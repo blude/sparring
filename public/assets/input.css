@@ -26,14 +26,6 @@ main {
     gap: 0.75rem;
 }
 
-/* No exchanges yet (before/during the retention decision): don't claim a flex:1
-   share of empty space and shove the retention dialog to the bottom of a blank
-   viewport — collapse to nothing so retention sits right where the eye lands. */
-#history:empty {
-    flex: 0 0 auto;
-    min-height: 0;
-}
-
 #history .turn { padding: 0.5rem 0.75rem; border-radius: 0.75rem; max-width: 90%; }
 #history .visitor { align-self: flex-end; background: #dbe9ff; }
 #history .sparring { align-self: flex-start; background: #f0f0f0; }
