@@ -28,7 +28,7 @@ final class Sparring
 
     public function sessionStateFor(array $session): string
     {
-        if ($session['consentGranted'] === null) {
+        if ($session['tosAgreed'] === null) {
             return 'awaiting-decision';
         }
         if ($session['turnCount'] >= TURN_ALLOWANCE) {

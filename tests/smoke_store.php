@@ -16,16 +16,23 @@ $store = new Store($dbPath);
 $session = $store->createSession('live');
 assert($session['origin'] === 'live');
 assert($session['turnCount'] === 0);
-assert($session['displayable'] === true);
+assert($session['displayable'] === false); // nothing projects until the visitor opts in
 assert($session['consentGranted'] === null);
+assert($session['tosAgreed'] === null);
+assert($session['projectionConsent'] === null);
 
 $fetched = $store->getSession($session['id']);
 assert($fetched !== null);
 assert($fetched['id'] === $session['id']);
 
-// --- consent, unknown session ---
-$store->setConsent($session['id'], true);
-assert($store->getSession($session['id'])['consentGranted'] === true);
+// --- consent decision, unknown session ---
+// Agrees to ToS and projection, declines retention — independent opt-ins (SC-05).
+$store->recordConsentDecision($session['id'], true, false, true);
+$afterConsent = $store->getSession($session['id']);
+assert($afterConsent['tosAgreed'] === true);
+assert($afterConsent['consentGranted'] === false);
+assert($afterConsent['projectionConsent'] === true);
+assert($afterConsent['displayable'] === true); // driven by projection choice, not a separate flag
 assert($store->getSession('does-not-exist') === null);
 
 // --- exchange + turn count ---

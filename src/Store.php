@@ -27,19 +27,34 @@ final class Store
 
     private function migrate(): void
     {
+        // displayable defaults to 0 now: nothing is projected until the visitor
+        // explicitly opts in via projection_consent (see recordConsentDecision).
+        // Pilot import still forces it true directly (setDisplayable) — that path
+        // has no visitor to ask.
         $this->pdo->exec(<<<SQL
             CREATE TABLE IF NOT EXISTS sessions (
-                id               TEXT PRIMARY KEY,
-                created_at       TEXT NOT NULL,
-                scenario_source  TEXT CHECK (scenario_source IN ('first-contribution', 'generated')),
-                origin           TEXT NOT NULL CHECK (origin IN ('pilot', 'live')),
-                scenario         TEXT,
-                displayable      INTEGER NOT NULL DEFAULT 1,
-                consent_granted  INTEGER,
-                turn_count       INTEGER NOT NULL DEFAULT 0,
-                last_active_at   TEXT NOT NULL
+                id                  TEXT PRIMARY KEY,
+                created_at          TEXT NOT NULL,
+                scenario_source     TEXT CHECK (scenario_source IN ('first-contribution', 'generated')),
+                origin              TEXT NOT NULL CHECK (origin IN ('pilot', 'live')),
+                scenario            TEXT,
+                displayable         INTEGER NOT NULL DEFAULT 0,
+                consent_granted     INTEGER,
+                tos_agreed          INTEGER,
+                projection_consent  INTEGER,
+                turn_count          INTEGER NOT NULL DEFAULT 0,
+                last_active_at      TEXT NOT NULL
             )
         SQL);
+
+        // Guard for a store.db created before tos_agreed/projection_consent existed —
+        // SQLite has no "ADD COLUMN IF NOT EXISTS" on the versions this targets.
+        $existing = array_column($this->pdo->query('PRAGMA table_info(sessions)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+        foreach (['tos_agreed', 'projection_consent'] as $column) {
+            if (!in_array($column, $existing, true)) {
+                $this->pdo->exec("ALTER TABLE sessions ADD COLUMN $column INTEGER");
+            }
+        }
 
         $this->pdo->exec(<<<SQL
             CREATE TABLE IF NOT EXISTS exchanges (
@@ -78,7 +93,7 @@ final class Store
 
         $stmt = $this->pdo->prepare(
             'INSERT INTO sessions (id, created_at, origin, displayable, turn_count, last_active_at)
-             VALUES (:id, :created_at, :origin, 1, 0, :last_active_at)'
+             VALUES (:id, :created_at, :origin, 0, 0, :last_active_at)'
         );
         $stmt->execute(['id' => $id, 'created_at' => $now, 'origin' => $origin, 'last_active_at' => $now]);
 
@@ -98,6 +113,31 @@ final class Store
     {
         $stmt = $this->pdo->prepare('UPDATE sessions SET consent_granted = :v WHERE id = :id');
         $stmt->execute(['v' => (int) $granted, 'id' => $id]);
+    }
+
+    /**
+     * TI-01's decision call, three-checkbox form. ToS agreement is a precondition
+     * of using the piece at all (gated in the API layer before this is called,
+     * never here) and is recorded for audit. Retention and projection are
+     * independent opt-ins (SQR-06/SC-05 — one switch must not govern both), and
+     * displayable is set directly from the projection choice: nothing is
+     * projected without an explicit yes, regardless of what TF-02 would have
+     * allowed.
+     */
+    public function recordConsentDecision(string $id, bool $tosAgreed, bool $retentionGranted, bool $projectionGranted): void
+    {
+        $stmt = $this->pdo->prepare(
+            'UPDATE sessions
+             SET tos_agreed = :tos, consent_granted = :retention, projection_consent = :projection, displayable = :displayable
+             WHERE id = :id'
+        );
+        $stmt->execute([
+            'tos' => (int) $tosAgreed,
+            'retention' => (int) $retentionGranted,
+            'projection' => (int) $projectionGranted,
+            'displayable' => (int) $projectionGranted,
+            'id' => $id,
+        ]);
     }
 
     /** TF-01 FS-01-6: withholds a session from projection. Never set back to true (AP-05-adjacent, one-way). */
@@ -288,6 +328,8 @@ final class Store
             'scenario' => $row['scenario'],
             'displayable' => (bool) $row['displayable'],
             'consentGranted' => $row['consent_granted'] === null ? null : (bool) $row['consent_granted'],
+            'tosAgreed' => $row['tos_agreed'] === null ? null : (bool) $row['tos_agreed'],
+            'projectionConsent' => $row['projection_consent'] === null ? null : (bool) $row['projection_consent'],
             'turnCount' => (int) $row['turn_count'],
             'lastActiveAt' => $row['last_active_at'],
         ];

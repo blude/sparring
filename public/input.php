@@ -15,12 +15,23 @@ require __DIR__ . '/../config.php';
   <div id="history" aria-live="polite"></div>
 
   <div id="retention" hidden>
-    <p>Your exchanges may be shown on the wall in this room and kept for review after the exhibition.
-       Nothing identifying you is shown or kept — keep it anyway?</p>
-    <div class="retention-actions">
-      <button id="retain-no" type="button">Don't keep it</button>
-      <button id="retain-yes" type="button">Keep it</button>
-    </div>
+    <p>Taking part requires agreeing to the Terms of Service and Privacy Policy
+       below. The other two are your choice — leave either unchecked if you'd
+       rather not, and you can still take part.</p>
+    <label class="consent-row">
+      <input type="checkbox" id="consent-tos">
+      <span>I agree to the <a href="terms.php" target="_blank" rel="noopener">Terms of Service</a>
+      and <a href="privacy.php" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+    </label>
+    <label class="consent-row">
+      <input type="checkbox" id="consent-projection">
+      <span>I agree that my exchanged messages may be displayed on the projector.</span>
+    </label>
+    <label class="consent-row">
+      <input type="checkbox" id="consent-retention">
+      <span>I agree that my session may be collected and analyzed for this thesis.</span>
+    </label>
+    <button id="consent-confirm" type="button" disabled>Confirm</button>
   </div>
 
   <form id="composer">

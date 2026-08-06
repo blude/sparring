@@ -116,14 +116,28 @@
         applySessionState(data.sessionState, data.turnsRemaining);
     }
 
-    // --- TF-02: record retention decision ---
-    function recordRetention(granted) {
-        return fetch('api/session.php', {
+    // --- TF-02: record the consent decision (ToS required, retention/projection are real opt-outs) ---
+    var tosCheckbox = document.getElementById('consent-tos');
+    var projectionCheckbox = document.getElementById('consent-projection');
+    var retentionCheckbox = document.getElementById('consent-retention');
+    var confirmButton = document.getElementById('consent-confirm');
+
+    tosCheckbox.addEventListener('change', function () {
+        confirmButton.disabled = !tosCheckbox.checked;
+    });
+
+    confirmButton.addEventListener('click', function () {
+        fetch('api/session.php', {
             method: 'POST',
-            body: JSON.stringify({ sessionId: sessionId, retentionGranted: granted }),
+            body: JSON.stringify({
+                sessionId: sessionId,
+                tosAgreed: tosCheckbox.checked,
+                retentionGranted: retentionCheckbox.checked,
+                projectionGranted: projectionCheckbox.checked,
+            }),
         })
             .then(function (res) {
-                if (!res.ok) throw new Error('retention-failed');
+                if (!res.ok) throw new Error('consent-failed');
                 return res.json();
             })
             .then(function (data) {
@@ -133,10 +147,7 @@
             .catch(function () {
                 setStatus('Could not record that choice — try again.');
             });
-    }
-
-    document.getElementById('retain-yes').addEventListener('click', function () { recordRetention(true); });
-    document.getElementById('retain-no').addEventListener('click', function () { recordRetention(false); });
+    });
 
     // --- TF-03: submit a contribution ---
     function submitContribution(text) {
