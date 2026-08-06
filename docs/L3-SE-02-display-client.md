@@ -1,8 +1,8 @@
-# L3 — Element Design Concept: Display Client
+# Element Design Concept: Display Client
 
 **Element:** SE-02 Display client
 **Element profile:** User-facing frontend (presentation only, no input)
-**Parent:** L2 System Design Concept
+**Parent:** System Design Concept
 **Status:** Draft. **Layout treatment is TO BE REFINED (SC-06).** This document specifies a baseline complete enough to build against, and marks each open decision explicitly.
 
 **Sections that apply.** Goals, user interfaces, technical functions, outbound interfaces, entities, quality requirements, and constraints. Use cases are thin and unusual here: the element has one user type who does not interact with it. UC-01 is written anyway, because the element's timing behaviour is only specifiable as a flow, and an absent use case section would read as an oversight rather than as a property of a non-interactive surface. Inbound technical interfaces do not apply.

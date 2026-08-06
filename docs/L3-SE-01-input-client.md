@@ -1,8 +1,8 @@
-# L3 — Element Design Concept: Input Client
+# Element Design Concept: Input Client
 
 **Element:** SE-01 Input client
 **Element profile:** User-facing frontend
-**Parent:** L2 System Design Concept
+**Parent:** System Design Concept
 **Status:** Draft
 
 **Sections that apply.** All sections apply, with user interfaces and use cases as the core. Technical functions are thin by design: per AP-01, this element holds no generation, no moderation, and no session policy. Entities cover in-memory view state only, since nothing is stored on the device.
@@ -26,6 +26,10 @@ The element shall show that a response is being produced, and shall state plainl
 *Success criteria (quantitative):* An in-progress state appears within 300 ms of submission.
 *Satisfies:* SG-04
 *Rationale:* Several seconds of unexplained stillness in a gallery reads as a broken piece, not a thinking one.
+
+**G-04 — Make unsuitable input visible**
+The element shall show that an input is invalid and should require the user to modify it's content before sending again.
+*Rationale:* Participants should'd be allowed to edit their input to fix the problem.
 
 ---
 

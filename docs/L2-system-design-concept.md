@@ -1,9 +1,9 @@
-# L2 — System Design Concept
+# System Design Concept
 
 **System:** Sparring Exhibition Object
-**Parent:** L1 Solution Design Concept
+**Parent:** Solution Design Concept
 **Status:** Draft
-**Scope note:** Deployment architecture (droplet sizing, web server configuration, TLS provisioning, backup scheduling) belongs in a separate System Realization Concept and is deliberately absent here.
+**Scope note:** Deployment architecture (droplet sizing, web server configuration, SSL config, backup scheduling) belongs in a separate System Realization Concept and is deliberately absent here.
 
 ---
 
@@ -40,11 +40,12 @@ When no live session is available for display, the system shall present pilot ma
 *Success criteria (qualitative):* The projection is populated at all times while running.
 *Satisfies:* BG-01, BG-03
 
-**SG-07 — Gate public projection independently of session access**
-The system shall be able to withhold a session from the projection while that session continues normally on the visitor's own device.
-*Success criteria (qualitative):* A withheld session produces no visible interruption for its participant.
+**SG-07 — Gate public projection along with session access**
+The system shall be able to withhold a session from both the projection and the visitor's device.
+*Success criteria (qualitative):* A withheld session produces visible interruption for its participant.
 *Satisfies:* BG-01
-*Rationale:* Supports BQR-03. Blocking projection and blocking use are different decisions and must not share a switch.
+*Supports:* BQR-03.
+*Rationale:* Prevents usage that doesn't contributes to the public projection. Blocking projection and withhelding usage are therefore tied together and must share the same switch.
 
 ---
 
@@ -78,9 +79,9 @@ The projection asks the backend for current material on a fixed interval rather 
 *Satisfies:* SG-04, SG-05
 
 **AP-05 — Moderation gates projection, not access**
-Content assessed as unsuitable withholds the session from the public surface. It does not end or degrade the visitor's own session.
-*Rationale:* The public surface and the private interaction carry different risks. Ending someone's session because a classifier fired would punish the visitor for a system decision they cannot see.
-*Implications:* Rules out treating moderation as an access control. Requires display eligibility to be a distinct stored property from consent.
+Content assessed as unsuitable withholds the session from the public surface and ends the participant's session.
+*Rationale:* The public surface and the private interaction carry different risks, and a defensive approach is warranted. Preemptively ending someone's session because a classifier fired is better than risking expousure, even if it involves a system decision that they cannot see.
+*Implications:* Adopts treating moderation as an access control. Requires a session's `is_appropriate` flag to be a ruling stored property.
 *Satisfies:* SG-07
 
 **AP-06 — Pilot and live material share one storage and display path, separated by an origin flag**
@@ -186,8 +187,8 @@ The single stateful component. Holds the datastore internally (see AP-04), so no
 
 **HE-02 — Projection setup**
 Projector and the machine driving it, running a browser in kiosk mode.
-*Procurement:* TBC. Whether Superraum supplies the projector or it must be sourced is not yet confirmed.
-*Managed by:* The venue or the operator, per the above.
+*Procurement:* Supplied by Fachbereich Informatik at FH Dortmund.
+*Managed by:* The operator.
 *Location:* Fixed in the exhibition space. Throw distance and surface determine legible type size, which is why SG-02's acceptance criteria remain qualitative until tested in place.
 *Runs:* SE-02
 *Characteristics:* One projector, one display machine, wired network preferred over wireless for an unattended multi-day run.

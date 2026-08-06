@@ -1,28 +1,32 @@
-# L1 — Solution Design Concept
+# Solution Design Concept
 
 **Solution:** Sparring Exhibition Object
 **Venue:** Superraum, Dortmund
-**Author:** Sarah
+**Author:** Sarah Pratti
 **Status:** Draft
-**Scope note:** Deliberately thin. This level exists to record *why* the installation is being built and what it must be true from a non-technical perspective. No L0 Digital Design Brief sits above it, so business constraints carry no `Refines → BRC-` relation. Those relations are omitted rather than pointed at IDs that do not exist.
+**Scope note:** Deliberately thin. This level exists to record *why* the installation is being built and what it must be true from a non-technical perspective. No Digital Design Brief sits above it, so business constraints carry no `Refines → BRC-` relation. Those relations are omitted rather than pointed at IDs that do not exist.
 
 ---
 
 ## 1. Vision
 
-### Executive summary (future press release)
+### Ffuture Press Release
 
 **Dortmund, October 2026. Sparring goes public at Superraum.**
 
-For three days at Superraum, visitors to the Sparring exhibition did not read about an AI that refuses to hand over answers. They argued with one. A QR code on the wall opened a plain text field on their own phone; whatever they typed went to a projected wall behind them, alongside the AI's reply, where everyone in the room could watch the exchange unfold.
+For three days at Superraum, visitors to the Sparring exhibition did not simply read about an AI that refuses to hand over answers. They argued with one. A QR code on the wall opened a plain text field on their own phone; whatever they typed went to a projected wall behind them, alongside the AI's reply, where everyone in the room could watch the exchange unfold.
+
+The AI was built with instructions and extended knowledge for answering requests specifically about Digital Design. Instead of giving away conclusive answers prematurely, like a useful chatbot would do, the AI assumes the role of a skilled, motivated partner who pushes the participants themselves to reason through their arguments, helping them arrive to the conclusions and reconstructing knowledge. The result is a dialogue that is designed with the goal of fostering the participants' cognitive skills applied to Digital Design education.
 
 "People expected it to just answer them," said Sarah, who designed the installation as part of her master's thesis at FH Dortmund. "Watching someone realise they were being pushed back on, and then watching them push back harder, was the whole point. That moment used to happen privately, in a session I had to reconstruct afterwards from a recording. Here it happened in a room full of people."
 
 The installation ran unattended through opening hours. Visitors who arrived to an idle wall still found something to read, because sessions from earlier pilot runs kept the projection populated between live participants. Sessions started with a scan and ended when the visitor walked away, with no account, no app, and no name attached to anything on the wall.
 
-Several visitors spent their session trying to talk the system out of its stance rather than working the problem with it. Those attempts stayed on the wall like every other exchange. "That is not misuse, that is the experiment," Sarah said. "If someone can talk the friction away in four turns in a gallery, that is a finding I would rather have than not."
+Several visitors spent their session enganging with prompts that were prepared by the exhibitor which explored themes like generative and agentic AI, especifically how these emerging technologies transforms the underlying material from which digital solutions are made of, and how Digital Design education must be reconfigured and reapplied to this new reality, as well as the business and human-centered perspectives around economic viability, desirability, technical feasibility and so on. 
 
-The recorded sessions now sit alongside the thesis evaluation as a separate, lighter body of material: not a controlled study, but a public record of what happens when the friction meets people who did not sign up for a research session.
+A few tried to talk the system out of its stance rather than working the problem with it. Those attempts stayed on the wall like every other exchange. "That is not misuse, that is the experiment," Sarah said. "If someone can talk the friction away in four turns in a gallery, that is a finding I would rather have than not."
+
+The recorded sessions now sit alongside the thesis evaluation as a separate, lighter body of material: not a controlled study, but a public record of what happens when the friction meets people who weren't expecting it.
 
 ### Business goals
 
@@ -32,7 +36,7 @@ The installation shall put the exchange between learner and Sparring partner on 
 *Rationale:* Legibility is a primary claim of the thesis. Until now it has only been evidenced through participant self-report after the fact.
 
 **BG-02 — Give visitors direct, unassisted first-hand experience of being sparred with**
-Any visitor shall be able to start and complete a session using only their own device, without installation, registration, or staff assistance.
+Any visitor shall be able to start and complete a session using only their own device, without registration, or staff assistance.
 *Success criteria (qualitative):* A visitor with no prior context reaches their first Sparring response without asking anyone how the piece works.
 
 **BG-03 — Run unattended through exhibition hours**
@@ -51,7 +55,7 @@ Interactions shall be captured in a form that can be reviewed after the exhibiti
 **VP-01 — Participating visitor**
 *Segment characteristics:* Exhibition audience. Mixed background, largely non-expert in agentic AI. Attention measured in minutes, not hours. Arrives curious, not briefed.
 *Value delivered:* Experiences the difference between an AI that resolves a request and one that holds a position. Sees their own thinking reflected back as something worth contesting. Leaves with a felt reference point rather than a description.
-*Pains addressed:* Explanations of "productive friction" do not land as text on a wall panel. The concept is experiential and has, until now, required a scheduled session to convey.
+*Pains addressed:* Explanations of "productive friction" do not land exclusively as text on a wall panel. The concept is experiential and has, until now, required a scheduled session to convey.
 *Current alternatives:* Reading a printed exhibition text about the thesis, or watching a recorded demo video.
 *Satisfies:* BG-01, BG-02
 
@@ -69,7 +73,7 @@ Interactions shall be captured in a form that can be reviewed after the exhibiti
 flowchart LR
   VCA01(["VCA-01 Participating visitor"])
   VCA02(["VCA-02 Observing visitor"])
-  VCA03["VCA-03 Thesis author / operator"]
+  VCA03["VCA-03 Thesis author / exhibitior"]
   VCA04["VCA-04 The installation"]
   VCA05["VCA-05 LLM provider"]
 
@@ -86,7 +90,7 @@ Receives the value described in VP-01. Interacts directly with VCA-04 through th
 **VCA-02 — Observing visitor** *(Customer)*
 Receives the value described in VP-02 through the projected surface of VCA-04, without interacting.
 
-**VCA-03 — Thesis author / operator** *(Organisation-internal)*
+**VCA-03 — Thesis author / exhibitor** *(Organisation-internal)*
 Provides the pilot session material that populates the installation before and between live sessions, and maintains the running system. Not present continuously during exhibition hours.
 
 **VCA-04 — The installation** *(Digital-element)*
@@ -127,7 +131,7 @@ The visitor's decision about whether their session may be retained and reviewed 
 
 ### BP-01 — Visitor conducts a Sparring session
 
-A visitor scans the code, agrees or declines to have their session retained, and exchanges turns with the Sparring partner until they stop or reach the session limit. Their exchanges appear on the projection as they happen.
+A visitor scans the QR code, agrees or declines to have their session retained, and exchanges turns with the Sparring partner until they stop or reach the session limit. Their exchanges appear on the projection as they happen.
 *Frequency:* Continuously during opening hours, in bursts following visitor traffic.
 *Involved parties:* VCA-01, VCA-04, VCA-05
 *Creates / updates:* Creates Session (BE-01), Consent record (BE-04), Scenario (BE-03); creates Exchange (BE-02) per turn.
@@ -200,7 +204,7 @@ The public surface shall not carry names, contact details, or other personal inf
 ## 7. Constraints
 
 **BC-01 — Build effort must not compete with thesis writing** *(Business)*
-*Source:* Thesis delivery date, 10 September 2026.
+*Source:* Thesis delivery date, 29 October 2026. Exhibition opening, 4 September 2026.
 *Applies to:* The whole solution.
 *Acceptance criteria (qualitative):* The installation is scoped so that abandoning it entirely would not jeopardise the thesis.
 

@@ -1,8 +1,8 @@
-# L3 — Element Design Concept: Backend Service
+# Element Design Concept: Backend Service
 
 **Element:** SE-03 Backend service
 **Element profile:** Backend service / API
-**Parent:** L2 System Design Concept
+**Parent:** System Design Concept
 **Status:** Draft
 
 **Sections that apply.** Goals, use cases, both technical interface sections, technical functions, entities, quality requirements, and constraints. User interfaces do not apply: this element has no human-facing surface. Its only human actor is UT-03, who reaches it through the operator interface (TI-05) rather than through a UI.
@@ -28,9 +28,9 @@ The element shall record sessions and exchanges tagged pilot or live at the mome
 *Success criteria (qualitative):* Exhibition material is extractable by filtering one stored value.
 *Satisfies:* SG-05
 
-**G-04 — Decide what may be projected, independently of what may be retained**
-The element shall assess contributions for projection suitability and gate the display feed on that assessment, without affecting the participant's own session.
-*Success criteria (qualitative):* A session marked ineligible for projection continues to serve its participant with no observable difference.
+**G-04 — Decide what may be projected**
+The element shall assess contributions for projection suitability and gate the display feed on that assessment, withholds subsequent interactions from the participant's session until they remove the offending content.
+*Success criteria (qualitative):* A session marked ineligible for projection is not suitable for the exhibition and further interactions should be withheld.
 *Satisfies:* SG-07
 
 **G-05 — Keep the display surface populated**
@@ -110,7 +110,7 @@ Determines whether a contribution may appear on the public surface. It never det
 
 **The distinction this function must get right (AP-07).** *Off-exercise* means the visitor has stopped doing the exercise: unrelated chat, spam, testing whether the field accepts input. It does **not** mean a visitor who is arguing with the Sparring partner, pressuring it, instructing it to abandon its position, or otherwise trying to talk the friction away. That visitor is engaged with the exercise and their attempt is the observation the installation exists to produce. The classification instruction must state this distinction explicitly rather than leaving it to the model's default reading of "off-topic", because both cases superficially resemble not-doing-the-exercise and only one should be withheld.
 
-*Contains-personal-information* covers names, contact details, and health, financial, or comparably personal circumstances. This case is expected to arise most often in exactly the situation AP-07 protects: a visitor under real pressure disclosing something real while trying to get the system to relent. That session must continue normally and must not be projected.
+*Contains-personal-information* covers names, contact details, and health, financial, or comparably personal circumstances. This case is expected to arise most often in exactly the situation AP-07 protects: a visitor under real pressure disclosing something real while trying to get the system to relent. That session must end and not be projected.
 
 **TF-03 — Enforce request limits**
 *Detail level:* Narrative
