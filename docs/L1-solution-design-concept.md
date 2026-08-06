@@ -107,7 +107,7 @@ Supplies the language generation that produces Sparring responses. Not owned or 
 
 **BE-01 — Sparring session**
 One visitor's continuous engagement with the installation, from first turn to abandonment or turn cap.
-*Key information:* Origin (pilot or live), consent status, display eligibility, scenario label, start and last-activity time, turn count.
+*Key information:* Origin (pilot or live), consent status, display eligibility, scenario label, start and last-activity time, turn count. Display eligibility is now set directly by the visitor's own projection consent (BE-04) rather than derived after the fact: a contribution unsuitable for projection is rejected before it is ever stored, so nothing stored is ever retroactively hidden.
 *Associations:* Contains many Exchanges (BE-02). Carries one Consent record (BE-04).
 
 **BE-02 — Exchange**
@@ -121,8 +121,8 @@ A short statement of what a session is about, giving a reader enough context to 
 *Associations:* Describes one Session (BE-01).
 
 **BE-04 — Consent record**
-The visitor's decision about whether their session may be retained and reviewed after the exhibition.
-*Key information:* Granted or withheld, time of decision.
+Three independent decisions made together, once, before the session opens: agreement to the terms of participation (a precondition of using the piece at all, not a data-processing choice), consent to have the session retained and reviewed after the exhibition, and consent to have exchanges shown on the projection. The latter two are genuine opt-outs — declining either still lets the visitor spar.
+*Key information:* Each of the three, granted or withheld, and time of decision.
 *Associations:* Belongs to one Session (BE-01).
 
 ---
@@ -131,7 +131,7 @@ The visitor's decision about whether their session may be retained and reviewed 
 
 ### BP-01 — Visitor conducts a Sparring session
 
-A visitor scans the QR code, agrees or declines to have their session retained, and exchanges turns with the Sparring partner until they stop or reach the session limit. Their exchanges appear on the projection as they happen.
+A visitor scans the QR code, agrees to take part and makes their retention and projection choices, and exchanges turns with the Sparring partner until they stop or reach the session limit. Their exchanges appear on the projection as they happen, if they consented to that.
 *Frequency:* Continuously during opening hours, in bursts following visitor traffic.
 *Involved parties:* VCA-01, VCA-04, VCA-05
 *Creates / updates:* Creates Session (BE-01), Consent record (BE-04), Scenario (BE-03); creates Exchange (BE-02) per turn.
@@ -140,7 +140,7 @@ A visitor scans the QR code, agrees or declines to have their session retained, 
 **Steps**
 
 - **PS-01-1** Visitor scans the code and opens the session surface on their own device.
-- **PS-01-2** Visitor is told what the installation does with their session and decides whether it may be retained.
+- **PS-01-2** Visitor is told what the installation does with their session and makes three decisions: agreeing to take part at all, and separately choosing whether their session may be retained and whether it may be projected.
 - **PS-01-3** Visitor writes an opening contribution describing what they want to work on.
 - **PS-01-4** The Sparring partner responds with challenge rather than resolution.
 - **PS-01-5** The completed exchange becomes visible on the projection.
@@ -150,8 +150,10 @@ A visitor scans the QR code, agrees or declines to have their session retained, 
 **Alternative flows**
 
 - **PA-01-1** *(extends PS-01-2)* Visitor declines retention. The session runs normally and is not kept after the exhibition. *Outcome:* Alternative-success.
-- **PA-01-2** *(extends PS-01-4)* The visitor's contribution is unsuitable for public projection. The session continues on the visitor's device and is withheld from the wall. *Outcome:* Alternative-success.
+- **PA-01-2** *(extends PS-01-4)* The visitor's contribution is unsuitable for public projection. Rather than being silently withheld after the fact, the turn is rejected before the Sparring partner sees it: nothing is sent to the wall or stored, and the visitor is told to edit their message and resubmit. The session itself is unaffected and continues normally. *Outcome:* Alternative-success.
 - **PA-01-3** *(extends PS-01-4)* Language generation is unavailable. The visitor is told plainly that the piece cannot respond right now. *Outcome:* Terminate.
+- **PA-01-4** *(extends PS-01-2)* Visitor declines projection. The session runs normally; their exchanges never appear on the wall, independently of whatever PA-01-1 decides about retention. *Outcome:* Alternative-success.
+- **PA-01-5** *(extends PS-01-2)* Visitor declines to agree to the terms of participation. Unlike retention and projection, this is not an opt-out the session can proceed without: the input surface stays unusable until it is agreed to. *Outcome:* Terminate.
 
 **Note on scope.** A visitor who spends the session trying to argue the Sparring partner out of its stance is following BP-01, not deviating from it. This is deliberate and is not treated as an exception path.
 
@@ -191,7 +193,7 @@ The friction shall read as deliberate and directed rather than as the system mal
 **BQR-03 — Nothing identifying a visitor reaches the projection** *(Compliance)*
 The public surface shall not carry names, contact details, or other personal information, whether typed deliberately or incidentally.
 *Applies to:* BP-02, BE-02
-*Acceptance criteria (qualitative):* Content assessed as carrying personal information is withheld from projection while the visitor's own session continues.
+*Acceptance criteria (qualitative):* Content assessed as carrying personal information is rejected before it is stored or sent to the Sparring partner — the visitor edits and resubmits, and the rest of the session is unaffected. Nothing unsuitable is ever in a position to reach the projection.
 *Satisfies:* BG-01, BG-04
 
 **BQR-04 — Exhibition material is never mistaken for evaluation data** *(Operational-excellence)*
@@ -211,7 +213,7 @@ The public surface shall not carry names, contact details, or other personal inf
 **BC-02 — Public user-generated content is subject to data protection law** *(Legal-regulatory)*
 *Source:* GDPR.
 *Applies to:* BP-01, BP-02, BE-01, BE-04.
-*Acceptance criteria (qualitative):* Retention is consented to, and projection of personal content is prevented independently of consent.
+*Acceptance criteria (qualitative):* Retention is consented to, and projection of personal content is prevented independently of consent. Retention and projection consent must each remain a genuine opt-out — neither may be a precondition of using the piece at all, or the consent is not freely given. The one thing that *is* a precondition is agreement to the terms of participation itself, which is a different kind of decision (whether to use the piece), not consent to a data-processing purpose, and is kept as a separate choice from the other two for exactly that reason.
 
 **BC-03 — One developer, no continuous on-site operator** *(Resource)*
 *Applies to:* The whole solution.

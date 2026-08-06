@@ -40,12 +40,12 @@ When no live session is available for display, the system shall present pilot ma
 *Success criteria (qualitative):* The projection is populated at all times while running.
 *Satisfies:* BG-01, BG-03
 
-**SG-07 — Gate public projection along with session access**
-The system shall be able to withhold a session from both the projection and the visitor's device.
-*Success criteria (qualitative):* A withheld session produces visible interruption for its participant.
+**SG-07 — Gate public projection at the moment of submission, not after the fact**
+The system shall reject a contribution assessed as unsuitable before it reaches the Sparring partner or the display feed, rather than storing it and hiding it later.
+*Success criteria (qualitative):* An unsuitable contribution never becomes an exchange; the visitor sees that it was rejected and can edit and resubmit; the session itself continues.
 *Satisfies:* BG-01
 *Supports:* BQR-03.
-*Rationale:* Prevents usage that doesn't contributes to the public projection. Blocking projection and withhelding usage are therefore tied together and must share the same switch.
+*Rationale:* Gating at submission rather than at display means nothing unsuitable is ever written down in the first place — there is no later step where it could leak. This also means projection eligibility for a *stored* exchange no longer needs a moderation-driven flag of its own: everything stored has already passed the check by construction, so what's actually projected is governed by the visitor's own projection consent (see SC-05), not by re-deciding suitability at read time.
 
 ---
 
@@ -78,10 +78,10 @@ The projection asks the backend for current material on a fixed interval rather 
 *Implications:* Rules out concurrent write scaling. Accepts that the store has no independent design surface, so no separate element design document exists for it.
 *Satisfies:* SG-04, SG-05
 
-**AP-05 — Moderation gates projection, not access**
-Content assessed as unsuitable withholds the session from the public surface and ends the participant's session.
-*Rationale:* The public surface and the private interaction carry different risks, and a defensive approach is warranted. Preemptively ending someone's session because a classifier fired is better than risking expousure, even if it involves a system decision that they cannot see.
-*Implications:* Adopts treating moderation as an access control. Requires a session's `is_appropriate` flag to be a ruling stored property.
+**AP-05 — Moderation gates storage, not a per-session display flag**
+Content assessed as unsuitable is rejected before it is ever written down: no exchange is stored, no turn is consumed, and the Sparring partner is never called. The visitor edits the contribution and resubmits; the session itself is not ended.
+*Rationale:* An earlier version of this decision ended the participant's session outright on a moderation hit, on the reasoning that a defensive stance was warranted even at the cost of a visible, unexplained interruption. Built and tested, that traded one problem for a worse one: it gives the visitor no way to recover from a false positive, and — per AP-07 — a visitor pressuring the Sparring partner is *supposed* to keep going, not be cut off. Rejecting the single turn and letting the visitor fix it protects the public surface just as well without punishing engagement the piece exists to produce.
+*Implications:* Moderation runs before the provider call, immediately after the length check (same reasoning: cheapest rejection path, no cost incurred). No `is_appropriate` ruling is stored against the session, because there is nothing to rule on after the fact — a stored exchange has already passed.
 *Satisfies:* SG-07
 
 **AP-06 — Pilot and live material share one storage and display path, separated by an origin flag**
@@ -93,6 +93,7 @@ Content assessed as unsuitable withholds the session from the public surface and
 Content filtering addresses profanity, personal information, and material unrelated to the exercise. It does not address visitors trying to make the system abandon its position.
 *Rationale:* Whether system-placed friction holds against a motivated user is the question the installation exists to expose. Filtering those attempts would remove the observation the piece is built to produce.
 *Implications:* Rules out treating persuasion, pressure, or instruction-style attacks on the Sparring stance as abuse. Requires the moderation function to distinguish adversarial-but-engaged input from disengaged input, and this distinction must be stated in that function's specification rather than left to a wordlist.
+*Lesson from testing:* stating the adversarial-vs-disengaged distinction was not sufficient on its own. The classification instruction must also state what the exercise's subject matter actually *is* — without that, the classifier has nothing to check on-topic-ness against, and genuinely on-topic contributions were systematically misclassified as off-exercise (the same failure this requirement exists to prevent, arrived at from the opposite direction). Both must be explicit in the instruction, not just the one that looks like the harder problem.
 *Satisfies:* SG-05
 
 ### 2.2 Architecture diagram
@@ -221,10 +222,10 @@ Projector and the machine driving it, running a browser in kiosk mode.
 
 - **SSt-01-1** UT-01 scans the code and SE-01 opens without a session identifier. *(Performed by: UT-01; Affects: SE-01)*
 - **SSt-01-2** SE-01 requests a new session from SE-03 and receives an identifier, which it places in the address. *(Performed by: SE-01; Affects: SE-03)*
-- **SSt-01-3** SE-01 presents the retention decision and holds the input surface until UT-01 responds. *(Performed by: SE-01; Affects: UT-01)*
+- **SSt-01-3** SE-01 presents the consent decision — agreement to take part, plus independent retention and projection choices — and holds the input surface until UT-01 responds. *(Performed by: SE-01; Affects: UT-01)*
 - **SSt-01-4** UT-01 submits a contribution to SE-03 through SE-01. *(Performed by: UT-01; Affects: SE-01, SE-03)*
 - **SSt-01-5** SE-03 checks the request against its rate and size limits. *(Performed by: SE-03)*
-- **SSt-01-6** SE-03 assesses the contribution for projection suitability and records the outcome against the session. *(Performed by: SE-03)*
+- **SSt-01-6** SE-03 assesses the contribution for projection suitability. An unsuitable contribution is rejected here — nothing is stored, no turn is consumed, and the flow does not continue to SSt-01-7. *(Performed by: SE-03)*
 - **SSt-01-7** SE-03 requests a Sparring response from PE-01, supplying the session's prior exchanges. *(Performed by: SE-03; Affects: PE-01)*
 - **SSt-01-8** PE-01 returns the response to SE-03. *(Performed by: PE-01; Affects: SE-03)*
 - **SSt-01-9** SE-03 stores the visitor contribution and the response as one exchange and returns the response to SE-01. *(Performed by: SE-03; Affects: SE-01)*
@@ -233,12 +234,13 @@ Projector and the machine driving it, running a browser in kiosk mode.
 
 **Alternative flows**
 
-- **SA-01-1** *(extends SSt-01-3)* UT-01 declines retention. SE-03 records the decision and the session proceeds; nothing is kept after the exhibition. *Outcome:* Alternative-success.
+- **SA-01-1** *(extends SSt-01-3)* UT-01 declines retention, projection, or both. SE-03 records the decision(s) and the session proceeds normally either way — these are independent opt-outs, not preconditions of participating. *Outcome:* Alternative-success.
 - **SA-01-2** *(extends SSt-01-5)* The request exceeds the rate or size limit. SE-03 rejects it and SE-01 tells UT-01 plainly. The session remains usable. *Outcome:* Resume.
-- **SA-01-3** *(extends SSt-01-6)* The contribution is assessed as unsuitable for projection. SE-03 marks the session ineligible for display and continues the flow from SSt-01-7 without informing UT-01, per AP-05. *Outcome:* Resume.
+- **SA-01-3** *(extends SSt-01-6)* The contribution is assessed as unsuitable for projection. SE-03 rejects the turn and returns that condition to SE-01, which tells UT-01 to edit and resubmit. Nothing is stored, no turn is consumed, and the session is otherwise unaffected. *Outcome:* Resume.
 - **SA-01-4** *(extends SSt-01-7)* PE-01 is unavailable or fails after retries. SE-03 returns a failure and SE-01 states that the installation cannot respond. *Outcome:* Terminate.
 - **SA-01-5** *(extends SSt-01-4)* The session has reached its turn limit. SE-03 rejects the contribution and SE-01 presents the session as complete. *Outcome:* Terminate.
-- **SA-01-6** *(extends SSt-01-1)* SE-01 opens with a session identifier already in the address after a reload. It fetches the existing session from SE-03 and resumes from SSt-01-4, skipping the retention decision. *Outcome:* Alternative-success.
+- **SA-01-6** *(extends SSt-01-1)* SE-01 opens with a session identifier already in the address after a reload. It fetches the existing session from SE-03 and resumes from SSt-01-4, skipping the consent decision. *Outcome:* Alternative-success.
+- **SA-01-7** *(extends SSt-01-3)* UT-01 declines to agree to the terms of participation. Unlike retention and projection, this is not an opt-out the session can proceed without — the input surface stays unusable. *Outcome:* Terminate.
 
 ### SSc-02 — The projection presents current material
 *Detail level:* Narrative
@@ -294,7 +296,7 @@ Before the exhibition opens, UT-03 supplies transcripts from pilot sessions to S
 
 **SQR-06 — Public projection is governed separately from retention** *(Compliance)*
 *Applies to:* SE-03, SE-02
-*Acceptance criteria (qualitative):* Display eligibility and retention consent are stored as distinct properties and evaluated independently. A session may be retained and not projected, or projected and not retained.
+*Acceptance criteria (qualitative):* Display eligibility, retention consent, and agreement to take part are stored as three distinct properties, each recorded independently. A session may be retained and not projected, or projected and not retained, in any combination. Display eligibility is set directly from the visitor's projection consent at decision time — suitability is enforced earlier, at write time (AP-05/SG-07), so nothing reaches storage that projection consent alone would need to filter back out.
 *Supports:* BQR-03
 
 **SQR-07 — The installation degrades visibly rather than silently** *(Reliability, recorded under Availability)*
@@ -332,11 +334,11 @@ Before the exhibition opens, UT-03 supplies transcripts from pilot sessions to S
 *Acceptance criteria:* SE-03 handles provider rate-limit and quota responses as expected conditions rather than faults, and its own limits are set below the provider's.
 *Consequence:* Rules out unthrottled request forwarding. Sets an upper bound on concurrent visitors, which is TBC.
 
-**SC-05 — Retention requires consent; projection requires suitability** *(Legal-regulatory)*
+**SC-05 — Retention requires consent; projection requires consent, and only ever carries content that already passed suitability** *(Legal-regulatory)*
 *Source:* BC-02.
 *Applies to:* SE-01, SE-03
-*Acceptance criteria (qualitative):* No session is retained past the exhibition without a recorded decision, and no session reaches the projection without passing the suitability assessment.
-*Consequence:* Rules out a single consent switch governing both retention and projection.
+*Acceptance criteria (qualitative):* No session is retained past the exhibition without a recorded decision. No session is projected without a recorded projection decision, and nothing unsuitable is ever available to project in the first place — suitability is enforced at write time (AP-05), not as a second gate applied to already-stored content. Neither retention nor projection consent may be bundled with the precondition of taking part at all (BC-02).
+*Consequence:* Rules out a single consent switch governing both retention and projection, and rules out treating "may I participate" and "may my content be kept/shown" as the same decision.
 *Refines:* BC-02
 
 **SC-06 — The projected layout is an open decision** *(Organisational)*

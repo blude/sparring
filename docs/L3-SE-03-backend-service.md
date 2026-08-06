@@ -28,9 +28,9 @@ The element shall record sessions and exchanges tagged pilot or live at the mome
 *Success criteria (qualitative):* Exhibition material is extractable by filtering one stored value.
 *Satisfies:* SG-05
 
-**G-04 — Decide what may be projected**
-The element shall assess contributions for projection suitability and gate the display feed on that assessment, withholds subsequent interactions from the participant's session until they remove the offending content.
-*Success criteria (qualitative):* A session marked ineligible for projection is not suitable for the exhibition and further interactions should be withheld.
+**G-04 — Decide what may be stored, and let the visitor's own choice decide what may be projected**
+The element shall assess each contribution for suitability before it is stored, rejecting an unsuitable one so the visitor can edit and resubmit rather than silently hiding it after the fact. Whether a *stored* exchange is projected is then a separate question, answered by the visitor's own projection consent, not by re-running suitability at display time.
+*Success criteria (qualitative):* Nothing unsuitable is ever stored. A session that declined projection consent never appears on the wall regardless of content; a session that granted it does, for as long as its content keeps passing the write-time check.
 *Satisfies:* SG-07
 
 **G-05 — Keep the display surface populated**
@@ -86,7 +86,7 @@ The element's central function. Everything that happens between a visitor pressi
 - **FS-01-3** *(Data-operation)* Compare E-01.8 (turnCount) against the session turn allowance. If the allowance is exhausted, return a turn-limit condition and stop.
 - **FS-01-4** *(Data-operation)* Trim the contribution and check it against the length bound. If it is empty or over-length, return a rejected condition and stop. No provider call has been made at this point, which matters because this is the cheapest rejection path and the one most likely to fire.
 - **FS-01-5** *(Function-call)* Call TF-02 with the contribution. TF-02 returns a suitability outcome.
-- **FS-01-6** *(Entity-access)* If TF-02 reported the contribution unsuitable, write `false` to E-01.6 (displayable). The session is not otherwise altered and processing continues, per AP-05.
+- **FS-01-6** *(Data-operation)* If TF-02 reported the contribution unsuitable, return a content-flagged condition and stop. Nothing is written to E-01 or E-02, and no provider call for a response is made — this is the same cheap-rejection reasoning as FS-01-4, just one check later. The session itself is not altered; only this turn is rejected.
 - **FS-01-7** *(Entity-access)* Read the session's prior exchanges from E-02 (E-02.3, E-02.4) in order, to supply conversational context.
 - **FS-01-8** *(Outbound-call)* Call TO-01 with the Sparring system prompt, the prior exchanges, and the new contribution. Expect a response text. *Call behaviour:* Synchronous. Timeout TBC, to be set from measured response times (SQR-01). Two attempts, with a short delay between them, on transport failure, timeout, or a provider 5xx. **No retry on a provider rate-limit or quota response**, because retrying a rate limit deepens it; return a generation-failed condition immediately. **No retry on a content-policy refusal from the provider**, which is a determinate outcome rather than a transient fault. On exhausted attempts, return a generation-failed condition. Nothing is written to E-02 on any failure path, so a failed turn leaves no partial exchange in the record.
 - **FS-01-9** *(Entity-access)* Write a new exchange to E-02 carrying the contribution (E-02.3), the response (E-02.4), the session reference (E-02.2), and its position (E-02.5).
@@ -97,12 +97,13 @@ The element's central function. Everything that happens between a visitor pressi
 **Alternative flows**
 
 - **FA-01-1** *(extends FS-01-8)* Provider rate limit, quota exhaustion, timeout, transport failure after retries, or content-policy refusal. All return a generation-failed condition to the caller and write nothing. Grouping is deliberate: the calling client takes the same action for every one of these, and distinguishing them would produce a taxonomy nobody acts on. The distinction is preserved in logs rather than in the response. *Outcome:* Terminate.
+- **FA-01-2** *(extends FS-01-6)* The contribution is unsuitable. Unlike FA-01-1, this is not terminal — the caller (SE-01) tells the visitor to edit and resubmit, and the input field re-enables with the text preserved. *Outcome:* Resume.
 
 **TF-02 — Assess a contribution for projection suitability**
 *Detail level:* Stepwise
 *Achieves:* G-04
 
-Determines whether a contribution may appear on the public surface. It never determines whether the visitor may continue.
+Determines whether a contribution may be stored and answered at all — and, because only stored content can ever be projected (G-04), this is also what keeps unsuitable material off the public surface. It determines whether *this turn* proceeds, not whether the visitor's session does: on an unsuitable result the visitor edits and resubmits, they are not cut off.
 
 - **FS-02-1** *(Data-operation)* Check the contribution against a maintained term list covering profanity. A match returns unsuitable without a provider call.
 - **FS-02-2** *(Outbound-call)* Call TO-02 with the contribution and a classification instruction. Expect one of: suitable, contains-personal-information, off-exercise. *Call behaviour:* Synchronous, short timeout, single attempt, no retry. **On any failure, return unsuitable.** Failing closed is correct here: the cost of not projecting a suitable contribution is that one item is missing from a wall, and the cost of projecting an unsuitable one is unrecoverable once it is six feet tall in a public room.
@@ -110,7 +111,9 @@ Determines whether a contribution may appear on the public surface. It never det
 
 **The distinction this function must get right (AP-07).** *Off-exercise* means the visitor has stopped doing the exercise: unrelated chat, spam, testing whether the field accepts input. It does **not** mean a visitor who is arguing with the Sparring partner, pressuring it, instructing it to abandon its position, or otherwise trying to talk the friction away. That visitor is engaged with the exercise and their attempt is the observation the installation exists to produce. The classification instruction must state this distinction explicitly rather than leaving it to the model's default reading of "off-topic", because both cases superficially resemble not-doing-the-exercise and only one should be withheld.
 
-*Contains-personal-information* covers names, contact details, and health, financial, or comparably personal circumstances. This case is expected to arise most often in exactly the situation AP-07 protects: a visitor under real pressure disclosing something real while trying to get the system to relent. That session must end and not be projected.
+**A second distinction the instruction must also get right, found in testing.** Stating the AP-07 distinction was not enough on its own: without also stating what the exercise's subject matter actually *is*, plainly on-topic contributions were misclassified off-exercise, because the classifier had nothing to check on-topic-ness against. Both the topic itself and the adversarial-engagement carve-out need to be explicit in the instruction — omitting either produces the same failure mode this requirement exists to prevent, from a different direction.
+
+*Contains-personal-information* covers names, contact details, and health, financial, or comparably personal circumstances. This case is expected to arise most often in exactly the situation AP-07 protects: a visitor under real pressure disclosing something real while trying to get the system to relent. That turn is rejected and not stored; the visitor edits it and continues — the session is not ended over it.
 
 **TF-03 — Enforce request limits**
 *Detail level:* Narrative
@@ -141,7 +144,7 @@ Produces the short context line shown above an exchange, from the session's firs
 *Achieves:* G-03, G-05
 
 - **FS-06-1** *(Data-operation)* Parse the supplied file and validate each transcript's structure. Collect malformed ones for reporting rather than aborting.
-- **FS-06-2** *(Entity-access)* For each valid transcript, write a session to E-01 with E-01.4 (origin) set to `pilot`, E-01.6 (displayable) set to true, and E-01.7 (consentGranted) set to true.
+- **FS-06-2** *(Entity-access)* For each valid transcript, write a session to E-01 with E-01.4 (origin) set to `pilot`, E-01.6 (displayable) set to true, and E-01.7 (consentGranted) set to true. E-01.10 (tosAgreed) and E-01.11 (projectionConsent) are left unset — pilot sessions have no visitor to ask, and displayable is set directly rather than derived from a projection consent that doesn't apply here.
 - **FS-06-3** *(Entity-access)* Write each exchange to E-02 in transcript order.
 - **FS-06-4** *(Function-call)* Call TF-05 for each session to derive its scenario statement.
 - **FS-06-5** *(Data-operation)* Return per-transcript outcomes.
@@ -157,11 +160,12 @@ Produces the short context line shown above an exchange, from the session's firs
 **TI-01 — Open a session**
 *Call type:* Synchronous
 *Calling elements:* SE-01 (TO-01)
-*Input:* Retention decision (boolean, optional; absent on creation, supplied on the decision call).
+*Input:* Three consent booleans, optional as a group; absent on creation, all three required together on the decision call: agreement to take part, retention consent, projection consent.
 *Output:* Session identifier (string), turn allowance (integer), session state (enum).
-*Action:* Creates a session in E-01 with origin fixed as `live` and a generated identifier, or records the retention decision against an existing session by writing E-01.7. Returns immediately.
+*Action:* Creates a session in E-01 with origin fixed as `live` and a generated identifier, or records the three-part decision against an existing session by writing E-01.7, E-01.10, and E-01.11 — and sets E-01.6 (displayable) directly from the projection choice in the same write. Returns immediately.
 *Error cases:*
-- Malformed request: missing or non-boolean decision on the decision call.
+- Malformed request: missing or non-boolean value on any of the three, on the decision call.
+- Agreement to take part is false or absent: rejected before it becomes a stored state (unlike the other two, which are legitimate declines) — this is what makes participation itself, as opposed to retention or projection, a precondition rather than an opt-out.
 - Session unknown: the identifier supplied with a decision does not resolve.
 
 **TI-02 — Submit a contribution**
@@ -175,15 +179,16 @@ Produces the short context line shown above an exchange, from the session's firs
 - Session unknown or expired.
 - Turn limit reached.
 - Contribution rejected: empty or over-length.
+- Contribution flagged: unsuitable per TF-02 (FA-01-2) — distinct from generation-failed. The visitor edits and resubmits; nothing about the session changes.
 - Generation failed: any condition grouped by FA-01-1.
 
-*The response carries no indication of the suitability assessment. A session marked ineligible for projection receives an ordinary response, per AP-05 and G-04.*
+*Unlike the earlier design this superseded, the response's condition list is not silent about suitability — a flagged contribution is a distinct, visible outcome (FA-01-2), because the visitor needs to know to edit their message. What the response never carries is which specific field or word triggered the flag, or anything about sessions other than the caller's own.*
 
 **TI-03 — Retrieve a session**
 *Call type:* Synchronous
 *Calling elements:* SE-01 (TO-03)
 *Input:* Session identifier (string, required).
-*Output:* Session state (enum), turn allowance and remaining count (integers), ordered exchanges (array), whether a retention decision has been recorded (boolean).
+*Output:* Session state (enum), turn allowance and remaining count (integers), ordered exchanges (array), whether the consent decision has been recorded (boolean) — one flag covering all three parts, since they are always recorded together.
 *Action:* Reads the session from E-01 and its exchanges from E-02 in order. Returns immediately.
 *Error cases:*
 - Session unknown or expired.
@@ -245,12 +250,14 @@ Produces the short context line shown above an exchange, from the session's firs
 | E-01.3 | scenarioSource | enum | required | `first-contribution` or `generated`. Records how E-01.5 was produced, so a later change of approach is visible in the data. |
 | E-01.4 | origin | enum | required | `pilot` or `live`. Written at creation and never modified (SQR-05). |
 | E-01.5 | scenario | string | optional | The context line shown with the exchange. Absent until the first exchange exists. |
-| E-01.6 | displayable | boolean | required | Whether the session may appear on the projection. Defaults true; set false by TF-01 FS-01-6. Independent of E-01.7. |
+| E-01.6 | displayable | boolean | required | Whether the session may appear on the projection. Defaults false; set directly from E-01.11 (projectionConsent) when the consent decision is recorded — not by moderation. Nothing unsuitable can reach E-02 in the first place (G-04/AP-05), so there is no separate moderation-driven display flag to maintain. Independent of E-01.7. |
 | E-01.7 | consentGranted | boolean | optional | Whether the participant agreed to retention. Absent until the decision is recorded. Independent of E-01.6 (SQR-06). |
 | E-01.8 | turnCount | integer | required | Exchanges completed. Compared against the turn allowance. |
 | E-01.9 | lastActiveAt | datetime | required | Time of the most recent exchange. Drives display ordering and expiry. |
+| E-01.10 | tosAgreed | boolean | optional | Whether the participant agreed to the terms of participation. Absent until recorded; once recorded it is always true — a decline is rejected at TI-01 before it becomes a stored value (unlike E-01.7 and E-01.11, which legitimately store `false`). |
+| E-01.11 | projectionConsent | boolean | optional | Whether the participant agreed to projection. Absent until the decision is recorded. Drives E-01.6 directly. Independent of E-01.7 — a session may be retained and not projected, or projected and not retained. |
 
-*E-01.6 and E-01.7 are deliberately separate fields governing separate things: whether the public surface may show this session, and whether it may be kept after the exhibition. Combining them into one flag would make it impossible to retain a session that must not be projected, which is the exact case TF-02's personal-information outcome produces.*
+*E-01.6, E-01.7, and E-01.11 govern three separate things: whether the public surface may currently show this session, whether it may be kept after the exhibition, and the visitor's own projection choice — the first is now derived from the third, the second stays fully independent of both. E-01.10 is different in kind from the other two consent fields: it gates participation itself rather than a data-processing purpose, which is why it is never stored as a decline (see L1 BC-02, L2 SC-05).*
 
 **E-02 — Exchange**
 *Persistence:* Persistent
@@ -325,7 +332,7 @@ Produces the short context line shown above an exchange, from the session's firs
 
 **QR-09 — Projection eligibility and retention consent are never conflated** *(Compliance)*
 *Applies to:* E-01, TF-01, TF-04, TI-01
-*Acceptance criteria:* E-01.6 and E-01.7 are read and written independently. No path sets one from the other.
+*Acceptance criteria:* E-01.7 (retention) is read and written independently of E-01.6/E-01.11 (projection). E-01.6 is permitted to derive from E-01.11 — that is the one intentional coupling, recorded once at consent time, not re-derived elsewhere — but no path derives E-01.7 from either, or E-01.11 from E-01.7.
 *Supports:* SQR-06
 
 **QR-10 — No raw request origin is stored** *(Compliance)*
@@ -368,6 +375,6 @@ Produces the short context line shown above an exchange, from the session's firs
 **C-05 — Attempts to bypass the Sparring stance are not filtered** *(Business)*
 *Source:* AP-07.
 *Applies to:* TF-02.
-*Acceptance criteria:* The classification instruction distinguishes disengagement from adversarial engagement, and only the former yields an off-exercise outcome. A visitor arguing the Sparring partner out of its position produces a suitable classification.
-*Consequence:* Rules out a general off-topic filter applied without this distinction. Sessions in which the friction is successfully talked away are retained and projected like any other.
+*Acceptance criteria:* The classification instruction distinguishes disengagement from adversarial engagement, and only the former yields an off-exercise outcome. A visitor arguing the Sparring partner out of its position produces a suitable classification. The instruction also states the exercise's actual subject matter explicitly (TF-02) — necessary alongside the disengagement distinction, not instead of it; found missing in testing, where its absence alone caused on-topic contributions to fail this same acceptance criterion from the other direction.
+*Consequence:* Rules out a general off-topic filter applied without this distinction. Sessions in which the friction is successfully talked away are retained and projected like any other (subject to the visitor's own projection consent, SC-05).
 *Element specific:* Yes
