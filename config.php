@@ -34,6 +34,10 @@ const PILOT_DATA_DIR = __DIR__ . '/data/pilot';
 // ponytail: no .env loader — one env var, getenv() is the whole mechanism.
 const ANTHROPIC_API_KEY_ENV = 'ANTHROPIC_API_KEY';
 const GENERATION_MODEL = 'claude-sonnet-5';
-const CLASSIFICATION_MODEL = 'claude-haiku-4-5';
+// Was claude-haiku-4-5. Measured 8/8 wrong (off-exercise) on a plainly on-topic
+// contribution regardless of prompt wording, while Sonnet 5 was 8/8 correct on
+// the same input — a capability gap, not a prompt problem. Classification calls
+// are tiny (maxTokens 64), so the cost delta at exhibition volume is negligible.
+const CLASSIFICATION_MODEL = 'claude-sonnet-5';
 const SPARRING_PROMPT_PATH = __DIR__ . '/prompts/sparring.md';
 const MODERATION_PROMPT_PATH = __DIR__ . '/prompts/moderation.md';
