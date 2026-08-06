@@ -1,0 +1,5 @@
+/vendor/
+/data/store.db
+/data/store.db-wal
+/data/store.db-shm
+.envrc

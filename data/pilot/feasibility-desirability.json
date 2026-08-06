@@ -1,0 +1,17 @@
+{
+  "scenario_source_text": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+  "exchanges": [
+    {
+      "contribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+      "response": "Before I hand you a test: what would change about your next move if it turned out to be infeasible, versus what would change if it turned out to be undesirable?"
+    },
+    {
+      "contribution": "If it's infeasible I'd need more time or a different technical approach. If it's undesirable I'd need to change the idea itself, or drop it.",
+      "response": "So they point to different next actions. Given that, whose objection are you actually hearing — an engineer's or someone closer to the user?"
+    },
+    {
+      "contribution": "Mostly engineers, actually. Which is strange if the real objection is about desirability.",
+      "response": "That's worth sitting with. Why would an engineer reach for 'not feasible' to voice a desirability concern, rather than just saying 'I don't think users want this'?"
+    }
+  ]
+}

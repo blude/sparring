@@ -1,0 +1,63 @@
+/*
+ * SC-06: layout treatment is an open decision, resolved later against real
+ * pilot transcripts on the actual projector (TBC-01..06). This is the baseline
+ * from SE-02 UI-01: vertical list, uniform items, most recent first, one
+ * exchange pair per item. Fixed viewport, no scroll (QR-06) — everything else
+ * here is a placeholder, not a design decision.
+ */
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background: #111;
+    color: #f2f2f2;
+    font-family: system-ui, sans-serif;
+}
+
+#wall {
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    overflow: hidden;
+}
+
+.exchange {
+    border-top: 1px solid #333;
+    padding-top: 1rem;
+    opacity: 1;
+    transition: opacity 400ms ease;
+}
+
+.exchange.entering {
+    opacity: 0;
+}
+
+.exchange .scenario {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 0.4rem;
+}
+
+.exchange .contribution,
+.exchange .response {
+    margin: 0.25rem 0;
+    line-height: 1.35;
+}
+
+.exchange .contribution::before {
+    content: "Visitor — ";
+    color: #7fb3ff;
+    font-weight: 600;
+}
+
+.exchange .response::before {
+    content: "Sparring — ";
+    color: #ffb37f;
+    font-weight: 600;
+}

@@ -1,0 +1,14 @@
+{
+    "name": "sparring/exhibition-object",
+    "description": "Sparring exhibition object backend (SE-03) — PHP, SQLite, Anthropic API",
+    "require": {
+        "php": ">=8.2",
+        "anthropic-ai/sdk": "^0.7",
+        "guzzlehttp/guzzle": "^8.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

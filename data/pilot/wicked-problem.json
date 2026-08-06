@@ -1,0 +1,21 @@
+{
+  "scenario_source_text": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+  "exchanges": [
+    {
+      "contribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+      "response": "Before I take that as given: what makes a problem 'wicked' rather than just hard? Give me one property that a fast AI draft doesn't actually remove."
+    },
+    {
+      "contribution": "I guess... there's no single correct answer, so speed doesn't help you find 'the' solution because there isn't one.",
+      "response": "Good, hold that. If there's no single correct answer, what is the AI's fast draft actually a draft OF? What is it optimizing toward if not correctness?"
+    },
+    {
+      "contribution": "Maybe it's optimizing for something that looks plausible, based on patterns in its training data, not for what's actually right for this specific context.",
+      "response": "So the risk isn't that the draft is slow to arrive at truth. What is the risk, then, if plausibility and rightness-for-context can come apart?"
+    },
+    {
+      "contribution": "The risk is that a designer stops interrogating the context because a plausible-looking answer already showed up, and that's a harder habit to catch than a wrong answer would be.",
+      "response": "That's the sharper claim. Now: what would a curriculum have to teach differently if the danger is a plausible answer arriving too early, rather than a correct answer arriving too late?"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+# PLACEHOLDER — TF-02 FS-02-1's local term list. Replace with a real curated
+# list before the exhibition; this exists only so the code path is exercised.
+# One term per line, case-insensitive whole-word match. Lines starting with #
+# are comments.
+fuck
+shit
