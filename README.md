@@ -54,8 +54,10 @@ and `data/` must sit outside the web-served directory on the real host —
 - `prompts/sparring.md` and `prompts/moderation.md` are drafts — read and
   rewrite before the exhibition; they're the actual pedagogical content.
 - Rate-limit key (`RateLimiter::resolveClientOrigin`) trusts
-  `X-Forwarded-For` — verify the droplet's EasyEngine config actually sets it,
-  or every visitor shares one bucket.
+  `X-Forwarded-For` — verified on a sibling EasyEngine site (2026-08-07) that
+  nginx sets this correctly and overwrites spoofed values. Still needs the
+  same spoof check run against sparring-live's own droplet before opening
+  night, in case that site's nginx config differs.
 - SC-06's display layout (TBC-01…06) is untouched — current SE-02 baseline is
   intentionally minimal per the docs, to be refined against real transcripts
   on the actual projector.

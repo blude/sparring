@@ -20,21 +20,23 @@ final class RateLimiter
     }
 
     /**
-     * Behind EasyEngine's nginx→PHP-FPM containers, REMOTE_ADDR can be the
-     * Docker gateway for every visitor unless real-IP forwarding is set up —
-     * verify on the actual droplet. X-Forwarded-For is trusted here because the
-     * host terminates TLS and proxies every request; it is not visitor-supplied
-     * from outside that chain.
+     * Behind EasyEngine's nginx→PHP-FPM, REMOTE_ADDR is set from the same-host
+     * fastcgi hop, so it already carries the real visitor IP. X-Forwarded-For
+     * is trusted too: verified 2026-08-07 against a live EasyEngine site
+     * (diasnormais.com) that nginx OVERWRITES this header with the real
+     * connecting IP rather than appending to it — a spoofed
+     * `X-Forwarded-For: 1.2.3.4` sent by curl came back as the real client
+     * address, not the injected value. So the header is never visitor-supplied
+     * from outside nginx's own hop.
      *
-     * nginx's default `proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for`
-     * APPENDS the real client address to whatever the request arrived with — it
-     * doesn't overwrite. So the trusted hop is the LAST entry, not the first; the
-     * first is whatever the visitor sent. Taking [0] would hand a visitor an
-     * unlimited-cardinality rate-limit key just by setting their own header.
+     * Parsing still takes the LAST comma-separated entry (not the first) as
+     * defense in depth — correct for both an overwritten single value and the
+     * append behavior (`$proxy_add_x_forwarded_for`) some nginx configs use
+     * instead, without needing to know which one is live.
      *
-     * ponytail: assumes exactly one proxy hop. If EasyEngine's Docker layer adds
-     * a second hop, this needs the second-to-last entry instead — verify against
-     * the real nginx/docker-compose config once the droplet is reachable.
+     * ponytail: verified on a sibling EasyEngine site, not sparring-live's own
+     * droplet — re-run the debug-headers.php spoof test there before opening
+     * night in case that site's nginx config differs.
      */
     public static function resolveClientOrigin(): string
     {
