@@ -158,14 +158,14 @@ The thesis author. Seeds pilot material before the exhibition and intervenes onl
 
 **SE-01 — Input client** *(Web-application)*
 The surface a visitor reaches by scanning the code, running in their own mobile browser.
-*Key responsibilities:* Presents the consent decision before any input is possible. Accepts and submits visitor contributions. Displays the session's exchanges to its own participant. Restores an interrupted session from the identifier in the address. Signals that a response is being produced.
+*Key responsibilities:* Presents the consent decision before any input is possible. Accepts and submits visitor contributions. Displays the session's exchanges to its own participant. Restores an interrupted session from the identifier in the address. Signals that a response is being produced. Reveals a generated visitor alias and avatar once consent is recorded, and lets the visitor deliberately start a new session.
 *Interacts with:* UT-01, SE-03, HE-01
 *Realises:* VCA-04
 *Satisfies:* SG-01, SG-03
 
 **SE-02 — Display client** *(Web-application)*
 The projected surface, running unattended in a browser on the projection machine.
-*Key responsibilities:* Requests current display material at a fixed interval. Renders exchanges with the scenario that gives them context. Gives prominence to recent material and recedes older material. Fits content to the projection without overflow.
+*Key responsibilities:* Requests current display material at a fixed interval. Renders exchanges with the scenario that gives them context. Gives prominence to recent material and recedes older material. Fits content to the projection without overflow. Labels each item with a generated visitor alias so exchanges from concurrent sessions are distinguishable.
 *Interacts with:* UT-02, SE-03, HE-02
 *Realises:* VCA-04
 *Satisfies:* SG-02, SG-06

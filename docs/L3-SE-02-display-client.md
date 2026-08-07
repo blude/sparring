@@ -27,6 +27,12 @@ The element shall run for the duration of exhibition hours without reload, recov
 *Satisfies:* SG-02, SG-06
 *Rationale:* SQR-02. A projection that visibly redraws every few seconds reads as a status screen rather than as part of the work.
 
+**G-04 — Distinguish concurrent visitors from one another**
+The element shall label each item so an observer can tell exchanges from different sessions apart, even when several appear in the same view.
+*Success criteria (qualitative):* An observer looking at two items can tell whether they belong to the same visitor or different ones, without reading the content of either.
+*Satisfies:* SG-02
+*Rationale:* Readability (SG-02) previously meant "legible text" but not "distinguishable speaker" — every item carried the identical literal label "Visitor —", so two concurrent sessions were indistinguishable except by content. That gap is what this goal closes.
+
 ---
 
 ## 2. Use cases
@@ -34,7 +40,7 @@ The element shall run for the duration of exhibition hours without reload, recov
 ### UC-01 — An observer reads the projection
 *Actors:* UT-02, SE-03
 *Prerequisites:* The element is running and has completed at least one successful retrieval.
-*Achieves:* G-01, G-02, G-03
+*Achieves:* G-01, G-02, G-03, G-04
 *Realises:* SSc-02
 
 UT-02 performs no action in this use case. The steps describe the element's own cycle, which is what determines what an observer sees at any moment.
@@ -73,6 +79,7 @@ Two properties of this baseline are settled and should not be revisited without 
 | Item | Type | Displayed | Source | Conditions |
 |---|---|---|---|---|
 | Scenario line | string | What the session is about, giving an isolated exchange its context | E-01.2 | Per item, always |
+| Visitor alias | string | A generated nickname distinguishing this item's session from others (G-04) | Derived from E-01.1 | Per item, always |
 | Visitor contribution | string | The visitor's turn | E-01.3 | Per item, always |
 | Sparring response | string | The reply to that turn | E-01.4 | Per item, always |
 | Recency position | integer | Implied by the item's position and treatment, not shown as a value | E-01.5 | Per item, always |
@@ -138,8 +145,9 @@ Trims an item's contribution and response so that the item occupies its allotted
 
 **TF-04 — Render the surface**
 *Detail level:* Narrative
+*Achieves:* G-04
 
-Applies the reconciled changes to UI-01 with transitions on entry, recession, and exit. All content from SE-03 is inserted as text, never as markup. No goal relation: this is presentation logic serving a use case that already references the goals.
+Applies the reconciled changes to UI-01 with transitions on entry, recession, and exit. All content from SE-03 is inserted as text, never as markup. Each item's visitor alias is derived once from its session identifier (E-01.1) at the point the item is first added — never recomputed on update, since the value is invariant for a given session and recomputing it would be pure waste.
 
 ---
 
@@ -174,7 +182,7 @@ None. No element calls this one. It is a leaf that only reads.
 | E-01.3 | visitorContribution | string | required | The visitor's turn, as supplied. |
 | E-01.4 | sparringResponse | string | required | The reply to that turn, as supplied. |
 | E-01.5 | recencyRank | integer | required | Position in the ordering supplied by SE-03. Not computed here. |
-| E-01.6 | origin | enum | required | `pilot` or `live`. Not currently rendered. Retained for TBC-06. |
+| E-01.6 | origin | enum | required | `pilot` or `live`. Not rendered on the normal surface (retained for TBC-06); shown per item only behind the debug flag (QR-07). |
 
 *The element derives no ordering, performs no selection, and stores nothing beyond the current cycle. Every decision about what appears is made by SE-03.*
 
@@ -213,6 +221,12 @@ None. No element calls this one. It is a leaf that only reads.
 *Applies to:* UI-01, TF-03
 *Acceptance criteria:* Content never extends beyond the projected area at the target resolution. No scrollbar appears under any content length.
 *Element specific:* Yes
+
+**QR-07 — Diagnostic tag is available to an operator, hidden by default** *(Maintainability)*
+*Applies to:* UI-01
+*Acceptance criteria:* An address flag appends a session id / origin tag to each item. Absent by default; no visitor-facing affordance exposes or hints at it.
+*Element specific:* Yes
+*Rationale:* Same operator need as SE-01 QR-06 — see there.
 
 ---
 

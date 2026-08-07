@@ -32,6 +32,12 @@ The element shall show that an input is invalid and should require the user to m
 *Rationale:* Participants should'd be allowed to edit their input to fix the problem.
 *Note:* this is the authoritative behavior for unsuitable content — an earlier version of L2's AP-05 described the session ending instead; that reading is superseded (see L2 AP-05's own note on why).
 
+**G-05 — Give the visitor a light identity, and a way to deliberately start over**
+The element shall reveal a generated nickname and avatar in the header once consent is recorded, and shall let the visitor abandon the current session and begin a fresh one on request.
+*Success criteria (qualitative):* A visitor can find their own alias in the header at any point after consenting, and can start a new session from the same screen without navigating away manually.
+*Derived:* Yes
+*Rationale:* The alias/avatar follows from SE-02's G-04 (display element design) — the wall now labels each session by a generated alias, so a visitor can recognise their own item on the shared surface only if the input client shows them the same value. The new-session control is a related convenience bundled into the same header for the same visitor. Neither was asked for by a stakeholder; both are a UX layer on top of the required consent gate.
+
 ---
 
 ## 2. Use cases
@@ -39,7 +45,7 @@ The element shall show that an input is invalid and should require the user to m
 ### UC-01 — Begin a session
 *Actors:* UT-01, SE-03
 *Prerequisites:* None. This is the entry point.
-*Achieves:* G-01
+*Achieves:* G-01, G-05
 *Realises:* SSc-01
 
 - **ST-01-1** *(Function-call)* On load, the element calls TF-01 with the address contents. TF-01 finds no session identifier and requests a new session, returning the identifier and an empty session.
@@ -48,6 +54,7 @@ The element shall show that an input is invalid and should require the user to m
 - **ST-01-4** *(User-interaction)* UT-01 records their three decisions on UI-01.
 - **ST-01-5** *(Function-call)* The element calls TF-02 with the three decisions. TF-02 sends them to SE-03 and returns confirmation.
 - **ST-01-6** *(Activity)* The element enables the contribution field. UC-02 becomes available.
+- **ST-01-7** *(Function-call)* The element calls TF-05 with the session identifier and reveals the resulting alias and avatar in the header. Never shown before this step — consent is what gates it, not the session's existence.
 
 **Alternative scenarios**
 
@@ -79,16 +86,31 @@ The element shall show that an input is invalid and should require the user to m
 ### UC-03 — Resume an interrupted session
 *Actors:* UT-01, SE-03
 *Prerequisites:* A session identifier is present in the address.
-*Achieves:* G-02
+*Achieves:* G-02, G-05
 *Realises:* SSc-01
 
 - **ST-03-1** *(Function-call)* On load, the element calls TF-01 with the address contents. TF-01 finds an identifier and fetches the existing session from SE-03.
 - **ST-03-2** *(Function-call)* The element calls TF-04 with the returned exchanges, which renders the history.
 - **ST-03-3** *(Activity)* The element restores the surface to its correct state: input enabled if the session is open, presented as complete if it has reached its limit. The consent decision is not asked again.
+- **ST-03-4** *(Function-call)* If the consent decision was already recorded on an earlier visit, the element calls TF-05 and reveals the alias and avatar immediately, same as ST-01-7.
 
 **Alternative scenarios**
 
 - **EX-03-1** *(extends ST-03-1)* The identifier is unknown to SE-03 or has expired. The element discards it and continues as UC-01 from ST-01-1. *Outcome:* Alternative-success.
+
+### UC-04 — Start a new session deliberately
+*Actors:* UT-01
+*Prerequisites:* UC-01 or UC-03 completed — a session, active or complete, is currently shown.
+*Achieves:* G-05
+*Realises:* SSc-01
+
+- **ST-04-1** *(User-interaction)* UT-01 presses "New session" in the header.
+- **ST-04-2** *(User-interaction)* The element asks UT-01 to confirm, stating that the current session will no longer be shown.
+- **ST-04-3** *(Activity)* On confirmation, the element opens the surface with no session identifier in the address, which begins UC-01 from ST-01-1.
+
+**Alternative scenarios**
+
+- **EX-04-1** *(extends ST-04-2)* UT-01 does not confirm. Nothing changes and the current session continues undisturbed. *Outcome:* Terminate.
 
 ---
 
@@ -96,7 +118,7 @@ The element shall show that an input is invalid and should require the user to m
 
 ### UI-01 — Session surface
 *User type:* UT-01
-*Realises:* UC-01, UC-02, UC-03
+*Realises:* UC-01, UC-02, UC-03, UC-04
 
 A single scrolling surface. The exchange history occupies the upper region, the input field is anchored below it. There is no navigation, no menu, and no second view.
 
@@ -110,6 +132,8 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 | Remaining turns | integer | How many contributions remain in the session | E-01.3 | Always, once the session is open |
 | Character allowance | integer | Characters remaining for the current contribution | TF-04 | While the field holds content |
 | Status message | string | Plain statement of a limit reached or a failure | E-01.6 | When set |
+| Visitor alias | string | The generated nickname, shown in a popover on request | TF-05 | Once consent is recorded |
+| Visitor avatar | string (emoji) | A small avatar in the header, always visible alongside the alias | TF-05 | Once consent is recorded |
 
 **Actions**
 
@@ -118,6 +142,8 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 | Record consent decisions | Three checkboxes, none preselected — agreement to take part, retention, projection — plus one Confirm action, enabled only once the participation checkbox is checked | UC-01 | Before the session is open |
 | Submit contribution | Button press, and keyboard submit on devices with a physical keyboard | UC-02 | Enabled only when the field holds content, the session is open, and no submission is outstanding |
 | Retry | Button press | UC-01, UC-02 | Only alongside a failure status message |
+| View own identity | Press the avatar to open a popover showing the alias; dismissed by pressing elsewhere, pressing the avatar again, or Escape | UC-01, UC-03 | Once consent is recorded |
+| Start a new session | Button press, with a confirmation step | UC-04 | Always available once a session exists |
 
 **Input fields**
 
@@ -129,7 +155,7 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 
 None. The element has one surface. The address carries the session identifier but is never used to move between views.
 
-**Presentation notes.** The consent decision must be answerable without scrolling on a small phone, or it becomes an obstacle at the exact moment the visitor is deciding whether to engage at all. None of the three checkboxes is preselected: a preselected or visually dominant "accept" is a dark pattern and defeats the point of asking. This holds even for the participation checkbox, which is required to proceed — required is not the same as defaulted-on.
+**Presentation notes.** The consent decision must be answerable without scrolling on a small phone, or it becomes an obstacle at the exact moment the visitor is deciding whether to engage at all. None of the three checkboxes is preselected: a preselected or visually dominant "accept" is a dark pattern and defeats the point of asking. This holds even for the participation checkbox, which is required to proceed — required is not the same as defaulted-on. The avatar and alias stay hidden through the consent decision itself; nothing about "who" a visitor is appears until they have agreed to take part.
 
 ---
 
@@ -171,6 +197,12 @@ Sends the visitor's three decisions — agreement to take part, retention, proje
 *Detail level:* Narrative
 
 Produces the visible history from E-01. Visitor and Sparring contributions are visually distinguished. Content from SE-03 is inserted as text, never as markup, so that anything a visitor types cannot alter the surface. No goal relation: this is presentation logic serving use cases that already reference the goals.
+
+**TF-05 — Derive visitor identity**
+*Detail level:* Narrative
+*Achieves:* G-05
+
+Computes a nickname and an avatar emoji as a pure function of the session identifier (E-01.1) — no call to SE-03, nothing written anywhere. The same derivation runs in SE-02, so a visitor's alias reads identically wherever it appears. Consistent with AP-03: identity stays derived from what already travels in the address, never a new piece of state.
 
 ---
 
@@ -254,6 +286,12 @@ None. The element provides no interface to other elements. It is reached by a pe
 *Acceptance criteria (qualitative):* Functions on current mobile Safari and Chrome. No transpilation, bundling, or framework runtime.
 *Supports:* SQR-02
 *Rationale:* SC-03. A build pipeline is one more thing that can be broken at 9am on opening day.
+
+**QR-06 — Diagnostic detail is available to an operator, hidden by default** *(Maintainability)*
+*Applies to:* UI-01
+*Acceptance criteria:* An address flag reveals session id, origin, rate-limit remaining, generation timing, and moderation reason (from SE-03's TI-01/TI-02/TI-03 outputs) alongside the normal surface. Absent by default; no visitor-facing affordance exposes or hints at it.
+*Element specific:* Yes
+*Rationale:* Serves UT-03's stated need (L2 §2.3) to diagnose a fault quickly and remotely, without adding an administrative interface (which SC-03 rules out).
 
 ---
 

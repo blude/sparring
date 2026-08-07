@@ -161,7 +161,7 @@ Produces the short context line shown above an exchange, from the session's firs
 *Call type:* Synchronous
 *Calling elements:* SE-01 (TO-01)
 *Input:* Three consent booleans, optional as a group; absent on creation, all three required together on the decision call: agreement to take part, retention consent, projection consent.
-*Output:* Session identifier (string), turn allowance (integer), session state (enum).
+*Output:* Session identifier (string), turn allowance (integer), session state (enum), origin (enum). Origin is always included — cheap to compute, and consumed only by SE-01's own debug-mode display (QR-06), not gated on this side.
 *Action:* Creates a session in E-01 with origin fixed as `live` and a generated identifier, or records the three-part decision against an existing session by writing E-01.7, E-01.10, and E-01.11 — and sets E-01.6 (displayable) directly from the projection choice in the same write. Returns immediately.
 *Error cases:*
 - Malformed request: missing or non-boolean value on any of the three, on the decision call.
@@ -172,7 +172,7 @@ Produces the short context line shown above an exchange, from the session's firs
 *Call type:* Synchronous
 *Calling elements:* SE-01 (TO-02)
 *Input:* Session identifier (string, required), contribution text (string, required).
-*Output:* The completed exchange (visitor contribution and Sparring response), remaining turn allowance (integer), session state (enum). Returned once generation has completed.
+*Output:* The completed exchange (visitor contribution and Sparring response), remaining turn allowance (integer), session state (enum). Returned once generation has completed. Every response, regardless of outcome, also carries rate-limit remaining (integer, from TF-03); an `ok` response additionally carries generation time in milliseconds (from FS-01-8's timing), and a flagged response carries the moderation reason (from TF-02's outcome — `blocked-term` or `llm-classification`). All three are cheap to compute and are included unconditionally; consumed only by SE-01's own debug-mode display (QR-06).
 *Action:* Calls TF-01 with the session identifier and contribution, and returns its result. Response time is dominated by the provider call in TF-01 FS-01-8 and is expected to run to several seconds.
 *Error cases:*
 - Request limit reached (from TF-03).
@@ -188,7 +188,7 @@ Produces the short context line shown above an exchange, from the session's firs
 *Call type:* Synchronous
 *Calling elements:* SE-01 (TO-03)
 *Input:* Session identifier (string, required).
-*Output:* Session state (enum), turn allowance and remaining count (integers), ordered exchanges (array), whether the consent decision has been recorded (boolean) — one flag covering all three parts, since they are always recorded together.
+*Output:* Session state (enum), turn allowance and remaining count (integers), ordered exchanges (array), whether the consent decision has been recorded (boolean) — one flag covering all three parts, since they are always recorded together — and origin (enum), same rationale as TI-01's.
 *Action:* Reads the session from E-01 and its exchanges from E-02 in order. Returns immediately.
 *Error cases:*
 - Session unknown or expired.
@@ -368,8 +368,8 @@ Produces the short context line shown above an exchange, from the session's firs
 **C-04 — No administrative interface, no analytics layer** *(Business)*
 *Source:* SC-03.
 *Applies to:* The element overall.
-*Acceptance criteria:* Operator tasks are performed directly against the host and the store file.
-*Consequence:* Rules out building any surface for inspecting or moderating sessions during the exhibition. Extraction is a query against the store.
+*Acceptance criteria:* Operator tasks — seeding, extraction, reset, and backup — are performed directly against the host and the store file, each its own single-purpose script (`bin/import_pilot.php`, `bin/export.php`, `bin/reset_db.php`, `bin/backup_db.php`).
+*Consequence:* Rules out building any surface for inspecting or moderating sessions during the exhibition. Extraction is a query against the store; reset and backup are, respectively, a bulk delete and a file-level snapshot against the same store, guarded by an explicit confirmation flag rather than by any authentication this system otherwise has no use for (C-03).
 *Implements:* SC-03
 
 **C-05 — Attempts to bypass the Sparring stance are not filtered** *(Business)*

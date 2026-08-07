@@ -20,7 +20,7 @@ The AI was built with instructions and extended knowledge for answering requests
 
 "People expected it to just answer them," said Sarah, who designed the installation as part of her master's thesis at FH Dortmund. "Watching someone realise they were being pushed back on, and then watching them push back harder, was the whole point. That moment used to happen privately, in a session I had to reconstruct afterwards from a recording. Here it happened in a room full of people."
 
-The installation ran unattended through opening hours. Visitors who arrived to an idle wall still found something to read, because sessions from earlier pilot runs kept the projection populated between live participants. Sessions started with a scan and ended when the visitor walked away, with no account, no app, and no name attached to anything on the wall.
+The installation ran unattended through opening hours. Visitors who arrived to an idle wall still found something to read, because sessions from earlier pilot runs kept the projection populated between live participants. Sessions started with a scan — or a tap on the landing screen for anyone who found the piece by its address instead — and ended when the visitor walked away, with no account and no app. The only "name" attached to anything on the wall was a nickname generated from the session itself, never typed by the visitor and never traceable back to who they were.
 
 Several visitors spent their session enganging with prompts that were prepared by the exhibitor which explored themes like generative and agentic AI, especifically how these emerging technologies transforms the underlying material from which digital solutions are made of, and how Digital Design education must be reconfigured and reapplied to this new reality, as well as the business and human-centered perspectives around economic viability, desirability, technical feasibility and so on. 
 
@@ -154,6 +154,7 @@ A visitor scans the QR code, agrees to take part and makes their retention and p
 - **PA-01-3** *(extends PS-01-4)* Language generation is unavailable. The visitor is told plainly that the piece cannot respond right now. *Outcome:* Terminate.
 - **PA-01-4** *(extends PS-01-2)* Visitor declines projection. The session runs normally; their exchanges never appear on the wall, independently of whatever PA-01-1 decides about retention. *Outcome:* Alternative-success.
 - **PA-01-5** *(extends PS-01-2)* Visitor declines to agree to the terms of participation. Unlike retention and projection, this is not an opt-out the session can proceed without: the input surface stays unusable until it is agreed to. *Outcome:* Terminate.
+- **PA-01-6** *(extends PS-01-1)* Visitor reaches the installation via a landing screen at the site's own address rather than a scanned code — typed directly, bookmarked, or shared. The same session surface opens and the process continues unchanged from PS-01-2. *Outcome:* Alternative-success.
 
 **Note on scope.** A visitor who spends the session trying to argue the Sparring partner out of its stance is following BP-01, not deviating from it. This is deliberate and is not treated as an exception path.
 
@@ -193,7 +194,7 @@ The friction shall read as deliberate and directed rather than as the system mal
 **BQR-03 — Nothing identifying a visitor reaches the projection** *(Compliance)*
 The public surface shall not carry names, contact details, or other personal information, whether typed deliberately or incidentally.
 *Applies to:* BP-02, BE-02
-*Acceptance criteria (qualitative):* Content assessed as carrying personal information is rejected before it is stored or sent to the Sparring partner — the visitor edits and resubmits, and the rest of the session is unaffected. Nothing unsuitable is ever in a position to reach the projection.
+*Acceptance criteria (qualitative):* Content assessed as carrying personal information is rejected before it is stored or sent to the Sparring partner — the visitor edits and resubmits, and the rest of the session is unaffected. Nothing unsuitable is ever in a position to reach the projection. A generated nickname shown alongside a session (see SE-02 element design) is not in scope here: it is not supplied by the visitor, identifies nothing about them, and carries no information this requirement exists to keep off the wall.
 *Satisfies:* BG-01, BG-04
 
 **BQR-04 — Exhibition material is never mistaken for evaluation data** *(Operational-excellence)*
