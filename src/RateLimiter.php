@@ -25,12 +25,23 @@ final class RateLimiter
      * verify on the actual droplet. X-Forwarded-For is trusted here because the
      * host terminates TLS and proxies every request; it is not visitor-supplied
      * from outside that chain.
+     *
+     * nginx's default `proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for`
+     * APPENDS the real client address to whatever the request arrived with — it
+     * doesn't overwrite. So the trusted hop is the LAST entry, not the first; the
+     * first is whatever the visitor sent. Taking [0] would hand a visitor an
+     * unlimited-cardinality rate-limit key just by setting their own header.
+     *
+     * ponytail: assumes exactly one proxy hop. If EasyEngine's Docker layer adds
+     * a second hop, this needs the second-to-last entry instead — verify against
+     * the real nginx/docker-compose config once the droplet is reachable.
      */
     public static function resolveClientOrigin(): string
     {
         $forwarded = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? null;
         if (is_string($forwarded) && $forwarded !== '') {
-            return trim(explode(',', $forwarded)[0]);
+            $hops = explode(',', $forwarded);
+            return trim(end($hops));
         }
         return $_SERVER['REMOTE_ADDR'] ?? 'unknown';
     }
