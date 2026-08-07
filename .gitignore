@@ -4,3 +4,4 @@
 /data/store.db-shm
 /data/backups/
 .envrc
+.env
