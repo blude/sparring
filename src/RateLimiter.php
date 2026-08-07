@@ -12,7 +12,8 @@ final class RateLimiter
     {
     }
 
-    public function allow(string $rawOrigin): bool
+    /** Returns ['allowed' => bool, 'remaining' => int] — remaining is surfaced to debug mode. */
+    public function allow(string $rawOrigin): array
     {
         $hash = hash('sha256', $rawOrigin);
         return $this->store->checkAndIncrementRateLimit($hash, RATE_LIMIT_WINDOW_SECONDS, RATE_LIMIT_MAX_REQUESTS);

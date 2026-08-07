@@ -57,8 +57,9 @@ final class Sparring
         }
 
         // FS-01-1: request rate, cheapest and most likely to fire (checked before touching the store).
-        if (!$this->rateLimiter->allow(RateLimiter::resolveClientOrigin())) {
-            return ['status' => 'rate-limited'];
+        $rateLimit = $this->rateLimiter->allow(RateLimiter::resolveClientOrigin());
+        if (!$rateLimit['allowed']) {
+            return ['status' => 'rate-limited', 'rateLimitRemaining' => $rateLimit['remaining']];
         }
 
         // FS-01-2: session must exist and be live.
@@ -69,29 +70,32 @@ final class Sparring
 
         // FS-01-3: turn allowance.
         if ($session['turnCount'] >= TURN_ALLOWANCE) {
-            return ['status' => 'turn-limit'];
+            return ['status' => 'turn-limit', 'rateLimitRemaining' => $rateLimit['remaining']];
         }
 
         // FS-01-4: trim + length bound, before any provider call.
         $contribution = trim($rawContribution);
         if ($contribution === '' || mb_strlen($contribution) > CONTRIBUTION_MAX_CHARS) {
-            return ['status' => 'rejected'];
+            return ['status' => 'rejected', 'rateLimitRemaining' => $rateLimit['remaining']];
         }
 
         // Moderation gate — see method doc above for why this runs before generation.
-        if (!$this->assessSuitability($contribution)) {
-            return ['status' => 'content-flagged'];
+        $suitability = $this->assessSuitability($contribution);
+        if (!$suitability['suitable']) {
+            return ['status' => 'content-flagged', 'rateLimitRemaining' => $rateLimit['remaining'], 'moderationReason' => $suitability['reason']];
         }
 
         // FS-01-7: prior exchanges as conversational context.
         $priorExchanges = $this->store->getExchanges($sessionId);
 
         // FS-01-8: the provider call. Every failure path throws GenerationFailedException.
+        $generationStart = microtime(true);
         try {
             $response = $this->llm->generateResponse($priorExchanges, $contribution);
         } catch (GenerationFailedException) {
-            return ['status' => 'generation-failed'];
+            return ['status' => 'generation-failed', 'rateLimitRemaining' => $rateLimit['remaining']];
         }
+        $generationMs = (int) round((microtime(true) - $generationStart) * 1000);
 
         // FS-01-9/10: write the exchange, advance the turn count, in one operation (QR-07).
         $exchange = $this->store->appendExchange($sessionId, $contribution, $response);
@@ -108,6 +112,8 @@ final class Sparring
             'exchange' => $exchange,
             'turnsRemaining' => TURN_ALLOWANCE - $updated['turnCount'],
             'sessionState' => $this->sessionStateFor($updated),
+            'rateLimitRemaining' => $rateLimit['remaining'],
+            'generationMs' => $generationMs,
         ];
     }
 
@@ -116,22 +122,27 @@ final class Sparring
      * determines whether the visitor may continue (that's the caller's job,
      * and per the resolved moderation gap, "continue" now means "edit and
      * resubmit", not "proceed unaffected").
+     *
+     * Returns ['suitable' => bool, 'reason' => ?string] — reason is null when
+     * suitable, otherwise 'blocked-term' or 'llm-classification'; surfaced to
+     * debug mode (?debug=1) only, the caller's gate check just reads 'suitable'.
      */
-    public function assessSuitability(string $contribution): bool
+    public function assessSuitability(string $contribution): array
     {
         // FS-02-1: local term list, no provider call, cheapest rejection path.
         if ($this->containsBlockedTerm($contribution)) {
-            return false;
+            return ['suitable' => false, 'reason' => 'blocked-term'];
         }
 
         // FS-02-2: single attempt, no retry, fails closed on ANY failure (QR-08).
         try {
             $classification = $this->llm->classify($contribution);
         } catch (Throwable) {
-            return false;
+            return ['suitable' => false, 'reason' => 'llm-classification'];
         }
 
-        return $classification === 'suitable';
+        $suitable = $classification === 'suitable';
+        return ['suitable' => $suitable, 'reason' => $suitable ? null : 'llm-classification'];
     }
 
     private function containsBlockedTerm(string $contribution): bool

@@ -39,6 +39,7 @@ function respond_session(Sparring $sparring, array $session): void
         'sessionId' => $session['id'],
         'sessionState' => $sparring->sessionStateFor($session),
         'turnsRemaining' => TURN_ALLOWANCE - $session['turnCount'],
+        'origin' => $session['origin'], // debug mode (?debug=1) only consumer
     ], JSON_UNESCAPED_SLASHES);
 }
 

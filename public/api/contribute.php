@@ -44,6 +44,17 @@ $statusCodes = [
 ];
 http_response_code($statusCodes[$result['status']] ?? 500);
 
+// Debug fields (?debug=1 in the client) are cheap to always compute, so no
+// server-side notion of "debug" is needed — just pass through what's present.
+$debugFields = array_filter(
+    [
+        'rateLimitRemaining' => $result['rateLimitRemaining'] ?? null,
+        'generationMs' => $result['generationMs'] ?? null,
+        'moderationReason' => $result['moderationReason'] ?? null,
+    ],
+    static fn ($v) => $v !== null
+);
+
 if ($result['status'] === 'ok') {
     echo json_encode([
         'status' => 'ok',
@@ -53,7 +64,8 @@ if ($result['status'] === 'ok') {
         ],
         'turnsRemaining' => $result['turnsRemaining'],
         'sessionState' => $result['sessionState'],
+        ...$debugFields,
     ], JSON_UNESCAPED_SLASHES);
 } else {
-    echo json_encode(['status' => $result['status']], JSON_UNESCAPED_SLASHES);
+    echo json_encode(['status' => $result['status'], ...$debugFields], JSON_UNESCAPED_SLASHES);
 }

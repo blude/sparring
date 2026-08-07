@@ -37,6 +37,7 @@ echo json_encode([
     'sessionState' => $sparring->sessionStateFor($session),
     'turnsRemaining' => TURN_ALLOWANCE - $session['turnCount'],
     'retentionDecided' => $session['consentGranted'] !== null,
+    'origin' => $session['origin'], // debug mode (?debug=1) only consumer
     'exchanges' => array_map(
         static fn (array $e) => [
             'visitorContribution' => $e['visitorContribution'],

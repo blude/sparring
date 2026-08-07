@@ -73,9 +73,23 @@ assert(count($store->getDisplayableSessions('pilot', 10)) === 1);
 // --- rate limiting ---
 $hash = hash('sha256', '203.0.113.7');
 for ($i = 0; $i < 3; $i++) {
-    assert($store->checkAndIncrementRateLimit($hash, 60, 3) === true);
+    assert($store->checkAndIncrementRateLimit($hash, 60, 3)['allowed'] === true);
 }
-assert($store->checkAndIncrementRateLimit($hash, 60, 3) === false); // 4th request in window exceeds limit of 3
+assert($store->checkAndIncrementRateLimit($hash, 60, 3)['allowed'] === false); // 4th request in window exceeds limit of 3
+
+// --- maintenance: counts, reset, backup ---
+$before = $store->getCounts();
+assert($before['sessions'] === 2); // $session + $pilotSession created above
+assert($before['exchanges'] === 3); // 2 on $session, 1 on $pilotSession
+assert($before['rateLimitWindows'] === 1);
+$deleted = $store->resetAll();
+assert($deleted === $before);
+assert($store->getCounts() === ['sessions' => 0, 'exchanges' => 0, 'rateLimitWindows' => 0]);
+
+$backupPath = sys_get_temp_dir() . '/sparring-smoke-backup-' . getmypid() . '.db';
+$store->backupTo($backupPath);
+assert(is_file($backupPath));
+unlink($backupPath);
 
 unlink($dbPath);
 foreach (['-wal', '-shm'] as $suffix) {

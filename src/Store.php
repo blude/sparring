@@ -268,9 +268,10 @@ final class Store
     /**
      * Reads/increments the counting window for a hashed origin, resetting it in place
      * once expired (TF-03: no swept background job on an unattended host).
-     * Returns true if the request is within the allowance.
+     * Returns ['allowed' => bool, 'remaining' => int] — remaining is surfaced to
+     * debug mode (?debug=1), cheap enough to always compute.
      */
-    public function checkAndIncrementRateLimit(string $originHash, int $windowSeconds, int $maxRequests): bool
+    public function checkAndIncrementRateLimit(string $originHash, int $windowSeconds, int $maxRequests): array
     {
         $now = time();
         $stmt = $this->pdo->prepare('SELECT * FROM rate_limit_windows WHERE origin_hash = :h');
@@ -285,18 +286,56 @@ final class Store
                  ON CONFLICT(origin_hash) DO UPDATE SET window_start = :ws, request_count = 1'
             );
             $stmt->execute(['h' => $originHash, 'ws' => self::now()]);
-            return true;
+            return ['allowed' => true, 'remaining' => $maxRequests - 1];
         }
 
         if ((int) $row['request_count'] >= $maxRequests) {
-            return false;
+            return ['allowed' => false, 'remaining' => 0];
         }
 
         $stmt = $this->pdo->prepare(
             'UPDATE rate_limit_windows SET request_count = request_count + 1 WHERE origin_hash = :h'
         );
         $stmt->execute(['h' => $originHash]);
-        return true;
+        return ['allowed' => true, 'remaining' => $maxRequests - ((int) $row['request_count'] + 1)];
+    }
+
+    // --- Maintenance (bin/reset_db.php, bin/backup_db.php) ---
+
+    /** Row counts across every table this store owns — used by --dry-run and post-reset reporting. */
+    public function getCounts(): array
+    {
+        return [
+            'sessions' => (int) $this->pdo->query('SELECT COUNT(*) FROM sessions')->fetchColumn(),
+            'exchanges' => (int) $this->pdo->query('SELECT COUNT(*) FROM exchanges')->fetchColumn(),
+            'rateLimitWindows' => (int) $this->pdo->query('SELECT COUNT(*) FROM rate_limit_windows')->fetchColumn(),
+        ];
+    }
+
+    /** Empties every table (FK-safe order: exchanges before sessions). Returns the counts deleted. */
+    public function resetAll(): array
+    {
+        $counts = $this->getCounts();
+        $this->pdo->beginTransaction();
+        try {
+            $this->pdo->exec('DELETE FROM exchanges');
+            $this->pdo->exec('DELETE FROM sessions');
+            $this->pdo->exec('DELETE FROM rate_limit_windows');
+            $this->pdo->commit();
+        } catch (Throwable $e) {
+            $this->pdo->rollBack();
+            throw $e;
+        }
+        return $counts;
+    }
+
+    /**
+     * Consistent-snapshot backup via SQLite's own VACUUM INTO — correct even
+     * under WAL journal mode (Store.php ctor), no new dependency needed.
+     */
+    public function backupTo(string $destPath): void
+    {
+        $this->pdo->exec('VACUUM INTO ' . $this->pdo->quote($destPath));
     }
 
     // --- Helpers ---

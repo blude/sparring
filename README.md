@@ -28,6 +28,20 @@ works immediately off the pilot seed; the input client needs
 php bin/export.php dump.json    # full raw store dump; omit the arg to print to stdout
 ```
 
+## Database maintenance
+
+```sh
+php bin/backup_db.php                  # snapshot to data/backups/store-<timestamp>.db
+php bin/backup_db.php path/to/file.db  # snapshot to a specific path instead
+
+php bin/reset_db.php --dry-run  # report what would be deleted, changes nothing
+php bin/reset_db.php --confirm  # empty sessions/exchanges/rate-limit tables
+```
+
+`?debug=1` on `input.php`/`display.php` shows a diagnostics panel (session
+id, origin, rate-limit remaining, generation timing, moderation reason on a
+flagged contribution) — dev-only, off by default.
+
 ## Layout
 
 See the plan's "File layout" section. Everything under `src/` and `prompts/`
