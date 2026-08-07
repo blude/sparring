@@ -7,7 +7,7 @@ require __DIR__ . '/../config.php';
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sparring</title>
+<title>Session — Sparring</title>
 <link rel="stylesheet" href="assets/input.css">
 </head>
 <body>

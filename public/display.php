@@ -6,7 +6,7 @@ require __DIR__ . '/../config.php';
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Sparring — projection</title>
+<title>Projection — Sparring</title>
 <link rel="stylesheet" href="assets/display.css">
 </head>
 <body>
