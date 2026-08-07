@@ -7,6 +7,21 @@ declare(strict_types=1);
  * See plan doc "Numeric defaults" table for the source TBC per constant.
  */
 
+// QR-11: an uncaught exception on any public endpoint (missing credential,
+// unwritable store, ...) must not leak a stack trace or filesystem path.
+// Every public/api/*.php requires this file first, so one handler covers all.
+// Scoped to the web SAPI only — bin/*.php CLI scripts also require this file,
+// and an admin running reset_db.php/backup_db.php needs the real exception
+// and stack trace on stderr, not a swallowed "{"status":"error"}".
+if (PHP_SAPI !== 'cli') {
+    ini_set('display_errors', '0');
+    set_exception_handler(static function (Throwable $e): void {
+        http_response_code(500);
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'error']);
+    });
+}
+
 // --- Session / turn limits ---
 const TURN_ALLOWANCE = 8;              // exchanges permitted per session (SG-04, E-01.8)
 const CONTRIBUTION_MAX_CHARS = 600;    // (SQR-04, TF-01 FS-01-4)

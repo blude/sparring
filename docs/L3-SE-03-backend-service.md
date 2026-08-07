@@ -340,6 +340,11 @@ Produces the short context line shown above an exchange, from the session's firs
 *Acceptance criteria:* Only the hashed origin is written. The raw value exists in memory for the duration of the request and nowhere else.
 *Element specific:* Yes
 
+**QR-11 — Infrastructure faults degrade to a generic error, not a leak** *(Security)*
+*Applies to:* TI-01, TI-02, TI-03, TI-04
+*Acceptance criteria:* An uncaught exception on any public endpoint (missing credential, unwritable store, or any other infrastructure fault) returns a generic JSON error with no file path, stack trace, or exception message.
+*Supports:* SQR-04
+
 ---
 
 ## 9. Constraints
@@ -377,4 +382,11 @@ Produces the short context line shown above an exchange, from the session's firs
 *Applies to:* TF-02.
 *Acceptance criteria:* The classification instruction distinguishes disengagement from adversarial engagement, and only the former yields an off-exercise outcome. A visitor arguing the Sparring partner out of its position produces a suitable classification. The instruction also states the exercise's actual subject matter explicitly (TF-02) — necessary alongside the disengagement distinction, not instead of it; found missing in testing, where its absence alone caused on-topic contributions to fail this same acceptance criterion from the other direction.
 *Consequence:* Rules out a general off-topic filter applied without this distinction. Sessions in which the friction is successfully talked away are retained and projected like any other (subject to the visitor's own projection consent, SC-05).
+*Element specific:* Yes
+
+**C-06 — Classifier input is untrusted data, not instruction** *(Security)*
+*Source:* this review.
+*Applies to:* TF-02.
+*Acceptance criteria:* The contribution text is delimited and labeled as data in the classification prompt, and delimiter characters that could close that boundary are stripped from the contribution before assembly.
+*Consequence:* Distinct from C-05 — that constraint accepts persona-steering as the exhibit's own subject; this one closes the separate case of a contribution engineered to flip the moderation verdict itself, which has no comparable justification for staying open.
 *Element specific:* Yes

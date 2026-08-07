@@ -21,6 +21,11 @@ final class GenerationFailedException extends RuntimeException
  */
 final class LlmClient
 {
+    // C-06: name of the wrapper tag prompts/moderation.md uses around
+    // {{CONTRIBUTION}} (its <contribution>/</contribution> lines). Kept as a
+    // constant, referenced from classify() below, so the two can't drift silently.
+    private const DELIMITER_TAG = 'contribution';
+
     private Client $client;
     private string $sparringPrompt;
     private string $moderationPromptTemplate;
@@ -100,7 +105,16 @@ final class LlmClient
      */
     public function classify(string $contribution): string
     {
-        $prompt = str_replace('{{CONTRIBUTION}}', $contribution, $this->moderationPromptTemplate);
+        // C-06: strip lookalike delimiter tags — any case, any internal whitespace
+        // (</contribution>, </CONTRIBUTION>, </ contribution >, ...) — so a visitor
+        // can't close the prompt's <contribution> wrapper early and splice
+        // instructions after it. Scoped to this classification prompt only: the
+        // stored/displayed contribution (Sparring::processTurn) is never touched,
+        // so a visitor legitimately typing the literal string isn't silently edited.
+        $tag = preg_quote(self::DELIMITER_TAG, '/');
+        $sanitized = preg_replace('/<\/?\s*' . $tag . '\s*>/i', '', $contribution);
+
+        $prompt = str_replace('{{CONTRIBUTION}}', $sanitized, $this->moderationPromptTemplate);
 
         $response = $this->client->messages->create(
             model: CLASSIFICATION_MODEL,
