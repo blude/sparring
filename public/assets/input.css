@@ -18,6 +18,54 @@ main {
     gap: 0.5rem;
 }
 
+#top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+#avatar-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #f7f7f7;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+}
+
+#avatar-popover {
+    position: absolute;
+    top: 2.75rem;
+    left: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    z-index: 1;
+}
+
+#new-session-btn {
+    padding: 0.4rem 0.75rem;
+    font: inherit;
+    font-size: 0.85rem;
+}
+
+#debug-panel {
+    font-size: 0.7rem;
+    background: #111;
+    color: #7f7;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    max-height: 8rem;
+}
+
 #history {
     flex: 1;
     overflow-y: auto;

@@ -12,6 +12,12 @@ require __DIR__ . '/../config.php';
 </head>
 <body>
 <main>
+  <header id="top-bar">
+    <button id="avatar-btn" type="button" aria-haspopup="true" aria-expanded="false" hidden></button>
+    <div id="avatar-popover" hidden role="dialog">You are <strong id="avatar-alias"></strong></div>
+    <button id="new-session-btn" type="button">New session</button>
+  </header>
+
   <div id="history" aria-live="polite"></div>
 
   <div id="retention" hidden>
@@ -45,6 +51,7 @@ require __DIR__ . '/../config.php';
 window.CONTRIBUTION_MAX_CHARS = <?= (int) CONTRIBUTION_MAX_CHARS ?>;
 window.SE01_WAIT_BOUND_MS = <?= (int) (SE01_WAIT_BOUND_SECONDS * 1000) ?>;
 </script>
+<script src="assets/identity.js"></script>
 <script src="assets/input.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@
 
     var MAX_CHARS = window.CONTRIBUTION_MAX_CHARS || 600;
     var WAIT_MS = window.SE01_WAIT_BOUND_MS || 25000;
+    var DEBUG = new URLSearchParams(window.location.search).get('debug') === '1';
 
     var historyEl = document.getElementById('history');
     var retentionEl = document.getElementById('retention');
@@ -18,9 +19,62 @@
     var submitEl = document.getElementById('submit');
     var charRemainingEl = document.getElementById('char-remaining');
     var statusEl = document.getElementById('status');
+    var avatarBtn = document.getElementById('avatar-btn');
+    var avatarPopover = document.getElementById('avatar-popover');
+    var avatarAliasEl = document.getElementById('avatar-alias');
+    var newSessionBtn = document.getElementById('new-session-btn');
 
     var sessionId = null;
     var sessionState = null; // 'awaiting-decision' | 'open' | 'complete' | 'failed'
+    var debugPanel = null;
+    var lastDebugInfo = {};
+
+    // --- identity: avatar + alias, revealed only once consent is recorded ---
+    function revealIdentity(id) {
+        avatarBtn.textContent = window.SparringIdentity.avatar(id);
+        avatarAliasEl.textContent = window.SparringIdentity.alias(id);
+        avatarBtn.hidden = false;
+    }
+
+    function closePopover() {
+        avatarPopover.hidden = true;
+        avatarBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    avatarBtn.addEventListener('click', function (event) {
+        event.stopPropagation();
+        var opening = avatarPopover.hidden;
+        avatarPopover.hidden = !opening;
+        avatarBtn.setAttribute('aria-expanded', String(opening));
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!avatarPopover.hidden && !avatarPopover.contains(event.target) && event.target !== avatarBtn) {
+            closePopover();
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closePopover();
+    });
+
+    newSessionBtn.addEventListener('click', function () {
+        if (window.confirm('Start a new session? Your current session will no longer be shown.')) {
+            window.location.href = 'input.php';
+        }
+    });
+
+    // --- debug mode (?debug=1): surfaces values already computed server-side, nothing new to compute ---
+    function updateDebugPanel(info) {
+        if (!DEBUG) return;
+        if (!debugPanel) {
+            debugPanel = document.createElement('pre');
+            debugPanel.id = 'debug-panel';
+            document.querySelector('main').appendChild(debugPanel);
+        }
+        Object.assign(lastDebugInfo, info);
+        debugPanel.textContent = JSON.stringify(lastDebugInfo, null, 2);
+    }
 
     fieldEl.setAttribute('maxlength', String(MAX_CHARS));
 
@@ -113,7 +167,9 @@
             appendTurn('sparring', exchange.sparringResponse);
         });
         retentionEl.hidden = true; // ST-03-3: retention decision is not asked again
+        if (data.sessionState !== 'awaiting-decision') revealIdentity(id); // consent already recorded
         applySessionState(data.sessionState, data.turnsRemaining);
+        updateDebugPanel({ sessionId: id, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
     }
 
     // --- TF-02: record the consent decision (ToS required, retention/projection are real opt-outs) ---
@@ -142,7 +198,9 @@
             })
             .then(function (data) {
                 retentionEl.hidden = true;
+                revealIdentity(sessionId); // consent just recorded — first point alias/avatar may be shown
                 applySessionState(data.sessionState, data.turnsRemaining);
+                updateDebugPanel({ sessionId: sessionId, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
             })
             .catch(function () {
                 setStatus('Could not record that choice — try again.');
@@ -175,6 +233,7 @@
     }
 
     function handleContributionResult(httpStatus, data, submittedText) {
+        updateDebugPanel({ rateLimitRemaining: data.rateLimitRemaining, generationMs: data.generationMs, moderationReason: data.moderationReason });
         switch (data.status) {
             case 'ok':
                 appendTurn('visitor', data.exchange.visitorContribution);
