@@ -10,9 +10,9 @@
 window.SparringIdentity = (function () {
     'use strict';
 
-    var BASE_WORDS = ['Neko', 'Kuma', 'Tora', 'Usagi', 'Kitsune', 'Inu', 'Tanuki', 'Ryu', 'Hebi', 'Saru'];
-    var SUFFIXES = ['lilo', 'dido', 'kiki', 'chibi', 'chen', 'ie', 'hon', 'hachi', 'ichi', 'roku'];
-    var AVATARS = ['🐣', '🦊', '🐼', '🐸', '🐢', '🦉', '🐙', '🐿️', '🦔', '🐝', '🦋', '🐳', '🦕', '🐧', '🐨', '🦄'];
+    var BASE_WORDS = ['Neko', 'Kuma', 'Tora', 'Usagi', 'Kitsune', 'Inu', 'Tanuki', 'Ryu', 'Hebi', 'Saru', 'Kero'];
+    var SUFFIXES = ['lilo', 'dido', 'kiki', 'chibi', 'chen', 'chan', 'ie', 'hon', 'hachi', 'ichi', 'roku', 'san', 'nana', 'shi', 'go', 'ni'];
+    var AVATARS = ['🐣', '🦊', '🐼', '🐸', '🐢', '🦉', '🐙', '🐿️', '🦔', '🐝', '🦋', '🐳', '🦕', '🐧', '🐨', '🦄', '🦆', '🐲'];
 
     function seed(sessionId) {
         return parseInt(sessionId.slice(0, 8), 16) || 0;
@@ -22,7 +22,7 @@ window.SparringIdentity = (function () {
         var s = seed(sessionId);
         var base = BASE_WORDS[s % BASE_WORDS.length];
         var suffix = SUFFIXES[Math.floor(s / BASE_WORDS.length) % SUFFIXES.length];
-        return base.slice(0, 2) + base + '-' + suffix; // naive doubling: repeat first 2 letters as prefix
+        return base.slice(0, 2) + base.toLowerCase() + '-' + suffix; // naive doubling: repeat first 2 letters as prefix
     }
 
     function avatar(sessionId) {
