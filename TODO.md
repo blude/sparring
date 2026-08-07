@@ -15,6 +15,8 @@
 
 ### Input
 
+- [ ] Change the visual style of the Sparring partner's message, so that the bubble is not visible anymore and text size is a bit larger.
+- [ ] Add support for the user to export their session's conversation (initially JSON). 
 - [ ] Add support for rendering mermaid diagrams
 - [ ] Show status "Sparring is thinking…" inline along with chat history
   - Status message is then replaced by the incoming message.
@@ -25,6 +27,7 @@
   - Rationale: This first exchange doesn't deliver friction.
 - [ ] Implement playful design for displaying exchanges (waiting for mockup).
 - [ ] Add support for rendering Mermaid diagrams.
+- [ ] Display AI generated session summaries (Using Haiku possibly)
 
 ### Sparring System Prompt
 
@@ -41,6 +44,11 @@
 - [ ] Add realistic content to Terms of Service page
 - [ ] Add realistic content to Privacy Policy page
 - [ ] Add realistic content to Credits page (partially done)
+
+## Bug Fixes
+
+- [ ] Investigate some benign visitor messages being blocked by moderation
+  - Maybe loosening the moderation can fix it.
 
 # Done
 
