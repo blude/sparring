@@ -1,6 +1,32 @@
-# PLACEHOLDER — TF-02 FS-02-1's local term list. Replace with a real curated
-# list before the exhibition; this exists only so the code path is exercised.
-# One term per line, case-insensitive whole-word match. Lines starting with #
-# are comments.
+# TF-02 FS-02-1's local term list — cheap first-pass filter before the LLM
+# classification call. One term per line, case-insensitive whole-word match.
+# Lines starting with # are comments. English + German (exhibition is in
+# Dortmund). Not exhaustive — the LLM classification pass (TF-02) is the
+# real backstop for anything not caught here.
+
+# English
 fuck
 shit
+bitch
+asshole
+bastard
+cunt
+dick
+piss
+slut
+whore
+faggot
+nigger
+retard
+
+# German
+scheiße
+scheisse
+arschloch
+fotze
+hurensohn
+wichser
+schlampe
+missgeburt
+spast
+neger

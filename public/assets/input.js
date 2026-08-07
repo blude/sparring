@@ -233,7 +233,13 @@
     }
 
     function handleContributionResult(httpStatus, data, submittedText) {
-        updateDebugPanel({ rateLimitRemaining: data.rateLimitRemaining, generationMs: data.generationMs, moderationReason: data.moderationReason });
+        // sessionState/turnsRemaining are only present on some outcomes (e.g. 'ok');
+        // merge them only when present so a rate-limited/rejected response doesn't
+        // blank out the last good values via updateDebugPanel's Object.assign.
+        var debugInfo = { rateLimitRemaining: data.rateLimitRemaining, generationMs: data.generationMs, moderationReason: data.moderationReason };
+        if (data.sessionState !== undefined) debugInfo.sessionState = data.sessionState;
+        if (data.turnsRemaining !== undefined) debugInfo.turnsRemaining = data.turnsRemaining;
+        updateDebugPanel(debugInfo);
         switch (data.status) {
             case 'ok':
                 appendTurn('visitor', data.exchange.visitorContribution);

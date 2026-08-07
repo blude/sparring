@@ -15,6 +15,7 @@
       gap: 1.5rem;
       font-family: system-ui, sans-serif;
       text-align: center;
+      touch-action: manipulation;
   }
   h1 {
       font-weight: 700;

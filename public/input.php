@@ -6,7 +6,7 @@ require __DIR__ . '/../config.php';
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Session — Sparring</title>
 <link rel="stylesheet" href="assets/input.css">
 </head>
@@ -41,10 +41,16 @@ require __DIR__ . '/../config.php';
   </div>
 
   <form id="composer">
-    <textarea id="contribution" placeholder="What do you want to work on?" disabled></textarea>
+    <div id="composer-row">
+      <textarea id="contribution" placeholder="What do you want to work on?" disabled></textarea>
+      <button id="submit" type="submit" disabled aria-label="Send">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M12 4 L12 20 M12 4 L6 10 M12 4 L18 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
     <div id="char-remaining"></div>
     <div id="status" role="status"></div>
-    <button id="submit" type="submit" disabled>Send</button>
   </form>
 </main>
 <script>

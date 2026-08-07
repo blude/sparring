@@ -11,7 +11,7 @@ window.SparringIdentity = (function () {
     'use strict';
 
     var BASE_WORDS = ['Neko', 'Kuma', 'Tora', 'Usagi', 'Kitsune', 'Inu', 'Tanuki', 'Ryu', 'Hebi', 'Saru', 'Kero'];
-    var SUFFIXES = ['lilo', 'dido', 'kiki', 'chibi', 'chen', 'chan', 'ie', 'hon', 'hachi', 'ichi', 'roku', 'san', 'nana', 'shi', 'go', 'ni'];
+    var SUFFIXES = ['lilo', 'dido', 'kiki', 'chibi', 'chen', 'chan', 'ie', 'hon', 'hachi', 'ichi', 'roku', 'san', 'nana', 'shi', 'go', 'ni', 'kyu', 'juu', 'maru', 'pyon', 'boo', 'tan', 'yan', 'poko', 'mochi'];
     var AVATARS = ['🐣', '🦊', '🐼', '🐸', '🐢', '🦉', '🐙', '🐿️', '🦔', '🐝', '🦋', '🐳', '🦕', '🐧', '🐨', '🦄', '🦆', '🐲'];
 
     function seed(sessionId) {

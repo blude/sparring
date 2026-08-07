@@ -23,7 +23,7 @@ if (PHP_SAPI !== 'cli') {
 }
 
 // --- Session / turn limits ---
-const TURN_ALLOWANCE = 8;              // exchanges permitted per session (SG-04, E-01.8)
+const TURN_ALLOWANCE = 10;             // exchanges permitted per session (SG-04, E-01.8)
 const CONTRIBUTION_MAX_CHARS = 600;    // (SQR-04, TF-01 FS-01-4)
 const SESSION_TTL_HOURS = 6;           // undefined in docs; drives "expired" for TI-01/02/03
 

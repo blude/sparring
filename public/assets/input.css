@@ -8,14 +8,17 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    touch-action: manipulation; /* suppress double-tap-to-zoom, keep pinch-zoom for accessibility */
 }
 
 main {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 0.75rem;
     gap: 0.5rem;
+    /* inset-aware padding needs viewport-fit=cover on input.php's meta to be non-zero */
+    padding: max(0.75rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right))
+             max(0.75rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
 }
 
 #top-bar {
@@ -108,8 +111,14 @@ main {
     gap: 0.25rem;
 }
 
+#composer-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 #contribution {
-    width: 100%;
+    flex: 1;
     min-height: 3.5rem;
     resize: none;
     padding: 0.5rem;
@@ -119,4 +128,17 @@ main {
 #char-remaining { font-size: 0.8rem; color: #666; text-align: right; }
 #status { font-size: 0.85rem; min-height: 1.1rem; color: #a33; }
 
-#submit { padding: 0.65rem; font: inherit; }
+#submit {
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background: #222;
+    color: #fff;
+}
+#submit:disabled { opacity: 0.5; }

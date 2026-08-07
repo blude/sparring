@@ -8,7 +8,6 @@
   - Query parameter only sends a scenario scenario ID.
   - The Scenario ID and message pairs are mapped in code. 
   - First message is sent automatically with "Sparring Scenario: {Scenario Description}"
-- [ ] seed profanity_terms.txt
 - [ ] update sparring.md prompt (blocked, waiting for instructions)
 - [ ] update moderation.md prompt (blocked, waiting for instructions)
 
@@ -16,9 +15,6 @@
 
 ### Input
 
-- [ ] Make Send button more compact
-  - Place it on the right, next to the prompt input field. Instead of text label, use an SVG up arrow icon
-- [ ] Bump max sparring exchanges to 10
 - [ ] Add support for rendering mermaid diagrams
 - [ ] Show status "Sparring is thinking…" inline along with chat history
   - Status message is then replaced by the incoming message.
@@ -40,25 +36,20 @@
 
 - [ ] Implement playful design of starting screen (waiting for mockup).
 
-### Identiy
-
-- [ ] Increase number of unique visitor aliases possible
-
 ### Misc
 
 - [ ] Add realistic content to Terms of Service page
 - [ ] Add realistic content to Privacy Policy page
 - [ ] Add realistic content to Credits page (partially done)
 
-## Bug Fixes
-
-- [ ] Debug window on input screen doesn't update after each new message.
-
-### Mobile pages (excluding Display screen)
-
-- [ ] Disable zooming on double-tapping
-- [ ] Layout: Respect Safe Area Insets
-
 # Done
 
 [Move here completed To Dos]
+
+- [x] seed profanity_terms.txt (English + German)
+- [x] Make Send button more compact (SVG arrow icon, right of input field)
+- [x] Bump max sparring exchanges to 10
+- [x] Increase number of unique visitor aliases possible
+- [x] Debug window on input screen doesn't update after each new message.
+- [x] Disable zooming on double-tapping (mobile, excluding Display screen)
+- [x] Layout: Respect Safe Area Insets (mobile, excluding Display screen)
