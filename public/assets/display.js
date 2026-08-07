@@ -7,6 +7,7 @@
     'use strict';
 
     var POLL_MS = window.POLL_INTERVAL_MS || 4000;
+    var DEBUG = new URLSearchParams(window.location.search).get('debug') === '1';
     var TRIM_CHARS = 260; // TF-03: character bound per side, both halves preserved
     var wall = document.getElementById('wall');
     var displayed = new Map(); // sessionId -> item, mirrors E-01 of this element
@@ -80,6 +81,10 @@
         scenario.className = 'scenario';
         scenario.textContent = item.scenario;
 
+        var visitorName = document.createElement('div');
+        visitorName.className = 'visitor-name';
+        visitorName.textContent = window.SparringIdentity.alias(item.sessionId); // write-once: invariant per sessionId
+
         var contribution = document.createElement('p');
         contribution.className = 'contribution';
         contribution.textContent = trim(item.visitorContribution, TRIM_CHARS);
@@ -88,7 +93,15 @@
         response.className = 'response';
         response.textContent = trim(item.sparringResponse, TRIM_CHARS);
 
-        el.append(scenario, contribution, response);
+        el.append(scenario, visitorName, contribution, response);
+
+        if (DEBUG) {
+            var debugTag = document.createElement('span');
+            debugTag.className = 'debug-tag';
+            debugTag.textContent = item.sessionId.slice(0, 8) + ' · ' + item.origin;
+            el.append(debugTag);
+        }
+
         return el;
     }
 

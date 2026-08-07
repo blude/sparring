@@ -12,6 +12,7 @@ require __DIR__ . '/../config.php';
 <body>
 <main id="wall" aria-live="off"></main>
 <script>window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;</script>
+<script src="assets/identity.js"></script>
 <script src="assets/display.js"></script>
 </body>
 </html>

@@ -50,14 +50,22 @@ html, body {
     line-height: 1.35;
 }
 
-.exchange .contribution::before {
-    content: "Visitor — ";
+.exchange .visitor-name {
     color: #7fb3ff;
     font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.15rem;
 }
 
 .exchange .response::before {
     content: "Sparring — ";
     color: #ffb37f;
     font-weight: 600;
+}
+
+.debug-tag {
+    display: block;
+    font-size: 0.7rem;
+    color: #666;
+    margin-top: 0.3rem;
 }
