@@ -9,11 +9,37 @@
  * (QR-06) — everything else here is a placeholder, not a design decision.
  */
 :root {
+    /* Light theme (default). Dark stays available via prefers-color-scheme below. */
     --brand-red: #d32f2f; /* matches index.php's "Sparring" wordmark — the actual brand red */
-    --accent: color-mix(in srgb, var(--brand-red) 55%, white);             /* lightened for legibility on #111 */
-    --accent-bubble-bg: color-mix(in srgb, var(--brand-red) 30%, black);   /* darkened, visitor bubble background */
-    --accent-bubble-text: color-mix(in srgb, var(--brand-red) 25%, white); /* lightened, visitor bubble text */
+    --accent: var(--brand-red);                                            /* legible as-is on white */
+    --accent-bubble-bg: color-mix(in srgb, var(--brand-red) 12%, white);    /* light tint, visitor bubble background */
+    --accent-bubble-text: color-mix(in srgb, var(--brand-red) 70%, black);  /* darkened, visitor bubble text */
+
+    --bg: #f7f7f7;
+    --fg: #111;
+    --border: #ddd;
+    --scenario-color: #666;
+    --response-bg: #eaeaea;
+    --response-text: #111;
+    --debug-color: #999;
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --accent: color-mix(in srgb, var(--brand-red) 55%, white);             /* lightened for legibility on #111 */
+        --accent-bubble-bg: color-mix(in srgb, var(--brand-red) 30%, black);   /* darkened, visitor bubble background */
+        --accent-bubble-text: color-mix(in srgb, var(--brand-red) 25%, white); /* lightened, visitor bubble text */
+
+        --bg: #111;
+        --fg: #f2f2f2;
+        --border: #333;
+        --scenario-color: #999;
+        --response-bg: #262626;
+        --response-text: #f2f2f2;
+        --debug-color: #666;
+    }
+}
+
 * { box-sizing: border-box; }
 
 html, body {
@@ -21,8 +47,8 @@ html, body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    background: #111;
-    color: #f2f2f2;
+    background: var(--bg);
+    color: var(--fg);
     font-family: system-ui, sans-serif;
     font-size: 1.05rem; /* less dense at 2x2 than the 3-col baseline, but both rows must still fit (QR-06) */
 }
@@ -39,7 +65,7 @@ body {
     text-align: center;
     font-size: 1.5rem;
     letter-spacing: 0.05em;
-    color: #f2f2f2;
+    color: var(--fg);
 }
 
 #wall {
@@ -64,7 +90,7 @@ body {
 .exchange {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--border);
     padding-top: 1rem;
     opacity: 1;
     transition: opacity 400ms ease;
@@ -76,7 +102,7 @@ body {
 
 .exchange .scenario {
     font-size: 0.85rem;
-    color: #999;
+    color: var(--scenario-color);
     margin-bottom: 0.4rem;
 }
 
@@ -97,8 +123,8 @@ body {
 
 .exchange .response {
     align-self: flex-end;
-    background: #262626;
-    color: #f2f2f2;
+    background: var(--response-bg);
+    color: var(--response-text);
 }
 
 .exchange .visitor-name {
@@ -111,6 +137,6 @@ body {
 .debug-tag {
     display: block;
     font-size: 0.7rem;
-    color: #666;
+    color: var(--debug-color);
     margin-top: 0.3rem;
 }
