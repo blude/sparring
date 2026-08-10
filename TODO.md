@@ -11,6 +11,11 @@
 - [ ] update sparring.md prompt (blocked, waiting for instructions)
 - [ ] update moderation.md prompt (blocked, waiting for instructions)
 
+### Input
+
+- [ ] Add support for the user to export their session's conversation (initially JSON).
+- [ ] Add support for rendering mermaid diagrams
+
 ### Admin Screen (new)
 
 - [ ] Add admin screen where sessions and exchanges are listed.
@@ -27,8 +32,6 @@
 ### Input
 
 - [ ] Change the visual style of the Sparring partner's message, so that the bubble is not visible anymore and text size is a bit larger.
-- [ ] Add support for the user to export their session's conversation (initially JSON). 
-- [ ] Add support for rendering mermaid diagrams
 - [ ] Show status "Sparring is thinking…" inline along with chat history
   - Status message is then replaced by the incoming message.
 
@@ -45,7 +48,7 @@
 ### Sparring System Prompt
 
 - [ ] Initial Scenario Setup
-  - If first visitor message starts with "Sparring Scenario:" then the immediate Sparring response is a simple acknowledgment of the scenario. 
+  - Description: If first visitor message starts with "Sparring Scenario:" then the immediate Sparring response is a simple acknowledgment of the scenario. 
 - [ ] Add support for generating Mermaid diagrams as part of a sparring move.
 
 ### Index
