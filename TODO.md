@@ -23,6 +23,13 @@
 
 ### Display
 
+#### Priority
+
+- [ ] Display exchange pairs in a masonry layout (3 coluns)
+- [ ] Display exchange pairs in stacked message bubbles
+
+#### Later
+
 - [ ] Never show the first exchange of a session, if user message starts with "Sparring Scenario:".
   - Rationale: This first exchange doesn't deliver friction.
 - [ ] Implement playful design for displaying exchanges (waiting for mockup).
