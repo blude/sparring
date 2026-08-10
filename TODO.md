@@ -11,6 +11,17 @@
 - [ ] update sparring.md prompt (blocked, waiting for instructions)
 - [ ] update moderation.md prompt (blocked, waiting for instructions)
 
+### Admin Screen (new)
+
+- [ ] Add admin screen where sessions and exchanges are listed.
+- [ ] Avaiable actions
+  - [ ] Delete session
+  - [ ] Mark session as unsuitable for display
+  - [ ] Edit exchange (all attributes)
+  - [ ] Reset database
+  - [ ] Import data (from pilot seed)
+- [ ] Simple password protected (to start)
+
 ## Improvements
 
 ### Input
