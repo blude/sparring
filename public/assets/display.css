@@ -1,10 +1,19 @@
 /*
  * SC-06: layout treatment is an open decision, resolved later against real
- * pilot transcripts on the actual projector (TBC-01..06). This is the baseline
- * from SE-02 UI-01: vertical list, uniform items, most recent first, one
- * exchange pair per item. Fixed viewport, no scroll (QR-06) — everything else
- * here is a placeholder, not a design decision.
+ * pilot transcripts on the actual projector (TBC-01..06). TBC-01 currently
+ * adopts a 2-column masonry treatment (DISPLAY_COLUMNS), targeting an
+ * assumed 1920x1080 (C-03 — pending final HE-02 confirmation). One exchange
+ * pair per item, uniform item shape (same template/truncation rule per
+ * item — not the same rendered height, that already varied with content
+ * length under the single-column baseline too). Fixed viewport, no scroll
+ * (QR-06) — everything else here is a placeholder, not a design decision.
  */
+:root {
+    --brand-red: #d32f2f; /* matches index.php's "Sparring" wordmark — the actual brand red */
+    --accent: color-mix(in srgb, var(--brand-red) 55%, white);             /* lightened for legibility on #111 */
+    --accent-bubble-bg: color-mix(in srgb, var(--brand-red) 30%, black);   /* darkened, visitor bubble background */
+    --accent-bubble-text: color-mix(in srgb, var(--brand-red) 25%, white); /* lightened, visitor bubble text */
+}
 * { box-sizing: border-box; }
 
 html, body {
@@ -15,16 +24,41 @@ html, body {
     background: #111;
     color: #f2f2f2;
     font-family: system-ui, sans-serif;
+    font-size: 1.05rem; /* less dense at 2x2 than the 3-col baseline, but both rows must still fit (QR-06) */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#logo {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 1rem 0 0;
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    color: #f2f2f2;
 }
 
 #wall {
-    height: 100%;
+    flex: 1;
+    min-height: 0; /* lets #wall's own overflow:hidden win inside a column flex parent (QR-06) */
     width: 100%;
     padding: 2rem;
     display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+    flex-direction: row;
+    gap: 1.5rem;
     overflow: hidden;
+}
+
+.column {
+    flex: 1;
+    min-width: 0; /* stops long unbroken text from forcing a column wider than its share */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .exchange {
@@ -48,17 +82,17 @@ html, body {
 
 .exchange .contribution,
 .exchange .response {
-    margin: 0.25rem 0;
-    padding: 0.5rem 0.75rem;
+    margin: 0.3rem 0;
+    padding: 0.6rem 0.85rem;
     max-width: 80%;
-    border-radius: 0.75rem;
+    border-radius: 0.85rem;
     line-height: 1.35;
 }
 
 .exchange .contribution {
     align-self: flex-start;
-    background: #2a3d5c;
-    color: #dbe9ff;
+    background: var(--accent-bubble-bg);
+    color: var(--accent-bubble-text);
 }
 
 .exchange .response {
@@ -68,7 +102,7 @@ html, body {
 }
 
 .exchange .visitor-name {
-    color: #7fb3ff;
+    color: var(--accent);
     font-weight: 600;
     font-size: 0.9rem;
     margin-bottom: 0.15rem;

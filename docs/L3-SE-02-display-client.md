@@ -67,12 +67,12 @@ UT-02 performs no action in this use case. The steps describe the element's own 
 
 The whole projected area. No controls, no cursor, no navigation, no scroll. The surface is a fixed viewport whose contents change over time.
 
-**Baseline composition (agreed, build against this).** A vertical list of uniform items, most recent first. Every item has the same shape: a scenario line, then a visitor contribution, then the Sparring response. One exchange pair per session, so each session contributes exactly one item.
+**Baseline composition (agreed, build against this).** TBC-01 currently adopts a 3-column masonry arrangement: each session is placed once into whichever column has the least rendered height (not the fewest items), and stays there for its lifetime. Every item has the same shape: a scenario line, then a visitor contribution, then the Sparring response. One exchange pair per session, so each session contributes exactly one item.
 
 Two properties of this baseline are settled and should not be revisited without a reason:
 
 - **The exchange pair is the unit.** A single turn shown alone conveys nothing about friction. The pair is the smallest thing that shows the mechanism.
-- **Every item has the same shape.** A design that renders the newest session differently from the rest requires two layouts, two truncation rules, and a decision about what happens when the newest session is unusually long. Uniformity removes all three.
+- **Every item has the same shape.** A design that renders the newest session differently from the rest requires two layouts, two truncation rules, and a decision about what happens when the newest session is unusually long. Uniformity removes all three. This is about shared *template and truncation rule*, not shared rendered height — height already varied with content length under the single-column baseline, and still does under masonry; that variance is what the column-balancing works with, not a departure from uniformity.
 
 **Visible data**
 
@@ -82,7 +82,7 @@ Two properties of this baseline are settled and should not be revisited without 
 | Visitor alias | string | A generated nickname distinguishing this item's session from others (G-04) | Derived from E-01.1 | Per item, always |
 | Visitor contribution | string | The visitor's turn | E-01.3 | Per item, always |
 | Sparring response | string | The reply to that turn | E-01.4 | Per item, always |
-| Recency position | integer | Implied by the item's position and treatment, not shown as a value | E-01.5 | Per item, always |
+| Recency position | integer | Implied by the item's position within its column; a session's column assignment is sticky and does not reflect global recency across columns | E-01.5 | Per item, always |
 
 **Actions.** None. The element accepts no input.
 
@@ -94,13 +94,16 @@ Two properties of this baseline are settled and should not be revisited without 
 
 Each is deliberately deferred until real pilot transcripts can be seen on HE-02 at exhibition viewing distance. None of them changes the interface SE-03 provides, so they can be resolved after the rest of the system works.
 
-**TBC-01 — Treatment of prominence and recency.** Three candidates were considered and none is yet chosen:
+**TBC-01 — Treatment of prominence and recency.** Four candidates now exist; masonry is adopted as a working default, the other three remain open:
 
 - *Size gradient.* Newest item largest, older items progressively smaller and dimmer. Conveys accumulation well. Weakness: older items become texture rather than content, so most of the surface is not actually readable.
 - *Rotation.* One or two items at full size, cycling on a timer, with an indicator of how many others exist. Every item gets a turn at being readable. Weakness: loses the sense of accumulation, and requires a live-session priority rule so that a visitor who has just contributed sees their own exchange rather than waiting for the cycle.
 - *Hybrid.* A large primary region plus a thin strip of recent items. Retains both properties at the cost of more layout work.
+- *Masonry (adopted).* `DISPLAY_COLUMNS` columns, each item placed once into the shortest-by-height column and never moved. Every item stays equally readable (no gradient, no cycling), and height-based placement gives a natural sense of accumulation without a timer. Weakness: strict global recency ordering is lost — a session's column position no longer says "newer than everything below it," only "newer than what's below it in its own column." Chosen for now because it needs no dwell-time rule (TBC-03) and no live-session interrupt rule (TBC-02), unlike rotation/hybrid.
 
-**TBC-02 — Whether a live session interrupts.** Only applicable if TBC-01 resolves to rotation or hybrid. If a visitor's exchange does not appear promptly on the wall, the connection between typing and projection is lost, and that connection is much of what makes the piece an installation rather than a screen. Under the size-gradient baseline this is automatic and needs no rule.
+  Masonry has its own version of "does everyone get seen," distinct from TBC-02: with `DISPLAY_ITEM_LIMIT` items shown and selection by most-recent-activity (`Store::getDisplayableSessions`, `ORDER BY last_active_at DESC`), a session that goes quiet is *excluded*, not merely delayed — it can drop off the wall entirely if enough other sessions stay more active. Accepted as intentional: recency-eviction gives visitors a reason to keep engaging rather than submitting once and disengaging, which fits a piece about friction. Not revisited unless pilot observation shows visitors feeling unfairly dropped rather than prompted to continue.
+
+**TBC-02 — Whether a live session interrupts.** Only applicable if TBC-01 resolves to rotation or hybrid. If a visitor's exchange does not appear promptly on the wall, the connection between typing and projection is lost, and that connection is much of what makes the piece an installation rather than a screen. Under the size-gradient baseline this is automatic and needs no rule. Under masonry, the analogous question is resolved above, not by this TBC.
 
 **TBC-03 — Dwell time, if any.** A fixed interval will feel wrong in both directions: too long for a short exchange, too short for a dense one. Scaling to content length is the obvious alternative. Not decidable without real transcripts.
 
@@ -250,7 +253,7 @@ None. No element calls this one. It is a leaf that only reads.
 *Source:* SC-03.
 *Applies to:* UI-01.
 *Acceptance criteria:* Renders correctly at the projection's native resolution. No responsive behaviour below or above it.
-*Consequence:* Rules out responsive layout work. Requires the projection resolution to be confirmed before UI-01 is finalised, which is a dependency on HE-02 procurement being settled.
+*Consequence:* Rules out responsive layout work. Requires the projection resolution to be confirmed before UI-01 is finalised, which is a dependency on HE-02 procurement being settled. Working assumption for now: 1920×1080 — not yet a confirmed HE-02 sign-off, but enough to build and tune the masonry treatment (TBC-01) against.
 *Implements:* SC-03
 
 **C-04 — No build step** *(Technical)*

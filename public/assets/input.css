@@ -1,5 +1,9 @@
 /* QR-03: reachable one-handed on a small phone, retention decision answerable
    without scrolling. Everything else here is a placeholder — refined later. */
+:root {
+    --accent: #d32f2f;      /* theme accent: matches index.php's "Sparring" wordmark red */
+    --accent-soft: #fbdfe0; /* accent tinted for a light-theme bubble background */
+}
 * { box-sizing: border-box; }
 
 body {
@@ -78,7 +82,7 @@ main {
 }
 
 #history .turn { padding: 0.5rem 0.75rem; border-radius: 0.75rem; max-width: 90%; }
-#history .visitor { align-self: flex-end; background: #dbe9ff; }
+#history .visitor { align-self: flex-end; background: var(--accent-soft); }
 #history .sparring { align-self: flex-start; background: #f0f0f0; }
 
 #retention {
@@ -138,7 +142,7 @@ main {
     justify-content: center;
     border-radius: 50%;
     border: none;
-    background: #222;
+    background: var(--accent);
     color: #fff;
 }
 #submit:disabled { opacity: 0.5; }

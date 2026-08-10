@@ -10,8 +10,11 @@ require __DIR__ . '/../config.php';
 <link rel="stylesheet" href="assets/display.css">
 </head>
 <body>
+<h1 id="logo">Sparring</h1>
 <main id="wall" aria-live="off"></main>
 <script>window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;</script>
+<script>window.DISPLAY_COLUMNS = <?= (int) DISPLAY_COLUMNS ?>;</script>
+<script>window.DISPLAY_ITEM_LIMIT = <?= (int) DISPLAY_ITEM_LIMIT ?>;</script>
 <script src="assets/identity.js"></script>
 <script src="assets/display.js"></script>
 </body>

@@ -2,15 +2,47 @@
  * SE-02: no build step (C-04), no framework. Implements TF-01 (poll),
  * TF-02 (reconcile — the whole reason unchanged items don't redraw),
  * TF-03 (fit to space), TF-04 (render, text-only per QR-05).
+ *
+ * TBC-01: masonry layout, DISPLAY_COLUMNS columns. Each session is placed
+ * once (pickColumn) and never moves after — that's what keeps QR-02
+ * ("an add leaves every other item undisturbed") true without a packing
+ * library: an add only ever touches the bottom of one column.
  */
 (function () {
     'use strict';
 
     var POLL_MS = window.POLL_INTERVAL_MS || 4000;
     var DEBUG = new URLSearchParams(window.location.search).get('debug') === '1';
-    var TRIM_CHARS = 260; // TF-03: character bound per side, both halves preserved
+    var TRIM_CHARS = 500; // TF-03: estimate for a ~900px column, 2 items tall, at 1920px; TBC-05 pending real HE-02 tuning
+    var COLUMN_COUNT = window.DISPLAY_COLUMNS || 3;
+    var MAX_PER_COLUMN = Math.ceil((window.DISPLAY_ITEM_LIMIT || 9) / COLUMN_COUNT); // QR-06: bounds worst-case column height
     var wall = document.getElementById('wall');
+    var columns = buildColumns();
     var displayed = new Map(); // sessionId -> item, mirrors E-01 of this element
+    var placement = new Map(); // sessionId -> column element, sticky for the item's lifetime
+
+    function buildColumns() {
+        var cols = [];
+        for (var i = 0; i < COLUMN_COUNT; i++) {
+            var col = document.createElement('div');
+            col.className = 'column';
+            wall.appendChild(col);
+            cols.push(col);
+        }
+        return cols;
+    }
+
+    // Masonry placement: shortest-by-rendered-height among columns under the
+    // cap, not shortest-by-count — that's what lets items balance by actual
+    // content weight instead of forcing equal rows.
+    function pickColumn() {
+        var best = null;
+        columns.forEach(function (col) {
+            if (col.children.length >= MAX_PER_COLUMN) return;
+            if (!best || col.offsetHeight < best.offsetHeight) best = col;
+        });
+        return best || columns[0]; // cap only bites if LIMIT/COLUMNS accounting is off; never leave an item unplaced
+    }
 
     function trim(text, n) {
         return text.length > n ? text.slice(0, n - 1) + '…' : text;
@@ -68,7 +100,6 @@
         toAdd.forEach(addItem);
 
         displayed = incoming;
-        reorder(items);
     }
 
     // --- TF-04: render (add/update/remove/reorder), text only ---
@@ -107,7 +138,9 @@
 
     function addItem(item) {
         var el = buildItemElement(item);
-        wall.appendChild(el);
+        var col = pickColumn();
+        placement.set(item.sessionId, col);
+        col.appendChild(el); // only this column's height changes; every other column is untouched (QR-02)
         requestAnimationFrame(function () { el.classList.remove('entering'); });
     }
 
@@ -121,14 +154,8 @@
 
     function removeItem(sessionId) {
         var el = wall.querySelector('[data-session-id="' + sessionId + '"]');
-        if (el) el.remove();
-    }
-
-    function reorder(items) {
-        items.forEach(function (item) {
-            var el = wall.querySelector('[data-session-id="' + item.sessionId + '"]');
-            if (el) wall.appendChild(el); // re-append in recency order; no-op for already-correct position
-        });
+        if (el) el.remove(); // compacts only its own column, same as baseline single-column removal
+        placement.delete(sessionId);
     }
 
     poll();
