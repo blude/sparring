@@ -28,6 +28,8 @@ html, body {
 }
 
 .exchange {
+    display: flex;
+    flex-direction: column;
     border-top: 1px solid #333;
     padding-top: 1rem;
     opacity: 1;
@@ -47,7 +49,22 @@ html, body {
 .exchange .contribution,
 .exchange .response {
     margin: 0.25rem 0;
+    padding: 0.5rem 0.75rem;
+    max-width: 80%;
+    border-radius: 0.75rem;
     line-height: 1.35;
+}
+
+.exchange .contribution {
+    align-self: flex-start;
+    background: #2a3d5c;
+    color: #dbe9ff;
+}
+
+.exchange .response {
+    align-self: flex-end;
+    background: #262626;
+    color: #f2f2f2;
 }
 
 .exchange .visitor-name {
@@ -55,12 +72,6 @@ html, body {
     font-weight: 600;
     font-size: 0.9rem;
     margin-bottom: 0.15rem;
-}
-
-.exchange .response::before {
-    content: "Sparring — ";
-    color: #ffb37f;
-    font-weight: 600;
 }
 
 .debug-tag {
