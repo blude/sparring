@@ -23,11 +23,6 @@
 
 ### Display
 
-#### Priority
-
-- [ ] Display exchange pairs in a masonry layout (3 coluns)
-- [ ] Display exchange pairs in stacked message bubbles
-
 #### Later
 
 - [ ] Never show the first exchange of a session, if user message starts with "Sparring Scenario:".
@@ -68,3 +63,5 @@
 - [x] Debug window on input screen doesn't update after each new message.
 - [x] Disable zooming on double-tapping (mobile, excluding Display screen)
 - [x] Layout: Respect Safe Area Insets (mobile, excluding Display screen)
+- [x] Display exchange pairs in stacked message bubbles
+- [x] Display exchange pairs in a masonry layout (shipped as 2 columns, not 3)
