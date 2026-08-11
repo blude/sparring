@@ -4,18 +4,39 @@
 
 The app elements shall incorporate juicier user interactions, such as:
 
-- [ ] Show an animated title when the first message is sent (e.g. READY? SPAR!) 
-- [ ] Show a quick punch animation when a new message is sent in input screen. 
-- [ ] Animte incoming exchanges in display screen too.
-- [ ] Desired: support message streaming
+### Examples
+
+- [ ] Show an animated title card when the first message is sent (e.g. READY? SPAR!) 
+- [ ] Show a quick punch animation everytime a new message is sent in input screen. 
+- [ ] Animte incoming exchanges in display screen.
+- [ ] Support message streaming
+- [ ] Wiggling / sliding / throbbing animations
+- [ ] Sound effects: glitchy, arcade-like sound effects
+
+### Requirements
+
 - [ ] Optional: frame-based animation, based on a real sketches that can be provides, if concept is validated (format: gif or highly compressed PNGs. grungy, gruffy style is accepted)
 - [ ] Requirement: an efficient animation framework.
-- [ ] Desired: employ custom typography, particple emitters, shaders, etc.
+- [ ] Requirement: non-blocking, performant.
+- [ ] Desired: employ custom typography, particle emitters, effects, animations, transitions, shaders, etc. This is where external dependencies are warranted.
+- [ ] Target platforms: Modern generation iPhone and Android devices: iPhone 14+, newer Pixel and Samsung Galaxy devices.
 
-Rationale: Adding juiciness to this exhibition piece is a nice to bring fun to a otherwise bland, "academic"-looking interface. It adds thematic flair, which already shows up in the app's name (Sparring, the japanese characters, the glove icon, etc). The UI should inherit videogame-inspired elements without being over the top. A nod to 90's arcade games, martial arts.
-
+**Rationale:** Adding juiciness to this exhibition piece is a nice to bring fun to a otherwise bland, "academic"-looking interface. It adds thematic flair, which already shows up in the app's name (Sparring, the japanese characters, the glove icon, etc). The UI should inherit videogame-inspired elements without being over the top. A nod to 90's arcade games, martial arts.
 
 ## New Features
+
+### Prototype / Session Evaluation (Important!)
+
+- [ ] At the end of an session (after visitor runs out of turns) a dialog is presented with the option to rate the session.
+- [ ] Questions TBC. But at the top of my head, one or two single-choice questions with 5 degree.
+- [ ] Example 1: How challenging was this Sparring session? (Custom label for each option)
+- [ ] Example 2: How knowledgeable would you rate Sparring regarding digital design? 
+- [ ] Final question: open feedback input -- what stood out to you? 
+
+Rationale: the exhibition offers a great sneaky opportunity to collect feedback about the Sparring prototype / exhibition piece.
+
+
+### General
 
 - [ ] Add support for invoking a starting scenario through a query parameter
   - Allows different QR Codes to be generated, each one containing URLs pointing to a different opening scenario
