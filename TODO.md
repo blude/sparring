@@ -10,7 +10,7 @@ The app elements shall incorporate juicier user interactions, such as:
 - [ ] Show a quick punch animation everytime a new message is sent in input screen. 
 - [ ] Animte incoming exchanges in display screen.
 - [ ] Support message streaming
-- [ ] Wiggling / sliding / throbbing animations
+- [ ] Wiggling / sliding / shaking / bumping / throbbing animations
 - [ ] Sound effects: glitchy, arcade-like sound effects
 
 ### Requirements
