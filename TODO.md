@@ -1,5 +1,16 @@
 # To Do
 
+## JUICYNESS (VERY IMPORTANT!!1)
+
+Rationale: Adding juiciness is a nice to bring fun to a otherwise bland, "corporate"-looking interface. It adds thematic flair, which already shows up in the app name (Sparring, the japanese characters, the glove icon, etc). The UI should inherit videogame-inspired elements without being over the top. A nod to 90's arcade games, martial arts.
+
+- [ ] Show an animated title when the first message is sent (e.g. READY? SPAR!) 
+- [ ] Show a quick punch animation when a new message is sent in input screen. 
+- [ ] Animte incoming exchanges in display screen too.
+- [ ] Desired: support message streaming
+- [ ] Optional: frame-based animation, based on a real sketches that can be provides, if concept is validated (format: gif or highly compressed PNGs. grungy, gruffy style is accepted)
+- [ ] Requirement: an efficient animation framework
+
 ## New Features
 
 - [ ] Add support for invoking a starting scenario through a query parameter
