@@ -20,14 +20,17 @@ window.SparringSfx = (function () {
 
     // One oscillator + a linear-to-near-zero gain envelope. sweepTo (optional)
     // glides the frequency across the note for the "glitchy" arcade feel.
-    function beep(type, freq, durationMs, sweepTo) {
+    // peakGain defaults to the production presets' level — sfx-debug.php
+    // passes its own so volume is tunable there without a second code path.
+    function beep(type, freq, durationMs, sweepTo, peakGain) {
+        if (peakGain === undefined) peakGain = 0.15; // quiet by default — exhibition phone speakers vary
         var c = context();
         var osc = c.createOscillator();
         var gain = c.createGain();
         osc.type = type;
         osc.frequency.setValueAtTime(freq, c.currentTime);
         if (sweepTo) osc.frequency.linearRampToValueAtTime(sweepTo, c.currentTime + durationMs / 1000);
-        gain.gain.setValueAtTime(0.15, c.currentTime); // quiet by default — exhibition phone speakers vary
+        gain.gain.setValueAtTime(peakGain, c.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, c.currentTime + durationMs / 1000);
         osc.connect(gain).connect(c.destination);
         osc.start();
@@ -55,5 +58,7 @@ window.SparringSfx = (function () {
         context(); // must run inside a user-gesture call stack — first call does the creating/resuming
     }
 
-    return { play: play, unlock: unlock };
+    // beep is exposed only for sfx-debug.php's live tuning — production
+    // code always goes through play(name), never calls this directly.
+    return { play: play, unlock: unlock, beep: beep };
 })();
