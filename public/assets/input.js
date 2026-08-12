@@ -297,8 +297,12 @@
                 setStatus('');
                 updateCharRemaining();
                 applySessionState(data.sessionState, data.turnsRemaining);
-                if (data.sessionState !== 'complete') setComposerEnabled(true);
-                window.SparringSfx.play('success');
+                if (data.sessionState === 'complete') {
+                    window.SparringSfx.playSequence('sessionEnd');
+                } else {
+                    setComposerEnabled(true);
+                    window.SparringSfx.play('success');
+                }
                 break;
 
             case 'rate-limited':
@@ -311,6 +315,7 @@
 
             case 'turn-limit':
                 applySessionState('complete');
+                window.SparringSfx.playSequence('sessionEnd');
                 break;
 
             case 'rejected':

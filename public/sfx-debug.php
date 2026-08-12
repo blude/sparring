@@ -6,21 +6,19 @@
 <title>SFX Debug — Sparring</title>
 <style>
 body{font:16px/1.5 system-ui,sans-serif;max-width:28rem;margin:2rem auto;padding:0 1rem;touch-action:manipulation;}
-label{display:block;margin-top:1.1rem;font-size:0.9rem;color:#555;}
-input[type=range]{width:100%;}
-select{font:inherit;}
+textarea{width:100%;height:4rem;font:0.9rem/1.4 ui-monospace,monospace;margin-top:0.4rem;}
 button{padding:0.6rem 1rem;font:inherit;margin-top:1rem;margin-right:0.5rem;}
-pre{background:#111;color:#7f7;padding:0.75rem;border-radius:0.5rem;overflow-x:auto;margin-top:1rem;font-size:0.85rem;}
-.notes{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.4rem;}
-.notes button{margin:0;padding:0.4rem 0.6rem;font-size:0.8rem;}
-.notes button.active{background:#d32f2f;color:#fff;}
+pre{background:#111;color:#f88;padding:0.75rem;border-radius:0.5rem;overflow-x:auto;margin-top:1rem;font-size:0.85rem;min-height:1.2rem;}
 </style>
 </head>
 <body>
 <h1>SFX Debug</h1>
-<p>Live-tunes <code>public/assets/sfx.js</code>'s <code>beep()</code> params.
-Not linked from the app — dev tool only. Play, adjust, copy the generated
-call back into <code>sfx.js</code>'s <code>PRESETS</code>.</p>
+<p>Previews a <a href="https://killedbyapixel.github.io/ZzFX/" target="_blank" rel="noopener">ZzFX</a>
+parameter array through this app's actual vendored engine
+(<code>public/assets/zzfx.min.js</code>). Not linked from the app — dev
+tool only. Design a sound in the official Sound Designer above, paste its
+exported array below to confirm it sounds right here, then copy it into
+<code>public/assets/sfx.js</code>'s <code>PRESETS</code>.</p>
 
 <div>
   <button type="button" data-preset="punch">Load punch</button>
@@ -28,136 +26,104 @@ call back into <code>sfx.js</code>'s <code>PRESETS</code>.</p>
   <button type="button" data-preset="error">Load error</button>
 </div>
 
-<label>Waveform
-  <select id="type">
-    <option value="square">square</option>
-    <option value="sawtooth">sawtooth</option>
-    <option value="triangle">triangle</option>
-    <option value="sine">sine</option>
-  </select>
-</label>
-
-<label>Start note: <span id="freq-val"></span></label>
-<div class="notes" id="freq-notes"></div>
-
-<label><input type="checkbox" id="sweep-on" checked> Sweep to: <span id="sweepTo-val"></span></label>
-<div class="notes" id="sweepTo-notes"></div>
-
-<label>Duration: <span id="duration-val"></span>ms
-  <input type="range" id="duration" min="20" max="1000" step="10">
-</label>
-
-<label>Gain: <span id="gain-val"></span>
-  <input type="range" id="gain" min="0" max="1" step="0.01">
+<label>Parameter array (comma-separated, in zzfx's own order)
+  <textarea id="params" spellcheck="false"></textarea>
 </label>
 
 <button type="button" id="play">▶ Play</button>
 
-<pre id="code"></pre>
+<pre id="error"></pre>
+
+<h2>Chain</h2>
+<p>One note per line (same paste-tolerant format as above — a full export
+line, a bracketed array, or a bare comma list). Plays back-to-back: each
+note's own duration (attack+sustain+release+decay+delay) schedules the
+next, like a real arpeggio/sequence.</p>
+
+<div>
+  <button type="button" data-sequence="sessionEnd">Load session end</button>
+</div>
+
+<label>Notes, one per line
+  <textarea id="chain" spellcheck="false" style="height:8rem"></textarea>
+</label>
+
+<button type="button" id="play-chain">▶ Play chain</button>
+
+<pre id="chain-error"></pre>
 
 <script src="assets/juicy.js"></script>
+<script src="assets/zzfx.min.js"></script>
 <script src="assets/sfx.js"></script>
 <script>
 (function () {
     'use strict';
 
-    // Mirrors sfx.js's own PRESETS — starting points to tweak from, not a
-    // second source of truth for production (that's still sfx.js alone).
-    var PRESETS = {
-        punch: { type: 'square', freq: 600, duration: 90, sweepTo: 280, gain: 0.15 },
-        success: { type: 'triangle', freq: 520, duration: 120, sweepTo: 900, gain: 0.15 },
-        error: { type: 'sawtooth', freq: 320, duration: 180, sweepTo: 160, gain: 0.15 },
-    };
+    // Reads sfx.js's real PRESETS/SEQUENCES — not a second copy, so this
+    // can't drift out of sync with production values the way a duplicate
+    // would (this bit us once already with PRESETS.punch).
+    var PRESETS = window.SparringSfx.PRESETS;
+    var SEQUENCES = window.SparringSfx.SEQUENCES;
 
-    var typeEl = document.getElementById('type');
-    var sweepOnEl = document.getElementById('sweep-on');
-    var durationEl = document.getElementById('duration');
-    var gainEl = document.getElementById('gain');
-    var codeEl = document.getElementById('code');
-    var freqNotesEl = document.getElementById('freq-notes');
-    var sweepToNotesEl = document.getElementById('sweepTo-notes');
-
-    // Diatonic notes only (no sharps), octaves 3-6 — covers the ~80-2000Hz
-    // range a phone speaker actually reproduces (see sfx.js's own note on
-    // the 300-900Hz band). Equal temperament, A4=440Hz.
-    var NOTE_NAMES = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-    var SEMITONES = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
-    var NOTES = [];
-    for (var octave = 3; octave <= 6; octave++) {
-        NOTE_NAMES.forEach(function (name) {
-            var midi = (octave + 1) * 12 + SEMITONES[name];
-            var freq = 440 * Math.pow(2, (midi - 69) / 12);
-            NOTES.push({ name: name + octave, freq: freq });
-        });
-    }
-
-    var freqNote = NOTES[7]; // D4, ~punch's original 600Hz starting point
-    var sweepToNote = NOTES[4]; // G3
-
-    function buildNoteButtons(container, onPick) {
-        NOTES.forEach(function (note) {
-            var btn = document.createElement('button');
-            btn.type = 'button';
-            btn.textContent = note.name;
-            btn.addEventListener('click', function () { onPick(note); });
-            container.appendChild(btn);
-        });
-    }
-
-    function markActive(container, note) {
-        Array.prototype.forEach.call(container.children, function (btn, i) {
-            btn.classList.toggle('active', NOTES[i] === note);
-        });
-    }
-
-    function refresh() {
-        document.getElementById('freq-val').textContent = freqNote.name + ' (' + Math.round(freqNote.freq) + 'Hz)';
-        document.getElementById('sweepTo-val').textContent = sweepToNote.name + ' (' + Math.round(sweepToNote.freq) + 'Hz)';
-        document.getElementById('duration-val').textContent = durationEl.value;
-        document.getElementById('gain-val').textContent = gainEl.value;
-        markActive(freqNotesEl, freqNote);
-        markActive(sweepToNotesEl, sweepToNote);
-        var sweep = sweepOnEl.checked ? Math.round(sweepToNote.freq) : 'null';
-        codeEl.textContent = "beep('" + typeEl.value + "', " + Math.round(freqNote.freq) + ", " + durationEl.value + ", " + sweep + ", " + gainEl.value + ");";
-    }
-
-    // Snaps a preset's raw Hz to its nearest diatonic note button, since
-    // the notes grid is discrete and the presets were tuned by ear, not
-    // to exact pitches.
-    function nearestNote(freq) {
-        return NOTES.reduce(function (best, note) {
-            return Math.abs(note.freq - freq) < Math.abs(best.freq - freq) ? note : best;
-        });
-    }
+    var paramsEl = document.getElementById('params');
+    var errorEl = document.getElementById('error');
 
     function load(values) {
-        typeEl.value = values.type;
-        freqNote = nearestNote(values.freq);
-        sweepToNote = nearestNote(values.sweepTo);
-        durationEl.value = values.duration;
-        gainEl.value = values.gain;
-        refresh();
+        paramsEl.value = values.join(', ');
+        errorEl.textContent = '';
     }
-
-    buildNoteButtons(freqNotesEl, function (note) { freqNote = note; refresh(); });
-    buildNoteButtons(sweepToNotesEl, function (note) { sweepToNote = note; refresh(); });
-
-    [typeEl, sweepOnEl, durationEl, gainEl].forEach(function (el) {
-        el.addEventListener('input', refresh);
-    });
 
     document.querySelectorAll('[data-preset]').forEach(function (btn) {
         btn.addEventListener('click', function () { load(PRESETS[btn.dataset.preset]); });
     });
 
+    // Accepts pasting the whole official export line verbatim, e.g.
+    // "zzfx(...[2.2,,840,...]); // Random 19" — pulls just the bracketed
+    // part out (falls back to the raw text if no brackets found). Can't use
+    // JSON.parse: ZzFX's own export uses sparse elisions (",,") to skip
+    // default-valued params, which is valid JS array literal syntax but not
+    // valid JSON. Shared by the single-note and chain players below.
+    function parseCall(text) {
+        var bracketed = text.match(/\[([^\]]*)\]/);
+        var arrayText = bracketed ? bracketed[1] : text;
+        return new Function('return [' + arrayText + ']')();
+    }
+
     document.getElementById('play').addEventListener('click', function () {
-        window.SparringSfx.beep(
-            typeEl.value,
-            freqNote.freq,
-            Number(durationEl.value),
-            sweepOnEl.checked ? sweepToNote.freq : undefined,
-            Number(gainEl.value)
-        );
+        errorEl.textContent = '';
+        var values;
+        try {
+            values = parseCall(paramsEl.value);
+        } catch (e) {
+            errorEl.textContent = 'Not a valid parameter list: ' + e.message;
+            return;
+        }
+        if (zzfxX.state === 'suspended') zzfxX.resume(); // this click is the user gesture
+        zzfx.apply(null, values);
+    });
+
+    var chainEl = document.getElementById('chain');
+    var chainErrorEl = document.getElementById('chain-error');
+
+    document.querySelectorAll('[data-sequence]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            chainEl.value = SEQUENCES[btn.dataset.sequence].map(function (n) { return n.join(', '); }).join('\n');
+            chainErrorEl.textContent = '';
+        });
+    });
+
+    document.getElementById('play-chain').addEventListener('click', function () {
+        chainErrorEl.textContent = '';
+        var lines = chainEl.value.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+        var notes;
+        try {
+            notes = lines.map(parseCall);
+        } catch (e) {
+            chainErrorEl.textContent = 'Not a valid parameter list: ' + e.message;
+            return;
+        }
+        if (zzfxX.state === 'suspended') zzfxX.resume(); // this click is the user gesture
+        window.SparringSfx.playChain(notes); // shared with production — see sfx.js
     });
 
     load(PRESETS.punch);

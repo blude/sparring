@@ -328,5 +328,5 @@ None. The element provides no interface to other elements. It is reached by a pe
 *Source:* SC-03.
 *Applies to:* The element overall.
 *Acceptance criteria:* The element ships as files served directly, with no compilation or bundling.
-*Consequence:* Rules out any framework requiring a build. Deployment is a file copy.
+*Consequence:* Rules out any framework requiring a build. Deployment is a file copy. One deliberate exception: `assets/zzfx.min.js` (ZzFX, MIT license) is a vendored, pre-built third-party file loaded via a plain `<script>` tag — nothing is installed, built, or bundled, so this still satisfies the acceptance criteria above. It is the sound-effect synthesis engine for QR-07's motion/sound layer, and the one dependency TODO.md's JUICYNESS requirement explicitly authorized ("This is where external dependencies are warranted").
 *Implements:* SC-03

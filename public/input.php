@@ -68,6 +68,7 @@ window.JUICY = {
 </script>
 <script src="assets/identity.js"></script>
 <script src="assets/juicy.js"></script>
+<script src="assets/zzfx.min.js"></script>
 <script src="assets/sfx.js"></script>
 <script src="assets/particles.js"></script>
 <script src="assets/input.js"></script>
