@@ -22,8 +22,8 @@ exported array below to confirm it sounds right here, then copy it into
 
 <div>
   <button type="button" data-preset="punch">Load punch</button>
-  <button type="button" data-preset="success">Load success</button>
-  <button type="button" data-preset="error">Load error</button>
+  <button type="button" data-preset="parry">Load parry</button>
+  <button type="button" data-preset="fumble">Load fumble</button>
 </div>
 
 <label>Parameter array (comma-separated, in zzfx's own order)

@@ -301,7 +301,7 @@
                     window.SparringSfx.playSequence('sessionEnd');
                 } else {
                     setComposerEnabled(true);
-                    window.SparringSfx.play('success');
+                    window.SparringSfx.play('parry');
                 }
                 break;
 
@@ -310,7 +310,7 @@
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
                 triggerWiggle();
-                window.SparringSfx.play('error');
+                window.SparringSfx.play('fumble');
                 break;
 
             case 'turn-limit':
@@ -323,7 +323,7 @@
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
                 triggerWiggle();
-                window.SparringSfx.play('error');
+                window.SparringSfx.play('fumble');
                 break;
 
             case 'content-flagged':
@@ -332,7 +332,7 @@
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
                 triggerWiggle();
-                window.SparringSfx.play('error');
+                window.SparringSfx.play('fumble');
                 break;
 
             case 'session-unknown':
@@ -344,7 +344,7 @@
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
                 triggerWiggle();
-                window.SparringSfx.play('error');
+                window.SparringSfx.play('fumble');
         }
         updateCharRemaining();
     }

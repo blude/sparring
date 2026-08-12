@@ -5,11 +5,8 @@
  * before this file. It declares zzfx/zzfxX/zzfxV via top-level `let`, not
  * as window properties, so they're referenced bare here, not via `window.`.
  *
- * PRESETS: punch is tuned (via sfx-debug.php + the official ZzFX Sound
- * Designer, https://killedbyapixel.github.io/ZzFX/). success/error are
- * still rough placeholder ports of the previous single-oscillator engine's
- * character — same workflow to retune: design/paste in sfx-debug.php,
- * copy the result back here.
+ * PRESETS: punch, fumble, and parry are all tuned (via sfx-debug.php + the
+ * official ZzFX Sound Designer, https://killedbyapixel.github.io/ZzFX/).
  *
  * zzfx params, in order: volume, randomness, frequency, attack, sustain,
  * release, shape, shapeCurve, slide, deltaSlide, pitchJump, pitchJumpTime,
@@ -21,8 +18,8 @@ window.SparringSfx = (function () {
 
     var PRESETS = {
         punch: [2.2, , 226, , .05, .19, 4, 1.4, 50, , , , .03, .3, 9.1, .3, .12, .53, .09], // tuned via sfx-debug.php + official designer
-        success: [1.2, .05, 500, 0, .05, .08, 1, 1, 40], // triangle, rising pitch — was 520->900Hz, still a rough placeholder
-        error: [1.2, .1, 320, 0, .05, .15, 2, 1, -30], // sawtooth, falling pitch — was 320->160Hz, still a rough placeholder
+        parry: [2.2, , 760, .02, .03, .01, 4, 2.2, , , , , , .9, 7.5, , .19, .79, .02, .2, -1166], // tuned via sfx-debug.php + official designer
+        fumble: [1.8, 0, 261.6256, .01, .2, .12, 5, .5, -3, 3, , 10, , .5, , .01, .1, .5, .03], // tuned via sfx-debug.php + official designer
     };
 
     // Multi-note sequences (arpeggios) — an array of zzfx parameter arrays,
