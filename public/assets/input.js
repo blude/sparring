@@ -104,6 +104,7 @@
     // 2's delay + line 2 duration).
     function showTitleCard() {
         if (!window.isJuicyOn('titleCard')) return;
+        window.SparringSfx.playSequence('titleCard'); // own isJuicyOn('sound') check gates this independently
         titleCardEl.classList.add('collapsed'); // start at 0 height while still [hidden]
         titleCardEl.hidden = false;
         void titleCardEl.offsetWidth; // commit the collapsed layout before animating away from it

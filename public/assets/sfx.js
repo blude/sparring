@@ -33,6 +33,18 @@ window.SparringSfx = (function () {
             [, 0, 391.9954, .02, .02, .2, 1, 1.5, , , , , , .1, , , , .91, .02], // G4
             [, 0, 261.6256, .02, .02, .5, 1, 1.5, , , , , , .1, , , , .91, .01], // End C4
         ],
+        // Bright pickup rising into a simultaneous C-major triad (a "chord"
+        // step, see playChain() below) — the resolving chord is what makes
+        // it read as uplifting rather than just an ascending run.
+        titleCard: [
+            [, 0, 391.9954, .01, .01, .1, 1, 1.5, , , , , , .1, , , , .91, .01], // pickup G4
+            [, 0, 523.2511, .01, .01, .1, 1, 1.5, , , , , , .1, , , , .91, .01], // pickup C5
+            [ // resolving chord: C4 + E4 + G4 together
+                [, 0, 261.6256, .01, .05, .3, 1, 1.5, , , , , , .1, , , , .91, .05], // C4
+                [, 0, 329.6276, .01, .05, .3, 1, 1.5, , , , , , .1, , , , .91, .05], // E4
+                [, 0, 391.9954, .01, .05, .3, 1, 1.5, , , , , , .1, , , , .91, .05], // G4
+            ],
+        ],
     };
 
     // zzfx's own param defaults (from zzfx.min.js's arrow-function default
@@ -50,15 +62,33 @@ window.SparringSfx = (function () {
         return (attack + sustain + release + delay + decay) * 1000;
     }
 
-    // Plays an array of zzfx parameter arrays back-to-back — each note's
-    // own duration schedules the next. Exported (see below) so
-    // sfx-debug.php's chain preview calls this instead of keeping its own
-    // copy of the scheduling logic.
+    // A step is normally one zzfx param array. It may instead be an array
+    // of param arrays — a "chord": every note in it fires in the same
+    // setTimeout tick with no delay between them, so they start together
+    // as independent, overlapping AudioBufferSourceNodes (zzfx.min.js
+    // gives every zzfx() call its own node — that's what makes two calls
+    // in the same tick sound simultaneous instead of one cutting the
+    // other off). This is real polyphony, not a fast arpeggio.
+    function isChord(step) {
+        return Array.isArray(step[0]);
+    }
+
+    // Plays an array of steps back-to-back — each step's own duration
+    // schedules the next. Exported (see below) so sfx-debug.php's chain
+    // preview calls this instead of keeping its own copy of the
+    // scheduling logic.
     function playChain(notes) {
         var offset = 0;
-        notes.forEach(function (values) {
-            setTimeout(function () { zzfx.apply(null, values); }, offset);
-            offset += durationMs(values);
+        notes.forEach(function (step) {
+            if (isChord(step)) {
+                setTimeout(function () {
+                    step.forEach(function (values) { zzfx.apply(null, values); });
+                }, offset);
+                offset += Math.max.apply(null, step.map(durationMs));
+            } else {
+                setTimeout(function () { zzfx.apply(null, step); }, offset);
+                offset += durationMs(step);
+            }
         });
     }
 
