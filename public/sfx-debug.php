@@ -5,14 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SFX Debug — Sparring</title>
 <style>
-body{font:16px/1.5 system-ui,sans-serif;max-width:28rem;margin:2rem auto;padding:0 1rem;touch-action:manipulation;}
+body{font:16px/1.5 system-ui,sans-serif;max-width:64rem;margin:2rem auto;padding:0 1rem;touch-action:manipulation;}
 textarea{width:100%;height:4rem;font:0.9rem/1.4 ui-monospace,monospace;margin-top:0.4rem;}
 button{padding:0.6rem 1rem;font:inherit;margin-top:1rem;margin-right:0.5rem;}
 pre{background:#111;color:#f88;padding:0.75rem;border-radius:0.5rem;overflow-x:auto;margin-top:1rem;font-size:0.85rem;min-height:1.2rem;}
+.cols{display:flex;gap:2rem;}
+.cols>section{flex:1;min-width:0;}
+@media (max-width:40rem){.cols{flex-direction:column;}}
 </style>
 </head>
 <body>
 <h1>SFX Debug</h1>
+
+<div class="cols">
+<section>
 <p>Previews a <a href="https://killedbyapixel.github.io/ZzFX/" target="_blank" rel="noopener">ZzFX</a>
 parameter array through this app's actual vendored engine
 (<code>public/assets/zzfx.min.js</code>). Not linked from the app — dev
@@ -33,7 +39,9 @@ exported array below to confirm it sounds right here, then copy it into
 <button type="button" id="play">▶ Play</button>
 
 <pre id="error"></pre>
+</section>
 
+<section>
 <h2>Chain</h2>
 <p>One note per line (same paste-tolerant format as above — a full export
 line, a bracketed array, or a bare comma list). Plays back-to-back: each
@@ -51,6 +59,8 @@ next, like a real arpeggio/sequence.</p>
 <button type="button" id="play-chain">▶ Play chain</button>
 
 <pre id="chain-error"></pre>
+</section>
+</div>
 
 <script src="assets/juicy.js"></script>
 <script src="assets/zzfx.min.js"></script>
