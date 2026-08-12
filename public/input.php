@@ -52,8 +52,9 @@ require __DIR__ . '/../config.php';
   </form>
 </main>
 <div id="title-card" hidden aria-hidden="true">
-  <span class="title-card__line">READY?</span>
-  <span class="title-card__line">SPAR!</span>
+  <span class="title-card__line title-card__line--slide">READY?</span>
+  <span class="title-card__line title-card__line--slide">GET SET.</span>
+  <span class="title-card__line title-card__line--grow">SPAR!</span>
 </div>
 <script>
 window.CONTRIBUTION_MAX_CHARS = <?= (int) CONTRIBUTION_MAX_CHARS ?>;

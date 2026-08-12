@@ -99,9 +99,10 @@
 
     // One-time overlay shown once the consent decision is recorded (UC-01)
     // — not tied to any particular submission, so it never competes with
-    // TF-03's in-progress state. On-screen time below matches the two
-    // lines' slide-through animations in input.css (line 1 duration + line
-    // 2's delay + line 2 duration).
+    // TF-03's in-progress state. On-screen time below matches the three
+    // lines' animations in input.css: line 1 slide (1000ms) + line 2's
+    // delay+slide (1050ms + 1000ms) + line 3's delay+grow (2100ms + 1000ms),
+    // i.e. line 3 finishes at 3100ms.
     function showTitleCard() {
         if (!window.isJuicyOn('titleCard')) return;
         window.SparringSfx.playSequence('titleCard'); // own isJuicyOn('sound') check gates this independently
@@ -114,7 +115,7 @@
         setTimeout(function () {
             titleCardEl.classList.add('collapsed'); // shrinks back to 0
             setTimeout(function () { titleCardEl.hidden = true; }, 250);
-        }, 1250);
+        }, 3100);
     }
 
     // Punch animation + particle burst on the submit button, plus a sound.

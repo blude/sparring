@@ -214,7 +214,6 @@ main {
     height: 8rem;
     padding: 0 1.5rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -233,26 +232,49 @@ main {
 #title-card[hidden] { display: none; }
 #title-card.collapsed { height: 0; opacity: 0; }
 
-/* Each line is full-width so its own edge lines up with the box's edge —
-   translateX(-100%)/(100%) then means "just off the box", not "off-screen". */
+/* All three words sit in the same spot — each line covers the full box
+   (position:absolute + inset:0) and centers itself, so they stack in place
+   instead of one under another. translateX(-100%)/(100%) then means "just
+   off the box", not "off-screen", since each line is still full-width. */
 .title-card__line {
-    display: block;
-    width: 100%;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    transform: translateX(-100%);
-    opacity: 0;
-    animation: title-card-slide 600ms ease-in-out forwards;
 }
-.title-card__line:nth-child(2) {
+.title-card__line--slide {
+    transform: translateX(100%); /* pre-animation state, matches keyframe's 0% (right-to-left entry) */
+    opacity: 0;
+    animation: title-card-slide 1000ms ease-in-out forwards;
+}
+.title-card__line--slide:nth-child(2) {
+    animation-delay: 1050ms; /* starts once line 1's slide-through (1000ms) has finished */
+}
+/* SPAR! is the payoff line: fades in/out and grows from center instead of
+   sliding — accent-colored to land as the punchline. */
+.title-card__line--grow {
     color: var(--accent);
-    animation-delay: 650ms; /* starts once line 1's slide-through (600ms) has finished */
+    opacity: 0;
+    transform: scale(0.4);
+    animation: title-card-grow 1000ms ease-in-out forwards;
+    animation-delay: 2100ms; /* starts once line 2's slide-through (1050ms delay + 1000ms) has finished */
 }
 
 @keyframes title-card-slide {
-    0% { transform: translateX(-100%); opacity: 0; }
+    0% { transform: translateX(100%); opacity: 0; }
     15% { transform: translateX(0); opacity: 1; }
     70% { transform: translateX(0); opacity: 1; }
-    100% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(-100%); opacity: 0; }
+}
+
+@keyframes title-card-grow {
+    0% { transform: scale(0.4); opacity: 0; }
+    30% { transform: scale(1.15); opacity: 1; }
+    45% { transform: scale(1); opacity: 1; }
+    70% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.3); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -261,10 +283,16 @@ main {
         animation: none;
     }
     .title-card__line {
+        position: static; /* motion off: back to normal flow so all 3 stack, don't overlap */
         animation: none;
         opacity: 1; /* base state is opacity:0 pre-animation — pin it visible with motion off */
         transform: none;
     }
-    #title-card { transition: none; }
+    #title-card {
+        height: auto;
+        flex-direction: column;
+        padding: 1rem 1.5rem;
+        transition: none;
+    }
     .particle-burst { display: none; }
 }
