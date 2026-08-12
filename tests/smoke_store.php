@@ -91,6 +91,18 @@ $store->backupTo($backupPath);
 assert(is_file($backupPath));
 unlink($backupPath);
 
+// --- maintenance: prune orphaned sessions ---
+$orphan = $store->createSession('live'); // zero exchanges — orphan candidate
+$busy = $store->createSession('live');
+$store->appendExchange($busy['id'], 'a contribution', 'a response');
+
+assert($store->countOrphanedSessions(999999) === 0); // too recent to count as stale — never touches an in-progress visitor
+assert($store->countOrphanedSessions(-3600) === 1); // cutoff pushed into the future — only the zero-exchange session qualifies
+
+assert($store->pruneOrphanedSessions(-3600) === 1);
+assert($store->getSession($orphan['id']) === null);
+assert($store->getSession($busy['id']) !== null); // has an exchange, never an orphan regardless of age
+
 unlink($dbPath);
 foreach (['-wal', '-shm'] as $suffix) {
     @unlink($dbPath . $suffix);

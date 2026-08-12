@@ -338,11 +338,41 @@ final class Store
         $this->pdo->exec('VACUUM INTO ' . $this->pdo->quote($destPath));
     }
 
+    /**
+     * Orphaned = zero exchanges (visitor loaded the page, never sent a turn)
+     * and stale past $olderThanSeconds — never touches an in-progress visitor.
+     * turn_count = 0 implies no exchanges row references the session, so no
+     * FK cleanup is needed before the delete (bin/prune_orphaned_sessions.php).
+     */
+    public function countOrphanedSessions(int $olderThanSeconds): int
+    {
+        $stmt = $this->pdo->prepare(
+            'SELECT COUNT(*) FROM sessions WHERE turn_count = 0 AND last_active_at < :cutoff'
+        );
+        $stmt->execute(['cutoff' => self::cutoff($olderThanSeconds)]);
+        return (int) $stmt->fetchColumn();
+    }
+
+    /** Deletes the sessions countOrphanedSessions() would count. Returns the number deleted. */
+    public function pruneOrphanedSessions(int $olderThanSeconds): int
+    {
+        $stmt = $this->pdo->prepare(
+            'DELETE FROM sessions WHERE turn_count = 0 AND last_active_at < :cutoff'
+        );
+        $stmt->execute(['cutoff' => self::cutoff($olderThanSeconds)]);
+        return $stmt->rowCount();
+    }
+
     // --- Helpers ---
 
     private static function now(): string
     {
         return gmdate('Y-m-d\TH:i:s\Z');
+    }
+
+    private static function cutoff(int $olderThanSeconds): string
+    {
+        return gmdate('Y-m-d\TH:i:s\Z', time() - $olderThanSeconds);
     }
 
     private function hydrateExchange(array $row): array
