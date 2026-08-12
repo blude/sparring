@@ -17,8 +17,6 @@ pre{background:#111;color:#f88;padding:0.75rem;border-radius:0.5rem;overflow-x:a
 <body>
 <h1>SFX Debug</h1>
 
-<div class="cols">
-<section>
 <p>Previews a <a href="https://killedbyapixel.github.io/ZzFX/" target="_blank" rel="noopener">ZzFX</a>
 parameter array through this app's actual vendored engine
 (<code>public/assets/zzfx.min.js</code>). Not linked from the app — dev
@@ -26,15 +24,21 @@ tool only. Design a sound in the official Sound Designer above, paste its
 exported array below to confirm it sounds right here, then copy it into
 <code>public/assets/sfx.js</code>'s <code>PRESETS</code>.</p>
 
+
+<div class="cols">
+<section>
+<h2>Single note</h2>
+
 <div>
   <button type="button" data-preset="punch">Load punch</button>
   <button type="button" data-preset="parry">Load parry</button>
   <button type="button" data-preset="fumble">Load fumble</button>
 </div>
 
-<label>Parameter array (comma-separated, in zzfx's own order)
-  <textarea id="params" spellcheck="false"></textarea>
+<label>Parameter array
+  <textarea id="params" spellcheck="false" style="height:8rem"></textarea>
 </label>
+<p>Comma-separated, in zzfx's own order.</p>
 
 <button type="button" id="play">▶ Play</button>
 
@@ -43,24 +47,24 @@ exported array below to confirm it sounds right here, then copy it into
 
 <section>
 <h2>Chain</h2>
-<p>One step per line (see syntax below). Notes play back-to-back: each
-note's own duration (attack+sustain+release+decay+delay) schedules the
-next, like a real arpeggio/sequence. Rests pause for a fixed time; chords
-play all their notes at once.</p>
 
 <div>
   <button type="button" data-sequence="sessionEnd">Load session end</button>
   <button type="button" data-sequence="titleCard">Load title card</button>
 </div>
 
-<label>Steps, one per line — a note (as above), a rest (<code>rest &lt;ms&gt;</code>),
-or a chord (multiple bracketed notes on one line, separated by <code>;</code>, played simultaneously)
+<label>Chain of steps
   <textarea id="chain" spellcheck="false" style="height:8rem"></textarea>
 </label>
+
+<p>Steps, one per line — a note (as before), a rest (<code>rest &lt;ms&gt;</code>),
+or a chord (multiple bracketed notes on one line, separated by <code>;</code>, played simultaneously)</p>
 
 <button type="button" id="play-chain">▶ Play chain</button>
 
 <pre id="chain-error"></pre>
+
+
 </section>
 </div>
 
