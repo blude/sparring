@@ -33,16 +33,25 @@ window.SparringSfx = (function () {
             [, 0, 391.9954, .02, .02, .2, 1, 1.5, , , , , , .1, , , , .91, .02], // G4
             [, 0, 261.6256, .02, .02, .5, 1, 1.5, , , , , , .1, , , , .91, .01], // End C4
         ],
-        // Bright pickup rising into a simultaneous C-major triad (a "chord"
-        // step, see playChain() below) — the resolving chord is what makes
-        // it read as uplifting rather than just an ascending run.
+        // Two pickup pairs (one per slide-in word, 2nd pitched a whole step
+        // above the 1st — Ready?/Get Set. rising urgency) resolving into a
+        // simultaneous C-major triad for Spar! (a "chord" step, see
+        // playChain() below) — the resolving chord is what makes it read as
+        // uplifting rather than just an ascending run. Each note's release
+        // is stretched so the two-note pairs and the chord each hold for
+        // ~1000ms, lining up with the 3-phase, ~1000ms/phase title card
+        // timing in input.css/input.js (total ~3100ms both places).
         titleCard: [
-            [, 0, 391.9954, .01, .01, .1, 1, 1.5, , , , , , .1, , , , .91, .01], // pickup G4
-            [, 0, 523.2511, .01, .01, .1, 1, 1.5, , , , , , .1, , , , .91, .01], // pickup C5
-            [ // resolving chord: C4 + E4 + G4 together
-                [, 0, 261.6256, .01, .05, .3, 1, 1.5, , , , , , .1, , , , .91, .05], // C4
-                [, 0, 329.6276, .01, .05, .3, 1, 1.5, , , , , , .1, , , , .91, .05], // E4
-                [, 0, 391.9954, .01, .05, .3, 1, 1.5, , , , , , .1, , , , .91, .05], // G4
+            [, 0, 391.9954, .01, .01, .47, 1, 1.5, , , , , , .1, , , , .91, .01], // pickup G4 (Ready?), held ~500ms
+            [, 0, 523.2511, .01, .01, .47, 1, 1.5, , , , , , .1, , , , .91, .01], // pickup C5 (Ready?), held ~500ms
+            50, // rest, matches the pause before Get Set. slides in
+            [, 0, 440.0000, .01, .01, .47, 1, 1.5, , , , , , .1, , , , .91, .01], // pickup A4, up a step (Get Set.), held ~500ms
+            [, 0, 587.3295, .01, .01, .47, 1, 1.5, , , , , , .1, , , , .91, .01], // pickup D5, up a step (Get Set.), held ~500ms
+            50, // rest, matches the pause before Spar! grows in
+            [ // resolving chord, up an octave from the original C4 triad — keeps the rise going: C5 + E5 + G5 (Spar!), held ~1000ms
+                [, 0, 523.2511, .01, .05, .89, 1, 1.5, , , , , , .1, , , , .91, .05], // C5
+                [, 0, 659.2551, .01, .05, .89, 1, 1.5, , , , , , .1, , , , .91, .05], // E5
+                [, 0, 783.9909, .01, .05, .89, 1, 1.5, , , , , , .1, , , , .91, .05], // G5
             ],
         ],
     };
@@ -74,13 +83,17 @@ window.SparringSfx = (function () {
     }
 
     // Plays an array of steps back-to-back — each step's own duration
-    // schedules the next. Exported (see below) so sfx-debug.php's chain
+    // schedules the next. A plain number step is a silent rest (ms) rather
+    // than a note/chord — lets a chain leave a gap without a fake
+    // zero-volume zzfx call. Exported (see below) so sfx-debug.php's chain
     // preview calls this instead of keeping its own copy of the
     // scheduling logic.
     function playChain(notes) {
         var offset = 0;
         notes.forEach(function (step) {
-            if (isChord(step)) {
+            if (typeof step === 'number') {
+                offset += step;
+            } else if (isChord(step)) {
                 setTimeout(function () {
                     step.forEach(function (values) { zzfx.apply(null, values); });
                 }, offset);
