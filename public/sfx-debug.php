@@ -43,16 +43,18 @@ exported array below to confirm it sounds right here, then copy it into
 
 <section>
 <h2>Chain</h2>
-<p>One note per line (same paste-tolerant format as above — a full export
-line, a bracketed array, or a bare comma list). Plays back-to-back: each
+<p>One step per line (see syntax below). Notes play back-to-back: each
 note's own duration (attack+sustain+release+decay+delay) schedules the
-next, like a real arpeggio/sequence.</p>
+next, like a real arpeggio/sequence. Rests pause for a fixed time; chords
+play all their notes at once.</p>
 
 <div>
   <button type="button" data-sequence="sessionEnd">Load session end</button>
+  <button type="button" data-sequence="titleCard">Load title card</button>
 </div>
 
-<label>Notes, one per line
+<label>Steps, one per line — a note (as above), a rest (<code>rest &lt;ms&gt;</code>),
+or a chord (multiple bracketed notes on one line, separated by <code>;</code>, played simultaneously)
   <textarea id="chain" spellcheck="false" style="height:8rem"></textarea>
 </label>
 
@@ -115,19 +117,40 @@ next, like a real arpeggio/sequence.</p>
     var chainEl = document.getElementById('chain');
     var chainErrorEl = document.getElementById('chain-error');
 
+    // A SEQUENCES step is a flat note array, a plain number (rest, ms), or
+    // an array of note arrays (chord — see playChain in sfx.js). Mirrors
+    // parseLine below so load -> play round-trips exactly.
+    function serializeStep(step) {
+        if (typeof step === 'number') return 'rest ' + step;
+        if (Array.isArray(step[0])) return step.map(function (n) { return '[' + n.join(', ') + ']'; }).join('; ');
+        return step.join(', ');
+    }
+
     document.querySelectorAll('[data-sequence]').forEach(function (btn) {
         btn.addEventListener('click', function () {
-            chainEl.value = SEQUENCES[btn.dataset.sequence].map(function (n) { return n.join(', '); }).join('\n');
+            chainEl.value = SEQUENCES[btn.dataset.sequence].map(serializeStep).join('\n');
             chainErrorEl.textContent = '';
         });
     });
+
+    // Mirrors serializeStep above: a bare "rest <ms>" line is a rest, a
+    // line with more than one bracketed note is a chord (each note parsed
+    // by parseCall), anything else is a single note (unchanged from before
+    // — still accepts the full paste-tolerant formats parseCall handles).
+    function parseLine(text) {
+        var rest = text.match(/^rest\s+([\d.]+)$/i);
+        if (rest) return Number(rest[1]);
+        var groups = text.match(/\[[^\]]*\]/g);
+        if (groups && groups.length > 1) return groups.map(parseCall);
+        return parseCall(text);
+    }
 
     document.getElementById('play-chain').addEventListener('click', function () {
         chainErrorEl.textContent = '';
         var lines = chainEl.value.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
         var notes;
         try {
-            notes = lines.map(parseCall);
+            notes = lines.map(parseLine);
         } catch (e) {
             chainErrorEl.textContent = 'Not a valid parameter list: ' + e.message;
             return;
