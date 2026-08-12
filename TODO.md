@@ -6,20 +6,22 @@ The app elements shall incorporate juicier user interactions, such as:
 
 ### Examples
 
-- [ ] Show an animated title card when the first message is sent (e.g. READY? SPAR!) 
-- [ ] Show a quick punch animation everytime a new message is sent in input screen. 
-- [ ] Animte incoming exchanges in display screen.
-- [ ] Support message streaming
-- [ ] Wiggling / sliding / shaking / bumping / throbbing animations
-- [ ] Sound effects: glitchy, arcade-like sound effects
+- [x] Show an animated title card when the first message is sent (e.g. READY? SPAR!) — shipped literally ("READY? SPAR!"), input screen only. Triggers once the consent decision is recorded (not on the first submission itself) — a floating boxed overlay, "READY?" then "SPAR!" sliding through in sequence.
+- [x] Show a quick punch animation everytime a new message is sent in input screen. — shipped: scale animation on the submit button + a small particle burst + a sound.
+- [x] Animte incoming exchanges in display screen. — shipped: opacity + slide-in on newly-added items only, never on updates (keeps the "unchanged items don't redraw" requirement intact).
+- [ ] Support message streaming — deferred. Needs backend SDK streaming support and a transport rewrite (SSE/chunked), materially bigger than the CSS/JS work above — separate future pass.
+- [x] Wiggling / sliding / shaking / bumping / throbbing animations — partial: shipped wiggle/shake (input screen, on a rejected/failed submission) and slide-in (display screen entrance). No bump/throb built yet.
+- [x] Sound effects: glitchy, arcade-like sound effects — shipped, input screen only (procedural Web Audio blips, no audio files). Display screen has no sound: it's an unattended wall projection with no user gesture to unlock playback.
+
+New: everything above is switchable in `config.php` — one global `JUICY_ENABLED` kill switch, plus a `JUICY_*` constant per effect, no code change needed to turn any of it off.
 
 ### Requirements
 
-- [ ] Optional: frame-based animation, based on a real sketches that can be provides, if concept is validated (format: gif or highly compressed PNGs. grungy, gruffy style is accepted)
-- [ ] Requirement: an efficient animation framework.
-- [ ] Requirement: non-blocking, performant.
-- [ ] Desired: employ custom typography, particle emitters, effects, animations, transitions, shaders, etc. This is where external dependencies are warranted.
-- [ ] Target platforms: Modern generation iPhone and Android devices: iPhone 14+, newer Pixel and Samsung Galaxy devices.
+- [ ] Optional: frame-based animation, based on a real sketches that can be provides, if concept is validated (format: gif or highly compressed PNGs. grungy, gruffy style is accepted) — deferred, no sketches exist yet.
+- [x] Requirement: an efficient animation framework. — native CSS keyframes/transitions + Web Animations conventions, plus one hand-rolled canvas particle loop for the punch burst. No dependency added — nothing in scope needed one.
+- [x] Requirement: non-blocking, performant. — animations restricted to `opacity`/`transform` (compositor thread only); sound is procedural, no asset loading.
+- [ ] Desired: employ custom typography, particle emitters, effects, animations, transitions, shaders, etc. This is where external dependencies are warranted. — typography and shaders not done. Particle *effect* (not an engine/library) shipped for the punch burst.
+- [x] Target platforms: Modern generation iPhone and Android devices: iPhone 14+, newer Pixel and Samsung Galaxy devices. — CSS/WAAPI + Web Audio, broadly supported; sound presets tuned into the ~300-900Hz band for phone speaker frequency response, not yet confirmed by ear on the actual exhibition hardware.
 
 **Rationale:** Adding juiciness to this exhibition piece is a nice to bring fun to a otherwise bland, "academic"-looking interface. It adds thematic flair, which already shows up in the app's name (Sparring, the japanese characters, the glove icon, etc). The UI should inherit videogame-inspired elements without being over the top. A nod to 90's arcade games, martial arts.
 

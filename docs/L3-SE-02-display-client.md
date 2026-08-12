@@ -152,6 +152,8 @@ Trims an item's contribution and response so that the item occupies its allotted
 
 Applies the reconciled changes to UI-01 with transitions on entry, recession, and exit. All content from SE-03 is inserted as text, never as markup. Each item's visitor alias is derived once from its session identifier (E-01.1) at the point the item is first added — never recomputed on update, since the value is invariant for a given session and recomputing it would be pure waste.
 
+The entry transition is restricted to opacity and transform, and applies only to a node TF-02 placed in the add set — never to a node TF-02 placed in the update set. A node in the update set instead gets a brief in-place pulse (also transform-only) on the same node, marking that its content changed without re-adding or moving it. Both are compositor-only, so neither an entering nor an updating item can shift or redraw any other item on the surface, which is what keeps this consistent with QR-02 rather than in tension with it — QR-02 protects *other* items from disturbance, not whether a changed item itself may carry a cue. A session occupies one node for its lifetime: only its first exchange goes through the add path; every exchange after that is an update to that same node. No sound accompanies this element: it runs unattended (QR-03), with no user gesture available to unlock audio playback.
+
 ---
 
 ## 5. Technical interfaces (inbound)
@@ -230,6 +232,12 @@ None. No element calls this one. It is a leaf that only reads.
 *Acceptance criteria:* An address flag appends a session id / origin tag to each item. Absent by default; no visitor-facing affordance exposes or hints at it.
 *Element specific:* Yes
 *Rationale:* Same operator need as SE-01 QR-06 — see there.
+
+**QR-08 — Entry and update motion respect a reduced-motion preference, and are switchable together** *(Usability/Accessibility)*
+*Applies to:* UI-01, TF-04
+*Acceptance criteria:* Both the entry transition and the update pulse are suppressed when the OS-level reduced-motion preference is set, and both are turned off together by a single configuration switch, independent of every other element, with no code change. Suppressing either changes nothing else about TF-01/TF-02 — an added or updated item still appears/updates, without the motion.
+*Element specific:* Yes
+*Rationale:* Mirrors SE-01 QR-07. Must be removable without becoming an accessibility regression or affecting QR-02's stability guarantee either way.
 
 ---
 

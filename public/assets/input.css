@@ -169,3 +169,102 @@ main {
     -webkit-mask-image: url('img/glove.svg');
     mask-image: url('img/glove.svg');
 }
+
+/* --- Juiciness (TODO.md JUICYNESS) --- */
+
+.particle-burst {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+@keyframes punch {
+    0% { transform: scale(1); }
+    30% { transform: scale(0.85); }
+    60% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
+
+#submit.punching { animation: punch 220ms ease; }
+
+@keyframes wiggle {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+
+#composer.wiggling { animation: wiggle 350ms ease; }
+
+/* Floating box, not full-screen — width fixed so translateX(-100%/100%)
+   below lands exactly at the box's own edges, and overflow:hidden clips
+   both the sliding lines and the box's own grow/shrink. Height is a fixed
+   value (not auto) so it has a real number to transition from/to 0 — and
+   because of the project-wide box-sizing:border-box rule, height:0 also
+   collapses the padding, so the box truly disappears, not just its content. */
+#title-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(80vw, 20rem);
+    height: 8rem;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    z-index: 2000;
+    pointer-events: none;
+    opacity: 1;
+    transition: height 250ms ease, opacity 200ms ease;
+}
+#title-card[hidden] { display: none; }
+#title-card.collapsed { height: 0; opacity: 0; }
+
+/* Each line is full-width so its own edge lines up with the box's edge —
+   translateX(-100%)/(100%) then means "just off the box", not "off-screen". */
+.title-card__line {
+    display: block;
+    width: 100%;
+    text-align: center;
+    transform: translateX(-100%);
+    opacity: 0;
+    animation: title-card-slide 600ms ease-in-out forwards;
+}
+.title-card__line:nth-child(2) {
+    color: var(--accent);
+    animation-delay: 650ms; /* starts once line 1's slide-through (600ms) has finished */
+}
+
+@keyframes title-card-slide {
+    0% { transform: translateX(-100%); opacity: 0; }
+    15% { transform: translateX(0); opacity: 1; }
+    70% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #submit.punching,
+    #composer.wiggling {
+        animation: none;
+    }
+    .title-card__line {
+        animation: none;
+        opacity: 1; /* base state is opacity:0 pre-animation — pin it visible with motion off */
+        transform: none;
+    }
+    #title-card { transition: none; }
+    .particle-burst { display: none; }
+}

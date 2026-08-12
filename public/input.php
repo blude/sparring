@@ -51,11 +51,25 @@ require __DIR__ . '/../config.php';
     <div id="status" role="status"></div>
   </form>
 </main>
+<div id="title-card" hidden aria-hidden="true">
+  <span class="title-card__line">READY?</span>
+  <span class="title-card__line">SPAR!</span>
+</div>
 <script>
 window.CONTRIBUTION_MAX_CHARS = <?= (int) CONTRIBUTION_MAX_CHARS ?>;
 window.SE01_WAIT_BOUND_MS = <?= (int) (SE01_WAIT_BOUND_SECONDS * 1000) ?>;
+window.JUICY = {
+    enabled: <?= JUICY_ENABLED ? 'true' : 'false' ?>,
+    punch: <?= JUICY_PUNCH ? 'true' : 'false' ?>,
+    titleCard: <?= JUICY_TITLE_CARD ? 'true' : 'false' ?>,
+    wiggle: <?= JUICY_WIGGLE ? 'true' : 'false' ?>,
+    sound: <?= JUICY_SOUND ? 'true' : 'false' ?>
+};
 </script>
 <script src="assets/identity.js"></script>
+<script src="assets/juicy.js"></script>
+<script src="assets/sfx.js"></script>
+<script src="assets/particles.js"></script>
 <script src="assets/input.js"></script>
 </body>
 </html>

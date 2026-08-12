@@ -155,7 +155,7 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 
 None. The element has one surface. The address carries the session identifier but is never used to move between views.
 
-**Presentation notes.** The consent decision must be answerable without scrolling on a small phone, or it becomes an obstacle at the exact moment the visitor is deciding whether to engage at all. None of the three checkboxes is preselected: a preselected or visually dominant "accept" is a dark pattern and defeats the point of asking. This holds even for the participation checkbox, which is required to proceed — required is not the same as defaulted-on. The avatar and alias stay hidden through the consent decision itself; nothing about "who" a visitor is appears until they have agreed to take part.
+**Presentation notes.** The consent decision must be answerable without scrolling on a small phone, or it becomes an obstacle at the exact moment the visitor is deciding whether to engage at all. None of the three checkboxes is preselected: a preselected or visually dominant "accept" is a dark pattern and defeats the point of asking. This holds even for the participation checkbox, which is required to proceed — required is not the same as defaulted-on. The avatar and alias stay hidden through the consent decision itself; nothing about "who" a visitor is appears until they have agreed to take part. A brief motion/sound layer on the consent decision and on submission (QR-07) is thematic flair matching the exhibition's martial-arts framing — decorative, never a condition for proceeding.
 
 ---
 
@@ -179,7 +179,7 @@ Determines whether a session already exists and produces one either way, so that
 *Detail level:* Narrative
 *Achieves:* G-01
 
-Sends the visitor's three decisions — agreement to take part, retention, projection — to SE-03 via TO-01 and holds the returned confirmation in E-01. Synchronous, two attempts, 10 second timeout per attempt. Exhausted attempts leave the session unopened and surface a failure, because opening the input field without a recorded decision would retain content the visitor never agreed to. A declined-participation response is not a transport failure and is handled separately (EX-01-3): the field simply stays unusable.
+Sends the visitor's three decisions — agreement to take part, retention, projection — to SE-03 via TO-01 and holds the returned confirmation in E-01. Synchronous, two attempts, 10 second timeout per attempt. Exhausted attempts leave the session unopened and surface a failure, because opening the input field without a recorded decision would retain content the visitor never agreed to. A declined-participation response is not a transport failure and is handled separately (EX-01-3): the field simply stays unusable. On a successful decision, a one-time title-card animation plays (QR-07) — purely presentational, no goal relation, and never a condition for the field becoming usable.
 
 **TF-03 — Submit a contribution**
 *Detail level:* Stepwise
@@ -196,7 +196,7 @@ Sends the visitor's three decisions — agreement to take part, retention, proje
 **TF-04 — Render the exchange history**
 *Detail level:* Narrative
 
-Produces the visible history from E-01. Visitor and Sparring contributions are visually distinguished. Content from SE-03 is inserted as text, never as markup, so that anything a visitor types cannot alter the surface. No goal relation: this is presentation logic serving use cases that already reference the goals.
+Produces the visible history from E-01. Visitor and Sparring contributions are visually distinguished. Content from SE-03 is inserted as text, never as markup, so that anything a visitor types cannot alter the surface. Submission and its outcome additionally carry a non-blocking presentational layer — a brief motion and sound cue on submit, and on a rejected/failed result — layered on top of this rendering, never gating it (QR-07). No goal relation: this is presentation logic serving use cases that already reference the goals.
 
 **TF-05 — Derive visitor identity**
 *Detail level:* Narrative
@@ -292,6 +292,12 @@ None. The element provides no interface to other elements. It is reached by a pe
 *Acceptance criteria:* An address flag reveals session id, origin, rate-limit remaining, generation timing, and moderation reason (from SE-03's TI-01/TI-02/TI-03 outputs) alongside the normal surface. Absent by default; no visitor-facing affordance exposes or hints at it.
 *Element specific:* Yes
 *Rationale:* Serves UT-03's stated need (L2 §2.3) to diagnose a fault quickly and remotely, without adding an administrative interface (which SC-03 rules out).
+
+**QR-07 — Motion respects a reduced-motion preference; every effect is individually switchable** *(Usability/Accessibility)*
+*Applies to:* UI-01, TF-02, TF-04
+*Acceptance criteria:* Every added animation (consent-decision title card, submit motion, rejection motion) is suppressed when the OS-level reduced-motion preference is set, without disabling submission or the consent decision itself. Sound is a separate signal — `prefers-reduced-motion` is a vestibular-motion preference and does not govern audio — and is instead gated solely by its own configuration switch. Each effect (title card, submit motion, rejection motion, sound) can be turned off independently by configuration, with no code change, and a single configuration switch turns all of them off at once. The title card plays once the consent decision is recorded, not on any submission, so it never overlaps QR-01's in-progress state — the two have no shared trigger.
+*Element specific:* Yes
+*Rationale:* TODO.md's JUICYNESS requirement is explicitly presentational flair, not core functionality — it must be possible to remove without touching TF-01 through TF-03, and must never become an accessibility regression.
 
 ---
 

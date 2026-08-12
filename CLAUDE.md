@@ -8,7 +8,10 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
 - PHP 8.2+, vanilla JS, SQLite (`data/store.db`, WAL mode). No build step,
   no npm, no framework, no bundler — files served directly.
 - Run: `composer install && export ANTHROPIC_API_KEY=... && php -S localhost:8080 -t public`
-- Test: `php tests/smoke_store.php` (assert-based, no framework)
+- Test: `php tests/smoke_store.php` (assert-based, no framework). Also
+  `node tests/smoke_juicy.js` for the juiciness on/off gating logic
+  (`public/assets/juicy.js`) — needs Node only to run the check, not as a
+  project dependency.
 - No linter configured — check changed files with `php -l <file>`.
 
 ## Conventions

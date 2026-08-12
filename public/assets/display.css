@@ -93,11 +93,38 @@ body {
     border-top: 1px solid var(--border);
     padding-top: 1rem;
     opacity: 1;
-    transition: opacity 400ms ease;
+    transform: translateY(0) scale(1);
+    /* transform-only alongside opacity: never triggers reflow, so an
+       entering item cannot disturb its column siblings (QR-02). Exaggerated
+       distance/duration/overshoot on purpose — this is read at exhibition
+       viewing distance, not on a laptop a foot away (QR-01). */
+    transition: opacity 500ms ease, transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .exchange.entering {
     opacity: 0;
+    transform: translateY(80px) scale(0.85);
+}
+
+/* A session gets one box for its whole lifetime — only its first exchange
+   is a fresh DOM node (.entering, above); every exchange after that just
+   updates that same box's text (updateItem), which .entering never touches.
+   This is the equivalent "something changed" cue for that path: a brief
+   in-place pulse, transform-only, so it never disturbs sibling items (QR-02)
+   the way the entrance transform doesn't. */
+@keyframes exchange-update-pulse {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+.exchange.updating {
+    animation: exchange-update-pulse 500ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .exchange { transition: none; }
+    .exchange.updating { animation: none; }
 }
 
 .exchange .scenario {

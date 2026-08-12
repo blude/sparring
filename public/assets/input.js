@@ -23,6 +23,7 @@
     var avatarPopover = document.getElementById('avatar-popover');
     var avatarAliasEl = document.getElementById('avatar-alias');
     var newSessionBtn = document.getElementById('new-session-btn');
+    var titleCardEl = document.getElementById('title-card');
 
     var sessionId = null;
     var sessionState = null; // 'awaiting-decision' | 'open' | 'complete' | 'failed'
@@ -89,6 +90,50 @@
 
     function setStatus(message) {
         statusEl.textContent = message || '';
+    }
+
+    // --- juiciness (TODO.md JUICYNESS): purely presentational, layered on
+    // top of the flows above, never gates them. Every trigger below checks
+    // its own isJuicyOn() flag, so config.php can kill any one of these
+    // independently with no code change. ---
+
+    // One-time overlay shown once the consent decision is recorded (UC-01)
+    // — not tied to any particular submission, so it never competes with
+    // TF-03's in-progress state. On-screen time below matches the two
+    // lines' slide-through animations in input.css (line 1 duration + line
+    // 2's delay + line 2 duration).
+    function showTitleCard() {
+        if (!window.isJuicyOn('titleCard')) return;
+        titleCardEl.classList.add('collapsed'); // start at 0 height while still [hidden]
+        titleCardEl.hidden = false;
+        void titleCardEl.offsetWidth; // commit the collapsed layout before animating away from it
+        requestAnimationFrame(function () {
+            titleCardEl.classList.remove('collapsed'); // grows 0 -> full height
+        });
+        setTimeout(function () {
+            titleCardEl.classList.add('collapsed'); // shrinks back to 0
+            setTimeout(function () { titleCardEl.hidden = true; }, 250);
+        }, 1250);
+    }
+
+    // Punch animation + particle burst on the submit button, plus a sound.
+    function triggerPunch() {
+        if (window.isJuicyOn('punch')) {
+            submitEl.classList.remove('punching');
+            void submitEl.offsetWidth; // restart the animation if retriggered before the previous one finished
+            submitEl.classList.add('punching');
+            var rect = submitEl.getBoundingClientRect();
+            window.SparringParticles.burst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        }
+        window.SparringSfx.play('punch');
+    }
+
+    // Shake the composer on a rejected/failed submission.
+    function triggerWiggle() {
+        if (!window.isJuicyOn('wiggle')) return;
+        composerEl.classList.remove('wiggling');
+        void composerEl.offsetWidth;
+        composerEl.classList.add('wiggling');
     }
 
     function updateCharRemaining() {
@@ -201,6 +246,7 @@
                 revealIdentity(sessionId); // consent just recorded — first point alias/avatar may be shown
                 applySessionState(data.sessionState, data.turnsRemaining);
                 updateDebugPanel({ sessionId: sessionId, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
+                showTitleCard();
             })
             .catch(function () {
                 setStatus('Could not record that choice — try again.');
@@ -209,6 +255,9 @@
 
     // --- TF-03: submit a contribution ---
     function submitContribution(text) {
+        window.SparringSfx.unlock(); // first tap of the session: the user gesture AudioContext needs on iOS Safari
+        triggerPunch();
+
         setComposerEnabled(false);
         setStatus('Sparring is thinking…'); // in-progress state, shown synchronously (QR-01: within 300ms)
 
@@ -249,12 +298,15 @@
                 updateCharRemaining();
                 applySessionState(data.sessionState, data.turnsRemaining);
                 if (data.sessionState !== 'complete') setComposerEnabled(true);
+                window.SparringSfx.play('success');
                 break;
 
             case 'rate-limited':
                 setStatus('Too many requests — wait a moment and try again.');
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
+                triggerWiggle();
+                window.SparringSfx.play('error');
                 break;
 
             case 'turn-limit':
@@ -265,6 +317,8 @@
                 setStatus('That message is empty or too long — edit it and try again.');
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
+                triggerWiggle();
+                window.SparringSfx.play('error');
                 break;
 
             case 'content-flagged':
@@ -272,6 +326,8 @@
                 setStatus("That message can't be shown here — edit it and try again.");
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
+                triggerWiggle();
+                window.SparringSfx.play('error');
                 break;
 
             case 'session-unknown':
@@ -282,6 +338,8 @@
                 setStatus('The installation cannot respond right now — try again.');
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
+                triggerWiggle();
+                window.SparringSfx.play('error');
         }
         updateCharRemaining();
     }

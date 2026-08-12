@@ -46,6 +46,16 @@ const SCENARIO_MAX_CHARS = 140; // TF-05: trim-based scenario statement length
 const STORE_DB_PATH = __DIR__ . '/data/store.db';
 const PILOT_DATA_DIR = __DIR__ . '/data/pilot';
 
+// --- Juiciness toggles (TODO.md JUICYNESS) ---
+// Global kill switch plus one per effect, each independently flippable —
+// no code change needed to turn any of this off for a demo or a fault.
+const JUICY_ENABLED = true;
+const JUICY_PUNCH = true;
+const JUICY_TITLE_CARD = true;
+const JUICY_WIGGLE = true;
+const JUICY_SOUND = true;
+const JUICY_DISPLAY_ENTRANCE = true;
+
 // --- LLM (PE-01) ---
 // ponytail: no .env loader — one env var, getenv() is the whole mechanism.
 const ANTHROPIC_API_KEY_ENV = 'ANTHROPIC_API_KEY';

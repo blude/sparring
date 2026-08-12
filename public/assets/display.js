@@ -105,7 +105,9 @@
     // --- TF-04: render (add/update/remove/reorder), text only ---
     function buildItemElement(item) {
         var el = document.createElement('article');
-        el.className = 'exchange entering';
+        // Entrance animation only — never applied to toUpdate (QR-02): the
+        // 'entering' class is only ever set here, on a freshly-built node.
+        el.className = 'exchange' + (window.isJuicyOn('displayEntrance') ? ' entering' : '');
         el.dataset.sessionId = item.sessionId;
 
         var scenario = document.createElement('div');
@@ -141,6 +143,10 @@
         var col = pickColumn();
         placement.set(item.sessionId, col);
         col.appendChild(el); // only this column's height changes; every other column is untouched (QR-02)
+        void el.offsetWidth; // force the 'entering' style to commit before scheduling its removal — this
+        // whole insertion happens inside poll()'s Promise chain, not a direct user gesture, and a bare
+        // rAF there can race ahead of the browser's paint (no forced style flush in between), which
+        // makes the entrance land instantly with no visible transition instead of animating in.
         requestAnimationFrame(function () { el.classList.remove('entering'); });
     }
 
@@ -150,6 +156,11 @@
         el.querySelector('.scenario').textContent = item.scenario;
         el.querySelector('.contribution').textContent = trim(item.visitorContribution, TRIM_CHARS);
         el.querySelector('.response').textContent = trim(item.sparringResponse, TRIM_CHARS);
+        if (window.isJuicyOn('displayEntrance')) {
+            el.classList.remove('updating');
+            void el.offsetWidth; // force the removal to commit so re-adding the class retriggers the animation
+            el.classList.add('updating');
+        }
     }
 
     function removeItem(sessionId) {
