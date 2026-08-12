@@ -15,7 +15,7 @@ require __DIR__ . '/../config.php';
   <header id="top-bar">
     <button id="avatar-btn" type="button" aria-haspopup="true" aria-expanded="false" hidden></button>
     <div id="avatar-popover" hidden role="dialog">You are <strong id="avatar-alias"></strong></div>
-    <button id="new-session-btn" type="button">New session</button>
+    <button id="new-session-btn" type="button">End session</button>
   </header>
 
   <div id="history" aria-live="polite"></div>

@@ -97,6 +97,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 **Alternative scenarios**
 
 - **EX-03-1** *(extends ST-03-1)* The identifier is unknown to SE-03 or has expired. The element discards it and continues as UC-01 from ST-01-1. *Outcome:* Alternative-success.
+- **EX-03-2** *(extends ST-03-3)* The identifier is known but the consent decision was never recorded (`awaiting-decision`). The element presents UI-01's consent decision again, same as ST-01-3, and continues as UC-01 from there. *Outcome:* Alternative-success.
 
 ### UC-04 — Start a new session deliberately
 *Actors:* UT-01

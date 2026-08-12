@@ -59,9 +59,12 @@
         if (event.key === 'Escape') closePopover();
     });
 
+    // TODO: "End session" should end the session early and show the
+    // feedback/evaluation dialog, not just bounce home. For now it still
+    // navigates back to the home screen — confirmation dialog unchanged.
     newSessionBtn.addEventListener('click', function () {
-        if (window.confirm('Start a new session? Your current session will no longer be shown.')) {
-            window.location.href = 'input.php';
+        if (window.confirm('End this session? Your current session will no longer be shown.')) {
+            window.location.href = '/';
         }
     });
 
@@ -213,7 +216,7 @@
             appendTurn('visitor', exchange.visitorContribution);
             appendTurn('sparring', exchange.sparringResponse);
         });
-        retentionEl.hidden = true; // ST-03-3: retention decision is not asked again
+        retentionEl.hidden = data.sessionState !== 'awaiting-decision'; // EX-03-2: still shown if consent was never recorded
         if (data.sessionState !== 'awaiting-decision') revealIdentity(id); // consent already recorded
         applySessionState(data.sessionState, data.turnsRemaining);
         updateDebugPanel({ sessionId: id, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
