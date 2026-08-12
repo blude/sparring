@@ -89,6 +89,10 @@ if (php_sapi_name() !== 'cli') {
     exit("this script runs on the host only (C-03)\n");
 }
 
+if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
+    exit("Usage: php bin/import_pilot.php [directory]   (defaults to config's PILOT_DATA_DIR)\n");
+}
+
 $dir = $argv[1] ?? PILOT_DATA_DIR;
 $store = new Store(STORE_DB_PATH);
 $outcome = import_directory($store, $dir);

@@ -16,6 +16,10 @@ if (php_sapi_name() !== 'cli') {
     exit("this script runs on the host only\n");
 }
 
+if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
+    exit("Usage: php bin/backup_db.php [output-path]   (defaults to data/backups/store-<timestamp>.db)\n");
+}
+
 $outputPath = $argv[1] ?? null;
 if ($outputPath === null) {
     $backupDir = __DIR__ . '/../data/backups';

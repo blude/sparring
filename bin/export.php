@@ -18,6 +18,10 @@ if (php_sapi_name() !== 'cli') {
     exit("this script runs on the host only\n");
 }
 
+if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
+    exit("Usage: php bin/export.php [output-path]   (defaults to stdout)\n");
+}
+
 $store = new Store(STORE_DB_PATH);
 
 $export = [

@@ -21,6 +21,14 @@ if (php_sapi_name() !== 'cli') {
     exit("this script runs on the host only\n");
 }
 
+if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
+    exit(
+        "Usage: php bin/prune_orphaned_sessions.php [hours] --dry-run\n" .
+        "       php bin/prune_orphaned_sessions.php [hours] --confirm\n" .
+        "       (hours defaults to 24)\n"
+    );
+}
+
 $dryRun = in_array('--dry-run', $argv, true);
 $confirmed = in_array('--confirm', $argv, true);
 

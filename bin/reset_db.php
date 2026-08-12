@@ -17,6 +17,13 @@ if (php_sapi_name() !== 'cli') {
     exit("this script runs on the host only\n");
 }
 
+if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
+    exit(
+        "Usage: php bin/reset_db.php --dry-run\n" .
+        "       php bin/reset_db.php --confirm\n"
+    );
+}
+
 $dryRun = in_array('--dry-run', $argv, true);
 $confirmed = in_array('--confirm', $argv, true);
 
