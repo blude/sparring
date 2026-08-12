@@ -38,7 +38,10 @@ exported array below to confirm it sounds right here, then copy it into
 <label>Parameter array
   <textarea id="params" spellcheck="false" style="height:8rem"></textarea>
 </label>
-<p>Comma-separated, in zzfx's own order.</p>
+<details>
+<summary>Parameter format</summary>
+<p>Comma-separated, in the order ZzFX's own export uses. The official Sound Designer's export line is a full <code>zzfx(...)</code> call, but this tool only needs the bracketed array part (the <code>...</code> inside the parentheses).</p>
+</details>
 
 <button type="button" id="play">▶ Play</button>
 
@@ -57,8 +60,11 @@ exported array below to confirm it sounds right here, then copy it into
   <textarea id="chain" spellcheck="false" style="height:8rem"></textarea>
 </label>
 
+<details>
+<summary>Chain format</summary>
 <p>Steps, one per line — a note (as before), a rest (<code>rest &lt;ms&gt;</code>),
 or a chord (multiple bracketed notes on one line, separated by <code>;</code>, played simultaneously)</p>
+</details>
 
 <button type="button" id="play-chain">▶ Play chain</button>
 
