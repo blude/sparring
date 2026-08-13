@@ -15,6 +15,12 @@
 The element shall present a usable input surface immediately on opening, with no installation, registration, or instruction step.
 *Success criteria (qualitative):* A visitor who has never seen the piece submits their first contribution without asking anyone how it works.
 *Satisfies:* SG-01
+*Note:* UI-01 shows a "Playbook" card of participation rules on screen load.
+It's visually an instruction step, but never gates the input surface — the
+field's usability doesn't depend on it, and it's dismissed automatically by
+the visitor's first submission rather than requiring an acknowledgement.
+Documented here as a deliberate, non-blocking exception rather than a silent
+one.
 
 **G-02 — Hold the visitor's place through interruption**
 The element shall restore a session and its exchanges after a reload, a locked device, or a backgrounded tab.
@@ -129,6 +135,7 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 |---|---|---|---|---|
 | Consent notice | string | What happens to the session, what each of the three decisions means, and which one is required | Static | Until the decision is recorded |
 | Exchange history | array | Visitor contributions and Sparring responses in order, visually distinguished by speaker | E-01.4 | Once at least one exchange exists |
+| Session title | string | The visitor's first contribution, truncated, shown in the header | E-01.4 | Once at least one contribution exists |
 | In-progress state | boolean | That a response is being produced | E-01.5 | While a submission is outstanding |
 | Remaining turns | integer | How many contributions remain in the session | E-01.3 | Always, once the session is open |
 | Character allowance | integer | Characters remaining for the current contribution | TF-04 | While the field holds content |
