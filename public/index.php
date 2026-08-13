@@ -135,10 +135,12 @@
       height: 0;
       border: 0;
       border-top: 1px solid rgba(0,0,0,0.1);
-      margin: 2rem 0;
+      margin: 2rem 0 0;
   }
   footer {
       margin: 0;
+      padding: 32px;
+      box-sizing: border-box;
       font-size: 0.8125rem;
       color: #444;
   }
