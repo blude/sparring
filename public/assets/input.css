@@ -2,13 +2,23 @@
    without scrolling. Everything else here is a placeholder — refined later. */
 :root {
     --accent: #d32f2f;      /* theme accent: matches index.php's "Sparring" wordmark red */
-    --accent-soft: #fbdfe0; /* accent tinted for a light-theme bubble background */
+    /* bubble colors, naming mirrors display.css's --accent-bubble-* pair —
+       input.css needs two full pairs (visitor + sparring), display.css only
+       needed one since the projector renders the AI side differently. */
+    --bubble-visitor-bg: #f8e7e7;
+    --bubble-visitor-text: #8b2d26;
+    --bubble-sparring-bg: #eaeaea;
+    --bubble-sparring-text: #111;
 }
 * { box-sizing: border-box; }
 
 body {
     margin: 0;
-    font-family: system-ui, sans-serif;
+    /* Figma specifies Helvetica Neue throughout this screen; system-ui
+       resolves to San Francisco on Apple devices, a visibly different
+       typeface. Helvetica Neue is a standard iOS/macOS system font, so
+       this costs nothing and matches the mockups directly. */
+    font-family: 'Helvetica Neue', system-ui, sans-serif;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -29,16 +39,47 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     position: relative;
 }
 
+#top-bar-leading {
+    position: relative; /* anchors #avatar-popover to this group, not the full-width #top-bar */
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#session-title {
+    flex: 1;
+    min-width: 0; /* required on a flex child or text-overflow:ellipsis silently fails */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #999; /* placeholder "Untitled" shade; setSessionTitle darkens once real */
+}
+#session-title.set { color: #222; }
+
+#top-bar-trailing {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
 #avatar-btn {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.5rem; /* 40px */
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
-    border: 1px solid #ddd;
-    background: #f7f7f7;
-    font-size: 1.2rem;
+    border: none;
+    background: #eaeae7;
+    font-size: 1.3125rem; /* 21px */
     line-height: 1;
     padding: 0;
     cursor: pointer;
@@ -47,7 +88,7 @@ main {
 #avatar-popover {
     position: absolute;
     top: 2.75rem;
-    left: 0;
+    left: 0; /* avatar is the leftmost item in #top-bar-leading now */
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 0.5rem;
@@ -58,9 +99,14 @@ main {
 }
 
 #new-session-btn {
-    padding: 0.4rem 0.75rem;
+    padding: 0.625rem 0.875rem; /* 10px/14px */
     font: inherit;
-    font-size: 0.85rem;
+    font-size: 0.875rem; /* 14px */
+    font-weight: 500;
+    color: #111;
+    background: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem; /* 8px */
 }
 
 #debug-panel {
@@ -81,11 +127,120 @@ main {
     gap: 0.75rem;
 }
 
-#history .turn { padding: 0.5rem 0.75rem; border-radius: 0.75rem; max-width: 90%; }
-#history .visitor { align-self: flex-end; background: var(--accent-soft); }
-#history .sparring { align-self: flex-start; background: #f0f0f0; }
+#history .turn { padding: 0.5rem 0.75rem; border-radius: 0.875rem; max-width: 90%; line-height: 1.3; }
+#history .visitor { align-self: flex-end; background: var(--bubble-visitor-bg); color: var(--bubble-visitor-text); }
+#history .sparring { align-self: flex-start; background: var(--bubble-sparring-bg); color: var(--bubble-sparring-text); }
+
+/* Status turns (formerly the separate #status element — QR-02's "no
+   condition leaves the surface unexplained" now satisfied inline, as the
+   last history item, instead of in a dedicated region). Not a speech
+   bubble: no background, so it doesn't read as something either party said. */
+#history .turn--status { align-self: flex-start; background: none; padding: 0.5rem 0.75rem 0; max-width: 100%; font-style: italic; color: #a33; }
+
+/* In-progress ("Consequently sparring…") gets the gradient-shimmer treatment;
+   terminal status messages (errors/limits) stay the plain color above. */
+#history .turn--pending {
+    background: linear-gradient(90deg, #da9393, #d32f2f, #da9393);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 1.6s linear infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Playbook: floating card, positioned the same way #title-card already is
+   (fixed + centered via translate) rather than inventing a second overlay
+   pattern. Visible from page load by default (no [hidden] in the markup);
+   input.js hides it once, on the first sent message. */
+#playbook {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(88vw, 328px);
+    z-index: 10;
+    opacity: 0.5; /* per the mockup — dimmed, secondary to the input surface */
+}
+
+/* Diagonal-cut backing shapes peeking out behind the card — both are
+   effectively a plain rect sheared with skewY (Shadow 1's edges are exact
+   parallelogram lengths; Shadow 2's are within ~1%, imperceptible),
+   so plain skewed divs replace the two exported SVGs. Height is each
+   shape's own left-edge length (skewY only shears x-based, so left/right
+   edges stay vertical — the height doesn't change, only the top/bottom
+   slant does), width/angle from the same source path data. */
+#playbook-shape-1, #playbook-shape-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 328px;
+    z-index: -1;
+}
+#playbook-shape-1 { height: 370px; background: #eaeaea; transform: translate(-50%, -50%) skewY(-10.2deg); }
+#playbook-shape-2 { height: 339px; background: #dddddd; transform: translate(-50%, -50%) skewY(-4.2deg); }
+
+#playbook-body {
+    background: #fff;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+#playbook-heading { margin: 0; font-size: 1.5rem; font-weight: 700; color: #222; text-align: center; }
+
+#playbook-rules {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#playbook-rules li { display: flex; align-items: center; gap: 1rem; }
+#playbook-rules p { margin: 0; font-size: 1.125rem; line-height: 1.4; color: #222; }
+
+/* Base circle is a plain flat-color disc — a solid-color SVG circle and a
+   border-radius:50% div render identically, so no fidelity is lost keeping
+   this one as CSS. The numerals themselves are real exported assets
+   (illustrated digits, not a typeface) laid over it at Figma's exact px
+   offsets — those can't be reproduced with text. */
+.playbook-bullet {
+    position: relative;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #666; /* was red (var(--accent)) — mockup changed the bullet fill to gray */
+}
+.playbook-bullet::after {
+    content: '';
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.playbook-bullet--1::after { left: 17.68px; top: 8.8px; width: 27.888px; height: 39.2px; background-image: url('img/playbook-bullet-1.svg'); }
+.playbook-bullet--2 { width: 48.14px; }
+.playbook-bullet--2::after { left: 15.88px; top: 8.13px; width: 32.256px; height: 39.872px; background-image: url('img/playbook-bullet-2.svg'); }
+.playbook-bullet--3 { width: 49.596px; height: 48.672px; }
+.playbook-bullet--3::after { left: 17.28px; top: 8.8px; width: 32.312px; height: 39.872px; background-image: url('img/playbook-bullet-3.svg'); }
 
 #retention {
+    /* position+z-index so it stacks above #playbook (fixed, z-index:10)
+       wherever the two overlap — ToS is the one that must win. */
+    position: relative;
+    z-index: 11;
+    background: #fff;
     border: 1px solid #ddd;
     border-radius: 0.75rem;
     padding: 0.75rem;
@@ -110,31 +265,79 @@ main {
 #consent-confirm:disabled { opacity: 0.5; }
 
 #composer {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
 }
 
+/* Scrim: fades history content out before it reaches the composer, matching
+   the Prompt Area's floating-over-content look in the mockups. rgba(...,0),
+   not the `transparent` keyword, for the transparent stop — some engines
+   interpolate `transparent` through transparent-black and produce a visible
+   gray haze instead of a clean fade. */
+#composer::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: 1.5rem;
+    background: linear-gradient(rgba(255, 255, 255, 0), #fff);
+    pointer-events: none;
+}
+
+/* This box IS Figma's "Textarea + Button" component (node 42:543) — the
+   rounded/bordered/shadowed card, not the bare <textarea>. Its three
+   defined states (Normal/Focused/Disabled) all restyle the whole box, not
+   just an inner focus ring — border color and shadow depth both change, so
+   focus is handled here via :focus-within, and the field's own native
+   focus outline is suppressed below (the box IS the focus indicator). */
 #composer-row {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 0.5rem; /* 8px */
+    min-height: 4.5rem; /* 72px */
+    padding: 0.875rem; /* 14px */
+    background: #fff;
+    border: 1px solid #999; /* Normal */
+    border-radius: 0.875rem; /* 14px */
+    box-shadow: 0 27px 8px rgba(0, 0, 0, 0), 0 17px 7px rgba(0, 0, 0, 0.01),
+                0 10px 6px rgba(0, 0, 0, 0.02), 0 4px 4px rgba(0, 0, 0, 0.03),
+                0 1px 2px rgba(0, 0, 0, 0.04); /* Normal */
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+#composer-row:focus-within {
+    border-color: #777; /* Focused */
+    box-shadow: 0 35px 10px rgba(0, 0, 0, 0), 0 22px 9px rgba(0, 0, 0, 0.01),
+                0 13px 8px rgba(0, 0, 0, 0.03), 0 6px 6px rgba(0, 0, 0, 0.05),
+                0 1px 3px rgba(0, 0, 0, 0.06); /* Focused */
+}
+#composer-row:has(#contribution:disabled) {
+    background: #fafafa; /* Disabled — border/shadow same as Normal per spec */
 }
 
 #contribution {
     flex: 1;
-    min-height: 3.5rem;
     resize: none;
-    padding: 0.5rem;
+    border: none;
+    padding: 0;
+    background: transparent;
     font: inherit;
+    font-size: 1rem; /* 16px */
+    color: #333;
 }
+#contribution:focus { outline: none; } /* the box's own border/shadow above is the focus indicator */
+#contribution:disabled { color: #999; }
+#contribution::placeholder { color: #999; }
 
-#char-remaining { font-size: 0.8rem; color: #666; text-align: right; }
-#status { font-size: 0.85rem; min-height: 1.1rem; color: #a33; }
+#composer-footer { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.75rem; color: #666; }
+#composer-disclaimer { margin: 0; }
+#char-remaining { flex-shrink: 0; }
 
 #submit {
     flex-shrink: 0;
-    width: 2.75rem;
+    width: 2.75rem; /* 44px */
     height: 2.75rem;
     padding: 0;
     display: flex;
@@ -142,8 +345,8 @@ main {
     justify-content: center;
     border-radius: 50%;
     border: none;
-    background: var(--accent);
-    color: #fff;
+    background: transparent;
+    color: var(--accent);
 }
 #submit:disabled { opacity: 0.5; }
 
@@ -151,8 +354,8 @@ main {
    swapping icons is a one-word class change, not an HTML/asset edit. Both
    variants stay defined here even though only one is active. */
 #submit .icon {
-    width: 20px;
-    height: 20px;
+    width: 40px; /* matches Figma's 40px icon inside the 44px send button */
+    height: 40px;
     background-color: currentColor;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
@@ -168,6 +371,10 @@ main {
 #submit .icon--glove {
     -webkit-mask-image: url('img/glove.svg');
     mask-image: url('img/glove.svg');
+    /* Figma applies this exact rotate+flip to reorient the shared library
+       glove icon for this send-button instance — the raw asset alone
+       points the wrong way. */
+    transform: rotate(-90deg) scaleX(-1);
 }
 
 /* --- Juiciness (TODO.md JUICYNESS) --- */
@@ -281,6 +488,13 @@ main {
     #submit.punching,
     #composer.wiggling {
         animation: none;
+    }
+    #composer-row {
+        transition: none;
+    }
+    #history .turn--pending {
+        animation: none;
+        background-position: 0 0; /* freeze on a static mid-gradient frame, still legible */
     }
     .title-card__line {
         position: static; /* motion off: back to normal flow so all 3 stack, don't overlap */

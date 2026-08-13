@@ -13,12 +13,13 @@
     var DEBUG = new URLSearchParams(window.location.search).get('debug') === '1';
 
     var historyEl = document.getElementById('history');
+    var playbookEl = document.getElementById('playbook');
     var retentionEl = document.getElementById('retention');
     var composerEl = document.getElementById('composer');
     var fieldEl = document.getElementById('contribution');
     var submitEl = document.getElementById('submit');
     var charRemainingEl = document.getElementById('char-remaining');
-    var statusEl = document.getElementById('status');
+    var sessionTitleEl = document.getElementById('session-title');
     var avatarBtn = document.getElementById('avatar-btn');
     var avatarPopover = document.getElementById('avatar-popover');
     var avatarAliasEl = document.getElementById('avatar-alias');
@@ -27,6 +28,7 @@
 
     var sessionId = null;
     var sessionState = null; // 'awaiting-decision' | 'open' | 'complete' | 'failed'
+    var statusTurnEl = null; // the one managed "status" entry in #history, if any (see setHistoryStatus)
     var debugPanel = null;
     var lastDebugInfo = {};
 
@@ -91,8 +93,33 @@
         historyEl.scrollTop = historyEl.scrollHeight;
     }
 
-    function setStatus(message) {
-        statusEl.textContent = message || '';
+    // Status now lives inside #history as a managed entry (formerly a
+    // separate #status element) — every prior in-progress/error/limit
+    // message routes through here. Always clears whatever status entry
+    // exists first, then creates a fresh one if there's a message — so
+    // calling setHistoryStatus(null) is how every call site clears it, and
+    // there is never more than one status entry in the history at a time.
+    function setHistoryStatus(message, pending) {
+        if (statusTurnEl) {
+            statusTurnEl.remove();
+            statusTurnEl = null;
+        }
+        if (!message) return;
+        statusTurnEl = document.createElement('div');
+        statusTurnEl.className = 'turn turn--status' + (pending ? ' turn--pending' : '');
+        statusTurnEl.setAttribute('role', 'status');
+        statusTurnEl.textContent = message;
+        historyEl.appendChild(statusTurnEl);
+        historyEl.scrollTop = historyEl.scrollHeight;
+    }
+
+    // Session title: the visitor's first contribution, set once (submit
+    // time, not response time — matches the design's loading-state frame)
+    // and never overwritten after.
+    function setSessionTitle(text) {
+        if (sessionTitleEl.classList.contains('set')) return;
+        sessionTitleEl.textContent = text;
+        sessionTitleEl.classList.add('set');
     }
 
     // --- juiciness (TODO.md JUICYNESS): purely presentational, layered on
@@ -154,7 +181,7 @@
         sessionState = state;
         if (state === 'complete') {
             setComposerEnabled(false);
-            setStatus('This session has reached its limit — thanks for sparring.');
+            setHistoryStatus('This session has reached its limit — thanks for sparring.', false);
         } else if (state === 'open') {
             setComposerEnabled(true);
         }
@@ -188,7 +215,7 @@
                     return createSession();
                 })
                 .catch(function () {
-                    setStatus('The installation is not accepting sessions right now — reload to retry.');
+                    setHistoryStatus('The installation is not accepting sessions right now — reload to retry.', false);
                 });
         }
         return createSession();
@@ -206,7 +233,7 @@
                 retentionEl.hidden = false; // ST-01-3: decision presented, field stays disabled
             })
             .catch(function () {
-                setStatus('The installation is not accepting sessions right now — reload to retry.');
+                setHistoryStatus('The installation is not accepting sessions right now — reload to retry.', false);
             });
     }
 
@@ -216,6 +243,8 @@
             appendTurn('visitor', exchange.visitorContribution);
             appendTurn('sparring', exchange.sparringResponse);
         });
+        if (data.exchanges.length > 0) setSessionTitle(data.exchanges[0].visitorContribution);
+        playbookEl.hidden = data.exchanges.length > 0; // already past the "Instructions" state if there's history
         retentionEl.hidden = data.sessionState !== 'awaiting-decision'; // EX-03-2: still shown if consent was never recorded
         if (data.sessionState !== 'awaiting-decision') revealIdentity(id); // consent already recorded
         applySessionState(data.sessionState, data.turnsRemaining);
@@ -254,17 +283,19 @@
                 showTitleCard();
             })
             .catch(function () {
-                setStatus('Could not record that choice — try again.');
+                setHistoryStatus('Could not record that choice — try again.', false);
             });
     });
 
     // --- TF-03: submit a contribution ---
     function submitContribution(text) {
+        playbookEl.hidden = true; // first sent message auto-dismisses the Playbook card
+        setSessionTitle(text);
         window.SparringSfx.unlock(); // first tap of the session: the user gesture AudioContext needs on iOS Safari
         triggerPunch();
 
         setComposerEnabled(false);
-        setStatus('Sparring is thinking…'); // in-progress state, shown synchronously (QR-01: within 300ms)
+        setHistoryStatus('Consequently sparring…', true); // in-progress state, shown synchronously (QR-01: within 300ms)
 
         var controller = new AbortController();
         var timeout = setTimeout(function () { controller.abort(); }, WAIT_MS);
@@ -294,12 +325,12 @@
         if (data.sessionState !== undefined) debugInfo.sessionState = data.sessionState;
         if (data.turnsRemaining !== undefined) debugInfo.turnsRemaining = data.turnsRemaining;
         updateDebugPanel(debugInfo);
+        setHistoryStatus(null); // clear the pending "thinking" entry — once, here, covers every branch below
         switch (data.status) {
             case 'ok':
                 appendTurn('visitor', data.exchange.visitorContribution);
                 appendTurn('sparring', data.exchange.sparringResponse);
                 fieldEl.value = '';
-                setStatus('');
                 updateCharRemaining();
                 applySessionState(data.sessionState, data.turnsRemaining);
                 if (data.sessionState === 'complete') {
@@ -311,7 +342,7 @@
                 break;
 
             case 'rate-limited':
-                setStatus('Too many requests — wait a moment and try again.');
+                setHistoryStatus('Too many requests — wait a moment and try again.', false);
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
                 triggerWiggle();
@@ -324,7 +355,7 @@
                 break;
 
             case 'rejected':
-                setStatus('That message is empty or too long — edit it and try again.');
+                setHistoryStatus('That message is empty or too long — edit it and try again.', false);
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
                 triggerWiggle();
@@ -333,7 +364,7 @@
 
             case 'content-flagged':
                 // Resolved moderation gate: reject-and-edit, session stays open.
-                setStatus("That message can't be shown here — edit it and try again.");
+                setHistoryStatus("That message can't be shown here — edit it and try again.", false);
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
                 triggerWiggle();
@@ -341,11 +372,11 @@
                 break;
 
             case 'session-unknown':
-                setStatus('This session is no longer available — reload to start a new one.');
+                setHistoryStatus('This session is no longer available — reload to start a new one.', false);
                 break;
 
             default: // generation-failed, or anything unrecognised
-                setStatus('The installation cannot respond right now — try again.');
+                setHistoryStatus('The installation cannot respond right now — try again.', false);
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
                 triggerWiggle();

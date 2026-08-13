@@ -13,12 +13,33 @@ require __DIR__ . '/../config.php';
 <body>
 <main>
   <header id="top-bar">
-    <button id="avatar-btn" type="button" aria-haspopup="true" aria-expanded="false" hidden></button>
-    <div id="avatar-popover" hidden role="dialog">You are <strong id="avatar-alias"></strong></div>
-    <button id="new-session-btn" type="button">End session</button>
+    <div id="top-bar-leading">
+      <button id="avatar-btn" type="button" aria-haspopup="true" aria-expanded="false" hidden></button>
+      <div id="avatar-popover" hidden role="dialog">You are <strong id="avatar-alias"></strong></div>
+      <div id="session-title">Untitled</div>
+    </div>
+    <div id="top-bar-trailing">
+      <button id="new-session-btn" type="button">End session</button>
+    </div>
   </header>
 
   <div id="history" aria-live="polite"></div>
+
+  <!-- Playbook: visible from screen load (independent of #retention below —
+       the two can be on screen at once), auto-dismissed on the first sent
+       message. No dismiss control by design. -->
+  <div id="playbook">
+    <div id="playbook-shape-1" aria-hidden="true"></div>
+    <div id="playbook-shape-2" aria-hidden="true"></div>
+    <div id="playbook-body">
+      <h2 id="playbook-heading">Playbook</h2>
+      <ol id="playbook-rules">
+        <li><span class="playbook-bullet playbook-bullet--1" aria-hidden="true"></span><p>Start with a provoking position or scenario.</p></li>
+        <li><span class="playbook-bullet playbook-bullet--2" aria-hidden="true"></span><p>Elaborate your argument in <strong>16 turns or less</strong>.</p></li>
+        <li><span class="playbook-bullet playbook-bullet--3" aria-hidden="true"></span><p>There&rsquo;s no winning or losing — only progress.</p></li>
+      </ol>
+    </div>
+  </div>
 
   <div id="retention" hidden>
     <p>Taking part requires agreeing to the Terms of Service and Privacy Policy
@@ -47,8 +68,10 @@ require __DIR__ . '/../config.php';
         <span class="icon icon--glove" aria-hidden="true"></span>
       </button>
     </div>
-    <div id="char-remaining"></div>
-    <div id="status" role="status"></div>
+    <div id="composer-footer">
+      <p id="composer-disclaimer">Sparring is AI and can make mistakes</p>
+      <div id="char-remaining"></div>
+    </div>
   </form>
 </main>
 <div id="title-card" hidden aria-hidden="true">
