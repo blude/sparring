@@ -70,7 +70,7 @@ Rationale: the exhibition offers a great sneaky opportunity to collect feedback 
 ### Input
 
 - [ ] Change the visual style of the Sparring partner's message, so that the bubble is not visible anymore and text size is a bit larger.
-- [ ] Show status "Sparring is thinking…" inline along with chat history
+- [x] Show status "Sparring is thinking…" inline along with chat history
   - Status message is then replaced by the incoming message.
 
 ### Display
@@ -91,7 +91,7 @@ Rationale: the exhibition offers a great sneaky opportunity to collect feedback 
 
 ### Index
 
-- [ ] Implement playful design of starting screen (waiting for mockup).
+- [x] Implement playful design of starting screen (waiting for mockup).
 
 ### Misc
 
