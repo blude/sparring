@@ -280,10 +280,12 @@ main {
     pointer-events: none;
 }
 
-/* This box IS Figma's "Textarea" component — the rounded/bordered/shadowed
-   card, not the bare <textarea>. The field and send button live inside it,
-   docked side by side, matching the mockup's actual nesting (the send icon
-   sits inside the same card, not beside it as a separate button). */
+/* This box IS Figma's "Textarea + Button" component (node 42:543) — the
+   rounded/bordered/shadowed card, not the bare <textarea>. Its three
+   defined states (Normal/Focused/Disabled) all restyle the whole box, not
+   just an inner focus ring — border color and shadow depth both change, so
+   focus is handled here via :focus-within, and the field's own native
+   focus outline is suppressed below (the box IS the focus indicator). */
 #composer-row {
     display: flex;
     align-items: flex-start;
@@ -291,11 +293,21 @@ main {
     min-height: 4.5rem; /* 72px */
     padding: 0.875rem; /* 14px */
     background: #fff;
-    border: 1px solid #aaa;
+    border: 1px solid #999; /* Normal */
     border-radius: 0.875rem; /* 14px */
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 27px 8px rgba(0, 0, 0, 0), 0 17px 7px rgba(0, 0, 0, 0.01),
+                0 10px 6px rgba(0, 0, 0, 0.02), 0 4px 4px rgba(0, 0, 0, 0.03),
+                0 1px 2px rgba(0, 0, 0, 0.04); /* Normal */
 }
-#composer-row:has(#contribution:disabled) { background: #fafafa; }
+#composer-row:focus-within {
+    border-color: #777; /* Focused */
+    box-shadow: 0 35px 10px rgba(0, 0, 0, 0), 0 22px 9px rgba(0, 0, 0, 0.01),
+                0 13px 8px rgba(0, 0, 0, 0.03), 0 6px 6px rgba(0, 0, 0, 0.05),
+                0 1px 3px rgba(0, 0, 0, 0.06); /* Focused */
+}
+#composer-row:has(#contribution:disabled) {
+    background: #fafafa; /* Disabled — border/shadow same as Normal per spec */
+}
 
 #contribution {
     flex: 1;
@@ -307,6 +319,7 @@ main {
     font-size: 1rem; /* 16px */
     color: #333;
 }
+#contribution:focus { outline: none; } /* the box's own border/shadow above is the focus indicator */
 #contribution:disabled { color: #999; }
 #contribution::placeholder { color: #999; }
 
