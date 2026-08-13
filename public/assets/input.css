@@ -198,6 +198,11 @@ main {
 }
 
 #retention {
+    /* position+z-index so it stacks above #playbook (fixed, z-index:10)
+       wherever the two overlap — ToS is the one that must win. */
+    position: relative;
+    z-index: 11;
+    background: #fff;
     border: 1px solid #ddd;
     border-radius: 0.75rem;
     padding: 0.75rem;
