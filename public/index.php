@@ -41,7 +41,7 @@
   .gradient-bottom {
       width: 100%;
       max-width: 402px;
-      height: 100px;
+      height: 140px;
       pointer-events: none;
   }
   .gradient-bottom .fill {
@@ -53,6 +53,15 @@
       mask: url(assets/img/gradient-bottom.svg) no-repeat;
       -webkit-mask-size: 100% 100%;
       mask-size: 100% 100%;
+  }
+  .presented-by {
+      margin: 0;
+      width: 100%;
+      max-width: 402px;
+      box-sizing: border-box;
+      padding: 1.25rem 60px;
+      font-size: 0.625rem;
+      color: #666;
   }
   .content {
       flex: 1 0 auto;
@@ -151,14 +160,23 @@
       font-weight: 700;
       text-decoration: underline;
   }
+  .divider {
+      width: 140px;
+      height: 0;
+      border: 0;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      margin: 2rem 0 1.5rem;
+  }
   footer {
-      margin-bottom: 1.5rem;
+      margin: 0 0 1.5rem;
       font-size: 0.8125rem;
+      color: #444;
   }
   footer a { color: #666; }
 </style>
 </head>
 <body>
+<p class="presented-by">FH DORTMUND and SUPERRAUM presents</p>
 <div class="content">
   <div class="branding">
     <div class="gloves-box">
@@ -176,7 +194,8 @@
   <a id="start-btn" href="input.php">Start a new session</a>
   <p class="learn-more"><strong>Learn more</strong> about Sparring&rsquo;s philosophy.</p>
 </div>
-<footer><a href="credits.php">Credits</a></footer>
+<hr class="divider">
+<footer>Craft with #DigitalMaterial &middot; <a href="credits.php">Credits</a></footer>
 <div class="gradient-bottom" aria-hidden="true"><div class="fill"></div></div>
 </body>
 </html>
