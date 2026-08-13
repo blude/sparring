@@ -43,6 +43,15 @@ main {
     position: relative;
 }
 
+#top-bar-leading {
+    position: relative; /* anchors #avatar-popover to this group, not the full-width #top-bar */
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 #session-title {
     flex: 1;
     min-width: 0; /* required on a flex child or text-overflow:ellipsis silently fails */
@@ -56,10 +65,8 @@ main {
 #session-title.set { color: #222; }
 
 #top-bar-trailing {
-    position: relative; /* anchors #avatar-popover to this group, not the full-width #top-bar */
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     flex-shrink: 0;
 }
 
@@ -81,7 +88,7 @@ main {
 #avatar-popover {
     position: absolute;
     top: 2.75rem;
-    right: 0; /* avatar is the rightmost item in #top-bar-trailing now */
+    left: 0; /* avatar is the leftmost item in #top-bar-leading now */
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 0.5rem;

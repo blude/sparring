@@ -13,11 +13,13 @@ require __DIR__ . '/../config.php';
 <body>
 <main>
   <header id="top-bar">
-    <div id="session-title">Untitled</div>
-    <div id="top-bar-trailing">
-      <button id="new-session-btn" type="button">End session</button>
+    <div id="top-bar-leading">
       <button id="avatar-btn" type="button" aria-haspopup="true" aria-expanded="false" hidden></button>
       <div id="avatar-popover" hidden role="dialog">You are <strong id="avatar-alias"></strong></div>
+      <div id="session-title">Untitled</div>
+    </div>
+    <div id="top-bar-trailing">
+      <button id="new-session-btn" type="button">End session</button>
     </div>
   </header>
 
