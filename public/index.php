@@ -5,14 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sparring — Learn Digital Design</title>
 <style>
-  html, body { margin: 0; height: 100%; }
+  html, body { margin: 0; }
   body {
-      position: relative;
+      /* min-height: 100lvh (large viewport height — ignores mobile Safari's
+         collapsible bottom bar) makes the page a hair taller than the
+         initially-visible viewport, so the last element (the gradient) sits
+         past the fold instead of fighting the bar with position:fixed. The
+         plain 100vh above is a fallback for browsers without lvh support —
+         unsupported values are ignored, so it just gets overridden. */
       min-height: 100vh;
+      min-height: 100lvh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       font-family: system-ui, sans-serif;
       text-align: center;
       touch-action: manipulation;
@@ -22,16 +27,14 @@
           radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px) 0 0/16px 16px,
           #fff;
   }
-  /* decorative gradient wash, bottom of frame, bleeding under the safe-area
-     inset (home-indicator bar) — fixed to the true viewport edge, same as
-     footer below. Color from CSS; shape/falloff from the exported Figma
-     mask (alpha-only, no color), flipped vertically to fade upward like
-     the mockup — mirrors Figma's own -scale-y-100 on this layer. */
+  /* decorative gradient wash, bottom of frame — last element in normal
+     document flow (not fixed), so it naturally lands past the initial fold
+     and is revealed once the page's extra height (see 100lvh above) makes
+     mobile Safari collapse its own bottom bar on scroll. Color from CSS;
+     shape/falloff from the exported Figma mask (alpha-only, no color),
+     flipped vertically to fade upward — mirrors Figma's own -scale-y-100
+     on this layer. */
   .gradient-bottom {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
       width: 100%;
       max-width: 402px;
       height: 100px;
@@ -48,14 +51,15 @@
       mask-size: 100% 100%;
   }
   .content {
-      position: relative;
+      flex: 1 0 auto;
       width: 100%;
       max-width: 402px;
       box-sizing: border-box;
-      padding: 0 60px;
+      padding: 2rem 60px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 2rem;
   }
   .branding {
@@ -144,15 +148,13 @@
       text-decoration: underline;
   }
   footer {
-      position: fixed;
-      bottom: 7.5rem;
+      margin-bottom: 1.5rem;
       font-size: 0.8125rem;
   }
   footer a { color: #666; }
 </style>
 </head>
 <body>
-<div class="gradient-bottom" aria-hidden="true"><div class="fill"></div></div>
 <div class="content">
   <div class="branding">
     <div class="gloves-box">
@@ -171,5 +173,6 @@
   <p class="learn-more"><strong>Learn more</strong> about Sparring&rsquo;s philosophy.</p>
 </div>
 <footer><a href="credits.php">Credits</a></footer>
+<div class="gradient-bottom" aria-hidden="true"><div class="fill"></div></div>
 </body>
 </html>
