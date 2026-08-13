@@ -12,9 +12,13 @@
          initially-visible viewport, so the last element (the gradient) sits
          past the fold instead of fighting the bar with position:fixed. The
          plain 100vh above is a fallback for browsers without lvh support —
-         unsupported values are ignored, so it just gets overridden. */
+         unsupported values are ignored, so it just gets overridden.
+         +3rem buffer: on some devices 100lvh alone undershoots the real
+         collapsed-bar height, leaving a sliver of visible page below the
+         gradient. Overshooting is harmless (a few extra rem of unseen
+         scroll past the fold); undershooting shows a white gap. */
       min-height: 100vh;
-      min-height: 100lvh;
+      min-height: calc(100lvh + 3rem);
       display: flex;
       flex-direction: column;
       align-items: center;
