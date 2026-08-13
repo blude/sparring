@@ -88,9 +88,14 @@ main {
 }
 
 #new-session-btn {
-    padding: 0.4rem 0.75rem;
+    padding: 0.625rem 0.875rem; /* 10px/14px */
     font: inherit;
-    font-size: 0.85rem;
+    font-size: 0.875rem; /* 14px */
+    font-weight: 500;
+    color: #111;
+    background: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem; /* 8px */
 }
 
 #debug-panel {
