@@ -11,7 +11,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-family: system-ui, sans-serif;
+      font-family: 'Helvetica Neue', 'Helvetica', system-ui, sans-serif;
       text-align: center;
       touch-action: manipulation;
       overflow-x: hidden;

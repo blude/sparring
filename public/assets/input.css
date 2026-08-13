@@ -18,7 +18,7 @@ body {
        resolves to San Francisco on Apple devices, a visibly different
        typeface. Helvetica Neue is a standard iOS/macOS system font, so
        this costs nothing and matches the mockups directly. */
-    font-family: 'Helvetica Neue', system-ui, sans-serif;
+    font-family: 'Helvetica Neue', 'Helvetica', system-ui, sans-serif;
     display: flex;
     flex-direction: column;
     height: 100vh;

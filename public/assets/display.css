@@ -49,7 +49,7 @@ html, body {
     overflow: hidden;
     background: var(--bg);
     color: var(--fg);
-    font-family: system-ui, sans-serif;
+    font-family: 'Helvetica Neue', 'Helvetica', system-ui, sans-serif;
     font-size: 1.05rem; /* less dense at 2x2 than the 3-col baseline, but both rows must still fit (QR-06) */
 }
 
