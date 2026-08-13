@@ -7,7 +7,6 @@
 <style>
   html, body { margin: 0; }
   body {
-      position: relative;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -23,10 +22,6 @@
           #fff;
   }
   .presented-by {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
       margin: 0;
       width: 100%;
       max-width: 402px;
