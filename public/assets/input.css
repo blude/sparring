@@ -167,23 +167,22 @@ main {
     opacity: 0.5; /* per the mockup — dimmed, secondary to the input surface */
 }
 
-/* Diagonal-cut backing shapes peeking out behind the card — real exported
-   Figma assets (each a plain 4-point polygon path, not reproducible as a
-   plain rotated rectangle without visibly drifting from the mockup: the
-   top/bottom edges aren't parallel, and the two layers have different
-   slants). Sized/positioned at the exact px Figma authored them at. */
+/* Diagonal-cut backing shapes peeking out behind the card — both are
+   effectively a plain rect sheared with skewY (Shadow 1's edges are exact
+   parallelogram lengths; Shadow 2's are within ~1%, imperceptible),
+   so plain skewed divs replace the two exported SVGs. Height is each
+   shape's own left-edge length (skewY only shears x-based, so left/right
+   edges stay vertical — the height doesn't change, only the top/bottom
+   slant does), width/angle from the same source path data. */
 #playbook-shape-1, #playbook-shape-2 {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 328px;
-    transform: translate(-50%, -50%);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
     z-index: -1;
 }
-#playbook-shape-1 { height: 429px; background-image: url('img/playbook-shadow-1.svg'); }
-#playbook-shape-2 { height: 363px; background-image: url('img/playbook-shadow-2.svg'); }
+#playbook-shape-1 { height: 370px; background: #eaeaea; transform: translate(-50%, -50%) skewY(-10.2deg); }
+#playbook-shape-2 { height: 339px; background: #dddddd; transform: translate(-50%, -50%) skewY(-4.2deg); }
 
 #playbook-body {
     background: #fff;
