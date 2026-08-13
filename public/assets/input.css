@@ -56,6 +56,7 @@ main {
 #session-title.set { color: #222; }
 
 #top-bar-trailing {
+    position: relative; /* anchors #avatar-popover to this group, not the full-width #top-bar */
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -80,7 +81,7 @@ main {
 #avatar-popover {
     position: absolute;
     top: 2.75rem;
-    left: 0;
+    right: 0; /* avatar is the rightmost item in #top-bar-trailing now */
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 0.5rem;
