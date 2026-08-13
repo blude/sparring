@@ -22,22 +22,30 @@
           radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px) 0 0/16px 16px,
           #fff;
   }
-  /* decorative gradient wash, top of frame — color from CSS, shape/falloff from the
-     exported Figma mask (the SVG itself is alpha-only, no color) */
-  .gradient-top {
-      position: absolute;
-      top: 0;
+  /* decorative gradient wash, bottom of frame, bleeding under the safe-area
+     inset (home-indicator bar) — fixed to the true viewport edge, same as
+     footer below. Color from CSS; shape/falloff from the exported Figma
+     mask (alpha-only, no color), flipped vertically to fade upward like
+     the mockup — mirrors Figma's own -scale-y-100 on this layer. */
+  .gradient-bottom {
+      position: fixed;
+      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
       max-width: 402px;
-      height: 169px;
+      height: 100px;
+      pointer-events: none;
+  }
+  .gradient-bottom .fill {
+      width: 100%;
+      height: 100%;
+      transform: scaleY(-1);
       background: linear-gradient(90deg, #ff8a80, #ffab40, #ffe57f 55%, #ccff90 80%, transparent);
-      -webkit-mask: url(assets/img/gradient-top.svg) no-repeat;
-      mask: url(assets/img/gradient-top.svg) no-repeat;
+      -webkit-mask: url(assets/img/gradient-bottom.svg) no-repeat;
+      mask: url(assets/img/gradient-bottom.svg) no-repeat;
       -webkit-mask-size: 100% 100%;
       mask-size: 100% 100%;
-      pointer-events: none;
   }
   .content {
       position: relative;
@@ -137,14 +145,14 @@
   }
   footer {
       position: fixed;
-      bottom: 1rem;
+      bottom: 7.5rem;
       font-size: 0.8125rem;
   }
   footer a { color: #666; }
 </style>
 </head>
 <body>
-<div class="gradient-top" aria-hidden="true"></div>
+<div class="gradient-bottom" aria-hidden="true"><div class="fill"></div></div>
 <div class="content">
   <div class="branding">
     <div class="gloves-box">

@@ -1,7 +1,7 @@
-<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="402" height="169" viewBox="0 0 402 169" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect id="Mask" width="402" height="169" fill="url(#paint0_linear_0_37)"/>
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="402" height="100" viewBox="0 0 402 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect id="Mask" width="402" height="100" fill="url(#paint0_linear_0_37)"/>
 <defs>
-<linearGradient id="paint0_linear_0_37" x1="201" y1="0" x2="201" y2="169" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint0_linear_0_37" x1="201" y1="0" x2="201" y2="100" gradientUnits="userSpaceOnUse">
 <stop/>
 <stop offset="0.142857" stop-opacity="0.734694"/>
 <stop offset="0.285714" stop-opacity="0.510204"/>
