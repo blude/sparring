@@ -39,7 +39,7 @@
       width: 100%;
       max-width: 402px;
       box-sizing: border-box;
-      padding: 2rem 60px;
+      padding: 0 60px;
       display: flex;
       flex-direction: column;
       align-items: center;
