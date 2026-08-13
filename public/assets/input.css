@@ -325,8 +325,8 @@ main {
    swapping icons is a one-word class change, not an HTML/asset edit. Both
    variants stay defined here even though only one is active. */
 #submit .icon {
-    width: 20px;
-    height: 20px;
+    width: 40px; /* matches Figma's 40px icon inside the 44px send button */
+    height: 40px;
     background-color: currentColor;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
