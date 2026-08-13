@@ -148,6 +148,7 @@ main {
     transform: translate(-50%, -50%);
     width: min(88vw, 328px);
     z-index: 10;
+    opacity: 0.5; /* per the mockup — dimmed, secondary to the input surface */
 }
 
 /* Diagonal-cut backing shapes peeking out behind the card — real exported
@@ -179,7 +180,7 @@ main {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
 }
 
-#playbook-heading { margin: 0; font-size: 1.5rem; font-weight: 700; text-align: center; }
+#playbook-heading { margin: 0; font-size: 1.5rem; font-weight: 700; color: #222; text-align: center; }
 
 #playbook-rules {
     margin: 0;
@@ -192,7 +193,7 @@ main {
 }
 
 #playbook-rules li { display: flex; align-items: center; gap: 1rem; }
-#playbook-rules p { margin: 0; font-size: 1.125rem; line-height: 1.4; }
+#playbook-rules p { margin: 0; font-size: 1.125rem; line-height: 1.4; color: #222; }
 
 /* Base circle is a plain flat-color disc — a solid-color SVG circle and a
    border-radius:50% div render identically, so no fidelity is lost keeping
@@ -271,20 +272,35 @@ main {
     pointer-events: none;
 }
 
+/* This box IS Figma's "Textarea" component — the rounded/bordered/shadowed
+   card, not the bare <textarea>. The field and send button live inside it,
+   docked side by side, matching the mockup's actual nesting (the send icon
+   sits inside the same card, not beside it as a separate button). */
 #composer-row {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 0.5rem; /* 8px */
+    min-height: 4.5rem; /* 72px */
+    padding: 0.875rem; /* 14px */
+    background: #fff;
+    border: 1px solid #aaa;
+    border-radius: 0.875rem; /* 14px */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.04);
 }
+#composer-row:has(#contribution:disabled) { background: #fafafa; }
 
 #contribution {
     flex: 1;
-    min-height: 3.5rem;
     resize: none;
-    padding: 0.5rem;
+    border: none;
+    padding: 0;
+    background: transparent;
     font: inherit;
+    font-size: 1rem; /* 16px */
+    color: inherit;
 }
-#contribution:disabled { background: #fafafa; color: #999; }
+#contribution:disabled { color: #999; }
+#contribution::placeholder { color: #999; }
 
 #composer-footer { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.75rem; color: #666; }
 #composer-disclaimer { margin: 0; }
@@ -292,7 +308,7 @@ main {
 
 #submit {
     flex-shrink: 0;
-    width: 2.75rem;
+    width: 2.75rem; /* 44px */
     height: 2.75rem;
     padding: 0;
     display: flex;
@@ -300,7 +316,7 @@ main {
     justify-content: center;
     border-radius: 50%;
     border: none;
-    background: #fff;
+    background: transparent;
     color: var(--accent);
 }
 #submit:disabled { opacity: 0.5; }
