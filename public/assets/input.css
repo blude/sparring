@@ -163,7 +163,6 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
     width: min(88vw, 328px);
-    z-index: 10;
     opacity: 0.5; /* per the mockup — dimmed, secondary to the input surface */
 }
 
@@ -186,7 +185,6 @@ main {
 
 #playbook-body {
     background: #fff;
-    border-radius: 0.75rem;
     padding: 2rem;
     display: flex;
     flex-direction: column;
