@@ -222,7 +222,7 @@ main {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: var(--accent);
+    background: #666; /* was red (var(--accent)) — mockup changed the bullet fill to gray */
 }
 .playbook-bullet::after {
     content: '';
