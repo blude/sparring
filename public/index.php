@@ -7,21 +7,12 @@
 <style>
   html, body { margin: 0; }
   body {
-      /* min-height: 100lvh (large viewport height — ignores mobile Safari's
-         collapsible bottom bar) makes the page a hair taller than the
-         initially-visible viewport, so the last element (the gradient) sits
-         past the fold instead of fighting the bar with position:fixed. The
-         plain 100vh above is a fallback for browsers without lvh support —
-         unsupported values are ignored, so it just gets overridden.
-         +3rem buffer: on some devices 100lvh alone undershoots the real
-         collapsed-bar height, leaving a sliver of visible page below the
-         gradient. Overshooting is harmless (a few extra rem of unseen
-         scroll past the fold); undershooting shows a white gap. */
+      position: relative;
       min-height: 100vh;
-      min-height: calc(100lvh + 3rem);
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       font-family: system-ui, sans-serif;
       text-align: center;
       touch-action: manipulation;
@@ -31,30 +22,11 @@
           radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px) 0 0/16px 16px,
           #fff;
   }
-  /* decorative gradient wash, bottom of frame — last element in normal
-     document flow (not fixed), so it naturally lands past the initial fold
-     and is revealed once the page's extra height (see 100lvh above) makes
-     mobile Safari collapse its own bottom bar on scroll. Color from CSS;
-     shape/falloff from the exported Figma mask (alpha-only, no color),
-     flipped vertically to fade upward — mirrors Figma's own -scale-y-100
-     on this layer. */
-  .gradient-bottom {
-      width: 100%;
-      max-width: 402px;
-      height: 140px;
-      pointer-events: none;
-  }
-  .gradient-bottom .fill {
-      width: 100%;
-      height: 100%;
-      transform: scaleY(-1);
-      background: linear-gradient(90deg, #ff8a80, #ffab40, #ffe57f 55%, #ccff90 80%, transparent);
-      -webkit-mask: url(assets/img/gradient-bottom.svg) no-repeat;
-      mask: url(assets/img/gradient-bottom.svg) no-repeat;
-      -webkit-mask-size: 100% 100%;
-      mask-size: 100% 100%;
-  }
   .presented-by {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
       margin: 0;
       width: 100%;
       max-width: 402px;
@@ -64,7 +36,6 @@
       color: #666;
   }
   .content {
-      flex: 1 0 auto;
       width: 100%;
       max-width: 402px;
       box-sizing: border-box;
@@ -72,7 +43,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 2rem;
   }
   .branding {
@@ -196,6 +166,5 @@
 </div>
 <hr class="divider">
 <footer>Craft with #DigitalMaterial &middot; <a href="credits.php">Credits</a></footer>
-<div class="gradient-bottom" aria-hidden="true"><div class="fill"></div></div>
 </body>
 </html>
