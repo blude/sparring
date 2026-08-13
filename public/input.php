@@ -76,7 +76,7 @@ require __DIR__ . '/../config.php';
 </main>
 <div id="title-card" hidden aria-hidden="true">
   <span class="title-card__line title-card__line--slide">READY?</span>
-  <span class="title-card__line title-card__line--slide">GET SET.</span>
+  <span class="title-card__line title-card__line--slide">GET SET</span>
   <span class="title-card__line title-card__line--grow">SPAR!</span>
 </div>
 <script>

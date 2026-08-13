@@ -404,6 +404,18 @@ main {
 
 #composer.wiggling { animation: wiggle 350ms ease; }
 
+/* --- Title Card (QR-02) --- */
+/* RethinkSans is a custom font, not a system font — the mockups use it for
+   the title card's "SPAR!" wordmark. It's a open-source font, so it's not bundled
+   with the OS; we self-host it here. */
+@font-face {
+    font-family: 'RethinkSans';
+    src: url('fonts/RethinkSans-ExtraBoldItalic.woff2') format('woff2');
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
+}
+
 /* Floating box, not full-screen — width fixed so translateX(-100%/100%)
    below lands exactly at the box's own edges, and overflow:hidden clips
    both the sliding lines and the box's own grow/shrink. Height is a fixed
@@ -426,8 +438,10 @@ main {
     color: #fff;
     border-radius: 1rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    font-size: 2.25rem;
+    font-size: 3.5rem;
     font-weight: 800;
+    font-style: italic;
+    font-family: 'RethinkSans', system-ui, sans-serif;
     letter-spacing: 0.05em;
     z-index: 2000;
     pointer-events: none;
