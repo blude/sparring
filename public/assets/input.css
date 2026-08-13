@@ -298,6 +298,7 @@ main {
     box-shadow: 0 27px 8px rgba(0, 0, 0, 0), 0 17px 7px rgba(0, 0, 0, 0.01),
                 0 10px 6px rgba(0, 0, 0, 0.02), 0 4px 4px rgba(0, 0, 0, 0.03),
                 0 1px 2px rgba(0, 0, 0, 0.04); /* Normal */
+    transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 #composer-row:focus-within {
     border-color: #777; /* Focused */
@@ -480,6 +481,9 @@ main {
     #submit.punching,
     #composer.wiggling {
         animation: none;
+    }
+    #composer-row {
+        transition: none;
     }
     #history .turn--pending {
         animation: none;
