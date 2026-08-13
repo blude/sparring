@@ -7,7 +7,6 @@
 <style>
   html, body { margin: 0; }
   body {
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -34,7 +33,8 @@
       width: 100%;
       max-width: 402px;
       box-sizing: border-box;
-      padding: 0 60px;
+      padding: 32px 60px;
+      margin-top: 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -130,7 +130,7 @@
       height: 0;
       border: 0;
       border-top: 1px solid rgba(0,0,0,0.1);
-      margin: 2rem 0 0;
+      margin: 0;
   }
   footer {
       margin: 0;
