@@ -42,17 +42,18 @@ require __DIR__ . '/../config.php';
   </div>
 
   <div id="retention" hidden>
-    <p>Taking part requires agreeing to the Terms of Service and Privacy Policy
-       below. The other two are your choice — leave either unchecked if you'd
-       rather not, and you can still take part.</p>
+    <h2 id="consent-heading">Participation consent</h2>
+    <p>By taking part in this session you confirm that you have read and
+       understood the <a href="terms.php" target="_blank" rel="noopener">Terms of Service</a>
+       and <a href="privacy.php" target="_blank" rel="noopener">Privacy Policy</a>.</p>
     <label class="consent-row">
       <input type="checkbox" id="consent-tos">
-      <span>I agree to the <a href="terms.php" target="_blank" rel="noopener">Terms of Service</a>
-      and <a href="privacy.php" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+      <span>I have read the above and agree to take part in the session.</span>
     </label>
+    <p id="consent-optional-heading">Optional — your choice, either or both:</p>
     <label class="consent-row">
       <input type="checkbox" id="consent-projection">
-      <span>I agree that my exchanged messages may be displayed on the projector.</span>
+      <span>I agree that my exchanged messages may be displayed on the projector during the session.</span>
     </label>
     <label class="consent-row">
       <input type="checkbox" id="consent-retention">
