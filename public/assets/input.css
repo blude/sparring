@@ -2,6 +2,7 @@
    without scrolling. Everything else here is a placeholder — refined later. */
 :root {
     --accent: #d32f2f;      /* theme accent: matches index.php's "Sparring" wordmark red */
+    --link-visited: #7b5940;
     /* bubble colors, naming mirrors display.css's --accent-bubble-* pair —
        input.css needs two full pairs (visitor + sparring), display.css only
        needed one since the projector renders the AI side differently. */
@@ -27,6 +28,10 @@ body {
         radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
         #fff;
 }
+
+a { color: var(--accent); }
+a:visited { color: var(--link-visited); }
+
 
 main {
     position: relative; /* anchors #playbook (position:absolute) to this box */
