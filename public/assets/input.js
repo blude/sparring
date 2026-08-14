@@ -143,6 +143,11 @@
             titleCardEl.classList.remove('collapsed'); // grows 0 -> full height
         });
         setTimeout(function () {
+            // fires as the "SPAR!" line's grow animation starts (line 3's own delay, see comment above)
+            var rect = titleCardEl.getBoundingClientRect();
+            window.SparringParticles.burst(rect.left + rect.width / 2, rect.top + rect.height / 2, 'titleCard');
+        }, 2100);
+        setTimeout(function () {
             titleCardEl.classList.add('collapsed'); // shrinks back to 0
             setTimeout(function () { titleCardEl.hidden = true; }, 250);
         }, 3100);

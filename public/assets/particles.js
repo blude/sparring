@@ -12,8 +12,8 @@ window.SparringParticles = (function () {
     var LIFETIME_MS = 450;
     var COLORS = ['#d32f2f', '#ff6f60', '#ffd54f'];
 
-    function burst(x, y) {
-        if (!window.isJuicyOn('punch')) return;
+    function burst(x, y, flag) {
+        if (!window.isJuicyOn(flag || 'punch')) return;
 
         var canvas = document.createElement('canvas');
         canvas.className = 'particle-burst';
