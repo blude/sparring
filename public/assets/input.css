@@ -29,6 +29,7 @@ body {
 }
 
 main {
+    position: relative; /* anchors #playbook (position:absolute) to this box */
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -161,7 +162,10 @@ main {
    pattern. Visible from page load by default (no [hidden] in the markup);
    input.js hides it once, on the first sent message. */
 #playbook {
-    position: fixed;
+    /* absolute (not fixed) — fixed rubber-bands separately from the page
+       during iOS overscroll, visibly detaching from the rest of the UI.
+       Anchored to main instead of the viewport, so it scrolls with it. */
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
