@@ -250,8 +250,12 @@ main {
        wherever the two overlap — ToS is the one that must win. */
     position: relative;
     z-index: 11;
-    background: #fff;
-    border: 1px solid #ddd;
+    /* deliberately inverted against the page's light theme so the consent
+       dialog pops — not a prefers-color-scheme response, always dark */
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #f2f2f2;
+    color-scheme: dark; /* native checkbox rendering matches the dark card */
     border-radius: 0.75rem;
     padding: 0.75rem;
 }
@@ -260,14 +264,14 @@ main {
     margin: 0.25rem 0;
     font-size: 1.125rem;
     font-weight: 700;
-    color: #444;
+    color: #fefefe;
 }
 
 #consent-optional-heading {
     margin: 0.75rem 0 0.25rem;
     font-size: 0.8rem;
     font-weight: 700;
-    color: #666;
+    color: #aaa;
     text-transform: uppercase;
 }
 
@@ -286,6 +290,10 @@ main {
     padding: 0.65rem;
     font: inherit;
     margin-top: 0.25rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
 }
 #consent-confirm:disabled { opacity: 0.5; }
 
