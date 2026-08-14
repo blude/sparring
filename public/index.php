@@ -17,7 +17,7 @@
       overflow-x: hidden;
       /* subtle dot-grid texture over white, matching the mockup's faint background */
       background:
-          radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px) 0 0/16px 16px,
+          radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
           #fff;
   }
   .presented-by {

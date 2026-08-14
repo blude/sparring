@@ -23,6 +23,9 @@ body {
     flex-direction: column;
     height: 100vh;
     touch-action: manipulation; /* suppress double-tap-to-zoom, keep pinch-zoom for accessibility */
+    background:
+        radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
+        #fff;
 }
 
 main {
