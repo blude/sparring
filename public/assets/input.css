@@ -417,7 +417,7 @@ main {
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 1000;
+    z-index: 2001; /* above #title-card (2000) so the SPAR! burst isn't hidden behind it */
 }
 
 @keyframes punch {
