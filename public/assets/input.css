@@ -22,7 +22,8 @@ body {
     font-family: 'Helvetica Neue', 'Helvetica', system-ui, sans-serif;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100vh; /* fallback for browsers without dvh support */
+    height: 100dvh; /* tracks Safari's collapsing address bar, unlike static vh */
     touch-action: manipulation; /* suppress double-tap-to-zoom, keep pinch-zoom for accessibility */
     background:
         radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
