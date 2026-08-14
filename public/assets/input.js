@@ -145,7 +145,7 @@
         setTimeout(function () {
             // fires as the "SPAR!" line's grow animation starts (line 3's own delay, see comment above)
             var rect = titleCardEl.getBoundingClientRect();
-            window.SparringParticles.burst(rect.left + rect.width / 2, rect.top + rect.height / 2, 'titleCard');
+            window.SparringParticles.burst(rect.left + rect.width / 2, rect.top + rect.height / 2, 'titleCard', 3);
         }, 2100);
         setTimeout(function () {
             titleCardEl.classList.add('collapsed'); // shrinks back to 0

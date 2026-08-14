@@ -12,8 +12,12 @@ window.SparringParticles = (function () {
     var LIFETIME_MS = 450;
     var COLORS = ['#d32f2f', '#ff6f60', '#ffd54f'];
 
-    function burst(x, y, flag) {
+    // scale (default 1) uniformly grows count/size/speed/lifetime — one knob
+    // so a splashier moment (title card) can ask for "bigger" without a pile
+    // of individually-tuned params. Punch's call site omits it, unchanged.
+    function burst(x, y, flag, scale) {
         if (!window.isJuicyOn(flag || 'punch')) return;
+        scale = scale || 1;
 
         var canvas = document.createElement('canvas');
         canvas.className = 'particle-burst';
@@ -22,23 +26,25 @@ window.SparringParticles = (function () {
         document.body.appendChild(canvas);
         var ctx = canvas.getContext('2d');
 
+        var count = Math.round(PARTICLE_COUNT * scale);
+        var lifetime = LIFETIME_MS * scale;
         var particles = [];
-        for (var i = 0; i < PARTICLE_COUNT; i++) {
-            var angle = (Math.PI * 2 * i) / PARTICLE_COUNT + Math.random() * 0.5;
-            var speed = 2 + Math.random() * 3;
+        for (var i = 0; i < count; i++) {
+            var angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
+            var speed = (2 + Math.random() * 3) * scale;
             particles.push({
                 x: x,
                 y: y,
                 vx: Math.cos(angle) * speed,
                 vy: Math.sin(angle) * speed,
                 color: COLORS[i % COLORS.length],
-                size: 3 + Math.random() * 3,
+                size: (3 + Math.random() * 3) * scale,
             });
         }
 
         var start = performance.now();
         function frame(now) {
-            var t = (now - start) / LIFETIME_MS;
+            var t = (now - start) / lifetime;
             if (t >= 1) { canvas.remove(); return; }
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(function (p) {
