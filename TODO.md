@@ -95,8 +95,8 @@ Rationale: the exhibition offers a great sneaky opportunity to collect feedback 
 
 ### Misc
 
-- [ ] Add realistic content to Terms of Service page
-- [ ] Add realistic content to Privacy Policy page
+- [x] Add realistic content to Terms of Service page
+- [x] Add realistic content to Privacy Policy page
 - [ ] Add realistic content to Credits page (partially done)
 
 ## Bug Fixes

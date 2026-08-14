@@ -139,6 +139,9 @@
       font-size: 0.8125rem;
       color: #444;
   }
+  footer p {
+      margin: 0 0 1rem;
+  }
   footer a { color: #666; }
 </style>
 </head>
@@ -162,6 +165,9 @@
   <p class="learn-more"><strong>Learn more</strong> about Sparring&rsquo;s philosophy.</p>
 </div>
 <hr class="divider">
-<footer>Craft with #DigitalMaterial &middot; <a href="credits.php">Credits</a></footer>
+<footer>
+    <p>Craft with #DigitalMaterial &middot; <a href="credits.php">Credits</a></p>
+    <p><a href="terms.php">Terms</a> and <a href="privacy.php">Privacy</a></p>
+</footer>
 </body>
 </html>
