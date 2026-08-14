@@ -34,9 +34,9 @@ require __DIR__ . '/../config.php';
     <div id="playbook-body">
       <h2 id="playbook-heading">Playbook</h2>
       <ol id="playbook-rules">
-        <li><span class="playbook-bullet playbook-bullet--1" aria-hidden="true"></span><p>Start with a provoking position or scenario.</p></li>
-        <li><span class="playbook-bullet playbook-bullet--2" aria-hidden="true"></span><p>Elaborate your argument in <strong>16 turns or less</strong>.</p></li>
-        <li><span class="playbook-bullet playbook-bullet--3" aria-hidden="true"></span><p>There&rsquo;s no winning or losing — only progress.</p></li>
+        <li><span class="playbook-bullet" aria-hidden="true">1</span><p>Start with a provoking position or scenario.</p></li>
+        <li><span class="playbook-bullet" aria-hidden="true">2</span><p>Elaborate your argument in <strong>16 turns or less</strong>.</p></li>
+        <li><span class="playbook-bullet" aria-hidden="true">3</span><p>There&rsquo;s no winning or losing — only progress.</p></li>
       </ol>
     </div>
   </div>

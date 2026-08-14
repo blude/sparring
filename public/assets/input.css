@@ -162,8 +162,8 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: min(88vw, 328px);
-    opacity: 0.5; /* per the mockup — dimmed, secondary to the input surface */
+    width: min(88vw, 296px);
+    opacity: 1; /* per the mockup — dimmed, secondary to the input surface */
 }
 
 /* Diagonal-cut backing shapes peeking out behind the card — both are
@@ -177,11 +177,11 @@ main {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 328px;
+    width: 296px;
     z-index: -1;
 }
-#playbook-shape-1 { height: 370px; background: #eaeaea; transform: translate(-50%, -50%) skewY(-10.2deg); }
-#playbook-shape-2 { height: 339px; background: #dddddd; transform: translate(-50%, -50%) skewY(-4.2deg); }
+#playbook-shape-1 { height: 315px; background: #eaeaea; transform: translate(-50%, -50%) skewY(-11.27deg); }
+#playbook-shape-2 { height: 288px; background: #dddddd; transform: translate(-50%, -50%) skewY(-5.41deg); }
 
 #playbook-body {
     background: #fff;
@@ -193,7 +193,7 @@ main {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
 }
 
-#playbook-heading { margin: 0; font-size: 1.5rem; font-weight: 700; color: #222; text-align: center; }
+#playbook-heading { margin: 0; font-size: 1.125rem; font-weight: 700; color: #666; text-align: center; }
 
 #playbook-rules {
     margin: 0;
@@ -206,32 +206,31 @@ main {
 }
 
 #playbook-rules li { display: flex; align-items: center; gap: 1rem; }
-#playbook-rules p { margin: 0; font-size: 1.125rem; line-height: 1.4; color: #222; }
+#playbook-rules p { margin: 0; font-size: 0.875rem; line-height: 1.4; color: #666; }
 
 /* Base circle is a plain flat-color disc — a solid-color SVG circle and a
    border-radius:50% div render identically, so no fidelity is lost keeping
-   this one as CSS. The numerals themselves are real exported assets
-   (illustrated digits, not a typeface) laid over it at Figma's exact px
-   offsets — those can't be reproduced with text. */
+   this one as CSS. Numerals were exported vector digits (illustrated, not a
+   typeface) — now that RethinkSans is self-hosted anyway (title card), the
+   digit glyphs render as real text in that font instead of per-digit SVGs. */
 .playbook-bullet {
     position: relative;
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    width: 32px;
+    height: 32px;
+    padding-top: 0.5rem; /* nudges the digit down to center it in the circle */
     border-radius: 50%;
-    background: #666; /* was red (var(--accent)) — mockup changed the bullet fill to gray */
+    background: #aaa; /* was red (var(--accent)), then #666 — mockup lightened the bullet fill again */
+    font-family: 'RethinkSans', system-ui, sans-serif;
+    font-weight: 800;
+    font-style: italic;
+    font-size: 36px;
+    line-height: 1;
+    color: #fefefe;
 }
-.playbook-bullet::after {
-    content: '';
-    position: absolute;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-.playbook-bullet--1::after { left: 17.68px; top: 8.8px; width: 27.888px; height: 39.2px; background-image: url('img/playbook-bullet-1.svg'); }
-.playbook-bullet--2 { width: 48.14px; }
-.playbook-bullet--2::after { left: 15.88px; top: 8.13px; width: 32.256px; height: 39.872px; background-image: url('img/playbook-bullet-2.svg'); }
-.playbook-bullet--3 { width: 49.596px; height: 48.672px; }
-.playbook-bullet--3::after { left: 17.28px; top: 8.8px; width: 32.312px; height: 39.872px; background-image: url('img/playbook-bullet-3.svg'); }
 
 #retention {
     /* position+z-index so it stacks above #playbook (fixed, z-index:10)
