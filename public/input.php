@@ -42,7 +42,7 @@ require __DIR__ . '/../config.php';
   </div>
 
   <div id="retention" hidden>
-    <h2 id="consent-heading">Participation consent</h2>
+    <h2 id="consent-heading">Head's up! Your consent is needed</h2>
     <p>By taking part in this session you confirm that you have read and
        understood the <a href="terms.php" target="_blank" rel="noopener">Terms of Service</a>
        and <a href="privacy.php" target="_blank" rel="noopener">Privacy Policy</a>.</p>
@@ -59,7 +59,7 @@ require __DIR__ . '/../config.php';
       <input type="checkbox" id="consent-retention">
       <span>I agree that my session may be collected and analyzed for this thesis.</span>
     </label>
-    <button id="consent-confirm" type="button" disabled>Confirm</button>
+    <button id="consent-confirm" type="button" disabled>Confirm choices</button>
   </div>
 
   <form id="composer">
