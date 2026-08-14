@@ -69,6 +69,14 @@ final class LlmClient
                     system: $this->sparringPrompt,
                     messages: $messages,
                     requestOptions: ['timeout' => (float) GENERATION_TIMEOUT_SECONDS, 'maxRetries' => 0],
+                    // Model default-enables extended thinking. Measured across a full
+                    // 10-turn session: it fires on ~70% of turns as context grows, costs
+                    // 60-110 tokens each time (billed, never shown to the visitor), stays
+                    // well inside the 1024 budget either way (worst case seen: 305/1024),
+                    // and produces no visible difference in the Sparring partner's replies
+                    // — the persona prompt already caps them to a few sentences. Disabled
+                    // for the wasted cost, not because it was starving output.
+                    thinking: ['type' => 'disabled'],
                 );
             } catch (RateLimitException $e) {
                 throw new GenerationFailedException('provider rate limit or quota exhausted', 0, $e);
@@ -121,6 +129,12 @@ final class LlmClient
             maxTokens: 64,
             messages: [['role' => 'user', 'content' => $prompt]],
             requestOptions: ['timeout' => 8.0, 'maxRetries' => 0], // FS-02-2: short timeout, single attempt
+            // Model default-enables extended thinking, which alone can exceed the
+            // 64-token budget and leave zero room for the actual classification —
+            // stop_reason comes back max_tokens with no text block, which
+            // assessSuitability's fail-closed catch (FS-02-2) then reads as
+            // unsuitable. Disable; a fixed three-value enum doesn't need it.
+            thinking: ['type' => 'disabled'],
             outputConfig: [
                 'format' => [
                     'type' => 'json_schema',
