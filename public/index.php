@@ -120,7 +120,7 @@
       font-size: 0.875rem;
       color: #222;
   }
-  .learn-more strong {
+  .learn-more a {
       color: #d32f2f;
       font-weight: 700;
       text-decoration: underline;
@@ -162,7 +162,7 @@
     <p>Prepare your sharpest arguments, throw in your best punches and be prepared to received some well-intentioned blows too!</p>
   </div>
   <a id="start-btn" href="input.php">Start a new session</a>
-  <p class="learn-more"><strong>Learn more</strong> about Sparring&rsquo;s philosophy.</p>
+  <p class="learn-more"><a href="philosophy.php">Learn more</a> about Sparring&rsquo;s philosophy.</p>
 </div>
 <hr class="divider">
 <footer>

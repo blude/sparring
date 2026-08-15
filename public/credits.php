@@ -10,8 +10,6 @@
 <h1>Credits</h1>
 <p>Sparring is a thesis exhibition piece by Sarah Puppin Pratti.</p>
 <p>Built with Anthropic's Claude API for response generation and moderation.</p>
-<h2>How Sparring Works</h2>
-<p>DRAFT: Sparring is an interactive experience that allows users to engage in a simulated sparring session with a AI partner who's skilled in Digital Design. The partner is designed to respond to user inputs in real-time, providing a dynamic and engaging intellectual practice. The solutions uses tailor-made system prompt to identify arguments, generate candidate counter-arguments, and return appropriate responses, creating a realistic and challenging sparring environment.</p>
 <h2>Duration of the Exhibition</h2>
 <p>Opening Ceremony: 4 September 2026, 18:00 TBC</p>
 <p>From 4 to 21 September 2026 at SUPERRAUM, Brückstraße 64, 44135 Dortmund</p>
