@@ -7,6 +7,26 @@ declare(strict_types=1);
  * See plan doc "Numeric defaults" table for the source TBC per constant.
  */
 
+// ponytail: hand-rolled .env loader, not vlucas/phpdotenv — one file, KEY=VALUE
+// lines, no quoting/interpolation support. Needed because the web SAPI (Valet's
+// php-fpm, or any prod php-fpm pool) doesn't inherit a shell's `export`, unlike
+// `php -S` run from a terminal. Real env vars always win — this only fills gaps.
+$dotenvPath = __DIR__ . '/.env';
+if (is_file($dotenvPath)) {
+    foreach (file($dotenvPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $line = trim($line);
+        if ($line === '' || $line[0] === '#' || !str_contains($line, '=')) {
+            continue;
+        }
+        [$key, $value] = explode('=', $line, 2);
+        $key = trim($key);
+        if (getenv($key) === false) { // real env takes precedence over .env
+            putenv($key . '=' . trim($value));
+        }
+    }
+}
+unset($dotenvPath, $line, $key, $value);
+
 // QR-11: an uncaught exception on any public endpoint (missing credential,
 // unwritable store, ...) must not leak a stack trace or filesystem path.
 // Every public/api/*.php requires this file first, so one handler covers all.
@@ -57,7 +77,7 @@ const JUICY_SOUND = true;
 const JUICY_DISPLAY_ENTRANCE = true;
 
 // --- LLM (PE-01) ---
-// ponytail: no .env loader — one env var, getenv() is the whole mechanism.
+// Populated by real env, or the .env loader above as a fallback.
 const ANTHROPIC_API_KEY_ENV = 'ANTHROPIC_API_KEY';
 const GENERATION_MODEL = 'claude-sonnet-5';
 // Was claude-haiku-4-5. Measured 8/8 wrong (off-exercise) on a plainly on-topic

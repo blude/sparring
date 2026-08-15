@@ -1,2 +1,0 @@
-# example .envrc file -- make a copy and edit the values below
-export ANTHROPIC_API_KEY=
