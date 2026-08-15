@@ -77,7 +77,6 @@ const JUICY_SOUND = true;
 const JUICY_DISPLAY_ENTRANCE = true;
 
 // --- LLM (PE-01) ---
-// Populated by real env, or the .env loader above as a fallback.
 const ANTHROPIC_API_KEY_ENV = 'ANTHROPIC_API_KEY';
 const GENERATION_MODEL = 'claude-sonnet-5';
 // Was claude-haiku-4-5. Measured 8/8 wrong (off-exercise) on a plainly on-topic
