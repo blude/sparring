@@ -193,8 +193,8 @@ main {
     width: 296px;
     z-index: -1;
 }
-#playbook-shape-1 { height: 315px; background: #eaeaea; transform: translate(-50%, -50%) skewY(-11.27deg); }
-#playbook-shape-2 { height: 288px; background: #dddddd; transform: translate(-50%, -50%) skewY(-5.41deg); }
+#playbook-shape-1 { height: 335px; background: #eaeaea; transform: translate(-50%, -50%) skewY(-11.27deg); }
+#playbook-shape-2 { height: 304px; background: #dddddd; transform: translate(-50%, -50%) skewY(-5.41deg); }
 
 #playbook-body {
     background: #fff;
