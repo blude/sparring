@@ -64,7 +64,7 @@ require __DIR__ . '/../config.php';
 
   <form id="composer">
     <div id="composer-row">
-      <textarea id="contribution" placeholder="What do you want to work on?" disabled></textarea>
+      <textarea id="contribution" placeholder="What's on your mind?" disabled></textarea>
       <button id="submit" type="submit" disabled aria-label="Send">
         <span class="icon icon--glove" aria-hidden="true"></span>
       </button>
