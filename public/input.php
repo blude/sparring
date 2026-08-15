@@ -8,7 +8,7 @@ require __DIR__ . '/../config.php';
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Session — Sparring</title>
-<link rel="stylesheet" href="assets/input.css">
+<link rel="stylesheet" href="<?= fasset('input.css') ?>">
 </head>
 <body>
 <main>
@@ -91,11 +91,11 @@ window.JUICY = {
     sound: <?= JUICY_SOUND ? 'true' : 'false' ?>
 };
 </script>
-<script src="assets/identity.js"></script>
-<script src="assets/juicy.js"></script>
-<script src="assets/zzfx.min.js"></script>
-<script src="assets/sfx.js"></script>
-<script src="assets/particles.js"></script>
-<script src="assets/input.js"></script>
+<script src="<?= fasset('identity.js') ?>"></script>
+<script src="<?= fasset('juicy.js') ?>"></script>
+<script src="<?= fasset('zzfx.min.js') ?>"></script>
+<script src="<?= fasset('sfx.js') ?>"></script>
+<script src="<?= fasset('particles.js') ?>"></script>
+<script src="<?= fasset('input.js') ?>"></script>
 </body>
 </html>

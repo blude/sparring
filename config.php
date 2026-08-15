@@ -76,6 +76,16 @@ const JUICY_WIGGLE = true;
 const JUICY_SOUND = true;
 const JUICY_DISPLAY_ENTRANCE = true;
 
+// --- Static assets ---
+// Cache-busting: appends the file's mtime as a query string so editing a CSS/JS
+// file forces browsers to fetch the new version instead of serving a stale
+// cached copy on a plain reload (no build step, no manifest, no versioning
+// scheme — just the filesystem's own timestamp).
+function fasset(string $file): string
+{
+    return "assets/$file?v=" . filemtime(__DIR__ . "/public/assets/$file");
+}
+
 // --- LLM (PE-01) ---
 const ANTHROPIC_API_KEY_ENV = 'ANTHROPIC_API_KEY';
 const GENERATION_MODEL = 'claude-sonnet-5';

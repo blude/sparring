@@ -7,7 +7,7 @@ require __DIR__ . '/../config.php';
 <head>
 <meta charset="utf-8">
 <title>Projection — Sparring</title>
-<link rel="stylesheet" href="assets/display.css">
+<link rel="stylesheet" href="<?= fasset('display.css') ?>">
 </head>
 <body>
 <h1 id="logo">Sparring</h1>
@@ -21,8 +21,8 @@ window.JUICY = {
     displayEntrance: <?= JUICY_DISPLAY_ENTRANCE ? 'true' : 'false' ?>
 };
 </script>
-<script src="assets/identity.js"></script>
-<script src="assets/juicy.js"></script>
-<script src="assets/display.js"></script>
+<script src="<?= fasset('identity.js') ?>"></script>
+<script src="<?= fasset('juicy.js') ?>"></script>
+<script src="<?= fasset('display.js') ?>"></script>
 </body>
 </html>
