@@ -44,8 +44,8 @@ require __DIR__ . '/../config.php';
   <div id="retention" hidden>
     <h2 id="consent-heading">Head's up! Your consent is needed</h2>
     <p>By taking part in this session you confirm that you have read and
-       understood the <a href="terms.php" target="_blank" rel="noopener">Terms of Service</a>
-       and <a href="privacy.php" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+       understood the <a href="/terms" target="_blank" rel="noopener">Terms of Service</a>
+       and <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</p>
     <label class="consent-row">
       <input type="checkbox" id="consent-tos">
       <span>I have read the above and agree to take part in the session.</span>

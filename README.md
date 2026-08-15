@@ -14,11 +14,17 @@ composer install                       # pulls anthropic-ai/sdk into vendor/
 export ANTHROPIC_API_KEY=sk-ant-...    # never put this in config.php
 php tests/smoke_store.php              # M0 self-check, no API key needed
 php bin/import_pilot.php               # M1: seeds data/store.db from data/pilot/*.json
-php -S localhost:8080 -t public        # serves SE-01 + SE-02 + the API
+php -S localhost:8080 -t public public/index.php   # serves SE-01 + SE-02 + the API
 ```
 
-Then open `http://localhost:8080/input.php` (SE-01) and
-`http://localhost:8080/display.php` (SE-02) in two tabs. The display feed
+`public/index.php` is passed as the router script so the built-in server
+falls back to it for pretty URLs (`/input`, `/display`, ...) the same way
+Valet does — see `public/index.php` for the route table. Real files (e.g.
+`/assets/input.js`) are still served directly, router only runs when
+nothing on disk matches.
+
+Then open `http://localhost:8080/input` (SE-01) and
+`http://localhost:8080/display` (SE-02) in two tabs. The display feed
 works immediately off the pilot seed; the input client needs
 `ANTHROPIC_API_KEY` set and `composer install` run, since it calls the LLM.
 

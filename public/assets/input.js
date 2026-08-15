@@ -218,7 +218,7 @@
     function establishSession() {
         var existing = urlSessionId();
         if (existing) {
-            return fetch('api/session_state.php?sessionId=' + encodeURIComponent(existing))
+            return fetch('/api/session-state?sessionId=' + encodeURIComponent(existing))
                 .then(function (res) {
                     if (res.status === 404) return null; // EX-03-1: unknown/expired, fall through to creation
                     if (!res.ok) throw new Error('session-state-failed');
@@ -236,7 +236,7 @@
     }
 
     function createSession() {
-        return fetch('api/session.php', { method: 'POST', body: JSON.stringify({}) })
+        return fetch('/api/session', { method: 'POST', body: JSON.stringify({}) })
             .then(function (res) {
                 if (!res.ok) throw new Error('create-failed');
                 return res.json();
@@ -276,7 +276,7 @@
     });
 
     confirmButton.addEventListener('click', function () {
-        fetch('api/session.php', {
+        fetch('/api/session', {
             method: 'POST',
             body: JSON.stringify({
                 sessionId: sessionId,
@@ -314,7 +314,7 @@
         var controller = new AbortController();
         var timeout = setTimeout(function () { controller.abort(); }, WAIT_MS);
 
-        fetch('api/contribute.php', {
+        fetch('/api/contribute', {
             method: 'POST',
             signal: controller.signal,
             body: JSON.stringify({ sessionId: sessionId, contribution: text }),

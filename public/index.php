@@ -1,173 +1,40 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sparring — Learn Digital Design</title>
-<style>
-  html, body { margin: 0; }
-  body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Helvetica Neue', 'Helvetica', system-ui, sans-serif;
-      text-align: center;
-      touch-action: manipulation;
-      overflow-x: hidden;
-      /* subtle dot-grid texture over white, matching the mockup's faint background */
-      background:
-          radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
-          #fff;
-  }
-  .presented-by {
-      margin: 0;
-      width: 100%;
-      max-width: 402px;
-      box-sizing: border-box;
-      padding: 1.25rem 60px;
-      font-size: 0.625rem;
-      color: #666;
-  }
-  .content {
-      width: 100%;
-      max-width: 402px;
-      box-sizing: border-box;
-      padding: 32px 60px;
-      margin-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-  }
-  .branding {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-  }
-  .gloves-box {
-      width: 112px;
-      height: 113px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
-  .gloves {
-      display: block;
-      width: 113px;
-      height: 112px;
-      transform: rotate(90deg);
-  }
-  /* logo: real "Sparring" / "スパーリング" text stays in the DOM for a11y/SEO,
-     visually replaced by the exported logotype SVGs — typography is a deliberate
-     design choice, not something a system font can reproduce */
-  .logo {
-      position: relative;
-      width: 183px;
-      height: 58px;
-  }
-  .wordmark, .subtitle {
-      position: absolute;
-      left: 0;
-      margin: 0;
-      overflow: hidden;
-      white-space: nowrap;
-      text-indent: -9999px;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-  }
-  .wordmark {
-      top: 0;
-      left: 0;
-      width: 183px;
-      height: 47px;
-      background-image: url(assets/img/logo-wordmark.svg);
-  }
-  .subtitle {
-      top: 41px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 106px;
-      height: 17px;
-      background-image: url(assets/img/logo-subtitle.svg);
-  }
-  .copy {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-  }
-  .copy p {
-      margin: 0;
-      line-height: 1.4;
-  }
-  .copy p:first-child { color: #222; font-size: 1rem; }
-  .copy p:last-child { color: #444; font-size: 0.875rem; }
-  #start-btn {
-      padding: 0.625rem 0.875rem;
-      font: inherit;
-      font-size: 0.875rem;
-      font-weight: 600;
-      border-radius: 0.5rem;
-      border: none;
-      background: #d32f2f;
-      text-decoration: none;
-      color: #fff;
-  }
-  .learn-more {
-      margin: 0;
-      font-size: 0.875rem;
-      color: #222;
-  }
-  .learn-more a {
-      color: #d32f2f;
-      font-weight: 700;
-      text-decoration: underline;
-  }
-  .divider {
-      width: 140px;
-      height: 0;
-      border: 0;
-      border-top: 1px solid rgba(0,0,0,0.1);
-      margin: 0;
-  }
-  footer {
-      margin: 0;
-      padding: 32px;
-      box-sizing: border-box;
-      font-size: 0.8125rem;
-      color: #444;
-  }
-  footer p {
-      margin: 0 0 1rem;
-  }
-  footer a { color: #666; }
-</style>
-</head>
-<body>
-<p class="presented-by">FH DORTMUND and SUPERRAUM presents</p>
-<div class="content">
-  <div class="branding">
-    <div class="gloves-box">
-      <img class="gloves" src="assets/img/sparring-gloves.png" alt="" width="113" height="112">
-    </div>
-    <div class="logo">
-      <h1 class="wordmark">Sparring</h1>
-      <p class="subtitle">スパーリング</p>
-    </div>
-  </div>
-  <div class="copy">
-    <p>Sparring is a versatile and engaged partner that works with you to exercise your knowledge in the emerging discipline of Digital Design.</p>
-    <p>Prepare your sharpest arguments, throw in your best punches and be prepared to received some well-intentioned blows too!</p>
-  </div>
-  <a id="start-btn" href="input.php">Start a new session</a>
-  <p class="learn-more"><a href="philosophy.php">Learn more</a> about Sparring&rsquo;s philosophy.</p>
-</div>
-<hr class="divider">
-<footer>
-    <p>Craft with #DigitalMaterial &middot; <a href="credits.php">Credits</a></p>
-    <p><a href="terms.php">Terms</a> and <a href="privacy.php">Privacy</a></p>
-</footer>
-</body>
-</html>
+<?php
+declare(strict_types=1);
+
+// Pretty-URL front controller. Valet (and the built-in `php -S` router.php
+// mode, see composer/README) falls through here whenever no real file on
+// disk matches the request path — this dispatches those to the actual
+// page/endpoint scripts. Every script below is still reachable by its
+// original *.php URL too, since this file only runs when nothing matched.
+$routes = [
+    '/'                   => __DIR__ . '/start.php',
+    '/input'              => __DIR__ . '/input.php',
+    '/display'            => __DIR__ . '/display.php',
+    '/credits'            => __DIR__ . '/credits.php',
+    '/philosophy'         => __DIR__ . '/philosophy.php',
+    '/privacy'            => __DIR__ . '/privacy.php',
+    '/terms'              => __DIR__ . '/terms.php',
+    '/sfx-debug'          => __DIR__ . '/sfx-debug.php',
+    '/api/session'        => __DIR__ . '/api/session.php',
+    '/api/session-state'  => __DIR__ . '/api/session_state.php',
+    '/api/contribute'     => __DIR__ . '/api/contribute.php',
+    '/api/display'        => __DIR__ . '/api/display.php',
+];
+
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// php -S with a router script intercepts *every* request, including real
+// static files (assets/*.js, favicon.ico, ...) — unlike Valet/nginx, which
+// serve those before PHP ever runs. Returning false here hands it back to
+// the built-in server's default static-file handling. No-op under Valet.
+$asFile = __DIR__ . $path;
+if ($path !== '/' && is_file($asFile)) {
+    return false;
+}
+
+if (!isset($routes[$path])) {
+    http_response_code(404);
+    exit('Not found');
+}
+
+require $routes[$path];

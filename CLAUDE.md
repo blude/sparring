@@ -7,7 +7,10 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
 ## Stack
 - PHP 8.2+, vanilla JS, SQLite (`data/store.db`, WAL mode). No build step,
   no npm, no framework, no bundler — files served directly.
-- Run: `composer install && export ANTHROPIC_API_KEY=... && php -S localhost:8080 -t public`
+- Run: `composer install && export ANTHROPIC_API_KEY=... && php -S localhost:8080 -t public public/index.php`
+  (the trailing `public/index.php` is the router script — pretty URLs like
+  `/input` need it, real files still serve directly). Also runs under
+  Laravel Valet (`valet park`/`link`), which routes the same way natively.
 - Test: `php tests/smoke_store.php` (assert-based, no framework). Also
   `node tests/smoke_juicy.js` for the juiciness on/off gating logic
   (`public/assets/juicy.js`) — needs Node only to run the check, not as a

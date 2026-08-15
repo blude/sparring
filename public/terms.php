@@ -13,7 +13,7 @@
 <p>Participation is voluntary. You may stop at any time by closing the page or walking away, without giving a reason and without consequence.</p>
 <p>Please do not enter content that is unlawful, or that discloses another person's personal information without their consent. The piece is intended for reflective, good-faith engagement; I reserve the right to end a session or restrict access if it is used in a way that disrupts the exhibition or other participants.</p>
 <p>Sparring is a thesis project and not a commercial product. It is offered as-is, without warranty as to availability or continuity of the service during the exhibition period.</p>
-<p>See the <a href="/privacy.php">Privacy Policy</a> for what is stored and for how long.</p>
+<p>See the <a href="/privacy">Privacy Policy</a> for what is stored and for how long.</p>
 <p><a href="/">Back</a></p>
 </body>
 </html>

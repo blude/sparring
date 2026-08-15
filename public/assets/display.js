@@ -53,7 +53,7 @@
         var controller = new AbortController();
         var timeout = setTimeout(function () { controller.abort(); }, Math.max(POLL_MS - 500, 1000));
 
-        fetch('api/display.php', { signal: controller.signal })
+        fetch('/api/display', { signal: controller.signal })
             .then(function (res) {
                 clearTimeout(timeout);
                 if (!res.ok) return null; // FA-01-1: keep current material, no action taken
