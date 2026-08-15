@@ -358,6 +358,10 @@ main {
     background: transparent;
     font: inherit;
     font-size: 1rem; /* 16px */
+    line-height: 1.25rem;
+    /* 5 lines cap; JS grows height to fit content up to this, then scrolls. */
+    max-height: 6.25rem;
+    overflow-y: auto;
     color: #333;
 }
 #contribution:focus { outline: none; } /* the box's own border/shadow above is the focus indicator */

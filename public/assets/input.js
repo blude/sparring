@@ -175,6 +175,15 @@
 
     function updateCharRemaining() {
         charRemainingEl.textContent = (MAX_CHARS - fieldEl.value.length) + ' characters left';
+        autoGrowField();
+    }
+
+    // Grow the textarea to fit its content, up to the 5-line cap set in
+    // input.css (max-height); overflow-y:auto there takes over past that.
+    // Reset to 'auto' first so scrollHeight can shrink back down, not just grow.
+    function autoGrowField() {
+        fieldEl.style.height = 'auto';
+        fieldEl.style.height = fieldEl.scrollHeight + 'px';
     }
 
     function setComposerEnabled(enabled) {
