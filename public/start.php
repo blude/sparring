@@ -158,8 +158,8 @@
     </div>
   </div>
   <div class="copy">
-    <p>Sparring is a versatile and engaged partner that works with you to exercise your knowledge in the emerging discipline of Digital Design.</p>
-    <p>Prepare your sharpest arguments, throw in your best punches and be prepared to received some well-intentioned blows too!</p>
+    <p>Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design.</p>
+    <p>Prepare your sharpest arguments, throw in your hardest punches, and be ready to take some well-intentioned blows back!</p>
   </div>
   <a id="start-btn" href="/input">Start a new session</a>
   <p class="learn-more"><a href="/philosophy">Learn more</a> about Sparring&rsquo;s philosophy.</p>
