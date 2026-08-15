@@ -89,10 +89,11 @@ function fasset(string $file): string
 // --- LLM (PE-01) ---
 const ANTHROPIC_API_KEY_ENV = 'ANTHROPIC_API_KEY';
 const GENERATION_MODEL = 'claude-sonnet-5';
-// Was claude-haiku-4-5. Measured 8/8 wrong (off-exercise) on a plainly on-topic
-// contribution regardless of prompt wording, while Sonnet 5 was 8/8 correct on
-// the same input — a capability gap, not a prompt problem. Classification calls
-// are tiny (maxTokens 64), so the cost delta at exhibition volume is negligible.
-const CLASSIFICATION_MODEL = 'claude-sonnet-5';
+// Was claude-sonnet-5. Originally swapped in because claude-haiku-4-5 was 8/8
+// wrong on the old off-exercise category — but that category is gone (see
+// f500d92, replaced by targets-real-person), and the failure was specific to
+// it. Manual re-check post-swap: 6/6 correct against the new prompt's own
+// examples plus edge cases, so back to haiku for the cost saving.
+const CLASSIFICATION_MODEL = 'claude-haiku-4-5-20251001';
 const SPARRING_PROMPT_PATH = __DIR__ . '/prompts/sparring.md';
 const MODERATION_PROMPT_PATH = __DIR__ . '/prompts/moderation.md';
