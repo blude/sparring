@@ -143,7 +143,7 @@ final class LlmClient
                         'properties' => [
                             'classification' => [
                                 'type' => 'string',
-                                'enum' => ['suitable', 'contains-personal-information', 'off-exercise'],
+                                'enum' => ['suitable', 'contains-personal-information', 'targets-real-person'],
                             ],
                         ],
                         'required' => ['classification'],

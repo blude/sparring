@@ -87,7 +87,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 - **EX-02-2** *(extends ST-02-4)* SE-03 reports that the session has reached its turn limit. UI-01 presents the session as complete and leaves the field disabled. The history remains readable. *Outcome:* Terminate.
 - **EX-02-3** *(extends ST-02-4)* SE-03 reports that no response could be produced. UI-01 states plainly that the installation cannot respond right now and re-enables the field with the contribution preserved. *Outcome:* Resume.
 - **EX-02-4** *(extends ST-02-4)* The request does not complete within the element's own wait bound. The element stops waiting and behaves as in EX-02-3. *Outcome:* Resume.
-- **EX-02-5** *(extends ST-02-4)* SE-03 reports the contribution as flagged (unsuitable). UI-01 states that the message can't be shown and re-enables the field with the contribution preserved, same shape as EX-02-1/EX-02-3. The session itself is unaffected. *Outcome:* Resume.
+- **EX-02-5** *(extends ST-02-4)* SE-03 reports the contribution as flagged (unsuitable). UI-01 states that the message can't be shown — with wording that varies by coarse category (personal information versus inappropriate content, see QR-06) — and re-enables the field with the contribution preserved, same shape as EX-02-1/EX-02-3. The session itself is unaffected. *Outcome:* Resume.
 
 ### UC-03 — Resume an interrupted session
 *Actors:* UT-01, SE-03
@@ -297,7 +297,7 @@ None. The element provides no interface to other elements. It is reached by a pe
 
 **QR-06 — Diagnostic detail is available to an operator, hidden by default** *(Maintainability)*
 *Applies to:* UI-01
-*Acceptance criteria:* An address flag reveals session id, origin, rate-limit remaining, generation timing, and moderation reason (from SE-03's TI-01/TI-02/TI-03 outputs) alongside the normal surface. Absent by default; no visitor-facing affordance exposes or hints at it.
+*Acceptance criteria:* An address flag reveals session id, origin, rate-limit remaining, generation timing, and the exact moderation reason (from SE-03's TI-01/TI-02/TI-03 outputs) alongside the normal surface. Absent by default; no visitor-facing affordance exposes or hints at the *exact* reason. The standard (non-debug) flagged-message copy does, deliberately, show a coarser two-category hint derived from the same value — personal information versus inappropriate content — narrow enough that it doesn't expose which specific classification or wordlist match fired.
 *Element specific:* Yes
 *Rationale:* Serves UT-03's stated need (L2 §2.3) to diagnose a fault quickly and remotely, without adding an administrative interface (which SC-03 rules out).
 

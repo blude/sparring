@@ -124,8 +124,11 @@ final class Sparring
      * resubmit", not "proceed unaffected").
      *
      * Returns ['suitable' => bool, 'reason' => ?string] — reason is null when
-     * suitable, otherwise 'blocked-term' or 'llm-classification'; surfaced to
-     * debug mode (?debug=1) only, the caller's gate check just reads 'suitable'.
+     * suitable, otherwise one of 'blocked-term', 'contains-personal-information',
+     * 'targets-real-person' (the classifier's own outcome), or
+     * 'llm-classification' (the classifier call itself failed — real reason
+     * unknown). The visitor-facing UI reads this to choose a coarse message;
+     * the exact reason stays debug-only (?debug=1), see input.js.
      */
     public function assessSuitability(string $contribution): array
     {
@@ -142,7 +145,7 @@ final class Sparring
         }
 
         $suitable = $classification === 'suitable';
-        return ['suitable' => $suitable, 'reason' => $suitable ? null : 'llm-classification'];
+        return ['suitable' => $suitable, 'reason' => $suitable ? null : $classification];
     }
 
     private function containsBlockedTerm(string $contribution): bool

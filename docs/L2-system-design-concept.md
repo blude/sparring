@@ -90,10 +90,10 @@ Content assessed as unsuitable is rejected before it is ever written down: no ex
 *Satisfies:* SG-05, SG-06
 
 **AP-07 — Attempts to argue the Sparring partner out of its stance are in scope**
-Content filtering addresses profanity, personal information, and material unrelated to the exercise. It does not address visitors trying to make the system abandon its position.
+Content filtering addresses profanity, personal information, and hateful, harassing, threatening, or sexual content targeting a real person or group. It does not address visitors trying to make the system abandon its position.
 *Rationale:* Whether system-placed friction holds against a motivated user is the question the installation exists to expose. Filtering those attempts would remove the observation the piece is built to produce.
-*Implications:* Rules out treating persuasion, pressure, or instruction-style attacks on the Sparring stance as abuse. Requires the moderation function to distinguish adversarial-but-engaged input from disengaged input, and this distinction must be stated in that function's specification rather than left to a wordlist.
-*Lesson from testing:* stating the adversarial-vs-disengaged distinction was not sufficient on its own. The classification instruction must also state what the exercise's subject matter actually *is* — without that, the classifier has nothing to check on-topic-ness against, and genuinely on-topic contributions were systematically misclassified as off-exercise (the same failure this requirement exists to prevent, arrived at from the opposite direction). Both must be explicit in the instruction, not just the one that looks like the harder problem.
+*Implications:* Rules out treating persuasion, pressure, or instruction-style attacks on the Sparring stance as abuse. Requires the moderation function to distinguish adversarial-but-engaged input aimed at the Sparring partner from harmful content aimed at a real person, and this distinction must be stated in that function's specification rather than left to a wordlist.
+*Lesson from testing:* stating the adversarial-vs-target distinction was not sufficient on its own. The classification instruction must also state what the exercise's subject matter actually *is* — without that, the classifier has nothing to check arguing-the-exercise against, so the subject matter has to be explicit alongside the target-based carve-out, not just the one that looks like the harder problem.
 *Satisfies:* SG-05
 
 ### 2.2 Architecture diagram

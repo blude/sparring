@@ -367,14 +367,24 @@
                 window.SparringSfx.play('fumble');
                 break;
 
-            case 'content-flagged':
+            case 'content-flagged': {
                 // Resolved moderation gate: reject-and-edit, session stays open.
-                setHistoryStatus("That message can't be shown here — edit it and try again.", false);
+                // Coarse category only, never the exact reason — see
+                // docs/L3-SE-03-backend-service.md's note on this field.
+                const reason = data.moderationReason;
+                let message = "That message can't be shown here — edit it and try again."; // fallback: classifier failure, real reason unknown
+                if (reason === 'contains-personal-information') {
+                    message = "That message includes personal information and can't be shown here — edit it and try again.";
+                } else if (reason === 'targets-real-person' || reason === 'blocked-term') {
+                    message = "That message isn't appropriate for this exhibition — edit it and try again.";
+                }
+                setHistoryStatus(message, false);
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
                 triggerWiggle();
                 window.SparringSfx.play('fumble');
                 break;
+            }
 
             case 'session-unknown':
                 setHistoryStatus('This session is no longer available — reload to start a new one.', false);
