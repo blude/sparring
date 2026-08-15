@@ -395,6 +395,15 @@
         submitEl.disabled = fieldEl.disabled || fieldEl.value.trim() === '';
     });
 
+    // Enter sends; Shift+Enter or Option/Alt+Enter inserts a line break
+    // (textarea default already does the line break, so only Enter alone
+    // needs intercepting to submit instead).
+    fieldEl.addEventListener('keydown', function (event) {
+        if (event.key !== 'Enter' || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        submitEl.click();
+    });
+
     composerEl.addEventListener('submit', function (event) {
         event.preventDefault();
         var text = fieldEl.value.trim();
