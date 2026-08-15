@@ -19,6 +19,17 @@
 <h2>About the Author</h2>
 <p>Sarah is a designer and researcher based in Dortmund. She is currently a student of the Master Digital Design program at the Fachhochschule Dortmund, where she investigates the role of AI in design education. Her work explores the intersection of technology, creativity, and human-computer interaction.</p>
 <p><strong>Contact:</strong> For inquiries, please contact <a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Inquiry">sarah.puppinpratti001@stud.fh-dortmund.de</a></p>
+<h2>Acknowledgements</h2>
+<p>Sparring uses the following open-source libraries and technologies:</p>
+<ul>
+<li><a href="https://github.com/KilledByAPixel/ZzFX">ZzFX</a> by Frank Force</li>
+<li><a href="https://github.com/hans-thiessen/Rethink-Sans/">RethinkSans</a> by Rethink</li>
+<li><a href="https://pictogrammers.com/library/mdi/">Material Design Icons</a> by the Pictogrammers group</li>
+<li><a href="https://easyengine.io/">EasyEngine</a></li>
+<li><a href="https://www.sqlite.org/">SQLite</a></li>
+<li><a href="https://figma.com/">Figma</a></li>
+<li><a href="https://github.com/anthropics/claude-api">Claude API</a> and Claude Code</li>
+</ul>
 <p><a href="/">Back</a></p>
 </body>
 </html>
