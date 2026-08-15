@@ -29,6 +29,7 @@
     var sessionId = null;
     var sessionState = null; // 'awaiting-decision' | 'open' | 'complete' | 'failed'
     var statusTurnEl = null; // the one managed "status" entry in #history, if any (see setHistoryStatus)
+    var optimisticTurnEl = null; // visitor turn shown ahead of the server response (see submitContribution); pruned on any non-'ok' outcome
     var debugPanel = null;
     var lastDebugInfo = {};
 
@@ -91,6 +92,7 @@
         el.textContent = text;
         historyEl.appendChild(el);
         historyEl.scrollTop = historyEl.scrollHeight;
+        return el;
     }
 
     // Status now lives inside #history as a managed entry (formerly a
@@ -111,6 +113,15 @@
         statusTurnEl.textContent = message;
         historyEl.appendChild(statusTurnEl);
         historyEl.scrollTop = historyEl.scrollHeight;
+    }
+
+    // Removes the optimistically-placed visitor turn (see submitContribution)
+    // when the server outcome isn't 'ok' — history stays a mirror of
+    // confirmed exchanges, never a submission that didn't land.
+    function clearOptimisticTurn() {
+        if (!optimisticTurnEl) return;
+        optimisticTurnEl.remove();
+        optimisticTurnEl = null;
     }
 
     // Session title: the visitor's first contribution, set once (submit
@@ -309,6 +320,9 @@
         triggerPunch();
 
         setComposerEnabled(false);
+        optimisticTurnEl = appendTurn('visitor', text); // shown ahead of the response; pruned on failure (clearOptimisticTurn)
+        fieldEl.value = ''; // cached in `text`/submittedText below, restored on failure
+        updateCharRemaining();
         setHistoryStatus('Consequently sparring…', true); // in-progress state, shown synchronously (QR-01: within 300ms)
 
         var controller = new AbortController();
@@ -342,10 +356,8 @@
         setHistoryStatus(null); // clear the pending "thinking" entry — once, here, covers every branch below
         switch (data.status) {
             case 'ok':
-                appendTurn('visitor', data.exchange.visitorContribution);
+                optimisticTurnEl = null; // confirmed — stop tracking it, nothing left to prune
                 appendTurn('sparring', data.exchange.sparringResponse);
-                fieldEl.value = '';
-                updateCharRemaining();
                 applySessionState(data.sessionState, data.turnsRemaining);
                 if (data.sessionState === 'complete') {
                     window.SparringSfx.playSequence('sessionEnd');
@@ -356,6 +368,7 @@
                 break;
 
             case 'rate-limited':
+                clearOptimisticTurn();
                 setHistoryStatus('Too many requests — wait a moment and try again.', false);
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
@@ -364,11 +377,13 @@
                 break;
 
             case 'turn-limit':
+                clearOptimisticTurn();
                 applySessionState('complete');
                 window.SparringSfx.playSequence('sessionEnd');
                 break;
 
             case 'rejected':
+                clearOptimisticTurn();
                 setHistoryStatus('That message is empty or too long — edit it and try again.', false);
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
@@ -387,6 +402,7 @@
                 } else if (reason === 'targets-real-person' || reason === 'blocked-term') {
                     message = "That message isn't appropriate for this exhibition — edit it and try again.";
                 }
+                clearOptimisticTurn();
                 setHistoryStatus(message, false);
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
@@ -396,10 +412,12 @@
             }
 
             case 'session-unknown':
+                clearOptimisticTurn();
                 setHistoryStatus('This session is no longer available — reload to start a new one.', false);
                 break;
 
             default: // generation-failed, or anything unrecognised
+                clearOptimisticTurn();
                 setHistoryStatus('The installation cannot respond right now — try again.', false);
                 fieldEl.value = submittedText;
                 setComposerEnabled(true);
