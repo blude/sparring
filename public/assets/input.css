@@ -145,7 +145,7 @@ main {
    condition leaves the surface unexplained" now satisfied inline, as the
    last history item, instead of in a dedicated region). Not a speech
    bubble: no background, so it doesn't read as something either party said. */
-#history .turn--status { align-self: flex-start; background: none; padding: 0.5rem 0.75rem 0; max-width: 100%; font-style: italic; color: #a33; }
+#history .turn--status { align-self: flex-start; background: none; padding: 0.5rem 0.75rem 0; max-width: 100%; color: #a33; }
 
 /* In-progress ("Consequently sparring…") gets the gradient-shimmer treatment;
    terminal status messages (errors/limits) stay the plain color above. */
