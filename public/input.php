@@ -25,9 +25,11 @@ declare(strict_types=1);
 
   <div id="history" aria-live="polite"></div>
 
-  <!-- Playbook: visible from screen load (independent of #retention below —
-       the two can be on screen at once), auto-dismissed on the first sent
-       message. No dismiss control by design. -->
+  <?php
+    /* Playbook: visible from screen load (independent of #retention below —
+      the two can be on screen at once), auto-dismissed on the first sent
+      message. No dismiss control by design. */
+  ?>
   <div id="playbook">
     <div id="playbook-shape-1" aria-hidden="true"></div>
     <div id="playbook-shape-2" aria-hidden="true"></div>
