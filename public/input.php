@@ -9,6 +9,7 @@ require __DIR__ . '/../config.php';
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Session — Sparring</title>
 <link rel="stylesheet" href="<?= fasset('input.css') ?>">
+<link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
 </head>
 <body>
 <main>

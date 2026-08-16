@@ -8,6 +8,7 @@ require __DIR__ . '/../config.php';
 <meta charset="utf-8">
 <title>Projection — Sparring</title>
 <link rel="stylesheet" href="<?= fasset('display.css') ?>">
+<link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
 </head>
 <body>
 <h1 id="logo">Sparring</h1>
