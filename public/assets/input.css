@@ -70,9 +70,23 @@ main {
     white-space: nowrap;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #999; /* placeholder "Untitled" shade; setSessionTitle darkens once real */
+    color: #999; /* placeholder "Untitled" shade; setSessionTitle/refineSessionTitle darken once real */
 }
 #session-title.set { color: #222; }
+
+/* Shimmers only while /api/title is actually in flight (input.js adds/removes
+   'title-pending' around that fetch) — not for the whole "Untitled" span,
+   which also covers the time before any submission. Same shimmer treatment
+   as the in-progress status text (#history .turn--pending, keyframes above),
+   reused rather than a second effect. */
+#session-title.title-pending {
+    background: linear-gradient(90deg, #bbb, #666, #bbb);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 1.6s linear infinite;
+}
 
 #top-bar-trailing {
     display: flex;
@@ -545,6 +559,10 @@ main {
         transition: none;
     }
     #history .turn--pending {
+        animation: none;
+        background-position: 0 0; /* freeze on a static mid-gradient frame, still legible */
+    }
+    #session-title.title-pending {
         animation: none;
         background-position: 0 0; /* freeze on a static mid-gradient frame, still legible */
     }

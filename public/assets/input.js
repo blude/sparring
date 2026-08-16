@@ -376,14 +376,20 @@
                 appendTurn('sparring', data.exchange.sparringResponse);
                 applySessionState(data.sessionState, data.turnsRemaining);
                 // Fire-and-forget title generation: doesn't block anything above,
-                // fires once per page load. Any failure (network, malformed body)
-                // just leaves #session-title on its default "Untitled" state.
+                // fires once per page load. 'title-pending' drives the shimmer
+                // (input.css) only for the span this fetch is actually in flight —
+                // not for "Untitled" in general, which also shows before any
+                // submission. Removed in .finally() so it comes off on failure too;
+                // any failure (network, malformed body) just leaves #session-title
+                // on its default "Untitled" state, no longer shimmering.
                 if (!titleRequested) {
                     titleRequested = true;
+                    sessionTitleEl.classList.add('title-pending');
                     fetch('/api/title', { method: 'POST', body: JSON.stringify({ sessionId: sessionId }) })
                         .then(function (res) { return res.json(); })
                         .then(function (titleData) { if (titleData && titleData.title) refineSessionTitle(titleData.title); })
-                        .catch(function () {});
+                        .catch(function () {})
+                        .finally(function () { sessionTitleEl.classList.remove('title-pending'); });
                 }
                 if (data.sessionState === 'complete') {
                     window.SparringSfx.playSequence('sessionEnd');
