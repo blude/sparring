@@ -151,7 +151,7 @@
 <div class="content">
   <div class="branding">
     <div class="gloves-box">
-      <img class="gloves" src="assets/img/sparring-gloves.png" alt="" width="113" height="112">
+      <img class="gloves" src="assets/img/sparring-gloves.png" alt="Boxing Gloves" width="113" height="112">
     </div>
     <div class="logo">
       <h1 class="wordmark">Sparring</h1>
