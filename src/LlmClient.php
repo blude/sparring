@@ -29,6 +29,7 @@ final class LlmClient
     private Client $client;
     private string $sparringPrompt;
     private string $moderationPromptTemplate;
+    private string $titlePromptTemplate;
 
     public function __construct(?string $apiKey = null)
     {
@@ -39,6 +40,7 @@ final class LlmClient
         $this->client = new Client(apiKey: $key);
         $this->sparringPrompt = (string) file_get_contents(SPARRING_PROMPT_PATH);
         $this->moderationPromptTemplate = (string) file_get_contents(MODERATION_PROMPT_PATH);
+        $this->titlePromptTemplate = (string) file_get_contents(TITLE_PROMPT_PATH);
     }
 
     /**
@@ -164,5 +166,62 @@ final class LlmClient
         }
 
         throw new RuntimeException('classification response missing a valid classification');
+    }
+
+    /**
+     * Generates a short (TITLE_MAX_CHARS) header title from a session's first
+     * contribution. Called once, out of band from generateResponse()/classify()
+     * — see Sparring::generateAndStoreTitle(). Single attempt, no retry: the
+     * caller falls back to a trim-based title on any failure, so retrying here
+     * would just delay that fallback for no benefit.
+     */
+    public function generateTitle(string $contribution): string
+    {
+        // Same lookalike-delimiter stripping as classify() — the untrusted
+        // contribution is wrapped in the same <contribution> tag here too.
+        $tag = preg_quote(self::DELIMITER_TAG, '/');
+        $sanitized = preg_replace('/<\/?\s*' . $tag . '\s*>/i', '', $contribution);
+
+        $prompt = str_replace('{{CONTRIBUTION}}', $sanitized, $this->titlePromptTemplate);
+
+        $response = $this->client->messages->create(
+            model: CLASSIFICATION_MODEL,
+            maxTokens: 64,
+            messages: [['role' => 'user', 'content' => $prompt]],
+            requestOptions: ['timeout' => 8.0, 'maxRetries' => 0],
+            thinking: ['type' => 'disabled'],
+            outputConfig: [
+                'format' => [
+                    'type' => 'json_schema',
+                    'schema' => [
+                        'type' => 'object',
+                        'properties' => [
+                            'title' => ['type' => 'string'],
+                        ],
+                        'required' => ['title'],
+                        'additionalProperties' => false,
+                    ],
+                ],
+            ],
+        );
+
+        foreach ($response->content as $block) {
+            if ($block->type === 'text') {
+                $data = json_decode($block->text, true);
+                if (is_array($data) && isset($data['title']) && is_string($data['title']) && trim($data['title']) !== '') {
+                    $title = trim($data['title']);
+                    // json_schema mode constrains shape reliably (why the
+                    // classification enum never comes back malformed), not
+                    // string length — clamp defensively rather than trust
+                    // the model honored the prompt's 38-char ask.
+                    return mb_strlen($title) > TITLE_MAX_CHARS
+                        ? mb_substr($title, 0, TITLE_MAX_CHARS - 1) . '…'
+                        : $title;
+                }
+                break;
+            }
+        }
+
+        throw new RuntimeException('title response missing a valid title');
     }
 }

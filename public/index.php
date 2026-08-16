@@ -19,6 +19,7 @@ $routes = [
     '/api/session-state'  => __DIR__ . '/api/session_state.php',
     '/api/contribute'     => __DIR__ . '/api/contribute.php',
     '/api/display'        => __DIR__ . '/api/display.php',
+    '/api/title'          => __DIR__ . '/api/title.php',
 ];
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

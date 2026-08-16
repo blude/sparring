@@ -30,6 +30,7 @@
     var sessionState = null; // 'awaiting-decision' | 'open' | 'complete' | 'failed'
     var statusTurnEl = null; // the one managed "status" entry in #history, if any (see setHistoryStatus)
     var optimisticTurnEl = null; // visitor turn shown ahead of the server response (see submitContribution); pruned on any non-'ok' outcome
+    var titleRequested = false; // guards the fire-and-forget /api/title fetch to once per page load (see handleContributionResult)
     var debugPanel = null;
     var lastDebugInfo = {};
 
@@ -124,11 +125,24 @@
         optimisticTurnEl = null;
     }
 
-    // Session title: the visitor's first contribution, set once (submit
-    // time, not response time — matches the design's loading-state frame)
-    // and never overwritten after.
+    // Session title, raw-text variant: used only on resumeSession (page
+    // reload mid-session), where the visitor's first contribution is already
+    // known synchronously from history and there's no fresh /api/title round
+    // trip to wait on. Write-once (a resumed session never re-derives its
+    // title from later exchanges). A fresh submission does NOT call this —
+    // #session-title stays "Untitled" until refineSessionTitle (below) has a
+    // real answer; see submitContribution.
     function setSessionTitle(text) {
         if (sessionTitleEl.classList.contains('set')) return;
+        sessionTitleEl.textContent = text;
+        sessionTitleEl.classList.add('set');
+    }
+
+    // Sets the title from /api/title's resolved value (LLM title, or its
+    // trim-based fallback — either way, a real answer, never raw untruncated
+    // text). Unlike setSessionTitle this always overwrites — fired at most
+    // once per page load (titleRequested guard at the call site).
+    function refineSessionTitle(text) {
         sessionTitleEl.textContent = text;
         sessionTitleEl.classList.add('set');
     }
@@ -315,7 +329,9 @@
     // --- TF-03: submit a contribution ---
     function submitContribution(text) {
         playbookEl.hidden = true; // first sent message auto-dismisses the Playbook card
-        setSessionTitle(text);
+        // No instant raw-text placeholder here (that was setSessionTitle's old job) —
+        // #session-title stays "Untitled" until /api/title resolves to a real title
+        // (LLM or its trim-fallback), fired once turn 1 succeeds (see 'ok' case below).
         window.SparringSfx.unlock(); // first tap of the session: the user gesture AudioContext needs on iOS Safari
         triggerPunch();
 
@@ -359,6 +375,16 @@
                 optimisticTurnEl = null; // confirmed — stop tracking it, nothing left to prune
                 appendTurn('sparring', data.exchange.sparringResponse);
                 applySessionState(data.sessionState, data.turnsRemaining);
+                // Fire-and-forget title generation: doesn't block anything above,
+                // fires once per page load. Any failure (network, malformed body)
+                // just leaves #session-title on its default "Untitled" state.
+                if (!titleRequested) {
+                    titleRequested = true;
+                    fetch('/api/title', { method: 'POST', body: JSON.stringify({ sessionId: sessionId }) })
+                        .then(function (res) { return res.json(); })
+                        .then(function (titleData) { if (titleData && titleData.title) refineSessionTitle(titleData.title); })
+                        .catch(function () {});
+                }
                 if (data.sessionState === 'complete') {
                     window.SparringSfx.playSequence('sessionEnd');
                 } else {

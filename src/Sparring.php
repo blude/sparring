@@ -118,6 +118,49 @@ final class Sparring
     }
 
     /**
+     * Generates and persists a session's header title, derived from its
+     * first contribution. Called once, out of band from processTurn — by
+     * the time this runs (public/api/title.php, fired fire-and-forget from
+     * the client after turn 1's response already landed), the visitor-facing
+     * turn is already complete, so nothing here is on that critical path.
+     *
+     * Two-branch, not null-on-failure: the LLM call is tried once; any
+     * failure (timeout, malformed response, ...) falls back to the same
+     * trim-based derivation TF-05 already uses for `scenario`
+     * (derive_scenario_statement), just capped at TITLE_MAX_CHARS instead of
+     * SCENARIO_MAX_CHARS. Either path always produces a usable title.
+     */
+    public function generateAndStoreTitle(string $sessionId): string
+    {
+        if ($this->llm === null) {
+            throw new LogicException('generateAndStoreTitle needs an LlmClient');
+        }
+
+        $session = $this->store->getSession($sessionId);
+        if ($session === null) {
+            throw new RuntimeException("unknown session: $sessionId");
+        }
+        if ($session['title'] !== null) {
+            return $session['title']; // already generated — never recomputed (mirrors scenario)
+        }
+
+        $exchanges = $this->store->getExchanges($sessionId);
+        $firstContribution = $exchanges[0]['visitorContribution'] ?? null;
+        if ($firstContribution === null) {
+            throw new RuntimeException("session $sessionId has no exchange to derive a title from");
+        }
+
+        try {
+            $title = $this->llm->generateTitle($firstContribution);
+        } catch (Throwable) {
+            $title = derive_scenario_statement($firstContribution, TITLE_MAX_CHARS);
+        }
+
+        $this->store->setTitle($sessionId, $title);
+        return $title;
+    }
+
+    /**
      * TF-02: whether a contribution may appear on the public surface. Never
      * determines whether the visitor may continue (that's the caller's job,
      * and per the resolved moderation gap, "continue" now means "edit and

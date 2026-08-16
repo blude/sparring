@@ -38,6 +38,7 @@ final class Store
                 scenario_source     TEXT CHECK (scenario_source IN ('first-contribution', 'generated')),
                 origin              TEXT NOT NULL CHECK (origin IN ('pilot', 'live')),
                 scenario            TEXT,
+                title               TEXT,
                 displayable         INTEGER NOT NULL DEFAULT 0,
                 consent_granted     INTEGER,
                 tos_agreed          INTEGER,
@@ -47,12 +48,12 @@ final class Store
             )
         SQL);
 
-        // Guard for a store.db created before tos_agreed/projection_consent existed —
-        // SQLite has no "ADD COLUMN IF NOT EXISTS" on the versions this targets.
+        // Guard for a store.db created before tos_agreed/projection_consent/title
+        // existed — SQLite has no "ADD COLUMN IF NOT EXISTS" on the versions this targets.
         $existing = array_column($this->pdo->query('PRAGMA table_info(sessions)')->fetchAll(PDO::FETCH_ASSOC), 'name');
-        foreach (['tos_agreed', 'projection_consent'] as $column) {
+        foreach (['tos_agreed' => 'INTEGER', 'projection_consent' => 'INTEGER', 'title' => 'TEXT'] as $column => $type) {
             if (!in_array($column, $existing, true)) {
-                $this->pdo->exec("ALTER TABLE sessions ADD COLUMN $column INTEGER");
+                $this->pdo->exec("ALTER TABLE sessions ADD COLUMN $column $type");
             }
         }
 
@@ -154,6 +155,20 @@ final class Store
             'UPDATE sessions SET scenario = :s, scenario_source = :src WHERE id = :id'
         );
         $stmt->execute(['s' => $scenario, 'src' => $source, 'id' => $id]);
+    }
+
+    /**
+     * Session header title, generated once from the first contribution (LLM
+     * or trim-fallback — see Sparring::generateAndStoreTitle) and never
+     * overwritten after. The `title IS NULL` guard makes a duplicate call a
+     * harmless no-op rather than a correctness problem: the client-side
+     * fetch that triggers this has no de-dup of its own beyond a best-effort
+     * flag (input.js), so the store is the actual source of truth for "once."
+     */
+    public function setTitle(string $id, string $title): void
+    {
+        $stmt = $this->pdo->prepare('UPDATE sessions SET title = :t WHERE id = :id AND title IS NULL');
+        $stmt->execute(['t' => $title, 'id' => $id]);
     }
 
     // --- Exchanges (E-02) ---
@@ -395,6 +410,7 @@ final class Store
             'scenarioSource' => $row['scenario_source'],
             'origin' => $row['origin'],
             'scenario' => $row['scenario'],
+            'title' => $row['title'],
             'displayable' => (bool) $row['displayable'],
             'consentGranted' => $row['consent_granted'] === null ? null : (bool) $row['consent_granted'],
             'tosAgreed' => $row['tos_agreed'] === null ? null : (bool) $row['tos_agreed'],

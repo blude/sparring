@@ -153,6 +153,11 @@ Produces the short context line shown above an exchange, from the session's firs
 
 - **FA-06-1** *(extends FS-06-1)* A transcript is malformed. It is recorded as rejected and the import continues with the remainder. *Outcome:* Resume.
 
+**TF-07 — Refine a session title**
+*Detail level:* Narrative
+
+Called once per session by TI-06, after the session's first exchange exists. Attempts a short (≤38 character) title via TO-02 with a title-generation instruction; on any failure (timeout, malformed response, or any other exception) falls back to the same trim-based derivation TF-05 uses for the scenario statement, just capped at 38 characters instead of TF-05's own bound. Either path always produces a usable title — there is no "couldn't generate one" outcome from the caller's point of view. Writes the result to E-01.12 once and never recomputes it: called again for a session that already has one, it returns the stored value unchanged rather than repeating the provider call. No goal relation: like TF-04 in SE-01, this is presentation logic serving SE-01's header, not a stated business goal.
+
 ---
 
 ## 5. Technical interfaces (inbound)
@@ -213,6 +218,17 @@ Produces the short context line shown above an exchange, from the session's firs
 - File unreadable or unparseable in full.
 - Individual transcript malformed, reported per transcript rather than as a failure of the call.
 
+**TI-06 — Refine a session title**
+*Call type:* Synchronous
+*Calling elements:* SE-01 (TO-04)
+*Input:* Session identifier (string, required).
+*Output:* Refined title (string) — always present when the call succeeds.
+*Action:* Calls TF-07 and returns its result. Returns once the provider call (or its fallback) completes.
+*Error cases:*
+- Session unknown.
+- Malformed request.
+- No exchange yet exists for the session — the caller normally only invokes this after the first exchange completes.
+
 ---
 
 ## 6. Technical interfaces (outbound)
@@ -226,14 +242,14 @@ Produces the short context line shown above an exchange, from the session's firs
 *Calls:* PE-01
 
 **TO-02 — Request a classification**
-*Statement:* This interface obtains a suitability classification for a visitor contribution, and optionally a scenario statement, by calling the language generation API (PE-01). Used by TF-02 on every turn, and by TF-05 only if the trimmed-contribution approach proves inadequate.
-*Input:* The contribution text and a classification instruction, or the contribution text and a summarisation instruction.
-*Output:* A classification value, or a short statement.
+*Statement:* This interface obtains a suitability classification, a scenario statement, or a session title for a visitor contribution, by calling the language generation API (PE-01). Used by TF-02 on every turn, by TF-05 only if the trimmed-contribution approach proves inadequate, and by TF-07 once per session.
+*Input:* The contribution text and a classification instruction, a summarisation instruction, or a title-generation instruction.
+*Output:* A classification value, a short statement, or a short title.
 *Error cases:* As TO-01.
 *Authoritative spec:* Provider documentation.
 *Calls:* PE-01
 
-*Call behaviour for both interfaces is specified on the calling function steps (TF-01 FS-01-8, TF-02 FS-02-2), not here. The two differ substantially: TF-01 retries and fails open to an error the visitor sees, TF-02 does not retry and fails closed to unsuitable.*
+*Call behaviour is specified on the calling function steps (TF-01 FS-01-8, TF-02 FS-02-2), or in the calling function's own narrative for TF-07, not here. The three differ substantially: TF-01 retries and fails open to an error the visitor sees; TF-02 does not retry and fails closed to unsuitable; TF-07 does not retry and fails open to a trim-based fallback, never an error.*
 
 ---
 
@@ -256,6 +272,7 @@ Produces the short context line shown above an exchange, from the session's firs
 | E-01.9 | lastActiveAt | datetime | required | Time of the most recent exchange. Drives display ordering and expiry. |
 | E-01.10 | tosAgreed | boolean | optional | Whether the participant agreed to the terms of participation. Absent until recorded; once recorded it is always true — a decline is rejected at TI-01 before it becomes a stored value (unlike E-01.7 and E-01.11, which legitimately store `false`). |
 | E-01.11 | projectionConsent | boolean | optional | Whether the participant agreed to projection. Absent until the decision is recorded. Drives E-01.6 directly. Independent of E-01.7 — a session may be retained and not projected, or projected and not retained. |
+| E-01.12 | title | string | optional | Short (≤38 character) header title, refined once from the first contribution and never recomputed (TF-07). Absent until refined. |
 
 *E-01.6, E-01.7, and E-01.11 govern three separate things: whether the public surface may currently show this session, whether it may be kept after the exhibition, and the visitor's own projection choice — the first is now derived from the third, the second stays fully independent of both. E-01.10 is different in kind from the other two consent fields: it gates participation itself rather than a data-processing purpose, which is why it is never stored as a decline (see L1 BC-02, L2 SC-05).*
 
@@ -353,7 +370,7 @@ Produces the short context line shown above an exchange, from the session's firs
 *Source:* SC-01.
 *Applies to:* The element overall, E-01 through E-03.
 *Acceptance criteria:* Runs as a single process group against a single store file, with no external database, cache, or queue service.
-*Consequence:* Rules out any design requiring concurrent write scaling or a background worker. Long-running work must complete within the request, which is why TF-01 is synchronous and why TF-05 caches its result rather than recomputing.
+*Consequence:* Rules out any design requiring concurrent write scaling or a background worker. Long-running work must complete within the request, which is why TF-01 is synchronous, why TF-05 caches its result rather than recomputing, and why TF-07's title refinement is triggered by a dedicated client call (TI-06) rather than a server-side background job — there is no queue or worker process for SE-01 to hand it to.
 *Implements:* SC-01
 
 **C-02 — Provider limits bound the element's own limits** *(Integration)*

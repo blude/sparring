@@ -135,7 +135,7 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 |---|---|---|---|---|
 | Consent notice | string | What happens to the session, what each of the three decisions means, and which one is required | Static | Until the decision is recorded |
 | Exchange history | array | Visitor contributions and Sparring responses in order, visually distinguished by speaker | E-01.4 | Once at least one exchange exists |
-| Session title | string | The visitor's first contribution, truncated, shown in the header | E-01.4 | Once at least one contribution exists |
+| Session title | string | A short (≤38 character) title summarising the session | TF-06 | "Untitled" from session start; replaced once TF-06 resolves, after the first exchange completes |
 | In-progress state | boolean | That a response is being produced | E-01.5 | While a submission is outstanding |
 | Remaining turns | integer | How many contributions remain in the session | E-01.3 | Always, once the session is open |
 | Character allowance | integer | Characters remaining for the current contribution | TF-04 | While the field holds content |
@@ -212,6 +212,11 @@ Produces the visible history from E-01. Visitor and Sparring contributions are v
 
 Computes a nickname and an avatar emoji as a pure function of the session identifier (E-01.1) — no call to SE-03, nothing written anywhere. The same derivation runs in SE-02, so a visitor's alias reads identically wherever it appears. Consistent with AP-03: identity stays derived from what already travels in the address, never a new piece of state.
 
+**TF-06 — Refine the session title**
+*Detail level:* Narrative
+
+Once the first exchange completes (UC-02), the element calls TO-04 with the session identifier to request a refined title, and replaces the header's default "Untitled" state with it when one comes back. Deliberately non-blocking and best-effort: it is not a step of UC-02's own sequence, carries no wait bound, and never gates the field or the response the visitor is watching for. Its failure (network, timeout, malformed response) is invisible rather than reported — the header simply stays "Untitled," unlike QR-02's failure-statement requirement, which is about the turn itself, not this. No goal relation: like TF-04, this is presentation logic layered on a use case that already references the goals.
+
 ---
 
 ## 5. Technical interfaces (inbound)
@@ -242,6 +247,13 @@ None. The element provides no interface to other elements. It is reached by a pe
 *Output:* Session state, turn allowance and remaining count, ordered exchanges.
 *Error cases:* Session unknown or expired. Service unavailable.
 *Authoritative spec:* SE-03 element design, TI-03.
+
+**TO-04 — Refine a session title**
+*Statement:* This interface requests a short, refined title for a session's first contribution by calling the backend service (SE-03). Used once per session, after the first exchange completes.
+*Input:* Session identifier.
+*Output:* Refined title (string) — always a usable value when the call succeeds; SE-03 falls back to a trim-based title internally rather than ever returning failure for "couldn't generate one" (see SE-03 TF-07).
+*Error cases:* Service unavailable. Session unknown. Malformed request. None of these are shown to the visitor (TF-06) — the header simply keeps its default "Untitled" state.
+*Authoritative spec:* SE-03 element design, TI-06.
 
 *No `Calls → PE-` relation applies. This element reaches no partner element directly, per AP-01.*
 
