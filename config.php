@@ -87,6 +87,33 @@ function fasset(string $file): string
     return "assets/$file?v=" . filemtime(__DIR__ . "/public/assets/$file");
 }
 
+// --- Social sharing (Open Graph / Twitter Card) ---
+// One place to change the domain or share image — was duplicated across
+// every public page's <head>, so an image/domain change meant editing six
+// files instead of one.
+const SITE_NAME = 'Sparring';
+const SITE_URL = 'https://sparringmethod.com';
+const OG_IMAGE = SITE_URL . '/assets/img/sparring-gloves.png'; // 612x606, not the 1200x630 og:image spec, gets cropped on some platforms — swap in a proper banner if one shows up
+
+// site_name/type/image/twitter:card never change per page, only these three do.
+// twitter:title/description/image are deliberately omitted — Twitter falls
+// back to the og:* equivalents when they're absent, so no need to duplicate.
+function ogTags(string $path, string $title, string $description): string
+{
+    $site_name = SITE_NAME; // heredoc interpolates variables, not bare constants
+    $url = SITE_URL . $path;
+    $image = OG_IMAGE; // heredoc interpolates variables, not bare constants
+    return <<<HTML
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="$site_name">
+<meta property="og:url" content="$url">
+<meta property="og:title" content="$title">
+<meta property="og:description" content="$description">
+<meta property="og:image" content="$image">
+<meta name="twitter:card" content="summary_large_image">
+HTML;
+}
+
 // --- LLM (PE-01) ---
 const ANTHROPIC_API_KEY_ENV = 'ANTHROPIC_API_KEY';
 const GENERATION_MODEL = 'claude-sonnet-5';

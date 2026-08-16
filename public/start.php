@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sparring — Learn Digital Design</title>
+<?= ogTags('/', 'Sparring — Learn Digital Design', 'Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design.') ?>
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
 <style>
   html, body { margin: 0; }
