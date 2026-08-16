@@ -423,10 +423,6 @@ main {
 #submit .icon--glove {
     -webkit-mask-image: url('img/glove.svg');
     mask-image: url('img/glove.svg');
-    /* Figma applies this exact rotate+flip to reorient the shared library
-       glove icon for this send-button instance — the raw asset alone
-       points the wrong way. */
-    transform: rotate(-90deg) scaleX(-1);
 }
 
 /* --- Juiciness (TODO.md JUICYNESS) --- */
