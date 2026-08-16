@@ -23,6 +23,8 @@ window.JUICY = {
 </script>
 <script src="<?= fasset('identity.js') ?>"></script>
 <script src="<?= fasset('juicy.js') ?>"></script>
+<script src="<?= fasset('mermaid.min.js') ?>"></script>
+<script src="<?= fasset('mermaid-render.js') ?>"></script>
 <script src="<?= fasset('display.js') ?>"></script>
 </body>
 </html>

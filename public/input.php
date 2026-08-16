@@ -99,6 +99,8 @@ window.JUICY = {
 <script src="<?= fasset('zzfx.min.js') ?>"></script>
 <script src="<?= fasset('sfx.js') ?>"></script>
 <script src="<?= fasset('particles.js') ?>"></script>
+<script src="<?= fasset('mermaid.min.js') ?>"></script>
+<script src="<?= fasset('mermaid-render.js') ?>"></script>
 <script src="<?= fasset('input.js') ?>"></script>
 </body>
 </html>

@@ -1,7 +1,8 @@
 /*
  * SE-02: no build step (C-04), no framework. Implements TF-01 (poll),
  * TF-02 (reconcile — the whole reason unchanged items don't redraw),
- * TF-03 (fit to space), TF-04 (render, text-only per QR-05).
+ * TF-03 (fit to space), TF-04 (render, text-only per QR-05 except a
+ * sparring response's own ```mermaid fence — see mermaid-render.js).
  *
  * TBC-01: masonry layout, DISPLAY_COLUMNS columns. Each session is placed
  * once (pickColumn) and never moves after — that's what keeps QR-02
@@ -46,6 +47,18 @@
 
     function trim(text, n) {
         return text.length > n ? text.slice(0, n - 1) + '…' : text;
+    }
+
+    // Sparring response only (never .contribution, which is visitor text and
+    // stays plain-trimmed textContent): a mermaid fence is exempt from
+    // TRIM_CHARS (it would otherwise get cut mid-syntax) and rendered via
+    // the shared helper; anything else keeps today's trim + textContent.
+    function renderResponse(el, text) {
+        if (window.SparringMermaid.extract(text)) {
+            window.SparringMermaid.renderInto(el, text);
+        } else {
+            el.textContent = trim(text, TRIM_CHARS);
+        }
     }
 
     // --- TF-01: retrieve display material ---
@@ -122,9 +135,9 @@
         contribution.className = 'contribution';
         contribution.textContent = trim(item.visitorContribution, TRIM_CHARS);
 
-        var response = document.createElement('p');
+        var response = document.createElement('div');
         response.className = 'response';
-        response.textContent = trim(item.sparringResponse, TRIM_CHARS);
+        renderResponse(response, item.sparringResponse);
 
         el.append(scenario, visitorName, contribution, response);
 
@@ -155,7 +168,7 @@
         if (!el) { addItem(item); return; }
         el.querySelector('.scenario').textContent = item.scenario;
         el.querySelector('.contribution').textContent = trim(item.visitorContribution, TRIM_CHARS);
-        el.querySelector('.response').textContent = trim(item.sparringResponse, TRIM_CHARS);
+        renderResponse(el.querySelector('.response'), item.sparringResponse);
         if (window.isJuicyOn('displayEntrance')) {
             el.classList.remove('updating');
             void el.offsetWidth; // force the removal to commit so re-adding the class retriggers the animation

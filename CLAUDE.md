@@ -13,8 +13,9 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   Laravel Valet (`valet park`/`link`), which routes the same way natively.
 - Test: `php tests/smoke_store.php` (assert-based, no framework). Also
   `node tests/smoke_juicy.js` for the juiciness on/off gating logic
-  (`public/assets/juicy.js`) — needs Node only to run the check, not as a
-  project dependency.
+  (`public/assets/juicy.js`), and `node tests/smoke_mermaid.js` for the
+  mermaid fence-detection logic (`public/assets/mermaid-render.js`) — both
+  need Node only to run the check, not as a project dependency.
 - No linter configured — check changed files with `php -l <file>`.
 
 ## Conventions

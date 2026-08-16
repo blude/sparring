@@ -154,6 +154,13 @@ body {
     color: var(--response-text);
 }
 
+/* A response containing a mermaid diagram gets nested <p> (before/after
+   text) around a .diagram div — zero the <p> UA margin, cap the SVG to the
+   column's width (QR-06: no overflow beyond the projected area). */
+.exchange .response p { margin: 0 0 0.5rem; }
+.exchange .response p:last-child { margin-bottom: 0; }
+.exchange .response .diagram svg { max-width: 100%; height: auto; }
+
 .exchange .visitor-name {
     color: var(--accent);
     font-weight: 600;

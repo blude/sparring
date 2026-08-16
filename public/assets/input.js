@@ -86,11 +86,18 @@
 
     fieldEl.setAttribute('maxlength', String(MAX_CHARS));
 
-    // --- rendering (TF-04): all content inserted as text, never markup (QR-04 / display QR-05 counterpart) ---
+    // --- rendering (TF-04): all content inserted as text, never markup (QR-04 /
+    // display QR-05 counterpart) — except a sparring turn's own ```mermaid fence,
+    // see mermaid-render.js for the narrowly-scoped exception. Visitor turns
+    // (role === 'visitor') and status turns always stay plain textContent. ---
     function appendTurn(role, text) {
         var el = document.createElement('div');
         el.className = 'turn ' + role;
-        el.textContent = text;
+        if (role === 'sparring') {
+            window.SparringMermaid.renderInto(el, text);
+        } else {
+            el.textContent = text;
+        }
         historyEl.appendChild(el);
         historyEl.scrollTop = historyEl.scrollHeight;
         return el;

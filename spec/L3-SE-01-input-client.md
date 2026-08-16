@@ -298,7 +298,7 @@ None. The element provides no interface to other elements. It is reached by a pe
 
 **QR-04 — Visitor content cannot alter the surface** *(Security)*
 *Applies to:* TF-04
-*Acceptance criteria:* All content returned from SE-03 is inserted as text. No path renders it as markup.
+*Acceptance criteria:* All content returned from SE-03 is inserted as text. No path renders it as markup, with one narrow exception: a single ```mermaid fenced block in a sparring turn is parsed by mermaid.js in `securityLevel: 'strict'` (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. Visitor turns are never routed through this path regardless of content.
 *Element specific:* Yes
 
 **QR-05 — Works on current mobile browsers without a build step** *(Compatibility)*

@@ -153,6 +153,12 @@ main {
 }
 
 #history .turn { padding: 0.5rem 0.75rem; border-radius: 0.875rem; max-width: 90%; line-height: 1.3; }
+/* A sparring turn containing a mermaid diagram gets nested <p> (before/after
+   text) around a .diagram div — zero the <p> UA margin so it doesn't add
+   gaps a plain-text turn never had, and cap the SVG to the bubble's width. */
+#history .turn p { margin: 0 0 0.5rem; }
+#history .turn p:last-child { margin-bottom: 0; }
+#history .turn .diagram svg { max-width: 100%; height: auto; }
 #history .visitor { align-self: flex-end; background: var(--bubble-visitor-bg); color: var(--bubble-visitor-text); }
 #history .sparring { align-self: flex-start; background: var(--bubble-sparring-bg); color: var(--bubble-sparring-text); }
 

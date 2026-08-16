@@ -218,7 +218,7 @@ None. No element calls this one. It is a leaf that only reads.
 
 **QR-05 — Visitor content cannot alter the surface** *(Security)*
 *Applies to:* TF-04
-*Acceptance criteria:* All content from SE-03 is inserted as text. No path renders it as markup.
+*Acceptance criteria:* All content from SE-03 is inserted as text. No path renders it as markup, with one narrow exception: a single ```mermaid fenced block in a sparring response is parsed by mermaid.js in `securityLevel: 'strict'` (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. A response containing a diagram fence is exempt from the trim length (TF-03) that otherwise bounds displayed text, so the fence isn't cut mid-syntax.
 *Element specific:* Yes
 *Rationale:* This surface is public and unattended, so the consequence of an injection is a projected wall rather than one person's phone.
 
