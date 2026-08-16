@@ -17,11 +17,11 @@ php bin/import_pilot.php               # M1: seeds data/store.db from data/pilot
 php -S localhost:8080 -t public public/index.php   # serves SE-01 + SE-02 + the API
 ```
 
-`public/index.php` is passed as the router script so the built-in server
-falls back to it for pretty URLs (`/input`, `/display`, ...) the same way
-Valet does — see `public/index.php` for the route table. Real files (e.g.
-`/assets/input.js`) are still served directly, router only runs when
-nothing on disk matches.
+`public/index.php` is passed as the router script and is the sole front
+controller — see `public/index.php` for the route table. Real static assets
+(e.g. `/assets/input.js`) still serve directly; page/endpoint scripts do
+not — `/input.php` 404s, only the pretty URL `/input` works. Valet gets the
+same behavior from `LocalValetDriver.php` at the repo root.
 
 Then open `http://localhost:8080/input` (SE-01) and
 `http://localhost:8080/display` (SE-02) in two tabs. The display feed
@@ -44,7 +44,7 @@ php bin/reset_db.php --dry-run  # report what would be deleted, changes nothing
 php bin/reset_db.php --confirm  # empty sessions/exchanges/rate-limit tables
 ```
 
-`?debug=1` on `input.php`/`display.php` shows a diagnostics panel (session
+`?debug=1` on `/input`/`/display` shows a diagnostics panel (session
 id, origin, rate-limit remaining, generation timing, moderation reason on a
 flagged contribution) — dev-only, off by default.
 

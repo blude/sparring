@@ -13,7 +13,6 @@ declare(strict_types=1);
  * and still spar; declining projection just means displayable stays false.
  */
 
-require __DIR__ . '/../../config.php';
 require __DIR__ . '/../../src/Store.php';
 require __DIR__ . '/../../src/Sparring.php';
 

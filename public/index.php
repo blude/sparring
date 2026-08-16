@@ -1,11 +1,10 @@
 <?php
 declare(strict_types=1);
 
-// Pretty-URL front controller. Valet (and the built-in `php -S` router.php
-// mode, see composer/README) falls through here whenever no real file on
-// disk matches the request path — this dispatches those to the actual
-// page/endpoint scripts. Every script below is still reachable by its
-// original *.php URL too, since this file only runs when nothing matched.
+// Sole front controller — LocalValetDriver.php forces every Valet request
+// through here (and this router does the same for `php -S`, see below),
+// so this is the one place config.php needs to be loaded. Page scripts are
+// no longer directly reachable by their own *.php URL.
 $routes = [
     '/'                   => __DIR__ . '/start.php',
     '/input'              => __DIR__ . '/input.php',
@@ -27,9 +26,11 @@ $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 // php -S with a router script intercepts *every* request, including real
 // static files (assets/*.js, favicon.ico, ...) — unlike Valet/nginx, which
 // serve those before PHP ever runs. Returning false here hands it back to
-// the built-in server's default static-file handling. No-op under Valet.
+// the built-in server's default static-file handling. Excludes .php so a
+// direct /input.php-style request still falls through to the 404 below,
+// matching LocalValetDriver.php's behavior. No-op under Valet.
 $asFile = __DIR__ . $path;
-if ($path !== '/' && is_file($asFile)) {
+if ($path !== '/' && is_file($asFile) && !str_ends_with($asFile, '.php')) {
     return false;
 }
 
@@ -38,4 +39,5 @@ if (!isset($routes[$path])) {
     exit('Not found');
 }
 
+require_once __DIR__ . '/../config.php';
 require $routes[$path];

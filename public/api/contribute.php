@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 /** TI-02 — Submit a contribution, run TF-01, return the completed exchange or a condition. */
 
-require __DIR__ . '/../../config.php';
 require __DIR__ . '/../../src/Store.php';
 require __DIR__ . '/../../src/RateLimiter.php';
 require __DIR__ . '/../../src/LlmClient.php';

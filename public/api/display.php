@@ -8,7 +8,6 @@ declare(strict_types=1);
  * any of them needs no change in SE-02 and no coordination between the two.
  */
 
-require __DIR__ . '/../../config.php';
 require __DIR__ . '/../../src/Store.php';
 require __DIR__ . '/../../src/Sparring.php';
 

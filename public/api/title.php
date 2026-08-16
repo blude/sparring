@@ -9,7 +9,6 @@ declare(strict_types=1);
  * placeholder title stays on screen — never a blocked or broken UI.
  */
 
-require __DIR__ . '/../../config.php';
 require __DIR__ . '/../../src/Store.php';
 require __DIR__ . '/../../src/LlmClient.php';
 require __DIR__ . '/../../src/Sparring.php';

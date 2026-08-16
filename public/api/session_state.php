@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 /** TI-03 — Retrieve an existing session and its exchanges, for UC-03's reload-recovery path. */
 
-require __DIR__ . '/../../config.php';
 require __DIR__ . '/../../src/Store.php';
 require __DIR__ . '/../../src/Sparring.php';
 
