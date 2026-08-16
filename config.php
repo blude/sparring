@@ -104,6 +104,7 @@ function ogTags(string $path, string $title, string $description): string
     $url = SITE_URL . $path;
     $image = OG_IMAGE; // heredoc interpolates variables, not bare constants
     return <<<HTML
+<meta name="description" content="$description">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="$site_name">
 <meta property="og:url" content="$url">
