@@ -1,11 +1,11 @@
 # Sparring Exhibition Object — POC
 
-Implements the L1–LX design docs in `docs/`. See
+Implements the L1–LX design spec in `spec/`. See
 `.claude/plans/` (or ask Claude) for the build plan, gap analysis, and the
 resolved moderation-flow decision. Status: proof of concept — rudimentary
 input/display clients, backend, LLM integration, display selection, session
 lifecycle, pilot seed + export. Non-functional polish (display layout
-treatment, visual design) is explicitly deferred per the docs themselves.
+treatment, visual design) is explicitly deferred per the specs themselves.
 
 ## Setup
 
@@ -65,5 +65,5 @@ and `data/` must sit outside the web-served directory on the real host —
   same spoof check run against sparring-live's own droplet before opening
   night, in case that site's nginx config differs.
 - SC-06's display layout (TBC-01…06) is untouched — current SE-02 baseline is
-  intentionally minimal per the docs, to be refined against real transcripts
+  intentionally minimal per the spec, to be refined against real transcripts
   on the actual projector.

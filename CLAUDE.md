@@ -2,7 +2,7 @@
 
 Thesis exhibition POC: visitor argues with an AI on their phone (SE-01), the
 exchange projects on a wall (SE-02), one backend service (SE-03). See
-`README.md` for setup/run, `docs/` for the design.
+`README.md` for setup/run, `spec/` for the design.
 
 ## Stack
 - PHP 8.2+, vanilla JS, SQLite (`data/store.db`, WAL mode). No build step,
@@ -29,7 +29,7 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   the backend has no server-side "mode" concept — it just always returns
   the cheap extra fields and the client decides whether to show them.
 
-## docs/ — design documentation
+## spec/ — design documentation
 Four-level framework (L0 brief, L1 solution, L2 system, L3 per-element),
 ID scheme (`BG-`, `SG-`, `G-`, `UC-`, `TF-`, `QR-`, `C-`, etc.) —
 **hand-written Markdown mimicking StrictDoc IDs, not a real validated
@@ -39,5 +39,5 @@ StrictDoc project** (no `.sgra`/`.sdoc` files, don't run `strictdoc` here).
   (`bin/export.php`) are **intentionally unmodeled** — covered by existing
   generic constraint language (see `C-04` in `L3-SE-03-backend-service.md`)
   rather than a dedicated UC/TF/QR that would just restate its parent.
-- New feature touching visible behavior? Check whether docs/ needs an
+- New feature touching visible behavior? Check whether spec/ needs an
   update — ask if unsure.

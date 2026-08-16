@@ -426,7 +426,7 @@
             case 'content-flagged': {
                 // Resolved moderation gate: reject-and-edit, session stays open.
                 // Coarse category only, never the exact reason — see
-                // docs/L3-SE-03-backend-service.md's note on this field.
+                // spec/L3-SE-03-backend-service.md's note on this field.
                 const reason = data.moderationReason;
                 let message = "That message can't be shown here — edit it and try again."; // fallback: classifier failure, real reason unknown
                 if (reason === 'contains-personal-information') {

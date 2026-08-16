@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * Every numeric/duration value the L3 docs marked TBC lives here, named,
+ * Every numeric/duration value the L3 spec marked TBC lives here, named,
  * so tuning after real pilot transcripts is a one-file edit.
  * See plan doc "Numeric defaults" table for the source TBC per constant.
  */
@@ -45,7 +45,7 @@ if (PHP_SAPI !== 'cli') {
 // --- Session / turn limits ---
 const TURN_ALLOWANCE = 10;             // exchanges permitted per session (SG-04, E-01.8)
 const CONTRIBUTION_MAX_CHARS = 600;    // (SQR-04, TF-01 FS-01-4)
-const SESSION_TTL_HOURS = 6;           // undefined in docs; drives "expired" for TI-01/02/03
+const SESSION_TTL_HOURS = 6;           // undefined in spec; drives "expired" for TI-01/02/03
 
 // --- Rate limiting (TF-03, SC-04) ---
 const RATE_LIMIT_WINDOW_SECONDS = 60;
