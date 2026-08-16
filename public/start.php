@@ -27,7 +27,7 @@
       width: 100%;
       max-width: 402px;
       box-sizing: border-box;
-      padding: 1.25rem 60px;
+      padding: 1.25rem 32px;
       font-size: 0.625rem;
       color: #666;
   }
@@ -35,8 +35,7 @@
       width: 100%;
       max-width: 402px;
       box-sizing: border-box;
-      padding: 32px 60px;
-      margin-top: 1rem;
+      padding: 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
