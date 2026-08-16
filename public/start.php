@@ -59,7 +59,6 @@
       display: block;
       width: 113px;
       height: 112px;
-      transform: rotate(90deg);
   }
   /* logo: real "Sparring" / "スパーリング" text stays in the DOM for a11y/SEO,
      visually replaced by the exported logotype SVGs — typography is a deliberate
