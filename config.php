@@ -93,7 +93,7 @@ function fasset(string $file): string
 // files instead of one.
 const SITE_NAME = 'Sparring';
 const SITE_URL = 'https://sparringmethod.com';
-const OG_IMAGE = SITE_URL . '/assets/img/sparring-gloves.png'; // 612x606, not the 1200x630 og:image spec, gets cropped on some platforms — swap in a proper banner if one shows up
+const OG_IMAGE = SITE_URL . '/assets/img/share-image.png'; // 1200x630 og:image spec, gets cropped on some platforms
 
 // site_name/type/image/twitter:card never change per page, only these three do.
 // twitter:title/description/image are deliberately omitted — Twitter falls
