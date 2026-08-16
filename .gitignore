@@ -6,5 +6,6 @@
 /data/store.db-shm
 /data/backups/
 .env
+/bin/deploy.env
 
 /workspace-local/
