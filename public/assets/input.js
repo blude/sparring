@@ -11,6 +11,9 @@
     var MAX_CHARS = window.CONTRIBUTION_MAX_CHARS || 600;
     var WAIT_MS = window.SE01_WAIT_BOUND_MS || 25000;
     var DEBUG = new URLSearchParams(window.location.search).get('debug') === '1';
+    // Draft persistence: sessionStorage only (temporary, tab-scoped) so an
+    // accidental reload doesn't lose an unsent contribution.
+    var DRAFT_KEY = 'sparring-draft';
 
     var historyEl = document.getElementById('history');
     var playbookEl = document.getElementById('playbook');
@@ -345,6 +348,7 @@
         setComposerEnabled(false);
         optimisticTurnEl = appendTurn('visitor', text); // shown ahead of the response; pruned on failure (clearOptimisticTurn)
         fieldEl.value = ''; // cached in `text`/submittedText below, restored on failure
+        sessionStorage.removeItem(DRAFT_KEY); // sent — draft below restores it again on failure
         updateCharRemaining();
         setHistoryStatus('Consequently sparring…', true); // in-progress state, shown synchronously (QR-01: within 300ms)
 
@@ -463,12 +467,14 @@
                 triggerWiggle();
                 window.SparringSfx.play('fumble');
         }
+        if (fieldEl.value) sessionStorage.setItem(DRAFT_KEY, fieldEl.value); // re-persist text restored on failure branches above
         updateCharRemaining();
     }
 
     fieldEl.addEventListener('input', function () {
         updateCharRemaining();
         submitEl.disabled = fieldEl.disabled || fieldEl.value.trim() === '';
+        sessionStorage.setItem(DRAFT_KEY, fieldEl.value);
     });
 
     // Enter sends; Shift+Enter or Option/Alt+Enter inserts a line break
@@ -487,6 +493,7 @@
         submitContribution(text);
     });
 
+    fieldEl.value = sessionStorage.getItem(DRAFT_KEY) || ''; // restore draft lost on reload (composer disabled until session resolves)
     updateCharRemaining();
     establishSession();
 })();
