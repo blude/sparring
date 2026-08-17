@@ -87,8 +87,8 @@
   }
   .subtitle {
       top: 41px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 53%;
+      transform: translateX(-53%);
       width: 106px;
       height: 17px;
       background-image: url(assets/img/logo-subtitle.svg);
