@@ -389,7 +389,7 @@ main {
 #contribution:disabled { color: #999; }
 #contribution::placeholder { color: #999; }
 
-#composer-footer { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.75rem; color: #666; }
+#composer-footer { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.875rem; color: #666; }
 #composer-disclaimer { margin: 0; }
 #char-remaining { flex-shrink: 0; }
 
