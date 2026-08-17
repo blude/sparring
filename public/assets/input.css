@@ -149,6 +149,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    padding-top: 1rem; /* subtle padding relative to the top bar */
     padding-bottom: 1rem; /* subtle space for avoiding overlap with the composer scrim */
 }
 
