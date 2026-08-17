@@ -42,3 +42,7 @@ StrictDoc project** (no `.sgra`/`.sdoc` files, don't run `strictdoc` here).
   rather than a dedicated UC/TF/QR that would just restate its parent.
 - New feature touching visible behavior? Check whether spec/ needs an
   update — ask if unsure.
+
+## prompts/sparring.md
+Editing this file: log it in `prompts/CHANGELOG.md` under `## Unreleased`.
+On commit, move that entry under a new dated/commit-hash heading.
