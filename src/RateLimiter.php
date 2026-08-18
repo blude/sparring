@@ -22,21 +22,13 @@ final class RateLimiter
     /**
      * Behind EasyEngine's nginx→PHP-FPM, REMOTE_ADDR is set from the same-host
      * fastcgi hop, so it already carries the real visitor IP. X-Forwarded-For
-     * is trusted too: verified 2026-08-07 against a live EasyEngine site
-     * (diasnormais.com) that nginx OVERWRITES this header with the real
-     * connecting IP rather than appending to it — a spoofed
-     * `X-Forwarded-For: 1.2.3.4` sent by curl came back as the real client
-     * address, not the injected value. So the header is never visitor-supplied
-     * from outside nginx's own hop.
-     *
-     * Parsing still takes the LAST comma-separated entry (not the first) as
-     * defense in depth — correct for both an overwritten single value and the
-     * append behavior (`$proxy_add_x_forwarded_for`) some nginx configs use
-     * instead, without needing to know which one is live.
-     *
-     * ponytail: verified on a sibling EasyEngine site, not sparring-live's own
-     * droplet — re-run the debug-headers.php spoof test there before opening
-     * night in case that site's nginx config differs.
+     * is trusted too: verified 2026-08-19 against sparring-live's own droplet
+     * (sparringmethod.com) with `curl -H "X-Forwarded-For: 1.2.3.4"` — nginx
+     * here APPENDS the real connecting IP rather than overwriting (unlike the
+     * sibling site checked 2026-08-07), so the response came back
+     * `"1.2.3.4, 2.214.252.236"`. Taking the last comma-separated entry (not
+     * the first) lands on the real IP either way — a spoofed value only ever
+     * occupies an earlier position, never the last.
      */
     public static function resolveClientOrigin(): string
     {

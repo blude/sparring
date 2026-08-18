@@ -118,14 +118,8 @@ First deploy on a fresh site, by hand, once:
 
 ## Known gaps before opening night (see plan doc §7)
 
-- `data/profanity_terms.txt` is a two-word placeholder. Replace with a real list.
-- `prompts/sparring.md` and `prompts/moderation.md` are drafts — read and
-  rewrite before the exhibition; they're the actual pedagogical content.
-- Rate-limit key (`RateLimiter::resolveClientOrigin`) trusts
-  `X-Forwarded-For` — verified on a sibling EasyEngine site (2026-08-07) that
-  nginx sets this correctly and overwrites spoofed values. Still needs the
-  same spoof check run against sparring-live's own droplet before opening
-  night, in case that site's nginx config differs.
-- SC-06's display layout (TBC-01…06) is untouched — current SE-02 baseline is
-  intentionally minimal per the spec, to be refined against real transcripts
-  on the actual projector.
+- SC-06's display layout: TBC-01 (masonry) is implemented as the working
+  baseline in `public/assets/arena.js`. TBC-02…06 (dwell time, which exchange
+  pair, item count/truncation, pilot-origin marking) are still open per the
+  spec's own acceptance criteria — to be resolved against real pilot
+  transcripts on the actual projector.
