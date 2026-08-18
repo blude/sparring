@@ -93,6 +93,13 @@
       height: 17px;
       background-image: url(assets/img/logo-subtitle.svg);
   }
+  .alpha-notice {
+      margin: 0;
+      font-size: 0.625rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #666;
+  }
   .copy {
       display: flex;
       flex-direction: column;
@@ -156,6 +163,7 @@
       <h1 class="wordmark">Sparring</h1>
       <p class="subtitle">スパーリング</p>
     </div>
+    <p class="alpha-notice">Alpha Preview</p>
   </div>
   <div class="copy">
     <p>Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design.</p>
