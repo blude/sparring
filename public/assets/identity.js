@@ -11,76 +11,76 @@ window.SparringIdentity = (function () {
     'use strict';
 
     const jiraiyaPrefixes = [
-        "Oni",      // 鬼 — ogre/demon
-        "Chō",      // 蝶 — butterfly
-        "Hoshi",    // 星 — star
-        "Tori",     // 鳥 — bird
-        "Yō",       // 妖 — witch/spirit
-        "Kaze",     // 風 — wind
-        "Uchū",     // 宇宙 — space
-        "Shiro",    // 城 — castle
-        "Rō",       // 牢 — jail/prison
-        "Igyō",     // 異形 — grotesque/strange form
-        "Baku",     // 爆 — explosive
-        "Rai",      // 雷 — lightning/thunder
-        "Sei",      // 聖 — holy/sacred
-        "Kami",     // 紙 — paper
-        "Hana",     // 花 — flower
-        "Hō",       // 宝 — treasure
-        "Hi",       // 火 — fire
-        "Kan",      // 漢 — Chinese/Han
-        "Jū",       // 獣 — beast
-        "Gō",       // 剛 — strong/tough
-        "Oto",      // 音 — sound
-        "Matsuri",  // 祭 — feast/festival
-        "Tetsu",    // 鉄 — metal/iron
-        "Sui",      // 水 — water
-        "Ke",       // 化 — changing/transformation
-        "Yami",     // 闇 — darkness
-        "Shaku",    // 灼 — burning/scorching
-        "Ma",       // 魔 — demon/magic
-        "Ja",       // 邪 — evil/wicked
+        "Oni",      // 鬼 - ogre/demon
+        "Chō",      // 蝶 - butterfly
+        "Hoshi",    // 星 - star
+        "Tori",     // 鳥 - bird
+        "Yō",       // 妖 - witch/spirit
+        "Kaze",     // 風 - wind
+        "Uchū",     // 宇宙 - space
+        "Shiro",    // 城 - castle
+        "Rō",       // 牢 - jail/prison
+        "Igyō",     // 異形 - grotesque/strange form
+        "Baku",     // 爆 - explosive
+        "Rai",      // 雷 - lightning/thunder
+        "Sei",      // 聖 - holy/sacred
+        "Kami",     // 紙 - paper
+        "Hana",     // 花 - flower
+        "Hō",       // 宝 - treasure
+        "Hi",       // 火 - fire
+        "Kan",      // 漢 - Chinese/Han
+        "Jū",       // 獣 - beast
+        "Gō",       // 剛 - strong/tough
+        "Oto",      // 音 - sound
+        "Matsuri",  // 祭 - feast/festival
+        "Tetsu",    // 鉄 - metal/iron
+        "Sui",      // 水 - water
+        "Ke",       // 化 - changing/transformation
+        "Yami",     // 闇 - darkness
+        "Shaku",    // 灼 - burning/scorching
+        "Ma",       // 魔 - demon/magic
+        "Ja",       // 邪 - evil/wicked
     ];
 
     const japaneseRoles = [
-        "ninja",        // 忍者 — ninja
-        "samurai",      // 侍 — samurai
-        "bushi",        // 武士 — warrior
-        "karateka",     // 空手家 — karate practitioner
-        "kenshi",       // 剣士 — swordsman
-        "kyūdōka",      // 弓道家 — archer (kyudo practitioner)
-        "rikishi",      // 力士 — sumo wrestler
-        "heishi",       // 兵士 — soldier
-        "yōhei",        // 傭兵 — mercenary
-        "kishi",        // 騎士 — knight
+        "ninja",        // 忍者 - ninja
+        "samurai",      // 侍 - samurai
+        "bushi",        // 武士 - warrior
+        "karateka",     // 空手家 - karate practitioner
+        "kenshi",       // 剣士 - swordsman
+        "kyūdōka",      // 弓道家 - archer (kyudo practitioner)
+        "rikishi",      // 力士 - sumo wrestler
+        "heishi",       // 兵士 - soldier
+        "yōhei",        // 傭兵 - mercenary
+        "kishi",        // 騎士 - knight
 
-        "odoriko",      // 踊り子 — dancer (traditional)
-        "dansā",        // ダンサー — dancer (modern)
-        "geisha",       // 芸者 — geisha
-        "yakusha",      // 役者 — actor
-        "kashu",        // 歌手 — singer
-        "ongakuka",     // 音楽家 — musician
-        "kyokugeishi",  // 曲芸師 — acrobat
-        "tejinashi",    // 手品師 — magician/illusionist
-        "rakugoka",     // 落語家 — rakugo storyteller
+        "odoriko",      // 踊り子 - dancer (traditional)
+        "dansā",        // ダンサー - dancer (modern)
+        "geisha",       // 芸者 - geisha
+        "yakusha",      // 役者 - actor
+        "kashu",        // 歌手 - singer
+        "ongakuka",     // 音楽家 - musician
+        "kyokugeishi",  // 曲芸師 - acrobat
+        "tejinashi",    // 手品師 - magician/illusionist
+        "rakugoka",     // 落語家 - rakugo storyteller
 
-        "shokunin",     // 職人 — craftsman/artisan
-        "kajiya",       // 鍛冶屋 — blacksmith
-        "daiku",        // 大工 — carpenter
-        "ryōshi",       // 漁師 — fisherman
-        "nōmin",        // 農民 — farmer
-        "shōnin",       // 商人 — merchant
-        "isha",         // 医者 — doctor
-        "gakusha",      // 学者 — scholar
-        "sōryo",        // 僧侶 — monk/priest
-        "miko",         // 巫女 — shrine maiden
+        "shokunin",     // 職人 - craftsman/artisan
+        "kajiya",       // 鍛冶屋 - blacksmith
+        "daiku",        // 大工 - carpenter
+        "ryōshi",       // 漁師 - fisherman
+        "nōmin",        // 農民 - farmer
+        "shōnin",       // 商人 - merchant
+        "isha",         // 医者 - doctor
+        "gakusha",      // 学者 - scholar
+        "sōryo",        // 僧侶 - monk/priest
+        "miko",         // 巫女 - shrine maiden
 
-        "mahōtsukai",   // 魔法使い — sorcerer/witch
-        "onmyōji",      // 陰陽師 — esoteric diviner
-        "uranaishi",    // 占い師 — fortune teller
-        "yamabushi",    // 山伏 — mountain ascetic
-        "tōzoku",       // 盗賊 — thief/bandit
-        "ansatsusha",   // 暗殺者 — assassin
+        "mahōtsukai",   // 魔法使い - sorcerer/witch
+        "onmyōji",      // 陰陽師 - esoteric diviner
+        "uranaishi",    // 占い師 - fortune teller
+        "yamabushi",    // 山伏 - mountain ascetic
+        "tōzoku",       // 盗賊 - thief/bandit
+        "ansatsusha",   // 暗殺者 - assassin
     ];
 
     const jiraiyaProperNames = [
