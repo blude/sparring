@@ -5,7 +5,7 @@ declare(strict_types=1);
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Projection — Sparring</title>
+<title>Arena — Sparring</title>
 <link rel="stylesheet" href="<?= fasset('arena.css') ?>">
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
 </head>

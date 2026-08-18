@@ -6,8 +6,8 @@ declare(strict_types=1);
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Session — Sparring</title>
-<?= ogTags('/dojo', 'Session — Sparring', 'Argue with an AI sparring partner about Digital Design, live.') ?>
+<title>Dojo — Sparring</title>
+<?= ogTags('/dojo', 'Dojo — Sparring', 'Argue with an AI sparring partner about Digital Design, live.') ?>
 <link rel="stylesheet" href="<?= fasset('dojo.css') ?>">
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
 </head>
