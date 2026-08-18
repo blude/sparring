@@ -9,6 +9,39 @@
  * ("an add leaves every other item undisturbed") true without a packing
  * library: an add only ever touches the bottom of one column.
  */
+
+/**
+ * TF-02's diff, pulled out of reconcile() below: displayed (sessionId ->
+ * item Map) and the incoming items array in, {toAdd, toUpdate, toRemove,
+ * next} out. No DOM, so it's unit-testable without a browser
+ * (tests/smoke_arena.js).
+ */
+window.SparringArenaDiff = {
+    diff: function (displayed, items) {
+        var incoming = new Map(items.map(function (item) { return [item.sessionId, item]; }));
+
+        var toAdd = [];
+        var toUpdate = [];
+        incoming.forEach(function (item, id) {
+            var existing = displayed.get(id);
+            if (!existing) {
+                toAdd.push(item);
+            } else if (existing.scenario !== item.scenario
+                || existing.visitorContribution !== item.visitorContribution
+                || existing.sparringResponse !== item.sparringResponse) {
+                toUpdate.push(item);
+            }
+        });
+
+        var toRemove = [];
+        displayed.forEach(function (_item, id) {
+            if (!incoming.has(id)) toRemove.push(id);
+        });
+
+        return { toAdd: toAdd, toUpdate: toUpdate, toRemove: toRemove, next: incoming };
+    },
+};
+
 (function () {
     'use strict';
 
@@ -84,35 +117,17 @@
 
     // --- TF-02: reconcile against what is displayed ---
     function reconcile(items) {
-        var incoming = new Map(items.map(function (item) { return [item.sessionId, item]; }));
+        var result = window.SparringArenaDiff.diff(displayed, items);
 
-        var toAdd = [];
-        var toUpdate = [];
-        incoming.forEach(function (item, id) {
-            var existing = displayed.get(id);
-            if (!existing) {
-                toAdd.push(item);
-            } else if (existing.scenario !== item.scenario
-                || existing.visitorContribution !== item.visitorContribution
-                || existing.sparringResponse !== item.sparringResponse) {
-                toUpdate.push(item);
-            }
-        });
-
-        var toRemove = [];
-        displayed.forEach(function (_item, id) {
-            if (!incoming.has(id)) toRemove.push(id);
-        });
-
-        if (toAdd.length === 0 && toUpdate.length === 0 && toRemove.length === 0) {
+        if (result.toAdd.length === 0 && result.toUpdate.length === 0 && result.toRemove.length === 0) {
             return; // EX-01-2: identical to what's shown, do nothing
         }
 
-        toRemove.forEach(removeItem);
-        toUpdate.forEach(updateItem);
-        toAdd.forEach(addItem);
+        result.toRemove.forEach(removeItem);
+        result.toUpdate.forEach(updateItem);
+        result.toAdd.forEach(addItem);
 
-        displayed = incoming;
+        displayed = result.next;
     }
 
     // --- TF-04: render (add/update/remove/reorder), text only ---

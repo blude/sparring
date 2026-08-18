@@ -5,6 +5,44 @@
  * contribution is rejected, not the session ended — the field re-enables
  * with the text preserved so the visitor can edit and resubmit.
  */
+
+/**
+ * Pure decision table for handleContributionResult's outcomes, minus 'ok'
+ * and 'turn-limit' (those two don't select from a message table — see the
+ * switch in handleContributionResult below). status/moderationReason in,
+ * {message, restoreText, enableComposer, wiggle, sound} out. No DOM, so
+ * it's unit-testable without a browser (tests/smoke_dojo.js).
+ */
+window.SparringDojoOutcome = {
+    resolveOutcome: function (status, moderationReason) {
+        switch (status) {
+            case 'rate-limited':
+                return { message: 'Too many requests — wait a moment and try again.', restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
+
+            case 'rejected':
+                return { message: 'That message is empty or too long — edit it and try again.', restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
+
+            case 'content-flagged': {
+                // Coarse category only, never the exact reason — see
+                // spec/L3-SE-03-backend-service.md's note on this field.
+                var message = "That message can't be shown here — edit it and try again."; // fallback: classifier failure, real reason unknown
+                if (moderationReason === 'contains-personal-information') {
+                    message = "That message includes personal information and can't be shown here — edit it and try again.";
+                } else if (moderationReason === 'targets-real-person' || moderationReason === 'blocked-term') {
+                    message = "That message isn't appropriate for this exhibition — edit it and try again.";
+                }
+                return { message: message, restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
+            }
+
+            case 'session-unknown':
+                return { message: 'This session is no longer available — reload to start a new one.', restoreText: false, enableComposer: false, wiggle: false, sound: null };
+
+            default: // generation-failed, or anything unrecognised
+                return { message: 'The installation cannot respond right now — try again.', restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
+        }
+    },
+};
+
 (function () {
     'use strict';
 
@@ -411,62 +449,25 @@
                 }
                 break;
 
-            case 'rate-limited':
-                clearOptimisticTurn();
-                setHistoryStatus('Too many requests — wait a moment and try again.', false);
-                fieldEl.value = submittedText;
-                setComposerEnabled(true);
-                triggerWiggle();
-                window.SparringSfx.play('fumble');
-                break;
-
             case 'turn-limit':
                 clearOptimisticTurn();
                 applySessionState('complete');
                 window.SparringSfx.playSequence('sessionEnd');
                 break;
 
-            case 'rejected':
+            // Resolved moderation gate: reject-and-edit, session stays open. Every
+            // other status (rate-limited, rejected, content-flagged, session-unknown,
+            // generation-failed, or anything unrecognised) is a message/behavior lookup
+            // — see resolveOutcome() above for the actual decision table.
+            default: {
+                const outcome = window.SparringDojoOutcome.resolveOutcome(data.status, data.moderationReason);
                 clearOptimisticTurn();
-                setHistoryStatus('That message is empty or too long — edit it and try again.', false);
-                fieldEl.value = submittedText;
-                setComposerEnabled(true);
-                triggerWiggle();
-                window.SparringSfx.play('fumble');
-                break;
-
-            case 'content-flagged': {
-                // Resolved moderation gate: reject-and-edit, session stays open.
-                // Coarse category only, never the exact reason — see
-                // spec/L3-SE-03-backend-service.md's note on this field.
-                const reason = data.moderationReason;
-                let message = "That message can't be shown here — edit it and try again."; // fallback: classifier failure, real reason unknown
-                if (reason === 'contains-personal-information') {
-                    message = "That message includes personal information and can't be shown here — edit it and try again.";
-                } else if (reason === 'targets-real-person' || reason === 'blocked-term') {
-                    message = "That message isn't appropriate for this exhibition — edit it and try again.";
-                }
-                clearOptimisticTurn();
-                setHistoryStatus(message, false);
-                fieldEl.value = submittedText;
-                setComposerEnabled(true);
-                triggerWiggle();
-                window.SparringSfx.play('fumble');
-                break;
+                setHistoryStatus(outcome.message, false);
+                if (outcome.restoreText) fieldEl.value = submittedText;
+                if (outcome.enableComposer) setComposerEnabled(true);
+                if (outcome.wiggle) triggerWiggle();
+                if (outcome.sound) window.SparringSfx.play(outcome.sound);
             }
-
-            case 'session-unknown':
-                clearOptimisticTurn();
-                setHistoryStatus('This session is no longer available — reload to start a new one.', false);
-                break;
-
-            default: // generation-failed, or anything unrecognised
-                clearOptimisticTurn();
-                setHistoryStatus('The installation cannot respond right now — try again.', false);
-                fieldEl.value = submittedText;
-                setComposerEnabled(true);
-                triggerWiggle();
-                window.SparringSfx.play('fumble');
         }
         if (fieldEl.value) sessionStorage.setItem(DRAFT_KEY, fieldEl.value); // re-persist text restored on failure branches above
         updateCharRemaining();
