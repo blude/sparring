@@ -11,7 +11,9 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   (the trailing `public/index.php` is the router script — pretty URLs like
   `/input` need it, real files still serve directly). Also runs under
   Laravel Valet (`valet park`/`link`), which routes the same way natively.
-- Test: assert-based smoke scripts, no framework. PHP: `php tests/smoke_store.php`
+- Test: assert-based smoke scripts, no framework. `tests/run.sh` runs all of
+  them (PHP then Node), stops on first failure. Individually — PHP:
+  `php tests/smoke_store.php`
   (`Store`), `php tests/smoke_llm_client.php` (provider dispatch +
   `OpenAiLlmClient`/`AnthropicLlmClient`'s pure response/failure-classification
   helpers), `php tests/smoke_sparring.php` (`Sparring::processTurn`'s gates +
