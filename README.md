@@ -12,8 +12,7 @@ treatment, visual design) is explicitly deferred per the specs themselves.
 ```sh
 composer install                       # pulls anthropic-ai/sdk into vendor/
 cp .env.example .env                   # then edit it, ANTHROPIC_API_KEY=sk-ant-...
-php tests/smoke_store.php              # M0 self-check, no API key needed
-node tests/smoke_juicy.js              # juiciness on/off gating self-check, Node only to run it
+sh tests/run.sh                        # runs all 10 smoke tests (PHP + Node), no API key needed
 php bin/import_pilot.php               # M1: seeds data/store.db from data/pilot/*.json
 valet link                             # once per checkout; serves this dir at https://sparring.test
 ```
