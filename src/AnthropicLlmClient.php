@@ -30,6 +30,29 @@ final class AnthropicLlmClient extends AbstractLlmClient
     }
 
     /**
+     * Pure exception-class -> outcome mapping, mirroring
+     * OpenAiLlmClient::classifyFailure() — that one takes an HTTP status/decoded
+     * body since OpenAiLlmClient talks HTTP directly; this SDK surfaces failures
+     * as typed exceptions instead, so the class name is the equivalent input.
+     * Takes the class name (not an instance) because the SDK's exceptions aren't
+     * cheaply constructible outside a real API response — unit-testable without
+     * a live call (tests/smoke_llm_client.php). Arm order mirrors the catch-block
+     * order in generateResponse() below exactly: RateLimitException and
+     * InternalServerException both extend APIStatusException, so each must be
+     * checked (and InternalServerException explicitly excluded as retryable)
+     * before the generic APIStatusException arm, or it would wrongly claim them.
+     */
+    public static function classifyGenerationFailure(string $exceptionClass): ?string
+    {
+        return match (true) {
+            is_a($exceptionClass, RateLimitException::class, true) => 'provider rate limit or quota exhausted',
+            is_a($exceptionClass, InternalServerException::class, true) => null, // retryable, not a terminal message
+            is_a($exceptionClass, APIStatusException::class, true) => 'provider rejected the request',
+            default => null, // APIConnectionException (not an APIStatusException at all): also retryable
+        };
+    }
+
+    /**
      * TO-01. $priorExchanges: ordered list of ['visitorContribution' => ..., 'sparringResponse' => ...].
      * Two attempts with a short delay, on transport failure / timeout / provider 5xx only.
      * No retry on rate-limit or quota (retrying deepens it) or on a content-policy refusal
@@ -67,7 +90,7 @@ final class AnthropicLlmClient extends AbstractLlmClient
                     thinking: ['type' => 'disabled'],
                 );
             } catch (RateLimitException $e) {
-                throw new GenerationFailedException('provider rate limit or quota exhausted', 0, $e);
+                throw new GenerationFailedException(self::classifyGenerationFailure(get_class($e)), 0, $e);
             } catch (InternalServerException|APIConnectionException $e) {
                 $lastError = $e;
                 if ($attempt < 2) {
@@ -75,7 +98,7 @@ final class AnthropicLlmClient extends AbstractLlmClient
                 }
                 continue;
             } catch (APIStatusException $e) {
-                throw new GenerationFailedException('provider rejected the request', 0, $e);
+                throw new GenerationFailedException(self::classifyGenerationFailure(get_class($e)), 0, $e);
             }
 
             if ($response->stopReason === 'refusal') {

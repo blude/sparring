@@ -52,4 +52,18 @@ assert(OpenAiLlmClient::classifyFailure(500, null) === 'provider rejected the re
 assert(OpenAiLlmClient::classifyFailure(200, ['choices' => [['finish_reason' => 'content_filter']]]) === 'provider declined the request (content policy)');
 assert(OpenAiLlmClient::classifyFailure(200, ['choices' => [['finish_reason' => 'stop']]]) === null);
 
+// --- AnthropicLlmClient::classifyGenerationFailure() ---
+// Exception-class equivalent of OpenAiLlmClient::classifyFailure() above —
+// AnthropicLlmClient surfaces failures as typed exceptions, not a raw HTTP
+// status/decoded body, so the class name is the input instead.
+assert(AnthropicLlmClient::classifyGenerationFailure(Anthropic\Core\Exceptions\RateLimitException::class)
+    === 'provider rate limit or quota exhausted');
+assert(AnthropicLlmClient::classifyGenerationFailure(Anthropic\Core\Exceptions\APIStatusException::class)
+    === 'provider rejected the request');
+// InternalServerException/APIConnectionException are retryable in generateResponse()'s
+// own loop, not a terminal failure classifyGenerationFailure() names a message for.
+assert(AnthropicLlmClient::classifyGenerationFailure(Anthropic\Core\Exceptions\InternalServerException::class) === null);
+assert(AnthropicLlmClient::classifyGenerationFailure(Anthropic\Core\Exceptions\APIConnectionException::class) === null);
+assert(AnthropicLlmClient::classifyGenerationFailure(RuntimeException::class) === null); // unrelated class: no match
+
 echo "OK: all LLM client provider-dispatch and helper assertions passed\n";
