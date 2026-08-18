@@ -41,4 +41,9 @@ for (let i = 0; i < ALPHABET.length; i++) {
 assert.ok(aliases.size > 20, `expected wide alias spread, got ${aliases.size}/32 distinct`);
 assert.ok(avatars.size > 10, `expected wide avatar spread, got ${avatars.size}/32 distinct`);
 
+// --- shape: "[prefix][role] [proper name...] [number]" — at least 3 space-separated
+// tokens (prefix+role is one token; proper name may itself contain spaces, e.g.
+// "Chan Kung-Fu", so this checks the floor, not an exact count).
+aliases.forEach(a => assert.ok(a.split(' ').length >= 3, `alias "${a}" missing expected token structure`));
+
 console.log('smoke_identity: ok');
