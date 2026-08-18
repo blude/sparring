@@ -119,7 +119,7 @@ window.SparringIdentity = (function () {
         "Kuroi Ibara",      // 黒い茨
     ];
 
-    const numbers = [
+    const japaneseNumbers = [
         "Ichigō",     // 一号 - No. 1
         "Nigō",       // 二号 - No. 2
         "Sangō",      // 三号 - No. 3
@@ -165,7 +165,7 @@ window.SparringIdentity = (function () {
         var prefix = jiraiyaPrefixes[s % jiraiyaPrefixes.length];
         var role = japaneseRoles[Math.floor(s / jiraiyaPrefixes.length) % japaneseRoles.length];
         var properName = jiraiyaProperNames[Math.floor(s / (jiraiyaPrefixes.length * japaneseRoles.length)) % jiraiyaProperNames.length];
-        var number = numbers[Math.floor(s / (jiraiyaPrefixes.length * japaneseRoles.length * jiraiyaProperNames.length)) % numbers.length];
+        var number = japaneseNumbers[Math.floor(s / (jiraiyaPrefixes.length * japaneseRoles.length * jiraiyaProperNames.length)) % japaneseNumbers.length];
         return prefix + role + ' ' + properName + ' ' + number; // naive, by design: [prefix][role] [proper name] [number]
     }
 
