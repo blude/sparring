@@ -14,7 +14,7 @@ final class Sparring
 {
     public function __construct(
         private Store $store,
-        private ?LlmClient $llm = null,
+        private ?LlmClientInterface $llm = null,
         private ?RateLimiter $rateLimiter = null,
     ) {
     }
@@ -53,7 +53,7 @@ final class Sparring
     public function processTurn(string $sessionId, string $rawContribution): array
     {
         if ($this->llm === null || $this->rateLimiter === null) {
-            throw new LogicException('processTurn needs an LlmClient and RateLimiter');
+            throw new LogicException('processTurn needs an LlmClientInterface and RateLimiter');
         }
 
         // FS-01-1: request rate, cheapest and most likely to fire (checked before touching the store).
@@ -133,7 +133,7 @@ final class Sparring
     public function generateAndStoreTitle(string $sessionId): string
     {
         if ($this->llm === null) {
-            throw new LogicException('generateAndStoreTitle needs an LlmClient');
+            throw new LogicException('generateAndStoreTitle needs an LlmClientInterface');
         }
 
         $session = $this->store->getSession($sessionId);

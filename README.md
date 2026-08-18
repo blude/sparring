@@ -35,6 +35,24 @@ php -S localhost:8080 -t public public/index.php   # serves SE-01 + SE-02 + the 
 
 Then open `http://localhost:8080/input` and `http://localhost:8080/display`.
 
+## Switch LLM provider
+
+Default is Anthropic — no config needed. To use OpenAI, or a local model
+served through LM Studio, add to `.env`:
+
+```sh
+LLM_PROVIDER=openai
+OPENAI_API_KEY=sk-...                        # leave unset for LM Studio, any value works
+OPENAI_BASE_URL=http://localhost:1234/v1     # omit for real OpenAI (defaults to api.openai.com)
+OPENAI_GENERATION_MODEL=qwen2.5-7b-instruct  # whatever model LM Studio has loaded
+OPENAI_CLASSIFICATION_MODEL=qwen2.5-7b-instruct
+```
+
+`OPENAI_GENERATION_MODEL`/`OPENAI_CLASSIFICATION_MODEL` default to
+`gpt-4.1`/`gpt-4.1-mini` if unset — fine for real OpenAI, but LM Studio needs
+whatever model ID it has loaded, so set these explicitly for local use.
+See `config.php`'s `--- LLM (PE-01) ---` block for every var name/default.
+
 Either way, `public/index.php` is the sole front controller — see
 `public/index.php` for the route table. Real static assets (e.g.
 `/assets/input.js`) still serve directly; page/endpoint scripts do not —

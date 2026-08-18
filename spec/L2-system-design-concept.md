@@ -204,7 +204,7 @@ Projector and the machine driving it, running a browser in kiosk mode.
 #### Partner elements
 
 **PE-01 — Language generation API**
-*Provider:* Anthropic
+*Provider:* Anthropic (default); OpenAI or an OpenAI-compatible local server, operator-selected
 *Partner type:* Third-party-API
 *Dependency:* Critical. The installation produces no Sparring response without it, and there is no degraded mode that preserves the piece's purpose.
 *Used by:* SE-03

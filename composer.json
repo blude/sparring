@@ -1,6 +1,6 @@
 {
     "name": "sparring/exhibition-object",
-    "description": "Sparring exhibition object backend (SE-03) — PHP, SQLite, Anthropic API",
+    "description": "Sparring exhibition object backend (SE-03) — PHP, SQLite, switchable LLM provider",
     "license": "MIT",
     "version": "0.1.0",
     "require": {

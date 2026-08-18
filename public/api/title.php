@@ -10,7 +10,9 @@ declare(strict_types=1);
  */
 
 require __DIR__ . '/../../src/Store.php';
-require __DIR__ . '/../../src/LlmClient.php';
+require __DIR__ . '/../../src/LlmClientInterface.php';
+require __DIR__ . '/../../src/AnthropicLlmClient.php';
+require __DIR__ . '/../../src/OpenAiLlmClient.php';
 require __DIR__ . '/../../src/Sparring.php';
 
 header('Content-Type: application/json');
@@ -36,7 +38,7 @@ if ($session === null) {
     exit;
 }
 
-$llm = new LlmClient();
+$llm = createLlmClient();
 $sparring = new Sparring($store, $llm);
 
 try {

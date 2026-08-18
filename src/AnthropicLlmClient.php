@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/AbstractLlmClient.php';
 
 use Anthropic\Client;
 use Anthropic\Core\Exceptions\APIConnectionException;
@@ -9,27 +10,14 @@ use Anthropic\Core\Exceptions\APIStatusException;
 use Anthropic\Core\Exceptions\InternalServerException;
 use Anthropic\Core\Exceptions\RateLimitException;
 
-/** TF-01 FS-01-8/FA-01-1: every generation failure the caller sees is this one type. */
-final class GenerationFailedException extends RuntimeException
-{
-}
-
 /**
  * Thin wrapper over anthropic-ai/sdk for TO-01 (generation) and TO-02
  * (classification). Holds no policy of its own — call behaviour (retries,
  * what's retryable) matches what TF-01/TF-02 specify, not a generic default.
  */
-final class LlmClient
+final class AnthropicLlmClient extends AbstractLlmClient
 {
-    // C-06: name of the wrapper tag prompts/moderation.md uses around
-    // {{CONTRIBUTION}} (its <contribution>/</contribution> lines). Kept as a
-    // constant, referenced from classify() below, so the two can't drift silently.
-    private const DELIMITER_TAG = 'contribution';
-
     private Client $client;
-    private string $sparringPrompt;
-    private string $moderationPromptTemplate;
-    private string $titlePromptTemplate;
 
     public function __construct(?string $apiKey = null)
     {
@@ -38,9 +26,7 @@ final class LlmClient
             throw new RuntimeException('ANTHROPIC_API_KEY is not set (QR-04: never in config.php or version control)');
         }
         $this->client = new Client(apiKey: $key);
-        $this->sparringPrompt = (string) file_get_contents(SPARRING_PROMPT_PATH);
-        $this->moderationPromptTemplate = (string) file_get_contents(MODERATION_PROMPT_PATH);
-        $this->titlePromptTemplate = (string) file_get_contents(TITLE_PROMPT_PATH);
+        $this->loadPrompts();
     }
 
     /**
@@ -115,15 +101,7 @@ final class LlmClient
      */
     public function classify(string $contribution): string
     {
-        // C-06: strip lookalike delimiter tags — any case, any internal whitespace
-        // (</contribution>, </CONTRIBUTION>, </ contribution >, ...) — so a visitor
-        // can't close the prompt's <contribution> wrapper early and splice
-        // instructions after it. Scoped to this classification prompt only: the
-        // stored/displayed contribution (Sparring::processTurn) is never touched,
-        // so a visitor legitimately typing the literal string isn't silently edited.
-        $tag = preg_quote(self::DELIMITER_TAG, '/');
-        $sanitized = preg_replace('/<\/?\s*' . $tag . '\s*>/i', '', $contribution);
-
+        $sanitized = self::stripDelimiterTag($contribution);
         $prompt = str_replace('{{CONTRIBUTION}}', $sanitized, $this->moderationPromptTemplate);
 
         $response = $this->client->messages->create(
@@ -177,11 +155,7 @@ final class LlmClient
      */
     public function generateTitle(string $contribution): string
     {
-        // Same lookalike-delimiter stripping as classify() — the untrusted
-        // contribution is wrapped in the same <contribution> tag here too.
-        $tag = preg_quote(self::DELIMITER_TAG, '/');
-        $sanitized = preg_replace('/<\/?\s*' . $tag . '\s*>/i', '', $contribution);
-
+        $sanitized = self::stripDelimiterTag($contribution);
         $prompt = str_replace('{{CONTRIBUTION}}', $sanitized, $this->titlePromptTemplate);
 
         $response = $this->client->messages->create(

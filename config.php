@@ -116,6 +116,12 @@ HTML;
 }
 
 // --- LLM (PE-01) ---
+// Provider is operator-selected via LLM_PROVIDER: 'anthropic' (default) or
+// 'openai' — the latter is any OpenAI-Chat-Completions-compatible endpoint,
+// so it also covers a local model served through LM Studio (point
+// OPENAI_BASE_URL at it; OPENAI_API_KEY can stay unset). See createLlmClient().
+const LLM_PROVIDER_ENV = 'LLM_PROVIDER';
+
 const ANTHROPIC_API_KEY_ENV = 'ANTHROPIC_API_KEY';
 const GENERATION_MODEL = 'claude-sonnet-5';
 // Was claude-sonnet-5. Originally swapped in because claude-haiku-4-5 was 8/8
@@ -124,6 +130,31 @@ const GENERATION_MODEL = 'claude-sonnet-5';
 // it. Manual re-check post-swap: 6/6 correct against the new prompt's own
 // examples plus edge cases, so back to haiku for the cost saving.
 const CLASSIFICATION_MODEL = 'claude-haiku-4-5-20251001';
+
+const OPENAI_API_KEY_ENV = 'OPENAI_API_KEY';
+const OPENAI_BASE_URL_ENV = 'OPENAI_BASE_URL';
+const OPENAI_BASE_URL_DEFAULT = 'https://api.openai.com/v1'; // e.g. http://localhost:1234/v1 for LM Studio
+const OPENAI_GENERATION_MODEL_ENV = 'OPENAI_GENERATION_MODEL';
+const OPENAI_GENERATION_MODEL_DEFAULT = 'gpt-4.1';
+const OPENAI_CLASSIFICATION_MODEL_ENV = 'OPENAI_CLASSIFICATION_MODEL';
+const OPENAI_CLASSIFICATION_MODEL_DEFAULT = 'gpt-4.1-mini';
+// Model IDs are env-overridable (not a literal constant like GENERATION_MODEL
+// above) because a locally-served model's ID is whatever the operator loaded
+// in LM Studio — there's no sane hardcoded default for that case.
+
 const SPARRING_PROMPT_PATH = __DIR__ . '/prompts/sparring.md';
 const MODERATION_PROMPT_PATH = __DIR__ . '/prompts/moderation.md';
 const TITLE_PROMPT_PATH = __DIR__ . '/prompts/title.md';
+
+function createLlmClient(): LlmClientInterface
+{
+    $provider = getenv(LLM_PROVIDER_ENV) ?: 'anthropic';
+    return match ($provider) {
+        'anthropic' => new AnthropicLlmClient(),
+        'openai' => new OpenAiLlmClient(),
+        // Unrecognized value (typo, wrong case) fails loudly instead of
+        // silently falling back to Anthropic — a typo here would otherwise
+        // burn Anthropic credits with no visible sign OpenAI/local wasn't used.
+        default => throw new RuntimeException("Unknown LLM_PROVIDER '$provider' — expected 'anthropic' or 'openai'"),
+    };
+}
