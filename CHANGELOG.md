@@ -2,6 +2,24 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-08-19
+
+- `d38afcc` docs: point README setup at tests/run.sh instead of stale two-test list
+- `eedc7bb` chore: green checkmark next to ok in run.sh
+- `489512f` chore: show [step/total] progress in run.sh
+- `656d52f` chore: standardize smoke test success messages to "<name>: ok"
+- `08e0799` docs: note run.sh's per-process rationale, list all 10 smoke tests
+- `5f70744` test: add smoke_domain.php for the small pure PHP helpers
+- `1410bc4` test: expose durationMs/isChord on SparringSfx, add smoke_sfx.js
+- `6b50a4f` chore: add tests/run.sh to run every smoke test in one shot
+- `88743e5` docs: list all smoke test files in CLAUDE.md
+- `d4ee28f` refactor: extract AnthropicLlmClient::classifyGenerationFailure
+- `2a11931` refactor: injectable $now on checkAndIncrementRateLimit/isExpired
+- `f8be6e1` refactor: extract pure decision tables from dojo.js and arena.js
+- `a621993` test: add smoke_sparring.php for processTurn's 7-gate pipeline
+- `9ceb105` rename: session_state.php to session-state.php for kebab-case consistency
+- `c5ceaf5` rename: input/display routes to dojo/arena, api/display to recent-exchanges
+
 ## 2026-08-18
 
 - `b9fe76b` feat: add Alpha Preview notice to start page
