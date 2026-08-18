@@ -15,7 +15,15 @@ window.SparringIdentity = (function () {
     var AVATARS = ['🐣', '🦊', '🐼', '🐸', '🐢', '🦉', '🐙', '🐿️', '🦔', '🐝', '🦋', '🐳', '🦕', '🐧', '🐨', '🦄', '🦆', '🐲'];
 
     function seed(sessionId) {
-        return parseInt(sessionId.slice(0, 8), 16) || 0;
+        // sessionId is Crockford Base32 (Store.php newSessionId) — not hex, so
+        // parseInt(id, 16) would stop at the first non-hex char (G,H,J,K,M,N,P,
+        // Q,R,S,T,V,W,X,Y,Z), collapsing >50% of sessions to the same seed.
+        // Hash every char instead of assuming a hex-compatible alphabet.
+        var h = 0;
+        for (var i = 0; i < sessionId.length; i++) {
+            h = (h * 31 + sessionId.charCodeAt(i)) >>> 0; // >>> 0 keeps it a positive 32-bit int
+        }
+        return h;
     }
 
     function alias(sessionId) {
