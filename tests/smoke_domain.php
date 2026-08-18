@@ -87,4 +87,4 @@ $withExplicitScenario = validate_transcript([
 ]);
 assert($withExplicitScenario['scenarioSourceText'] === 'an explicit scenario'); // explicit field wins, trimmed
 
-echo "OK: all domain-helper assertions passed\n";
+echo "smoke_domain: ok\n";

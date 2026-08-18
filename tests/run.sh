@@ -14,4 +14,4 @@ for f in tests/smoke_*.js; do
     node "$f"
 done
 
-echo "OK: all smoke tests passed"
+echo "all: ok"

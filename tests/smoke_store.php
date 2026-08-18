@@ -121,4 +121,4 @@ foreach (['-wal', '-shm'] as $suffix) {
     @unlink($dbPath . $suffix);
 }
 
-echo "OK: all M0 store assertions passed\n";
+echo "smoke_store: ok\n";

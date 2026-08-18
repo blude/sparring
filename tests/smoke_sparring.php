@@ -199,4 +199,4 @@ foreach (['-wal', '-shm'] as $suffix) {
     @unlink($dbPath . $suffix);
 }
 
-echo "OK: all Sparring::processTurn assertions passed\n";
+echo "smoke_sparring: ok\n";

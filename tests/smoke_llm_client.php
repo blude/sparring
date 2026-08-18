@@ -66,4 +66,4 @@ assert(AnthropicLlmClient::classifyGenerationFailure(Anthropic\Core\Exceptions\I
 assert(AnthropicLlmClient::classifyGenerationFailure(Anthropic\Core\Exceptions\APIConnectionException::class) === null);
 assert(AnthropicLlmClient::classifyGenerationFailure(RuntimeException::class) === null); // unrelated class: no match
 
-echo "OK: all LLM client provider-dispatch and helper assertions passed\n";
+echo "smoke_llm_client: ok\n";
