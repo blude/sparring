@@ -71,6 +71,7 @@
     // navigates back to the home screen — confirmation dialog unchanged.
     newSessionBtn.addEventListener('click', function () {
         if (window.confirm('End this session? Your current session will no longer be shown.')) {
+            sessionStorage.removeItem(DRAFT_KEY); // ending session should not leave next session's composer pre-filled
             window.location.href = '/';
         }
     });
