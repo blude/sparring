@@ -7,10 +7,17 @@
 set -e
 cd "$(dirname "$0")/.."
 
+total=$(ls tests/smoke_*.php tests/smoke_*.js | wc -l | tr -d ' ')
+n=0
+
 for f in tests/smoke_*.php; do
+    n=$((n + 1))
+    printf '[%d/%d] ' "$n" "$total"
     php "$f"
 done
 for f in tests/smoke_*.js; do
+    n=$((n + 1))
+    printf '[%d/%d] ' "$n" "$total"
     node "$f"
 done
 
