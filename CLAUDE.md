@@ -12,19 +12,22 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   `/input` need it, real files still serve directly). Also runs under
   Laravel Valet (`valet park`/`link`), which routes the same way natively.
 - Test: assert-based smoke scripts, no framework. `tests/run.sh` runs all of
-  them (PHP then Node), stops on first failure. Individually — PHP:
-  `php tests/smoke_store.php`
+  them (PHP then Node, each its own process — see the script's own comment on
+  why), stops on first failure. Individually — PHP: `php tests/smoke_store.php`
   (`Store`), `php tests/smoke_llm_client.php` (provider dispatch +
   `OpenAiLlmClient`/`AnthropicLlmClient`'s pure response/failure-classification
   helpers), `php tests/smoke_sparring.php` (`Sparring::processTurn`'s gates +
-  `sessionStateFor`/`isExpired`). JS (Node only to run the check, not a
-  project dependency): `node tests/smoke_juicy.js` (`public/assets/juicy.js`),
-  `node tests/smoke_mermaid.js` (fence-detection in
-  `public/assets/mermaid-render.js`), `node tests/smoke_identity.js` (alias/avatar
-  seed in `public/assets/identity.js`), `node tests/smoke_dojo.js`
-  (`handleContributionResult`'s outcome table in `public/assets/dojo.js`), and
+  `sessionStateFor`/`isExpired`), `php tests/smoke_domain.php`
+  (`derive_scenario_statement`, `AbstractLlmClient::stripDelimiterTag`,
+  `bin/import_pilot.php::validate_transcript`). JS (Node only to run the
+  check, not a project dependency): `node tests/smoke_juicy.js`
+  (`public/assets/juicy.js`), `node tests/smoke_mermaid.js` (fence-detection
+  in `public/assets/mermaid-render.js`), `node tests/smoke_identity.js`
+  (alias/avatar seed in `public/assets/identity.js`), `node tests/smoke_dojo.js`
+  (`handleContributionResult`'s outcome table in `public/assets/dojo.js`),
   `node tests/smoke_arena.js` (the wall's add/update/remove diff in
-  `public/assets/arena.js`).
+  `public/assets/arena.js`), and `node tests/smoke_sfx.js` (note-duration/
+  chord-detection logic in `public/assets/sfx.js`).
 - No linter configured — check changed files with `php -l <file>`.
 
 ## Conventions
