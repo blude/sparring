@@ -4,6 +4,18 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+
+## 2026-08-18 — `73583bd` prompt: add edge case rule for meta questions
+- Added edge-case rule: meta questions ("what is Sparring," "how does this
+  work") get the practice-fight analogy directly, without explaining how it
+  maps to design work — ask the visitor to put the mapping in their own
+  words or bring something real instead.
+
+## 2026-08-17 — `cb7d847` prompt: reorganize sections
+- Reordered/renamed XML sections (`pedagogical_intents`, `domain_grounding`,
+  `boundary_objects`, `edge_cases` regrouped), no content change.
+
+## 2026-08-17 — `d46f283` prompt: considerably expand the system instructions
 - Rewrite: identity now names the exhibition context explicitly (Semesterausstellung).
 - Added explicit 4-stage `core_mechanism` (mine argument → pick strategy →
   generate question → hold dialogue), stages 1–3 silent, only stage 4 visible.

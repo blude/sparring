@@ -2,6 +2,25 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-08-18
+
+- `11dd9e7` fix: clear composer draft from sessionStorage on end session
+- `73583bd` prompt: add edge case rule for meta questions
+- `d07b8fd` Merge branch 'feat/shorter-session-id' into develop
+- `82eae82` feat: shorten session ID to 8-char Crockford Base32
+- `c7c803e` feat: switchable LLM provider (Anthropic, OpenAI, LM Studio)
+
+## 2026-08-17
+
+- `9dd5534` style add small padding on top of content area
+- `9436941` style: slight increase composer footer font size
+- `bc96117` feat: persist composer draft in sessionStorage across reload
+- `cb7d847` prompt: reorganize sections
+- `d46f283` prompt: considerably expand the system instructions defines richer identity with examples, vocabullary, voice...
+- `394cd27` style: subtly nudge subtitle to the right
+- `5f1bc3c` docs: add sparring.md changelog and update workflow note
+- `d4e44e6` docs: add changelog covering full repo history
+
 ## 2026-08-16
 
 - `f032316` fix: set explicit composer.json root version
