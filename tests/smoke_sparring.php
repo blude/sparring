@@ -1,0 +1,195 @@
+<?php
+declare(strict_types=1);
+
+/**
+ * Self-check for Sparring::processTurn — the 7-gate turn pipeline every
+ * visitor exchange routes through (rate limit, session, expiry, turn
+ * allowance, length, moderation, generation) — plus the pure
+ * sessionStateFor()/isExpired() helpers. Uses a fake LlmClientInterface,
+ * no network, no real API key. Real Store on a tmp SQLite path.
+ * Run: php tests/smoke_sparring.php
+ */
+
+require __DIR__ . '/../config.php';
+require __DIR__ . '/../src/Store.php';
+require __DIR__ . '/../src/LlmClientInterface.php';
+require __DIR__ . '/../src/RateLimiter.php';
+require __DIR__ . '/../src/Sparring.php';
+
+/** Canned LlmClientInterface — every branch is caller-configurable, no network. */
+final class FakeLlmClient implements LlmClientInterface
+{
+    public string $classifyResult = 'suitable';
+    public bool $throwOnClassify = false;
+    public bool $throwOnGenerate = false;
+    public string $cannedResponse = 'What makes you think it has a clean answer?';
+
+    public function generateResponse(array $priorExchanges, string $newContribution): string
+    {
+        if ($this->throwOnGenerate) {
+            throw new GenerationFailedException('fake generation failure');
+        }
+        return $this->cannedResponse;
+    }
+
+    public function classify(string $contribution): string
+    {
+        if ($this->throwOnClassify) {
+            throw new RuntimeException('fake classify failure');
+        }
+        return $this->classifyResult;
+    }
+
+    public function generateTitle(string $contribution): string
+    {
+        return 'canned title';
+    }
+}
+
+$dbPath = sys_get_temp_dir() . '/sparring_smoke_sparring_' . bin2hex(random_bytes(4)) . '.db';
+$store = new Store($dbPath);
+$llm = new FakeLlmClient();
+$rateLimiter = new RateLimiter($store);
+$sparring = new Sparring($store, $llm, $rateLimiter);
+
+// RateLimiter::resolveClientOrigin() reads $_SERVER directly (TF-03) — give
+// each sub-test its own REMOTE_ADDR so their rate-limit windows don't collide.
+function withOrigin(string $addr, callable $fn): void
+{
+    $_SERVER['REMOTE_ADDR'] = $addr;
+    $fn();
+}
+
+// --- pure helpers, no DB/network at all ---
+
+// sessionStateFor: 3-branch decision, pure given a plain array.
+assert($sparring->sessionStateFor(['tosAgreed' => null, 'turnCount' => 0]) === 'awaiting-decision');
+assert($sparring->sessionStateFor(['tosAgreed' => true, 'turnCount' => 0]) === 'open');
+assert($sparring->sessionStateFor(['tosAgreed' => true, 'turnCount' => TURN_ALLOWANCE]) === 'complete');
+assert($sparring->sessionStateFor(['tosAgreed' => false, 'turnCount' => 0]) === 'open'); // false !== null: decided, just declined
+
+// isExpired: only reads time() + the passed lastActiveAt, no DB.
+$fresh = gmdate('Y-m-d\TH:i:s\Z', time() - 60);
+$stale = gmdate('Y-m-d\TH:i:s\Z', time() - (SESSION_TTL_HOURS * 3600 + 60));
+assert($sparring->isExpired(['lastActiveAt' => $fresh]) === false);
+assert($sparring->isExpired(['lastActiveAt' => $stale]) === true);
+
+// --- processTurn gates, each on its own rate-limit bucket ---
+
+// FS-01-9/10/11: happy path, exchange persisted, scenario set once (first turn only).
+withOrigin('10.0.0.1', function () use ($store, $sparring) {
+    $session = $store->createSession('live');
+    $result = $sparring->processTurn($session['id'], '  What is a wicked problem?  ');
+    assert($result['status'] === 'ok');
+    assert($result['exchange']['position'] === 1);
+    assert($result['exchange']['visitorContribution'] === 'What is a wicked problem?'); // trimmed
+    assert($result['turnsRemaining'] === TURN_ALLOWANCE - 1);
+    assert($result['sessionState'] === 'awaiting-decision'); // consent not recorded yet — processTurn doesn't gate on it
+    assert($result['rateLimitRemaining'] === RATE_LIMIT_MAX_REQUESTS - 1);
+
+    $afterFirst = $store->getSession($session['id']);
+    assert($afterFirst['scenario'] !== null);
+    $scenarioAfterFirst = $afterFirst['scenario'];
+
+    $result2 = $sparring->processTurn($session['id'], 'A second contribution.');
+    assert($result2['status'] === 'ok');
+    assert($result2['exchange']['position'] === 2);
+    $afterSecond = $store->getSession($session['id']);
+    assert($afterSecond['scenario'] === $scenarioAfterFirst); // TF-05: written once, never recomputed
+});
+
+// FS-01-4: empty and over-length contributions are rejected before any provider call.
+withOrigin('10.0.0.2', function () use ($store, $sparring) {
+    $session = $store->createSession('live');
+    assert($sparring->processTurn($session['id'], '   ')['status'] === 'rejected');
+    $tooLong = str_repeat('a', CONTRIBUTION_MAX_CHARS + 1);
+    assert($sparring->processTurn($session['id'], $tooLong)['status'] === 'rejected');
+    assert($store->getSession($session['id'])['turnCount'] === 0); // neither attempt counted as a turn
+});
+
+// FS-02-1: local blocked-term list short-circuits before any classify() call.
+withOrigin('10.0.0.3', function () use ($store, $sparring) {
+    $termsPath = __DIR__ . '/../data/profanity_terms.txt';
+    $term = null;
+    foreach (file($termsPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $line = trim($line);
+        if ($line !== '' && !str_starts_with($line, '#')) {
+            $term = $line;
+            break;
+        }
+    }
+    assert($term !== null); // fixture file must have at least one real term
+
+    $session = $store->createSession('live');
+    $result = $sparring->processTurn($session['id'], "a sentence containing $term as a word");
+    assert($result['status'] === 'content-flagged');
+    assert($result['moderationReason'] === 'blocked-term');
+    assert($store->getSession($session['id'])['turnCount'] === 0);
+});
+
+// FS-02-2: classifier says unsuitable — reason passed straight through.
+withOrigin('10.0.0.4', function () use ($store, $sparring, $llm) {
+    $session = $store->createSession('live');
+    $llm->classifyResult = 'targets-real-person';
+    $result = $sparring->processTurn($session['id'], 'a contribution about someone specific');
+    $llm->classifyResult = 'suitable'; // reset for later sub-tests
+    assert($result['status'] === 'content-flagged');
+    assert($result['moderationReason'] === 'targets-real-person');
+});
+
+// QR-08: classify() itself failing fails closed, reason is the generic 'llm-classification'.
+withOrigin('10.0.0.5', function () use ($store, $sparring, $llm) {
+    $session = $store->createSession('live');
+    $llm->throwOnClassify = true;
+    $result = $sparring->processTurn($session['id'], 'a perfectly ordinary contribution');
+    $llm->throwOnClassify = false;
+    assert($result['status'] === 'content-flagged');
+    assert($result['moderationReason'] === 'llm-classification');
+});
+
+// FS-01-8: generation failure maps to 'generation-failed', nothing persisted.
+withOrigin('10.0.0.6', function () use ($store, $sparring, $llm) {
+    $session = $store->createSession('live');
+    $llm->throwOnGenerate = true;
+    $result = $sparring->processTurn($session['id'], 'a perfectly ordinary contribution');
+    $llm->throwOnGenerate = false;
+    assert($result['status'] === 'generation-failed');
+    assert($store->getSession($session['id'])['turnCount'] === 0);
+});
+
+// FS-01-2: unknown session id.
+withOrigin('10.0.0.7', function () use ($sparring) {
+    assert($sparring->processTurn('DOESNOTEXIST', 'hi')['status'] === 'session-unknown');
+});
+
+// FS-01-3: turn allowance already exhausted (rate limiter fresh — isolates this gate from rate-limiting).
+withOrigin('10.0.0.8', function () use ($store, $sparring) {
+    $session = $store->createSession('live');
+    for ($i = 0; $i < TURN_ALLOWANCE; $i++) {
+        $store->appendExchange($session['id'], "turn $i", 'a response'); // bypass processTurn/rate limiter directly
+    }
+    $result = $sparring->processTurn($session['id'], 'one more, please');
+    assert($result['status'] === 'turn-limit');
+    assert($store->getSession($session['id'])['turnCount'] === TURN_ALLOWANCE); // not incremented further
+});
+
+// FS-01-1: rate limit exhausted. RATE_LIMIT_MAX_REQUESTS === TURN_ALLOWANCE here,
+// so the (max+1)th call always hits the rate gate first — it's checked before turn count.
+withOrigin('10.0.0.9', function () use ($store, $sparring) {
+    $session = $store->createSession('live');
+    for ($i = 0; $i < RATE_LIMIT_MAX_REQUESTS; $i++) {
+        $result = $sparring->processTurn($session['id'], "turn $i");
+        assert($result['status'] === 'ok');
+        assert($result['rateLimitRemaining'] === RATE_LIMIT_MAX_REQUESTS - 1 - $i);
+    }
+    $result = $sparring->processTurn($session['id'], 'over the limit');
+    assert($result['status'] === 'rate-limited');
+    assert($result['rateLimitRemaining'] === 0);
+});
+
+unlink($dbPath);
+foreach (['-wal', '-shm'] as $suffix) {
+    @unlink($dbPath . $suffix);
+}
+
+echo "OK: all Sparring::processTurn assertions passed\n";
