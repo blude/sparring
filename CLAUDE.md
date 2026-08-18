@@ -11,13 +11,18 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   (the trailing `public/index.php` is the router script — pretty URLs like
   `/input` need it, real files still serve directly). Also runs under
   Laravel Valet (`valet park`/`link`), which routes the same way natively.
-- Test: `php tests/smoke_store.php` (assert-based, no framework). Also
-  `node tests/smoke_juicy.js` for the juiciness on/off gating logic
-  (`public/assets/juicy.js`), `node tests/smoke_mermaid.js` for the
-  mermaid fence-detection logic (`public/assets/mermaid-render.js`), and
-  `node tests/smoke_identity.js` for the visitor alias/avatar seed logic
-  (`public/assets/identity.js`) — all need Node only to run the check, not
-  as a project dependency.
+- Test: assert-based smoke scripts, no framework. PHP: `php tests/smoke_store.php`
+  (`Store`), `php tests/smoke_llm_client.php` (provider dispatch +
+  `OpenAiLlmClient`/`AnthropicLlmClient`'s pure response/failure-classification
+  helpers), `php tests/smoke_sparring.php` (`Sparring::processTurn`'s gates +
+  `sessionStateFor`/`isExpired`). JS (Node only to run the check, not a
+  project dependency): `node tests/smoke_juicy.js` (`public/assets/juicy.js`),
+  `node tests/smoke_mermaid.js` (fence-detection in
+  `public/assets/mermaid-render.js`), `node tests/smoke_identity.js` (alias/avatar
+  seed in `public/assets/identity.js`), `node tests/smoke_dojo.js`
+  (`handleContributionResult`'s outcome table in `public/assets/dojo.js`), and
+  `node tests/smoke_arena.js` (the wall's add/update/remove diff in
+  `public/assets/arena.js`).
 - No linter configured — check changed files with `php -l <file>`.
 
 ## Conventions
