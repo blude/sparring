@@ -4,6 +4,8 @@ Generated from git history. Grouped by commit date, newest first.
 
 ## 2026-08-19
 
+- `836f7eb` feat: add fallback error pages for 404/500
+- `47c4dde` docs: update CHANGELOG through d38afcc
 - `d38afcc` docs: point README setup at tests/run.sh instead of stale two-test list
 - `eedc7bb` chore: green checkmark next to ok in run.sh
 - `489512f` chore: show [step/total] progress in run.sh
