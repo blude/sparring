@@ -89,7 +89,7 @@ final class Store
             throw new InvalidArgumentException("origin must be 'pilot' or 'live'");
         }
 
-        $id = bin2hex(random_bytes(16)); // opaque, enumeration-resistant (E-01.1); not secret (AP-03)
+        $id = self::newSessionId(); // opaque, enumeration-resistant (E-01.1); not secret (AP-03)
         $now = self::now();
 
         $stmt = $this->pdo->prepare(
@@ -99,6 +99,25 @@ final class Store
         $stmt->execute(['id' => $id, 'created_at' => $now, 'origin' => $origin, 'last_active_at' => $now]);
 
         return $this->getSession($id);
+    }
+
+    private static function newSessionId(): string
+    {
+        // Crockford Base32: excludes I/L/O/U to avoid visual confusion (human-readable ID)
+        static $alphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+        $bytes = random_bytes(5); // 40 bits = 8 base32 chars exactly, no padding
+        $bits = 0;
+        $bitCount = 0;
+        $out = '';
+        foreach (str_split($bytes) as $byte) {
+            $bits = ($bits << 8) | ord($byte);
+            $bitCount += 8;
+            while ($bitCount >= 5) {
+                $bitCount -= 5;
+                $out .= $alphabet[($bits >> $bitCount) & 31];
+            }
+        }
+        return $out;
     }
 
     public function getSession(string $id): ?array
