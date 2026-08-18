@@ -4,6 +4,12 @@ Generated from git history. Grouped by commit date, newest first.
 
 ## 2026-08-18
 
+- `b9fe76b` feat: add Alpha Preview notice to start page
+- `cd7f8a2` chore: change dash character
+- `3a3e15a` chore: rename variable
+- `3984cd2` chore: alignm code comments
+- `bf13e1c` feat: replace base-word+suffix alias scheme with jiraiya name generator
+- `77364f1` fix: identity.js seed() misparses Crockford Base32 sessionId as hex
 - `11dd9e7` fix: clear composer draft from sessionStorage on end session
 - `73583bd` prompt: add edge case rule for meta questions
 - `d07b8fd` Merge branch 'feat/shorter-session-id' into develop
