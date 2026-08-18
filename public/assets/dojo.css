@@ -3,8 +3,8 @@
 :root {
     --accent: #d32f2f;      /* theme accent: matches index.php's "Sparring" wordmark red */
     --link-visited: #7b5940;
-    /* bubble colors, naming mirrors display.css's --accent-bubble-* pair —
-       input.css needs two full pairs (visitor + sparring), display.css only
+    /* bubble colors, naming mirrors arena.css's --accent-bubble-* pair —
+       dojo.css needs two full pairs (visitor + sparring), arena.css only
        needed one since the projector renders the AI side differently. */
     --bubble-visitor-bg: #f8e7e7;
     --bubble-visitor-text: #8b2d26;
@@ -40,7 +40,7 @@ main {
     flex-direction: column;
     height: 100%;
     gap: 0.5rem;
-    /* inset-aware padding needs viewport-fit=cover on input.php's meta to be non-zero */
+    /* inset-aware padding needs viewport-fit=cover on dojo.php's meta to be non-zero */
     padding: max(0.75rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right))
              max(0.75rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
 }
@@ -74,7 +74,7 @@ main {
 }
 #session-title.set { color: #222; }
 
-/* Shimmers only while /api/title is actually in flight (input.js adds/removes
+/* Shimmers only while /api/title is actually in flight (dojo.js adds/removes
    'title-pending' around that fetch) — not for the whole "Untitled" span,
    which also covers the time before any submission. Same shimmer treatment
    as the in-progress status text (#history .turn--pending, keyframes above),
@@ -188,7 +188,7 @@ main {
 /* Playbook: floating card, positioned the same way #title-card already is
    (fixed + centered via translate) rather than inventing a second overlay
    pattern. Visible from page load by default (no [hidden] in the markup);
-   input.js hides it once, on the first sent message. */
+   dojo.js hides it once, on the first sent message. */
 #playbook {
     /* absolute (not fixed) — fixed rubber-bands separately from the page
        during iOS overscroll, visibly detaching from the rest of the UI.

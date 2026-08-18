@@ -171,7 +171,7 @@ final class Sparring
      * 'targets-real-person' (the classifier's own outcome), or
      * 'llm-classification' (the classifier call itself failed — real reason
      * unknown). The visitor-facing UI reads this to choose a coarse message;
-     * the exact reason stays debug-only (?debug=1), see input.js.
+     * the exact reason stays debug-only (?debug=1), see dojo.js.
      */
     public function assessSuitability(string $contribution): array
     {

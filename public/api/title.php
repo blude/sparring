@@ -4,7 +4,7 @@ declare(strict_types=1);
 /**
  * Generates (or reuses) a session's header title, out of band from the turn
  * that created its first exchange — see Sparring::generateAndStoreTitle().
- * Fired fire-and-forget from the client (input.js) once turn 1 succeeds, so
+ * Fired fire-and-forget from the client (dojo.js) once turn 1 succeeds, so
  * every failure mode here just means the client's existing raw-text
  * placeholder title stays on screen — never a blocked or broken UI.
  */

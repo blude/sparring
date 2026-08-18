@@ -3,8 +3,8 @@
 use Valet\Drivers\ValetDriver;
 
 // Valet's default driver (BasicWithPublicValetDriver) tries `public/<uri>`
-// as its own front controller first — so a request for /input.php would
-// execute public/input.php directly, bypassing public/index.php and the
+// as its own front controller first — so a request for /dojo.php would
+// execute public/dojo.php directly, bypassing public/index.php and the
 // config.php it loads. This driver forces index.php as the sole front
 // controller (matching `php -S ... public/index.php` dev mode); only real
 // static assets serve directly, never a .php file.

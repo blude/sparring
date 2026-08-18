@@ -182,7 +182,7 @@ final class Store
      * overwritten after. The `title IS NULL` guard makes a duplicate call a
      * harmless no-op rather than a correctness problem: the client-side
      * fetch that triggers this has no de-dup of its own beyond a best-effort
-     * flag (input.js), so the store is the actual source of truth for "once."
+     * flag (dojo.js), so the store is the actual source of truth for "once."
      */
     public function setTitle(string $id, string $title): void
     {

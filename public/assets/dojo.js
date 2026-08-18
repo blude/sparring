@@ -166,7 +166,7 @@
     // One-time overlay shown once the consent decision is recorded (UC-01)
     // — not tied to any particular submission, so it never competes with
     // TF-03's in-progress state. On-screen time below matches the three
-    // lines' animations in input.css: line 1 slide (1000ms) + line 2's
+    // lines' animations in dojo.css: line 1 slide (1000ms) + line 2's
     // delay+slide (1050ms + 1000ms) + line 3's delay+grow (2100ms + 1000ms),
     // i.e. line 3 finishes at 3100ms.
     function showTitleCard() {
@@ -215,7 +215,7 @@
     }
 
     // Grow the textarea to fit its content, up to the 5-line cap set in
-    // input.css (max-height); overflow-y:auto there takes over past that.
+    // dojo.css (max-height); overflow-y:auto there takes over past that.
     // Reset to 'auto' first so scrollHeight can shrink back down, not just grow.
     function autoGrowField() {
         fieldEl.style.height = 'auto';
@@ -389,7 +389,7 @@
                 applySessionState(data.sessionState, data.turnsRemaining);
                 // Fire-and-forget title generation: doesn't block anything above,
                 // fires once per page load. 'title-pending' drives the shimmer
-                // (input.css) only for the span this fetch is actually in flight —
+                // (dojo.css) only for the span this fetch is actually in flight —
                 // not for "Untitled" in general, which also shows before any
                 // submission. Removed in .finally() so it comes off on failure too;
                 // any failure (network, malformed body) just leaves #session-title

@@ -169,7 +169,7 @@
     <p>Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design.</p>
     <p>Prepare your sharpest arguments, throw in your hardest punches, and be ready to take some well-intentioned blows back!</p>
   </div>
-  <a id="start-btn" href="/input">Start a new session</a>
+  <a id="start-btn" href="/dojo">Start a new session</a>
   <p class="learn-more"><a href="/philosophy">Learn more</a> about Sparring&rsquo;s philosophy.</p>
 </div>
 <hr class="divider">

@@ -1,5 +1,5 @@
 /*
- * Shared mermaid diagram rendering, used by input.js (SE-01) and display.js
+ * Shared mermaid diagram rendering, used by dojo.js (SE-01) and arena.js
  * (SE-02) alike. Only ever called on sparring-authored text — visitor text
  * always stays plain textContent at the call site, never routed through
  * here. This is the one intentional, narrowly-scoped exception to QR-04

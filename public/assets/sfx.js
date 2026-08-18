@@ -1,5 +1,5 @@
 /*
- * SE-01 only (display.php never loads this — no user gesture on the wall
+ * SE-01 only (arena.php never loads this — no user gesture on the wall
  * to unlock AudioContext). Engine is ZzFXMicro (assets/zzfx.min.js,
  * vendored, MIT license — https://github.com/KilledByAPixel/ZzFX), loaded
  * before this file. It declares zzfx/zzfxX/zzfxV via top-level `let`, not
@@ -40,7 +40,7 @@ window.SparringSfx = (function () {
         // uplifting rather than just an ascending run. Each note's release
         // is stretched so the two-note pairs and the chord each hold for
         // ~1000ms, lining up with the 3-phase, ~1000ms/phase title card
-        // timing in input.css/input.js (total ~3100ms both places).
+        // timing in dojo.css/dojo.js (total ~3100ms both places).
         titleCard: [
             [, 0, 391.9954, .01, .01, .47, 1, 1.5, , , , , , .1, , , , .91, .01], // pickup G4 (Ready?), held ~500ms
             [, 0, 523.2511, .01, .01, .47, 1, 1.5, , , , , , .1, , , , .91, .01], // pickup C5 (Ready?), held ~500ms

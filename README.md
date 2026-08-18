@@ -22,8 +22,8 @@ Preferred dev method is Valet — it's a real php-fpm SAPI, same as prod, so
 it doesn't inherit a shell's `export` and needs the `.env` file (`config.php`
 loads it on every request; a real env var still wins if both are set).
 `valet link` reads the folder name (`sparring`) as the site name; run it
-once from the repo root, then open `https://sparring.test/input` (SE-01)
-and `https://sparring.test/display` (SE-02). `LocalValetDriver.php` at the
+once from the repo root, then open `https://sparring.test/dojo` (SE-01)
+and `https://sparring.test/arena` (SE-02). `LocalValetDriver.php` at the
 repo root makes Valet route the same way as the command below.
 
 Alternative — no Valet, plain PHP built-in server:
@@ -33,7 +33,7 @@ export ANTHROPIC_API_KEY=sk-ant-...    # inherits from the shell here, .env not 
 php -S localhost:8080 -t public public/index.php   # serves SE-01 + SE-02 + the API
 ```
 
-Then open `http://localhost:8080/input` and `http://localhost:8080/display`.
+Then open `http://localhost:8080/dojo` and `http://localhost:8080/arena`.
 
 ## Switch LLM provider
 
@@ -55,8 +55,8 @@ See `config.php`'s `--- LLM (PE-01) ---` block for every var name/default.
 
 Either way, `public/index.php` is the sole front controller — see
 `public/index.php` for the route table. Real static assets (e.g.
-`/assets/input.js`) still serve directly; page/endpoint scripts do not —
-`/input.php` 404s, only the pretty URL `/input` works. The display feed
+`/assets/dojo.js`) still serve directly; page/endpoint scripts do not —
+`/dojo.php` 404s, only the pretty URL `/dojo` works. The display feed
 works immediately off the pilot seed; the input client needs
 `ANTHROPIC_API_KEY` set and `composer install` run, since it calls the LLM.
 
@@ -83,7 +83,7 @@ On prod, run any `bin/*.php` script through `ee shell <site> --command='php bin/
 instead of bare `php bin/...` on the host — the host's PHP may be older than
 this project's 8.2+ requirement (see Deploy below).
 
-`?debug=1` on `/input`/`/display` shows a diagnostics panel (session
+`?debug=1` on `/dojo`/`/arena` shows a diagnostics panel (session
 id, origin, rate-limit remaining, generation timing, moderation reason on a
 flagged contribution) — dev-only, off by default.
 

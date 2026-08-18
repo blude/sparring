@@ -7,8 +7,8 @@ declare(strict_types=1);
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Session — Sparring</title>
-<?= ogTags('/input', 'Session — Sparring', 'Argue with an AI sparring partner about Digital Design, live.') ?>
-<link rel="stylesheet" href="<?= fasset('input.css') ?>">
+<?= ogTags('/dojo', 'Session — Sparring', 'Argue with an AI sparring partner about Digital Design, live.') ?>
+<link rel="stylesheet" href="<?= fasset('dojo.css') ?>">
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
 </head>
 <body>
@@ -101,6 +101,6 @@ window.JUICY = {
 <script src="<?= fasset('particles.js') ?>"></script>
 <script src="<?= fasset('mermaid.min.js') ?>"></script>
 <script src="<?= fasset('mermaid-render.js') ?>"></script>
-<script src="<?= fasset('input.js') ?>"></script>
+<script src="<?= fasset('dojo.js') ?>"></script>
 </body>
 </html>
