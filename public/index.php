@@ -21,6 +21,8 @@ $routes = [
     '/api/title'            => __DIR__ . '/api/title.php',
 ];
 
+require_once __DIR__ . '/../config.php';
+
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 // php -S with a router script intercepts *every* request, including real
@@ -35,9 +37,7 @@ if ($path !== '/' && is_file($asFile) && !str_ends_with($asFile, '.php')) {
 }
 
 if (!isset($routes[$path])) {
-    http_response_code(404);
-    exit('Not found');
+    renderErrorPage(404, "This page doesn't exist or may have moved.");
 }
 
-require_once __DIR__ . '/../config.php';
 require $routes[$path];

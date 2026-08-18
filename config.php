@@ -36,9 +36,16 @@ unset($dotenvPath, $line, $key, $value);
 if (PHP_SAPI !== 'cli') {
     ini_set('display_errors', '0');
     set_exception_handler(static function (Throwable $e): void {
-        http_response_code(500);
-        header('Content-Type: application/json');
-        echo json_encode(['status' => 'error']);
+        // API endpoints are fetched by JS, not viewed — keep the JSON reply.
+        // Everything else is a page a visitor is looking at, so it gets the
+        // same HTML fallback as a 404.
+        if (str_starts_with($_SERVER['REQUEST_URI'], '/api/')) {
+            http_response_code(500);
+            header('Content-Type: application/json');
+            echo json_encode(['status' => 'error']);
+            return;
+        }
+        renderErrorPage(500, 'Something went wrong on our end. Try again in a moment.');
     });
 }
 
@@ -85,6 +92,33 @@ const JUICY_DISPLAY_ENTRANCE = true;
 function fasset(string $file): string
 {
     return "assets/$file?v=" . filemtime(__DIR__ . "/public/assets/$file");
+}
+
+// --- Error pages ---
+// Fallback UI for 404/500/etc — plain, no stack trace or technical detail
+// (that's what the exception handler above swallows for API calls), just
+// the code, a human-readable reason, and a way back in. Used by the router
+// for unmatched routes and by the exception handler above for page requests.
+function renderErrorPage(int $code, string $message): never
+{
+    http_response_code($code);
+    echo <<<HTML
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$code — Sparring</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:40rem;margin:2rem auto;padding:0 1rem;text-align:center;touch-action:manipulation;}h1{font-size:3rem;margin:0;}a{color:#d32f2f;}a:visited{color:#7b5940;}</style>
+</head>
+<body>
+<h1>$code</h1>
+<p>$message</p>
+<p><a href="/">Back to start</a></p>
+</body>
+</html>
+HTML;
+    exit;
 }
 
 // --- Social sharing (Open Graph / Twitter Card) ---
