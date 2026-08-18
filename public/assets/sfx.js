@@ -125,6 +125,11 @@ window.SparringSfx = (function () {
 
     // PRESETS/SEQUENCES/playChain exposed too — sfx-debug.php reads/calls
     // these directly rather than keeping a second copy that can drift out
-    // of sync with this one.
-    return { play: play, playSequence: playSequence, unlock: unlock, PRESETS: PRESETS, SEQUENCES: SEQUENCES, playChain: playChain };
+    // of sync with this one. durationMs/isChord exposed for tests/smoke_sfx.js
+    // — both are pure (no zzfx/setTimeout call), so no reason to hide them.
+    return {
+        play: play, playSequence: playSequence, unlock: unlock,
+        PRESETS: PRESETS, SEQUENCES: SEQUENCES, playChain: playChain,
+        durationMs: durationMs, isChord: isChord,
+    };
 })();
