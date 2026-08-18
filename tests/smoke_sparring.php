@@ -74,6 +74,13 @@ $stale = gmdate('Y-m-d\TH:i:s\Z', time() - (SESSION_TTL_HOURS * 3600 + 60));
 assert($sparring->isExpired(['lastActiveAt' => $fresh]) === false);
 assert($sparring->isExpired(['lastActiveAt' => $stale]) === true);
 
+// Same check via the injectable $now — decoupled from the real wall clock entirely.
+$fixedNow = 2_000_000_000; // arbitrary fixed epoch instant
+$fixedFresh = gmdate('Y-m-d\TH:i:s\Z', $fixedNow - 60);
+$fixedStale = gmdate('Y-m-d\TH:i:s\Z', $fixedNow - (SESSION_TTL_HOURS * 3600 + 60));
+assert($sparring->isExpired(['lastActiveAt' => $fixedFresh], $fixedNow) === false);
+assert($sparring->isExpired(['lastActiveAt' => $fixedStale], $fixedNow) === true);
+
 // --- processTurn gates, each on its own rate-limit bucket ---
 
 // FS-01-9/10/11: happy path, exchange persisted, scenario set once (first turn only).

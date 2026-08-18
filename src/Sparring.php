@@ -19,10 +19,14 @@ final class Sparring
     ) {
     }
 
-    /** TI-01/TI-03: "unknown or expired" is treated identically everywhere it's checked. */
-    public function isExpired(array $session): bool
+    /**
+     * TI-01/TI-03: "unknown or expired" is treated identically everywhere it's checked.
+     * $now defaults to time() — injectable so a test can check the TTL boundary
+     * deterministically instead of sleeping for real (tests/smoke_sparring.php).
+     */
+    public function isExpired(array $session, ?int $now = null): bool
     {
-        $ageSeconds = time() - strtotime($session['lastActiveAt']);
+        $ageSeconds = ($now ?? time()) - strtotime($session['lastActiveAt']);
         return $ageSeconds > SESSION_TTL_HOURS * 3600;
     }
 

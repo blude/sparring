@@ -77,11 +77,24 @@ for ($i = 0; $i < 3; $i++) {
 }
 assert($store->checkAndIncrementRateLimit($hash, 60, 3)['allowed'] === false); // 4th request in window exceeds limit of 3
 
+// --- rate limiting: window-boundary math via the injectable $now, no sleep() ---
+// window_start itself still stamps the real wall clock (self::now(), unchanged
+// by this param) — offsets below are margined generously so a slow test run
+// can't land on the wrong side of a boundary.
+$boundaryHash = hash('sha256', 'rate-limit-boundary-origin');
+$t0 = time();
+$b1 = $store->checkAndIncrementRateLimit($boundaryHash, 10, 5, $t0);
+assert($b1 === ['allowed' => true, 'remaining' => 4]);
+$b2 = $store->checkAndIncrementRateLimit($boundaryHash, 10, 5, $t0 + 5); // still inside the 10s window
+assert($b2 === ['allowed' => true, 'remaining' => 3]);
+$b3 = $store->checkAndIncrementRateLimit($boundaryHash, 10, 5, $t0 + 15); // past the window: resets, not a continuation
+assert($b3 === ['allowed' => true, 'remaining' => 4]);
+
 // --- maintenance: counts, reset, backup ---
 $before = $store->getCounts();
 assert($before['sessions'] === 2); // $session + $pilotSession created above
 assert($before['exchanges'] === 3); // 2 on $session, 1 on $pilotSession
-assert($before['rateLimitWindows'] === 1);
+assert($before['rateLimitWindows'] === 2); // $hash + $boundaryHash above
 $deleted = $store->resetAll();
 assert($deleted === $before);
 assert($store->getCounts() === ['sessions' => 0, 'exchanges' => 0, 'rateLimitWindows' => 0]);

@@ -304,10 +304,14 @@ final class Store
      * once expired (TF-03: no swept background job on an unattended host).
      * Returns ['allowed' => bool, 'remaining' => int] — remaining is surfaced to
      * debug mode (?debug=1), cheap enough to always compute.
+     *
+     * $now: window-expiry reference point, defaults to time(). Injectable so a
+     * test can check the window-boundary math deterministically instead of
+     * sleeping for real (tests/smoke_sparring.php).
      */
-    public function checkAndIncrementRateLimit(string $originHash, int $windowSeconds, int $maxRequests): array
+    public function checkAndIncrementRateLimit(string $originHash, int $windowSeconds, int $maxRequests, ?int $now = null): array
     {
-        $now = time();
+        $now = $now ?? time();
         $stmt = $this->pdo->prepare('SELECT * FROM rate_limit_windows WHERE origin_hash = :h');
         $stmt->execute(['h' => $originHash]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
