@@ -7,7 +7,13 @@ declare(strict_types=1);
  * post-exhibition purge for declined sessions are noted as future work in
  * the plan, not built here.
  *
- * Usage: php bin/export.php [output-path]   (defaults to stdout)
+ * --jsonl [--session=<id>] switches to one exchange-per-line JSONL, optionally
+ * scoped to a single session (e.g. piping one visitor's transcript elsewhere).
+ * Sessions metadata is dropped in this mode — it doesn't fit a flat exchange
+ * stream, and the caller already knows the session_id it asked for.
+ *
+ * Usage: php bin/export.php [output-path]                     (full JSON dump)
+ *        php bin/export.php --jsonl [--session=<id>] [output-path]
  */
 
 require __DIR__ . '/../config.php';
@@ -19,10 +25,46 @@ if (php_sapi_name() !== 'cli') {
 }
 
 if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
-    exit("Usage: php bin/export.php [output-path]   (defaults to stdout)\n");
+    exit(
+        "Usage: php bin/export.php [output-path]                     (full JSON dump)\n" .
+        "       php bin/export.php --jsonl [--session=<id>] [output-path]\n"
+    );
 }
 
 $store = new Store(STORE_DB_PATH);
+
+$jsonl = in_array('--jsonl', $argv, true);
+$sessionId = null;
+foreach ($argv as $arg) {
+    if (str_starts_with($arg, '--session=')) {
+        $sessionId = substr($arg, strlen('--session='));
+    }
+}
+// output path is the first positional (non-flag) arg after the script name
+$outputPath = null;
+foreach (array_slice($argv, 1) as $arg) {
+    if (!str_starts_with($arg, '--')) {
+        $outputPath = $arg;
+        break;
+    }
+}
+
+if ($jsonl) {
+    $exchanges = $sessionId === null ? $store->getAllExchanges() : $store->getExchanges($sessionId);
+    $lines = array_map(
+        fn(array $e) => json_encode($e, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+        $exchanges
+    );
+    $out = implode("\n", $lines) . ($lines === [] ? '' : "\n");
+
+    if ($outputPath === null) {
+        fwrite(STDOUT, $out);
+    } else {
+        file_put_contents($outputPath, $out);
+        fwrite(STDERR, sprintf("exported %d exchange(s) to %s\n", count($exchanges), $outputPath));
+    }
+    exit;
+}
 
 $export = [
     'exportedAt' => gmdate('Y-m-d\TH:i:s\Z'),
@@ -32,7 +74,6 @@ $export = [
 
 $json = json_encode($export, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
-$outputPath = $argv[1] ?? null;
 if ($outputPath === null) {
     fwrite(STDOUT, $json . "\n");
 } else {
