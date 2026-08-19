@@ -7,10 +7,19 @@ declare(strict_types=1);
  * See plan doc "Numeric defaults" table for the source TBC per constant.
  */
 
-// ponytail: hand-rolled .env loader, not vlucas/phpdotenv — one file, KEY=VALUE
-// lines, no quoting/interpolation support. Needed because the web SAPI (Valet's
-// php-fpm, or any prod php-fpm pool) doesn't inherit a shell's `export`, unlike
-// `php -S` run from a terminal. Real env vars always win — this only fills gaps.
+/*
+|--------------------------------------------------------------------------
+| Environment
+|--------------------------------------------------------------------------
+|
+| ponytail: hand-rolled .env loader, not vlucas/phpdotenv — one file,
+| KEY=VALUE lines, no quoting/interpolation support. Needed because the
+| web SAPI (Valet's php-fpm, or any prod php-fpm pool) doesn't inherit a
+| shell's `export`, unlike `php -S` run from a terminal. Real env vars
+| always win — this only fills gaps.
+|
+*/
+
 $dotenvPath = __DIR__ . '/.env';
 if (is_file($dotenvPath)) {
     foreach (file($dotenvPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
@@ -27,12 +36,21 @@ if (is_file($dotenvPath)) {
 }
 unset($dotenvPath, $line, $key, $value);
 
-// QR-11: an uncaught exception on any public endpoint (missing credential,
-// unwritable store, ...) must not leak a stack trace or filesystem path.
-// Every public/api/*.php requires this file first, so one handler covers all.
-// Scoped to the web SAPI only — bin/*.php CLI scripts also require this file,
-// and an admin running reset_db.php/backup_db.php needs the real exception
-// and stack trace on stderr, not a swallowed "{"status":"error"}".
+/*
+|--------------------------------------------------------------------------
+| Error handling
+|--------------------------------------------------------------------------
+|
+| QR-11: an uncaught exception on any public endpoint (missing credential,
+| unwritable store, ...) must not leak a stack trace or filesystem path.
+| Every public/api/*.php requires this file first, so one handler covers
+| all. Scoped to the web SAPI only — bin/*.php CLI scripts also require
+| this file, and an admin running reset_db.php/backup_db.php needs the
+| real exception and stack trace on stderr, not a swallowed
+| "{"status":"error"}".
+|
+*/
+
 if (PHP_SAPI !== 'cli') {
     ini_set('display_errors', '0');
     set_exception_handler(static function (Throwable $e): void {
@@ -49,38 +67,73 @@ if (PHP_SAPI !== 'cli') {
     });
 }
 
-// --- Session / turn limits ---
+/*
+|--------------------------------------------------------------------------
+| Session / turn limits
+|--------------------------------------------------------------------------
+*/
+
 const TURN_ALLOWANCE = 10;             // exchanges permitted per session (SG-04, E-01.8)
 const CONTRIBUTION_MAX_CHARS = 600;    // (SQR-04, TF-01 FS-01-4)
 const SESSION_TTL_HOURS = 6;           // undefined in spec; drives "expired" for TI-01/02/03
 
-// --- Rate limiting (TF-03, SC-04) ---
+/*
+|--------------------------------------------------------------------------
+| Rate limiting (TF-03, SC-04)
+|--------------------------------------------------------------------------
+*/
+
 const RATE_LIMIT_WINDOW_SECONDS = 60;
 const RATE_LIMIT_MAX_REQUESTS = 10;
 
-// --- Generation timing (SQR-01) ---
+/*
+|--------------------------------------------------------------------------
+| Generation timing (SQR-01)
+|--------------------------------------------------------------------------
+*/
+
 const GENERATION_TIMEOUT_SECONDS = 20; // SE-03's own bound on the provider call
 const SE01_WAIT_BOUND_SECONDS = 25;    // SE-01's bound, kept above the one above
 
-// --- Display feed (AP-02, SE-02 TF-01, TF-04) ---
+/*
+|--------------------------------------------------------------------------
+| Display feed (AP-02, SE-02 TF-01, TF-04)
+|--------------------------------------------------------------------------
+*/
+
 const DISPLAY_POLL_INTERVAL_SECONDS = 4;
 const DISPLAY_ITEM_LIMIT = 4;
 const DISPLAY_COLUMNS = 2; // masonry layout, TBC-01: 2x2 target at assumed 1920x1080, more room per item
 const SCENARIO_MAX_CHARS = 140; // TF-05: trim-based scenario statement length
 const TITLE_MAX_CHARS = 38;     // header title generated from the first contribution, LLM or trim-fallback
 
-// --- Storage (AP-04) ---
-// Outside the served docroot on the real host; project-root-relative here.
+/*
+|--------------------------------------------------------------------------
+| Storage (AP-04)
+|--------------------------------------------------------------------------
+|
+| Outside the served docroot on the real host; project-root-relative here.
+|
+*/
+
 const STORE_DB_PATH = __DIR__ . '/data/store.db';
 const PILOT_DATA_DIR = __DIR__ . '/data/pilot';
 
-// --- Opening prompts (QR-code-driven session starters, /dojo?scenario=<id>) ---
-// ID -> raw description text. Distinct from Store::setScenario()/
-// derive_scenario_statement()'s "scenario" (the wall's derived heading from
-// the visitor's own first contribution) — this is a pre-authored opener
-// picked by which QR code was scanned. Do not rename to anything containing
-// "scenario" in code-facing identifiers; the query param itself stays
-// `scenario` (external/QR-facing, chosen by whoever prints the QR codes).
+/*
+|--------------------------------------------------------------------------
+| Opening prompts (QR-code-driven session starters, /dojo?scenario=<id>)
+|--------------------------------------------------------------------------
+|
+| ID -> raw description text. Distinct from Store::setScenario()/
+| derive_scenario_statement()'s "scenario" (the wall's derived heading
+| from the visitor's own first contribution) — this is a pre-authored
+| opener picked by which QR code was scanned. Do not rename to anything
+| containing "scenario" in code-facing identifiers; the query param
+| itself stays `scenario` (external/QR-facing, chosen by whoever prints
+| the QR codes).
+|
+*/
+
 const OPENING_PROMPTS = [
     'wicked-problems' => 'Some decisions can never fully be "solved" — only managed.',
     // add one entry per QR code before the exhibition
@@ -98,9 +151,16 @@ function resolve_opening_message(?string $id): ?string
     return 'Sparring Scenario: ' . OPENING_PROMPTS[$id];
 }
 
-// --- Juiciness toggles (TODO.md JUICYNESS) ---
-// Global kill switch plus one per effect, each independently flippable —
-// no code change needed to turn any of this off for a demo or a fault.
+/*
+|--------------------------------------------------------------------------
+| Juiciness toggles (TODO.md JUICYNESS)
+|--------------------------------------------------------------------------
+|
+| Global kill switch plus one per effect, each independently flippable —
+| no code change needed to turn any of this off for a demo or a fault.
+|
+*/
+
 const JUICY_ENABLED = true;
 const JUICY_PUNCH = true;
 const JUICY_TITLE_CARD = true;
@@ -108,21 +168,36 @@ const JUICY_WIGGLE = true;
 const JUICY_SOUND = true;
 const JUICY_DISPLAY_ENTRANCE = true;
 
-// --- Static assets ---
-// Cache-busting: appends the file's mtime as a query string so editing a CSS/JS
-// file forces browsers to fetch the new version instead of serving a stale
-// cached copy on a plain reload (no build step, no manifest, no versioning
-// scheme — just the filesystem's own timestamp).
+/*
+|--------------------------------------------------------------------------
+| Static assets
+|--------------------------------------------------------------------------
+|
+| Cache-busting: appends the file's mtime as a query string so editing a
+| CSS/JS file forces browsers to fetch the new version instead of serving
+| a stale cached copy on a plain reload (no build step, no manifest, no
+| versioning scheme — just the filesystem's own timestamp).
+|
+*/
+
 function fasset(string $file): string
 {
     return "assets/$file?v=" . filemtime(__DIR__ . "/public/assets/$file");
 }
 
-// --- Error pages ---
-// Fallback UI for 404/500/etc — plain, no stack trace or technical detail
-// (that's what the exception handler above swallows for API calls), just
-// the code, a human-readable reason, and a way back in. Used by the router
-// for unmatched routes and by the exception handler above for page requests.
+/*
+|--------------------------------------------------------------------------
+| Error pages
+|--------------------------------------------------------------------------
+|
+| Fallback UI for 404/500/etc — plain, no stack trace or technical detail
+| (that's what the exception handler above swallows for API calls), just
+| the code, a human-readable reason, and a way back in. Used by the
+| router for unmatched routes and by the exception handler above for
+| page requests.
+|
+*/
+
 function renderErrorPage(int $code, string $message): never
 {
     http_response_code($code);
@@ -145,10 +220,17 @@ HTML;
     exit;
 }
 
-// --- Social sharing (Open Graph / Twitter Card) ---
-// One place to change the domain or share image — was duplicated across
-// every public page's <head>, so an image/domain change meant editing six
-// files instead of one.
+/*
+|--------------------------------------------------------------------------
+| Social sharing (Open Graph / Twitter Card)
+|--------------------------------------------------------------------------
+|
+| One place to change the domain or share image — was duplicated across
+| every public page's <head>, so an image/domain change meant editing
+| six files instead of one.
+|
+*/
+
 const SITE_NAME = 'Sparring';
 const SITE_URL = 'https://sparringmethod.com';
 const OG_IMAGE = SITE_URL . '/assets/img/share-image.png'; // 1200x630 og:image spec, gets cropped on some platforms
@@ -173,11 +255,19 @@ function ogTags(string $path, string $title, string $description): string
 HTML;
 }
 
-// --- LLM (PE-01) ---
-// Provider is operator-selected via LLM_PROVIDER: 'anthropic' (default) or
-// 'openai' — the latter is any OpenAI-Chat-Completions-compatible endpoint,
-// so it also covers a local model served through LM Studio (point
-// OPENAI_BASE_URL at it; OPENAI_API_KEY can stay unset). See createLlmClient().
+/*
+|--------------------------------------------------------------------------
+| LLM (PE-01)
+|--------------------------------------------------------------------------
+|
+| Provider is operator-selected via LLM_PROVIDER: 'anthropic' (default)
+| or 'openai' — the latter is any OpenAI-Chat-Completions-compatible
+| endpoint, so it also covers a local model served through LM Studio
+| (point OPENAI_BASE_URL at it; OPENAI_API_KEY can stay unset). See
+| createLlmClient().
+|
+*/
+
 const LLM_PROVIDER_ENV = 'LLM_PROVIDER';
 
 const ANTHROPIC_API_KEY_ENV = 'ANTHROPIC_API_KEY';
