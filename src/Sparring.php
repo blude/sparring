@@ -19,6 +19,12 @@ final class Sparring
     ) {
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Session state
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * TI-01/TI-03: "unknown or expired" is treated identically everywhere it's checked.
      * $now defaults to time() — injectable so a test can check the TTL boundary
@@ -40,6 +46,12 @@ final class Sparring
         }
         return 'open';
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Turn processing (TF-01)
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * TF-01: everything between a visitor pressing submit and a response
@@ -121,6 +133,12 @@ final class Sparring
         ];
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Title generation
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Generates and persists a session's header title, derived from its
      * first contribution. Called once, out of band from processTurn — by
@@ -163,6 +181,12 @@ final class Sparring
         $this->store->setTitle($sessionId, $title);
         return $title;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Moderation (TF-02)
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * TF-02: whether a contribution may appear on the public surface. Never
@@ -215,6 +239,12 @@ final class Sparring
         }
         return (bool) preg_match('/\b(' . implode('|', $terms) . ')\b/iu', $contribution);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Display assembly (TF-04)
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * TF-04: assembles the ordered items the projection renders. Every decision

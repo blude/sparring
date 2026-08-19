@@ -20,6 +20,12 @@ final class OpenAiLlmClient extends AbstractLlmClient
     private string $generationModel;
     private string $classificationModel;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Setup
+    |--------------------------------------------------------------------------
+    */
+
     public function __construct()
     {
         $baseUrl = getenv(OPENAI_BASE_URL_ENV) ?: OPENAI_BASE_URL_DEFAULT;
@@ -35,6 +41,12 @@ final class OpenAiLlmClient extends AbstractLlmClient
 
         $this->loadPrompts();
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Generation (TO-01)
+    |--------------------------------------------------------------------------
+    */
 
     /** TO-01, same two-attempt policy as AnthropicLlmClient::generateResponse(). */
     public function generateResponse(array $priorExchanges, string $newContribution): string
@@ -91,6 +103,12 @@ final class OpenAiLlmClient extends AbstractLlmClient
         throw new GenerationFailedException('generation failed after retries', 0, $lastError);
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Classification (TO-02)
+    |--------------------------------------------------------------------------
+    */
+
     /** TO-02 classification half. Single attempt, no retry — same fail-closed contract as Anthropic's. */
     public function classify(string $contribution): string
     {
@@ -117,6 +135,12 @@ final class OpenAiLlmClient extends AbstractLlmClient
 
         throw new RuntimeException('classification response missing a valid classification');
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Title generation
+    |--------------------------------------------------------------------------
+    */
 
     /** Same fallback-on-failure contract as AnthropicLlmClient::generateTitle(). */
     public function generateTitle(string $contribution): string
@@ -145,6 +169,12 @@ final class OpenAiLlmClient extends AbstractLlmClient
         throw new RuntimeException('title response missing a valid title');
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Request helpers
+    |--------------------------------------------------------------------------
+    */
+
     /** Shared single-attempt structured-output request for classify()/generateTitle(). */
     private function requestJsonSchema(string $model, string $prompt, int $maxTokens, float $timeout, string $schemaName, array $schema): array
     {
@@ -169,6 +199,12 @@ final class OpenAiLlmClient extends AbstractLlmClient
 
         return is_array($decoded) ? $decoded : [];
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pure response helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Maps an HTTP status + decoded body to a GenerationFailedException message,

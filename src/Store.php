@@ -80,7 +80,11 @@ final class Store
         $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_sessions_display ON sessions(origin, displayable, last_active_at)');
     }
 
-    // --- Sessions (E-01) ---
+    /*
+    |--------------------------------------------------------------------------
+    | Sessions (E-01)
+    |--------------------------------------------------------------------------
+    */
 
     /** Creates a session with origin fixed at creation (SQR-05) and no other value assigned yet. */
     public function createSession(string $origin): array
@@ -190,7 +194,11 @@ final class Store
         $stmt->execute(['t' => $title, 'id' => $id]);
     }
 
-    // --- Exchanges (E-02) ---
+    /*
+    |--------------------------------------------------------------------------
+    | Exchanges (E-02)
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Writes one completed exchange and advances the session's turn count in the same
@@ -297,7 +305,11 @@ final class Store
         return array_map($this->hydrateSession(...), $stmt->fetchAll(PDO::FETCH_ASSOC));
     }
 
-    // --- Rate limiting (E-03) ---
+    /*
+    |--------------------------------------------------------------------------
+    | Rate limiting (E-03)
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Reads/increments the counting window for a hashed origin, resetting it in place
@@ -338,7 +350,11 @@ final class Store
         return ['allowed' => true, 'remaining' => $maxRequests - ((int) $row['request_count'] + 1)];
     }
 
-    // --- Maintenance (bin/reset_db.php, bin/backup_db.php) ---
+    /*
+    |--------------------------------------------------------------------------
+    | Maintenance (bin/reset_db.php, bin/backup_db.php)
+    |--------------------------------------------------------------------------
+    */
 
     /** Row counts across every table this store owns — used by --dry-run and post-reset reporting. */
     public function getCounts(): array
@@ -401,7 +417,11 @@ final class Store
         return $stmt->rowCount();
     }
 
-    // --- Helpers ---
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     private static function now(): string
     {

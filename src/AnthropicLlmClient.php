@@ -19,6 +19,12 @@ final class AnthropicLlmClient extends AbstractLlmClient
 {
     private Client $client;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Setup
+    |--------------------------------------------------------------------------
+    */
+
     public function __construct(?string $apiKey = null)
     {
         $key = $apiKey ?? (getenv(ANTHROPIC_API_KEY_ENV) ?: null);
@@ -28,6 +34,12 @@ final class AnthropicLlmClient extends AbstractLlmClient
         $this->client = new Client(apiKey: $key);
         $this->loadPrompts();
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Failure classification
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Pure exception-class -> outcome mapping, mirroring
@@ -51,6 +63,12 @@ final class AnthropicLlmClient extends AbstractLlmClient
             default => null, // APIConnectionException (not an APIStatusException at all): also retryable
         };
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Generation (TO-01)
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * TO-01. $priorExchanges: ordered list of ['visitorContribution' => ..., 'sparringResponse' => ...].
@@ -116,6 +134,12 @@ final class AnthropicLlmClient extends AbstractLlmClient
         throw new GenerationFailedException('generation failed after retries', 0, $lastError);
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Classification (TO-02)
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * TO-02 classification half. Single attempt, no retry — TF-02 fails closed on
      * ANY failure, so every failure mode (network, 4xx/5xx, malformed response) is
@@ -168,6 +192,12 @@ final class AnthropicLlmClient extends AbstractLlmClient
 
         throw new RuntimeException('classification response missing a valid classification');
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Title generation
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Generates a short (TITLE_MAX_CHARS) header title from a session's first
