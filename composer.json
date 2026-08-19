@@ -12,5 +12,9 @@
         "allow-plugins": {
             "php-http/discovery": true
         }
+    },
+    "scripts": {
+        "post-install-cmd": "git config core.hooksPath .githooks 2>/dev/null || true",
+        "post-update-cmd": "git config core.hooksPath .githooks 2>/dev/null || true"
     }
 }

@@ -2,7 +2,8 @@
 # Rejects commit messages that don't follow Conventional Commits
 # (https://www.conventionalcommits.org/). No deps — plain POSIX sh so it
 # works without npm/commitlint, matching this project's no-build-step rule.
-# Activate once per checkout: git config core.hooksPath .githooks
+# `composer install` wires this up automatically (core.hooksPath). Manual:
+# git config core.hooksPath .githooks
 
 msg_file="$1"
 first_line=$(head -n1 "$msg_file")
