@@ -40,12 +40,7 @@ Rationale: the exhibition offers a great sneaky opportunity to collect feedback 
 
 ### General
 
-- [ ] Add support for invoking a starting scenario through a query parameter
-  - Allows different QR Codes to be generated, each one containing URLs pointing to a different opening scenario
-  - Naturally, visitor has to accept terms and conditions first.
-  - Query parameter only sends a scenario scenario ID.
-  - The Scenario ID and message pairs are mapped in code. 
-  - First message is sent automatically with "Sparring Scenario: {Scenario Description}"
+- [x] Add support for invoking a starting scenario through a query parameter — shipped: `/dojo?scenario=<id>` resolves against `OPENING_PROMPTS` in `config.php` (code-mapped, whitelist-validated) and auto-sends "Sparring Scenario: {Scenario Description}" as the first turn once consent is recorded. Named "opening message/prompt" in code to avoid colliding with the unrelated existing `scenario` concept (the wall's derived heading). No acknowledgment branch, no wall suppression — those stay separate, unshipped TODO items.
 - [ ] update sparring.md prompt (blocked, waiting for instructions)
 - [ ] update moderation.md prompt (blocked, waiting for instructions)
 
