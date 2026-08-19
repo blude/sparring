@@ -38,8 +38,8 @@ _Satisfies:_ SG-04 +
 _Rationale:_ Several seconds of unexplained stillness in a gallery reads as a broken piece, not a thinking one.
 
 *G-04 — Make unsuitable input visible* +
-The element shall show that an input is invalid and should require the user to modify it's content before sending again. +
-_Rationale:_ Participants should'd be allowed to edit their input to fix the problem. +
+The element shall show that an input is invalid and should require the user to modify its content before sending again. +
+_Rationale:_ Participants should be allowed to edit their input to fix the problem. +
 _Note:_ this is the authoritative behavior for unsuitable content — an earlier version of L2's AP-05 described the session ending instead; that reading is superseded (see L2 AP-05's own note on why).
 
 *G-05 — Give the visitor a light identity, and a way to deliberately start over* +

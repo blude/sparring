@@ -13,7 +13,7 @@
 | PS-xx-x | Business Process Step
 | PA-xx-x | Business Process Step Alternative
 | BQR-xx | Business Quality Requirements
-| BC-xx | Business Contraints
+| BC-xx | Business Constraints
 |===
 
 == Scope: System Design Concept

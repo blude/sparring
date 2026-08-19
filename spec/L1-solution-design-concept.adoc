@@ -10,7 +10,7 @@
 
 == 1. Vision
 
-=== Ffuture Press Release
+=== Future Press Release
 
 *Dortmund, October 2026. Sparring goes public at Superraum.*
 
@@ -22,7 +22,7 @@ The AI was built with instructions and extended knowledge for answering requests
 
 The installation ran unattended through opening hours. Visitors who arrived to an idle wall still found something to read, because sessions from earlier pilot runs kept the projection populated between live participants. Sessions started with a scan — or a tap on the landing screen for anyone who found the piece by its address instead — and ended when the visitor walked away, with no account and no app. The only "name" attached to anything on the wall was a nickname generated from the session itself, never typed by the visitor and never traceable back to who they were.
 
-Several visitors spent their session enganging with prompts that were prepared by the exhibitor which explored themes like generative and agentic AI, especifically how these emerging technologies transforms the underlying material from which digital solutions are made of, and how Digital Design education must be reconfigured and reapplied to this new reality, as well as the business and human-centered perspectives around economic viability, desirability, technical feasibility and so on.
+Several visitors spent their session engaging with prompts that were prepared by the exhibitor which explored themes like generative and agentic AI, specifically how these emerging technologies transform the underlying material from which digital solutions are made of, and how Digital Design education must be reconfigured and reapplied to this new reality, as well as the business and human-centered perspectives around economic viability, desirability, technical feasibility and so on.
 
 A few tried to talk the system out of its stance rather than working the problem with it. Those attempts stayed on the wall like every other exchange. "That is not misuse, that is the experiment," Sarah said. "If someone can talk the friction away in four turns in a gallery, that is a finding I would rather have than not."
 
@@ -74,7 +74,7 @@ _Satisfies:_ BG-01
 flowchart LR
   VCA01(["VCA-01 Participating visitor"])
   VCA02(["VCA-02 Observing visitor"])
-  VCA03["VCA-03 Thesis author / exhibitior"]
+  VCA03["VCA-03 Thesis author / exhibitor"]
   VCA04["VCA-04 The installation"]
   VCA05["VCA-05 LLM provider"]
 

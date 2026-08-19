@@ -7,7 +7,7 @@
 - [ ] Add prompt evaluation suite
 - [ ] Fix prompt introspection hiccup
 - [ ] Use session title as the de facto session identifier for exchanges in the arena display
-- [ ] Fix typos in specs
+- [x] Fix typos in specs
 - [ ] Add cross-references in specs
 - [ ] Publish specs to HTML
 - [ ] Rename scenario query param to o, for opening

@@ -1,4 +1,4 @@
-= Szstem Realization Concept
+= System Realization Concept
 
 == Available Setup
 
