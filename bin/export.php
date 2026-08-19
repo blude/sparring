@@ -51,8 +51,14 @@ foreach (array_slice($argv, 1) as $arg) {
 
 if ($jsonl) {
     $exchanges = $sessionId === null ? $store->getAllExchanges() : $store->getExchanges($sessionId);
+    // OpenAI fine-tuning chat format: one {"messages": [...]} line per exchange.
     $lines = array_map(
-        fn(array $e) => json_encode($e, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+        fn(array $e) => json_encode([
+            'messages' => [
+                ['role' => 'user', 'content' => $e['visitorContribution']],
+                ['role' => 'assistant', 'content' => $e['sparringResponse']],
+            ],
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
         $exchanges
     );
     $out = implode("\n", $lines) . ($lines === [] ? '' : "\n");
