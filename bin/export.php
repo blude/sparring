@@ -7,10 +7,11 @@ declare(strict_types=1);
  * post-exhibition purge for declined sessions are noted as future work in
  * the plan, not built here.
  *
- * --jsonl [--session=<id>] switches to one exchange-per-line JSONL, optionally
- * scoped to a single session (e.g. piping one visitor's transcript elsewhere).
- * Sessions metadata is dropped in this mode — it doesn't fit a flat exchange
- * stream, and the caller already knows the session_id it asked for.
+ * --jsonl [--session=<id>] switches to one conversation-per-line JSONL in the
+ * OpenAI fine-tuning chat format ({"messages": [...]}), each exchange in a
+ * session flattened to a user/assistant turn pair. --session=<id> scopes to
+ * one session (one line out); omitted, every session gets its own line.
+ * Sessions metadata is dropped in this mode — it doesn't fit the schema.
  *
  * Usage: php bin/export.php [output-path]                     (full JSON dump)
  *        php bin/export.php --jsonl [--session=<id>] [output-path]
@@ -51,15 +52,19 @@ foreach (array_slice($argv, 1) as $arg) {
 
 if ($jsonl) {
     $exchanges = $sessionId === null ? $store->getAllExchanges() : $store->getExchanges($sessionId);
-    // OpenAI fine-tuning chat format: one {"messages": [...]} line per exchange.
+
+    // Group into one ordered turn-list per session. getAllExchanges()/getExchanges()
+    // are already ordered by (session_id,) position, so a plain bucket preserves it.
+    $bySession = [];
+    foreach ($exchanges as $e) {
+        $bySession[$e['sessionId']][] = ['role' => 'user', 'content' => $e['visitorContribution']];
+        $bySession[$e['sessionId']][] = ['role' => 'assistant', 'content' => $e['sparringResponse']];
+    }
+
+    // OpenAI fine-tuning chat format: one {"messages": [...]} line per session.
     $lines = array_map(
-        fn(array $e) => json_encode([
-            'messages' => [
-                ['role' => 'user', 'content' => $e['visitorContribution']],
-                ['role' => 'assistant', 'content' => $e['sparringResponse']],
-            ],
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
-        $exchanges
+        fn(array $messages) => json_encode(['messages' => $messages], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+        array_values($bySession)
     );
     $out = implode("\n", $lines) . ($lines === [] ? '' : "\n");
 
@@ -67,7 +72,7 @@ if ($jsonl) {
         fwrite(STDOUT, $out);
     } else {
         file_put_contents($outputPath, $out);
-        fwrite(STDERR, sprintf("exported %d exchange(s) to %s\n", count($exchanges), $outputPath));
+        fwrite(STDERR, sprintf("exported %d session(s) to %s\n", count($bySession), $outputPath));
     }
     exit;
 }
