@@ -152,6 +152,7 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 | Retry | Button press | UC-01, UC-02 | Only alongside a failure status message |
 | View own identity | Press the avatar to open a popover showing the alias; dismissed by pressing elsewhere, pressing the avatar again, or Escape | UC-01, UC-03 | Once consent is recorded |
 | Start a new session | Button press, with a confirmation step | UC-04 | Always available once a session exists |
+| Switch interface language | Press EN or DE; the choice persists across the session and future visits | — | Always available |
 
 **Input fields**
 
@@ -319,6 +320,11 @@ None. The element provides no interface to other elements. It is reached by a pe
 *Element specific:* Yes
 *Rationale:* TODO.md's JUICYNESS requirement is explicitly presentational flair, not core functionality — it must be possible to remove without touching TF-01 through TF-03, and must never become an accessibility regression.
 
+**QR-08 — Interface language is selectable and matches on first visit where possible** *(Usability)*
+*Applies to:* UI-01
+*Acceptance criteria:* The surface is available in English and German. On a first visit the interface language follows the device/browser's own language setting when it names a supported language, English otherwise; an explicit switch overrides this and persists across the session and future visits on the same device. The AI's own reply language is a separate behavior (TF-03/prompt-level, see SE-03) that follows what the visitor types, not this setting.
+*Element specific:* Yes
+
 ---
 
 ## 9. Constraints
@@ -334,7 +340,7 @@ None. The element provides no interface to other elements. It is reached by a pe
 *Source:* AP-03.
 *Applies to:* TF-01, E-01.
 *Acceptance criteria:* The identifier is read from and written to the address only. No cookie, no local storage, no session storage.
-*Consequence:* Rules out silent identity persistence across visits. A visitor who closes the tab has ended their session, which is the intended behaviour.
+*Consequence:* Rules out silent identity persistence across visits. A visitor who closes the tab has ended their session, which is the intended behaviour. Scoped to session identity specifically — a device-level UI language preference (QR-08) is a separate concern and may persist by whatever means fits, same as the existing sessionStorage-held composer draft.
 *Implements:* SC-05
 
 **C-03 — Consent is decided before input is possible** *(Legal-regulatory)*
