@@ -68,7 +68,6 @@ window.SparringDojoOutcome = {
     var titleCardEl = document.getElementById('title-card');
 
     var sessionId = null;
-    var sessionState = null; // 'awaiting-decision' | 'open' | 'complete' | 'failed'
     var statusTurnEl = null; // the one managed "status" entry in #history, if any (see setHistoryStatus)
     var optimisticTurnEl = null; // visitor turn shown ahead of the server response (see submitContribution); pruned on any non-'ok' outcome
     var titleRequested = false; // guards the fire-and-forget /api/title fetch to once per page load (see handleContributionResult)
@@ -266,7 +265,6 @@ window.SparringDojoOutcome = {
     }
 
     function applySessionState(state, turnsRemaining) {
-        sessionState = state;
         if (state === 'complete') {
             setComposerEnabled(false);
             setHistoryStatus('This session has reached its limit — thanks for sparring.', false);
@@ -350,6 +348,7 @@ window.SparringDojoOutcome = {
     });
 
     confirmButton.addEventListener('click', function () {
+        confirmButton.disabled = true; // guard against a double-tap firing two consent POSTs (and double-sending OPENING_MESSAGE below)
         fetch('/api/session', {
             method: 'POST',
             body: JSON.stringify({
@@ -376,6 +375,7 @@ window.SparringDojoOutcome = {
                 }
             })
             .catch(function () {
+                confirmButton.disabled = false; // let the visitor retry
                 setHistoryStatus('Could not record that choice — try again.', false);
             });
     });
@@ -394,7 +394,7 @@ window.SparringDojoOutcome = {
         fieldEl.value = ''; // cached in `text`/submittedText below, restored on failure
         sessionStorage.removeItem(DRAFT_KEY); // sent — draft below restores it again on failure
         updateCharRemaining();
-        setHistoryStatus('Consequently sparring…', true); // in-progress state, shown synchronously (QR-01: within 300ms)
+        setHistoryStatus('Sparring is thinking…', true); // in-progress state, shown synchronously (QR-01: within 300ms)
 
         var controller = new AbortController();
         var timeout = setTimeout(function () { controller.abort(); }, WAIT_MS);
@@ -407,16 +407,16 @@ window.SparringDojoOutcome = {
             .then(function (res) { return res.json().then(function (data) { return { res: res, data: data }; }); })
             .then(function (result) {
                 clearTimeout(timeout);
-                handleContributionResult(result.res.status, result.data, text);
+                handleContributionResult(result.data, text);
             })
             .catch(function () {
                 clearTimeout(timeout);
                 // FA-03-1 grouping: timeout or transport failure is treated as a generation failure.
-                handleContributionResult(502, { status: 'generation-failed' }, text);
+                handleContributionResult({ status: 'generation-failed' }, text);
             });
     }
 
-    function handleContributionResult(httpStatus, data, submittedText) {
+    function handleContributionResult(data, submittedText) {
         // sessionState/turnsRemaining are only present on some outcomes (e.g. 'ok');
         // merge them only when present so a rate-limited/rejected response doesn't
         // blank out the last good values via updateDebugPanel's Object.assign.
