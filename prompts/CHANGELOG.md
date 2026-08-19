@@ -4,6 +4,11 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: instruct Sparring (`<voice>`/"How to respond") and the title
+  generator (`prompts/title.md`) to reply/title in the same language the
+  visitor's contribution is written in (English or German) — part of
+  adding German UI support alongside English. The AI's reply language
+  follows what the visitor typed, not the resolved UI locale toggle.
 
 ## 2026-08-18 — `73583bd` prompt: add edge case rule for meta questions
 - Added edge-case rule: meta questions ("what is Sparring," "how does this
