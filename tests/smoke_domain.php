@@ -27,8 +27,8 @@ assert(str_ends_with($derived, '…'));
 assert(derive_scenario_statement(str_repeat('b', 10), 5) === 'bbbb…'); // custom $maxChars, not the SCENARIO_MAX_CHARS default
 
 // --- resolve_opening_message() ---
-assert(resolve_opening_message('wicked-problems') === 'Sparring Scenario: Some decisions can never fully be "solved" — only managed.');
-assert(resolve_opening_message('not-a-real-id') === null);
+assert(resolve_opening_message('1') === 'Sparring Scenario: Some decisions can never fully be "solved" — only managed.');
+assert(resolve_opening_message('99') === null);
 assert(resolve_opening_message(null) === null);
 assert(resolve_opening_message('') === null);
 

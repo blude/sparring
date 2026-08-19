@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-$openingMessage = resolve_opening_message($_GET['scenario'] ?? null);
+$openingMessage = resolve_opening_message($_GET['o'] ?? null);
 ?>
 <!doctype html>
 <html lang="en">

@@ -121,21 +121,21 @@ const PILOT_DATA_DIR = __DIR__ . '/data/pilot';
 
 /*
 |--------------------------------------------------------------------------
-| Opening prompts (QR-code-driven session starters, /dojo?scenario=<id>)
+| Opening prompts (QR-code-driven session starters, /dojo?o=<n>)
 |--------------------------------------------------------------------------
 |
-| ID -> raw description text. Distinct from Store::setScenario()/
+| Number -> raw description text. Distinct from Store::setScenario()/
 | derive_scenario_statement()'s "scenario" (the wall's derived heading
 | from the visitor's own first contribution) — this is a pre-authored
 | opener picked by which QR code was scanned. Do not rename to anything
 | containing "scenario" in code-facing identifiers; the query param
-| itself stays `scenario` (external/QR-facing, chosen by whoever prints
-| the QR codes).
+| itself is `o` (external/QR-facing, chosen by whoever prints the QR
+| codes).
 |
 */
 
 const OPENING_PROMPTS = [
-    'wicked-problems' => 'Some decisions can never fully be "solved" — only managed.',
+    1 => 'Some decisions can never fully be "solved" — only managed.',
     // add one entry per QR code before the exhibition
 ];
 

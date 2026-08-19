@@ -40,7 +40,7 @@ Rationale: the exhibition offers a great sneaky opportunity to collect feedback 
 
 ### General
 
-- [x] Add support for invoking a starting scenario through a query parameter — shipped: `/dojo?scenario=<id>` resolves against `OPENING_PROMPTS` in `config.php` (code-mapped, whitelist-validated) and auto-sends "Sparring Scenario: {Scenario Description}" as the first turn once consent is recorded. Named "opening message/prompt" in code to avoid colliding with the unrelated existing `scenario` concept (the wall's derived heading). No acknowledgment branch, no wall suppression — those stay separate, unshipped TODO items.
+- [x] Add support for invoking a starting scenario through a query parameter — shipped: `/dojo?o=<n>` resolves against `OPENING_PROMPTS` in `config.php` (code-mapped, whitelist-validated) and auto-sends "Sparring Scenario: {Scenario Description}" as the first turn once consent is recorded. Named "opening message/prompt" in code to avoid colliding with the unrelated existing `scenario` concept (the wall's derived heading). No acknowledgment branch, no wall suppression — those stay separate, unshipped TODO items.
 - [ ] update sparring.md prompt (blocked, waiting for instructions)
 - [ ] update moderation.md prompt (blocked, waiting for instructions)
 
