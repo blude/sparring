@@ -10,14 +10,23 @@ declare(strict_types=1);
  * post-exhibition purge for declined sessions is separate future work, not
  * built here.
  *
- * --jsonl [--session=<id>] switches to one conversation-per-line JSONL in the
- * OpenAI fine-tuning chat format ({"messages": [...]}), each exchange in a
- * session flattened to a user/assistant turn pair. --session=<id> scopes to
- * one session (one line out); omitted, every session gets its own line.
- * Sessions metadata is dropped in this mode — it doesn't fit the schema.
+ * --jsonl/--csv/--markdown [--session=<id>] switch to one alternate export
+ * format each, optionally scoped to a single session (--session=<id>) and/or
+ * --consented-only. Mutually exclusive; --jsonl wins if more than one given.
  *
- * Usage: php bin/export.php [--consented-only] [output-path]                     (full JSON dump)
- *        php bin/export.php --jsonl [--session=<id>] [--consented-only] [output-path]
+ *   --jsonl     One conversation-per-line JSONL in the OpenAI fine-tuning
+ *               chat format ({"messages": [...]}), each exchange in a
+ *               session flattened to a user/assistant turn pair.
+ *               --session=<id> yields one line; omitted, one line per
+ *               session. Session metadata is dropped — doesn't fit the
+ *               schema.
+ *   --csv       Flat exchange rows (id, sessionId, visitorContribution,
+ *               sparringResponse, position, createdAt), one per line.
+ *   --markdown  One human-readable transcript per session (heading +
+ *               metadata + turns), sessions separated by a rule.
+ *
+ * Usage: php bin/export.php [--consented-only] [output-path]
+ *        php bin/export.php --jsonl|--csv|--markdown [--session=<id>] [--consented-only] [output-path]
  */
 
 require __DIR__ . '/../config.php';
@@ -30,30 +39,22 @@ if (php_sapi_name() !== 'cli') {
 
 if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
     exit(
-        "Usage: php bin/export.php [--consented-only] [output-path]                     (full JSON dump)\n" .
-        "       php bin/export.php --jsonl [--session=<id>] [--consented-only] [output-path]\n"
+        "Usage: php bin/export.php [--consented-only] [output-path]\n" .
+        "       php bin/export.php --jsonl|--csv|--markdown [--session=<id>] [--consented-only] [output-path]\n"
     );
 }
 
 $store = new Store(STORE_DB_PATH);
 
 $jsonl = in_array('--jsonl', $argv, true);
+$csv = in_array('--csv', $argv, true);
+$markdown = in_array('--markdown', $argv, true);
 $consentedOnly = in_array('--consented-only', $argv, true);
 $sessionId = null;
 foreach ($argv as $arg) {
     if (str_starts_with($arg, '--session=')) {
         $sessionId = substr($arg, strlen('--session='));
     }
-}
-
-// $allSessions is fetched lazily below — only when --consented-only or the full
-// (non-jsonl) dump actually needs it, not on every plain --jsonl call.
-$allSessions = null;
-$consentedIds = null;
-if ($consentedOnly) {
-    $allSessions = $store->getAllSessions();
-    // Sessions where the visitor explicitly granted retention consent (null = undecided, excluded too).
-    $consentedIds = array_column(array_filter($allSessions, fn(array $s) => $s['consentGranted'] === true), 'id');
 }
 // output path is the first positional (non-flag) arg after the script name
 $outputPath = null;
@@ -64,16 +65,41 @@ foreach (array_slice($argv, 1) as $arg) {
     }
 }
 
-if ($jsonl) {
+// $allSessions is fetched lazily — only when --consented-only, --markdown, or
+// the full (non-alternate-format) dump actually needs session rows.
+$allSessions = null;
+$consentedIds = null;
+if ($consentedOnly) {
+    $allSessions = $store->getAllSessions();
+    // Sessions where the visitor explicitly granted retention consent (null = undecided, excluded too).
+    $consentedIds = array_column(array_filter($allSessions, fn(array $s) => $s['consentGranted'] === true), 'id');
+}
+
+// Shared by --jsonl/--csv/--markdown: the exchange rows those formats all draw from.
+$filteredExchanges = function () use ($store, $sessionId, $consentedIds): array {
     $exchanges = $sessionId === null ? $store->getAllExchanges() : $store->getExchanges($sessionId);
     if ($consentedIds !== null) {
         $exchanges = array_values(array_filter($exchanges, fn(array $e) => in_array($e['sessionId'], $consentedIds, true)));
     }
+    return $exchanges;
+};
 
+$writeOut = function (string $out, ?string $outputPath = null, ?string $countMessage = null): void {
+    if ($outputPath === null) {
+        fwrite(STDOUT, $out);
+    } else {
+        file_put_contents($outputPath, $out);
+        if ($countMessage !== null) {
+            fwrite(STDERR, $countMessage);
+        }
+    }
+};
+
+if ($jsonl) {
     // Group into one ordered turn-list per session. getAllExchanges()/getExchanges()
     // are already ordered by (session_id,) position, so a plain bucket preserves it.
     $bySession = [];
-    foreach ($exchanges as $e) {
+    foreach ($filteredExchanges() as $e) {
         $bySession[$e['sessionId']][] = ['role' => 'user', 'content' => $e['visitorContribution']];
         $bySession[$e['sessionId']][] = ['role' => 'assistant', 'content' => $e['sparringResponse']];
     }
@@ -84,13 +110,52 @@ if ($jsonl) {
         array_values($bySession)
     );
     $out = implode("\n", $lines) . ($lines === [] ? '' : "\n");
+    $writeOut($out, $outputPath, sprintf("exported %d session(s) to %s\n", count($bySession), $outputPath ?? ''));
+    exit;
+}
 
-    if ($outputPath === null) {
-        fwrite(STDOUT, $out);
-    } else {
-        file_put_contents($outputPath, $out);
-        fwrite(STDERR, sprintf("exported %d session(s) to %s\n", count($bySession), $outputPath));
+if ($csv) {
+    $exchanges = $filteredExchanges();
+    $handle = fopen($outputPath ?? 'php://stdout', 'w');
+    fputcsv($handle, ['id', 'sessionId', 'visitorContribution', 'sparringResponse', 'position', 'createdAt'], ',', '"', '\\');
+    foreach ($exchanges as $e) {
+        fputcsv($handle, [$e['id'], $e['sessionId'], $e['visitorContribution'], $e['sparringResponse'], $e['position'], $e['createdAt']], ',', '"', '\\');
     }
+    fclose($handle);
+    if ($outputPath !== null) {
+        fwrite(STDERR, sprintf("exported %d exchange(s) to %s\n", count($exchanges), $outputPath));
+    }
+    exit;
+}
+
+if ($markdown) {
+    $sessionsById = array_column($allSessions ?? $store->getAllSessions(), null, 'id');
+
+    $bySession = [];
+    foreach ($filteredExchanges() as $e) {
+        $bySession[$e['sessionId']][] = $e;
+    }
+
+    $docs = [];
+    foreach ($bySession as $sid => $exchanges) {
+        $session = $sessionsById[$sid] ?? null;
+        $lines = ["# Session {$sid}", ''];
+        if ($session !== null) {
+            $lines[] = "- origin: {$session['origin']}";
+            $lines[] = '- scenario: ' . ($session['scenario'] ?? '(none)');
+            $lines[] = "- created: {$session['createdAt']}";
+            $lines[] = '';
+        }
+        foreach ($exchanges as $e) {
+            $lines[] = "**Visitor:** {$e['visitorContribution']}";
+            $lines[] = '';
+            $lines[] = "**Sparring:** {$e['sparringResponse']}";
+            $lines[] = '';
+        }
+        $docs[] = implode("\n", $lines);
+    }
+    $out = implode("\n---\n\n", $docs);
+    $writeOut($out, $outputPath, sprintf("exported %d session(s) to %s\n", count($docs), $outputPath ?? ''));
     exit;
 }
 
