@@ -5,9 +5,14 @@ declare(strict_types=1);
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
 <title>Arena — Sparring</title>
 <link rel="stylesheet" href="<?= fasset('arena.css') ?>">
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
+<link rel="manifest" href="/arena.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#d32f2f">
 </head>
 <body>
 <h1 id="logo">Sparring</h1>

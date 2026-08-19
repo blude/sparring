@@ -11,7 +11,7 @@
 <body>
 <h1>Sparring's Philosophy</h1>
 <h2>How Sparring Works</h2>
-<p>DRAFT: Sparring is an interactive experience that allows users to engage in a simulated sparring session with a AI partner who's skilled in Digital Design. The partner is designed to respond to user inputs in real-time, providing a dynamic and engaging intellectual practice. The solutions uses tailor-made system prompt to identify arguments, generate candidate counter-arguments, and return appropriate responses, creating a realistic and challenging sparring environment.</p>
+<p>Sparring is an interactive experience that lets you engage in a simulated sparring session with an AI partner skilled in Digital Design. The partner responds to your arguments in real time, providing a dynamic, engaging intellectual practice. It uses a tailor-made system prompt to identify arguments, generate candidate counter-arguments, and return appropriate responses — creating a realistic, challenging sparring environment.</p>
 <p><a href="/">Back</a></p>
 </body>
 </html>

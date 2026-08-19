@@ -17,6 +17,8 @@ php bin/import_pilot.php               # M1: seeds data/store.db from data/pilot
 valet link                             # once per checkout; serves this dir at https://sparring.test
 ```
 
+`composer install` also wires `core.hooksPath` to `.githooks/` (Conventional Commits check on `git commit`).
+
 Preferred dev method is Valet — it's a real php-fpm SAPI, same as prod, so
 it doesn't inherit a shell's `export` and needs the `.env` file (`config.php`
 loads it on every request; a real env var still wins if both are set).

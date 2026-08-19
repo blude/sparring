@@ -12,7 +12,12 @@ require __DIR__ . '/../src/Store.php';
 $dbPath = sys_get_temp_dir() . '/sparring_smoke_' . bin2hex(random_bytes(4)) . '.db';
 $store = new Store($dbPath);
 
-// --- session create + origin round-trip ---
+/*
+|--------------------------------------------------------------------------
+| session create + origin round-trip
+|--------------------------------------------------------------------------
+*/
+
 $session = $store->createSession('live');
 assert($session['origin'] === 'live');
 assert($session['turnCount'] === 0);
@@ -25,7 +30,12 @@ $fetched = $store->getSession($session['id']);
 assert($fetched !== null);
 assert($fetched['id'] === $session['id']);
 
-// --- consent decision, unknown session ---
+/*
+|--------------------------------------------------------------------------
+| consent decision, unknown session
+|--------------------------------------------------------------------------
+*/
+
 // Agrees to ToS and projection, declines retention — independent opt-ins (SC-05).
 $store->recordConsentDecision($session['id'], true, false, true);
 $afterConsent = $store->getSession($session['id']);
@@ -35,7 +45,38 @@ assert($afterConsent['projectionConsent'] === true);
 assert($afterConsent['displayable'] === true); // driven by projection choice, not a separate flag
 assert($store->getSession('does-not-exist') === null);
 
-// --- exchange + turn count ---
+/*
+|--------------------------------------------------------------------------
+| setConsent: the retention-only decision call, independent of recordConsentDecision above
+|--------------------------------------------------------------------------
+*/
+
+$consentOnlySession = $store->createSession('live');
+assert($store->getSession($consentOnlySession['id'])['consentGranted'] === null);
+$store->setConsent($consentOnlySession['id'], true);
+assert($store->getSession($consentOnlySession['id'])['consentGranted'] === true);
+$store->setConsent($consentOnlySession['id'], false);
+assert($store->getSession($consentOnlySession['id'])['consentGranted'] === false); // not one-way, unlike setDisplayable
+
+/*
+|--------------------------------------------------------------------------
+| setTitle: write-once, guarded by `title IS NULL`
+|--------------------------------------------------------------------------
+*/
+
+$titleSession = $store->createSession('live');
+assert($store->getSession($titleSession['id'])['title'] === null);
+$store->setTitle($titleSession['id'], 'What is a wicked problem?');
+assert($store->getSession($titleSession['id'])['title'] === 'What is a wicked problem?');
+$store->setTitle($titleSession['id'], 'a later call must not overwrite');
+assert($store->getSession($titleSession['id'])['title'] === 'What is a wicked problem?');
+
+/*
+|--------------------------------------------------------------------------
+| exchange + turn count
+|--------------------------------------------------------------------------
+*/
+
 $exchange = $store->appendExchange($session['id'], 'What is a wicked problem?', 'What makes you think it has a clean answer?');
 assert($exchange['position'] === 1);
 
@@ -53,7 +94,12 @@ assert($exchanges[0]['position'] === 1 && $exchanges[1]['position'] === 2);
 $latest = $store->getLatestExchange($session['id']);
 assert($latest['position'] === 2);
 
-// --- displayable / scenario ---
+/*
+|--------------------------------------------------------------------------
+| displayable / scenario
+|--------------------------------------------------------------------------
+*/
+
 $store->setScenario($session['id'], 'What is a wicked problem?', 'first-contribution');
 $store->setDisplayable($session['id'], true);
 $visible = $store->getDisplayableSessions('live', 10);
@@ -70,14 +116,38 @@ $store->setDisplayable($pilotSession['id'], true);
 assert(count($store->getDisplayableSessions('live', 10)) === 0);
 assert(count($store->getDisplayableSessions('pilot', 10)) === 1);
 
-// --- rate limiting ---
+/*
+|--------------------------------------------------------------------------
+| getAllSessions / getAllExchanges (bin/export.php: every row, any origin)
+|--------------------------------------------------------------------------
+*/
+
+$allSessionIds = array_column($store->getAllSessions(), 'id');
+foreach ([$session['id'], $consentOnlySession['id'], $titleSession['id'], $pilotSession['id']] as $id) {
+    assert(in_array($id, $allSessionIds, true));
+}
+assert(count($allSessionIds) === 4); // every session created so far, live and pilot alike
+$allExchanges = $store->getAllExchanges();
+assert(count($allExchanges) === 3); // 2 on $session, 1 on $pilotSession — the other two sessions have none
+
+/*
+|--------------------------------------------------------------------------
+| rate limiting
+|--------------------------------------------------------------------------
+*/
+
 $hash = hash('sha256', '203.0.113.7');
 for ($i = 0; $i < 3; $i++) {
     assert($store->checkAndIncrementRateLimit($hash, 60, 3)['allowed'] === true);
 }
 assert($store->checkAndIncrementRateLimit($hash, 60, 3)['allowed'] === false); // 4th request in window exceeds limit of 3
 
-// --- rate limiting: window-boundary math via the injectable $now, no sleep() ---
+/*
+|--------------------------------------------------------------------------
+| rate limiting: window-boundary math via the injectable $now, no sleep()
+|--------------------------------------------------------------------------
+*/
+
 // window_start itself still stamps the real wall clock (self::now(), unchanged
 // by this param) — offsets below are margined generously so a slow test run
 // can't land on the wrong side of a boundary.
@@ -90,9 +160,14 @@ assert($b2 === ['allowed' => true, 'remaining' => 3]);
 $b3 = $store->checkAndIncrementRateLimit($boundaryHash, 10, 5, $t0 + 15); // past the window: resets, not a continuation
 assert($b3 === ['allowed' => true, 'remaining' => 4]);
 
-// --- maintenance: counts, reset, backup ---
+/*
+|--------------------------------------------------------------------------
+| maintenance: counts, reset, backup
+|--------------------------------------------------------------------------
+*/
+
 $before = $store->getCounts();
-assert($before['sessions'] === 2); // $session + $pilotSession created above
+assert($before['sessions'] === 4); // $session, $consentOnlySession, $titleSession, $pilotSession created above
 assert($before['exchanges'] === 3); // 2 on $session, 1 on $pilotSession
 assert($before['rateLimitWindows'] === 2); // $hash + $boundaryHash above
 $deleted = $store->resetAll();
@@ -104,7 +179,12 @@ $store->backupTo($backupPath);
 assert(is_file($backupPath));
 unlink($backupPath);
 
-// --- maintenance: prune orphaned sessions ---
+/*
+|--------------------------------------------------------------------------
+| maintenance: prune orphaned sessions
+|--------------------------------------------------------------------------
+*/
+
 $orphan = $store->createSession('live'); // zero exchanges — orphan candidate
 $busy = $store->createSession('live');
 $store->appendExchange($busy['id'], 'a contribution', 'a response');

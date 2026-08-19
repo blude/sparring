@@ -68,14 +68,20 @@ window.SparringDojoOutcome = {
     var titleCardEl = document.getElementById('title-card');
 
     var sessionId = null;
-    var sessionState = null; // 'awaiting-decision' | 'open' | 'complete' | 'failed'
     var statusTurnEl = null; // the one managed "status" entry in #history, if any (see setHistoryStatus)
     var optimisticTurnEl = null; // visitor turn shown ahead of the server response (see submitContribution); pruned on any non-'ok' outcome
     var titleRequested = false; // guards the fire-and-forget /api/title fetch to once per page load (see handleContributionResult)
     var debugPanel = null;
     var lastDebugInfo = {};
 
-    // --- identity: avatar + alias, revealed only once consent is recorded ---
+    /*
+    |--------------------------------------------------------------------------
+    | Identity: avatar + alias
+    |--------------------------------------------------------------------------
+    |
+    | Revealed only once consent is recorded.
+    |
+    */
     function revealIdentity(id) {
         avatarBtn.textContent = window.SparringIdentity.avatar(id);
         avatarAliasEl.textContent = window.SparringIdentity.alias(id);
@@ -114,7 +120,14 @@ window.SparringDojoOutcome = {
         }
     });
 
-    // --- debug mode (?debug=1): surfaces values already computed server-side, nothing new to compute ---
+    /*
+    |--------------------------------------------------------------------------
+    | Debug mode (?debug=1)
+    |--------------------------------------------------------------------------
+    |
+    | Surfaces values already computed server-side, nothing new to compute.
+    |
+    */
     function updateDebugPanel(info) {
         if (!DEBUG) return;
         if (!debugPanel) {
@@ -128,10 +141,17 @@ window.SparringDojoOutcome = {
 
     fieldEl.setAttribute('maxlength', String(MAX_CHARS));
 
-    // --- rendering (TF-04): all content inserted as text, never markup (QR-04 /
-    // display QR-05 counterpart) — except a sparring turn's own ```mermaid fence,
-    // see mermaid-render.js for the narrowly-scoped exception. Visitor turns
-    // (role === 'visitor') and status turns always stay plain textContent. ---
+    /*
+    |--------------------------------------------------------------------------
+    | Rendering (TF-04)
+    |--------------------------------------------------------------------------
+    |
+    | All content inserted as text, never markup (QR-04 / display QR-05
+    | counterpart) — except a sparring turn's own ```mermaid fence, see
+    | mermaid-render.js for the narrowly-scoped exception. Visitor turns
+    | (role === 'visitor') and status turns always stay plain textContent.
+    |
+    */
     function appendTurn(role, text) {
         var el = document.createElement('div');
         el.className = 'turn ' + role;
@@ -196,10 +216,16 @@ window.SparringDojoOutcome = {
         sessionTitleEl.classList.add('set');
     }
 
-    // --- juiciness (TODO.md JUICYNESS): purely presentational, layered on
-    // top of the flows above, never gates them. Every trigger below checks
-    // its own isJuicyOn() flag, so config.php can kill any one of these
-    // independently with no code change. ---
+    /*
+    |--------------------------------------------------------------------------
+    | Juiciness (TODO.md JUICYNESS)
+    |--------------------------------------------------------------------------
+    |
+    | Purely presentational, layered on top of the flows above, never gates
+    | them. Every trigger below checks its own isJuicyOn() flag, so
+    | config.php can kill any one of these independently with no code change.
+    |
+    */
 
     // One-time overlay shown once the consent decision is recorded (UC-01)
     // — not tied to any particular submission, so it never competes with
@@ -266,7 +292,6 @@ window.SparringDojoOutcome = {
     }
 
     function applySessionState(state, turnsRemaining) {
-        sessionState = state;
         if (state === 'complete') {
             setComposerEnabled(false);
             setHistoryStatus('This session has reached its limit — thanks for sparring.', false);
@@ -278,7 +303,11 @@ window.SparringDojoOutcome = {
         }
     }
 
-    // --- TF-01: establish the session (UC-01 / UC-03) ---
+    /*
+    |--------------------------------------------------------------------------
+    | TF-01: establish the session (UC-01 / UC-03)
+    |--------------------------------------------------------------------------
+    */
     function urlSessionId() {
         return new URLSearchParams(window.location.search).get('s');
     }
@@ -339,7 +368,14 @@ window.SparringDojoOutcome = {
         updateDebugPanel({ sessionId: id, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
     }
 
-    // --- TF-02: record the consent decision (ToS required, retention/projection are real opt-outs) ---
+    /*
+    |--------------------------------------------------------------------------
+    | TF-02: record the consent decision
+    |--------------------------------------------------------------------------
+    |
+    | ToS required; retention and projection are real opt-outs.
+    |
+    */
     var tosCheckbox = document.getElementById('consent-tos');
     var projectionCheckbox = document.getElementById('consent-projection');
     var retentionCheckbox = document.getElementById('consent-retention');
@@ -350,6 +386,7 @@ window.SparringDojoOutcome = {
     });
 
     confirmButton.addEventListener('click', function () {
+        confirmButton.disabled = true; // guard against a double-tap firing two consent POSTs (and double-sending OPENING_MESSAGE below)
         fetch('/api/session', {
             method: 'POST',
             body: JSON.stringify({
@@ -376,11 +413,16 @@ window.SparringDojoOutcome = {
                 }
             })
             .catch(function () {
+                confirmButton.disabled = false; // let the visitor retry
                 setHistoryStatus('Could not record that choice — try again.', false);
             });
     });
 
-    // --- TF-03: submit a contribution ---
+    /*
+    |--------------------------------------------------------------------------
+    | TF-03: submit a contribution
+    |--------------------------------------------------------------------------
+    */
     function submitContribution(text) {
         playbookEl.hidden = true; // first sent message auto-dismisses the Playbook card
         // No instant raw-text placeholder here (that was setSessionTitle's old job) —
@@ -394,7 +436,7 @@ window.SparringDojoOutcome = {
         fieldEl.value = ''; // cached in `text`/submittedText below, restored on failure
         sessionStorage.removeItem(DRAFT_KEY); // sent — draft below restores it again on failure
         updateCharRemaining();
-        setHistoryStatus('Consequently sparring…', true); // in-progress state, shown synchronously (QR-01: within 300ms)
+        setHistoryStatus('Sparring is thinking…', true); // in-progress state, shown synchronously (QR-01: within 300ms)
 
         var controller = new AbortController();
         var timeout = setTimeout(function () { controller.abort(); }, WAIT_MS);
@@ -407,16 +449,16 @@ window.SparringDojoOutcome = {
             .then(function (res) { return res.json().then(function (data) { return { res: res, data: data }; }); })
             .then(function (result) {
                 clearTimeout(timeout);
-                handleContributionResult(result.res.status, result.data, text);
+                handleContributionResult(result.data, text);
             })
             .catch(function () {
                 clearTimeout(timeout);
                 // FA-03-1 grouping: timeout or transport failure is treated as a generation failure.
-                handleContributionResult(502, { status: 'generation-failed' }, text);
+                handleContributionResult({ status: 'generation-failed' }, text);
             });
     }
 
-    function handleContributionResult(httpStatus, data, submittedText) {
+    function handleContributionResult(data, submittedText) {
         // sessionState/turnsRemaining are only present on some outcomes (e.g. 'ok');
         // merge them only when present so a rate-limited/rejected response doesn't
         // blank out the last good values via updateDebugPanel's Object.assign.

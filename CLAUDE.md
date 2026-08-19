@@ -16,8 +16,9 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   why), stops on first failure. Individually — PHP: `php tests/smoke_store.php`
   (`Store`), `php tests/smoke_llm_client.php` (provider dispatch +
   `OpenAiLlmClient`/`AnthropicLlmClient`'s pure response/failure-classification
-  helpers), `php tests/smoke_sparring.php` (`Sparring::processTurn`'s gates +
-  `sessionStateFor`/`isExpired`), `php tests/smoke_domain.php`
+  helpers), `php tests/smoke_sparring.php` (`Sparring::processTurn`'s gates,
+  `sessionStateFor`/`isExpired`, and `RateLimiter::resolveClientOrigin`),
+  `php tests/smoke_domain.php`
   (`derive_scenario_statement`, `AbstractLlmClient::stripDelimiterTag`,
   `bin/import_pilot.php::validate_transcript`). JS (Node only to run the
   check, not a project dependency): `node tests/smoke_juicy.js`
@@ -31,6 +32,11 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
 - No linter configured — check changed files with `php -l <file>`.
 
 ## Conventions
+- Commits follow [Conventional Commits](https://www.conventionalcommits.org/):
+  `type(scope)?: subject`, types `feat fix docs style refactor perf test chore
+  build ci revert`, imperative subject, one logical change per commit. A
+  `.githooks/commit-msg` hook enforces this — `composer install` wires
+  `core.hooksPath` to it automatically (see README Setup).
 - `bin/*.php` CLI scripts: CLI-only guard (`php_sapi_name() !== 'cli'`),
   `require config.php` + relevant `src/*.php`, plain positional `$argv[1]`
   or `in_array('--flag', $argv, true)` — no `getopt()`, no CLI arg library.
@@ -45,12 +51,12 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
 ## spec/ — design documentation
 Four-level framework (L0 brief, L1 solution, L2 system, L3 per-element),
 ID scheme (`BG-`, `SG-`, `G-`, `UC-`, `TF-`, `QR-`, `C-`, etc.) —
-**hand-written Markdown mimicking StrictDoc IDs, not a real validated
+**hand-written AsciiDoc mimicking StrictDoc IDs, not a real validated
 StrictDoc project** (no `.sgra`/`.sdoc` files, don't run `strictdoc` here).
 - Only behavioral/decision content gets modeled. Static pages
   (`privacy.php`, `terms.php`) and single-purpose CLI ops scripts
   (`bin/export.php`) are **intentionally unmodeled** — covered by existing
-  generic constraint language (see `C-04` in `L3-SE-03-backend-service.md`)
+  generic constraint language (see `C-04` in `L3-SE-03-backend-service.adoc`)
   rather than a dedicated UC/TF/QR that would just restate its parent.
 - New feature touching visible behavior? Check whether spec/ needs an
   update — ask if unsure.

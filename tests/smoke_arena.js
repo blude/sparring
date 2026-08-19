@@ -27,35 +27,60 @@ function item(id, overrides) {
     return Object.assign({ sessionId: id, scenario: 's', visitorContribution: 'v', sparringResponse: 'r' }, overrides || {});
 }
 
-// --- empty displayed, one incoming item: pure add ---
+/*
+|--------------------------------------------------------------------------
+| empty displayed, one incoming item: pure add
+|--------------------------------------------------------------------------
+*/
+
 let result = diff(new Map(), [item('a')]);
 assert.strictEqual(result.toAdd.length, 1);
 assert.strictEqual(result.toUpdate.length, 0);
 assert.strictEqual(result.toRemove.length, 0);
 assert.strictEqual(result.next.size, 1);
 
-// --- identical item, nothing changed: no add/update/remove ---
+/*
+|--------------------------------------------------------------------------
+| identical item, nothing changed: no add/update/remove
+|--------------------------------------------------------------------------
+*/
+
 const displayed = new Map([['a', item('a')]]);
 result = diff(displayed, [item('a')]);
 assert.strictEqual(result.toAdd.length, 0);
 assert.strictEqual(result.toUpdate.length, 0);
 assert.strictEqual(result.toRemove.length, 0);
 
-// --- changed field on an existing item: update, not add ---
+/*
+|--------------------------------------------------------------------------
+| changed field on an existing item: update, not add
+|--------------------------------------------------------------------------
+*/
+
 result = diff(displayed, [item('a', { sparringResponse: 'a different response' })]);
 assert.strictEqual(result.toAdd.length, 0);
 assert.strictEqual(result.toUpdate.length, 1);
 assert.strictEqual(result.toUpdate[0].sparringResponse, 'a different response');
 assert.strictEqual(result.toRemove.length, 0);
 
-// --- item missing from incoming: remove ---
+/*
+|--------------------------------------------------------------------------
+| item missing from incoming: remove
+|--------------------------------------------------------------------------
+*/
+
 result = diff(displayed, []);
 assert.strictEqual(result.toAdd.length, 0);
 assert.strictEqual(result.toUpdate.length, 0);
 assert.deepStrictEqual(result.toRemove, ['a']);
 assert.strictEqual(result.next.size, 0);
 
-// --- mixed: one kept-as-is, one changed, one new, one removed ---
+/*
+|--------------------------------------------------------------------------
+| mixed: one kept-as-is, one changed, one new, one removed
+|--------------------------------------------------------------------------
+*/
+
 const before = new Map([
     ['kept', item('kept')],
     ['changed', item('changed')],

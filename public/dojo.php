@@ -11,6 +11,10 @@ $openingMessage = resolve_opening_message($_GET['o'] ?? null);
 <?= ogTags('/dojo', 'Dojo — Sparring', 'Argue with an AI sparring partner about Digital Design, live.') ?>
 <link rel="stylesheet" href="<?= fasset('dojo.css') ?>">
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
+<link rel="manifest" href="/dojo.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#d32f2f">
 </head>
 <body>
 <main>

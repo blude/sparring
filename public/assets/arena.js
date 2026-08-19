@@ -53,7 +53,6 @@ window.SparringArenaDiff = {
     var wall = document.getElementById('wall');
     var columns = buildColumns();
     var displayed = new Map(); // sessionId -> item, mirrors E-01 of this element
-    var placement = new Map(); // sessionId -> column element, sticky for the item's lifetime
 
     function buildColumns() {
         var cols = [];
@@ -169,7 +168,6 @@ window.SparringArenaDiff = {
     function addItem(item) {
         var el = buildItemElement(item);
         var col = pickColumn();
-        placement.set(item.sessionId, col);
         col.appendChild(el); // only this column's height changes; every other column is untouched (QR-02)
         void el.offsetWidth; // force the 'entering' style to commit before scheduling its removal — this
         // whole insertion happens inside poll()'s Promise chain, not a direct user gesture, and a bare
@@ -194,7 +192,6 @@ window.SparringArenaDiff = {
     function removeItem(sessionId) {
         var el = wall.querySelector('[data-session-id="' + sessionId + '"]');
         if (el) el.remove(); // compacts only its own column, same as baseline single-column removal
-        placement.delete(sessionId);
     }
 
     poll();
