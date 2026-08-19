@@ -301,7 +301,7 @@ Before the exhibition opens, UT-03 supplies transcripts from pilot sessions to S
 
 **SQR-07 — The installation degrades visibly rather than silently** *(Reliability, recorded under Availability)*
 *Applies to:* SE-01, SE-02
-*Acceptance criteria (qualitative):* Every failure the visitor can encounter produces a plain statement of what happened. No failure presents as an unresponsive interface.
+*Acceptance criteria (qualitative):* Every failure the visitor can encounter produces a plain statement of what happened. No failure presents as an unresponsive interface. This includes routing failures (unmatched path) and uncaught infrastructure faults on a page request, not only the failure conditions SE-01/SE-02 raise themselves.
 *Supports:* BQR-01
 
 ---
