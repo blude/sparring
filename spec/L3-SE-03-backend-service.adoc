@@ -402,8 +402,8 @@ _Element specific:_ Yes
 *C-04 — No administrative interface, no analytics layer* _(Business)_ +
 _Source:_ SC-03. +
 _Applies to:_ The element overall. +
-_Acceptance criteria:_ Operator tasks — seeding, extraction, reset, and backup — are performed directly against the host and the store file, each its own single-purpose script (`bin/import_pilot.php`, `bin/export.php`, `bin/reset_db.php`, `bin/backup_db.php`). +
-_Consequence:_ Rules out building any surface for inspecting or moderating sessions during the exhibition. Extraction is a query against the store; reset and backup are, respectively, a bulk delete and a file-level snapshot against the same store, guarded by an explicit confirmation flag rather than by any authentication this system otherwise has no use for (C-03). +
+_Acceptance criteria:_ Operator tasks — seeding, extraction, pruning, reset, and backup — are performed directly against the host and the store file, each its own single-purpose script (`bin/import_pilot.php`, `bin/export.php`, `bin/prune_orphaned_sessions.php`, `bin/reset_db.php`, `bin/backup_db.php`). +
+_Consequence:_ Rules out building any surface for inspecting or moderating sessions during the exhibition. Extraction is a query against the store; pruning and reset are, respectively, a targeted and a bulk delete against the same store; backup is a file-level snapshot; pruning and reset are guarded by an explicit confirmation flag rather than by any authentication this system otherwise has no use for (C-03). +
 _Implements:_ SC-03
 
 *C-05 — Attempts to bypass the Sparring stance are not filtered* _(Business)_ +
