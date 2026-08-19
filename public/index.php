@@ -23,6 +23,12 @@ $routes = [
 
 require_once __DIR__ . '/../config.php';
 
+// Resolved once, up front, for every request (page or /api/*) — this is
+// what actually sends the locale cookie on an explicit ?lang= override, and
+// it must happen before any output. Later calls to resolve_locale()/t() in
+// the same request reuse this memoized result.
+resolve_locale();
+
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 // php -S with a router script intercepts *every* request, including real
@@ -37,7 +43,7 @@ if ($path !== '/' && is_file($asFile) && !str_ends_with($asFile, '.php')) {
 }
 
 if (!isset($routes[$path])) {
-    renderErrorPage(404, "This page doesn't exist or may have moved.");
+    renderErrorPage(404, t('error.404'));
 }
 
 require $routes[$path];

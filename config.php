@@ -63,7 +63,7 @@ if (PHP_SAPI !== 'cli') {
             echo json_encode(['status' => 'error']);
             return;
         }
-        renderErrorPage(500, 'Something went wrong on our end. Try again in a moment.');
+        renderErrorPage(500, t('error.500'));
     });
 }
 
@@ -153,6 +153,118 @@ function resolve_opening_message(?string $id): ?string
 
 /*
 |--------------------------------------------------------------------------
+| Locale (i18n)
+|--------------------------------------------------------------------------
+|
+| Two supported UI locales: 'en' (default) and 'de'. The AI's own reply
+| language is a separate concern, handled entirely in prompts/sparring.md
+| and prompts/title.md — it follows what the visitor typed, not this
+| resolved UI locale, so no code here touches that.
+|
+*/
+
+const SUPPORTED_LOCALES = ['en', 'de'];
+const LOCALE_COOKIE_TTL_SECONDS = 60 * 60 * 24 * 365; // ~1 year
+
+// Pure precedence logic, no superglobals — testable without a request
+// context. Same whitelist idiom as resolve_opening_message(): untrusted
+// input in, one of the two known-good values out, never anything else.
+function resolve_locale_from(?string $queryLang, ?string $cookieLocale, string $acceptLanguageHeader): string
+{
+    if ($queryLang !== null && in_array($queryLang, SUPPORTED_LOCALES, true)) {
+        return $queryLang;
+    }
+    if ($cookieLocale !== null && in_array($cookieLocale, SUPPORTED_LOCALES, true)) {
+        return $cookieLocale;
+    }
+    // First Accept-Language tag matching a supported locale — a plain
+    // prefix/case-insensitive match, not full RFC 4647 negotiation; two
+    // locales don't need a negotiation library.
+    foreach (explode(',', $acceptLanguageHeader) as $tag) {
+        $tag = explode('-', strtolower(trim(explode(';', $tag, 2)[0])), 2)[0];
+        if (in_array($tag, SUPPORTED_LOCALES, true)) {
+            return $tag;
+        }
+    }
+    return 'en';
+}
+
+// Request-scoped wrapper: reads the superglobals, persists an explicit
+// ?lang= override to a cookie, and short-circuits to 'en' under CLI (smoke
+// tests and bin/*.php scripts have no request to resolve and no response to
+// set a cookie on). Memoized so every page/helper in the same request shares
+// one resolution instead of re-parsing Accept-Language repeatedly.
+function resolve_locale(): string
+{
+    static $locale = null;
+    if ($locale !== null) {
+        return $locale;
+    }
+    if (PHP_SAPI === 'cli') {
+        return $locale = 'en';
+    }
+
+    $queryLang = is_string($_GET['lang'] ?? null) ? $_GET['lang'] : null;
+    $locale = resolve_locale_from($queryLang, is_string($_COOKIE['locale'] ?? null) ? $_COOKIE['locale'] : null, $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '');
+
+    if ($queryLang !== null && $queryLang === $locale) { // explicit override — persist it past this request
+        setcookie('locale', $locale, time() + LOCALE_COOKIE_TTL_SECONDS, '/');
+    }
+    return $locale;
+}
+
+// Looks up $key in the resolved locale's catalog (i18n/{locale}.php),
+// falling back to the English catalog if missing from the resolved one —
+// never the raw key, since an unattended wall showing "dojo.consent.heading"
+// is worse than showing English. {name}-style params substituted via
+// strtr(). Catalogs are loaded once per request and cached.
+function t(string $key, array $params = []): string
+{
+    static $catalogs = [];
+    $locale = resolve_locale();
+
+    if (!isset($catalogs[$locale])) {
+        $catalogs[$locale] = require __DIR__ . "/i18n/$locale.php";
+    }
+    if (!isset($catalogs['en'])) {
+        $catalogs['en'] = require __DIR__ . '/i18n/en.php';
+    }
+
+    $value = $catalogs[$locale][$key] ?? $catalogs['en'][$key] ?? null;
+    if ($value === null) {
+        // Missing from both catalogs is a broken key, not a missing
+        // translation (that case is caught by tests/smoke_i18n.php's
+        // catalog-parity check) — fail loud rather than show nothing.
+        throw new RuntimeException("Missing i18n key '$key'");
+    }
+
+    return $params === [] ? $value : strtr($value, $params);
+}
+
+// Two-link EN/DE switcher, preserving the rest of the current query string
+// (?s=<sessionId>, ?o=<opening>, ?debug=1, ...) so switching language never
+// drops session/opening-message context that lives in the address (C-02
+// requires session identity to live only there). Called identically from
+// every page — same one-shared-helper pattern as ogTags()/fasset(), not a
+// new templating mechanism.
+function localeSwitcher(): string
+{
+    $current = resolve_locale();
+    $links = [];
+    foreach (SUPPORTED_LOCALES as $loc) {
+        $label = strtoupper($loc);
+        if ($loc === $current) {
+            $links[] = "<span class=\"locale-current\" aria-current=\"true\">$label</span>";
+            continue;
+        }
+        $query = http_build_query(array_merge($_GET, ['lang' => $loc]));
+        $links[] = "<a href=\"?$query\">$label</a>";
+    }
+    return '<nav class="locale-switcher" aria-label="Language">' . implode(' ', $links) . '</nav>';
+}
+
+/*
+|--------------------------------------------------------------------------
 | Juiciness toggles (TODO.md JUICYNESS)
 |--------------------------------------------------------------------------
 |
@@ -201,9 +313,11 @@ function fasset(string $file): string
 function renderErrorPage(int $code, string $message): never
 {
     http_response_code($code);
+    $lang = resolve_locale();
+    $backToStart = t('error.backToStart');
     echo <<<HTML
 <!doctype html>
-<html lang="en">
+<html lang="$lang">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -213,7 +327,7 @@ function renderErrorPage(int $code, string $message): never
 <body>
 <h1>$code</h1>
 <p>$message</p>
-<p><a href="/">Back to start</a></p>
+<p><a href="/">$backToStart</a></p>
 </body>
 </html>
 HTML;
