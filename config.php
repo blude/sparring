@@ -74,6 +74,30 @@ const TITLE_MAX_CHARS = 38;     // header title generated from the first contrib
 const STORE_DB_PATH = __DIR__ . '/data/store.db';
 const PILOT_DATA_DIR = __DIR__ . '/data/pilot';
 
+// --- Opening prompts (QR-code-driven session starters, /dojo?scenario=<id>) ---
+// ID -> raw description text. Distinct from Store::setScenario()/
+// derive_scenario_statement()'s "scenario" (the wall's derived heading from
+// the visitor's own first contribution) — this is a pre-authored opener
+// picked by which QR code was scanned. Do not rename to anything containing
+// "scenario" in code-facing identifiers; the query param itself stays
+// `scenario` (external/QR-facing, chosen by whoever prints the QR codes).
+const OPENING_PROMPTS = [
+    'wicked-problems' => 'Some decisions can never fully be "solved" — only managed.',
+    // add one entry per QR code before the exhibition
+];
+
+// Resolves an untrusted query-param value against the whitelist above.
+// Anything not an exact key match — null, '', typo, tampered value —
+// resolves to null. Array-key lookup against a fixed literal map has no
+// injection surface; that IS the validation at this trust boundary.
+function resolve_opening_message(?string $id): ?string
+{
+    if ($id === null || $id === '' || !isset(OPENING_PROMPTS[$id])) {
+        return null;
+    }
+    return 'Sparring Scenario: ' . OPENING_PROMPTS[$id];
+}
+
 // --- Juiciness toggles (TODO.md JUICYNESS) ---
 // Global kill switch plus one per effect, each independently flippable —
 // no code change needed to turn any of this off for a demo or a fault.

@@ -369,6 +369,11 @@ window.SparringDojoOutcome = {
                 applySessionState(data.sessionState, data.turnsRemaining);
                 updateDebugPanel({ sessionId: sessionId, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
                 showTitleCard();
+                // QR-code-seeded session: auto-send the opening line as the first
+                // turn instead of waiting for the visitor to type one.
+                if (window.OPENING_MESSAGE && data.sessionState === 'open') {
+                    submitContribution(window.OPENING_MESSAGE);
+                }
             })
             .catch(function () {
                 setHistoryStatus('Could not record that choice — try again.', false);

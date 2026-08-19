@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+$openingMessage = resolve_opening_message($_GET['scenario'] ?? null);
 ?>
 <!doctype html>
 <html lang="en">
@@ -85,6 +86,7 @@ declare(strict_types=1);
 </div>
 <script>
 window.CONTRIBUTION_MAX_CHARS = <?= (int) CONTRIBUTION_MAX_CHARS ?>;
+window.OPENING_MESSAGE = <?= json_encode($openingMessage) ?>;
 window.SE01_WAIT_BOUND_MS = <?= (int) (SE01_WAIT_BOUND_SECONDS * 1000) ?>;
 window.JUICY = {
     enabled: <?= JUICY_ENABLED ? 'true' : 'false' ?>,

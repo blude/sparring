@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 /**
  * Self-check for the small pure helpers that don't warrant their own file:
- * derive_scenario_statement() (src/scenario.php), AbstractLlmClient's
- * stripDelimiterTag(), and bin/import_pilot.php's validate_transcript().
+ * derive_scenario_statement() (src/scenario.php), resolve_opening_message()
+ * (config.php), AbstractLlmClient's stripDelimiterTag(), and
+ * bin/import_pilot.php's validate_transcript().
  * No DB, no network. Store::hydrateExchange/hydrateSession aren't repeated
  * here — smoke_store.php's round-trip assertions already exercise their
  * output shape on every getSession()/getExchanges() call.
@@ -24,6 +25,12 @@ $derived = derive_scenario_statement($long, 140);
 assert(mb_strlen($derived) === 140);
 assert(str_ends_with($derived, '…'));
 assert(derive_scenario_statement(str_repeat('b', 10), 5) === 'bbbb…'); // custom $maxChars, not the SCENARIO_MAX_CHARS default
+
+// --- resolve_opening_message() ---
+assert(resolve_opening_message('wicked-problems') === 'Sparring Scenario: Some decisions can never fully be "solved" — only managed.');
+assert(resolve_opening_message('not-a-real-id') === null);
+assert(resolve_opening_message(null) === null);
+assert(resolve_opening_message('') === null);
 
 // --- AbstractLlmClient::stripDelimiterTag() (protected static — invoke via a minimal concrete subclass) ---
 final class TestLlmClient extends AbstractLlmClient
