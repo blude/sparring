@@ -240,7 +240,7 @@ _Error cases:_
 == 6. Technical interfaces (outbound)
 
 *TO-01 — Request a Sparring response* +
-_Statement:_ This interface obtains a Sparring partner reply to a visitor contribution by calling the language generation API (PE-01). Used for every visitor turn. +
+_Statement:_ This interface obtains a Sparring partner reply to a visitor contribution by calling the language generation API (PE-01). Used for every visitor turn. The system prompt instructs the model to reply in whichever language (English or German) the visitor's own contribution is written in — a prompt-level behavior, not a parameter of this interface, and independent of SE-01's UI locale (QR-08 in L3-SE-01-input-client.adoc). +
 _Input:_ The Sparring system prompt, the session's prior exchanges as conversational context, the new visitor contribution, and generation parameters. +
 _Output:_ Response text. +
 _Error cases:_ Rate limit exceeded. Quota exhausted. Content-policy refusal. Provider server error. Timeout. Transport failure. Authentication failure. +

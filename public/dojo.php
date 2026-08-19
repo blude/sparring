@@ -3,12 +3,12 @@ declare(strict_types=1);
 $openingMessage = resolve_opening_message($_GET['o'] ?? null);
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="<?= resolve_locale() ?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dojo — Sparring</title>
-<?= ogTags('/dojo', 'Dojo — Sparring', 'Argue with an AI sparring partner about Digital Design, live.') ?>
+<title><?= t('dojo.title') ?></title>
+<?= ogTags('/dojo', t('dojo.title'), t('dojo.ogDescription')) ?>
 <link rel="stylesheet" href="<?= fasset('dojo.css') ?>">
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
 <link rel="manifest" href="/dojo.webmanifest">
@@ -21,11 +21,12 @@ $openingMessage = resolve_opening_message($_GET['o'] ?? null);
   <header id="top-bar">
     <div id="top-bar-leading">
       <button id="avatar-btn" type="button" aria-haspopup="true" aria-expanded="false" hidden></button>
-      <div id="avatar-popover" hidden role="dialog">You are <strong id="avatar-alias"></strong></div>
-      <div id="session-title">Untitled</div>
+      <div id="avatar-popover" hidden role="dialog"><?= t('dojo.avatarPopoverPrefix') ?><strong id="avatar-alias"></strong></div>
+      <div id="session-title"><?= t('dojo.untitled') ?></div>
     </div>
     <div id="top-bar-trailing">
-      <button id="new-session-btn" type="button">End session</button>
+      <?= localeSwitcher() ?>
+      <button id="new-session-btn" type="button"><?= t('dojo.endSession') ?></button>
     </div>
   </header>
 
@@ -40,58 +41,74 @@ $openingMessage = resolve_opening_message($_GET['o'] ?? null);
     <div id="playbook-shape-1" aria-hidden="true"></div>
     <div id="playbook-shape-2" aria-hidden="true"></div>
     <div id="playbook-body">
-      <h2 id="playbook-heading">Playbook</h2>
+      <h2 id="playbook-heading"><?= t('dojo.playbook.heading') ?></h2>
       <ol id="playbook-rules">
-        <li><span class="playbook-bullet" aria-hidden="true">1</span><p>Start with a provoking position or scenario.</p></li>
-        <li><span class="playbook-bullet" aria-hidden="true">2</span><p>Elaborate your argument in <strong>16 turns or less</strong>.</p></li>
-        <li><span class="playbook-bullet" aria-hidden="true">3</span><p>There&rsquo;s no winning or losing — only progress.</p></li>
+        <li><span class="playbook-bullet" aria-hidden="true">1</span><p><?= t('dojo.playbook.rule1') ?></p></li>
+        <li><span class="playbook-bullet" aria-hidden="true">2</span><p><?= t('dojo.playbook.rule2') ?></p></li>
+        <li><span class="playbook-bullet" aria-hidden="true">3</span><p><?= t('dojo.playbook.rule3') ?></p></li>
       </ol>
     </div>
   </div>
 
   <div id="retention" hidden>
-    <h2 id="consent-heading">Head's up! Your consent is needed</h2>
-    <p>By taking part in this session you confirm that you have read and
-       understood the <a href="/terms" target="_blank" rel="noopener">Terms of Service</a>
-       and <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+    <h2 id="consent-heading"><?= t('dojo.consent.heading') ?></h2>
+    <p><?= t('dojo.consent.tosLine') ?></p>
     <label class="consent-row">
       <input type="checkbox" id="consent-tos">
-      <span>I have read the above and agree to take part in the session.</span>
+      <span><?= t('dojo.consent.participateLabel') ?></span>
     </label>
-    <p id="consent-optional-heading">Optional — your choice, either or both:</p>
+    <p id="consent-optional-heading"><?= t('dojo.consent.optionalHeading') ?></p>
     <label class="consent-row">
       <input type="checkbox" id="consent-projection">
-      <span>I agree that my exchanged messages may be displayed on the projector during the session.</span>
+      <span><?= t('dojo.consent.projectionLabel') ?></span>
     </label>
     <label class="consent-row">
       <input type="checkbox" id="consent-retention">
-      <span>I agree that my session may be collected and analyzed for this thesis.</span>
+      <span><?= t('dojo.consent.retentionLabel') ?></span>
     </label>
-    <button id="consent-confirm" type="button" disabled>Confirm choices</button>
+    <button id="consent-confirm" type="button" disabled><?= t('dojo.consent.confirm') ?></button>
   </div>
 
   <form id="composer">
     <div id="composer-row">
-      <textarea id="contribution" placeholder="What's on your mind?" disabled></textarea>
-      <button id="submit" type="submit" disabled aria-label="Send">
+      <textarea id="contribution" placeholder="<?= t('dojo.composer.placeholder') ?>" disabled></textarea>
+      <button id="submit" type="submit" disabled aria-label="<?= t('dojo.composer.sendAriaLabel') ?>">
         <span class="icon icon--glove" aria-hidden="true"></span>
       </button>
     </div>
     <div id="composer-footer">
-      <p id="composer-disclaimer">Sparring is AI and can make mistakes</p>
+      <p id="composer-disclaimer"><?= t('dojo.composer.disclaimer') ?></p>
       <div id="char-remaining"></div>
     </div>
   </form>
 </main>
 <div id="title-card" hidden aria-hidden="true">
-  <span class="title-card__line title-card__line--slide">READY?</span>
-  <span class="title-card__line title-card__line--slide">GET SET</span>
-  <span class="title-card__line title-card__line--grow">SPAR!</span>
+  <span class="title-card__line title-card__line--slide"><?= t('dojo.titleCard.line1') ?></span>
+  <span class="title-card__line title-card__line--slide"><?= t('dojo.titleCard.line2') ?></span>
+  <span class="title-card__line title-card__line--grow"><?= t('dojo.titleCard.line3') ?></span>
 </div>
 <script>
 window.CONTRIBUTION_MAX_CHARS = <?= (int) CONTRIBUTION_MAX_CHARS ?>;
 window.OPENING_MESSAGE = <?= json_encode($openingMessage) ?>;
 window.SE01_WAIT_BOUND_MS = <?= (int) (SE01_WAIT_BOUND_SECONDS * 1000) ?>;
+window.LOCALE = <?= json_encode(resolve_locale()) ?>;
+window.STRINGS = {
+    dojo: {
+        outcomeRateLimited: <?= json_encode(t('dojo.js.outcomeRateLimited')) ?>,
+        outcomeRejected: <?= json_encode(t('dojo.js.outcomeRejected')) ?>,
+        outcomeFlaggedGeneric: <?= json_encode(t('dojo.js.outcomeFlaggedGeneric')) ?>,
+        outcomeFlaggedPersonalInfo: <?= json_encode(t('dojo.js.outcomeFlaggedPersonalInfo')) ?>,
+        outcomeFlaggedInappropriate: <?= json_encode(t('dojo.js.outcomeFlaggedInappropriate')) ?>,
+        outcomeSessionUnknown: <?= json_encode(t('dojo.js.outcomeSessionUnknown')) ?>,
+        outcomeGenerationFailed: <?= json_encode(t('dojo.js.outcomeGenerationFailed')) ?>,
+        confirmEndSession: <?= json_encode(t('dojo.js.confirmEndSession')) ?>,
+        sessionComplete: <?= json_encode(t('dojo.js.sessionComplete')) ?>,
+        installationUnavailable: <?= json_encode(t('dojo.js.installationUnavailable')) ?>,
+        consentFailed: <?= json_encode(t('dojo.js.consentFailed')) ?>,
+        thinking: <?= json_encode(t('dojo.js.thinking')) ?>,
+        charsRemaining: <?= json_encode(t('dojo.js.charsRemaining')) ?>
+    }
+};
 window.JUICY = {
     enabled: <?= JUICY_ENABLED ? 'true' : 'false' ?>,
     punch: <?= JUICY_PUNCH ? 'true' : 'false' ?>,

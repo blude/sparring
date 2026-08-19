@@ -2,11 +2,11 @@
 declare(strict_types=1);
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="<?= resolve_locale() ?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
-<title>Arena — Sparring</title>
+<title><?= t('arena.title') ?></title>
 <link rel="stylesheet" href="<?= fasset('arena.css') ?>">
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
 <link rel="manifest" href="/arena.webmanifest">
@@ -20,6 +20,7 @@ declare(strict_types=1);
 <script>window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;</script>
 <script>window.DISPLAY_COLUMNS = <?= (int) DISPLAY_COLUMNS ?>;</script>
 <script>window.DISPLAY_ITEM_LIMIT = <?= (int) DISPLAY_ITEM_LIMIT ?>;</script>
+<script>window.LOCALE = <?= json_encode(resolve_locale()) ?>;</script>
 <script>
 window.JUICY = {
     enabled: <?= JUICY_ENABLED ? 'true' : 'false' ?>,
