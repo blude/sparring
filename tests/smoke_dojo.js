@@ -25,7 +25,12 @@ assert(iifeStart > 0, 'dojo.js main IIFE marker not found — did its shape chan
 eval(source.slice(0, iifeStart));
 const resolveOutcome = window.SparringDojoOutcome.resolveOutcome;
 
-// --- rate-limited / rejected / generation-failed / unrecognised: fixed message, same shape ---
+/*
+|--------------------------------------------------------------------------
+| rate-limited / rejected / generation-failed / unrecognised: fixed message, same shape
+|--------------------------------------------------------------------------
+*/
+
 for (const status of ['rate-limited', 'rejected', 'generation-failed', 'some-unrecognised-status']) {
     const outcome = resolveOutcome(status, undefined);
     assert.strictEqual(typeof outcome.message, 'string');
@@ -37,7 +42,12 @@ for (const status of ['rate-limited', 'rejected', 'generation-failed', 'some-unr
 assert.strictEqual(resolveOutcome('rate-limited', undefined).message, 'Too many requests — wait a moment and try again.');
 assert.strictEqual(resolveOutcome('rejected', undefined).message, 'That message is empty or too long — edit it and try again.');
 
-// --- session-unknown: message only, nothing else fires ---
+/*
+|--------------------------------------------------------------------------
+| session-unknown: message only, nothing else fires
+|--------------------------------------------------------------------------
+*/
+
 const sessionUnknown = resolveOutcome('session-unknown', undefined);
 assert.strictEqual(sessionUnknown.message, 'This session is no longer available — reload to start a new one.');
 assert.strictEqual(sessionUnknown.restoreText, false);
@@ -45,7 +55,12 @@ assert.strictEqual(sessionUnknown.enableComposer, false);
 assert.strictEqual(sessionUnknown.wiggle, false);
 assert.strictEqual(sessionUnknown.sound, null);
 
-// --- content-flagged: nested 3-way choice on moderationReason ---
+/*
+|--------------------------------------------------------------------------
+| content-flagged: nested 3-way choice on moderationReason
+|--------------------------------------------------------------------------
+*/
+
 const genericFlag = resolveOutcome('content-flagged', undefined);
 assert.strictEqual(genericFlag.message, "That message can't be shown here — edit it and try again.");
 const personalInfo = resolveOutcome('content-flagged', 'contains-personal-information');

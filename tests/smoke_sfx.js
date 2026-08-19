@@ -19,11 +19,21 @@ const source = fs.readFileSync(path.join(__dirname, '../public/assets/sfx.js'), 
 eval(source);
 const { durationMs, isChord } = window.SparringSfx;
 
-// --- isChord: a chord step is an array of param arrays; a plain note step isn't ---
+/*
+|--------------------------------------------------------------------------
+| isChord: a chord step is an array of param arrays; a plain note step isn't
+|--------------------------------------------------------------------------
+*/
+
 assert.strictEqual(isChord([[1, 2, 3]]), true); // step[0] is itself an array
 assert.strictEqual(isChord([1, 2, 3]), false); // step[0] is a number
 
-// --- durationMs: sums attack(3) + sustain(4) + release(5) + delay(16) + decay(18), in seconds -> ms ---
+/*
+|--------------------------------------------------------------------------
+| durationMs: sums attack(3) + sustain(4) + release(5) + delay(16) + decay(18), in seconds -> ms
+|--------------------------------------------------------------------------
+*/
+
 function closeTo(actual, expected) {
     assert(Math.abs(actual - expected) < 1e-9, `expected ${actual} to be close to ${expected}`);
 }

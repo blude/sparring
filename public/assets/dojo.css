@@ -432,7 +432,11 @@ main {
     mask-image: url('img/glove.svg');
 }
 
-/* --- Juiciness (TODO.md JUICYNESS) --- */
+/*
+|--------------------------------------------------------------------------
+| Juiciness (TODO.md JUICYNESS)
+|--------------------------------------------------------------------------
+*/
 
 .particle-burst {
     position: fixed;
@@ -461,10 +465,16 @@ main {
 
 #composer.wiggling { animation: wiggle 350ms ease; }
 
-/* --- Title Card (QR-02) --- */
-/* RethinkSans is a custom font, not a system font — the mockups use it for
-   the title card's "SPAR!" wordmark. It's a open-source font, so it's not bundled
-   with the OS; we self-host it here. */
+/*
+|--------------------------------------------------------------------------
+| Title Card (QR-02)
+|--------------------------------------------------------------------------
+|
+| RethinkSans is a custom font, not a system font — the mockups use it for
+| the title card's "SPAR!" wordmark. It's a open-source font, so it's not
+| bundled with the OS; we self-host it here.
+|
+*/
 @font-face {
     font-family: 'RethinkSans';
     src: url('fonts/RethinkSans-ExtraBoldItalic.woff2') format('woff2');

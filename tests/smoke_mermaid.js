@@ -21,28 +21,58 @@ const source = fs.readFileSync(path.join(__dirname, '../public/assets/mermaid-re
 eval(source);
 const extract = window.SparringMermaid.extract;
 
-// --- no fence at all ---
+/*
+|--------------------------------------------------------------------------
+| no fence at all
+|--------------------------------------------------------------------------
+*/
+
 assert.strictEqual(extract('just a plain reply, no diagram here'), null);
 
-// --- well-formed fence, text on both sides ---
+/*
+|--------------------------------------------------------------------------
+| well-formed fence, text on both sides
+|--------------------------------------------------------------------------
+*/
+
 let result = extract('Here\'s the shape of it:\n```mermaid\ngraph TD\nA --> B\n```\nDoes that match what you meant?');
 assert.strictEqual(result.before, "Here's the shape of it:");
 assert.strictEqual(result.diagram, 'graph TD\nA --> B');
 assert.strictEqual(result.after, 'Does that match what you meant?');
 
-// --- fence with nothing before or after ---
+/*
+|--------------------------------------------------------------------------
+| fence with nothing before or after
+|--------------------------------------------------------------------------
+*/
+
 result = extract('```mermaid\ngraph TD\nA --> B\n```');
 assert.strictEqual(result.before, '');
 assert.strictEqual(result.diagram, 'graph TD\nA --> B');
 assert.strictEqual(result.after, '');
 
-// --- unterminated fence: falls back to null (plain text upstream) ---
+/*
+|--------------------------------------------------------------------------
+| unterminated fence: falls back to null (plain text upstream)
+|--------------------------------------------------------------------------
+*/
+
 assert.strictEqual(extract('```mermaid\ngraph TD\nA --> B'), null);
 
-// --- fence for a different language is left alone ---
+/*
+|--------------------------------------------------------------------------
+| fence for a different language is left alone
+|--------------------------------------------------------------------------
+*/
+
 assert.strictEqual(extract('```js\nconsole.log(1)\n```'), null);
 
-// --- CRLF line endings around the fence markers (the `\r?\n` branch) ---
+/*
+|--------------------------------------------------------------------------
+| CRLF line endings around the fence markers (the `\r?\n` branch)
+|--------------------------------------------------------------------------
+*/
+
 result = extract('before text\r\n```mermaid\r\ngraph TD\r\nA --> B\r\n```\r\nafter text');
 assert.strictEqual(result.before, 'before text');
 assert.strictEqual(result.diagram, 'graph TD\r\nA --> B'); // internal \r is untouched — only the fence-adjacent ones are matched

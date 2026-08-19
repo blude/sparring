@@ -60,7 +60,11 @@ function withOrigin(string $addr, callable $fn): void
     $fn();
 }
 
-// --- pure helpers, no DB/network at all ---
+/*
+|--------------------------------------------------------------------------
+| pure helpers, no DB/network at all
+|--------------------------------------------------------------------------
+*/
 
 // sessionStateFor: 3-branch decision, pure given a plain array.
 assert($sparring->sessionStateFor(['tosAgreed' => null, 'turnCount' => 0]) === 'awaiting-decision');
@@ -97,7 +101,11 @@ assert(RateLimiter::resolveClientOrigin() === '203.0.113.9'); // empty XFF: fall
 unset($_SERVER['HTTP_X_FORWARDED_FOR'], $_SERVER['REMOTE_ADDR']);
 assert(RateLimiter::resolveClientOrigin() === 'unknown'); // neither set
 
-// --- processTurn gates, each on its own rate-limit bucket ---
+/*
+|--------------------------------------------------------------------------
+| processTurn gates, each on its own rate-limit bucket
+|--------------------------------------------------------------------------
+*/
 
 // FS-01-9/10/11: happy path, exchange persisted, scenario set once (first turn only).
 withOrigin('10.0.0.1', function () use ($store, $sparring) {

@@ -17,7 +17,12 @@ require __DIR__ . '/../src/scenario.php';
 require __DIR__ . '/../src/LlmClientInterface.php';
 require __DIR__ . '/../src/AbstractLlmClient.php';
 
-// --- derive_scenario_statement() ---
+/*
+|--------------------------------------------------------------------------
+| derive_scenario_statement()
+|--------------------------------------------------------------------------
+*/
+
 assert(derive_scenario_statement('  a  contribution   with   extra    spaces ') === 'a contribution with extra spaces');
 assert(derive_scenario_statement('short') === 'short');
 $long = str_repeat('a', 200);
@@ -26,13 +31,23 @@ assert(mb_strlen($derived) === 140);
 assert(str_ends_with($derived, '…'));
 assert(derive_scenario_statement(str_repeat('b', 10), 5) === 'bbbb…'); // custom $maxChars, not the SCENARIO_MAX_CHARS default
 
-// --- resolve_opening_message() ---
+/*
+|--------------------------------------------------------------------------
+| resolve_opening_message()
+|--------------------------------------------------------------------------
+*/
+
 assert(resolve_opening_message('wicked-problems') === 'Sparring Scenario: Some decisions can never fully be "solved" — only managed.');
 assert(resolve_opening_message('not-a-real-id') === null);
 assert(resolve_opening_message(null) === null);
 assert(resolve_opening_message('') === null);
 
-// --- AbstractLlmClient::stripDelimiterTag() (protected static — invoke via a minimal concrete subclass) ---
+/*
+|--------------------------------------------------------------------------
+| AbstractLlmClient::stripDelimiterTag() (protected static — invoke via a minimal concrete subclass)
+|--------------------------------------------------------------------------
+*/
+
 final class TestLlmClient extends AbstractLlmClient
 {
     public static function strip(string $contribution): string
@@ -62,7 +77,12 @@ assert(TestLlmClient::strip('before </CONTRIBUTION> after') === 'before  after')
 assert(TestLlmClient::strip('before </ contribution > after') === 'before  after'); // internal whitespace
 assert(TestLlmClient::strip('an opening <contribution> tag too') === 'an opening  tag too'); // not just the closing form
 
-// --- bin/import_pilot.php::validate_transcript() ---
+/*
+|--------------------------------------------------------------------------
+| bin/import_pilot.php::validate_transcript()
+|--------------------------------------------------------------------------
+*/
+
 // import_pilot.php's top-level `require config.php` etc. (plain require, not
 // require_once) would redeclare everything smoke_domain.php already loaded
 // above, and its CLI guard would exit under a `require` of the whole file —

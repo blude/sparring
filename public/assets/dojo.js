@@ -74,7 +74,14 @@ window.SparringDojoOutcome = {
     var debugPanel = null;
     var lastDebugInfo = {};
 
-    // --- identity: avatar + alias, revealed only once consent is recorded ---
+    /*
+    |--------------------------------------------------------------------------
+    | Identity: avatar + alias
+    |--------------------------------------------------------------------------
+    |
+    | Revealed only once consent is recorded.
+    |
+    */
     function revealIdentity(id) {
         avatarBtn.textContent = window.SparringIdentity.avatar(id);
         avatarAliasEl.textContent = window.SparringIdentity.alias(id);
@@ -113,7 +120,14 @@ window.SparringDojoOutcome = {
         }
     });
 
-    // --- debug mode (?debug=1): surfaces values already computed server-side, nothing new to compute ---
+    /*
+    |--------------------------------------------------------------------------
+    | Debug mode (?debug=1)
+    |--------------------------------------------------------------------------
+    |
+    | Surfaces values already computed server-side, nothing new to compute.
+    |
+    */
     function updateDebugPanel(info) {
         if (!DEBUG) return;
         if (!debugPanel) {
@@ -127,10 +141,17 @@ window.SparringDojoOutcome = {
 
     fieldEl.setAttribute('maxlength', String(MAX_CHARS));
 
-    // --- rendering (TF-04): all content inserted as text, never markup (QR-04 /
-    // display QR-05 counterpart) — except a sparring turn's own ```mermaid fence,
-    // see mermaid-render.js for the narrowly-scoped exception. Visitor turns
-    // (role === 'visitor') and status turns always stay plain textContent. ---
+    /*
+    |--------------------------------------------------------------------------
+    | Rendering (TF-04)
+    |--------------------------------------------------------------------------
+    |
+    | All content inserted as text, never markup (QR-04 / display QR-05
+    | counterpart) — except a sparring turn's own ```mermaid fence, see
+    | mermaid-render.js for the narrowly-scoped exception. Visitor turns
+    | (role === 'visitor') and status turns always stay plain textContent.
+    |
+    */
     function appendTurn(role, text) {
         var el = document.createElement('div');
         el.className = 'turn ' + role;
@@ -195,10 +216,16 @@ window.SparringDojoOutcome = {
         sessionTitleEl.classList.add('set');
     }
 
-    // --- juiciness (TODO.md JUICYNESS): purely presentational, layered on
-    // top of the flows above, never gates them. Every trigger below checks
-    // its own isJuicyOn() flag, so config.php can kill any one of these
-    // independently with no code change. ---
+    /*
+    |--------------------------------------------------------------------------
+    | Juiciness (TODO.md JUICYNESS)
+    |--------------------------------------------------------------------------
+    |
+    | Purely presentational, layered on top of the flows above, never gates
+    | them. Every trigger below checks its own isJuicyOn() flag, so
+    | config.php can kill any one of these independently with no code change.
+    |
+    */
 
     // One-time overlay shown once the consent decision is recorded (UC-01)
     // — not tied to any particular submission, so it never competes with
@@ -276,7 +303,11 @@ window.SparringDojoOutcome = {
         }
     }
 
-    // --- TF-01: establish the session (UC-01 / UC-03) ---
+    /*
+    |--------------------------------------------------------------------------
+    | TF-01: establish the session (UC-01 / UC-03)
+    |--------------------------------------------------------------------------
+    */
     function urlSessionId() {
         return new URLSearchParams(window.location.search).get('s');
     }
@@ -337,7 +368,14 @@ window.SparringDojoOutcome = {
         updateDebugPanel({ sessionId: id, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
     }
 
-    // --- TF-02: record the consent decision (ToS required, retention/projection are real opt-outs) ---
+    /*
+    |--------------------------------------------------------------------------
+    | TF-02: record the consent decision
+    |--------------------------------------------------------------------------
+    |
+    | ToS required; retention and projection are real opt-outs.
+    |
+    */
     var tosCheckbox = document.getElementById('consent-tos');
     var projectionCheckbox = document.getElementById('consent-projection');
     var retentionCheckbox = document.getElementById('consent-retention');
@@ -380,7 +418,11 @@ window.SparringDojoOutcome = {
             });
     });
 
-    // --- TF-03: submit a contribution ---
+    /*
+    |--------------------------------------------------------------------------
+    | TF-03: submit a contribution
+    |--------------------------------------------------------------------------
+    */
     function submitContribution(text) {
         playbookEl.hidden = true; // first sent message auto-dismisses the Playbook card
         // No instant raw-text placeholder here (that was setSessionTitle's old job) —
