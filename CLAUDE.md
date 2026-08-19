@@ -32,6 +32,11 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
 - No linter configured — check changed files with `php -l <file>`.
 
 ## Conventions
+- Commits follow [Conventional Commits](https://www.conventionalcommits.org/):
+  `type(scope)?: subject`, types `feat fix docs style refactor perf test chore
+  build ci revert`, imperative subject, one logical change per commit. A
+  `scripts/git-hooks/commit-msg` hook enforces this — `git config
+  core.hooksPath scripts/git-hooks` once per checkout (see README Setup).
 - `bin/*.php` CLI scripts: CLI-only guard (`php_sapi_name() !== 'cli'`),
   `require config.php` + relevant `src/*.php`, plain positional `$argv[1]`
   or `in_array('--flag', $argv, true)` — no `getopt()`, no CLI arg library.
@@ -46,12 +51,12 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
 ## spec/ — design documentation
 Four-level framework (L0 brief, L1 solution, L2 system, L3 per-element),
 ID scheme (`BG-`, `SG-`, `G-`, `UC-`, `TF-`, `QR-`, `C-`, etc.) —
-**hand-written Markdown mimicking StrictDoc IDs, not a real validated
+**hand-written AsciiDoc mimicking StrictDoc IDs, not a real validated
 StrictDoc project** (no `.sgra`/`.sdoc` files, don't run `strictdoc` here).
 - Only behavioral/decision content gets modeled. Static pages
   (`privacy.php`, `terms.php`) and single-purpose CLI ops scripts
   (`bin/export.php`) are **intentionally unmodeled** — covered by existing
-  generic constraint language (see `C-04` in `L3-SE-03-backend-service.md`)
+  generic constraint language (see `C-04` in `L3-SE-03-backend-service.adoc`)
   rather than a dedicated UC/TF/QR that would just restate its parent.
 - New feature touching visible behavior? Check whether spec/ needs an
   update — ask if unsure.
