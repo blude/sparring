@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="<?= resolve_locale() ?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sparring — Learn Digital Design</title>
-<?= ogTags('/', 'Sparring — Learn Digital Design', 'Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design.') ?>
+<title><?= t('start.title') ?></title>
+<?= ogTags('/', t('start.title'), t('start.tagline')) ?>
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
 <style>
   html, body { margin: 0; }
@@ -150,10 +150,22 @@
       margin: 0 0 1rem;
   }
   footer a { color: #666; }
+  .locale-switcher {
+      width: 100%;
+      max-width: 402px;
+      box-sizing: border-box;
+      padding: 0.5rem 32px 0;
+      font-size: 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+  }
+  .locale-switcher a, .locale-switcher span { color: #888; text-decoration: none; }
+  .locale-switcher .locale-current { color: #222; font-weight: 700; }
 </style>
 </head>
 <body>
-<p class="presented-by">FH DORTMUND and SUPERRAUM presents</p>
+<?= localeSwitcher() ?>
+<p class="presented-by"><?= t('start.presentedBy') ?></p>
 <div class="content">
   <div class="branding">
     <div class="gloves-box">
@@ -163,19 +175,19 @@
       <h1 class="wordmark">Sparring</h1>
       <p class="subtitle">スパーリング</p>
     </div>
-    <p class="alpha-notice">Alpha Preview</p>
+    <p class="alpha-notice"><?= t('start.alphaNotice') ?></p>
   </div>
   <div class="copy">
-    <p>Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design.</p>
-    <p>Prepare your sharpest arguments, throw in your hardest punches, and be ready to take some well-intentioned blows back!</p>
+    <p><?= t('start.tagline') ?></p>
+    <p><?= t('start.copy.punchline') ?></p>
   </div>
-  <a id="start-btn" href="/dojo">Start a new session</a>
-  <p class="learn-more"><a href="/philosophy">Learn more</a> about Sparring&rsquo;s philosophy.</p>
+  <a id="start-btn" href="/dojo"><?= t('start.cta') ?></a>
+  <p class="learn-more"><?= t('start.learnMore') ?></p>
 </div>
 <hr class="divider">
 <footer>
-    <p>Craft with #DigitalMaterial &middot; <a href="/credits">Credits</a></p>
-    <p><a href="/terms">Terms</a> and <a href="/privacy">Privacy</a></p>
+    <p><?= t('start.footer.craft') ?></p>
+    <p><?= t('start.footer.legal') ?></p>
 </footer>
 </body>
 </html>

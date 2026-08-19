@@ -1,17 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="<?= resolve_locale() ?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Philosophy — Sparring</title>
-<?= ogTags('/philosophy', "Philosophy — Sparring", 'How Sparring works: an AI partner that challenges your thinking through dialectic sparring in Digital Design.') ?>
+<title><?= t('philosophy.title') ?></title>
+<?= ogTags('/philosophy', t('philosophy.title'), t('philosophy.ogDescription')) ?>
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
-<style>body{font:16px/1.5 system-ui,sans-serif;max-width:40rem;margin:2rem auto;padding:0 1rem;touch-action:manipulation;}a{color:#d32f2f;}a:visited{color:#7b5940;}</style>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:40rem;margin:2rem auto;padding:0 1rem;touch-action:manipulation;}a{color:#d32f2f;}a:visited{color:#7b5940;}.locale-switcher{margin-bottom:1rem;font-size:0.8rem}.locale-switcher a,.locale-switcher span{margin-right:0.5rem;color:#888;text-decoration:none}.locale-switcher .locale-current{color:#222;font-weight:700}</style>
 </head>
 <body>
-<h1>Sparring's Philosophy</h1>
-<h2>How Sparring Works</h2>
-<p>DRAFT: Sparring is an interactive experience that allows users to engage in a simulated sparring session with a AI partner who's skilled in Digital Design. The partner is designed to respond to user inputs in real-time, providing a dynamic and engaging intellectual practice. The solutions uses tailor-made system prompt to identify arguments, generate candidate counter-arguments, and return appropriate responses, creating a realistic and challenging sparring environment.</p>
-<p><a href="/">Back</a></p>
+<?= localeSwitcher() ?>
+<h1><?= t('philosophy.heading') ?></h1>
+<h2><?= t('philosophy.subheading') ?></h2>
+<p><?= t('philosophy.body') ?></p>
+<p><a href="/"><?= t('common.back') ?></a></p>
 </body>
 </html>

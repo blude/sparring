@@ -15,30 +15,31 @@
  */
 window.SparringDojoOutcome = {
     resolveOutcome: function (status, moderationReason) {
+        var strings = window.STRINGS.dojo;
         switch (status) {
             case 'rate-limited':
-                return { message: 'Too many requests — wait a moment and try again.', restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
+                return { message: strings.outcomeRateLimited, restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
 
             case 'rejected':
-                return { message: 'That message is empty or too long — edit it and try again.', restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
+                return { message: strings.outcomeRejected, restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
 
             case 'content-flagged': {
                 // Coarse category only, never the exact reason — see
                 // spec/L3-SE-03-backend-service.md's note on this field.
-                var message = "That message can't be shown here — edit it and try again."; // fallback: classifier failure, real reason unknown
+                var message = strings.outcomeFlaggedGeneric; // fallback: classifier failure, real reason unknown
                 if (moderationReason === 'contains-personal-information') {
-                    message = "That message includes personal information and can't be shown here — edit it and try again.";
+                    message = strings.outcomeFlaggedPersonalInfo;
                 } else if (moderationReason === 'targets-real-person' || moderationReason === 'blocked-term') {
-                    message = "That message isn't appropriate for this exhibition — edit it and try again.";
+                    message = strings.outcomeFlaggedInappropriate;
                 }
                 return { message: message, restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
             }
 
             case 'session-unknown':
-                return { message: 'This session is no longer available — reload to start a new one.', restoreText: false, enableComposer: false, wiggle: false, sound: null };
+                return { message: strings.outcomeSessionUnknown, restoreText: false, enableComposer: false, wiggle: false, sound: null };
 
             default: // generation-failed, or anything unrecognised
-                return { message: 'The installation cannot respond right now — try again.', restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
+                return { message: strings.outcomeGenerationFailed, restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
         }
     },
 };
@@ -108,7 +109,7 @@ window.SparringDojoOutcome = {
     // feedback/evaluation dialog, not just bounce home. For now it still
     // navigates back to the home screen — confirmation dialog unchanged.
     newSessionBtn.addEventListener('click', function () {
-        if (window.confirm('End this session? Your current session will no longer be shown.')) {
+        if (window.confirm(window.STRINGS.dojo.confirmEndSession)) {
             sessionStorage.removeItem(DRAFT_KEY); // ending session should not leave next session's composer pre-filled
             window.location.href = '/';
         }
@@ -248,7 +249,7 @@ window.SparringDojoOutcome = {
     }
 
     function updateCharRemaining() {
-        charRemainingEl.textContent = (MAX_CHARS - fieldEl.value.length) + ' characters left';
+        charRemainingEl.textContent = window.STRINGS.dojo.charsRemaining.replace('{n}', String(MAX_CHARS - fieldEl.value.length));
         autoGrowField();
     }
 
@@ -269,7 +270,7 @@ window.SparringDojoOutcome = {
         sessionState = state;
         if (state === 'complete') {
             setComposerEnabled(false);
-            setHistoryStatus('This session has reached its limit — thanks for sparring.', false);
+            setHistoryStatus(window.STRINGS.dojo.sessionComplete, false);
         } else if (state === 'open') {
             setComposerEnabled(true);
         }
@@ -303,7 +304,7 @@ window.SparringDojoOutcome = {
                     return createSession();
                 })
                 .catch(function () {
-                    setHistoryStatus('The installation is not accepting sessions right now — reload to retry.', false);
+                    setHistoryStatus(window.STRINGS.dojo.installationUnavailable, false);
                 });
         }
         return createSession();
@@ -321,7 +322,7 @@ window.SparringDojoOutcome = {
                 retentionEl.hidden = false; // ST-01-3: decision presented, field stays disabled
             })
             .catch(function () {
-                setHistoryStatus('The installation is not accepting sessions right now — reload to retry.', false);
+                setHistoryStatus(window.STRINGS.dojo.installationUnavailable, false);
             });
     }
 
@@ -376,7 +377,7 @@ window.SparringDojoOutcome = {
                 }
             })
             .catch(function () {
-                setHistoryStatus('Could not record that choice — try again.', false);
+                setHistoryStatus(window.STRINGS.dojo.consentFailed, false);
             });
     });
 
@@ -394,7 +395,7 @@ window.SparringDojoOutcome = {
         fieldEl.value = ''; // cached in `text`/submittedText below, restored on failure
         sessionStorage.removeItem(DRAFT_KEY); // sent — draft below restores it again on failure
         updateCharRemaining();
-        setHistoryStatus('Consequently sparring…', true); // in-progress state, shown synchronously (QR-01: within 300ms)
+        setHistoryStatus(window.STRINGS.dojo.thinking, true); // in-progress state, shown synchronously (QR-01: within 300ms)
 
         var controller = new AbortController();
         var timeout = setTimeout(function () { controller.abort(); }, WAIT_MS);

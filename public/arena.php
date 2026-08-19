@@ -2,10 +2,10 @@
 declare(strict_types=1);
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="<?= resolve_locale() ?>">
 <head>
 <meta charset="utf-8">
-<title>Arena — Sparring</title>
+<title><?= t('arena.title') ?></title>
 <link rel="stylesheet" href="<?= fasset('arena.css') ?>">
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
 </head>
@@ -15,6 +15,7 @@ declare(strict_types=1);
 <script>window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;</script>
 <script>window.DISPLAY_COLUMNS = <?= (int) DISPLAY_COLUMNS ?>;</script>
 <script>window.DISPLAY_ITEM_LIMIT = <?= (int) DISPLAY_ITEM_LIMIT ?>;</script>
+<script>window.LOCALE = <?= json_encode(resolve_locale()) ?>;</script>
 <script>
 window.JUICY = {
     enabled: <?= JUICY_ENABLED ? 'true' : 'false' ?>,
