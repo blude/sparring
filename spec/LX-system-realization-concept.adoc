@@ -1,0 +1,9 @@
+= Szstem Realization Concept
+
+== Available Setup
+
+- _Droplet Config:_ 1 CPU / 1GB RAM (70% used) / 25 GB disk (63% used)
+- _App Management:_ EasyEngine 4.12
+- _PHP Version:_ 8.4
+- _Backup Scheduling:_ not configured
+- _SSL Provisioning:_ Let's Encrypt
