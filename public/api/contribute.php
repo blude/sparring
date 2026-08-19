@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $body = json_decode(file_get_contents('php://input') ?: '', true);
-if (!is_array($body) || !isset($body['sessionId'], $body['contribution']) || !is_string($body['sessionId']) || !is_string($body['contribution'])) {
+if (!is_array($body) || !isset($body['sessionId'], $body['contribution']) || !is_string($body['sessionId']) || $body['sessionId'] === '' || !is_string($body['contribution'])) {
     http_response_code(400);
     echo json_encode(['error' => 'malformed-request']);
     exit;
