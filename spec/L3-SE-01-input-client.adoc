@@ -20,7 +20,11 @@ It's visually an instruction step, but never gates the input surface — the
 field's usability doesn't depend on it, and it's dismissed automatically by
 the visitor's first submission rather than requiring an acknowledgement.
 Documented here as a deliberate, non-blocking exception rather than a silent
-one.
+one. +
+_Note:_ The page also declares a web app manifest (`display: standalone`,
+home-screen icon) so a visitor _may_ install it — this is an opt-in a
+visitor reaches through their own browser chrome, never a step the flow
+prompts or requires, so it does not gate G-01.
 
 *G-02 — Hold the visitor's place through interruption* +
 The element shall restore a session and its exchanges after a reload, a locked device, or a backgrounded tab. +

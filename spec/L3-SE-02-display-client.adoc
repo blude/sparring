@@ -276,3 +276,10 @@ _Applies to:_ The element overall. +
 _Acceptance criteria:_ Ships as files served directly, with no compilation or bundling. +
 _Consequence:_ Rules out any framework requiring a build. +
 _Implements:_ SC-03
+
+*C-05 — May deploy as an installed web app on iPad instead of a projector* _(Technical)_ +
+_Source:_ TODO.md. +
+_Applies to:_ UI-01. +
+_Acceptance criteria:_ A web app manifest (`display: standalone`, `orientation: landscape`, home-screen icon) lets the element be added to an iPad home screen and opened without browser chrome; pinch-zoom, text selection, and touch callout are disabled so a stray touch on the (now touchscreen) surface can't disrupt an unattended display. +
+_Consequence:_ Does not relax C-03 — the iPad renders at its own fixed viewport under the same no-responsive-behaviour rule, it just isn't necessarily 1920×1080. +
+_Implements:_ SC-03

@@ -11,10 +11,10 @@
 - [ ] Add cross-references in specs
 - [ ] Publish specs to HTML
 - [ ] Rename scenario query param to o, for opening
-- [ ] Enable web app capability for both dojo (input) and arena (display) SEs. Arena may be alternatively presented on iPad
+- [x] Enable web app capability for both dojo (input) and arena (display) SEs. Arena may be alternatively presented on iPad — shipped: `dojo.webmanifest`/`arena.webmanifest` (`display: standalone`, arena adds `orientation: landscape`), reusing the existing 180×180 `apple-touch-icon.png`. Arena also gets pinch-zoom/select/callout lockdown (viewport + CSS) since an iPad adds a touchscreen a projector doesn't have. No service worker/offline shell — app needs the live backend regardless.
 - [ ] Add actions to sparring partner's response: copy, rate good, rate bad, regenerate
 - [ ] Show timestamp in messages
-- [ ] Beef up available export options to contemplate:
+- [x] Beef up available export options to contemplate:
   1. Human readable format (Markdown) - one session queried by ID
   2. one full conversation (session) per line, all sessions
   3. one turn per line, single session queried by ID
