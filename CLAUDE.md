@@ -30,6 +30,10 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   `public/assets/arena.js`), and `node tests/smoke_sfx.js` (note-duration/
   chord-detection logic in `public/assets/sfx.js`).
 - No linter configured — check changed files with `php -l <file>`.
+- `tests/run.sh` is plumbing only — it never calls a real LLM. Conversational/
+  pedagogical quality of `prompts/sparring.md` itself is covered separately by
+  `evals/sparring/` (multi-turn simulated-visitor eval suite, real Anthropic
+  calls, own `README.md`), not part of `tests/run.sh`.
 
 ## Conventions
 - Commits follow [Conventional Commits](https://www.conventionalcommits.org/):

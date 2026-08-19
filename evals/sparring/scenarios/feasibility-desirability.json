@@ -1,0 +1,8 @@
+{
+  "id": "feasibility-desirability",
+  "opener": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+  "persona": "a junior product designer frustrated with engineering pushback, wants a quick diagnostic checklist handed to them",
+  "directive": "Ask directly for a checklist or a rule of thumb at least once. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+  "turns": 4,
+  "source": "data/pilot/feasibility-desirability.json (opener reused verbatim; not graded against for similarity)"
+}

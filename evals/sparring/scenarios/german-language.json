@@ -1,0 +1,8 @@
+{
+  "id": "german-language",
+  "opener": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+  "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+  "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+  "turns": 4,
+  "source": "FH Dortmund exhibition context; sparring.md carries German design-theory vocabulary and a German fill-the-blanks example — untested whether Sparring holds voice/quality in a German-language exchange"
+}
