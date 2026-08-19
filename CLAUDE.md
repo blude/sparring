@@ -35,8 +35,8 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
 - Commits follow [Conventional Commits](https://www.conventionalcommits.org/):
   `type(scope)?: subject`, types `feat fix docs style refactor perf test chore
   build ci revert`, imperative subject, one logical change per commit. A
-  `scripts/git-hooks/commit-msg` hook enforces this — `git config
-  core.hooksPath scripts/git-hooks` once per checkout (see README Setup).
+  `.githooks/commit-msg` hook enforces this — `git config core.hooksPath
+  .githooks` once per checkout (see README Setup).
 - `bin/*.php` CLI scripts: CLI-only guard (`php_sapi_name() !== 'cli'`),
   `require config.php` + relevant `src/*.php`, plain positional `$argv[1]`
   or `in_array('--flag', $argv, true)` — no `getopt()`, no CLI arg library.
