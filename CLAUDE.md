@@ -16,8 +16,9 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   why), stops on first failure. Individually — PHP: `php tests/smoke_store.php`
   (`Store`), `php tests/smoke_llm_client.php` (provider dispatch +
   `OpenAiLlmClient`/`AnthropicLlmClient`'s pure response/failure-classification
-  helpers), `php tests/smoke_sparring.php` (`Sparring::processTurn`'s gates +
-  `sessionStateFor`/`isExpired`), `php tests/smoke_domain.php`
+  helpers), `php tests/smoke_sparring.php` (`Sparring::processTurn`'s gates,
+  `sessionStateFor`/`isExpired`, and `RateLimiter::resolveClientOrigin`),
+  `php tests/smoke_domain.php`
   (`derive_scenario_statement`, `AbstractLlmClient::stripDelimiterTag`,
   `bin/import_pilot.php::validate_transcript`). JS (Node only to run the
   check, not a project dependency): `node tests/smoke_juicy.js`

@@ -81,6 +81,22 @@ $fixedStale = gmdate('Y-m-d\TH:i:s\Z', $fixedNow - (SESSION_TTL_HOURS * 3600 + 6
 assert($sparring->isExpired(['lastActiveAt' => $fixedFresh], $fixedNow) === false);
 assert($sparring->isExpired(['lastActiveAt' => $fixedStale], $fixedNow) === true);
 
+// RateLimiter::resolveClientOrigin: XFF multi-hop takes the LAST entry (see
+// its own docblock — nginx here appends the real IP rather than overwriting).
+unset($_SERVER['HTTP_X_FORWARDED_FOR']);
+$_SERVER['REMOTE_ADDR'] = '203.0.113.9';
+assert(RateLimiter::resolveClientOrigin() === '203.0.113.9'); // no XFF: falls back to REMOTE_ADDR
+$_SERVER['HTTP_X_FORWARDED_FOR'] = '198.51.100.1';
+assert(RateLimiter::resolveClientOrigin() === '198.51.100.1'); // single hop
+$_SERVER['HTTP_X_FORWARDED_FOR'] = '1.2.3.4, 2.214.252.236';
+assert(RateLimiter::resolveClientOrigin() === '2.214.252.236'); // multi-hop: last, not first
+$_SERVER['HTTP_X_FORWARDED_FOR'] = ' 1.2.3.4 ,  2.214.252.236  ';
+assert(RateLimiter::resolveClientOrigin() === '2.214.252.236'); // surrounding whitespace trimmed
+$_SERVER['HTTP_X_FORWARDED_FOR'] = '';
+assert(RateLimiter::resolveClientOrigin() === '203.0.113.9'); // empty XFF: falls back to REMOTE_ADDR too
+unset($_SERVER['HTTP_X_FORWARDED_FOR'], $_SERVER['REMOTE_ADDR']);
+assert(RateLimiter::resolveClientOrigin() === 'unknown'); // neither set
+
 // --- processTurn gates, each on its own rate-limit bucket ---
 
 // FS-01-9/10/11: happy path, exchange persisted, scenario set once (first turn only).

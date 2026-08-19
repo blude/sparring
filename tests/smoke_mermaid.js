@@ -42,4 +42,10 @@ assert.strictEqual(extract('```mermaid\ngraph TD\nA --> B'), null);
 // --- fence for a different language is left alone ---
 assert.strictEqual(extract('```js\nconsole.log(1)\n```'), null);
 
+// --- CRLF line endings around the fence markers (the `\r?\n` branch) ---
+result = extract('before text\r\n```mermaid\r\ngraph TD\r\nA --> B\r\n```\r\nafter text');
+assert.strictEqual(result.before, 'before text');
+assert.strictEqual(result.diagram, 'graph TD\r\nA --> B'); // internal \r is untouched — only the fence-adjacent ones are matched
+assert.strictEqual(result.after, 'after text');
+
 console.log('smoke_mermaid: ok');

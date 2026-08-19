@@ -35,6 +35,22 @@ assert($afterConsent['projectionConsent'] === true);
 assert($afterConsent['displayable'] === true); // driven by projection choice, not a separate flag
 assert($store->getSession('does-not-exist') === null);
 
+// --- setConsent: the retention-only decision call, independent of recordConsentDecision above ---
+$consentOnlySession = $store->createSession('live');
+assert($store->getSession($consentOnlySession['id'])['consentGranted'] === null);
+$store->setConsent($consentOnlySession['id'], true);
+assert($store->getSession($consentOnlySession['id'])['consentGranted'] === true);
+$store->setConsent($consentOnlySession['id'], false);
+assert($store->getSession($consentOnlySession['id'])['consentGranted'] === false); // not one-way, unlike setDisplayable
+
+// --- setTitle: write-once, guarded by `title IS NULL` ---
+$titleSession = $store->createSession('live');
+assert($store->getSession($titleSession['id'])['title'] === null);
+$store->setTitle($titleSession['id'], 'What is a wicked problem?');
+assert($store->getSession($titleSession['id'])['title'] === 'What is a wicked problem?');
+$store->setTitle($titleSession['id'], 'a later call must not overwrite');
+assert($store->getSession($titleSession['id'])['title'] === 'What is a wicked problem?');
+
 // --- exchange + turn count ---
 $exchange = $store->appendExchange($session['id'], 'What is a wicked problem?', 'What makes you think it has a clean answer?');
 assert($exchange['position'] === 1);
@@ -70,6 +86,15 @@ $store->setDisplayable($pilotSession['id'], true);
 assert(count($store->getDisplayableSessions('live', 10)) === 0);
 assert(count($store->getDisplayableSessions('pilot', 10)) === 1);
 
+// --- getAllSessions / getAllExchanges (bin/export.php: every row, any origin) ---
+$allSessionIds = array_column($store->getAllSessions(), 'id');
+foreach ([$session['id'], $consentOnlySession['id'], $titleSession['id'], $pilotSession['id']] as $id) {
+    assert(in_array($id, $allSessionIds, true));
+}
+assert(count($allSessionIds) === 4); // every session created so far, live and pilot alike
+$allExchanges = $store->getAllExchanges();
+assert(count($allExchanges) === 3); // 2 on $session, 1 on $pilotSession — the other two sessions have none
+
 // --- rate limiting ---
 $hash = hash('sha256', '203.0.113.7');
 for ($i = 0; $i < 3; $i++) {
@@ -92,7 +117,7 @@ assert($b3 === ['allowed' => true, 'remaining' => 4]);
 
 // --- maintenance: counts, reset, backup ---
 $before = $store->getCounts();
-assert($before['sessions'] === 2); // $session + $pilotSession created above
+assert($before['sessions'] === 4); // $session, $consentOnlySession, $titleSession, $pilotSession created above
 assert($before['exchanges'] === 3); // 2 on $session, 1 on $pilotSession
 assert($before['rateLimitWindows'] === 2); // $hash + $boundaryHash above
 $deleted = $store->resetAll();
