@@ -73,39 +73,46 @@ _Rationale:_ Gating at submission rather than at display means nothing unsuitabl
 
 === Key architecture principles
 
-*[[AP-01]]AP-01 All logic lives in the backend; clients are presentation only* +
+==== [[AP-01]]AP-01 All logic lives in the backend; clients are presentation only
+
 _Rationale:_ The clients run on devices the project does not control, in a public setting. Placing generation, moderation, rate limiting, or session policy in a client would expose the API credential and make every rule editable by anyone with developer tools. +
 _Implications:_ Rules out client-side calls to the language provider. Any behaviour change ships as a backend change, not a client change. +
 _Satisfies:_ <<SG-04,SG-04 Run unattended and absorb misuse without operator>>
 
-*[[AP-02]]AP-02 Polling, not push* +
+==== [[AP-02]]AP-02 Polling, not push
+
 The projection asks the backend for current material on a fixed interval rather than holding an open connection. +
 _Rationale:_ A projection refreshing every few seconds is indistinguishable from live at exhibition pace. A persistent connection is one more thing to keep alive across a multi-day unattended run, with reconnection logic that only manifests as a fault when nobody is watching. +
 _Implications:_ Rules out server-sent events and websockets. Accepts a few seconds of latency between a turn completing and its appearance on the wall. +
 _Satisfies:_ <<SG-04,SG-04 Run unattended and absorb misuse without operator>>, <<SG-06,SG-06 Never present an empty surface>>
 
-*[[AP-03]]AP-03 Session identity travels in the URL; no accounts, no identity cookies* +
+==== [[AP-03]]AP-03 Session identity travels in the URL; no accounts, no identity cookies
+
 _Rationale:_ An identifier in the address survives reload, which is the specific failure this system is exposed to. Accounts would defeat <<SG-01,SG-01 Start a session from a personal device with no>>, and identity cookies add a consent surface for no benefit. +
 _Implications:_ Session identifiers are guessable-resistant but not secret. Rules out storing anything in a session that would be harmful if the URL were shared. Rules out any per-visitor authentication. +
 _Satisfies:_ <<SG-01,SG-01 Start a session from a personal device with no>>, <<SG-03,SG-03 Survive interruption of the visitor's session>>
 
-*[[AP-04]]AP-04 One file-backed datastore, held inside the backend element* +
+==== [[AP-04]]AP-04 One file-backed datastore, held inside the backend element
+
 _Rationale:_ Exhibition-scale volume does not warrant a database server. A single file is copied to back up and inspected with one command, which matters when the maintainer is not on site. +
 _Implications:_ Rules out concurrent write scaling. Accepts that the store has no independent design surface, so no separate element design document exists for it. +
 _Satisfies:_ <<SG-04,SG-04 Run unattended and absorb misuse without operator>>, <<SG-05,SG-05 Record every interaction with its origin fixed at>>
 
-*[[AP-05]]AP-05 Moderation gates storage, not a per-session display flag* +
+==== [[AP-05]]AP-05 Moderation gates storage, not a per-session display flag
+
 Content assessed as unsuitable is rejected before it is ever written down: no exchange is stored, no turn is consumed, and the Sparring partner is never called. The visitor edits the contribution and resubmits; the session itself is not ended. +
 _Rationale:_ An earlier version of this decision ended the participant's session outright on a moderation hit, on the reasoning that a defensive stance was warranted even at the cost of a visible, unexplained interruption. Built and tested, that traded one problem for a worse one: it gives the visitor no way to recover from a false positive, and — per <<AP-07,AP-07 Attempts to argue the Sparring partner out of its>> — a visitor pressuring the Sparring partner is _supposed_ to keep going, not be cut off. Rejecting the single turn and letting the visitor fix it protects the public surface just as well without punishing engagement the piece exists to produce. +
 _Implications:_ Moderation runs before the provider call, immediately after the length check (same reasoning: cheapest rejection path, no cost incurred). No `is_appropriate` ruling is stored against the session, because there is nothing to rule on after the fact — a stored exchange has already passed. +
 _Satisfies:_ <<SG-07,SG-07 Gate public projection at the moment of submission>>
 
-*[[AP-06]]AP-06 Pilot and live material share one storage and display path, separated by an origin flag* +
+==== [[AP-06]]AP-06 Pilot and live material share one storage and display path, separated by an origin flag
+
 _Rationale:_ A second path for pilot content would need its own rendering and its own failure modes. One path with one discriminating field is less code and makes the separation checkable. +
 _Implications:_ Requires origin to be set at creation and never inferred. Any extraction of exhibition material must filter on it explicitly. +
 _Satisfies:_ <<SG-05,SG-05 Record every interaction with its origin fixed at>>, <<SG-06,SG-06 Never present an empty surface>>
 
-*[[AP-07]]AP-07 Attempts to argue the Sparring partner out of its stance are in scope* +
+==== [[AP-07]]AP-07 Attempts to argue the Sparring partner out of its stance are in scope
+
 Content filtering addresses profanity, personal information, and hateful, harassing, threatening, or sexual content targeting a real person or group. It does not address visitors trying to make the system abandon its position. +
 _Rationale:_ Whether system-placed friction holds against a motivated user is the question the installation exists to expose. Filtering those attempts would remove the observation the piece is built to produce. +
 _Implications:_ Rules out treating persuasion, pressure, or instruction-style attacks on the Sparring stance as abuse. Requires the moderation function to distinguish adversarial-but-engaged input aimed at the Sparring partner from harmful content aimed at a real person, and this distinction must be stated in that function's specification rather than left to a wordlist. +
@@ -154,19 +161,22 @@ NOTE: Dashed link marks the system boundary. Detailed interaction sequences are 
 
 === User types
 
-*[[UT-01]]UT-01 Participating visitor* +
+==== [[UT-01]]UT-01 Participating visitor
+
 An exhibition visitor who chooses to interact. No prior briefing, no expertise in agentic AI assumed, attention measured in minutes. +
 _Primary goals:_ Find out what the piece does. Get a response to something they actually care about. Understand why the system is not simply answering them. +
 _Interacts with:_ <<SE-01,SE-01 Input client>> +
 _Represents:_ xref:L1-solution-design-concept.adoc#VCA-01[VCA-01 Participating visitor]
 
-*[[UT-02]]UT-02 Observing visitor* +
+==== [[UT-02]]UT-02 Observing visitor
+
 Present in the space, not interacting. May be accompanying a participant, waiting, or passing through. +
 _Primary goals:_ Understand what the piece is without committing to it. Decide whether to participate. +
 _Interacts with:_ <<SE-02,SE-02 Display client>> (viewing only, no input) +
 _Represents:_ xref:L1-solution-design-concept.adoc#VCA-02[VCA-02 Observing visitor]
 
-*[[UT-03]]UT-03 Operator* +
+==== [[UT-03]]UT-03 Operator
+
 The thesis author. Seeds pilot material before the exhibition and intervenes only when something has failed. +
 _Primary goals:_ Populate the installation before opening. Extract exhibition material afterwards. Diagnose a fault quickly and remotely. +
 _Interacts with:_ <<SE-03,SE-03 Backend service>> +
@@ -174,21 +184,24 @@ _Represents:_ xref:L1-solution-design-concept.adoc#VCA-03[VCA-03 Thesis author /
 
 === Software elements
 
-*[[SE-01]]SE-01 Input client* _(Web-application)_ +
+==== [[SE-01]]SE-01 Input client _(Web-application)_
+
 The surface a visitor reaches by scanning the code, running in their own mobile browser. +
 _Key responsibilities:_ Presents the consent decision before any input is possible. Accepts and submits visitor contributions. Displays the session's exchanges to its own participant. Restores an interrupted session from the identifier in the address. Signals that a response is being produced. Reveals a generated visitor alias and avatar once consent is recorded, and lets the visitor deliberately start a new session. +
 _Interacts with:_ <<UT-01,UT-01 Participating visitor>>, <<SE-03,SE-03 Backend service>>, <<HE-01,HE-01 Visitor smartphone>> +
 _Realises:_ xref:L1-solution-design-concept.adoc#VCA-04[VCA-04 The installation] +
 _Satisfies:_ <<SG-01,SG-01 Start a session from a personal device with no>>, <<SG-03,SG-03 Survive interruption of the visitor's session>>
 
-*[[SE-02]]SE-02 Display client* _(Web-application)_ +
+==== [[SE-02]]SE-02 Display client _(Web-application)_
+
 The projected surface, running unattended in a browser on the projection machine. +
 _Key responsibilities:_ Requests current display material at a fixed interval. Renders exchanges with the scenario that gives them context. Gives prominence to recent material and recedes older material. Fits content to the projection without overflow. Labels each item with a generated visitor alias so exchanges from concurrent sessions are distinguishable. +
 _Interacts with:_ <<UT-02,UT-02 Observing visitor>>, <<SE-03,SE-03 Backend service>>, <<HE-02,HE-02 Projection setup>> +
 _Realises:_ xref:L1-solution-design-concept.adoc#VCA-04[VCA-04 The installation] +
 _Satisfies:_ <<SG-02,SG-02 Make turn-taking readable from across the room>>, <<SG-06,SG-06 Never present an empty surface>>
 
-*[[SE-03]]SE-03 Backend service* _(Backend-service)_ +
+==== [[SE-03]]SE-03 Backend service _(Backend-service)_
+
 The single stateful component. Holds the datastore internally (see <<AP-04,AP-04 One file-backed datastore, held inside the backend>>), so no separate database element is identified. +
 _Key responsibilities:_ Issues and resolves session identifiers. Produces Sparring responses by calling <<PE-01,PE-01 Language generation API>>. Assesses contributions for projection suitability. Enforces request rate, input size, and session length limits. Persists sessions and exchanges with their origin. Assembles the material the projection displays. Accepts pilot material from the operator. +
 _Interacts with:_ <<SE-01,SE-01 Input client>>, <<SE-02,SE-02 Display client>>, <<PE-01,PE-01 Language generation API>>, <<UT-03,UT-03 Operator>>, <<HE-03,HE-03 Hosted server>> +
@@ -198,13 +211,15 @@ _Constrained by:_ <<SC-01,SC-01 PHP with a file-backed store on a single hosted>
 
 === Hardware elements
 
-*[[HE-01]]HE-01 Visitor smartphone* +
+==== [[HE-01]]HE-01 Visitor smartphone
+
 _Procurement:_ Assumed-existing +
 _Managed by:_ The visitor +
 _Runs:_ <<SE-01,SE-01 Input client>> +
 _Characteristics:_ Any current mobile browser with camera-based code scanning. No minimum specification beyond this.
 
-*[[HE-02]]HE-02 Projection setup* +
+==== [[HE-02]]HE-02 Projection setup
+
 Projector and the machine driving it, running a browser in kiosk mode. +
 _Procurement:_ Supplied by Fachbereich Informatik at FH Dortmund. +
 _Managed by:_ The operator. +
@@ -212,7 +227,8 @@ _Location:_ Fixed in the exhibition space. Throw distance and surface determine 
 _Runs:_ <<SE-02,SE-02 Display client>> +
 _Characteristics:_ One projector, one display machine, wired network preferred over wireless for an unattended multi-day run.
 
-*[[HE-03]]HE-03 Hosted server* +
+==== [[HE-03]]HE-03 Hosted server
+
 _Procurement:_ Managed-service +
 _Managed by:_ Cloud provider +
 _Location:_ EU region. +
@@ -221,7 +237,8 @@ _Characteristics:_ Smallest generally available instance. Public HTTPS endpoint 
 
 === Partner elements
 
-*[[PE-01]]PE-01 Language generation API* +
+==== [[PE-01]]PE-01 Language generation API
+
 _Provider:_ Anthropic (default); OpenAI or an OpenAI-compatible local server, operator-selected +
 _Partner type:_ Third-party-API +
 _Dependency:_ Critical. The installation produces no Sparring response without it, and there is no degraded mode that preserves the piece's purpose. +
