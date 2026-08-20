@@ -37,8 +37,6 @@ $openingMessage = resolve_opening_message($_GET['o'] ?? null);
       message. No dismiss control by design. */
   ?>
   <div id="playbook">
-    <div id="playbook-shape-1" aria-hidden="true"></div>
-    <div id="playbook-shape-2" aria-hidden="true"></div>
     <div id="playbook-body">
       <h2 id="playbook-heading"><?= t('dojo.playbook.heading') ?></h2>
       <ol id="playbook-rules">

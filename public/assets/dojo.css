@@ -214,37 +214,51 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
     width: min(88vw, 296px);
-    opacity: 1; /* per the mockup — dimmed, secondary to the input surface */
+    opacity: 0.8;
 }
-
-/* Diagonal-cut backing shapes peeking out behind the card — both are
-   effectively a plain rect sheared with skewY (Shadow 1's edges are exact
-   parallelogram lengths; Shadow 2's are within ~1%, imperceptible),
-   so plain skewed divs replace the two exported SVGs. Height is each
-   shape's own left-edge length (skewY only shears x-based, so left/right
-   edges stay vertical — the height doesn't change, only the top/bottom
-   slant does), width/angle from the same source path data. */
-#playbook-shape-1, #playbook-shape-2 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 296px;
-    z-index: -1;
-}
-#playbook-shape-1 { height: 335px; background: #eaeaea; transform: translate(-50%, -50%) skewY(-11.27deg); }
-#playbook-shape-2 { height: 304px; background: #dddddd; transform: translate(-50%, -50%) skewY(-5.41deg); }
 
 #playbook-body {
+    position: relative;
     background: #fff;
-    padding: 2rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
+    border-radius: 1rem;
+    border: 1px solid #eee;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
 }
 
 #playbook-heading { margin: 0; font-size: 1.125rem; font-weight: 700; color: #666; text-align: center; }
+
+#playbook-heading::before {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 1rem;
+    background: #ccc;
+    position: absolute;
+    left: 1.5rem;
+    top: -0.5rem;
+    opacity: 0.8;
+    transform: rotate(-2deg);
+    border-radius: 1px;
+}
+
+#playbook-heading::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 1rem;
+    background: #ccc;
+    position: absolute;
+    right: 1.5rem;
+    top: -0.5rem;
+    opacity: 0.8;
+    transform: rotate(-1deg);
+    border-radius: 1px;
+}
 
 #playbook-rules {
     margin: 0;
@@ -253,7 +267,7 @@ main {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 #playbook-rules li { display: flex; align-items: center; gap: 1rem; }
