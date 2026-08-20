@@ -42,6 +42,14 @@ if ($path !== '/' && is_file($asFile) && !str_ends_with($asFile, '.php')) {
     return false;
 }
 
+// public/spec/ has no directory-index behaviour of its own under php -S or
+// Valet (both route everything through here) — the static-file check above
+// only matches an exact filename, not a bare directory request.
+if ($path === '/spec' || $path === '/spec/') {
+    header('Location: /spec/index.html', true, 302);
+    exit;
+}
+
 if (!isset($routes[$path])) {
     renderErrorPage(404, t('error.404'));
 }
