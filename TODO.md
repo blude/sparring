@@ -3,7 +3,7 @@
 - [ ] Add ability for visitors to reply to one of Sparring's replies from the wall projection using QR code.
 - [ ] Add QR Code generator
 - [ ] Add reply counters for exchanges in the arena display 
-- [ ] Add internationalization support (German)
+- [x] Add internationalization support (German)
 - [x] Add prompt evaluation suite
 - [ ] Fix prompt introspection hiccup
 - [ ] Use session title as the de facto session identifier for exchanges in the arena display
@@ -68,18 +68,7 @@ Rationale: the exhibition offers a great sneaky opportunity to collect feedback 
 ### Input
 
 - [ ] Add support for the user to export their session's conversation (initially JSON).
-- [ ] Add support for rendering mermaid diagrams
-
-### Admin Screen (new)
-
-- [ ] Add admin screen where sessions and exchanges are listed.
-- [ ] Avaiable actions
-  - [ ] Delete session
-  - [ ] Mark session as unsuitable for display
-  - [ ] Edit exchange (all attributes)
-  - [ ] Reset database
-  - [ ] Import data (from pilot seed)
-- [ ] Simple password protected (to start)
+- [x] Add support for rendering mermaid diagrams
 
 ## Improvements
 
@@ -103,7 +92,7 @@ Rationale: the exhibition offers a great sneaky opportunity to collect feedback 
 
 - [ ] Initial Scenario Setup
   - Description: If first visitor message starts with "Sparring Scenario:" then the immediate Sparring response is a simple acknowledgment of the scenario. 
-- [ ] Add support for generating Mermaid diagrams as part of a sparring move.
+- [x] Add support for generating Mermaid diagrams as part of a sparring move.
 
 ### Index
 
