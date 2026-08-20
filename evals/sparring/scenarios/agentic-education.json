@@ -1,0 +1,8 @@
+{
+  "id": "agentic-education",
+  "opener": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+  "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+  "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+  "turns": 4,
+  "source": "data/pilot/agentic-education.json (opener reused verbatim; not graded against for similarity)"
+}

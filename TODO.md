@@ -4,7 +4,7 @@
 - [ ] Add QR Code generator
 - [ ] Add reply counters for exchanges in the arena display 
 - [ ] Add internationalization support (German)
-- [ ] Add prompt evaluation suite
+- [x] Add prompt evaluation suite
 - [ ] Fix prompt introspection hiccup
 - [ ] Use session title as the de facto session identifier for exchanges in the arena display
 - [x] Fix typos in specs
