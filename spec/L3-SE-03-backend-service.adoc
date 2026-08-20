@@ -1,6 +1,11 @@
 = Element Design Concept: Backend Service
 Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
 v.1.0, 2026-06-19
+:toc: left
+:toclevels: 3
+:icons: font
+:sectanchors:
+:sectnums:
 
 *Element:* xref:L2-system-design-concept.adoc#SE-03[SE-03] Backend service +
 *Element profile:* Backend service / API +
@@ -11,9 +16,12 @@ v.1.0, 2026-06-19
 
 *A note on the datastore.* Per xref:L2-system-design-concept.adoc#AP-04[AP-04], storage is held inside this element rather than identified as a separate software element at L2. Its entities are therefore specified here, in section 7.
 
+xref:index.adoc[Index] / xref:L1-solution-design-concept.adoc[Solution Design Concept] / xref:L2-system-design-concept.adoc[System Design Concept] / *Backend Service* (SE-03)
+
+
 '''
 
-== 1. Goals
+== Goals
 
 *[[G-01]]G-01 — Produce Sparring responses and hold every rule that governs them* +
 The element shall be the sole location of generation, moderation, rate limiting, and session policy, so that no rule is editable from a device the project does not control. +
@@ -47,7 +55,7 @@ _Satisfies:_ xref:L2-system-design-concept.adoc#SG-04[SG-04]
 
 '''
 
-== 2. Use cases
+== Use cases
 
 Use cases at this level are thin, because most of this element's behaviour is reached through technical interfaces rather than as user-facing functionality. The one exception is the operator path, which is a genuine use case with a human actor.
 
@@ -70,7 +78,7 @@ _Realises:_ SSc-03
 
 '''
 
-== 3. User interfaces
+== User interfaces
 
 Not applicable. This element presents no user interface. xref:L2-system-design-concept.adoc#UT-03[UT-03] reaches it through <<TI-05,TI-05>>, which is a technical interface invoked directly on the host rather than a surface.
 
@@ -163,7 +171,7 @@ Called once per session by <<TI-06,TI-06>>, after the session's first exchange e
 
 '''
 
-== 5. Technical interfaces (inbound)
+== Technical interfaces (inbound)
 
 *[[TI-01]]TI-01 — Open a session* +
 _Call type:_ Synchronous +
@@ -239,7 +247,7 @@ _Error cases:_
 
 '''
 
-== 6. Technical interfaces (outbound)
+== Technical interfaces (outbound)
 
 *[[TO-01]]TO-01 — Request a Sparring response* +
 _Statement:_ This interface obtains a Sparring partner reply to a visitor contribution by calling the language generation API (xref:L2-system-design-concept.adoc#PE-01[PE-01]). Used for every visitor turn. The system prompt instructs the model to reply in whichever language (English or German) the visitor's own contribution is written in — a prompt-level behavior, not a parameter of this interface, and independent of xref:L2-system-design-concept.adoc#SE-01[SE-01]'s UI locale (xref:L3-SE-01-input-client.adoc#QR-08[QR-08] in L3-SE-01-input-client.adoc). +
@@ -261,7 +269,7 @@ _Call behaviour is specified on the calling function steps (<<TF-01,TF-01>> <<FS
 
 '''
 
-== 7. Entities
+== Entities
 
 *[[E-01]]E-01 — Session* +
 _Persistence:_ Persistent +
@@ -318,7 +326,7 @@ _Purely technical, with no L1 business entity counterpart._
 
 '''
 
-== 8. Quality requirements
+== Quality requirements
 
 *[[QR-01]]QR-01 — Generation is bounded and its bound is enforced here* _(Performance)_ +
 _Applies to:_ <<TF-01,TF-01>>, <<TO-01,TO-01>> +
@@ -378,7 +386,7 @@ _Supports:_ xref:L2-system-design-concept.adoc#SQR-04[SQR-04]
 
 '''
 
-== 9. Constraints
+== Constraints
 
 *[[C-01]]C-01 — PHP with a file-backed store on one instance* _(Technical)_ +
 _Source:_ xref:L2-system-design-concept.adoc#SC-01[SC-01]. +

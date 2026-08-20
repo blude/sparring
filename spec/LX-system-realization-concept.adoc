@@ -1,6 +1,13 @@
 = System Realization Concept
 Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
 v.1.0, 2026-06-19
+:toc: left
+:toclevels: 3
+:icons: font
+:sectanchors:
+:sectnums:
+
+xref:index.adoc[Index] / *System Realization Concept*
 
 == Available Setup
 

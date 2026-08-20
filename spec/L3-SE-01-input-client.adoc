@@ -1,6 +1,11 @@
 = Element Design Concept: Input Client
 Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
 v.1.0, 2026-06-19
+:toc: left
+:toclevels: 3
+:icons: font
+:sectanchors:
+:sectnums:
 
 *Element:* xref:L2-system-design-concept.adoc#SE-01[SE-01] Input client +
 *Element profile:* User-facing frontend +
@@ -9,9 +14,11 @@ v.1.0, 2026-06-19
 
 *Sections that apply.* All sections apply, with user interfaces and use cases as the core. Technical functions are thin by design: per xref:L2-system-design-concept.adoc#AP-01[AP-01], this element holds no generation, no moderation, and no session policy. Entities cover in-memory view state only, since nothing is stored on the device.
 
+xref:index.adoc[Index] / xref:L1-solution-design-concept.adoc[Solution Design Concept] / xref:L2-system-design-concept.adoc[System Design Concept] / *Input Client* (SE-01)
+
 '''
 
-== 1. Goals
+== Goals
 
 *[[G-01]]G-01 — Reach a working input surface with nothing but a scan* +
 The element shall present a usable input surface immediately on opening, with no installation, registration, or instruction step. +
@@ -52,7 +59,7 @@ _Rationale:_ The alias/avatar follows from xref:L2-system-design-concept.adoc#SE
 
 '''
 
-== 2. Use cases
+== Use cases
 
 === [[UC-01]]UC-01 — Begin a session
 
@@ -131,7 +138,7 @@ _Realises:_ SSc-01
 
 '''
 
-== 3. User interfaces
+== User interfaces
 
 === [[UI-01]]UI-01 — Session surface
 
@@ -185,7 +192,7 @@ None. The element has one surface. The address carries the session identifier bu
 
 '''
 
-== 4. Technical functions
+== Technical functions
 
 *[[TF-01]]TF-01 — Establish the session* +
 _Detail level:_ Stepwise +
@@ -237,13 +244,13 @@ Once the first exchange completes (<<UC-02,UC-02>>), the element calls <<TO-04,T
 
 '''
 
-== 5. Technical interfaces (inbound)
+== Technical interfaces (inbound)
 
 None. The element provides no interface to other elements. It is reached by a person opening a URL, which is not an inbound technical interface in the sense this section covers.
 
 '''
 
-== 6. Technical interfaces (outbound)
+== Technical interfaces (outbound)
 
 *[[TO-01]]TO-01 — Open a session* +
 _Statement:_ This interface creates a session and records the consent decision by calling the backend service (xref:L2-system-design-concept.adoc#SE-03[SE-03]). Used for establishing a session before any contribution is possible. +
@@ -277,7 +284,7 @@ _No `Calls → PE-` relation applies. This element reaches no partner element di
 
 '''
 
-== 7. Entities
+== Entities
 
 *[[E-01]]E-01 — Session view state* +
 _Persistence:_ In-memory. Discarded when the page unloads, and rebuilt from xref:L2-system-design-concept.adoc#SE-03[SE-03] on the next load. Nothing is written to device storage. +
@@ -346,7 +353,7 @@ _Element specific:_ Yes
 
 '''
 
-== 9. Constraints
+== Constraints
 
 *[[C-01]]C-01 — No credential, no policy, no generation in this element* _(Technical)_ +
 _Source:_ xref:L2-system-design-concept.adoc#AP-01[AP-01]. +

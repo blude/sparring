@@ -1,15 +1,22 @@
 = Solution Design Concept
 Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
 v.1.0, 2026-06-19
+:toc: left
+:toclevels: 3
+:icons: font
+:sectanchors:
+:sectnums:
 
 *Solution:* Sparring Exhibition Object +
 *Venue:* Superraum, Dortmund +
 *Status:* Draft +
 *Scope note:* Deliberately thin. This level exists to record _why_ the installation is being built and what it must be true from a non-technical perspective. No Digital Design Brief sits above it, so business constraints carry no `Refines → BRC-` relation. Those relations are omitted rather than pointed at IDs that do not exist.
 
+xref:index.adoc[Index] / *Solution Design Concept*
+
 '''
 
-== 1. Vision
+== Vision
 
 === Future Press Release
 
@@ -51,7 +58,7 @@ _Rationale:_ This is explicitly secondary. The installation is an exhibition art
 
 '''
 
-== 2. Value proposition
+== Value proposition
 
 *[[VP-01]]VP-01 — Participating visitor* +
 _Segment characteristics:_ Exhibition audience. Mixed background, largely non-expert in agentic AI. Attention measured in minutes, not hours. Arrives curious, not briefed. +
@@ -68,7 +75,7 @@ _Satisfies:_ <<BG-01,BG-01>>
 
 '''
 
-== 3. Value creation architecture
+== Value creation architecture
 
 [source,mermaid]
 ----
@@ -107,7 +114,7 @@ _Realises:_ <<VP-01,VP-01>>
 
 '''
 
-== 4. Information architecture
+== Information architecture
 
 *[[BE-01]]BE-01 — Sparring session* +
 One visitor's continuous engagement with the installation, from first turn to abandonment or turn cap. +
@@ -131,7 +138,7 @@ _Associations:_ Belongs to one Session (<<BE-01,BE-01>>).
 
 '''
 
-== 5. Business processes
+== Business processes
 
 === [[BP-01]]BP-01 — Visitor conducts a Sparring session
 
@@ -182,7 +189,7 @@ _Supports:_ <<BG-01,BG-01>>, <<BG-03,BG-03>>
 
 '''
 
-== 6. Quality requirements
+== Quality requirements
 
 *[[BQR-01]]BQR-01 — Visitors experience challenge, not obstruction* _(Customer-satisfaction)_ +
 The friction shall read as deliberate and directed rather than as the system malfunctioning or refusing. +
@@ -208,7 +215,7 @@ _Satisfies:_ <<BG-04,BG-04>>
 
 '''
 
-== 7. Constraints
+== Constraints
 
 *[[BC-01]]BC-01 — Build effort must not compete with thesis writing* _(Business)_ +
 _Source:_ Thesis delivery date, 29 October 2026. Exhibition opening, 4 September 2026. +

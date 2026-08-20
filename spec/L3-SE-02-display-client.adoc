@@ -1,6 +1,11 @@
 = Element Design Concept: Display Client
 Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
 v.1.0, 2026-06-19
+:toc: left
+:toclevels: 3
+:icons: font
+:sectanchors:
+:sectnums:
 
 *Element:* xref:L2-system-design-concept.adoc#SE-02[SE-02] Display client +
 *Element profile:* User-facing frontend (presentation only, no input) +
@@ -9,9 +14,12 @@ v.1.0, 2026-06-19
 
 *Sections that apply.* Goals, user interfaces, technical functions, outbound interfaces, entities, quality requirements, and constraints. Use cases are thin and unusual here: the element has one user type who does not interact with it. <<UC-01,UC-01>> is written anyway, because the element's timing behaviour is only specifiable as a flow, and an absent use case section would read as an oversight rather than as a property of a non-interactive surface. Inbound technical interfaces do not apply.
 
+xref:index.adoc[Index] / xref:L1-solution-design-concept.adoc[Solution Design Concept] / xref:L2-system-design-concept.adoc[System Design Concept] / *Display Client* (SE-02)
+
+
 '''
 
-== 1. Goals
+== Goals
 
 *[[G-01]]G-01 — Make turn-taking visible to people who are not participating* +
 The element shall present visitor contributions and Sparring responses as paired exchanges, so that an observer sees a challenge and what provoked it rather than an isolated reply. +
@@ -37,7 +45,7 @@ _Rationale:_ Readability (xref:L2-system-design-concept.adoc#SG-02[SG-02]) previ
 
 '''
 
-== 2. Use cases
+== Use cases
 
 === [[UC-01]]UC-01 — An observer reads the projection
 
@@ -62,7 +70,7 @@ xref:L2-system-design-concept.adoc#UT-02[UT-02] performs no action in this use c
 
 '''
 
-== 3. User interfaces
+== User interfaces
 
 === [[UI-01]]UI-01 — Projection surface
 
@@ -121,7 +129,7 @@ Masonry has its own version of "does everyone get seen," distinct from <<TBC-02,
 
 '''
 
-== 4. Technical functions
+== Technical functions
 
 *[[TF-01]]TF-01 — Retrieve display material* +
 _Detail level:_ Stepwise +
@@ -162,13 +170,13 @@ The entry transition is restricted to opacity and transform, and applies only to
 
 '''
 
-== 5. Technical interfaces (inbound)
+== Technical interfaces (inbound)
 
 None. No element calls this one. It is a leaf that only reads.
 
 '''
 
-== 6. Technical interfaces (outbound)
+== Technical interfaces (outbound)
 
 *[[TO-01]]TO-01 — Retrieve display material* +
 _Statement:_ This interface obtains the set of sessions currently eligible for projection by calling the backend service (xref:L2-system-design-concept.adoc#SE-03[SE-03]). Used on every polling cycle. +
@@ -181,7 +189,7 @@ _No `Calls → PE-` relation applies. This element reaches no partner element._
 
 '''
 
-== 7. Entities
+== Entities
 
 *[[E-01]]E-01 — Displayed material* +
 _Persistence:_ In-memory. Held only to support reconciliation. Lost on reload and rebuilt on the next cycle, which is acceptable because a reload costs one polling interval. +
@@ -202,7 +210,7 @@ _The element derives no ordering, performs no selection, and stores nothing beyo
 
 '''
 
-== 8. Quality requirements
+== Quality requirements
 
 *[[QR-01]]QR-01 — Readable at exhibition viewing distance* _(Usability)_ +
 _Applies to:_ <<UI-01,UI-01>> +
@@ -250,7 +258,7 @@ _Rationale:_ Mirrors xref:L2-system-design-concept.adoc#SE-01[SE-01] xref:L3-SE-
 
 '''
 
-== 9. Constraints
+== Constraints
 
 *[[C-01]]C-01 — Layout treatment is an open decision* _(Organisational)_ +
 _Source:_ xref:L2-system-design-concept.adoc#SC-06[SC-06]. +
