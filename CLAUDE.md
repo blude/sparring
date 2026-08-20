@@ -54,8 +54,8 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
 
 ## spec/ — design documentation
 Four-level framework (L0 brief, L1 solution, L2 system, L3 per-element),
-ID scheme (`BG-`, `SG-`, `G-`, `UC-`, `TF-`, `QR-`, `C-`, etc.) —
-**AsciiDoc**).
+ID scheme (`BG-`, `SG-`, `G-`, `UC-`, `TF-`, `QR-`, `C-`, etc.), written
+in AsciiDoc and built to `public/spec/` with `bin/build_spec.sh`.
 - Only behavioral/decision content gets modeled. Static pages
   (`privacy.php`, `terms.php`) and single-purpose CLI ops scripts
   (`bin/export.php`) are **intentionally unmodeled** — covered by existing
