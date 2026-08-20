@@ -1,10 +1,15 @@
 = Glossary
 Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
 v.1.0, 2026-06-19
+:toc: left
+:toclevels: 3
+:icons: font
+:sectanchors:
+:sectnums:
 
 xref:index.adoc[Index] / *Glossary*
 
-== Scope: Solution Design Concept
+== Solution Design Concept
 
 [options="header", cols="1,4"]
 |===
@@ -20,7 +25,7 @@ xref:index.adoc[Index] / *Glossary*
 | BC-xx | Business Constraints
 |===
 
-== Scope: System Design Concept
+== System Design Concept
 
 [options="header", cols="1,4"]
 |===
@@ -37,7 +42,7 @@ xref:index.adoc[Index] / *Glossary*
 | SC-xx | System Constraint
 |===
 
-== Scope: Element Design Concept
+== Element Design Concept
 
 [options="header", cols="1,4"]
 |===
