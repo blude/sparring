@@ -156,18 +156,67 @@ The baseline arm only gets mechanical checks — judging it against
 php bin/summarize_sparring.php evals/sparring/sparring-workspace/iteration-1
 ```
 
-Prints a per-scenario, per-arm (real prompt vs. `--baseline`) markdown table
-of pass rate per assertion across reps. `grading.json`'s `expectations`
-format (`{text, passed, evidence}`) is the same field shape skill-creator's
-own eval-viewer (`generate_review.py`) reads — but that tool and
-`aggregate_benchmark.py` assume its single-shot `eval-<id>/{with_skill,
-without_skill}` layout, which this suite's `scenario-id/{rep-N,baseline}/`
-layout (built for multi-rep pass-rate tracking over a *multi-turn*
-transcript, not a single-shot A/B) doesn't map onto cleanly.
-`bin/summarize_sparring.php` is a small purpose-built summary instead of
-reshaping every run's output to fit a tool built for a different shape. For
-turn-by-turn transcript reading, open `transcript.json`/`grading.json`
-directly — each `evidence` string quotes the turn it's judging.
+Prints a top-line **core score** plus a per-scenario, per-arm (real prompt
+vs. `--baseline`) markdown table of pass rate per assertion across reps.
+`grading.json`'s `expectations` format (`{text, passed, evidence}`) is the
+same field shape skill-creator's own eval-viewer (`generate_review.py`)
+reads — but that tool and `aggregate_benchmark.py` assume its single-shot
+`eval-<id>/{with_skill, without_skill}` layout, which this suite's
+`scenario-id/{rep-N,baseline}/` layout (built for multi-rep pass-rate
+tracking over a *multi-turn* transcript, not a single-shot A/B) doesn't map
+onto cleanly. `bin/summarize_sparring.php` is a small purpose-built summary
+instead of reshaping every run's output to fit a tool built for a different
+shape. For turn-by-turn transcript reading, open `transcript.json`/
+`grading.json` directly — each `evidence` string quotes the turn it's
+judging.
+
+**Core score** deliberately excludes `[flag]`-prefixed assertions
+(question-mark count, "move" word use — advisory, not failures): blending
+those into one number with the hard rubric items would let a prompt look
+"worse" just because visitors asked more follow-ups, unrelated to actual
+quality. It's the mean pass rate across banned phrases, the Mermaid fence
+check, and all 6 judge rubric items, aggregated across every scenario. Read
+it alongside the breakdown underneath, not instead of it — a drop should be
+immediately traceable to which specific assertion moved.
+
+### Comparing two iterations
+
+```bash
+php bin/summarize_sparring.php evals/sparring/sparring-workspace/iteration-2 --compare=evals/sparring/sparring-workspace/iteration-1
+```
+
+The positional argument is the run you're checking, `--compare` points at
+the run to diff against (so this reads "how does iteration 2 compare to
+iteration 1"). Prints the core-score delta plus every `prompt`-arm
+assertion sorted by largest `|delta|` first, so the assertions that
+actually moved surface immediately instead of getting lost in a full
+unsorted table. The `baseline` arm is left out of the diff — it doesn't
+change between iterations of the same prompt edit, and is already visible
+via a plain (non-`--compare`) run on either directory.
+
+At 3 reps per scenario, three nondeterministic layers stack (visitor
+simulation, Sparring's own generation, the judge) — don't trust a single
+iteration's small delta (a few points) as real signal. Look for a
+consistent direction across 2-3 iterations before concluding an edit
+helped or hurt.
+
+### Refine loop
+
+1. Run the full suite against the current `sparring.md`, grade, summarize
+   — this is your `iteration-1` baseline.
+2. Edit `sparring.md` for a specific failure pattern you read in a
+   `grading.json` `evidence` string (the evidence tells you what to fix;
+   the pass/fail count only tells you where to look). Log the edit in
+   `prompts/CHANGELOG.md` per this repo's convention.
+3. Re-run just the scenario(s) that failed first — `--scenario=<id>`, cheap
+   — to confirm the edit actually moved that assertion before spending on
+   a full run.
+4. If it moved the right way, run the full suite at `--iteration=2`, grade
+   it, then `--compare=iteration-1` against the previous one. Check the
+   movers table for collateral damage — fixing one thing (e.g. a turn-4
+   capitulation pattern) can regress another (e.g. turn length), and the
+   per-assertion diff catches that where a single core-score number
+   wouldn't.
 
 ## Out of scope for v1
 
