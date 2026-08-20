@@ -30,7 +30,7 @@ return [
     'start.alphaNotice' => 'Alpha Preview',
     'start.copy.punchline' => 'Prepare your sharpest arguments, throw in your hardest punches, and be ready to take some well-intentioned blows back!',
     'start.cta' => 'Start a new session',
-    'start.learnMore' => '<a href="/philosophy">Learn more</a> about Sparring&rsquo;s philosophy.',
+    'start.learnMore' => 'Learn more about <a href="/philosophy">Sparring&rsquo;s philosophy</a>.',
     'start.footer.craft' => '&copy; {year} &middot; Craft with #DigitalMaterial &middot; <a href="/credits">Credits</a>',
     'start.footer.legal' => '<a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a>',
 

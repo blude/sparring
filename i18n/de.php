@@ -23,7 +23,7 @@ return [
     'start.alphaNotice' => 'Alpha-Vorschau',
     'start.copy.punchline' => 'Bereite deine schärfsten Argumente vor, teile deine härtesten Schläge aus und sei bereit, wohlmeinende Konter einzustecken!',
     'start.cta' => 'Neue Sitzung starten',
-    'start.learnMore' => '<a href="/philosophy">Erfahre mehr</a> über die Philosophie von Sparring.',
+    'start.learnMore' => 'Erfahre mehr über die <a href="/philosophy">Philosophie von Sparring</a>.',
     'start.footer.craft' => '&copy; {year} &middot; Craft mit #DigitalMaterial &middot; <a href="/credits">Credits</a>',
     'start.footer.legal' => '<a href="/terms">AGB</a> &middot; <a href="/privacy">Datenschutz</a>',
 
