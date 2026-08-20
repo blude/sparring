@@ -461,48 +461,45 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_system_architecture">2. System architecture</a>
 <ul class="sectlevel2">
-<li><a href="#_architecture_overview">2.1. Architecture overview</a>
-<ul class="sectlevel3">
-<li><a href="#_key_architecture_principles">2.1.1. Key architecture principles</a></li>
+<li><a href="#_architecture_overview">2.1. Architecture overview</a></li>
+<li><a href="#_key_architecture_principles">2.2. Key architecture principles</a></li>
+<li><a href="#_architecture_diagram">2.3. Architecture diagram</a></li>
 </ul>
 </li>
-<li><a href="#_architecture_diagram">2.2. Architecture diagram</a></li>
-<li><a href="#_system_elements">2.3. System elements</a>
-<ul class="sectlevel3">
-<li><a href="#_user_types">2.3.1. User types</a></li>
-<li><a href="#_software_elements">2.3.2. Software elements</a></li>
-<li><a href="#_hardware_elements">2.3.3. Hardware elements</a></li>
-<li><a href="#_partner_elements">2.3.4. Partner elements</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#_system_scenarios">3. System scenarios</a>
+<li><a href="#_system_elements">3. System elements</a>
 <ul class="sectlevel2">
-<li><a href="#_ssc_01_a_visitor_conducts_a_sparring_session">3.1. SSc-01 — A visitor conducts a Sparring session</a></li>
-<li><a href="#_ssc_02_the_projection_presents_current_material">3.2. SSc-02 — The projection presents current material</a></li>
-<li><a href="#_ssc_03_the_operator_seeds_pilot_material">3.3. SSc-03 — The operator seeds pilot material</a></li>
+<li><a href="#_user_types">3.1. User types</a></li>
+<li><a href="#_software_elements">3.2. Software elements</a></li>
+<li><a href="#_hardware_elements">3.3. Hardware elements</a></li>
+<li><a href="#_partner_elements">3.4. Partner elements</a></li>
 </ul>
 </li>
-<li><a href="#_quality_requirements">4. Quality requirements</a>
+<li><a href="#_system_scenarios">4. System scenarios</a>
 <ul class="sectlevel2">
-<li><a href="#_sqr_01_a_sparring_response_arrives_or_its_absence_is_visible_performance">4.1. SQR-01 A Sparring response arrives, or its absence is visible <em>(Performance)</em></a></li>
-<li><a href="#_sqr_02_the_installation_recovers_without_a_person_present_availability">4.2. SQR-02 The installation recovers without a person present <em>(Availability)</em></a></li>
-<li><a href="#_sqr_03_the_projection_is_readable_at_exhibition_viewing_distance_usability">4.3. SQR-03 The projection is readable at exhibition viewing distance <em>(Usability)</em></a></li>
-<li><a href="#_sqr_04_credentials_and_quota_are_protected_from_the_public_security">4.4. SQR-04 Credentials and quota are protected from the public <em>(Security)</em></a></li>
-<li><a href="#_sqr_05_origin_is_fixed_at_creation_and_never_inferred_data_integrity">4.5. SQR-05 Origin is fixed at creation and never inferred <em>(Data-integrity)</em></a></li>
-<li><a href="#_sqr_06_public_projection_is_governed_separately_from_retention_compliance">4.6. SQR-06 Public projection is governed separately from retention <em>(Compliance)</em></a></li>
-<li><a href="#_sqr_07_the_installation_degrades_visibly_rather_than_silently_reliability_recorded_under_availability">4.7. SQR-07 The installation degrades visibly rather than silently <em>(Reliability, recorded under Availability)</em></a></li>
+<li><a href="#_ssc_01_a_visitor_conducts_a_sparring_session">4.1. SSc-01 — A visitor conducts a Sparring session</a></li>
+<li><a href="#_ssc_02_the_projection_presents_current_material">4.2. SSc-02 — The projection presents current material</a></li>
+<li><a href="#_ssc_03_the_operator_seeds_pilot_material">4.3. SSc-03 — The operator seeds pilot material</a></li>
 </ul>
 </li>
-<li><a href="#_constraints">5. Constraints</a>
+<li><a href="#_quality_requirements">5. Quality requirements</a>
 <ul class="sectlevel2">
-<li><a href="#_sc_01_php_with_a_file_backed_store_on_a_single_hosted_instance_technical">5.1. SC-01 PHP with a file-backed store on a single hosted instance <em>(Technical)</em></a></li>
-<li><a href="#_sc_02_the_public_endpoint_must_be_served_over_https_with_a_valid_certificate_technical">5.2. SC-02 The public endpoint must be served over HTTPS with a valid certificate <em>(Technical)</em></a></li>
-<li><a href="#_sc_03_build_effort_is_capped_and_the_piece_is_expendable_business">5.3. SC-03 Build effort is capped and the piece is expendable <em>(Business)</em></a></li>
-<li><a href="#_sc_04_generation_is_rate_limited_and_metered_by_the_provider_integration">5.4. SC-04 Generation is rate-limited and metered by the provider <em>(Integration)</em></a></li>
-<li><a href="#_sc_05_retention_requires_consent_projection_requires_consent_and_only_ever_carries_content_that_already_passed_suitability_legal_regulatory">5.5. SC-05 Retention requires consent; projection requires consent, and only ever carries content that already passed suitability <em>(Legal-regulatory)</em></a></li>
-<li><a href="#_sc_06_the_projected_layout_is_an_open_decision_organisational">5.6. SC-06 The projected layout is an open decision <em>(Organisational)</em></a></li>
+<li><a href="#_sqr_01_a_sparring_response_arrives_or_its_absence_is_visible_performance">5.1. SQR-01 A Sparring response arrives, or its absence is visible <em>(Performance)</em></a></li>
+<li><a href="#_sqr_02_the_installation_recovers_without_a_person_present_availability">5.2. SQR-02 The installation recovers without a person present <em>(Availability)</em></a></li>
+<li><a href="#_sqr_03_the_projection_is_readable_at_exhibition_viewing_distance_usability">5.3. SQR-03 The projection is readable at exhibition viewing distance <em>(Usability)</em></a></li>
+<li><a href="#_sqr_04_credentials_and_quota_are_protected_from_the_public_security">5.4. SQR-04 Credentials and quota are protected from the public <em>(Security)</em></a></li>
+<li><a href="#_sqr_05_origin_is_fixed_at_creation_and_never_inferred_data_integrity">5.5. SQR-05 Origin is fixed at creation and never inferred <em>(Data-integrity)</em></a></li>
+<li><a href="#_sqr_06_public_projection_is_governed_separately_from_retention_compliance">5.6. SQR-06 Public projection is governed separately from retention <em>(Compliance)</em></a></li>
+<li><a href="#_sqr_07_the_installation_degrades_visibly_rather_than_silently_reliability_recorded_under_availability">5.7. SQR-07 The installation degrades visibly rather than silently <em>(Reliability, recorded under Availability)</em></a></li>
+</ul>
+</li>
+<li><a href="#_constraints">6. Constraints</a>
+<ul class="sectlevel2">
+<li><a href="#_sc_01_php_with_a_file_backed_store_on_a_single_hosted_instance_technical">6.1. SC-01 PHP with a file-backed store on a single hosted instance <em>(Technical)</em></a></li>
+<li><a href="#_sc_02_the_public_endpoint_must_be_served_over_https_with_a_valid_certificate_technical">6.2. SC-02 The public endpoint must be served over HTTPS with a valid certificate <em>(Technical)</em></a></li>
+<li><a href="#_sc_03_build_effort_is_capped_and_the_piece_is_expendable_business">6.3. SC-03 Build effort is capped and the piece is expendable <em>(Business)</em></a></li>
+<li><a href="#_sc_04_generation_is_rate_limited_and_metered_by_the_provider_integration">6.4. SC-04 Generation is rate-limited and metered by the provider <em>(Integration)</em></a></li>
+<li><a href="#_sc_05_retention_requires_consent_projection_requires_consent_and_only_ever_carries_content_that_already_passed_suitability_legal_regulatory">6.5. SC-05 Retention requires consent; projection requires consent, and only ever carries content that already passed suitability <em>(Legal-regulatory)</em></a></li>
+<li><a href="#_sc_06_the_projected_layout_is_an_open_decision_organisational">6.6. SC-06 The projected layout is an open decision <em>(Organisational)</em></a></li>
 </ul>
 </li>
 </ul>
@@ -596,8 +593,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p><strong>Architecture style:</strong> Client-server, three participants. Two thin browser clients and one stateful backend, with all logic and all credentials held server-side.</p>
 </div>
-<div class="sect3">
-<h4 id="_key_architecture_principles"><a class="anchor" href="#_key_architecture_principles"></a>2.1.1. Key architecture principles</h4>
+</div>
+<div class="sect2">
+<h3 id="_key_architecture_principles"><a class="anchor" href="#_key_architecture_principles"></a>2.2. Key architecture principles</h3>
 <div class="paragraph">
 <p><strong><a id="AP-01"></a>AP-01 All logic lives in the backend; clients are presentation only</strong><br>
 <em>Rationale:</em> The clients run on devices the project does not control, in a public setting. Placing generation, moderation, rate limiting, or session policy in a client would expose the API credential and make every rule editable by anyone with developer tools.<br>
@@ -656,9 +654,8 @@ Lesson from testing: stating the adversarial-vs-target distinction was not suffi
 </table>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_architecture_diagram"><a class="anchor" href="#_architecture_diagram"></a>2.2. Architecture diagram</h3>
+<h3 id="_architecture_diagram"><a class="anchor" href="#_architecture_diagram"></a>2.3. Architecture diagram</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-mermaid" data-lang="mermaid">flowchart TB
@@ -705,10 +702,13 @@ Dashed link marks the system boundary. Detailed interaction sequences are in sec
 </table>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_system_elements"><a class="anchor" href="#_system_elements"></a>3. System elements</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="_system_elements"><a class="anchor" href="#_system_elements"></a>2.3. System elements</h3>
-<div class="sect3">
-<h4 id="_user_types"><a class="anchor" href="#_user_types"></a>2.3.1. User types</h4>
+<h3 id="_user_types"><a class="anchor" href="#_user_types"></a>3.1. User types</h3>
 <div class="paragraph">
 <p><strong><a id="UT-01"></a>UT-01 Participating visitor</strong><br>
 An exhibition visitor who chooses to interact. No prior briefing, no expertise in agentic AI assumed, attention measured in minutes.<br>
@@ -731,8 +731,8 @@ The thesis author. Seeds pilot material before the exhibition and intervenes onl
 <em>Represents:</em> <a href="L1-solution-design-concept.html#VCA-03">VCA-03 Thesis author / exhibitor</a></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_software_elements"><a class="anchor" href="#_software_elements"></a>2.3.2. Software elements</h4>
+<div class="sect2">
+<h3 id="_software_elements"><a class="anchor" href="#_software_elements"></a>3.2. Software elements</h3>
 <div class="paragraph">
 <p><strong><a id="SE-01"></a>SE-01 Input client</strong> <em>(Web-application)</em><br>
 The surface a visitor reaches by scanning the code, running in their own mobile browser.<br>
@@ -759,8 +759,8 @@ The single stateful component. Holds the datastore internally (see <a href="#AP-
 <em>Constrained by:</em> <a href="#SC-01">SC-01 PHP with a file-backed store on a single hosted</a>, <a href="#SC-04">SC-04 Generation is rate-limited and metered by the provider</a></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_hardware_elements"><a class="anchor" href="#_hardware_elements"></a>2.3.3. Hardware elements</h4>
+<div class="sect2">
+<h3 id="_hardware_elements"><a class="anchor" href="#_hardware_elements"></a>3.3. Hardware elements</h3>
 <div class="paragraph">
 <p><strong><a id="HE-01"></a>HE-01 Visitor smartphone</strong><br>
 <em>Procurement:</em> Assumed-existing<br>
@@ -786,8 +786,8 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 <em>Characteristics:</em> Smallest generally available instance. Public HTTPS endpoint with a valid certificate, which is required because visitors reach it by scanning a code with a phone camera.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_partner_elements"><a class="anchor" href="#_partner_elements"></a>2.3.4. Partner elements</h4>
+<div class="sect2">
+<h3 id="_partner_elements"><a class="anchor" href="#_partner_elements"></a>3.4. Partner elements</h3>
 <div class="paragraph">
 <p><strong><a id="PE-01"></a>PE-01 Language generation API</strong><br>
 <em>Provider:</em> Anthropic (default); OpenAI or an OpenAI-compatible local server, operator-selected<br>
@@ -802,12 +802,11 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
-<h2 id="_system_scenarios"><a class="anchor" href="#_system_scenarios"></a>3. System scenarios</h2>
+<h2 id="_system_scenarios"><a class="anchor" href="#_system_scenarios"></a>4. System scenarios</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ssc_01_a_visitor_conducts_a_sparring_session"><a class="anchor" href="#_ssc_01_a_visitor_conducts_a_sparring_session"></a>3.1. SSc-01 — A visitor conducts a Sparring session</h3>
+<h3 id="_ssc_01_a_visitor_conducts_a_sparring_session"><a class="anchor" href="#_ssc_01_a_visitor_conducts_a_sparring_session"></a>4.1. SSc-01 — A visitor conducts a Sparring session</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Detailed<br>
 <em>Achieves:</em> <a href="#SG-01">SG-01 Start a session from a personal device with no</a>, <a href="#SG-03">SG-03 Survive interruption of the visitor&#8217;s session</a>, <a href="#SG-05">SG-05 Record every interaction with its origin fixed at</a>, <a href="#SG-07">SG-07 Gate public projection at the moment of submission</a><br>
@@ -880,7 +879,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ssc_02_the_projection_presents_current_material"><a class="anchor" href="#_ssc_02_the_projection_presents_current_material"></a>3.2. SSc-02 — The projection presents current material</h3>
+<h3 id="_ssc_02_the_projection_presents_current_material"><a class="anchor" href="#_ssc_02_the_projection_presents_current_material"></a>4.2. SSc-02 — The projection presents current material</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#SG-02">SG-02 Make turn-taking readable from across the room</a>, <a href="#SG-06">SG-06 Never present an empty surface</a><br>
@@ -904,7 +903,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ssc_03_the_operator_seeds_pilot_material"><a class="anchor" href="#_ssc_03_the_operator_seeds_pilot_material"></a>3.3. SSc-03 — The operator seeds pilot material</h3>
+<h3 id="_ssc_03_the_operator_seeds_pilot_material"><a class="anchor" href="#_ssc_03_the_operator_seeds_pilot_material"></a>4.3. SSc-03 — The operator seeds pilot material</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#SG-05">SG-05 Record every interaction with its origin fixed at</a>, <a href="#SG-06">SG-06 Never present an empty surface</a></p>
@@ -927,10 +926,10 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>4. Quality requirements</h2>
+<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>5. Quality requirements</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_sqr_01_a_sparring_response_arrives_or_its_absence_is_visible_performance"><a class="anchor" href="#_sqr_01_a_sparring_response_arrives_or_its_absence_is_visible_performance"></a>4.1. <a id="SQR-01"></a>SQR-01 A Sparring response arrives, or its absence is visible <em>(Performance)</em></h3>
+<h3 id="_sqr_01_a_sparring_response_arrives_or_its_absence_is_visible_performance"><a class="anchor" href="#_sqr_01_a_sparring_response_arrives_or_its_absence_is_visible_performance"></a>5.1. <a id="SQR-01"></a>SQR-01 A Sparring response arrives, or its absence is visible <em>(Performance)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-03">SE-03 Backend service</a>, <a href="#PE-01">PE-01 Language generation API</a><br>
 <em>Acceptance criteria:</em> <a href="#SE-01">SE-01 Input client</a> presents an unambiguous in-progress state within 300 ms of submission and maintains it until a response or failure arrives. <a href="#SE-03">SE-03 Backend service</a> abandons a generation request after a bounded interval rather than leaving the visitor with an indefinite wait. The bound is 20 seconds (<code>GENERATION_TIMEOUT_SECONDS</code>, config.php).<br>
@@ -939,7 +938,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqr_02_the_installation_recovers_without_a_person_present_availability"><a class="anchor" href="#_sqr_02_the_installation_recovers_without_a_person_present_availability"></a>4.2. <a id="SQR-02"></a>SQR-02 The installation recovers without a person present <em>(Availability)</em></h3>
+<h3 id="_sqr_02_the_installation_recovers_without_a_person_present_availability"><a class="anchor" href="#_sqr_02_the_installation_recovers_without_a_person_present_availability"></a>5.2. <a id="SQR-02"></a>SQR-02 The installation recovers without a person present <em>(Availability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#SE-02">SE-02 Display client</a>, <a href="#SE-03">SE-03 Backend service</a>, <a href="#HE-03">HE-03 Hosted server</a><br>
 <em>Acceptance criteria (qualitative):</em> <a href="#SE-02">SE-02 Display client</a> recovers from a backend outage on its own next interval with no reload. <a href="#SE-03">SE-03 Backend service</a> restarts automatically after a process failure. No fault requires physical access to <a href="#HE-02">HE-02 Projection setup</a> to clear.<br>
@@ -947,7 +946,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqr_03_the_projection_is_readable_at_exhibition_viewing_distance_usability"><a class="anchor" href="#_sqr_03_the_projection_is_readable_at_exhibition_viewing_distance_usability"></a>4.3. <a id="SQR-03"></a>SQR-03 The projection is readable at exhibition viewing distance <em>(Usability)</em></h3>
+<h3 id="_sqr_03_the_projection_is_readable_at_exhibition_viewing_distance_usability"><a class="anchor" href="#_sqr_03_the_projection_is_readable_at_exhibition_viewing_distance_usability"></a>5.3. <a id="SQR-03"></a>SQR-03 The projection is readable at exhibition viewing distance <em>(Usability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#SE-02">SE-02 Display client</a>, <a href="#HE-02">HE-02 Projection setup</a><br>
 <em>Acceptance criteria (qualitative):</em> A complete exchange is readable by a standing observer at the room&#8217;s typical viewing distance. Verified in place on the actual projector before opening, not in a browser window.<br>
@@ -955,7 +954,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqr_04_credentials_and_quota_are_protected_from_the_public_security"><a class="anchor" href="#_sqr_04_credentials_and_quota_are_protected_from_the_public_security"></a>4.4. <a id="SQR-04"></a>SQR-04 Credentials and quota are protected from the public <em>(Security)</em></h3>
+<h3 id="_sqr_04_credentials_and_quota_are_protected_from_the_public_security"><a class="anchor" href="#_sqr_04_credentials_and_quota_are_protected_from_the_public_security"></a>5.4. <a id="SQR-04"></a>SQR-04 Credentials and quota are protected from the public <em>(Security)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
 <em>Acceptance criteria:</em> The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window (10 requests / 60 seconds — <code>RATE_LIMIT_MAX_REQUESTS</code>, <code>RATE_LIMIT_WINDOW_SECONDS</code>, config.php). Contribution length is bounded (600 characters — <code>CONTRIBUTION_MAX_CHARS</code>). Session length is bounded (10 exchanges — <code>TURN_ALLOWANCE</code>).<br>
@@ -963,7 +962,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqr_05_origin_is_fixed_at_creation_and_never_inferred_data_integrity"><a class="anchor" href="#_sqr_05_origin_is_fixed_at_creation_and_never_inferred_data_integrity"></a>4.5. <a id="SQR-05"></a>SQR-05 Origin is fixed at creation and never inferred <em>(Data-integrity)</em></h3>
+<h3 id="_sqr_05_origin_is_fixed_at_creation_and_never_inferred_data_integrity"><a class="anchor" href="#_sqr_05_origin_is_fixed_at_creation_and_never_inferred_data_integrity"></a>5.5. <a id="SQR-05"></a>SQR-05 Origin is fixed at creation and never inferred <em>(Data-integrity)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
 <em>Acceptance criteria (qualitative):</em> Every session carries pilot or live from the moment it is created. No process assigns or corrects origin afterwards. Extraction of exhibition material filters on the stored value.<br>
@@ -971,7 +970,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqr_06_public_projection_is_governed_separately_from_retention_compliance"><a class="anchor" href="#_sqr_06_public_projection_is_governed_separately_from_retention_compliance"></a>4.6. <a id="SQR-06"></a>SQR-06 Public projection is governed separately from retention <em>(Compliance)</em></h3>
+<h3 id="_sqr_06_public_projection_is_governed_separately_from_retention_compliance"><a class="anchor" href="#_sqr_06_public_projection_is_governed_separately_from_retention_compliance"></a>5.6. <a id="SQR-06"></a>SQR-06 Public projection is governed separately from retention <em>(Compliance)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a>, <a href="#SE-02">SE-02 Display client</a><br>
 <em>Acceptance criteria (qualitative):</em> Display eligibility, retention consent, and agreement to take part are stored as three distinct properties, each recorded independently. A session may be retained and not projected, or projected and not retained, in any combination. Display eligibility is set directly from the visitor&#8217;s projection consent at decision time — suitability is enforced earlier, at write time (<a href="#AP-05">AP-05 Moderation gates storage, not a per-session display</a>/<a href="#SG-07">SG-07 Gate public projection at the moment of submission</a>), so nothing reaches storage that projection consent alone would need to filter back out.<br>
@@ -979,7 +978,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sqr_07_the_installation_degrades_visibly_rather_than_silently_reliability_recorded_under_availability"><a class="anchor" href="#_sqr_07_the_installation_degrades_visibly_rather_than_silently_reliability_recorded_under_availability"></a>4.7. <a id="SQR-07"></a>SQR-07 The installation degrades visibly rather than silently <em>(Reliability, recorded under Availability)</em></h3>
+<h3 id="_sqr_07_the_installation_degrades_visibly_rather_than_silently_reliability_recorded_under_availability"><a class="anchor" href="#_sqr_07_the_installation_degrades_visibly_rather_than_silently_reliability_recorded_under_availability"></a>5.7. <a id="SQR-07"></a>SQR-07 The installation degrades visibly rather than silently <em>(Reliability, recorded under Availability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-02">SE-02 Display client</a><br>
 <em>Acceptance criteria (qualitative):</em> Every failure the visitor can encounter produces a plain statement of what happened. No failure presents as an unresponsive interface. This includes routing failures (unmatched path) and uncaught infrastructure faults on a page request, not only the failure conditions <a href="#SE-01">SE-01 Input client</a>/<a href="#SE-02">SE-02 Display client</a> raise themselves.<br>
@@ -990,10 +989,10 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>5. Constraints</h2>
+<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>6. Constraints</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_sc_01_php_with_a_file_backed_store_on_a_single_hosted_instance_technical"><a class="anchor" href="#_sc_01_php_with_a_file_backed_store_on_a_single_hosted_instance_technical"></a>5.1. <a id="SC-01"></a>SC-01 PHP with a file-backed store on a single hosted instance <em>(Technical)</em></h3>
+<h3 id="_sc_01_php_with_a_file_backed_store_on_a_single_hosted_instance_technical"><a class="anchor" href="#_sc_01_php_with_a_file_backed_store_on_a_single_hosted_instance_technical"></a>6.1. <a id="SC-01"></a>SC-01 PHP with a file-backed store on a single hosted instance <em>(Technical)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> Operator&#8217;s existing capability and maintenance preference.<br>
 <em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
@@ -1004,7 +1003,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sc_02_the_public_endpoint_must_be_served_over_https_with_a_valid_certificate_technical"><a class="anchor" href="#_sc_02_the_public_endpoint_must_be_served_over_https_with_a_valid_certificate_technical"></a>5.2. <a id="SC-02"></a>SC-02 The public endpoint must be served over HTTPS with a valid certificate <em>(Technical)</em></h3>
+<h3 id="_sc_02_the_public_endpoint_must_be_served_over_https_with_a_valid_certificate_technical"><a class="anchor" href="#_sc_02_the_public_endpoint_must_be_served_over_https_with_a_valid_certificate_technical"></a>6.2. <a id="SC-02"></a>SC-02 The public endpoint must be served over HTTPS with a valid certificate <em>(Technical)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> Mobile browser and camera-based code scanning behaviour.<br>
 <em>Applies to:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-02">SE-02 Display client</a>, <a href="#SE-03">SE-03 Backend service</a>, <a href="#HE-03">HE-03 Hosted server</a><br>
@@ -1014,7 +1013,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sc_03_build_effort_is_capped_and_the_piece_is_expendable_business"><a class="anchor" href="#_sc_03_build_effort_is_capped_and_the_piece_is_expendable_business"></a>5.3. <a id="SC-03"></a>SC-03 Build effort is capped and the piece is expendable <em>(Business)</em></h3>
+<h3 id="_sc_03_build_effort_is_capped_and_the_piece_is_expendable_business"><a class="anchor" href="#_sc_03_build_effort_is_capped_and_the_piece_is_expendable_business"></a>6.3. <a id="SC-03"></a>SC-03 Build effort is capped and the piece is expendable <em>(Business)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L1-solution-design-concept.html#BC-01">BC-01 Build effort must not compete with thesis writing</a>.<br>
 <em>Applies to:</em> All software elements.<br>
@@ -1024,7 +1023,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sc_04_generation_is_rate_limited_and_metered_by_the_provider_integration"><a class="anchor" href="#_sc_04_generation_is_rate_limited_and_metered_by_the_provider_integration"></a>5.4. <a id="SC-04"></a>SC-04 Generation is rate-limited and metered by the provider <em>(Integration)</em></h3>
+<h3 id="_sc_04_generation_is_rate_limited_and_metered_by_the_provider_integration"><a class="anchor" href="#_sc_04_generation_is_rate_limited_and_metered_by_the_provider_integration"></a>6.4. <a id="SC-04"></a>SC-04 Generation is rate-limited and metered by the provider <em>(Integration)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="#PE-01">PE-01 Language generation API</a> provider terms.<br>
 <em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
@@ -1034,7 +1033,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sc_05_retention_requires_consent_projection_requires_consent_and_only_ever_carries_content_that_already_passed_suitability_legal_regulatory"><a class="anchor" href="#_sc_05_retention_requires_consent_projection_requires_consent_and_only_ever_carries_content_that_already_passed_suitability_legal_regulatory"></a>5.5. <a id="SC-05"></a>SC-05 Retention requires consent; projection requires consent, and only ever carries content that already passed suitability <em>(Legal-regulatory)</em></h3>
+<h3 id="_sc_05_retention_requires_consent_projection_requires_consent_and_only_ever_carries_content_that_already_passed_suitability_legal_regulatory"><a class="anchor" href="#_sc_05_retention_requires_consent_projection_requires_consent_and_only_ever_carries_content_that_already_passed_suitability_legal_regulatory"></a>6.5. <a id="SC-05"></a>SC-05 Retention requires consent; projection requires consent, and only ever carries content that already passed suitability <em>(Legal-regulatory)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L1-solution-design-concept.html#BC-02">BC-02 Public user-generated content is subject to data</a>.<br>
 <em>Applies to:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-03">SE-03 Backend service</a><br>
@@ -1044,7 +1043,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sc_06_the_projected_layout_is_an_open_decision_organisational"><a class="anchor" href="#_sc_06_the_projected_layout_is_an_open_decision_organisational"></a>5.6. <a id="SC-06"></a>SC-06 The projected layout is an open decision <em>(Organisational)</em></h3>
+<h3 id="_sc_06_the_projected_layout_is_an_open_decision_organisational"><a class="anchor" href="#_sc_06_the_projected_layout_is_an_open_decision_organisational"></a>6.6. <a id="SC-06"></a>SC-06 The projected layout is an open decision <em>(Organisational)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L1-solution-design-concept.html#BC-04">BC-04 Display design is not yet settled</a>.<br>
 <em>Applies to:</em> <a href="#SE-02">SE-02 Display client</a><br>
@@ -1072,7 +1071,7 @@ Downward references from L3 are not written here. Element designs declare their 
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:56:59 +0200
+Last updated 2026-08-20 22:09:51 +0200
 </div>
 </div>
 </body>

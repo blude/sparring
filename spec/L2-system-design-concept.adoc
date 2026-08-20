@@ -71,7 +71,7 @@ _Rationale:_ Gating at submission rather than at display means nothing unsuitabl
 
 *Architecture style:* Client-server, three participants. Two thin browser clients and one stateful backend, with all logic and all credentials held server-side.
 
-==== Key architecture principles
+=== Key architecture principles
 
 *[[AP-01]]AP-01 All logic lives in the backend; clients are presentation only* +
 _Rationale:_ The clients run on devices the project does not control, in a public setting. Placing generation, moderation, rate limiting, or session policy in a client would expose the API credential and make every rule editable by anyone with developer tools. +
@@ -150,9 +150,9 @@ flowchart TB
 
 NOTE: Dashed link marks the system boundary. Detailed interaction sequences are in section 3, not in the diagram.
 
-=== System elements
+== System elements
 
-==== User types
+=== User types
 
 *[[UT-01]]UT-01 Participating visitor* +
 An exhibition visitor who chooses to interact. No prior briefing, no expertise in agentic AI assumed, attention measured in minutes. +
@@ -172,7 +172,7 @@ _Primary goals:_ Populate the installation before opening. Extract exhibition ma
 _Interacts with:_ <<SE-03,SE-03 Backend service>> +
 _Represents:_ xref:L1-solution-design-concept.adoc#VCA-03[VCA-03 Thesis author / exhibitor]
 
-==== Software elements
+=== Software elements
 
 *[[SE-01]]SE-01 Input client* _(Web-application)_ +
 The surface a visitor reaches by scanning the code, running in their own mobile browser. +
@@ -196,7 +196,7 @@ _Realises:_ xref:L1-solution-design-concept.adoc#VCA-04[VCA-04 The installation]
 _Satisfies:_ <<SG-01,SG-01 Start a session from a personal device with no>>, <<SG-04,SG-04 Run unattended and absorb misuse without operator>>, <<SG-05,SG-05 Record every interaction with its origin fixed at>>, <<SG-06,SG-06 Never present an empty surface>>, <<SG-07,SG-07 Gate public projection at the moment of submission>> +
 _Constrained by:_ <<SC-01,SC-01 PHP with a file-backed store on a single hosted>>, <<SC-04,SC-04 Generation is rate-limited and metered by the provider>>
 
-==== Hardware elements
+=== Hardware elements
 
 *[[HE-01]]HE-01 Visitor smartphone* +
 _Procurement:_ Assumed-existing +
@@ -219,7 +219,7 @@ _Location:_ EU region. +
 _Runs:_ <<SE-01,SE-01 Input client>>, <<SE-02,SE-02 Display client>>, <<SE-03,SE-03 Backend service>> +
 _Characteristics:_ Smallest generally available instance. Public HTTPS endpoint with a valid certificate, which is required because visitors reach it by scanning a code with a phone camera.
 
-==== Partner elements
+=== Partner elements
 
 *[[PE-01]]PE-01 Language generation API* +
 _Provider:_ Anthropic (default); OpenAI or an OpenAI-compatible local server, operator-selected +
