@@ -164,7 +164,6 @@
 </style>
 </head>
 <body>
-<?= localeSwitcher() ?>
 <p class="presented-by"><?= t('start.presentedBy') ?></p>
 <div class="content">
   <div class="branding">
@@ -189,5 +188,6 @@
     <p><?= t('start.footer.craft') ?></p>
     <p><?= t('start.footer.legal') ?></p>
 </footer>
+<?php /* echo localeSwitcher(); */ ?>
 </body>
 </html>
