@@ -25,7 +25,6 @@ $openingMessage = resolve_opening_message($_GET['o'] ?? null);
       <div id="session-title"><?= t('dojo.untitled') ?></div>
     </div>
     <div id="top-bar-trailing">
-      <?= localeSwitcher() ?>
       <button id="new-session-btn" type="button"><?= t('dojo.endSession') ?></button>
     </div>
   </header>
