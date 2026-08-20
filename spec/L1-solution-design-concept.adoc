@@ -65,13 +65,13 @@ _Segment characteristics:_ Exhibition audience. Mixed background, largely non-ex
 _Value delivered:_ Experiences the difference between an AI that resolves a request and one that holds a position. Sees their own thinking reflected back as something worth contesting. Leaves with a felt reference point rather than a description. +
 _Pains addressed:_ Explanations of "productive friction" do not land exclusively as text on a wall panel. The concept is experiential and has, until now, required a scheduled session to convey. +
 _Current alternatives:_ Reading a printed exhibition text about the thesis, or watching a recorded demo video. +
-_Satisfies:_ <<BG-01,BG-01>>, <<BG-02,BG-02>>
+_Satisfies:_ <<BG-01,BG-01 — Make Sparring's friction visible to an audience>>, <<BG-02,BG-02 — Give visitors direct, unassisted first-hand experience>>
 
 *[[VP-02]]VP-02 — Observing visitor (bystander)* +
 _Segment characteristics:_ Present in the room, not currently interacting. May be waiting, accompanying someone, or passing through. Engagement window of a few seconds. +
 _Value delivered:_ Can read a complete exchange without context or commitment. Understands what the piece does before deciding whether to participate. +
 _Pains addressed:_ Interactive pieces that only reward the person holding the device leave everyone else out of the work. +
-_Satisfies:_ <<BG-01,BG-01>>
+_Satisfies:_ <<BG-01,BG-01 — Make Sparring's friction visible to an audience>>
 
 '''
 
@@ -94,23 +94,23 @@ flowchart LR
 ----
 
 *[[VCA-01]]VCA-01 — Participating visitor* _(Customer)_ +
-Receives the value described in <<VP-01,VP-01>>. Interacts directly with <<VCA-04,VCA-04>> through their own device. +
-_Realises:_ <<VP-01,VP-01>>
+Receives the value described in <<VP-01,VP-01 — Participating visitor>>. Interacts directly with <<VCA-04,VCA-04 — The installation>> through their own device. +
+_Realises:_ <<VP-01,VP-01 — Participating visitor>>
 
 *[[VCA-02]]VCA-02 — Observing visitor* _(Customer)_ +
-Receives the value described in <<VP-02,VP-02>> through the projected surface of <<VCA-04,VCA-04>>, without interacting. +
-_Realises:_ <<VP-02,VP-02>>
+Receives the value described in <<VP-02,VP-02 — Observing visitor (bystander)>> through the projected surface of <<VCA-04,VCA-04 — The installation>>, without interacting. +
+_Realises:_ <<VP-02,VP-02 — Observing visitor (bystander)>>
 
 *[[VCA-03]]VCA-03 — Thesis author / exhibitor* _(Organisation-internal)_ +
 Provides the pilot session material that populates the installation before and between live sessions, and maintains the running system. Not present continuously during exhibition hours.
 
 *[[VCA-04]]VCA-04 — The installation* _(Digital-element)_ +
 The whole technical system, treated as one element at this level. The technical decomposition into clients and backend belongs at L2. +
-_Interacts with:_ <<VCA-01,VCA-01>>, <<VCA-02,VCA-02>>, <<VCA-03,VCA-03>>, <<VCA-05,VCA-05>>
+_Interacts with:_ <<VCA-01,VCA-01 — Participating visitor>>, <<VCA-02,VCA-02 — Observing visitor>>, <<VCA-03,VCA-03 — Thesis author / exhibitor>>, <<VCA-05,VCA-05 — LLM provider>>
 
 *[[VCA-05]]VCA-05 — LLM provider* _(Organisation-external)_ +
 Supplies the language generation that produces Sparring responses. Not owned or controlled by the project. +
-_Realises:_ <<VP-01,VP-01>>
+_Realises:_ <<VP-01,VP-01 — Participating visitor>>
 
 '''
 
@@ -118,23 +118,23 @@ _Realises:_ <<VP-01,VP-01>>
 
 *[[BE-01]]BE-01 — Sparring session* +
 One visitor's continuous engagement with the installation, from first turn to abandonment or turn cap. +
-_Key information:_ Origin (pilot or live), consent status, display eligibility, scenario label, start and last-activity time, turn count. Display eligibility is now set directly by the visitor's own projection consent (<<BE-04,BE-04>>) rather than derived after the fact: a contribution unsuitable for projection is rejected before it is ever stored, so nothing stored is ever retroactively hidden. +
-_Associations:_ Contains many Exchanges (<<BE-02,BE-02>>). Carries one Consent record (<<BE-04,BE-04>>).
+_Key information:_ Origin (pilot or live), consent status, display eligibility, scenario label, start and last-activity time, turn count. Display eligibility is now set directly by the visitor's own projection consent (<<BE-04,BE-04 — Consent record>>) rather than derived after the fact: a contribution unsuitable for projection is rejected before it is ever stored, so nothing stored is ever retroactively hidden. +
+_Associations:_ Contains many Exchanges (<<BE-02,BE-02 — Exchange>>). Carries one Consent record (<<BE-04,BE-04 — Consent record>>).
 
 *[[BE-02]]BE-02 — Exchange* +
 One visitor turn together with the Sparring partner's reply to it. The exchange, not the individual turn, is the unit that carries meaning: a reply without its prompt shows nothing about friction. +
 _Key information:_ Visitor contribution, Sparring contribution, position within the session, time. +
-_Associations:_ Belongs to a Session (<<BE-01,BE-01>>).
+_Associations:_ Belongs to a Session (<<BE-01,BE-01 — Sparring session>>).
 
 *[[BE-03]]BE-03 — Scenario* +
 A short statement of what a session is about, giving a reader enough context to make sense of an isolated exchange. +
 _Key information:_ Summary text, derivation source (visitor's opening turn or generated label). +
-_Associations:_ Describes one Session (<<BE-01,BE-01>>).
+_Associations:_ Describes one Session (<<BE-01,BE-01 — Sparring session>>).
 
 *[[BE-04]]BE-04 — Consent record* +
 Three independent decisions made together, once, before the session opens: agreement to the terms of participation (a precondition of using the piece at all, not a data-processing choice), consent to have the session retained and reviewed after the exhibition, and consent to have exchanges shown on the projection. The latter two are genuine opt-outs — declining either still lets the visitor spar. +
 _Key information:_ Each of the three, granted or withheld, and time of decision. +
-_Associations:_ Belongs to one Session (<<BE-01,BE-01>>).
+_Associations:_ Belongs to one Session (<<BE-01,BE-01 — Sparring session>>).
 
 '''
 
@@ -144,9 +144,9 @@ _Associations:_ Belongs to one Session (<<BE-01,BE-01>>).
 
 A visitor scans the QR code, agrees to take part and makes their retention and projection choices, and exchanges turns with the Sparring partner until they stop or reach the session limit. Their exchanges appear on the projection as they happen, if they consented to that. +
 _Frequency:_ Continuously during opening hours, in bursts following visitor traffic. +
-_Involved parties:_ <<VCA-01,VCA-01>>, <<VCA-04,VCA-04>>, <<VCA-05,VCA-05>> +
-_Creates / updates:_ Creates Session (<<BE-01,BE-01>>), Consent record (<<BE-04,BE-04>>), Scenario (<<BE-03,BE-03>>); creates Exchange (<<BE-02,BE-02>>) per turn. +
-_Supports:_ <<BG-01,BG-01>>, <<BG-02,BG-02>>
+_Involved parties:_ <<VCA-01,VCA-01 — Participating visitor>>, <<VCA-04,VCA-04 — The installation>>, <<VCA-05,VCA-05 — LLM provider>> +
+_Creates / updates:_ Creates Session (<<BE-01,BE-01 — Sparring session>>), Consent record (<<BE-04,BE-04 — Consent record>>), Scenario (<<BE-03,BE-03 — Scenario>>); creates Exchange (<<BE-02,BE-02 — Exchange>>) per turn. +
+_Supports:_ <<BG-01,BG-01 — Make Sparring's friction visible to an audience>>, <<BG-02,BG-02 — Give visitors direct, unassisted first-hand experience>>
 
 *Steps*
 
@@ -167,15 +167,15 @@ _Supports:_ <<BG-01,BG-01>>, <<BG-02,BG-02>>
 - *[[PA-01-5]]PA-01-5* _(extends <<PS-01-2,PS-01-2>>)_ Visitor declines to agree to the terms of participation. Unlike retention and projection, this is not an opt-out the session can proceed without: the input surface stays unusable until it is agreed to. _Outcome:_ Terminate.
 - *[[PA-01-6]]PA-01-6* _(extends <<PS-01-1,PS-01-1>>)_ Visitor reaches the installation via a landing screen at the site's own address rather than a scanned code — typed directly, bookmarked, or shared. The same session surface opens and the process continues unchanged from <<PS-01-2,PS-01-2>>. _Outcome:_ Alternative-success.
 
-*Note on scope.* A visitor who spends the session trying to argue the Sparring partner out of its stance is following <<BP-01,BP-01>>, not deviating from it. This is deliberate and is not treated as an exception path.
+*Note on scope.* A visitor who spends the session trying to argue the Sparring partner out of its stance is following <<BP-01,BP-01 — Visitor conducts a Sparring session>>, not deviating from it. This is deliberate and is not treated as an exception path.
 
 === [[BP-02]]BP-02 — Recent sessions are shown to the room
 
 The projection presents recent exchanges so that people who are not currently participating can read what the installation does. When no live session is running, earlier pilot material keeps the surface populated. +
 _Frequency:_ Continuous. +
-_Involved parties:_ <<VCA-02,VCA-02>>, <<VCA-04,VCA-04>>, <<VCA-03,VCA-03>> +
-_Creates / updates:_ Reads Session (<<BE-01,BE-01>>), Exchange (<<BE-02,BE-02>>), Scenario (<<BE-03,BE-03>>). +
-_Supports:_ <<BG-01,BG-01>>, <<BG-03,BG-03>>
+_Involved parties:_ <<VCA-02,VCA-02 — Observing visitor>>, <<VCA-04,VCA-04 — The installation>>, <<VCA-03,VCA-03 — Thesis author / exhibitor>> +
+_Creates / updates:_ Reads Session (<<BE-01,BE-01 — Sparring session>>), Exchange (<<BE-02,BE-02 — Exchange>>), Scenario (<<BE-03,BE-03 — Scenario>>). +
+_Supports:_ <<BG-01,BG-01 — Make Sparring's friction visible to an audience>>, <<BG-03,BG-03 — Run unattended through exhibition hours>>
 
 *Steps*
 
@@ -193,25 +193,25 @@ _Supports:_ <<BG-01,BG-01>>, <<BG-03,BG-03>>
 
 *[[BQR-01]]BQR-01 — Visitors experience challenge, not obstruction* _(Customer-satisfaction)_ +
 The friction shall read as deliberate and directed rather than as the system malfunctioning or refusing. +
-_Applies to:_ <<BP-01,BP-01>>, <<VP-01,VP-01>> +
+_Applies to:_ <<BP-01,BP-01 — Visitor conducts a Sparring session>>, <<VP-01,VP-01 — Participating visitor>> +
 _Acceptance criteria (qualitative):_ In informal observation during the exhibition, visitors who encounter pushback continue the session rather than abandoning it at the first refusal. +
-_Satisfies:_ <<BG-01,BG-01>>
+_Satisfies:_ <<BG-01,BG-01 — Make Sparring's friction visible to an audience>>
 
 *[[BQR-02]]BQR-02 — The piece is available whenever the room is open* _(Service-quality)_ +
-_Applies to:_ <<BP-01,BP-01>>, <<BP-02,BP-02>> +
+_Applies to:_ <<BP-01,BP-01 — Visitor conducts a Sparring session>>, <<BP-02,BP-02 — Recent sessions are shown to the room>> +
 _Acceptance criteria (quantitative):_ Available across published opening hours with no on-site intervention. +
-_Satisfies:_ <<BG-03,BG-03>>
+_Satisfies:_ <<BG-03,BG-03 — Run unattended through exhibition hours>>
 
 *[[BQR-03]]BQR-03 — Nothing identifying a visitor reaches the projection* _(Compliance)_ +
 The public surface shall not carry names, contact details, or other personal information, whether typed deliberately or incidentally. +
-_Applies to:_ <<BP-02,BP-02>>, <<BE-02,BE-02>> +
-_Acceptance criteria (qualitative):_ Content assessed as carrying personal information is rejected before it is stored or sent to the Sparring partner — the visitor edits and resubmits, and the rest of the session is unaffected. Nothing unsuitable is ever in a position to reach the projection. A generated nickname shown alongside a session (see xref:L2-system-design-concept.adoc#SE-02[SE-02] element design) is not in scope here: it is not supplied by the visitor, identifies nothing about them, and carries no information this requirement exists to keep off the wall. +
-_Satisfies:_ <<BG-01,BG-01>>, <<BG-04,BG-04>>
+_Applies to:_ <<BP-02,BP-02 — Recent sessions are shown to the room>>, <<BE-02,BE-02 — Exchange>> +
+_Acceptance criteria (qualitative):_ Content assessed as carrying personal information is rejected before it is stored or sent to the Sparring partner — the visitor edits and resubmits, and the rest of the session is unaffected. Nothing unsuitable is ever in a position to reach the projection. A generated nickname shown alongside a session (see xref:L2-system-design-concept.adoc#SE-02[SE-02 — Display client] element design) is not in scope here: it is not supplied by the visitor, identifies nothing about them, and carries no information this requirement exists to keep off the wall. +
+_Satisfies:_ <<BG-01,BG-01 — Make Sparring's friction visible to an audience>>, <<BG-04,BG-04 — Produce a record of public interactions as secondary>>
 
 *[[BQR-04]]BQR-04 — Exhibition material is never mistaken for evaluation data* _(Operational-excellence)_ +
-_Applies to:_ <<BE-01,BE-01>> +
+_Applies to:_ <<BE-01,BE-01 — Sparring session>> +
 _Acceptance criteria (qualitative):_ Session origin is recorded at creation, not reconstructed afterwards. +
-_Satisfies:_ <<BG-04,BG-04>>
+_Satisfies:_ <<BG-04,BG-04 — Produce a record of public interactions as secondary>>
 
 '''
 
@@ -224,7 +224,7 @@ _Acceptance criteria (qualitative):_ The installation is scoped so that abandoni
 
 *[[BC-02]]BC-02 — Public user-generated content is subject to data protection law* _(Legal-regulatory)_ +
 _Source:_ GDPR. +
-_Applies to:_ <<BP-01,BP-01>>, <<BP-02,BP-02>>, <<BE-01,BE-01>>, <<BE-04,BE-04>>. +
+_Applies to:_ <<BP-01,BP-01 — Visitor conducts a Sparring session>>, <<BP-02,BP-02 — Recent sessions are shown to the room>>, <<BE-01,BE-01 — Sparring session>>, <<BE-04,BE-04 — Consent record>>. +
 _Acceptance criteria (qualitative):_ Retention is consented to, and projection of personal content is prevented independently of consent. Retention and projection consent must each remain a genuine opt-out — neither may be a precondition of using the piece at all, or the consent is not freely given. The one thing that _is_ a precondition is agreement to the terms of participation itself, which is a different kind of decision (whether to use the piece), not consent to a data-processing purpose, and is kept as a separate choice from the other two for exactly that reason.
 
 *[[BC-03]]BC-03 — One developer, no continuous on-site operator* _(Resource)_ +
@@ -233,7 +233,7 @@ _Acceptance criteria (qualitative):_ No routine task requires a person in the ro
 
 *[[BC-04]]BC-04 — Display design is not yet settled* _(Organisational)_ +
 The projected layout is marked TO BE REFINED and will be decided against real pilot transcripts on the actual projector. +
-_Applies to:_ <<BP-02,BP-02>>. +
+_Applies to:_ <<BP-02,BP-02 — Recent sessions are shown to the room>>. +
 _Acceptance criteria:_ TBC.
 
 '''

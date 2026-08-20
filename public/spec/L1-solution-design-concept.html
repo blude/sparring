@@ -550,14 +550,14 @@ Interactions shall be captured in a form that can be reviewed after the exhibiti
 <em>Value delivered:</em> Experiences the difference between an AI that resolves a request and one that holds a position. Sees their own thinking reflected back as something worth contesting. Leaves with a felt reference point rather than a description.<br>
 <em>Pains addressed:</em> Explanations of "productive friction" do not land exclusively as text on a wall panel. The concept is experiential and has, until now, required a scheduled session to convey.<br>
 <em>Current alternatives:</em> Reading a printed exhibition text about the thesis, or watching a recorded demo video.<br>
-<em>Satisfies:</em> <a href="#BG-01">BG-01</a>, <a href="#BG-02">BG-02</a></p>
+<em>Satisfies:</em> <a href="#BG-01">BG-01 — Make Sparring&#8217;s friction visible to an audience</a>, <a href="#BG-02">BG-02 — Give visitors direct, unassisted first-hand experience</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="VP-02"></a>VP-02 — Observing visitor (bystander)</strong><br>
 <em>Segment characteristics:</em> Present in the room, not currently interacting. May be waiting, accompanying someone, or passing through. Engagement window of a few seconds.<br>
 <em>Value delivered:</em> Can read a complete exchange without context or commitment. Understands what the piece does before deciding whether to participate.<br>
 <em>Pains addressed:</em> Interactive pieces that only reward the person holding the device leave everyone else out of the work.<br>
-<em>Satisfies:</em> <a href="#BG-01">BG-01</a></p>
+<em>Satisfies:</em> <a href="#BG-01">BG-01 — Make Sparring&#8217;s friction visible to an audience</a></p>
 </div>
 <hr>
 </div>
@@ -583,13 +583,13 @@ Interactions shall be captured in a form that can be reviewed after the exhibiti
 </div>
 <div class="paragraph">
 <p><strong><a id="VCA-01"></a>VCA-01 — Participating visitor</strong> <em>(Customer)</em><br>
-Receives the value described in <a href="#VP-01">VP-01</a>. Interacts directly with <a href="#VCA-04">VCA-04</a> through their own device.<br>
-<em>Realises:</em> <a href="#VP-01">VP-01</a></p>
+Receives the value described in <a href="#VP-01">VP-01 — Participating visitor</a>. Interacts directly with <a href="#VCA-04">VCA-04 — The installation</a> through their own device.<br>
+<em>Realises:</em> <a href="#VP-01">VP-01 — Participating visitor</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="VCA-02"></a>VCA-02 — Observing visitor</strong> <em>(Customer)</em><br>
-Receives the value described in <a href="#VP-02">VP-02</a> through the projected surface of <a href="#VCA-04">VCA-04</a>, without interacting.<br>
-<em>Realises:</em> <a href="#VP-02">VP-02</a></p>
+Receives the value described in <a href="#VP-02">VP-02 — Observing visitor (bystander)</a> through the projected surface of <a href="#VCA-04">VCA-04 — The installation</a>, without interacting.<br>
+<em>Realises:</em> <a href="#VP-02">VP-02 — Observing visitor (bystander)</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="VCA-03"></a>VCA-03 — Thesis author / exhibitor</strong> <em>(Organisation-internal)</em><br>
@@ -598,12 +598,12 @@ Provides the pilot session material that populates the installation before and b
 <div class="paragraph">
 <p><strong><a id="VCA-04"></a>VCA-04 — The installation</strong> <em>(Digital-element)</em><br>
 The whole technical system, treated as one element at this level. The technical decomposition into clients and backend belongs at L2.<br>
-<em>Interacts with:</em> <a href="#VCA-01">VCA-01</a>, <a href="#VCA-02">VCA-02</a>, <a href="#VCA-03">VCA-03</a>, <a href="#VCA-05">VCA-05</a></p>
+<em>Interacts with:</em> <a href="#VCA-01">VCA-01 — Participating visitor</a>, <a href="#VCA-02">VCA-02 — Observing visitor</a>, <a href="#VCA-03">VCA-03 — Thesis author / exhibitor</a>, <a href="#VCA-05">VCA-05 — LLM provider</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="VCA-05"></a>VCA-05 — LLM provider</strong> <em>(Organisation-external)</em><br>
 Supplies the language generation that produces Sparring responses. Not owned or controlled by the project.<br>
-<em>Realises:</em> <a href="#VP-01">VP-01</a></p>
+<em>Realises:</em> <a href="#VP-01">VP-01 — Participating visitor</a></p>
 </div>
 <hr>
 </div>
@@ -614,26 +614,26 @@ Supplies the language generation that produces Sparring responses. Not owned or 
 <div class="paragraph">
 <p><strong><a id="BE-01"></a>BE-01 — Sparring session</strong><br>
 One visitor&#8217;s continuous engagement with the installation, from first turn to abandonment or turn cap.<br>
-<em>Key information:</em> Origin (pilot or live), consent status, display eligibility, scenario label, start and last-activity time, turn count. Display eligibility is now set directly by the visitor&#8217;s own projection consent (<a href="#BE-04">BE-04</a>) rather than derived after the fact: a contribution unsuitable for projection is rejected before it is ever stored, so nothing stored is ever retroactively hidden.<br>
-<em>Associations:</em> Contains many Exchanges (<a href="#BE-02">BE-02</a>). Carries one Consent record (<a href="#BE-04">BE-04</a>).</p>
+<em>Key information:</em> Origin (pilot or live), consent status, display eligibility, scenario label, start and last-activity time, turn count. Display eligibility is now set directly by the visitor&#8217;s own projection consent (<a href="#BE-04">BE-04 — Consent record</a>) rather than derived after the fact: a contribution unsuitable for projection is rejected before it is ever stored, so nothing stored is ever retroactively hidden.<br>
+<em>Associations:</em> Contains many Exchanges (<a href="#BE-02">BE-02 — Exchange</a>). Carries one Consent record (<a href="#BE-04">BE-04 — Consent record</a>).</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="BE-02"></a>BE-02 — Exchange</strong><br>
 One visitor turn together with the Sparring partner&#8217;s reply to it. The exchange, not the individual turn, is the unit that carries meaning: a reply without its prompt shows nothing about friction.<br>
 <em>Key information:</em> Visitor contribution, Sparring contribution, position within the session, time.<br>
-<em>Associations:</em> Belongs to a Session (<a href="#BE-01">BE-01</a>).</p>
+<em>Associations:</em> Belongs to a Session (<a href="#BE-01">BE-01 — Sparring session</a>).</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="BE-03"></a>BE-03 — Scenario</strong><br>
 A short statement of what a session is about, giving a reader enough context to make sense of an isolated exchange.<br>
 <em>Key information:</em> Summary text, derivation source (visitor&#8217;s opening turn or generated label).<br>
-<em>Associations:</em> Describes one Session (<a href="#BE-01">BE-01</a>).</p>
+<em>Associations:</em> Describes one Session (<a href="#BE-01">BE-01 — Sparring session</a>).</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="BE-04"></a>BE-04 — Consent record</strong><br>
 Three independent decisions made together, once, before the session opens: agreement to the terms of participation (a precondition of using the piece at all, not a data-processing choice), consent to have the session retained and reviewed after the exhibition, and consent to have exchanges shown on the projection. The latter two are genuine opt-outs — declining either still lets the visitor spar.<br>
 <em>Key information:</em> Each of the three, granted or withheld, and time of decision.<br>
-<em>Associations:</em> Belongs to one Session (<a href="#BE-01">BE-01</a>).</p>
+<em>Associations:</em> Belongs to one Session (<a href="#BE-01">BE-01 — Sparring session</a>).</p>
 </div>
 <hr>
 </div>
@@ -646,9 +646,9 @@ Three independent decisions made together, once, before the session opens: agree
 <div class="paragraph">
 <p>A visitor scans the QR code, agrees to take part and makes their retention and projection choices, and exchanges turns with the Sparring partner until they stop or reach the session limit. Their exchanges appear on the projection as they happen, if they consented to that.<br>
 <em>Frequency:</em> Continuously during opening hours, in bursts following visitor traffic.<br>
-<em>Involved parties:</em> <a href="#VCA-01">VCA-01</a>, <a href="#VCA-04">VCA-04</a>, <a href="#VCA-05">VCA-05</a><br>
-<em>Creates / updates:</em> Creates Session (<a href="#BE-01">BE-01</a>), Consent record (<a href="#BE-04">BE-04</a>), Scenario (<a href="#BE-03">BE-03</a>); creates Exchange (<a href="#BE-02">BE-02</a>) per turn.<br>
-<em>Supports:</em> <a href="#BG-01">BG-01</a>, <a href="#BG-02">BG-02</a></p>
+<em>Involved parties:</em> <a href="#VCA-01">VCA-01 — Participating visitor</a>, <a href="#VCA-04">VCA-04 — The installation</a>, <a href="#VCA-05">VCA-05 — LLM provider</a><br>
+<em>Creates / updates:</em> Creates Session (<a href="#BE-01">BE-01 — Sparring session</a>), Consent record (<a href="#BE-04">BE-04 — Consent record</a>), Scenario (<a href="#BE-03">BE-03 — Scenario</a>); creates Exchange (<a href="#BE-02">BE-02 — Exchange</a>) per turn.<br>
+<em>Supports:</em> <a href="#BG-01">BG-01 — Make Sparring&#8217;s friction visible to an audience</a>, <a href="#BG-02">BG-02 — Give visitors direct, unassisted first-hand experience</a></p>
 </div>
 <div class="paragraph">
 <p><strong>Steps</strong></p>
@@ -704,7 +704,7 @@ Three independent decisions made together, once, before the session opens: agree
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Note on scope.</strong> A visitor who spends the session trying to argue the Sparring partner out of its stance is following <a href="#BP-01">BP-01</a>, not deviating from it. This is deliberate and is not treated as an exception path.</p>
+<p><strong>Note on scope.</strong> A visitor who spends the session trying to argue the Sparring partner out of its stance is following <a href="#BP-01">BP-01 — Visitor conducts a Sparring session</a>, not deviating from it. This is deliberate and is not treated as an exception path.</p>
 </div>
 </div>
 <div class="sect2">
@@ -712,9 +712,9 @@ Three independent decisions made together, once, before the session opens: agree
 <div class="paragraph">
 <p>The projection presents recent exchanges so that people who are not currently participating can read what the installation does. When no live session is running, earlier pilot material keeps the surface populated.<br>
 <em>Frequency:</em> Continuous.<br>
-<em>Involved parties:</em> <a href="#VCA-02">VCA-02</a>, <a href="#VCA-04">VCA-04</a>, <a href="#VCA-03">VCA-03</a><br>
-<em>Creates / updates:</em> Reads Session (<a href="#BE-01">BE-01</a>), Exchange (<a href="#BE-02">BE-02</a>), Scenario (<a href="#BE-03">BE-03</a>).<br>
-<em>Supports:</em> <a href="#BG-01">BG-01</a>, <a href="#BG-03">BG-03</a></p>
+<em>Involved parties:</em> <a href="#VCA-02">VCA-02 — Observing visitor</a>, <a href="#VCA-04">VCA-04 — The installation</a>, <a href="#VCA-03">VCA-03 — Thesis author / exhibitor</a><br>
+<em>Creates / updates:</em> Reads Session (<a href="#BE-01">BE-01 — Sparring session</a>), Exchange (<a href="#BE-02">BE-02 — Exchange</a>), Scenario (<a href="#BE-03">BE-03 — Scenario</a>).<br>
+<em>Supports:</em> <a href="#BG-01">BG-01 — Make Sparring&#8217;s friction visible to an audience</a>, <a href="#BG-03">BG-03 — Run unattended through exhibition hours</a></p>
 </div>
 <div class="paragraph">
 <p><strong>Steps</strong></p>
@@ -752,28 +752,28 @@ Three independent decisions made together, once, before the session opens: agree
 <div class="paragraph">
 <p><strong><a id="BQR-01"></a>BQR-01 — Visitors experience challenge, not obstruction</strong> <em>(Customer-satisfaction)</em><br>
 The friction shall read as deliberate and directed rather than as the system malfunctioning or refusing.<br>
-<em>Applies to:</em> <a href="#BP-01">BP-01</a>, <a href="#VP-01">VP-01</a><br>
+<em>Applies to:</em> <a href="#BP-01">BP-01 — Visitor conducts a Sparring session</a>, <a href="#VP-01">VP-01 — Participating visitor</a><br>
 <em>Acceptance criteria (qualitative):</em> In informal observation during the exhibition, visitors who encounter pushback continue the session rather than abandoning it at the first refusal.<br>
-<em>Satisfies:</em> <a href="#BG-01">BG-01</a></p>
+<em>Satisfies:</em> <a href="#BG-01">BG-01 — Make Sparring&#8217;s friction visible to an audience</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="BQR-02"></a>BQR-02 — The piece is available whenever the room is open</strong> <em>(Service-quality)</em><br>
-<em>Applies to:</em> <a href="#BP-01">BP-01</a>, <a href="#BP-02">BP-02</a><br>
+<em>Applies to:</em> <a href="#BP-01">BP-01 — Visitor conducts a Sparring session</a>, <a href="#BP-02">BP-02 — Recent sessions are shown to the room</a><br>
 <em>Acceptance criteria (quantitative):</em> Available across published opening hours with no on-site intervention.<br>
-<em>Satisfies:</em> <a href="#BG-03">BG-03</a></p>
+<em>Satisfies:</em> <a href="#BG-03">BG-03 — Run unattended through exhibition hours</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="BQR-03"></a>BQR-03 — Nothing identifying a visitor reaches the projection</strong> <em>(Compliance)</em><br>
 The public surface shall not carry names, contact details, or other personal information, whether typed deliberately or incidentally.<br>
-<em>Applies to:</em> <a href="#BP-02">BP-02</a>, <a href="#BE-02">BE-02</a><br>
-<em>Acceptance criteria (qualitative):</em> Content assessed as carrying personal information is rejected before it is stored or sent to the Sparring partner — the visitor edits and resubmits, and the rest of the session is unaffected. Nothing unsuitable is ever in a position to reach the projection. A generated nickname shown alongside a session (see <a href="L2-system-design-concept.html#SE-02">SE-02</a> element design) is not in scope here: it is not supplied by the visitor, identifies nothing about them, and carries no information this requirement exists to keep off the wall.<br>
-<em>Satisfies:</em> <a href="#BG-01">BG-01</a>, <a href="#BG-04">BG-04</a></p>
+<em>Applies to:</em> <a href="#BP-02">BP-02 — Recent sessions are shown to the room</a>, <a href="#BE-02">BE-02 — Exchange</a><br>
+<em>Acceptance criteria (qualitative):</em> Content assessed as carrying personal information is rejected before it is stored or sent to the Sparring partner — the visitor edits and resubmits, and the rest of the session is unaffected. Nothing unsuitable is ever in a position to reach the projection. A generated nickname shown alongside a session (see <a href="L2-system-design-concept.html#SE-02">SE-02 — Display client</a> element design) is not in scope here: it is not supplied by the visitor, identifies nothing about them, and carries no information this requirement exists to keep off the wall.<br>
+<em>Satisfies:</em> <a href="#BG-01">BG-01 — Make Sparring&#8217;s friction visible to an audience</a>, <a href="#BG-04">BG-04 — Produce a record of public interactions as secondary</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="BQR-04"></a>BQR-04 — Exhibition material is never mistaken for evaluation data</strong> <em>(Operational-excellence)</em><br>
-<em>Applies to:</em> <a href="#BE-01">BE-01</a><br>
+<em>Applies to:</em> <a href="#BE-01">BE-01 — Sparring session</a><br>
 <em>Acceptance criteria (qualitative):</em> Session origin is recorded at creation, not reconstructed afterwards.<br>
-<em>Satisfies:</em> <a href="#BG-04">BG-04</a></p>
+<em>Satisfies:</em> <a href="#BG-04">BG-04 — Produce a record of public interactions as secondary</a></p>
 </div>
 <hr>
 </div>
@@ -790,7 +790,7 @@ The public surface shall not carry names, contact details, or other personal inf
 <div class="paragraph">
 <p><strong><a id="BC-02"></a>BC-02 — Public user-generated content is subject to data protection law</strong> <em>(Legal-regulatory)</em><br>
 <em>Source:</em> GDPR.<br>
-<em>Applies to:</em> <a href="#BP-01">BP-01</a>, <a href="#BP-02">BP-02</a>, <a href="#BE-01">BE-01</a>, <a href="#BE-04">BE-04</a>.<br>
+<em>Applies to:</em> <a href="#BP-01">BP-01 — Visitor conducts a Sparring session</a>, <a href="#BP-02">BP-02 — Recent sessions are shown to the room</a>, <a href="#BE-01">BE-01 — Sparring session</a>, <a href="#BE-04">BE-04 — Consent record</a>.<br>
 <em>Acceptance criteria (qualitative):</em> Retention is consented to, and projection of personal content is prevented independently of consent. Retention and projection consent must each remain a genuine opt-out — neither may be a precondition of using the piece at all, or the consent is not freely given. The one thing that <em>is</em> a precondition is agreement to the terms of participation itself, which is a different kind of decision (whether to use the piece), not consent to a data-processing purpose, and is kept as a separate choice from the other two for exactly that reason.</p>
 </div>
 <div class="paragraph">
@@ -801,7 +801,7 @@ The public surface shall not carry names, contact details, or other personal inf
 <div class="paragraph">
 <p><strong><a id="BC-04"></a>BC-04 — Display design is not yet settled</strong> <em>(Organisational)</em><br>
 The projected layout is marked TO BE REFINED and will be decided against real pilot transcripts on the actual projector.<br>
-<em>Applies to:</em> <a href="#BP-02">BP-02</a>.<br>
+<em>Applies to:</em> <a href="#BP-02">BP-02 — Recent sessions are shown to the room</a>.<br>
 <em>Acceptance criteria:</em> TBC.</p>
 </div>
 <hr>
@@ -814,7 +814,7 @@ The projected layout is marked TO BE REFINED and will be decided against real pi
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 20:53:21 +0200
+Last updated 2026-08-20 21:04:04 +0200
 </div>
 </div>
 </body>
