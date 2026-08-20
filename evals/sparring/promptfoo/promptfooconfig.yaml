@@ -1,0 +1,38 @@
+# promptfoo harness for prompts/sparring.md — see evals/sparring/promptfoo/README.md
+# for how to run this and how to point it at a local judge/visitor-sim model.
+#
+# Replaces bin/eval_sparring.php + bin/grade_sparring.php + bin/summarize_sparring.php's
+# orchestration/reporting. The old suite is untouched and still runnable independently —
+# see the plan this was built from for why (rollback safety net).
+
+description: Multi-turn eval for prompts/sparring.md
+
+prompts:
+  # Cosmetic label only — provider.js reads context.vars directly, not promptfoo's own
+  # prompt templating (this is a multi-turn conversation, not a single templated prompt).
+  - '{{opener}}'
+
+providers:
+  - id: file://./provider.js
+    label: sparring-real
+    config:
+      baseline: false
+  - id: file://./provider.js
+    label: sparring-baseline
+    config:
+      baseline: true
+
+tests: file://./load-tests.js
+
+defaultTest:
+  assert:
+    - type: javascript
+      value: file://./grade.js
+
+evaluateOptions:
+  # Three nondeterministic layers stack (visitor sim, generation, judge) — same reasoning
+  # as the old suite's default --reps=3 (see evals/sparring/README.md).
+  repeat: 3
+  # Must stay 1: config.php's RateLimiter buckets by client origin, and every local eval
+  # request hashes to the same bucket under `php -S`. See provider.js's pacing comment.
+  maxConcurrency: 1

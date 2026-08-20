@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "description": "Dev-only Node dependencies for the promptfoo eval harness (evals/sparring/promptfoo/). The app itself has no build step and no npm dependency — this exists for the eval suite alone.",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "devDependencies": {
+    "promptfoo": "latest",
+    "@anthropic-ai/sdk": "latest",
+    "openai": "latest"
+  },
+  "scripts": {
+    "eval:sparring": "promptfoo eval -c evals/sparring/promptfoo/promptfooconfig.yaml",
+    "eval:sparring:view": "promptfoo view"
+  }
+}

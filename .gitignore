@@ -11,3 +11,7 @@
 /workspace-local/
 
 /evals/sparring/sparring-workspace/
+
+# promptfoo eval harness (evals/sparring/promptfoo/) — dev-only Node deps, never the app
+/node_modules/
+/.promptfoo/
