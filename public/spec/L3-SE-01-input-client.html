@@ -475,13 +475,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Element:</strong> <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a> Input client<br>
+<p><strong>Element:</strong> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> Input client<br>
 <strong>Element profile:</strong> User-facing frontend<br>
 <strong>Parent:</strong> System Design Concept<br>
 <strong>Status:</strong> Draft</p>
 </div>
 <div class="paragraph">
-<p><strong>Sections that apply.</strong> All sections apply, with user interfaces and use cases as the core. Technical functions are thin by design: per <a href="L2-system-design-concept.html#AP-01">AP-01: All logic lives in the backend</a>, this element holds no generation, no moderation, and no session policy. Entities cover in-memory view state only, since nothing is stored on the device.</p>
+<p><strong>Sections that apply.</strong> All sections apply, with user interfaces and use cases as the core. Technical functions are thin by design: per <a href="L2-system-design-concept.html#AP-01">AP-01 All logic lives in the backend</a>, this element holds no generation, no moderation, and no session policy. Entities cover in-memory view state only, since nothing is stored on the device.</p>
 </div>
 <div class="paragraph">
 <p><a href="index.html">Index</a> / <a href="L1-solution-design-concept.html">Solution Design Concept</a> / <a href="L2-system-design-concept.html">System Design Concept</a> / <strong>Input Client</strong> (SE-01)</p>
@@ -496,8 +496,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong><a id="G-01"></a>G-01 — Reach a working input surface with nothing but a scan</strong><br>
 The element shall present a usable input surface immediately on opening, with no installation, registration, or instruction step.<br>
 <em>Success criteria (qualitative):</em> A visitor who has never seen the piece submits their first contribution without asking anyone how it works.<br>
-<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-01">SG-01: Start a session from a personal device with no</a><br>
-<em>Note:</em> <a href="#UI-01">UI-01: Session surface</a> shows a "Playbook" card of participation rules on screen load.
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-01">SG-01 Start a session from a personal device with no</a><br>
+<em>Note:</em> <a href="#UI-01">UI-01 Session surface</a> shows a "Playbook" card of participation rules on screen load.
 It&#8217;s visually an instruction step, but never gates the input surface — the
 field&#8217;s usability doesn&#8217;t depend on it, and it&#8217;s dismissed automatically by
 the visitor&#8217;s first submission rather than requiring an acknowledgement.
@@ -506,33 +506,33 @@ one.<br>
 <em>Note:</em> The page also declares a web app manifest (<code>display: standalone</code>,
 home-screen icon) so a visitor <em>may</em> install it — this is an opt-in a
 visitor reaches through their own browser chrome, never a step the flow
-prompts or requires, so it does not gate <a href="#G-01">G-01: Reach a working input surface with nothing but a scan</a>.</p>
+prompts or requires, so it does not gate <a href="#G-01">G-01 Reach a working input surface with nothing but a scan</a>.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="G-02"></a>G-02 — Hold the visitor&#8217;s place through interruption</strong><br>
 The element shall restore a session and its exchanges after a reload, a locked device, or a backgrounded tab.<br>
 <em>Success criteria (qualitative):</em> Reloading restores the full session with no loss of prior exchanges and no repeated consent step.<br>
-<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-03">SG-03: Survive interruption of the visitor&#8217;s session</a></p>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-03">SG-03 Survive interruption of the visitor&#8217;s session</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="G-03"></a>G-03 — Make waiting and failure legible</strong><br>
 The element shall show that a response is being produced, and shall state plainly when one cannot be.<br>
 <em>Success criteria (quantitative):</em> An in-progress state appears within 300 ms of submission.<br>
-<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-04">SG-04: Run unattended and absorb misuse without operator</a><br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-04">SG-04 Run unattended and absorb misuse without operator</a><br>
 <em>Rationale:</em> Several seconds of unexplained stillness in a gallery reads as a broken piece, not a thinking one.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="G-04"></a>G-04 — Make unsuitable input visible</strong><br>
 The element shall show that an input is invalid and should require the user to modify its content before sending again.<br>
 <em>Rationale:</em> Participants should be allowed to edit their input to fix the problem.<br>
-<em>Note:</em> this is the authoritative behavior for unsuitable content — an earlier version of L2&#8217;s <a href="L2-system-design-concept.html#AP-05">AP-05: Moderation gates storage, not a per-session display</a> described the session ending instead; that reading is superseded (see L2 <a href="L2-system-design-concept.html#AP-05">AP-05: Moderation gates storage, not a per-session display</a>'s own note on why).</p>
+<em>Note:</em> this is the authoritative behavior for unsuitable content — an earlier version of L2&#8217;s <a href="L2-system-design-concept.html#AP-05">AP-05 Moderation gates storage, not a per-session display</a> described the session ending instead; that reading is superseded (see L2 <a href="L2-system-design-concept.html#AP-05">AP-05 Moderation gates storage, not a per-session display</a>'s own note on why).</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="G-05"></a>G-05 — Give the visitor a light identity, and a way to deliberately start over</strong><br>
 The element shall reveal a generated nickname and avatar in the header once consent is recorded, and shall let the visitor abandon the current session and begin a fresh one on request.<br>
 <em>Success criteria (qualitative):</em> A visitor can find their own alias in the header at any point after consenting, and can start a new session from the same screen without navigating away manually.<br>
 <em>Derived:</em> Yes<br>
-<em>Rationale:</em> The alias/avatar follows from <a href="L2-system-design-concept.html#SE-02">SE-02: Display client</a>'s <a href="L3-SE-02-display-client.html#G-04">G-04: Distinguish concurrent visitors from one another</a> (display element design) — the wall now labels each session by a generated alias, so a visitor can recognise their own item on the shared surface only if the input client shows them the same value. The new-session control is a related convenience bundled into the same header for the same visitor. Neither was asked for by a stakeholder; both are a UX layer on top of the required consent gate.</p>
+<em>Rationale:</em> The alias/avatar follows from <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a>'s <a href="L3-SE-02-display-client.html#G-04">G-04 Distinguish concurrent visitors from one another</a> (display element design) — the wall now labels each session by a generated alias, so a visitor can recognise their own item on the shared surface only if the input client shows them the same value. The new-session control is a related convenience bundled into the same header for the same visitor. Neither was asked for by a stakeholder; both are a UX layer on top of the required consent gate.</p>
 </div>
 <hr>
 </div>
@@ -543,33 +543,33 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="sect2">
 <h3 id="_uc_01_begin_a_session"><a class="anchor" href="#_uc_01_begin_a_session"></a>2.1. <a id="UC-01"></a>UC-01 — Begin a session</h3>
 <div class="paragraph">
-<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a>, <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a><br>
+<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a>, <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a><br>
 <em>Prerequisites:</em> None. This is the entry point.<br>
-<em>Achieves:</em> <a href="#G-01">G-01: Reach a working input surface with nothing but a scan</a>, <a href="#G-05">G-05: Give the visitor a light identity</a><br>
+<em>Achieves:</em> <a href="#G-01">G-01 Reach a working input surface with nothing but a scan</a>, <a href="#G-05">G-05 Give the visitor a light identity</a><br>
 <em>Realises:</em> SSc-01</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="ST-01-1"></a>ST-01-1</strong> <em>(Function-call)</em> On load, the element calls <a href="#TF-01">TF-01: Establish the session</a> with the address contents. <a href="#TF-01">TF-01: Establish the session</a> finds no session identifier and requests a new session, returning the identifier and an empty session.</p>
+<p><strong><a id="ST-01-1"></a>ST-01-1</strong> <em>(Function-call)</em> On load, the element calls <a href="#TF-01">TF-01 Establish the session</a> with the address contents. <a href="#TF-01">TF-01 Establish the session</a> finds no session identifier and requests a new session, returning the identifier and an empty session.</p>
 </li>
 <li>
 <p><strong><a id="ST-01-2"></a>ST-01-2</strong> <em>(Activity)</em> The element places the identifier in the address without adding a history entry.</p>
 </li>
 <li>
-<p><strong><a id="ST-01-3"></a>ST-01-3</strong> <em>(User-interaction)</em> <a href="#UI-01">UI-01: Session surface</a> presents the consent decision: agreement to take part, plus independent retention and projection choices. The contribution field is present but not usable.</p>
+<p><strong><a id="ST-01-3"></a>ST-01-3</strong> <em>(User-interaction)</em> <a href="#UI-01">UI-01 Session surface</a> presents the consent decision: agreement to take part, plus independent retention and projection choices. The contribution field is present but not usable.</p>
 </li>
 <li>
-<p><strong><a id="ST-01-4"></a>ST-01-4</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a> records their three decisions on <a href="#UI-01">UI-01: Session surface</a>.</p>
+<p><strong><a id="ST-01-4"></a>ST-01-4</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> records their three decisions on <a href="#UI-01">UI-01 Session surface</a>.</p>
 </li>
 <li>
-<p><strong><a id="ST-01-5"></a>ST-01-5</strong> <em>(Function-call)</em> The element calls <a href="#TF-02">TF-02: Record the consent decision</a> with the three decisions. <a href="#TF-02">TF-02: Record the consent decision</a> sends them to <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> and returns confirmation.</p>
+<p><strong><a id="ST-01-5"></a>ST-01-5</strong> <em>(Function-call)</em> The element calls <a href="#TF-02">TF-02 Record the consent decision</a> with the three decisions. <a href="#TF-02">TF-02 Record the consent decision</a> sends them to <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> and returns confirmation.</p>
 </li>
 <li>
-<p><strong><a id="ST-01-6"></a>ST-01-6</strong> <em>(Activity)</em> The element enables the contribution field. <a href="#UC-02">UC-02: Contribute a turn</a> becomes available.</p>
+<p><strong><a id="ST-01-6"></a>ST-01-6</strong> <em>(Activity)</em> The element enables the contribution field. <a href="#UC-02">UC-02 Contribute a turn</a> becomes available.</p>
 </li>
 <li>
-<p><strong><a id="ST-01-7"></a>ST-01-7</strong> <em>(Function-call)</em> The element calls <a href="#TF-05">TF-05: Derive visitor identity</a> with the session identifier and reveals the resulting alias and avatar in the header. Never shown before this step — consent is what gates it, not the session&#8217;s existence.</p>
+<p><strong><a id="ST-01-7"></a>ST-01-7</strong> <em>(Function-call)</em> The element calls <a href="#TF-05">TF-05 Derive visitor identity</a> with the session identifier and reveals the resulting alias and avatar in the header. Never shown before this step — consent is what gates it, not the session&#8217;s existence.</p>
 </li>
 </ul>
 </div>
@@ -579,13 +579,13 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="EX-01-1"></a>EX-01-1</strong> <em>(extends <a href="#ST-01-1">ST-01-1</a>)</em> Session creation fails. <a href="#UI-01">UI-01: Session surface</a> states that the installation is not accepting sessions and offers a retry. <em>Outcome:</em> Terminate.</p>
+<p><strong><a id="EX-01-1"></a>EX-01-1</strong> <em>(extends <a href="#ST-01-1">ST-01-1</a>)</em> Session creation fails. <a href="#UI-01">UI-01 Session surface</a> states that the installation is not accepting sessions and offers a retry. <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
-<p><strong><a id="EX-01-2"></a>EX-01-2</strong> <em>(extends <a href="#ST-01-4">ST-01-4</a>)</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a> declines retention, projection, or both. The decision(s) are recorded as declined and the flow continues unchanged from <a href="#ST-01-5">ST-01-5</a> — these are real opt-outs, not preconditions. Nothing about the surface differs afterwards. <em>Outcome:</em> Alternative-success.</p>
+<p><strong><a id="EX-01-2"></a>EX-01-2</strong> <em>(extends <a href="#ST-01-4">ST-01-4</a>)</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> declines retention, projection, or both. The decision(s) are recorded as declined and the flow continues unchanged from <a href="#ST-01-5">ST-01-5</a> — these are real opt-outs, not preconditions. Nothing about the surface differs afterwards. <em>Outcome:</em> Alternative-success.</p>
 </li>
 <li>
-<p><strong><a id="EX-01-3"></a>EX-01-3</strong> <em>(extends <a href="#ST-01-4">ST-01-4</a>)</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a> does not agree to take part. Unlike <a href="#EX-01-2">EX-01-2</a>, the flow does not proceed to <a href="#ST-01-5">ST-01-5</a>: the Confirm action stays disabled and the contribution field remains unusable. <em>Outcome:</em> Terminate.</p>
+<p><strong><a id="EX-01-3"></a>EX-01-3</strong> <em>(extends <a href="#ST-01-4">ST-01-4</a>)</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> does not agree to take part. Unlike <a href="#EX-01-2">EX-01-2</a>, the flow does not proceed to <a href="#ST-01-5">ST-01-5</a>: the Confirm action stays disabled and the contribution field remains unusable. <em>Outcome:</em> Terminate.</p>
 </li>
 </ul>
 </div>
@@ -593,27 +593,27 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="sect2">
 <h3 id="_uc_02_contribute_a_turn"><a class="anchor" href="#_uc_02_contribute_a_turn"></a>2.2. <a id="UC-02"></a>UC-02 — Contribute a turn</h3>
 <div class="paragraph">
-<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a>, <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a><br>
-<em>Prerequisites:</em> <a href="#UC-01">UC-01: Begin a session</a> completed, or <a href="#UC-03">UC-03: Resume an interrupted session</a> completed.<br>
-<em>Achieves:</em> <a href="#G-01">G-01: Reach a working input surface with nothing but a scan</a>, <a href="#G-03">G-03: Make waiting and failure legible</a><br>
+<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a>, <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a><br>
+<em>Prerequisites:</em> <a href="#UC-01">UC-01 Begin a session</a> completed, or <a href="#UC-03">UC-03 Resume an interrupted session</a> completed.<br>
+<em>Achieves:</em> <a href="#G-01">G-01 Reach a working input surface with nothing but a scan</a>, <a href="#G-03">G-03 Make waiting and failure legible</a><br>
 <em>Realises:</em> SSc-01</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="ST-02-1"></a>ST-02-1</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a> enters a contribution in <a href="#UI-01">UI-01: Session surface</a>'s input field. The remaining character allowance is shown as they type.</p>
+<p><strong><a id="ST-02-1"></a>ST-02-1</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> enters a contribution in <a href="#UI-01">UI-01 Session surface</a>'s input field. The remaining character allowance is shown as they type.</p>
 </li>
 <li>
-<p><strong><a id="ST-02-2"></a>ST-02-2</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a> submits.</p>
+<p><strong><a id="ST-02-2"></a>ST-02-2</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> submits.</p>
 </li>
 <li>
 <p><strong><a id="ST-02-3"></a>ST-02-3</strong> <em>(Activity)</em> The element disables the input field and shows the in-progress state.</p>
 </li>
 <li>
-<p><strong><a id="ST-02-4"></a>ST-02-4</strong> <em>(Function-call)</em> The element calls <a href="#TF-03">TF-03: Submit a contribution</a> with the session identifier and the contribution. <a href="#TF-03">TF-03: Submit a contribution</a> submits it and returns the completed exchange.</p>
+<p><strong><a id="ST-02-4"></a>ST-02-4</strong> <em>(Function-call)</em> The element calls <a href="#TF-03">TF-03 Submit a contribution</a> with the session identifier and the contribution. <a href="#TF-03">TF-03 Submit a contribution</a> submits it and returns the completed exchange.</p>
 </li>
 <li>
-<p><strong><a id="ST-02-5"></a>ST-02-5</strong> <em>(Function-call)</em> The element calls <a href="#TF-04">TF-04: Render the exchange history</a> with the returned exchange, which appends it to the rendered history.</p>
+<p><strong><a id="ST-02-5"></a>ST-02-5</strong> <em>(Function-call)</em> The element calls <a href="#TF-04">TF-04 Render the exchange history</a> with the returned exchange, which appends it to the rendered history.</p>
 </li>
 <li>
 <p><strong><a id="ST-02-6"></a>ST-02-6</strong> <em>(Activity)</em> The element clears the in-progress state, empties and re-enables the input field, and scrolls the newest exchange into view.</p>
@@ -626,19 +626,19 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="EX-02-1"></a>EX-02-1</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> reports that the request limit has been reached. <a href="#UI-01">UI-01: Session surface</a> states this and re-enables the field. The typed contribution is preserved. <em>Outcome:</em> Resume.</p>
+<p><strong><a id="EX-02-1"></a>EX-02-1</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports that the request limit has been reached. <a href="#UI-01">UI-01 Session surface</a> states this and re-enables the field. The typed contribution is preserved. <em>Outcome:</em> Resume.</p>
 </li>
 <li>
-<p><strong><a id="EX-02-2"></a>EX-02-2</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> reports that the session has reached its turn limit. <a href="#UI-01">UI-01: Session surface</a> presents the session as complete and leaves the field disabled. The history remains readable. <em>Outcome:</em> Terminate.</p>
+<p><strong><a id="EX-02-2"></a>EX-02-2</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports that the session has reached its turn limit. <a href="#UI-01">UI-01 Session surface</a> presents the session as complete and leaves the field disabled. The history remains readable. <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
-<p><strong><a id="EX-02-3"></a>EX-02-3</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> reports that no response could be produced. <a href="#UI-01">UI-01: Session surface</a> states plainly that the installation cannot respond right now and re-enables the field with the contribution preserved. <em>Outcome:</em> Resume.</p>
+<p><strong><a id="EX-02-3"></a>EX-02-3</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports that no response could be produced. <a href="#UI-01">UI-01 Session surface</a> states plainly that the installation cannot respond right now and re-enables the field with the contribution preserved. <em>Outcome:</em> Resume.</p>
 </li>
 <li>
 <p><strong><a id="EX-02-4"></a>EX-02-4</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> The request does not complete within the element&#8217;s own wait bound. The element stops waiting and behaves as in <a href="#EX-02-3">EX-02-3</a>. <em>Outcome:</em> Resume.</p>
 </li>
 <li>
-<p><strong><a id="EX-02-5"></a>EX-02-5</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> reports the contribution as flagged (unsuitable). <a href="#UI-01">UI-01: Session surface</a> states that the message can&#8217;t be shown — with wording that varies by coarse category (personal information versus inappropriate content, see <a href="#QR-06">QR-06: Diagnostic detail is available to an operator</a>) — and re-enables the field with the contribution preserved, same shape as <a href="#EX-02-1">EX-02-1</a>/<a href="#EX-02-3">EX-02-3</a>. The session itself is unaffected. <em>Outcome:</em> Resume.</p>
+<p><strong><a id="EX-02-5"></a>EX-02-5</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports the contribution as flagged (unsuitable). <a href="#UI-01">UI-01 Session surface</a> states that the message can&#8217;t be shown — with wording that varies by coarse category (personal information versus inappropriate content, see <a href="#QR-06">QR-06 Diagnostic detail is available to an operator</a>) — and re-enables the field with the contribution preserved, same shape as <a href="#EX-02-1">EX-02-1</a>/<a href="#EX-02-3">EX-02-3</a>. The session itself is unaffected. <em>Outcome:</em> Resume.</p>
 </li>
 </ul>
 </div>
@@ -646,24 +646,24 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="sect2">
 <h3 id="_uc_03_resume_an_interrupted_session"><a class="anchor" href="#_uc_03_resume_an_interrupted_session"></a>2.3. <a id="UC-03"></a>UC-03 — Resume an interrupted session</h3>
 <div class="paragraph">
-<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a>, <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a><br>
+<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a>, <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a><br>
 <em>Prerequisites:</em> A session identifier is present in the address.<br>
-<em>Achieves:</em> <a href="#G-02">G-02: Hold the visitor&#8217;s place through interruption</a>, <a href="#G-05">G-05: Give the visitor a light identity</a><br>
+<em>Achieves:</em> <a href="#G-02">G-02 Hold the visitor&#8217;s place through interruption</a>, <a href="#G-05">G-05 Give the visitor a light identity</a><br>
 <em>Realises:</em> SSc-01</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="ST-03-1"></a>ST-03-1</strong> <em>(Function-call)</em> On load, the element calls <a href="#TF-01">TF-01: Establish the session</a> with the address contents. <a href="#TF-01">TF-01: Establish the session</a> finds an identifier and fetches the existing session from <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>.</p>
+<p><strong><a id="ST-03-1"></a>ST-03-1</strong> <em>(Function-call)</em> On load, the element calls <a href="#TF-01">TF-01 Establish the session</a> with the address contents. <a href="#TF-01">TF-01 Establish the session</a> finds an identifier and fetches the existing session from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>.</p>
 </li>
 <li>
-<p><strong><a id="ST-03-2"></a>ST-03-2</strong> <em>(Function-call)</em> The element calls <a href="#TF-04">TF-04: Render the exchange history</a> with the returned exchanges, which renders the history.</p>
+<p><strong><a id="ST-03-2"></a>ST-03-2</strong> <em>(Function-call)</em> The element calls <a href="#TF-04">TF-04 Render the exchange history</a> with the returned exchanges, which renders the history.</p>
 </li>
 <li>
 <p><strong><a id="ST-03-3"></a>ST-03-3</strong> <em>(Activity)</em> The element restores the surface to its correct state: input enabled if the session is open, presented as complete if it has reached its limit. The consent decision is not asked again.</p>
 </li>
 <li>
-<p><strong><a id="ST-03-4"></a>ST-03-4</strong> <em>(Function-call)</em> If the consent decision was already recorded on an earlier visit, the element calls <a href="#TF-05">TF-05: Derive visitor identity</a> and reveals the alias and avatar immediately, same as <a href="#ST-01-7">ST-01-7</a>.</p>
+<p><strong><a id="ST-03-4"></a>ST-03-4</strong> <em>(Function-call)</em> If the consent decision was already recorded on an earlier visit, the element calls <a href="#TF-05">TF-05 Derive visitor identity</a> and reveals the alias and avatar immediately, same as <a href="#ST-01-7">ST-01-7</a>.</p>
 </li>
 </ul>
 </div>
@@ -673,10 +673,10 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="EX-03-1"></a>EX-03-1</strong> <em>(extends <a href="#ST-03-1">ST-03-1</a>)</em> The identifier is unknown to <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> or has expired. The element discards it and continues as <a href="#UC-01">UC-01: Begin a session</a> from <a href="#ST-01-1">ST-01-1</a>. <em>Outcome:</em> Alternative-success.</p>
+<p><strong><a id="EX-03-1"></a>EX-03-1</strong> <em>(extends <a href="#ST-03-1">ST-03-1</a>)</em> The identifier is unknown to <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> or has expired. The element discards it and continues as <a href="#UC-01">UC-01 Begin a session</a> from <a href="#ST-01-1">ST-01-1</a>. <em>Outcome:</em> Alternative-success.</p>
 </li>
 <li>
-<p><strong><a id="EX-03-2"></a>EX-03-2</strong> <em>(extends <a href="#ST-03-3">ST-03-3</a>)</em> The identifier is known but the consent decision was never recorded (<code>awaiting-decision</code>). The element presents <a href="#UI-01">UI-01: Session surface</a>'s consent decision again, same as <a href="#ST-01-3">ST-01-3</a>, and continues as <a href="#UC-01">UC-01: Begin a session</a> from there. <em>Outcome:</em> Alternative-success.</p>
+<p><strong><a id="EX-03-2"></a>EX-03-2</strong> <em>(extends <a href="#ST-03-3">ST-03-3</a>)</em> The identifier is known but the consent decision was never recorded (<code>awaiting-decision</code>). The element presents <a href="#UI-01">UI-01 Session surface</a>'s consent decision again, same as <a href="#ST-01-3">ST-01-3</a>, and continues as <a href="#UC-01">UC-01 Begin a session</a> from there. <em>Outcome:</em> Alternative-success.</p>
 </li>
 </ul>
 </div>
@@ -684,21 +684,21 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="sect2">
 <h3 id="_uc_04_start_a_new_session_deliberately"><a class="anchor" href="#_uc_04_start_a_new_session_deliberately"></a>2.4. <a id="UC-04"></a>UC-04 — Start a new session deliberately</h3>
 <div class="paragraph">
-<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a><br>
-<em>Prerequisites:</em> <a href="#UC-01">UC-01: Begin a session</a> or <a href="#UC-03">UC-03: Resume an interrupted session</a> completed — a session, active or complete, is currently shown.<br>
-<em>Achieves:</em> <a href="#G-05">G-05: Give the visitor a light identity</a><br>
+<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a><br>
+<em>Prerequisites:</em> <a href="#UC-01">UC-01 Begin a session</a> or <a href="#UC-03">UC-03 Resume an interrupted session</a> completed — a session, active or complete, is currently shown.<br>
+<em>Achieves:</em> <a href="#G-05">G-05 Give the visitor a light identity</a><br>
 <em>Realises:</em> SSc-01</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="ST-04-1"></a>ST-04-1</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a> presses "New session" in the header.</p>
+<p><strong><a id="ST-04-1"></a>ST-04-1</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> presses "New session" in the header.</p>
 </li>
 <li>
-<p><strong><a id="ST-04-2"></a>ST-04-2</strong> <em>(User-interaction)</em> The element asks <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a> to confirm, stating that the current session will no longer be shown.</p>
+<p><strong><a id="ST-04-2"></a>ST-04-2</strong> <em>(User-interaction)</em> The element asks <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> to confirm, stating that the current session will no longer be shown.</p>
 </li>
 <li>
-<p><strong><a id="ST-04-3"></a>ST-04-3</strong> <em>(Activity)</em> On confirmation, the element opens the surface with no session identifier in the address, which begins <a href="#UC-01">UC-01: Begin a session</a> from <a href="#ST-01-1">ST-01-1</a>.</p>
+<p><strong><a id="ST-04-3"></a>ST-04-3</strong> <em>(Activity)</em> On confirmation, the element opens the surface with no session identifier in the address, which begins <a href="#UC-01">UC-01 Begin a session</a> from <a href="#ST-01-1">ST-01-1</a>.</p>
 </li>
 </ul>
 </div>
@@ -708,7 +708,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="EX-04-1"></a>EX-04-1</strong> <em>(extends <a href="#ST-04-2">ST-04-2</a>)</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a> does not confirm. Nothing changes and the current session continues undisturbed. <em>Outcome:</em> Terminate.</p>
+<p><strong><a id="EX-04-1"></a>EX-04-1</strong> <em>(extends <a href="#ST-04-2">ST-04-2</a>)</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> does not confirm. Nothing changes and the current session continues undisturbed. <em>Outcome:</em> Terminate.</p>
 </li>
 </ul>
 </div>
@@ -722,8 +722,8 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="sect2">
 <h3 id="_ui_01_session_surface"><a class="anchor" href="#_ui_01_session_surface"></a>3.1. <a id="UI-01"></a>UI-01 — Session surface</h3>
 <div class="paragraph">
-<p><em>User type:</em> <a href="L2-system-design-concept.html#UT-01">UT-01: Participating visitor</a><br>
-<em>Realises:</em> <a href="#UC-01">UC-01: Begin a session</a>, <a href="#UC-02">UC-02: Contribute a turn</a>, <a href="#UC-03">UC-03: Resume an interrupted session</a>, <a href="#UC-04">UC-04: Start a new session deliberately</a></p>
+<p><em>User type:</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a><br>
+<em>Realises:</em> <a href="#UC-01">UC-01 Begin a session</a>, <a href="#UC-02">UC-02 Contribute a turn</a>, <a href="#UC-03">UC-03 Resume an interrupted session</a>, <a href="#UC-04">UC-04 Start a new session deliberately</a></p>
 </div>
 <div class="paragraph">
 <p>A single scrolling surface. The exchange history occupies the upper region, the input field is anchored below it. There is no navigation, no menu, and no second view.</p>
@@ -760,56 +760,56 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <td class="tableblock halign-left valign-top"><p class="tableblock">Exchange history</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Visitor contributions and Sparring responses in order, visually distinguished by speaker</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.4">E-01.4: exchanges</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.4">E-01.4 exchanges</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Once at least one exchange exists</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Session title</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A short (≤38 character) title summarising the session</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-06">TF-06: Refine the session title</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"Untitled" from session start; replaced once <a href="#TF-06">TF-06: Refine the session title</a> resolves, after the first exchange completes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-06">TF-06 Refine the session title</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"Untitled" from session start; replaced once <a href="#TF-06">TF-06 Refine the session title</a> resolves, after the first exchange completes</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">In-progress state</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">That a response is being produced</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.5">E-01.5: submissionOutstanding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.5">E-01.5 submissionOutstanding</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">While a submission is outstanding</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Remaining turns</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">How many contributions remain in the session</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.3">E-01.3: turnsRemaining</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.3">E-01.3 turnsRemaining</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Always, once the session is open</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Character allowance</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Characters remaining for the current contribution</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-04">TF-04: Render the exchange history</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-04">TF-04 Render the exchange history</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">While the field holds content</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Status message</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Plain statement of a limit reached or a failure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.6">E-01.6: statusMessage</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.6">E-01.6 statusMessage</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">When set</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Visitor alias</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The generated nickname, shown in a popover on request</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-05">TF-05: Derive visitor identity</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-05">TF-05 Derive visitor identity</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Once consent is recorded</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Visitor avatar</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string (emoji)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A small avatar in the header, always visible alongside the alias</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-05">TF-05: Derive visitor identity</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-05">TF-05 Derive visitor identity</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Once consent is recorded</p></td>
 </tr>
 </tbody>
@@ -836,31 +836,31 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Record consent decisions</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Three checkboxes, none preselected — agreement to take part, retention, projection — plus one Confirm action, enabled only once the participation checkbox is checked</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-01">UC-01: Begin a session</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-01">UC-01 Begin a session</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Before the session is open</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Submit contribution</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Button press, and keyboard submit on devices with a physical keyboard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-02">UC-02: Contribute a turn</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-02">UC-02 Contribute a turn</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enabled only when the field holds content, the session is open, and no submission is outstanding</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Retry</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Button press</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-01">UC-01: Begin a session</a>, <a href="#UC-02">UC-02: Contribute a turn</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-01">UC-01 Begin a session</a>, <a href="#UC-02">UC-02 Contribute a turn</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Only alongside a failure status message</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">View own identity</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Press the avatar to open a popover showing the alias; dismissed by pressing elsewhere, pressing the avatar again, or Escape</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-01">UC-01: Begin a session</a>, <a href="#UC-03">UC-03: Resume an interrupted session</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-01">UC-01 Begin a session</a>, <a href="#UC-03">UC-03 Resume an interrupted session</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Once consent is recorded</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Start a new session</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Button press, with a confirmation step</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-04">UC-04: Start a new session deliberately</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-04">UC-04 Start a new session deliberately</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Always available once a session exists</p></td>
 </tr>
 <tr>
@@ -896,8 +896,8 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <td class="tableblock halign-left valign-top"><p class="tableblock">Contribution</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">What the visitor wants to work on, or their reply to the Sparring partner</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Required. Bounded length, enforced at the field and again by <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-02">UC-02: Contribute a turn</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required. Bounded length, enforced at the field and again by <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-02">UC-02 Contribute a turn</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -908,7 +908,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <p>None. The element has one surface. The address carries the session identifier but is never used to move between views.</p>
 </div>
 <div class="paragraph">
-<p><strong>Presentation notes.</strong> The consent decision must be answerable without scrolling on a small phone, or it becomes an obstacle at the exact moment the visitor is deciding whether to engage at all. None of the three checkboxes is preselected: a preselected or visually dominant "accept" is a dark pattern and defeats the point of asking. This holds even for the participation checkbox, which is required to proceed — required is not the same as defaulted-on. The avatar and alias stay hidden through the consent decision itself; nothing about "who" a visitor is appears until they have agreed to take part. A brief motion/sound layer on the consent decision and on submission (<a href="#QR-07">QR-07: Motion respects a reduced-motion preference</a>) is thematic flair matching the exhibition&#8217;s martial-arts framing — decorative, never a condition for proceeding.</p>
+<p><strong>Presentation notes.</strong> The consent decision must be answerable without scrolling on a small phone, or it becomes an obstacle at the exact moment the visitor is deciding whether to engage at all. None of the three checkboxes is preselected: a preselected or visually dominant "accept" is a dark pattern and defeats the point of asking. This holds even for the participation checkbox, which is required to proceed — required is not the same as defaulted-on. The avatar and alias stay hidden through the consent decision itself; nothing about "who" a visitor is appears until they have agreed to take part. A brief motion/sound layer on the consent decision and on submission (<a href="#QR-07">QR-07 Motion respects a reduced-motion preference</a>) is thematic flair matching the exhibition&#8217;s martial-arts framing — decorative, never a condition for proceeding.</p>
 </div>
 <hr>
 </div>
@@ -920,7 +920,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="paragraph">
 <p><strong><a id="TF-01"></a>TF-01 — Establish the session</strong><br>
 <em>Detail level:</em> Stepwise<br>
-<em>Achieves:</em> <a href="#G-01">G-01: Reach a working input surface with nothing but a scan</a>, <a href="#G-02">G-02: Hold the visitor&#8217;s place through interruption</a></p>
+<em>Achieves:</em> <a href="#G-01">G-01 Reach a working input surface with nothing but a scan</a>, <a href="#G-02">G-02 Hold the visitor&#8217;s place through interruption</a></p>
 </div>
 <div class="paragraph">
 <p>Determines whether a session already exists and produces one either way, so that the calling use case does not branch on it.</p>
@@ -931,10 +931,10 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <p><strong><a id="FS-01-1"></a>FS-01-1</strong> <em>(Data-operation)</em> Read the session identifier from the address. If absent, continue at <a href="#FS-01-3">FS-01-3</a>.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-2"></a>FS-01-2</strong> <em>(Outbound-call)</em> Call <a href="#TO-03">TO-03: Retrieve a session</a> with the identifier. On success, return the session and its exchanges, and stop. <em>Call behaviour:</em> Synchronous, single attempt, 10 second timeout. A not-found or expired response is not an error and continues at <a href="#FS-01-3">FS-01-3</a>. A timeout or transport failure surfaces to the caller as a failure.</p>
+<p><strong><a id="FS-01-2"></a>FS-01-2</strong> <em>(Outbound-call)</em> Call <a href="#TO-03">TO-03 Retrieve a session</a> with the identifier. On success, return the session and its exchanges, and stop. <em>Call behaviour:</em> Synchronous, single attempt, 10 second timeout. A not-found or expired response is not an error and continues at <a href="#FS-01-3">FS-01-3</a>. A timeout or transport failure surfaces to the caller as a failure.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-3"></a>FS-01-3</strong> <em>(Outbound-call)</em> Call <a href="#TO-01">TO-01: Open a session</a> to create a session. Return the identifier and an empty exchange list. <em>Call behaviour:</em> Synchronous, two attempts with a 1 second delay between them, 10 second timeout per attempt. Exhausted attempts surface to the caller as a failure.</p>
+<p><strong><a id="FS-01-3"></a>FS-01-3</strong> <em>(Outbound-call)</em> Call <a href="#TO-01">TO-01 Open a session</a> to create a session. Return the identifier and an empty exchange list. <em>Call behaviour:</em> Synchronous, two attempts with a 1 second delay between them, 10 second timeout per attempt. Exhausted attempts surface to the caller as a failure.</p>
 </li>
 </ul>
 </div>
@@ -951,15 +951,15 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="paragraph">
 <p><strong><a id="TF-02"></a>TF-02 — Record the consent decision</strong><br>
 <em>Detail level:</em> Narrative<br>
-<em>Achieves:</em> <a href="#G-01">G-01: Reach a working input surface with nothing but a scan</a></p>
+<em>Achieves:</em> <a href="#G-01">G-01 Reach a working input surface with nothing but a scan</a></p>
 </div>
 <div class="paragraph">
-<p>Sends the visitor&#8217;s three decisions — agreement to take part, retention, projection — to <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> via <a href="#TO-01">TO-01: Open a session</a> and holds the returned confirmation in <a href="#E-01">E-01: Session view state</a>. Synchronous, two attempts, 10 second timeout per attempt. Exhausted attempts leave the session unopened and surface a failure, because opening the input field without a recorded decision would retain content the visitor never agreed to. A declined-participation response is not a transport failure and is handled separately (<a href="#EX-01-3">EX-01-3</a>): the field simply stays unusable. On a successful decision, a one-time title-card animation plays (<a href="#QR-07">QR-07: Motion respects a reduced-motion preference</a>) — purely presentational, no goal relation, and never a condition for the field becoming usable. If the address also carries a recognized opening-prompt identifier — a fixed set authored in code, one per QR code printed for the exhibition — a successful decision additionally triggers <a href="#TF-03">TF-03: Submit a contribution</a> once, automatically, with the corresponding pre-authored text as the contribution, before the visitor has typed anything. An unrecognized or absent identifier takes no action; the field opens empty as usual.</p>
+<p>Sends the visitor&#8217;s three decisions — agreement to take part, retention, projection — to <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> via <a href="#TO-01">TO-01 Open a session</a> and holds the returned confirmation in <a href="#E-01">E-01 Session view state</a>. Synchronous, two attempts, 10 second timeout per attempt. Exhausted attempts leave the session unopened and surface a failure, because opening the input field without a recorded decision would retain content the visitor never agreed to. A declined-participation response is not a transport failure and is handled separately (<a href="#EX-01-3">EX-01-3</a>): the field simply stays unusable. On a successful decision, a one-time title-card animation plays (<a href="#QR-07">QR-07 Motion respects a reduced-motion preference</a>) — purely presentational, no goal relation, and never a condition for the field becoming usable. If the address also carries a recognized opening-prompt identifier — a fixed set authored in code, one per QR code printed for the exhibition — a successful decision additionally triggers <a href="#TF-03">TF-03 Submit a contribution</a> once, automatically, with the corresponding pre-authored text as the contribution, before the visitor has typed anything. An unrecognized or absent identifier takes no action; the field opens empty as usual.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TF-03"></a>TF-03 — Submit a contribution</strong><br>
 <em>Detail level:</em> Stepwise<br>
-<em>Achieves:</em> <a href="#G-01">G-01: Reach a working input surface with nothing but a scan</a>, <a href="#G-03">G-03: Make waiting and failure legible</a></p>
+<em>Achieves:</em> <a href="#G-01">G-01 Reach a working input surface with nothing but a scan</a>, <a href="#G-03">G-03 Make waiting and failure legible</a></p>
 </div>
 <div class="ulist">
 <ul>
@@ -967,10 +967,10 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <p><strong><a id="FS-03-1"></a>FS-03-1</strong> <em>(Data-operation)</em> Trim the contribution and reject it locally if it is empty or exceeds the bound, without calling out.</p>
 </li>
 <li>
-<p><strong><a id="FS-03-2"></a>FS-03-2</strong> <em>(Outbound-call)</em> Call <a href="#TO-02">TO-02: Submit a contribution</a> with the session identifier and the contribution. <em>Call behaviour:</em> Synchronous. No retry, because a retried submission risks producing a duplicate exchange and the visitor is watching. Wait bound set slightly above <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>'s own generation bound, which is TBC alongside <a href="L2-system-design-concept.html#SQR-01">SQR-01: A Sparring response arrives, or its absence is visible</a>. On rate-limit, turn-limit, flagged-content, or generation-failure responses, return the reported condition to the caller rather than treating it as a fault. On timeout or transport failure, return a generation-failure condition.</p>
+<p><strong><a id="FS-03-2"></a>FS-03-2</strong> <em>(Outbound-call)</em> Call <a href="#TO-02">TO-02 Submit a contribution</a> with the session identifier and the contribution. <em>Call behaviour:</em> Synchronous. No retry, because a retried submission risks producing a duplicate exchange and the visitor is watching. Wait bound set slightly above <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s own generation bound, which is TBC alongside <a href="L2-system-design-concept.html#SQR-01">SQR-01 A Sparring response arrives, or its absence is visible</a>. On rate-limit, turn-limit, flagged-content, or generation-failure responses, return the reported condition to the caller rather than treating it as a fault. On timeout or transport failure, return a generation-failure condition.</p>
 </li>
 <li>
-<p><strong><a id="FS-03-3"></a>FS-03-3</strong> <em>(Data-operation)</em> Append the returned exchange to <a href="#E-01">E-01: Session view state</a> and decrement the remaining turn count.</p>
+<p><strong><a id="FS-03-3"></a>FS-03-3</strong> <em>(Data-operation)</em> Append the returned exchange to <a href="#E-01">E-01 Session view state</a> and decrement the remaining turn count.</p>
 </li>
 </ul>
 </div>
@@ -980,7 +980,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="FA-03-1"></a>FA-03-1</strong> <em>(extends <a href="#FS-03-2">FS-03-2</a>)</em> Any reported condition is returned unchanged to the caller, which decides what <a href="#UI-01">UI-01: Session surface</a> shows. Grouping is intentional: this function does not distinguish between them because it takes the same action for all. <em>Outcome:</em> Resume.</p>
+<p><strong><a id="FA-03-1"></a>FA-03-1</strong> <em>(extends <a href="#FS-03-2">FS-03-2</a>)</em> Any reported condition is returned unchanged to the caller, which decides what <a href="#UI-01">UI-01 Session surface</a> shows. Grouping is intentional: this function does not distinguish between them because it takes the same action for all. <em>Outcome:</em> Resume.</p>
 </li>
 </ul>
 </div>
@@ -989,22 +989,22 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <em>Detail level:</em> Narrative</p>
 </div>
 <div class="paragraph">
-<p>Produces the visible history from <a href="#E-01">E-01: Session view state</a>. Visitor and Sparring contributions are visually distinguished. Content from <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> is inserted as text, never as markup, so that anything a visitor types cannot alter the surface. Submission and its outcome additionally carry a non-blocking presentational layer — a brief motion and sound cue on submit, and on a rejected/failed result — layered on top of this rendering, never gating it (<a href="#QR-07">QR-07: Motion respects a reduced-motion preference</a>). No goal relation: this is presentation logic serving use cases that already reference the goals.</p>
+<p>Produces the visible history from <a href="#E-01">E-01 Session view state</a>. Visitor and Sparring contributions are visually distinguished. Content from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> is inserted as text, never as markup, so that anything a visitor types cannot alter the surface. Submission and its outcome additionally carry a non-blocking presentational layer — a brief motion and sound cue on submit, and on a rejected/failed result — layered on top of this rendering, never gating it (<a href="#QR-07">QR-07 Motion respects a reduced-motion preference</a>). No goal relation: this is presentation logic serving use cases that already reference the goals.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TF-05"></a>TF-05 — Derive visitor identity</strong><br>
 <em>Detail level:</em> Narrative<br>
-<em>Achieves:</em> <a href="#G-05">G-05: Give the visitor a light identity</a></p>
+<em>Achieves:</em> <a href="#G-05">G-05 Give the visitor a light identity</a></p>
 </div>
 <div class="paragraph">
-<p>Computes a nickname and an avatar emoji as a pure function of the session identifier (<a href="#E-01.1">E-01.1: sessionId</a>) — no call to <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>, nothing written anywhere. The same derivation runs in <a href="L2-system-design-concept.html#SE-02">SE-02: Display client</a>, so a visitor&#8217;s alias reads identically wherever it appears. Consistent with <a href="L2-system-design-concept.html#AP-03">AP-03: Session identity travels in the URL; no accounts</a>: identity stays derived from what already travels in the address, never a new piece of state.</p>
+<p>Computes a nickname and an avatar emoji as a pure function of the session identifier (<a href="#E-01.1">E-01.1 sessionId</a>) — no call to <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>, nothing written anywhere. The same derivation runs in <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a>, so a visitor&#8217;s alias reads identically wherever it appears. Consistent with <a href="L2-system-design-concept.html#AP-03">AP-03 Session identity travels in the URL; no accounts</a>: identity stays derived from what already travels in the address, never a new piece of state.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TF-06"></a>TF-06 — Refine the session title</strong><br>
 <em>Detail level:</em> Narrative</p>
 </div>
 <div class="paragraph">
-<p>Once the first exchange completes (<a href="#UC-02">UC-02: Contribute a turn</a>), the element calls <a href="#TO-04">TO-04: Refine a session title</a> with the session identifier to request a refined title, and replaces the header&#8217;s default "Untitled" state with it when one comes back. Deliberately non-blocking and best-effort: it is not a step of <a href="#UC-02">UC-02: Contribute a turn</a>'s own sequence, carries no wait bound, and never gates the field or the response the visitor is watching for. Its failure (network, timeout, malformed response) is invisible rather than reported — the header simply stays "Untitled," unlike <a href="#QR-02">QR-02: Every failure produces a statement</a>'s failure-statement requirement, which is about the turn itself, not this. No goal relation: like <a href="#TF-04">TF-04: Render the exchange history</a>, this is presentation logic layered on a use case that already references the goals.</p>
+<p>Once the first exchange completes (<a href="#UC-02">UC-02 Contribute a turn</a>), the element calls <a href="#TO-04">TO-04 Refine a session title</a> with the session identifier to request a refined title, and replaces the header&#8217;s default "Untitled" state with it when one comes back. Deliberately non-blocking and best-effort: it is not a step of <a href="#UC-02">UC-02 Contribute a turn</a>'s own sequence, carries no wait bound, and never gates the field or the response the visitor is watching for. Its failure (network, timeout, malformed response) is invisible rather than reported — the header simply stays "Untitled," unlike <a href="#QR-02">QR-02 Every failure produces a statement</a>'s failure-statement requirement, which is about the turn itself, not this. No goal relation: like <a href="#TF-04">TF-04 Render the exchange history</a>, this is presentation logic layered on a use case that already references the goals.</p>
 </div>
 <hr>
 </div>
@@ -1023,38 +1023,38 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="TO-01"></a>TO-01 — Open a session</strong><br>
-<em>Statement:</em> This interface creates a session and records the consent decision by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>). Used for establishing a session before any contribution is possible.<br>
+<em>Statement:</em> This interface creates a session and records the consent decision by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used for establishing a session before any contribution is possible.<br>
 <em>Input:</em> Three consent booleans — agreement to take part, retention, projection — required together on the decision call; all absent on the creation call.<br>
 <em>Output:</em> Session identifier, turn allowance, session state.<br>
 <em>Error cases:</em> Service unavailable. Malformed request. Declined to agree to take part — distinct from a malformed request, since the shape is valid but the value is a hard no.<br>
-<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-01">TI-01: Open a session</a>.</p>
+<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-01">TI-01 Open a session</a>.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TO-02"></a>TO-02 — Submit a contribution</strong><br>
-<em>Statement:</em> This interface submits a visitor contribution and obtains the Sparring response by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>). Used for every turn after the session is open.<br>
+<em>Statement:</em> This interface submits a visitor contribution and obtains the Sparring response by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used for every turn after the session is open.<br>
 <em>Input:</em> Session identifier, contribution text.<br>
 <em>Output:</em> The completed exchange, updated remaining turn count, session state.<br>
 <em>Error cases:</em> Request limit reached. Session turn limit reached. Contribution flagged as unsuitable — the visitor edits and resubmits; the session is unaffected. Generation failed. Session unknown or expired. Contribution rejected as malformed or over-length.<br>
-<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-02">TI-02: Submit a contribution</a>.</p>
+<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-02">TI-02 Submit a contribution</a>.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TO-03"></a>TO-03 — Retrieve a session</strong><br>
-<em>Statement:</em> This interface fetches an existing session and its exchanges by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>). Used for restoring state after an interruption.<br>
+<em>Statement:</em> This interface fetches an existing session and its exchanges by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used for restoring state after an interruption.<br>
 <em>Input:</em> Session identifier.<br>
 <em>Output:</em> Session state, turn allowance and remaining count, ordered exchanges.<br>
 <em>Error cases:</em> Session unknown or expired. Service unavailable.<br>
-<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-03">TI-03: Retrieve a session</a>.</p>
+<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-03">TI-03 Retrieve a session</a>.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TO-04"></a>TO-04 — Refine a session title</strong><br>
-<em>Statement:</em> This interface requests a short, refined title for a session&#8217;s first contribution by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>). Used once per session, after the first exchange completes.<br>
+<em>Statement:</em> This interface requests a short, refined title for a session&#8217;s first contribution by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used once per session, after the first exchange completes.<br>
 <em>Input:</em> Session identifier.<br>
-<em>Output:</em> Refined title (string) — always a usable value when the call succeeds; <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> falls back to a trim-based title internally rather than ever returning failure for "couldn&#8217;t generate one" (see <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> <a href="L3-SE-03-backend-service.html#TF-07">TF-07: Refine a session title</a>).<br>
-<em>Error cases:</em> Service unavailable. Session unknown. Malformed request. None of these are shown to the visitor (<a href="#TF-06">TF-06: Refine the session title</a>) — the header simply keeps its default "Untitled" state.<br>
-<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-06">TI-06: Refine a session title</a>.</p>
+<em>Output:</em> Refined title (string) — always a usable value when the call succeeds; <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> falls back to a trim-based title internally rather than ever returning failure for "couldn&#8217;t generate one" (see <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> <a href="L3-SE-03-backend-service.html#TF-07">TF-07 Refine a session title</a>).<br>
+<em>Error cases:</em> Service unavailable. Session unknown. Malformed request. None of these are shown to the visitor (<a href="#TF-06">TF-06 Refine the session title</a>) — the header simply keeps its default "Untitled" state.<br>
+<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-06">TI-06 Refine a session title</a>.</p>
 </div>
 <div class="paragraph">
-<p><em>No <code>Calls → PE-</code> relation applies. This element reaches no partner element directly, per <a href="L2-system-design-concept.html#AP-01">AP-01: All logic lives in the backend</a>.</em></p>
+<p><em>No <code>Calls → PE-</code> relation applies. This element reaches no partner element directly, per <a href="L2-system-design-concept.html#AP-01">AP-01 All logic lives in the backend</a>.</em></p>
 </div>
 <hr>
 </div>
@@ -1064,8 +1064,8 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="E-01"></a>E-01 — Session view state</strong><br>
-<em>Persistence:</em> In-memory. Discarded when the page unloads, and rebuilt from <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> on the next load. Nothing is written to device storage.<br>
-<em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01: Sparring session</a> (partially; the authoritative record is <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>'s <a href="L3-SE-03-backend-service.html#E-01">E-01: Session</a>)</p>
+<em>Persistence:</em> In-memory. Discarded when the page unloads, and rebuilt from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> on the next load. Nothing is written to device storage.<br>
+<em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01 Sparring session</a> (partially; the authoritative record is <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s <a href="L3-SE-03-backend-service.html#E-01">E-01 Session</a>)</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1104,7 +1104,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <td class="tableblock halign-left valign-top"><p class="tableblock">turnsRemaining</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contributions still permitted. Supplied by <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>, never computed here.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contributions still permitted. Supplied by <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>, never computed here.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.4"></a>E-01.4</p></td>
@@ -1130,7 +1130,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>The device holds no consent record. The decision is sent to <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> and its consequences are enforced there. Holding a local copy would create a second source of truth for the one thing that must not have one.</em></p>
+<p><em>The device holds no consent record. The decision is sent to <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> and its consequences are enforced there. Holding a local copy would create a second source of truth for the one thing that must not have one.</em></p>
 </div>
 <hr>
 </div>
@@ -1140,54 +1140,54 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="QR-01"></a>QR-01 — The in-progress state appears immediately</strong> <em>(Performance)</em><br>
-<em>Applies to:</em> <a href="#UI-01">UI-01: Session surface</a>, <a href="#TF-03">TF-03: Submit a contribution</a><br>
+<em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a>, <a href="#TF-03">TF-03 Submit a contribution</a><br>
 <em>Acceptance criteria:</em> The state is visible within 300 ms of submission and persists until the response or a failure arrives.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-01">SQR-01: A Sparring response arrives, or its absence is visible</a></p>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-01">SQR-01 A Sparring response arrives, or its absence is visible</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-02"></a>QR-02 — Every failure produces a statement</strong> <em>(Usability)</em><br>
-<em>Applies to:</em> <a href="#UI-01">UI-01: Session surface</a>, <a href="#TF-01">TF-01: Establish the session</a>, <a href="#TF-03">TF-03: Submit a contribution</a><br>
+<em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a>, <a href="#TF-01">TF-01 Establish the session</a>, <a href="#TF-03">TF-03 Submit a contribution</a><br>
 <em>Acceptance criteria (qualitative):</em> No condition leaves the surface unresponsive or unexplained. Every path that stops shows what happened and whether the visitor can continue.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-07">SQR-07: The installation degrades visibly rather than silently</a></p>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-07">SQR-07 The installation degrades visibly rather than silently</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-03"></a>QR-03 — Usable on a phone held in one hand</strong> <em>(Usability)</em><br>
-<em>Applies to:</em> <a href="#UI-01">UI-01: Session surface</a><br>
+<em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a><br>
 <em>Acceptance criteria (qualitative):</em> Input field and submit action reachable one-handed on a small phone with the software keyboard raised. The consent decision is answerable without scrolling.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-03">SQR-03: The projection is readable at exhibition viewing</a><br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-03">SQR-03 The projection is readable at exhibition viewing</a><br>
 <em>Element specific:</em> Yes</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-04"></a>QR-04 — Visitor content cannot alter the surface</strong> <em>(Security)</em><br>
-<em>Applies to:</em> <a href="#TF-04">TF-04: Render the exchange history</a><br>
-<em>Acceptance criteria:</em> All content returned from <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> is inserted as text. No path renders it as markup, with one narrow exception: a single <code>mermaid</code> fenced block in a sparring turn is parsed by mermaid.js in <code>securityLevel: 'strict'</code> (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. Visitor turns are never routed through this path regardless of content.<br>
+<em>Applies to:</em> <a href="#TF-04">TF-04 Render the exchange history</a><br>
+<em>Acceptance criteria:</em> All content returned from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> is inserted as text. No path renders it as markup, with one narrow exception: a single <code>mermaid</code> fenced block in a sparring turn is parsed by mermaid.js in <code>securityLevel: 'strict'</code> (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. Visitor turns are never routed through this path regardless of content.<br>
 <em>Element specific:</em> Yes</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-05"></a>QR-05 — Works on current mobile browsers without a build step</strong> <em>(Compatibility)</em><br>
 <em>Applies to:</em> The element overall<br>
 <em>Acceptance criteria (qualitative):</em> Functions on current mobile Safari and Chrome. No transpilation, bundling, or framework runtime.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02: The installation recovers without a person present</a><br>
-<em>Rationale:</em> <a href="L2-system-design-concept.html#SC-03">SC-03: Build effort is capped and the piece is expendable</a>. A build pipeline is one more thing that can be broken at 9am on opening day.</p>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02 The installation recovers without a person present</a><br>
+<em>Rationale:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>. A build pipeline is one more thing that can be broken at 9am on opening day.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-06"></a>QR-06 — Diagnostic detail is available to an operator, hidden by default</strong> <em>(Maintainability)</em><br>
-<em>Applies to:</em> <a href="#UI-01">UI-01: Session surface</a><br>
-<em>Acceptance criteria:</em> An address flag reveals session id, origin, rate-limit remaining, generation timing, and the exact moderation reason (from <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>'s <a href="L3-SE-03-backend-service.html#TI-01">TI-01: Open a session</a>/<a href="L3-SE-03-backend-service.html#TI-02">TI-02: Submit a contribution</a>/<a href="L3-SE-03-backend-service.html#TI-03">TI-03: Retrieve a session</a> outputs) alongside the normal surface. Absent by default; no visitor-facing affordance exposes or hints at the <em>exact</em> reason. The standard (non-debug) flagged-message copy does, deliberately, show a coarser two-category hint derived from the same value — personal information versus inappropriate content — narrow enough that it doesn&#8217;t expose which specific classification or wordlist match fired.<br>
+<em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a><br>
+<em>Acceptance criteria:</em> An address flag reveals session id, origin, rate-limit remaining, generation timing, and the exact moderation reason (from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s <a href="L3-SE-03-backend-service.html#TI-01">TI-01 Open a session</a>/<a href="L3-SE-03-backend-service.html#TI-02">TI-02 Submit a contribution</a>/<a href="L3-SE-03-backend-service.html#TI-03">TI-03 Retrieve a session</a> outputs) alongside the normal surface. Absent by default; no visitor-facing affordance exposes or hints at the <em>exact</em> reason. The standard (non-debug) flagged-message copy does, deliberately, show a coarser two-category hint derived from the same value — personal information versus inappropriate content — narrow enough that it doesn&#8217;t expose which specific classification or wordlist match fired.<br>
 <em>Element specific:</em> Yes<br>
-<em>Rationale:</em> Serves <a href="L2-system-design-concept.html#UT-03">UT-03: Operator</a>'s stated need (L2 §2.3) to diagnose a fault quickly and remotely, without adding an administrative interface (which <a href="L2-system-design-concept.html#SC-03">SC-03: Build effort is capped and the piece is expendable</a> rules out).</p>
+<em>Rationale:</em> Serves <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a>'s stated need (L2 §2.3) to diagnose a fault quickly and remotely, without adding an administrative interface (which <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a> rules out).</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-07"></a>QR-07 — Motion respects a reduced-motion preference; every effect is individually switchable</strong> <em>(Usability/Accessibility)</em><br>
-<em>Applies to:</em> <a href="#UI-01">UI-01: Session surface</a>, <a href="#TF-02">TF-02: Record the consent decision</a>, <a href="#TF-04">TF-04: Render the exchange history</a><br>
-<em>Acceptance criteria:</em> Every added animation (consent-decision title card, submit motion, rejection motion) is suppressed when the OS-level reduced-motion preference is set, without disabling submission or the consent decision itself. Sound is a separate signal — <code>prefers-reduced-motion</code> is a vestibular-motion preference and does not govern audio — and is instead gated solely by its own configuration switch. Each effect (title card, submit motion, rejection motion, sound) can be turned off independently by configuration, with no code change, and a single configuration switch turns all of them off at once. The title card plays once the consent decision is recorded, not on any submission, so it never overlaps <a href="#QR-01">QR-01: The in-progress state appears immediately</a>'s in-progress state — the two have no shared trigger.<br>
+<em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a>, <a href="#TF-02">TF-02 Record the consent decision</a>, <a href="#TF-04">TF-04 Render the exchange history</a><br>
+<em>Acceptance criteria:</em> Every added animation (consent-decision title card, submit motion, rejection motion) is suppressed when the OS-level reduced-motion preference is set, without disabling submission or the consent decision itself. Sound is a separate signal — <code>prefers-reduced-motion</code> is a vestibular-motion preference and does not govern audio — and is instead gated solely by its own configuration switch. Each effect (title card, submit motion, rejection motion, sound) can be turned off independently by configuration, with no code change, and a single configuration switch turns all of them off at once. The title card plays once the consent decision is recorded, not on any submission, so it never overlaps <a href="#QR-01">QR-01 The in-progress state appears immediately</a>'s in-progress state — the two have no shared trigger.<br>
 <em>Element specific:</em> Yes<br>
-<em>Rationale:</em> TODO.md&#8217;s JUICYNESS requirement is explicitly presentational flair, not core functionality — it must be possible to remove without touching <a href="#TF-01">TF-01: Establish the session</a> through <a href="#TF-03">TF-03: Submit a contribution</a>, and must never become an accessibility regression.</p>
+<em>Rationale:</em> TODO.md&#8217;s JUICYNESS requirement is explicitly presentational flair, not core functionality — it must be possible to remove without touching <a href="#TF-01">TF-01 Establish the session</a> through <a href="#TF-03">TF-03 Submit a contribution</a>, and must never become an accessibility regression.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-08"></a>QR-08 — Interface language is selectable and matches on first visit where possible</strong> <em>(Usability)</em><br>
-<em>Applies to:</em> <a href="#UI-01">UI-01: Session surface</a><br>
-<em>Acceptance criteria:</em> The surface is available in English and German. On a first visit the interface language follows the device/browser&#8217;s own language setting when it names a supported language, English otherwise; an explicit switch overrides this and persists across the session and future visits on the same device. The AI&#8217;s own reply language is a separate behavior (<a href="#TF-03">TF-03: Submit a contribution</a>/prompt-level, see <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a>) that follows what the visitor types, not this setting.<br>
+<em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a><br>
+<em>Acceptance criteria:</em> The surface is available in English and German. On a first visit the interface language follows the device/browser&#8217;s own language setting when it names a supported language, English otherwise; an explicit switch overrides this and persists across the session and future visits on the same device. The AI&#8217;s own reply language is a separate behavior (<a href="#TF-03">TF-03 Submit a contribution</a>/prompt-level, see <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>) that follows what the visitor types, not this setting.<br>
 <em>Element specific:</em> Yes</p>
 </div>
 <hr>
@@ -1198,35 +1198,35 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="C-01"></a>C-01 — No credential, no policy, no generation in this element</strong> <em>(Technical)</em><br>
-<em>Source:</em> <a href="L2-system-design-concept.html#AP-01">AP-01: All logic lives in the backend</a>.<br>
+<em>Source:</em> <a href="L2-system-design-concept.html#AP-01">AP-01 All logic lives in the backend</a>.<br>
 <em>Applies to:</em> All technical functions and outbound interfaces.<br>
 <em>Acceptance criteria:</em> The element contains no provider credential and no limit, filter, or generation logic beyond field-level input bounds.<br>
-<em>Consequence:</em> Rules out any direct call to <a href="L2-system-design-concept.html#PE-01">PE-01: Language generation API</a> and any client-side enforcement that <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> does not repeat.<br>
-<em>Implements:</em> <a href="L2-system-design-concept.html#SC-01">SC-01: PHP with a file-backed store on a single hosted</a></p>
+<em>Consequence:</em> Rules out any direct call to <a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a> and any client-side enforcement that <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> does not repeat.<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-01">SC-01 PHP with a file-backed store on a single hosted</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="C-02"></a>C-02 — Session identity lives in the address, not in device storage</strong> <em>(Technical)</em><br>
-<em>Source:</em> <a href="L2-system-design-concept.html#AP-03">AP-03: Session identity travels in the URL; no accounts</a>.<br>
-<em>Applies to:</em> <a href="#TF-01">TF-01: Establish the session</a>, <a href="#E-01">E-01: Session view state</a>.<br>
+<em>Source:</em> <a href="L2-system-design-concept.html#AP-03">AP-03 Session identity travels in the URL; no accounts</a>.<br>
+<em>Applies to:</em> <a href="#TF-01">TF-01 Establish the session</a>, <a href="#E-01">E-01 Session view state</a>.<br>
 <em>Acceptance criteria:</em> The identifier is read from and written to the address only. No cookie, no local storage, no session storage.<br>
-<em>Consequence:</em> Rules out silent identity persistence across visits. A visitor who closes the tab has ended their session, which is the intended behaviour. Scoped to session identity specifically — a device-level UI language preference (<a href="#QR-08">QR-08: Interface language is selectable and matches on first</a>) is a separate concern and may persist by whatever means fits, same as the existing sessionStorage-held composer draft.<br>
-<em>Implements:</em> <a href="L2-system-design-concept.html#SC-05">SC-05: Retention requires consent; projection requires</a></p>
+<em>Consequence:</em> Rules out silent identity persistence across visits. A visitor who closes the tab has ended their session, which is the intended behaviour. Scoped to session identity specifically — a device-level UI language preference (<a href="#QR-08">QR-08 Interface language is selectable and matches on first</a>) is a separate concern and may persist by whatever means fits, same as the existing sessionStorage-held composer draft.<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-05">SC-05 Retention requires consent; projection requires</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="C-03"></a>C-03 — Consent is decided before input is possible</strong> <em>(Legal-regulatory)</em><br>
-<em>Source:</em> <a href="L2-system-design-concept.html#SC-05">SC-05: Retention requires consent; projection requires</a>.<br>
-<em>Applies to:</em> <a href="#UC-01">UC-01: Begin a session</a>, <a href="#UI-01">UI-01: Session surface</a>.<br>
+<em>Source:</em> <a href="L2-system-design-concept.html#SC-05">SC-05 Retention requires consent; projection requires</a>.<br>
+<em>Applies to:</em> <a href="#UC-01">UC-01 Begin a session</a>, <a href="#UI-01">UI-01 Session surface</a>.<br>
 <em>Acceptance criteria:</em> The contribution field cannot be submitted until a decision is recorded. What actually gates it is agreement to take part specifically — retention and projection are recorded at the same moment but, as real opt-outs, do not themselves block anything. None of the three options is preselected or visually favoured.<br>
 <em>Consequence:</em> Rules out deferring the decision until after the first contribution. Rules out treating retention or projection decline as equivalent to declining to take part.<br>
-<em>Implements:</em> <a href="L2-system-design-concept.html#SC-05">SC-05: Retention requires consent; projection requires</a></p>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-05">SC-05 Retention requires consent; projection requires</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="C-04"></a>C-04 — No build step</strong> <em>(Technical)</em><br>
-<em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03: Build effort is capped and the piece is expendable</a>.<br>
+<em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>.<br>
 <em>Applies to:</em> The element overall.<br>
 <em>Acceptance criteria:</em> The element ships as files served directly, with no compilation or bundling.<br>
-<em>Consequence:</em> Rules out any framework requiring a build. Deployment is a file copy. One deliberate exception: <code>assets/zzfx.min.js</code> (ZzFX, MIT license) is a vendored, pre-built third-party file loaded via a plain <code>&lt;script&gt;</code> tag — nothing is installed, built, or bundled, so this still satisfies the acceptance criteria above. It is the sound-effect synthesis engine for <a href="#QR-07">QR-07: Motion respects a reduced-motion preference</a>'s motion/sound layer, and the one dependency TODO.md&#8217;s JUICYNESS requirement explicitly authorized ("This is where external dependencies are warranted").<br>
-<em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03: Build effort is capped and the piece is expendable</a></p>
+<em>Consequence:</em> Rules out any framework requiring a build. Deployment is a file copy. One deliberate exception: <code>assets/zzfx.min.js</code> (ZzFX, MIT license) is a vendored, pre-built third-party file loaded via a plain <code>&lt;script&gt;</code> tag — nothing is installed, built, or bundled, so this still satisfies the acceptance criteria above. It is the sound-effect synthesis engine for <a href="#QR-07">QR-07 Motion respects a reduced-motion preference</a>'s motion/sound layer, and the one dependency TODO.md&#8217;s JUICYNESS requirement explicitly authorized ("This is where external dependencies are warranted").<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a></p>
 </div>
 </div>
 </div>
@@ -1234,7 +1234,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:07:50 +0200
+Last updated 2026-08-20 21:09:10 +0200
 </div>
 </div>
 </body>

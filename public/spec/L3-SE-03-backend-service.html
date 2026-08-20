@@ -468,16 +468,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Element:</strong> <a href="L2-system-design-concept.html#SE-03">SE-03: Backend service</a> Backend service<br>
+<p><strong>Element:</strong> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> Backend service<br>
 <strong>Element profile:</strong> Backend service / API<br>
 <strong>Parent:</strong> System Design Concept<br>
 <strong>Status:</strong> Draft</p>
 </div>
 <div class="paragraph">
-<p><strong>Sections that apply.</strong> Goals, use cases, both technical interface sections, technical functions, entities, quality requirements, and constraints. User interfaces do not apply: this element has no human-facing surface. Its only human actor is <a href="L2-system-design-concept.html#UT-03">UT-03: Operator</a>, who reaches it through the operator interface (<a href="#TI-05">TI-05: Import pilot material</a>) rather than through a UI.</p>
+<p><strong>Sections that apply.</strong> Goals, use cases, both technical interface sections, technical functions, entities, quality requirements, and constraints. User interfaces do not apply: this element has no human-facing surface. Its only human actor is <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a>, who reaches it through the operator interface (<a href="#TI-05">TI-05 Import pilot material</a>) rather than through a UI.</p>
 </div>
 <div class="paragraph">
-<p><strong>A note on the datastore.</strong> Per <a href="L2-system-design-concept.html#AP-04">AP-04: One file-backed datastore, held inside the backend</a>, storage is held inside this element rather than identified as a separate software element at L2. Its entities are therefore specified here, in section 7.</p>
+<p><strong>A note on the datastore.</strong> Per <a href="L2-system-design-concept.html#AP-04">AP-04 One file-backed datastore, held inside the backend</a>, storage is held inside this element rather than identified as a separate software element at L2. Its entities are therefore specified here, in section 7.</p>
 </div>
 <div class="paragraph">
 <p><a href="index.html">Index</a> / <a href="L1-solution-design-concept.html">Solution Design Concept</a> / <a href="L2-system-design-concept.html">System Design Concept</a> / <strong>Backend Service</strong> (SE-03)</p>
@@ -492,37 +492,37 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong><a id="G-01"></a>G-01 — Produce Sparring responses and hold every rule that governs them</strong><br>
 The element shall be the sole location of generation, moderation, rate limiting, and session policy, so that no rule is editable from a device the project does not control.<br>
 <em>Success criteria (qualitative):</em> No client contains a provider credential or any limit the element does not independently enforce.<br>
-<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-01">SG-01: Start a session from a personal device with no</a>, <a href="L2-system-design-concept.html#SG-04">SG-04: Run unattended and absorb misuse without operator</a></p>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-01">SG-01 Start a session from a personal device with no</a>, <a href="L2-system-design-concept.html#SG-04">SG-04 Run unattended and absorb misuse without operator</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="G-02"></a>G-02 — Keep a session usable across interruption</strong><br>
 The element shall resolve a session identifier to its full state and history for as long as the session is live.<br>
 <em>Success criteria (qualitative):</em> A session fetched after an interruption returns identical content to what its participant last saw.<br>
-<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-03">SG-03: Survive interruption of the visitor&#8217;s session</a></p>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-03">SG-03 Survive interruption of the visitor&#8217;s session</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="G-03"></a>G-03 — Persist every interaction with its origin fixed at creation</strong><br>
 The element shall record sessions and exchanges tagged pilot or live at the moment of creation, with no later assignment or correction.<br>
 <em>Success criteria (qualitative):</em> Exhibition material is extractable by filtering one stored value.<br>
-<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-05">SG-05: Record every interaction with its origin fixed at</a></p>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-05">SG-05 Record every interaction with its origin fixed at</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="G-04"></a>G-04 — Decide what may be stored, and let the visitor&#8217;s own choice decide what may be projected</strong><br>
 The element shall assess each contribution for suitability before it is stored, rejecting an unsuitable one so the visitor can edit and resubmit rather than silently hiding it after the fact. Whether a <em>stored</em> exchange is projected is then a separate question, answered by the visitor&#8217;s own projection consent, not by re-running suitability at display time.<br>
 <em>Success criteria (qualitative):</em> Nothing unsuitable is ever stored. A session that declined projection consent never appears on the wall regardless of content; a session that granted it does, for as long as its content keeps passing the write-time check.<br>
-<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-07">SG-07: Gate public projection at the moment of submission</a></p>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-07">SG-07 Gate public projection at the moment of submission</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="G-05"></a>G-05 — Keep the display surface populated</strong><br>
 The element shall supply display material at all times, falling back to pilot-origin sessions when insufficient live material is eligible.<br>
 <em>Success criteria (qualitative):</em> The display feed is never empty while the element is running and pilot material exists.<br>
-<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-06">SG-06: Never present an empty surface</a></p>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-06">SG-06 Never present an empty surface</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="G-06"></a>G-06 — Absorb load and misuse without failing</strong><br>
 The element shall reject excess requests, over-length contributions, and over-long sessions as expected conditions, and shall continue serving other visitors when it does.<br>
 <em>Success criteria (qualitative):</em> A rejected request affects only its own session.<br>
-<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-04">SG-04: Run unattended and absorb misuse without operator</a></p>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-04">SG-04 Run unattended and absorb misuse without operator</a></p>
 </div>
 <hr>
 </div>
@@ -536,18 +536,18 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div class="sect2">
 <h3 id="_uc_01_the_operator_seeds_pilot_material"><a class="anchor" href="#_uc_01_the_operator_seeds_pilot_material"></a>2.1. <a id="UC-01"></a>UC-01 — The operator seeds pilot material</h3>
 <div class="paragraph">
-<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-03">UT-03: Operator</a><br>
+<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a><br>
 <em>Prerequisites:</em> Pilot transcripts exist in the expected structured form.<br>
-<em>Achieves:</em> <a href="#G-03">G-03: Persist every interaction with its origin fixed at</a>, <a href="#G-05">G-05: Keep the display surface populated</a><br>
+<em>Achieves:</em> <a href="#G-03">G-03 Persist every interaction with its origin fixed at</a>, <a href="#G-05">G-05 Keep the display surface populated</a><br>
 <em>Realises:</em> SSc-03</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="ST-01-1"></a>ST-01-1</strong> <em>(Activity)</em> <a href="L2-system-design-concept.html#UT-03">UT-03: Operator</a> places a transcript file where the element can read it and invokes the import path (<a href="#TI-05">TI-05: Import pilot material</a>).</p>
+<p><strong><a id="ST-01-1"></a>ST-01-1</strong> <em>(Activity)</em> <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a> places a transcript file where the element can read it and invokes the import path (<a href="#TI-05">TI-05 Import pilot material</a>).</p>
 </li>
 <li>
-<p><strong><a id="ST-01-2"></a>ST-01-2</strong> <em>(Function-call)</em> The element calls <a href="#TF-06">TF-06: Import pilot transcripts</a> with the file contents. <a href="#TF-06">TF-06: Import pilot transcripts</a> validates each transcript, creates its session and exchanges with origin fixed as pilot, and returns a per-transcript outcome.</p>
+<p><strong><a id="ST-01-2"></a>ST-01-2</strong> <em>(Function-call)</em> The element calls <a href="#TF-06">TF-06 Import pilot transcripts</a> with the file contents. <a href="#TF-06">TF-06 Import pilot transcripts</a> validates each transcript, creates its session and exchanges with origin fixed as pilot, and returns a per-transcript outcome.</p>
 </li>
 <li>
 <p><strong><a id="ST-01-3"></a>ST-01-3</strong> <em>(Activity)</em> The element reports how many transcripts were imported and names any that were rejected.</p>
@@ -565,7 +565,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Note.</strong> This path performs no generation and never calls <a href="L2-system-design-concept.html#PE-01">PE-01: Language generation API</a>. The Sparring responses already exist in the transcripts, and regenerating them would produce material that no pilot session actually contained.</p>
+<p><strong>Note.</strong> This path performs no generation and never calls <a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a>. The Sparring responses already exist in the transcripts, and regenerating them would produce material that no pilot session actually contained.</p>
 </div>
 <hr>
 </div>
@@ -575,7 +575,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <h2 id="_user_interfaces"><a class="anchor" href="#_user_interfaces"></a>3. User interfaces</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Not applicable. This element presents no user interface. <a href="L2-system-design-concept.html#UT-03">UT-03: Operator</a> reaches it through <a href="#TI-05">TI-05: Import pilot material</a>, which is a technical interface invoked directly on the host rather than a surface.</p>
+<p>Not applicable. This element presents no user interface. <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a> reaches it through <a href="#TI-05">TI-05 Import pilot material</a>, which is a technical interface invoked directly on the host rather than a surface.</p>
 </div>
 <hr>
 </div>
@@ -586,7 +586,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div class="paragraph">
 <p><strong><a id="TF-01"></a>TF-01 — Process a visitor turn</strong><br>
 <em>Detail level:</em> Stepwise<br>
-<em>Achieves:</em> <a href="#G-01">G-01: Produce Sparring responses and hold every rule that</a>, <a href="#G-04">G-04: Decide what may be stored, and let the visitor&#8217;s own</a>, <a href="#G-06">G-06: Absorb load and misuse without failing</a></p>
+<em>Achieves:</em> <a href="#G-01">G-01 Produce Sparring responses and hold every rule that</a>, <a href="#G-04">G-04 Decide what may be stored, and let the visitor&#8217;s own</a>, <a href="#G-06">G-06 Absorb load and misuse without failing</a></p>
 </div>
 <div class="paragraph">
 <p>The element&#8217;s central function. Everything that happens between a visitor pressing submit and a response returning is here, which is what keeps retry and error handling in one place rather than scattered across interfaces.</p>
@@ -594,37 +594,37 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="FS-01-1"></a>FS-01-1</strong> <em>(Function-call)</em> Call <a href="#TF-03">TF-03: Enforce request limits</a> with the request origin. If it reports the limit reached, return that condition and stop.</p>
+<p><strong><a id="FS-01-1"></a>FS-01-1</strong> <em>(Function-call)</em> Call <a href="#TF-03">TF-03 Enforce request limits</a> with the request origin. If it reports the limit reached, return that condition and stop.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-2"></a>FS-01-2</strong> <em>(Entity-access)</em> Read the session from <a href="#E-01">E-01: Session</a> by its identifier (<a href="#E-01.1">E-01.1: sessionId</a>). If absent or expired, return a session-unknown condition and stop.</p>
+<p><strong><a id="FS-01-2"></a>FS-01-2</strong> <em>(Entity-access)</em> Read the session from <a href="#E-01">E-01 Session</a> by its identifier (<a href="#E-01.1">E-01.1 sessionId</a>). If absent or expired, return a session-unknown condition and stop.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-3"></a>FS-01-3</strong> <em>(Data-operation)</em> Compare <a href="#E-01.8">E-01.8: turnCount</a> (turnCount) against the session turn allowance. If the allowance is exhausted, return a turn-limit condition and stop.</p>
+<p><strong><a id="FS-01-3"></a>FS-01-3</strong> <em>(Data-operation)</em> Compare <a href="#E-01.8">E-01.8 turnCount</a> (turnCount) against the session turn allowance. If the allowance is exhausted, return a turn-limit condition and stop.</p>
 </li>
 <li>
 <p><strong><a id="FS-01-4"></a>FS-01-4</strong> <em>(Data-operation)</em> Trim the contribution and check it against the length bound. If it is empty or over-length, return a rejected condition and stop. No provider call has been made at this point, which matters because this is the cheapest rejection path and the one most likely to fire.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-5"></a>FS-01-5</strong> <em>(Function-call)</em> Call <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a> with the contribution. <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a> returns a suitability outcome.</p>
+<p><strong><a id="FS-01-5"></a>FS-01-5</strong> <em>(Function-call)</em> Call <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> with the contribution. <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> returns a suitability outcome.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-6"></a>FS-01-6</strong> <em>(Data-operation)</em> If <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a> reported the contribution unsuitable, return a content-flagged condition and stop. Nothing is written to <a href="#E-01">E-01: Session</a> or <a href="#E-02">E-02: Exchange</a>, and no provider call for a response is made — this is the same cheap-rejection reasoning as <a href="#FS-01-4">FS-01-4</a>, just one check later. The session itself is not altered; only this turn is rejected.</p>
+<p><strong><a id="FS-01-6"></a>FS-01-6</strong> <em>(Data-operation)</em> If <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> reported the contribution unsuitable, return a content-flagged condition and stop. Nothing is written to <a href="#E-01">E-01 Session</a> or <a href="#E-02">E-02 Exchange</a>, and no provider call for a response is made — this is the same cheap-rejection reasoning as <a href="#FS-01-4">FS-01-4</a>, just one check later. The session itself is not altered; only this turn is rejected.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-7"></a>FS-01-7</strong> <em>(Entity-access)</em> Read the session&#8217;s prior exchanges from <a href="#E-02">E-02: Exchange</a> (<a href="#E-02.3">E-02.3: visitorContribution</a>, <a href="#E-02.4">E-02.4: sparringResponse</a>) in order, to supply conversational context.</p>
+<p><strong><a id="FS-01-7"></a>FS-01-7</strong> <em>(Entity-access)</em> Read the session&#8217;s prior exchanges from <a href="#E-02">E-02 Exchange</a> (<a href="#E-02.3">E-02.3 visitorContribution</a>, <a href="#E-02.4">E-02.4 sparringResponse</a>) in order, to supply conversational context.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-8"></a>FS-01-8</strong> <em>(Outbound-call)</em> Call <a href="#TO-01">TO-01: Request a Sparring response</a> with the Sparring system prompt, the prior exchanges, and the new contribution. Expect a response text. <em>Call behaviour:</em> Synchronous. Timeout TBC, to be set from measured response times (<a href="L2-system-design-concept.html#SQR-01">SQR-01: A Sparring response arrives, or its absence is visible</a>). Two attempts, with a short delay between them, on transport failure, timeout, or a provider 5xx. <strong>No retry on a provider rate-limit or quota response</strong>, because retrying a rate limit deepens it; return a generation-failed condition immediately. <strong>No retry on a content-policy refusal from the provider</strong>, which is a determinate outcome rather than a transient fault. On exhausted attempts, return a generation-failed condition. Nothing is written to <a href="#E-02">E-02: Exchange</a> on any failure path, so a failed turn leaves no partial exchange in the record.</p>
+<p><strong><a id="FS-01-8"></a>FS-01-8</strong> <em>(Outbound-call)</em> Call <a href="#TO-01">TO-01 Request a Sparring response</a> with the Sparring system prompt, the prior exchanges, and the new contribution. Expect a response text. <em>Call behaviour:</em> Synchronous. Timeout TBC, to be set from measured response times (<a href="L2-system-design-concept.html#SQR-01">SQR-01 A Sparring response arrives, or its absence is visible</a>). Two attempts, with a short delay between them, on transport failure, timeout, or a provider 5xx. <strong>No retry on a provider rate-limit or quota response</strong>, because retrying a rate limit deepens it; return a generation-failed condition immediately. <strong>No retry on a content-policy refusal from the provider</strong>, which is a determinate outcome rather than a transient fault. On exhausted attempts, return a generation-failed condition. Nothing is written to <a href="#E-02">E-02 Exchange</a> on any failure path, so a failed turn leaves no partial exchange in the record.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-9"></a>FS-01-9</strong> <em>(Entity-access)</em> Write a new exchange to <a href="#E-02">E-02: Exchange</a> carrying the contribution (<a href="#E-02.3">E-02.3: visitorContribution</a>), the response (<a href="#E-02.4">E-02.4: sparringResponse</a>), the session reference (<a href="#E-02.2">E-02.2: sessionId</a>), and its position (<a href="#E-02.5">E-02.5: position</a>).</p>
+<p><strong><a id="FS-01-9"></a>FS-01-9</strong> <em>(Entity-access)</em> Write a new exchange to <a href="#E-02">E-02 Exchange</a> carrying the contribution (<a href="#E-02.3">E-02.3 visitorContribution</a>), the response (<a href="#E-02.4">E-02.4 sparringResponse</a>), the session reference (<a href="#E-02.2">E-02.2 sessionId</a>), and its position (<a href="#E-02.5">E-02.5 position</a>).</p>
 </li>
 <li>
-<p><strong><a id="FS-01-10"></a>FS-01-10</strong> <em>(Entity-access)</em> Increment <a href="#E-01.8">E-01.8: turnCount</a> (turnCount) and update <a href="#E-01.9">E-01.9: lastActiveAt</a> (lastActiveAt).</p>
+<p><strong><a id="FS-01-10"></a>FS-01-10</strong> <em>(Entity-access)</em> Increment <a href="#E-01.8">E-01.8 turnCount</a> (turnCount) and update <a href="#E-01.9">E-01.9 lastActiveAt</a> (lastActiveAt).</p>
 </li>
 <li>
-<p><strong><a id="FS-01-11"></a>FS-01-11</strong> <em>(Function-call)</em> If this was the session&#8217;s first exchange, call <a href="#TF-05">TF-05: Derive a scenario statement</a> to derive the scenario statement and write it to <a href="#E-01.5">E-01.5: scenario</a>.</p>
+<p><strong><a id="FS-01-11"></a>FS-01-11</strong> <em>(Function-call)</em> If this was the session&#8217;s first exchange, call <a href="#TF-05">TF-05 Derive a scenario statement</a> to derive the scenario statement and write it to <a href="#E-01.5">E-01.5 scenario</a>.</p>
 </li>
 <li>
 <p><strong><a id="FS-01-12"></a>FS-01-12</strong> <em>(Data-operation)</em> Return the response, the remaining turn allowance, and the session state.</p>
@@ -640,17 +640,17 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <p><strong><a id="FA-01-1"></a>FA-01-1</strong> <em>(extends <a href="#FS-01-8">FS-01-8</a>)</em> Provider rate limit, quota exhaustion, timeout, transport failure after retries, or content-policy refusal. All return a generation-failed condition to the caller and write nothing. Grouping is deliberate: the calling client takes the same action for every one of these, and distinguishing them would produce a taxonomy nobody acts on. The distinction is preserved in logs rather than in the response. <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
-<p><strong><a id="FA-01-2"></a>FA-01-2</strong> <em>(extends <a href="#FS-01-6">FS-01-6</a>)</em> The contribution is unsuitable. Unlike <a href="#FA-01-1">FA-01-1</a>, this is not terminal — the caller (<a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a>) tells the visitor to edit and resubmit, and the input field re-enables with the text preserved. <em>Outcome:</em> Resume.</p>
+<p><strong><a id="FA-01-2"></a>FA-01-2</strong> <em>(extends <a href="#FS-01-6">FS-01-6</a>)</em> The contribution is unsuitable. Unlike <a href="#FA-01-1">FA-01-1</a>, this is not terminal — the caller (<a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>) tells the visitor to edit and resubmit, and the input field re-enables with the text preserved. <em>Outcome:</em> Resume.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p><strong><a id="TF-02"></a>TF-02 — Assess a contribution for projection suitability</strong><br>
 <em>Detail level:</em> Stepwise<br>
-<em>Achieves:</em> <a href="#G-04">G-04: Decide what may be stored, and let the visitor&#8217;s own</a></p>
+<em>Achieves:</em> <a href="#G-04">G-04 Decide what may be stored, and let the visitor&#8217;s own</a></p>
 </div>
 <div class="paragraph">
-<p>Determines whether a contribution may be stored and answered at all — and, because only stored content can ever be projected (<a href="#G-04">G-04: Decide what may be stored, and let the visitor&#8217;s own</a>), this is also what keeps unsuitable material off the public surface. It determines whether <em>this turn</em> proceeds, not whether the visitor&#8217;s session does: on an unsuitable result the visitor edits and resubmits, they are not cut off.</p>
+<p>Determines whether a contribution may be stored and answered at all — and, because only stored content can ever be projected (<a href="#G-04">G-04 Decide what may be stored, and let the visitor&#8217;s own</a>), this is also what keeps unsuitable material off the public surface. It determines whether <em>this turn</em> proceeds, not whether the visitor&#8217;s session does: on an unsuitable result the visitor edits and resubmits, they are not cut off.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -658,7 +658,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <p><strong><a id="FS-02-1"></a>FS-02-1</strong> <em>(Data-operation)</em> Check the contribution against a maintained term list covering profanity. A match returns unsuitable without a provider call.</p>
 </li>
 <li>
-<p><strong><a id="FS-02-2"></a>FS-02-2</strong> <em>(Outbound-call)</em> Call <a href="#TO-02">TO-02: Request a classification</a> with the contribution and a classification instruction. Expect one of: suitable, contains-personal-information, targets-real-person. <em>Call behaviour:</em> Synchronous, short timeout, single attempt, no retry. <strong>On any failure, return unsuitable.</strong> Failing closed is correct here: the cost of not projecting a suitable contribution is that one item is missing from a wall, and the cost of projecting an unsuitable one is unrecoverable once it is six feet tall in a public room.</p>
+<p><strong><a id="FS-02-2"></a>FS-02-2</strong> <em>(Outbound-call)</em> Call <a href="#TO-02">TO-02 Request a classification</a> with the contribution and a classification instruction. Expect one of: suitable, contains-personal-information, targets-real-person. <em>Call behaviour:</em> Synchronous, short timeout, single attempt, no retry. <strong>On any failure, return unsuitable.</strong> Failing closed is correct here: the cost of not projecting a suitable contribution is that one item is missing from a wall, and the cost of projecting an unsuitable one is unrecoverable once it is six feet tall in a public room.</p>
 </li>
 <li>
 <p><strong><a id="FS-02-3"></a>FS-02-3</strong> <em>(Data-operation)</em> Map the classification to an outcome and return it.</p>
@@ -666,61 +666,61 @@ The element shall reject excess requests, over-length contributions, and over-lo
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>The distinction this function must get right (<a href="L2-system-design-concept.html#AP-07">AP-07: Attempts to argue the Sparring partner out of its</a>).</strong> <em>Targets-real-person</em> means the harmful content — hate speech, harassment, threats, sexual content — is aimed at or about a real, identifiable person or group. It does <strong>not</strong> mean a visitor who is hostile toward, arguing with, pressuring, or instructing the Sparring partner to abandon its position, however extreme the tone — the Sparring partner is software, not a person, and that visitor is engaged with the exercise; their attempt is the observation the installation exists to produce. The classification instruction must state this distinction explicitly rather than leaving it to the model&#8217;s default reading of "unsafe language", because hostility-at-the-AI and harm-at-a-person can otherwise look similar and only one should be withheld.</p>
+<p><strong>The distinction this function must get right (<a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a>).</strong> <em>Targets-real-person</em> means the harmful content — hate speech, harassment, threats, sexual content — is aimed at or about a real, identifiable person or group. It does <strong>not</strong> mean a visitor who is hostile toward, arguing with, pressuring, or instructing the Sparring partner to abandon its position, however extreme the tone — the Sparring partner is software, not a person, and that visitor is engaged with the exercise; their attempt is the observation the installation exists to produce. The classification instruction must state this distinction explicitly rather than leaving it to the model&#8217;s default reading of "unsafe language", because hostility-at-the-AI and harm-at-a-person can otherwise look similar and only one should be withheld.</p>
 </div>
 <div class="paragraph">
-<p><strong>A second distinction the instruction must also get right, found in testing.</strong> Stating the <a href="L2-system-design-concept.html#AP-07">AP-07: Attempts to argue the Sparring partner out of its</a> distinction was not enough on its own: without also stating what the exercise&#8217;s subject matter actually <em>is</em>, the classifier had nothing to check arguing-the-exercise against, which produced misclassifications in the other direction. Both the topic itself and the target-based carve-out need to be explicit in the instruction — omitting either produces a failure mode this requirement exists to prevent, from a different direction.</p>
+<p><strong>A second distinction the instruction must also get right, found in testing.</strong> Stating the <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a> distinction was not enough on its own: without also stating what the exercise&#8217;s subject matter actually <em>is</em>, the classifier had nothing to check arguing-the-exercise against, which produced misclassifications in the other direction. Both the topic itself and the target-based carve-out need to be explicit in the instruction — omitting either produces a failure mode this requirement exists to prevent, from a different direction.</p>
 </div>
 <div class="paragraph">
-<p><em>Contains-personal-information</em> covers names, contact details, and health, financial, or comparably personal circumstances. This case is expected to arise most often in exactly the situation <a href="L2-system-design-concept.html#AP-07">AP-07: Attempts to argue the Sparring partner out of its</a> protects: a visitor under real pressure disclosing something real while trying to get the system to relent. That turn is rejected and not stored; the visitor edits it and continues — the session is not ended over it.</p>
+<p><em>Contains-personal-information</em> covers names, contact details, and health, financial, or comparably personal circumstances. This case is expected to arise most often in exactly the situation <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a> protects: a visitor under real pressure disclosing something real while trying to get the system to relent. That turn is rejected and not stored; the visitor edits it and continues — the session is not ended over it.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TF-03"></a>TF-03 — Enforce request limits</strong><br>
 <em>Detail level:</em> Narrative<br>
-<em>Achieves:</em> <a href="#G-06">G-06: Absorb load and misuse without failing</a></p>
+<em>Achieves:</em> <a href="#G-06">G-06 Absorb load and misuse without failing</a></p>
 </div>
 <div class="paragraph">
-<p>Reads the current window for the request origin from <a href="#E-03">E-03: Rate limit window</a>, increments it, and reports whether the allowance is exceeded. Windows are keyed on a hashed origin (<a href="#E-03.1">E-03.1: originHash</a>), so no raw address is stored. Expired windows are reset in place rather than swept by a separate process, which avoids a scheduled job on an unattended host. Threshold and window length are TBC, to be set below the provider&#8217;s own limits per <a href="L2-system-design-concept.html#SC-04">SC-04: Generation is rate-limited and metered by the provider</a>. No goal relation beyond <a href="#G-06">G-06: Absorb load and misuse without failing</a>: this is a guard, not business logic.</p>
+<p>Reads the current window for the request origin from <a href="#E-03">E-03 Rate limit window</a>, increments it, and reports whether the allowance is exceeded. Windows are keyed on a hashed origin (<a href="#E-03.1">E-03.1 originHash</a>), so no raw address is stored. Expired windows are reset in place rather than swept by a separate process, which avoids a scheduled job on an unattended host. Threshold and window length are TBC, to be set below the provider&#8217;s own limits per <a href="L2-system-design-concept.html#SC-04">SC-04 Generation is rate-limited and metered by the provider</a>. No goal relation beyond <a href="#G-06">G-06 Absorb load and misuse without failing</a>: this is a guard, not business logic.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TF-04"></a>TF-04 — Assemble display material</strong><br>
 <em>Detail level:</em> Stepwise<br>
-<em>Achieves:</em> <a href="#G-05">G-05: Keep the display surface populated</a>, <a href="#G-04">G-04: Decide what may be stored, and let the visitor&#8217;s own</a></p>
+<em>Achieves:</em> <a href="#G-05">G-05 Keep the display surface populated</a>, <a href="#G-04">G-04 Decide what may be stored, and let the visitor&#8217;s own</a></p>
 </div>
 <div class="paragraph">
-<p>Produces the ordered items the projection renders. Every decision about what appears on the wall is made here, so that <a href="L2-system-design-concept.html#SE-02">SE-02: Display client</a> carries no policy (<a href="L3-SE-02-display-client.html#C-02">C-02: This element holds no selection or ordering policy</a> of that element).</p>
+<p>Produces the ordered items the projection renders. Every decision about what appears on the wall is made here, so that <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> carries no policy (<a href="L3-SE-02-display-client.html#C-02">C-02 This element holds no selection or ordering policy</a> of that element).</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="FS-04-1"></a>FS-04-1</strong> <em>(Entity-access)</em> Read live-origin sessions from <a href="#E-01">E-01: Session</a> where <a href="#E-01.6">E-01.6: displayable</a> (displayable) is true and at least one exchange exists, ordered by <a href="#E-01.9">E-01.9: lastActiveAt</a> (lastActiveAt) descending, up to the item limit.</p>
+<p><strong><a id="FS-04-1"></a>FS-04-1</strong> <em>(Entity-access)</em> Read live-origin sessions from <a href="#E-01">E-01 Session</a> where <a href="#E-01.6">E-01.6 displayable</a> (displayable) is true and at least one exchange exists, ordered by <a href="#E-01.9">E-01.9 lastActiveAt</a> (lastActiveAt) descending, up to the item limit.</p>
 </li>
 <li>
 <p><strong><a id="FS-04-2"></a>FS-04-2</strong> <em>(Data-operation)</em> If fewer items were found than the limit, continue at <a href="#FS-04-3">FS-04-3</a>. Otherwise continue at <a href="#FS-04-4">FS-04-4</a>.</p>
 </li>
 <li>
-<p><strong><a id="FS-04-3"></a>FS-04-3</strong> <em>(Entity-access)</em> Read pilot-origin sessions from <a href="#E-01">E-01: Session</a> under the same eligibility conditions, ordered by <a href="#E-01.9">E-01.9: lastActiveAt</a> descending, and append until the limit is reached.</p>
+<p><strong><a id="FS-04-3"></a>FS-04-3</strong> <em>(Entity-access)</em> Read pilot-origin sessions from <a href="#E-01">E-01 Session</a> under the same eligibility conditions, ordered by <a href="#E-01.9">E-01.9 lastActiveAt</a> descending, and append until the limit is reached.</p>
 </li>
 <li>
-<p><strong><a id="FS-04-4"></a>FS-04-4</strong> <em>(Entity-access)</em> For each selected session, read its most recent exchange from <a href="#E-02">E-02: Exchange</a> (<a href="#E-02.3">E-02.3: visitorContribution</a>, <a href="#E-02.4">E-02.4: sparringResponse</a>). Which exchange to select is an open decision (<a href="L2-system-design-concept.html#SE-02">SE-02: Display client</a> <a href="L3-SE-02-display-client.html#TBC-04">TBC-04: Which exchange pair per session.</a>); it is made here and changing it does not affect <a href="L2-system-design-concept.html#SE-02">SE-02: Display client</a>.</p>
+<p><strong><a id="FS-04-4"></a>FS-04-4</strong> <em>(Entity-access)</em> For each selected session, read its most recent exchange from <a href="#E-02">E-02 Exchange</a> (<a href="#E-02.3">E-02.3 visitorContribution</a>, <a href="#E-02.4">E-02.4 sparringResponse</a>). Which exchange to select is an open decision (<a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> <a href="L3-SE-02-display-client.html#TBC-04">TBC-04 Which exchange pair per session.</a>); it is made here and changing it does not affect <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a>.</p>
 </li>
 <li>
-<p><strong><a id="FS-04-5"></a>FS-04-5</strong> <em>(Data-operation)</em> Build each item from the session&#8217;s scenario (<a href="#E-01.5">E-01.5: scenario</a>), the exchange pair, the origin (<a href="#E-01.4">E-01.4: origin</a>), and a recency position. Return the ordered list.</p>
+<p><strong><a id="FS-04-5"></a>FS-04-5</strong> <em>(Data-operation)</em> Build each item from the session&#8217;s scenario (<a href="#E-01.5">E-01.5 scenario</a>), the exchange pair, the origin (<a href="#E-01.4">E-01.4 origin</a>), and a recency position. Return the ordered list.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p><strong><a id="TF-05"></a>TF-05 — Derive a scenario statement</strong><br>
 <em>Detail level:</em> Narrative<br>
-<em>Achieves:</em> <a href="#G-05">G-05: Keep the display surface populated</a></p>
+<em>Achieves:</em> <a href="#G-05">G-05 Keep the display surface populated</a></p>
 </div>
 <div class="paragraph">
-<p>Produces the short context line shown above an exchange, from the session&#8217;s first visitor contribution. The initial approach is to trim that contribution to a bounded length, which costs nothing. If opening contributions prove to read badly as context lines when checked against pilot transcripts, the fallback is a single generation call via <a href="#TO-02">TO-02: Request a classification</a>, with the result written once to <a href="#E-01.5">E-01.5: scenario</a> and never recomputed. Computing it per render would multiply provider cost by the polling rate, which is the specific mistake this note exists to prevent.</p>
+<p>Produces the short context line shown above an exchange, from the session&#8217;s first visitor contribution. The initial approach is to trim that contribution to a bounded length, which costs nothing. If opening contributions prove to read badly as context lines when checked against pilot transcripts, the fallback is a single generation call via <a href="#TO-02">TO-02 Request a classification</a>, with the result written once to <a href="#E-01.5">E-01.5 scenario</a> and never recomputed. Computing it per render would multiply provider cost by the polling rate, which is the specific mistake this note exists to prevent.</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TF-06"></a>TF-06 — Import pilot transcripts</strong><br>
 <em>Detail level:</em> Stepwise<br>
-<em>Achieves:</em> <a href="#G-03">G-03: Persist every interaction with its origin fixed at</a>, <a href="#G-05">G-05: Keep the display surface populated</a></p>
+<em>Achieves:</em> <a href="#G-03">G-03 Persist every interaction with its origin fixed at</a>, <a href="#G-05">G-05 Keep the display surface populated</a></p>
 </div>
 <div class="ulist">
 <ul>
@@ -728,13 +728,13 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <p><strong><a id="FS-06-1"></a>FS-06-1</strong> <em>(Data-operation)</em> Parse the supplied file and validate each transcript&#8217;s structure. Collect malformed ones for reporting rather than aborting.</p>
 </li>
 <li>
-<p><strong><a id="FS-06-2"></a>FS-06-2</strong> <em>(Entity-access)</em> For each valid transcript, write a session to <a href="#E-01">E-01: Session</a> with <a href="#E-01.4">E-01.4: origin</a> (origin) set to <code>pilot</code>, <a href="#E-01.6">E-01.6: displayable</a> (displayable) set to true, and <a href="#E-01.7">E-01.7: consentGranted</a> (consentGranted) set to true. <a href="#E-01.10">E-01.10: tosAgreed</a> (tosAgreed) and <a href="#E-01.11">E-01.11: projectionConsent</a> (projectionConsent) are left unset — pilot sessions have no visitor to ask, and displayable is set directly rather than derived from a projection consent that doesn&#8217;t apply here.</p>
+<p><strong><a id="FS-06-2"></a>FS-06-2</strong> <em>(Entity-access)</em> For each valid transcript, write a session to <a href="#E-01">E-01 Session</a> with <a href="#E-01.4">E-01.4 origin</a> (origin) set to <code>pilot</code>, <a href="#E-01.6">E-01.6 displayable</a> (displayable) set to true, and <a href="#E-01.7">E-01.7 consentGranted</a> (consentGranted) set to true. <a href="#E-01.10">E-01.10 tosAgreed</a> (tosAgreed) and <a href="#E-01.11">E-01.11 projectionConsent</a> (projectionConsent) are left unset — pilot sessions have no visitor to ask, and displayable is set directly rather than derived from a projection consent that doesn&#8217;t apply here.</p>
 </li>
 <li>
-<p><strong><a id="FS-06-3"></a>FS-06-3</strong> <em>(Entity-access)</em> Write each exchange to <a href="#E-02">E-02: Exchange</a> in transcript order.</p>
+<p><strong><a id="FS-06-3"></a>FS-06-3</strong> <em>(Entity-access)</em> Write each exchange to <a href="#E-02">E-02 Exchange</a> in transcript order.</p>
 </li>
 <li>
-<p><strong><a id="FS-06-4"></a>FS-06-4</strong> <em>(Function-call)</em> Call <a href="#TF-05">TF-05: Derive a scenario statement</a> for each session to derive its scenario statement.</p>
+<p><strong><a id="FS-06-4"></a>FS-06-4</strong> <em>(Function-call)</em> Call <a href="#TF-05">TF-05 Derive a scenario statement</a> for each session to derive its scenario statement.</p>
 </li>
 <li>
 <p><strong><a id="FS-06-5"></a>FS-06-5</strong> <em>(Data-operation)</em> Return per-transcript outcomes.</p>
@@ -756,7 +756,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <em>Detail level:</em> Narrative</p>
 </div>
 <div class="paragraph">
-<p>Called once per session by <a href="#TI-06">TI-06: Refine a session title</a>, after the session&#8217;s first exchange exists. Attempts a short (≤38 character) title via <a href="#TO-02">TO-02: Request a classification</a> with a title-generation instruction; on any failure (timeout, malformed response, or any other exception) falls back to the same trim-based derivation <a href="#TF-05">TF-05: Derive a scenario statement</a> uses for the scenario statement, just capped at 38 characters instead of <a href="#TF-05">TF-05: Derive a scenario statement</a>'s own bound. Either path always produces a usable title — there is no "couldn&#8217;t generate one" outcome from the caller&#8217;s point of view. Writes the result to <a href="#E-01.12">E-01.12: title</a> once and never recomputes it: called again for a session that already has one, it returns the stored value unchanged rather than repeating the provider call. No goal relation: like <a href="#TF-04">TF-04: Assemble display material</a> in <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a>, this is presentation logic serving <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a>'s header, not a stated business goal.</p>
+<p>Called once per session by <a href="#TI-06">TI-06 Refine a session title</a>, after the session&#8217;s first exchange exists. Attempts a short (≤38 character) title via <a href="#TO-02">TO-02 Request a classification</a> with a title-generation instruction; on any failure (timeout, malformed response, or any other exception) falls back to the same trim-based derivation <a href="#TF-05">TF-05 Derive a scenario statement</a> uses for the scenario statement, just capped at 38 characters instead of <a href="#TF-05">TF-05 Derive a scenario statement</a>'s own bound. Either path always produces a usable title — there is no "couldn&#8217;t generate one" outcome from the caller&#8217;s point of view. Writes the result to <a href="#E-01.12">E-01.12 title</a> once and never recomputes it: called again for a session that already has one, it returns the stored value unchanged rather than repeating the provider call. No goal relation: like <a href="#TF-04">TF-04 Assemble display material</a> in <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>, this is presentation logic serving <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s header, not a stated business goal.</p>
 </div>
 <hr>
 </div>
@@ -767,10 +767,10 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div class="paragraph">
 <p><strong><a id="TI-01"></a>TI-01 — Open a session</strong><br>
 <em>Call type:</em> Synchronous<br>
-<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a> (<a href="L3-SE-01-input-client.html#TO-01">TO-01: Open a session</a>)<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> (<a href="L3-SE-01-input-client.html#TO-01">TO-01 Open a session</a>)<br>
 <em>Input:</em> Three consent booleans, optional as a group; absent on creation, all three required together on the decision call: agreement to take part, retention consent, projection consent.<br>
-<em>Output:</em> Session identifier (string), turn allowance (integer), session state (enum), origin (enum). Origin is always included — cheap to compute, and consumed only by <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a>'s own debug-mode display (<a href="L3-SE-01-input-client.html#QR-06">QR-06: Diagnostic detail is available to an operator</a>), not gated on this side.<br>
-<em>Action:</em> Creates a session in <a href="#E-01">E-01: Session</a> with origin fixed as <code>live</code> and a generated identifier, or records the three-part decision against an existing session by writing <a href="#E-01.7">E-01.7: consentGranted</a>, <a href="#E-01.10">E-01.10: tosAgreed</a>, and <a href="#E-01.11">E-01.11: projectionConsent</a> — and sets <a href="#E-01.6">E-01.6: displayable</a> (displayable) directly from the projection choice in the same write. Returns immediately.<br>
+<em>Output:</em> Session identifier (string), turn allowance (integer), session state (enum), origin (enum). Origin is always included — cheap to compute, and consumed only by <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s own debug-mode display (<a href="L3-SE-01-input-client.html#QR-06">QR-06 Diagnostic detail is available to an operator</a>), not gated on this side.<br>
+<em>Action:</em> Creates a session in <a href="#E-01">E-01 Session</a> with origin fixed as <code>live</code> and a generated identifier, or records the three-part decision against an existing session by writing <a href="#E-01.7">E-01.7 consentGranted</a>, <a href="#E-01.10">E-01.10 tosAgreed</a>, and <a href="#E-01.11">E-01.11 projectionConsent</a> — and sets <a href="#E-01.6">E-01.6 displayable</a> (displayable) directly from the projection choice in the same write. Returns immediately.<br>
 <em>Error cases:</em></p>
 </div>
 <div class="ulist">
@@ -789,16 +789,16 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div class="paragraph">
 <p><strong><a id="TI-02"></a>TI-02 — Submit a contribution</strong><br>
 <em>Call type:</em> Synchronous<br>
-<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a> (<a href="L3-SE-01-input-client.html#TO-02">TO-02: Submit a contribution</a>)<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> (<a href="L3-SE-01-input-client.html#TO-02">TO-02 Submit a contribution</a>)<br>
 <em>Input:</em> Session identifier (string, required), contribution text (string, required).<br>
-<em>Output:</em> The completed exchange (visitor contribution and Sparring response), remaining turn allowance (integer), session state (enum). Returned once generation has completed. Every response, regardless of outcome, also carries rate-limit remaining (integer, from <a href="#TF-03">TF-03: Enforce request limits</a>); an <code>ok</code> response additionally carries generation time in milliseconds (from <a href="#FS-01-8">FS-01-8</a>'s timing), and a flagged response carries the moderation reason (from <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a>'s outcome — <code>blocked-term</code>, <code>contains-personal-information</code>, <code>targets-real-person</code>, or <code>llm-classification</code> if the classifier call itself failed). All three are cheap to compute and are included unconditionally. The exact reason is consumed only by <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a>'s own debug-mode display (<a href="L3-SE-01-input-client.html#QR-06">QR-06: Diagnostic detail is available to an operator</a>); <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a>'s standard (non-debug) UI derives a coarser two-category hint from the same value — see <a href="L3-SE-01-input-client.html#QR-06">QR-06: Diagnostic detail is available to an operator</a>'s note.<br>
-<em>Action:</em> Calls <a href="#TF-01">TF-01: Process a visitor turn</a> with the session identifier and contribution, and returns its result. Response time is dominated by the provider call in <a href="#TF-01">TF-01: Process a visitor turn</a> <a href="#FS-01-8">FS-01-8</a> and is expected to run to several seconds.<br>
+<em>Output:</em> The completed exchange (visitor contribution and Sparring response), remaining turn allowance (integer), session state (enum). Returned once generation has completed. Every response, regardless of outcome, also carries rate-limit remaining (integer, from <a href="#TF-03">TF-03 Enforce request limits</a>); an <code>ok</code> response additionally carries generation time in milliseconds (from <a href="#FS-01-8">FS-01-8</a>'s timing), and a flagged response carries the moderation reason (from <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>'s outcome — <code>blocked-term</code>, <code>contains-personal-information</code>, <code>targets-real-person</code>, or <code>llm-classification</code> if the classifier call itself failed). All three are cheap to compute and are included unconditionally. The exact reason is consumed only by <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s own debug-mode display (<a href="L3-SE-01-input-client.html#QR-06">QR-06 Diagnostic detail is available to an operator</a>); <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s standard (non-debug) UI derives a coarser two-category hint from the same value — see <a href="L3-SE-01-input-client.html#QR-06">QR-06 Diagnostic detail is available to an operator</a>'s note.<br>
+<em>Action:</em> Calls <a href="#TF-01">TF-01 Process a visitor turn</a> with the session identifier and contribution, and returns its result. Response time is dominated by the provider call in <a href="#TF-01">TF-01 Process a visitor turn</a> <a href="#FS-01-8">FS-01-8</a> and is expected to run to several seconds.<br>
 <em>Error cases:</em></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Request limit reached (from <a href="#TF-03">TF-03: Enforce request limits</a>).</p>
+<p>Request limit reached (from <a href="#TF-03">TF-03 Enforce request limits</a>).</p>
 </li>
 <li>
 <p>Session unknown or expired.</p>
@@ -810,7 +810,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <p>Contribution rejected: empty or over-length.</p>
 </li>
 <li>
-<p>Contribution flagged: unsuitable per <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a> (<a href="#FA-01-2">FA-01-2</a>) — distinct from generation-failed. The visitor edits and resubmits; nothing about the session changes.</p>
+<p>Contribution flagged: unsuitable per <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> (<a href="#FA-01-2">FA-01-2</a>) — distinct from generation-failed. The visitor edits and resubmits; nothing about the session changes.</p>
 </li>
 <li>
 <p>Generation failed: any condition grouped by <a href="#FA-01-1">FA-01-1</a>.</p>
@@ -818,15 +818,15 @@ The element shall reject excess requests, over-length contributions, and over-lo
 </ul>
 </div>
 <div class="paragraph">
-<p><em>Unlike the earlier design this superseded, the response&#8217;s condition list is not silent about suitability — a flagged contribution is a distinct, visible outcome (<a href="#FA-01-2">FA-01-2</a>), because the visitor needs to know to edit their message. What the response never carries is which specific field or word triggered the flag, or anything about sessions other than the caller&#8217;s own. The visitor-facing UI does, deliberately, distinguish two broad categories — personal information versus inappropriate content — from the moderation reason; that coarse hint is not the same as exposing the exact classification or wordlist match, which stays debug-only (<a href="L3-SE-01-input-client.html#QR-06">QR-06: Diagnostic detail is available to an operator</a> in L3-SE-01-input-client.adoc).</em></p>
+<p><em>Unlike the earlier design this superseded, the response&#8217;s condition list is not silent about suitability — a flagged contribution is a distinct, visible outcome (<a href="#FA-01-2">FA-01-2</a>), because the visitor needs to know to edit their message. What the response never carries is which specific field or word triggered the flag, or anything about sessions other than the caller&#8217;s own. The visitor-facing UI does, deliberately, distinguish two broad categories — personal information versus inappropriate content — from the moderation reason; that coarse hint is not the same as exposing the exact classification or wordlist match, which stays debug-only (<a href="L3-SE-01-input-client.html#QR-06">QR-06 Diagnostic detail is available to an operator</a> in L3-SE-01-input-client.adoc).</em></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TI-03"></a>TI-03 — Retrieve a session</strong><br>
 <em>Call type:</em> Synchronous<br>
-<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a> (<a href="L3-SE-01-input-client.html#TO-03">TO-03: Retrieve a session</a>)<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> (<a href="L3-SE-01-input-client.html#TO-03">TO-03 Retrieve a session</a>)<br>
 <em>Input:</em> Session identifier (string, required).<br>
-<em>Output:</em> Session state (enum), turn allowance and remaining count (integers), ordered exchanges (array), whether the consent decision has been recorded (boolean) — one flag covering all three parts, since they are always recorded together — and origin (enum), same rationale as <a href="#TI-01">TI-01: Open a session</a>'s.<br>
-<em>Action:</em> Reads the session from <a href="#E-01">E-01: Session</a> and its exchanges from <a href="#E-02">E-02: Exchange</a> in order. Returns immediately.<br>
+<em>Output:</em> Session state (enum), turn allowance and remaining count (integers), ordered exchanges (array), whether the consent decision has been recorded (boolean) — one flag covering all three parts, since they are always recorded together — and origin (enum), same rationale as <a href="#TI-01">TI-01 Open a session</a>'s.<br>
+<em>Action:</em> Reads the session from <a href="#E-01">E-01 Session</a> and its exchanges from <a href="#E-02">E-02 Exchange</a> in order. Returns immediately.<br>
 <em>Error cases:</em></p>
 </div>
 <div class="ulist">
@@ -839,22 +839,22 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div class="paragraph">
 <p><strong><a id="TI-04"></a>TI-04 — Retrieve display material</strong><br>
 <em>Call type:</em> Synchronous<br>
-<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-02">SE-02: Display client</a> (<a href="L3-SE-02-display-client.html#TO-01">TO-01: Retrieve display material</a>)<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> (<a href="L3-SE-02-display-client.html#TO-01">TO-01 Retrieve display material</a>)<br>
 <em>Input:</em> None.<br>
 <em>Output:</em> An ordered list of items, each carrying a session identifier, scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency position.<br>
-<em>Action:</em> Calls <a href="#TF-04">TF-04: Assemble display material</a> and returns its result. Returns immediately.<br>
+<em>Action:</em> Calls <a href="#TF-04">TF-04 Assemble display material</a> and returns its result. Returns immediately.<br>
 <em>Error cases:</em> None specific to this interface. An empty list is a valid response and occurs only when no pilot material has been imported.</p>
 </div>
 <div class="paragraph">
-<p><em>This interface takes no parameters by design. Item count, ordering, exchange selection, and pilot fallback are all decided in <a href="#TF-04">TF-04: Assemble display material</a>, so that a change to any of them requires no change in <a href="L2-system-design-concept.html#SE-02">SE-02: Display client</a> and no coordination between the two.</em></p>
+<p><em>This interface takes no parameters by design. Item count, ordering, exchange selection, and pilot fallback are all decided in <a href="#TF-04">TF-04 Assemble display material</a>, so that a change to any of them requires no change in <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> and no coordination between the two.</em></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TI-05"></a>TI-05 — Import pilot material</strong><br>
 <em>Call type:</em> Synchronous<br>
-<em>Calling elements:</em> <a href="L2-system-design-concept.html#UT-03">UT-03: Operator</a>, directly on the host.<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a>, directly on the host.<br>
 <em>Input:</em> A structured transcript file.<br>
 <em>Output:</em> Per-transcript outcomes: imported or rejected, with a reason for each rejection.<br>
-<em>Action:</em> Calls <a href="#TF-06">TF-06: Import pilot transcripts</a>. Not reachable over the public endpoint (<a href="#C-03">C-03: The operator path is not publicly reachable</a>).<br>
+<em>Action:</em> Calls <a href="#TF-06">TF-06 Import pilot transcripts</a>. Not reachable over the public endpoint (<a href="#C-03">C-03 The operator path is not publicly reachable</a>).<br>
 <em>Error cases:</em></p>
 </div>
 <div class="ulist">
@@ -870,10 +870,10 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div class="paragraph">
 <p><strong><a id="TI-06"></a>TI-06 — Refine a session title</strong><br>
 <em>Call type:</em> Synchronous<br>
-<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a> (<a href="L3-SE-01-input-client.html#TO-04">TO-04: Refine a session title</a>)<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> (<a href="L3-SE-01-input-client.html#TO-04">TO-04 Refine a session title</a>)<br>
 <em>Input:</em> Session identifier (string, required).<br>
 <em>Output:</em> Refined title (string) — always present when the call succeeds.<br>
-<em>Action:</em> Calls <a href="#TF-07">TF-07: Refine a session title</a> and returns its result. Returns once the provider call (or its fallback) completes.<br>
+<em>Action:</em> Calls <a href="#TF-07">TF-07 Refine a session title</a> and returns its result. Returns once the provider call (or its fallback) completes.<br>
 <em>Error cases:</em></p>
 </div>
 <div class="ulist">
@@ -897,24 +897,24 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="TO-01"></a>TO-01 — Request a Sparring response</strong><br>
-<em>Statement:</em> This interface obtains a Sparring partner reply to a visitor contribution by calling the language generation API (<a href="L2-system-design-concept.html#PE-01">PE-01: Language generation API</a>). Used for every visitor turn. The system prompt instructs the model to reply in whichever language (English or German) the visitor&#8217;s own contribution is written in — a prompt-level behavior, not a parameter of this interface, and independent of <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a>'s UI locale (<a href="L3-SE-01-input-client.html#QR-08">QR-08: Interface language is selectable and matches on first</a> in L3-SE-01-input-client.adoc).<br>
+<em>Statement:</em> This interface obtains a Sparring partner reply to a visitor contribution by calling the language generation API (<a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a>). Used for every visitor turn. The system prompt instructs the model to reply in whichever language (English or German) the visitor&#8217;s own contribution is written in — a prompt-level behavior, not a parameter of this interface, and independent of <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s UI locale (<a href="L3-SE-01-input-client.html#QR-08">QR-08 Interface language is selectable and matches on first</a> in L3-SE-01-input-client.adoc).<br>
 <em>Input:</em> The Sparring system prompt, the session&#8217;s prior exchanges as conversational context, the new visitor contribution, and generation parameters.<br>
 <em>Output:</em> Response text.<br>
 <em>Error cases:</em> Rate limit exceeded. Quota exhausted. Content-policy refusal. Provider server error. Timeout. Transport failure. Authentication failure.<br>
 <em>Authoritative spec:</em> Provider documentation. No element in this system holds the authoritative specification.<br>
-<em>Calls:</em> <a href="L2-system-design-concept.html#PE-01">PE-01: Language generation API</a></p>
+<em>Calls:</em> <a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="TO-02"></a>TO-02 — Request a classification</strong><br>
-<em>Statement:</em> This interface obtains a suitability classification, a scenario statement, or a session title for a visitor contribution, by calling the language generation API (<a href="L2-system-design-concept.html#PE-01">PE-01: Language generation API</a>). Used by <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a> on every turn, by <a href="#TF-05">TF-05: Derive a scenario statement</a> only if the trimmed-contribution approach proves inadequate, and by <a href="#TF-07">TF-07: Refine a session title</a> once per session.<br>
+<em>Statement:</em> This interface obtains a suitability classification, a scenario statement, or a session title for a visitor contribution, by calling the language generation API (<a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a>). Used by <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> on every turn, by <a href="#TF-05">TF-05 Derive a scenario statement</a> only if the trimmed-contribution approach proves inadequate, and by <a href="#TF-07">TF-07 Refine a session title</a> once per session.<br>
 <em>Input:</em> The contribution text and a classification instruction, a summarisation instruction, or a title-generation instruction.<br>
 <em>Output:</em> A classification value, a short statement, or a short title.<br>
-<em>Error cases:</em> As <a href="#TO-01">TO-01: Request a Sparring response</a>.<br>
+<em>Error cases:</em> As <a href="#TO-01">TO-01 Request a Sparring response</a>.<br>
 <em>Authoritative spec:</em> Provider documentation.<br>
-<em>Calls:</em> <a href="L2-system-design-concept.html#PE-01">PE-01: Language generation API</a></p>
+<em>Calls:</em> <a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a></p>
 </div>
 <div class="paragraph">
-<p><em>Call behaviour is specified on the calling function steps (<a href="#TF-01">TF-01: Process a visitor turn</a> <a href="#FS-01-8">FS-01-8</a>, <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a> <a href="#FS-02-2">FS-02-2</a>), or in the calling function&#8217;s own narrative for <a href="#TF-07">TF-07: Refine a session title</a>, not here. The three differ substantially: <a href="#TF-01">TF-01: Process a visitor turn</a> retries and fails open to an error the visitor sees; <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a> does not retry and fails closed to unsuitable; <a href="#TF-07">TF-07: Refine a session title</a> does not retry and fails open to a trim-based fallback, never an error.</em></p>
+<p><em>Call behaviour is specified on the calling function steps (<a href="#TF-01">TF-01 Process a visitor turn</a> <a href="#FS-01-8">FS-01-8</a>, <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> <a href="#FS-02-2">FS-02-2</a>), or in the calling function&#8217;s own narrative for <a href="#TF-07">TF-07 Refine a session title</a>, not here. The three differ substantially: <a href="#TF-01">TF-01 Process a visitor turn</a> retries and fails open to an error the visitor sees; <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> does not retry and fails closed to unsuitable; <a href="#TF-07">TF-07 Refine a session title</a> does not retry and fails open to a trim-based fallback, never an error.</em></p>
 </div>
 <hr>
 </div>
@@ -925,7 +925,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div class="paragraph">
 <p><strong><a id="E-01"></a>E-01 — Session</strong><br>
 <em>Persistence:</em> Persistent<br>
-<em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01: Sparring session</a></p>
+<em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01 Sparring session</a></p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -950,7 +950,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <td class="tableblock halign-left valign-top"><p class="tableblock">sessionId</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Generated identifier, sufficiently random to resist enumeration. Travels in the client address (<a href="L2-system-design-concept.html#AP-03">AP-03: Session identity travels in the URL; no accounts</a>), so it is not secret and nothing sensitive may be derived from it.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generated identifier, sufficiently random to resist enumeration. Travels in the client address (<a href="L2-system-design-concept.html#AP-03">AP-03 Session identity travels in the URL; no accounts</a>), so it is not secret and nothing sensitive may be derived from it.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.2"></a>E-01.2</p></td>
@@ -964,14 +964,14 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <td class="tableblock halign-left valign-top"><p class="tableblock">scenarioSource</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">enum</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>first-contribution</code> or <code>generated</code>. Records how <a href="#E-01.5">E-01.5: scenario</a> was produced, so a later change of approach is visible in the data.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>first-contribution</code> or <code>generated</code>. Records how <a href="#E-01.5">E-01.5 scenario</a> was produced, so a later change of approach is visible in the data.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.4"></a>E-01.4</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">origin</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">enum</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pilot</code> or <code>live</code>. Written at creation and never modified (<a href="L2-system-design-concept.html#SQR-05">SQR-05: Origin is fixed at creation and never inferred</a>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pilot</code> or <code>live</code>. Written at creation and never modified (<a href="L2-system-design-concept.html#SQR-05">SQR-05 Origin is fixed at creation and never inferred</a>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.5"></a>E-01.5</p></td>
@@ -985,14 +985,14 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <td class="tableblock halign-left valign-top"><p class="tableblock">displayable</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the session may appear on the projection. Defaults false; set directly from <a href="#E-01.11">E-01.11: projectionConsent</a> (projectionConsent) when the consent decision is recorded — not by moderation. Nothing unsuitable can reach <a href="#E-02">E-02: Exchange</a> in the first place (<a href="#G-04">G-04: Decide what may be stored, and let the visitor&#8217;s own</a>/<a href="L2-system-design-concept.html#AP-05">AP-05: Moderation gates storage, not a per-session display</a>), so there is no separate moderation-driven display flag to maintain. Independent of <a href="#E-01.7">E-01.7: consentGranted</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the session may appear on the projection. Defaults false; set directly from <a href="#E-01.11">E-01.11 projectionConsent</a> (projectionConsent) when the consent decision is recorded — not by moderation. Nothing unsuitable can reach <a href="#E-02">E-02 Exchange</a> in the first place (<a href="#G-04">G-04 Decide what may be stored, and let the visitor&#8217;s own</a>/<a href="L2-system-design-concept.html#AP-05">AP-05 Moderation gates storage, not a per-session display</a>), so there is no separate moderation-driven display flag to maintain. Independent of <a href="#E-01.7">E-01.7 consentGranted</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.7"></a>E-01.7</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">consentGranted</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the participant agreed to retention. Absent until the decision is recorded. Independent of <a href="#E-01.6">E-01.6: displayable</a> (<a href="L2-system-design-concept.html#SQR-06">SQR-06: Public projection is governed separately from retention</a>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the participant agreed to retention. Absent until the decision is recorded. Independent of <a href="#E-01.6">E-01.6 displayable</a> (<a href="L2-system-design-concept.html#SQR-06">SQR-06 Public projection is governed separately from retention</a>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.8"></a>E-01.8</p></td>
@@ -1013,31 +1013,31 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <td class="tableblock halign-left valign-top"><p class="tableblock">tosAgreed</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the participant agreed to the terms of participation. Absent until recorded; once recorded it is always true — a decline is rejected at <a href="#TI-01">TI-01: Open a session</a> before it becomes a stored value (unlike <a href="#E-01.7">E-01.7: consentGranted</a> and <a href="#E-01.11">E-01.11: projectionConsent</a>, which legitimately store <code>false</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the participant agreed to the terms of participation. Absent until recorded; once recorded it is always true — a decline is rejected at <a href="#TI-01">TI-01 Open a session</a> before it becomes a stored value (unlike <a href="#E-01.7">E-01.7 consentGranted</a> and <a href="#E-01.11">E-01.11 projectionConsent</a>, which legitimately store <code>false</code>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.11"></a>E-01.11</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">projectionConsent</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the participant agreed to projection. Absent until the decision is recorded. Drives <a href="#E-01.6">E-01.6: displayable</a> directly. Independent of <a href="#E-01.7">E-01.7: consentGranted</a> — a session may be retained and not projected, or projected and not retained.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the participant agreed to projection. Absent until the decision is recorded. Drives <a href="#E-01.6">E-01.6 displayable</a> directly. Independent of <a href="#E-01.7">E-01.7 consentGranted</a> — a session may be retained and not projected, or projected and not retained.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.12"></a>E-01.12</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">title</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Short (≤38 character) header title, refined once from the first contribution and never recomputed (<a href="#TF-07">TF-07: Refine a session title</a>). Absent until refined.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short (≤38 character) header title, refined once from the first contribution and never recomputed (<a href="#TF-07">TF-07 Refine a session title</a>). Absent until refined.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>E-01.6, <a href="#E-01.7">E-01.7: consentGranted</a>, and <a href="#E-01.11">E-01.11: projectionConsent</a> govern three separate things: whether the public surface may currently show this session, whether it may be kept after the exhibition, and the visitor&#8217;s own projection choice — the first is now derived from the third, the second stays fully independent of both. <a href="#E-01.10">E-01.10: tosAgreed</a> is different in kind from the other two consent fields: it gates participation itself rather than a data-processing purpose, which is why it is never stored as a decline (see L1 <a href="L1-solution-design-concept.html#BC-02">BC-02: Public user-generated content is subject to data</a>, L2 <a href="L2-system-design-concept.html#SC-05">SC-05: Retention requires consent; projection requires</a>).</em></p>
+<p><em>E-01.6, <a href="#E-01.7">E-01.7 consentGranted</a>, and <a href="#E-01.11">E-01.11 projectionConsent</a> govern three separate things: whether the public surface may currently show this session, whether it may be kept after the exhibition, and the visitor&#8217;s own projection choice — the first is now derived from the third, the second stays fully independent of both. <a href="#E-01.10">E-01.10 tosAgreed</a> is different in kind from the other two consent fields: it gates participation itself rather than a data-processing purpose, which is why it is never stored as a decline (see L1 <a href="L1-solution-design-concept.html#BC-02">BC-02 Public user-generated content is subject to data</a>, L2 <a href="L2-system-design-concept.html#SC-05">SC-05 Retention requires consent; projection requires</a>).</em></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="E-02"></a>E-02 — Exchange</strong><br>
 <em>Persistence:</em> Persistent<br>
-<em>Refines:</em> <a href="L1-solution-design-concept.html#BE-02">BE-02: Exchange</a></p>
+<em>Refines:</em> <a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a></p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1069,7 +1069,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <td class="tableblock halign-left valign-top"><p class="tableblock">sessionId</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to <a href="#E-01.1">E-01.1: sessionId</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to <a href="#E-01.1">E-01.1 sessionId</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-02.3"></a>E-02.3</p></td>
@@ -1102,7 +1102,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>The pair is stored as one record rather than as two turn records. This follows the display unit (<a href="L1-solution-design-concept.html#BE-02">BE-02: Exchange</a>) and removes the possibility of a stored contribution with no response, which is the state a failed generation would otherwise leave behind.</em></p>
+<p><em>The pair is stored as one record rather than as two turn records. This follows the display unit (<a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a>) and removes the possibility of a stored contribution with no response, which is the state a failed generation would otherwise leave behind.</em></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="E-03"></a>E-03 — Rate limit window</strong><br>
@@ -1160,70 +1160,70 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="QR-01"></a>QR-01 — Generation is bounded and its bound is enforced here</strong> <em>(Performance)</em><br>
-<em>Applies to:</em> <a href="#TF-01">TF-01: Process a visitor turn</a>, <a href="#TO-01">TO-01: Request a Sparring response</a><br>
-<em>Acceptance criteria:</em> <a href="#TF-01">TF-01: Process a visitor turn</a> abandons a generation request at a fixed bound and returns a generation-failed condition. The bound is TBC, to be set from measured response times, and must be below <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a>'s own wait bound so that the element decides the outcome rather than the client timing out first.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-01">SQR-01: A Sparring response arrives, or its absence is visible</a></p>
+<em>Applies to:</em> <a href="#TF-01">TF-01 Process a visitor turn</a>, <a href="#TO-01">TO-01 Request a Sparring response</a><br>
+<em>Acceptance criteria:</em> <a href="#TF-01">TF-01 Process a visitor turn</a> abandons a generation request at a fixed bound and returns a generation-failed condition. The bound is TBC, to be set from measured response times, and must be below <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s own wait bound so that the element decides the outcome rather than the client timing out first.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-01">SQR-01 A Sparring response arrives, or its absence is visible</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-02"></a>QR-02 — Restarts unattended</strong> <em>(Availability)</em><br>
 <em>Applies to:</em> The element overall<br>
-<em>Acceptance criteria:</em> The process restarts automatically after failure. No in-memory state is required for correctness after a restart, because everything needed is in <a href="#E-01">E-01: Session</a> through <a href="#E-03">E-03: Rate limit window</a>.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02: The installation recovers without a person present</a></p>
+<em>Acceptance criteria:</em> The process restarts automatically after failure. No in-memory state is required for correctness after a restart, because everything needed is in <a href="#E-01">E-01 Session</a> through <a href="#E-03">E-03 Rate limit window</a>.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02 The installation recovers without a person present</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-03"></a>QR-03 — A rejected request affects only its own session</strong> <em>(Availability)</em><br>
-<em>Applies to:</em> <a href="#TF-01">TF-01: Process a visitor turn</a>, <a href="#TF-03">TF-03: Enforce request limits</a><br>
+<em>Applies to:</em> <a href="#TF-01">TF-01 Process a visitor turn</a>, <a href="#TF-03">TF-03 Enforce request limits</a><br>
 <em>Acceptance criteria:</em> Rate limiting, turn limits, and generation failures return a condition for the requesting session and leave every other session serviceable.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02: The installation recovers without a person present</a></p>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02 The installation recovers without a person present</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-04"></a>QR-04 — The provider credential never leaves the host</strong> <em>(Security)</em><br>
-<em>Applies to:</em> <a href="#TO-01">TO-01: Request a Sparring response</a>, <a href="#TO-02">TO-02: Request a classification</a><br>
+<em>Applies to:</em> <a href="#TO-01">TO-01 Request a Sparring response</a>, <a href="#TO-02">TO-02 Request a classification</a><br>
 <em>Acceptance criteria:</em> The credential is read from host configuration, is absent from version control, and appears in no response body, error message, or log line.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-04">SQR-04: Credentials and quota are protected from the public</a></p>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-04">SQR-04 Credentials and quota are protected from the public</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-05"></a>QR-05 — Limits are enforced on every path</strong> <em>(Security)</em><br>
-<em>Applies to:</em> <a href="#TF-01">TF-01: Process a visitor turn</a>, <a href="#TF-03">TF-03: Enforce request limits</a>, <a href="#TI-02">TI-02: Submit a contribution</a><br>
+<em>Applies to:</em> <a href="#TF-01">TF-01 Process a visitor turn</a>, <a href="#TF-03">TF-03 Enforce request limits</a>, <a href="#TI-02">TI-02 Submit a contribution</a><br>
 <em>Acceptance criteria:</em> Contribution length, session turn allowance, and request rate are each checked in this element regardless of whether a client has already checked them.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-04">SQR-04: Credentials and quota are protected from the public</a></p>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-04">SQR-04 Credentials and quota are protected from the public</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-06"></a>QR-06 — Origin is written once</strong> <em>(Data-integrity)</em><br>
-<em>Applies to:</em> <a href="#E-01">E-01: Session</a>, <a href="#TF-06">TF-06: Import pilot transcripts</a>, <a href="#TI-01">TI-01: Open a session</a><br>
-<em>Acceptance criteria:</em> <a href="#E-01.4">E-01.4: origin</a> is set at creation and no code path updates it. No process infers origin from any other value.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-05">SQR-05: Origin is fixed at creation and never inferred</a></p>
+<em>Applies to:</em> <a href="#E-01">E-01 Session</a>, <a href="#TF-06">TF-06 Import pilot transcripts</a>, <a href="#TI-01">TI-01 Open a session</a><br>
+<em>Acceptance criteria:</em> <a href="#E-01.4">E-01.4 origin</a> is set at creation and no code path updates it. No process infers origin from any other value.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-05">SQR-05 Origin is fixed at creation and never inferred</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-07"></a>QR-07 — No partial exchange is ever stored</strong> <em>(Data-integrity)</em><br>
-<em>Applies to:</em> <a href="#TF-01">TF-01: Process a visitor turn</a><br>
-<em>Acceptance criteria:</em> <a href="#E-02">E-02: Exchange</a> is written only after a response has been received. Every failure path in <a href="#FS-01-8">FS-01-8</a> writes nothing.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-05">SQR-05: Origin is fixed at creation and never inferred</a><br>
+<em>Applies to:</em> <a href="#TF-01">TF-01 Process a visitor turn</a><br>
+<em>Acceptance criteria:</em> <a href="#E-02">E-02 Exchange</a> is written only after a response has been received. Every failure path in <a href="#FS-01-8">FS-01-8</a> writes nothing.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-05">SQR-05 Origin is fixed at creation and never inferred</a><br>
 <em>Element specific:</em> Yes</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-08"></a>QR-08 — Suitability assessment fails closed</strong> <em>(Compliance)</em><br>
-<em>Applies to:</em> <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a><br>
-<em>Acceptance criteria:</em> Every failure of <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a>, including provider unavailability, yields an unsuitable outcome. No path treats an unavailable classifier as permission to project.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-06">SQR-06: Public projection is governed separately from retention</a></p>
+<em>Applies to:</em> <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a><br>
+<em>Acceptance criteria:</em> Every failure of <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>, including provider unavailability, yields an unsuitable outcome. No path treats an unavailable classifier as permission to project.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-06">SQR-06 Public projection is governed separately from retention</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-09"></a>QR-09 — Projection eligibility and retention consent are never conflated</strong> <em>(Compliance)</em><br>
-<em>Applies to:</em> <a href="#E-01">E-01: Session</a>, <a href="#TF-01">TF-01: Process a visitor turn</a>, <a href="#TF-04">TF-04: Assemble display material</a>, <a href="#TI-01">TI-01: Open a session</a><br>
-<em>Acceptance criteria:</em> <a href="#E-01.7">E-01.7: consentGranted</a> (retention) is read and written independently of <a href="#E-01.6">E-01.6: displayable</a>/<a href="#E-01.11">E-01.11: projectionConsent</a> (projection). <a href="#E-01.6">E-01.6: displayable</a> is permitted to derive from <a href="#E-01.11">E-01.11: projectionConsent</a> — that is the one intentional coupling, recorded once at consent time, not re-derived elsewhere — but no path derives <a href="#E-01.7">E-01.7: consentGranted</a> from either, or <a href="#E-01.11">E-01.11: projectionConsent</a> from <a href="#E-01.7">E-01.7: consentGranted</a>.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-06">SQR-06: Public projection is governed separately from retention</a></p>
+<em>Applies to:</em> <a href="#E-01">E-01 Session</a>, <a href="#TF-01">TF-01 Process a visitor turn</a>, <a href="#TF-04">TF-04 Assemble display material</a>, <a href="#TI-01">TI-01 Open a session</a><br>
+<em>Acceptance criteria:</em> <a href="#E-01.7">E-01.7 consentGranted</a> (retention) is read and written independently of <a href="#E-01.6">E-01.6 displayable</a>/<a href="#E-01.11">E-01.11 projectionConsent</a> (projection). <a href="#E-01.6">E-01.6 displayable</a> is permitted to derive from <a href="#E-01.11">E-01.11 projectionConsent</a> — that is the one intentional coupling, recorded once at consent time, not re-derived elsewhere — but no path derives <a href="#E-01.7">E-01.7 consentGranted</a> from either, or <a href="#E-01.11">E-01.11 projectionConsent</a> from <a href="#E-01.7">E-01.7 consentGranted</a>.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-06">SQR-06 Public projection is governed separately from retention</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-10"></a>QR-10 — No raw request origin is stored</strong> <em>(Compliance)</em><br>
-<em>Applies to:</em> <a href="#E-03">E-03: Rate limit window</a>, <a href="#TF-03">TF-03: Enforce request limits</a><br>
+<em>Applies to:</em> <a href="#E-03">E-03 Rate limit window</a>, <a href="#TF-03">TF-03 Enforce request limits</a><br>
 <em>Acceptance criteria:</em> Only the hashed origin is written. The raw value exists in memory for the duration of the request and nowhere else.<br>
 <em>Element specific:</em> Yes</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="QR-11"></a>QR-11 — Infrastructure faults degrade to a generic error, not a leak</strong> <em>(Security)</em><br>
-<em>Applies to:</em> <a href="#TI-01">TI-01: Open a session</a>, <a href="#TI-02">TI-02: Submit a contribution</a>, <a href="#TI-03">TI-03: Retrieve a session</a>, <a href="#TI-04">TI-04: Retrieve display material</a><br>
+<em>Applies to:</em> <a href="#TI-01">TI-01 Open a session</a>, <a href="#TI-02">TI-02 Submit a contribution</a>, <a href="#TI-03">TI-03 Retrieve a session</a>, <a href="#TI-04">TI-04 Retrieve display material</a><br>
 <em>Acceptance criteria:</em> An uncaught exception on any public endpoint (missing credential, unwritable store, or any other infrastructure fault) returns a generic JSON error with no file path, stack trace, or exception message.<br>
-<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-04">SQR-04: Credentials and quota are protected from the public</a></p>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-04">SQR-04 Credentials and quota are protected from the public</a></p>
 </div>
 <hr>
 </div>
@@ -1233,50 +1233,50 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="C-01"></a>C-01 — PHP with a file-backed store on one instance</strong> <em>(Technical)</em><br>
-<em>Source:</em> <a href="L2-system-design-concept.html#SC-01">SC-01: PHP with a file-backed store on a single hosted</a>.<br>
-<em>Applies to:</em> The element overall, <a href="#E-01">E-01: Session</a> through <a href="#E-03">E-03: Rate limit window</a>.<br>
+<em>Source:</em> <a href="L2-system-design-concept.html#SC-01">SC-01 PHP with a file-backed store on a single hosted</a>.<br>
+<em>Applies to:</em> The element overall, <a href="#E-01">E-01 Session</a> through <a href="#E-03">E-03 Rate limit window</a>.<br>
 <em>Acceptance criteria:</em> Runs as a single process group against a single store file, with no external database, cache, or queue service.<br>
-<em>Consequence:</em> Rules out any design requiring concurrent write scaling or a background worker. Long-running work must complete within the request, which is why <a href="#TF-01">TF-01: Process a visitor turn</a> is synchronous, why <a href="#TF-05">TF-05: Derive a scenario statement</a> caches its result rather than recomputing, and why <a href="#TF-07">TF-07: Refine a session title</a>'s title refinement is triggered by a dedicated client call (<a href="#TI-06">TI-06: Refine a session title</a>) rather than a server-side background job — there is no queue or worker process for <a href="L2-system-design-concept.html#SE-01">SE-01: Input client</a> to hand it to.<br>
-<em>Implements:</em> <a href="L2-system-design-concept.html#SC-01">SC-01: PHP with a file-backed store on a single hosted</a></p>
+<em>Consequence:</em> Rules out any design requiring concurrent write scaling or a background worker. Long-running work must complete within the request, which is why <a href="#TF-01">TF-01 Process a visitor turn</a> is synchronous, why <a href="#TF-05">TF-05 Derive a scenario statement</a> caches its result rather than recomputing, and why <a href="#TF-07">TF-07 Refine a session title</a>'s title refinement is triggered by a dedicated client call (<a href="#TI-06">TI-06 Refine a session title</a>) rather than a server-side background job — there is no queue or worker process for <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> to hand it to.<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-01">SC-01 PHP with a file-backed store on a single hosted</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="C-02"></a>C-02 — Provider limits bound the element&#8217;s own limits</strong> <em>(Integration)</em><br>
-<em>Source:</em> <a href="L2-system-design-concept.html#SC-04">SC-04: Generation is rate-limited and metered by the provider</a>.<br>
-<em>Applies to:</em> <a href="#TF-03">TF-03: Enforce request limits</a>, <a href="#TF-01">TF-01: Process a visitor turn</a>.<br>
-<em>Acceptance criteria:</em> The request rate threshold in <a href="#TF-03">TF-03: Enforce request limits</a> is set below the provider&#8217;s limit, so that visitors meet this element&#8217;s limit rather than the provider&#8217;s.<br>
+<em>Source:</em> <a href="L2-system-design-concept.html#SC-04">SC-04 Generation is rate-limited and metered by the provider</a>.<br>
+<em>Applies to:</em> <a href="#TF-03">TF-03 Enforce request limits</a>, <a href="#TF-01">TF-01 Process a visitor turn</a>.<br>
+<em>Acceptance criteria:</em> The request rate threshold in <a href="#TF-03">TF-03 Enforce request limits</a> is set below the provider&#8217;s limit, so that visitors meet this element&#8217;s limit rather than the provider&#8217;s.<br>
 <em>Consequence:</em> Rules out unthrottled forwarding. Sets an upper bound on concurrent visitors, TBC once the threshold is chosen.<br>
-<em>Implements:</em> <a href="L2-system-design-concept.html#SC-04">SC-04: Generation is rate-limited and metered by the provider</a></p>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-04">SC-04 Generation is rate-limited and metered by the provider</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="C-03"></a>C-03 — The operator path is not publicly reachable</strong> <em>(Security)</em><br>
-<em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03: Build effort is capped and the piece is expendable</a>, and the absence of any authentication in this system.<br>
-<em>Applies to:</em> <a href="#TI-05">TI-05: Import pilot material</a>.<br>
-<em>Acceptance criteria:</em> <a href="#TI-05">TI-05: Import pilot material</a> is invoked on the host and is not routed on the public endpoint.<br>
+<em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>, and the absence of any authentication in this system.<br>
+<em>Applies to:</em> <a href="#TI-05">TI-05 Import pilot material</a>.<br>
+<em>Acceptance criteria:</em> <a href="#TI-05">TI-05 Import pilot material</a> is invoked on the host and is not routed on the public endpoint.<br>
 <em>Consequence:</em> Rules out remote import and, with it, the need for an authentication mechanism this system otherwise has no use for. Seeding requires host access.<br>
 <em>Element specific:</em> Yes</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="C-04"></a>C-04 — No administrative interface, no analytics layer</strong> <em>(Business)</em><br>
-<em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03: Build effort is capped and the piece is expendable</a>.<br>
+<em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>.<br>
 <em>Applies to:</em> The element overall.<br>
 <em>Acceptance criteria:</em> Operator tasks — seeding, extraction, pruning, reset, and backup — are performed directly against the host and the store file, each its own single-purpose script (<code>bin/import_pilot.php</code>, <code>bin/export.php</code>, <code>bin/prune_orphaned_sessions.php</code>, <code>bin/reset_db.php</code>, <code>bin/backup_db.php</code>).<br>
-<em>Consequence:</em> Rules out building any surface for inspecting or moderating sessions during the exhibition. Extraction is a query against the store; pruning and reset are, respectively, a targeted and a bulk delete against the same store; backup is a file-level snapshot; pruning and reset are guarded by an explicit confirmation flag rather than by any authentication this system otherwise has no use for (<a href="#C-03">C-03: The operator path is not publicly reachable</a>).<br>
-<em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03: Build effort is capped and the piece is expendable</a></p>
+<em>Consequence:</em> Rules out building any surface for inspecting or moderating sessions during the exhibition. Extraction is a query against the store; pruning and reset are, respectively, a targeted and a bulk delete against the same store; backup is a file-level snapshot; pruning and reset are guarded by an explicit confirmation flag rather than by any authentication this system otherwise has no use for (<a href="#C-03">C-03 The operator path is not publicly reachable</a>).<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a></p>
 </div>
 <div class="paragraph">
 <p><strong><a id="C-05"></a>C-05 — Attempts to bypass the Sparring stance are not filtered</strong> <em>(Business)</em><br>
-<em>Source:</em> <a href="L2-system-design-concept.html#AP-07">AP-07: Attempts to argue the Sparring partner out of its</a>.<br>
-<em>Applies to:</em> <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a>.<br>
-<em>Acceptance criteria:</em> The classification instruction distinguishes hostility directed at the Sparring partner (suitable, however extreme the tone) from harmful content targeting a real person or group (targets-real-person). A visitor arguing the Sparring partner out of its position, however hostile, produces a suitable classification. The instruction also states the exercise&#8217;s actual subject matter explicitly (<a href="#TF-02">TF-02: Assess a contribution for projection suitability</a>) — necessary alongside the target-based distinction, not instead of it; found missing in testing, where its absence alone caused on-topic contributions to fail this same acceptance criterion from the other direction.<br>
-<em>Consequence:</em> There is no off-topic filter of any kind — disengagement (spam, unrelated chat) is not classified or withheld. Sessions in which the friction is successfully talked away are retained and projected like any other (subject to the visitor&#8217;s own projection consent, <a href="L2-system-design-concept.html#SC-05">SC-05: Retention requires consent; projection requires</a>).<br>
+<em>Source:</em> <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a>.<br>
+<em>Applies to:</em> <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>.<br>
+<em>Acceptance criteria:</em> The classification instruction distinguishes hostility directed at the Sparring partner (suitable, however extreme the tone) from harmful content targeting a real person or group (targets-real-person). A visitor arguing the Sparring partner out of its position, however hostile, produces a suitable classification. The instruction also states the exercise&#8217;s actual subject matter explicitly (<a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>) — necessary alongside the target-based distinction, not instead of it; found missing in testing, where its absence alone caused on-topic contributions to fail this same acceptance criterion from the other direction.<br>
+<em>Consequence:</em> There is no off-topic filter of any kind — disengagement (spam, unrelated chat) is not classified or withheld. Sessions in which the friction is successfully talked away are retained and projected like any other (subject to the visitor&#8217;s own projection consent, <a href="L2-system-design-concept.html#SC-05">SC-05 Retention requires consent; projection requires</a>).<br>
 <em>Element specific:</em> Yes</p>
 </div>
 <div class="paragraph">
 <p><strong><a id="C-06"></a>C-06 — Classifier input is untrusted data, not instruction</strong> <em>(Security)</em><br>
 <em>Source:</em> this review.<br>
-<em>Applies to:</em> <a href="#TF-02">TF-02: Assess a contribution for projection suitability</a>.<br>
+<em>Applies to:</em> <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>.<br>
 <em>Acceptance criteria:</em> The contribution text is delimited and labeled as data in the classification prompt, and delimiter characters that could close that boundary are stripped from the contribution before assembly.<br>
-<em>Consequence:</em> Distinct from <a href="#C-05">C-05: Attempts to bypass the Sparring stance are not filtered</a> — that constraint accepts persona-steering as the exhibit&#8217;s own subject; this one closes the separate case of a contribution engineered to flip the moderation verdict itself, which has no comparable justification for staying open.<br>
+<em>Consequence:</em> Distinct from <a href="#C-05">C-05 Attempts to bypass the Sparring stance are not filtered</a> — that constraint accepts persona-steering as the exhibit&#8217;s own subject; this one closes the separate case of a contribution engineered to flip the moderation verdict itself, which has no comparable justification for staying open.<br>
 <em>Element specific:</em> Yes</p>
 </div>
 </div>
@@ -1285,7 +1285,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:07:50 +0200
+Last updated 2026-08-20 21:09:10 +0200
 </div>
 </div>
 </body>
