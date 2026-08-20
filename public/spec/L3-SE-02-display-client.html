@@ -467,10 +467,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_open_decisions">3.2. Open decisions</a></li>
 </ul>
 </li>
-<li><a href="#_technical_functions">4. Technical functions</a></li>
+<li><a href="#_technical_functions">4. Technical functions</a>
+<ul class="sectlevel2">
+<li><a href="#_tf_01_retrieve_display_material">4.1. TF-01 Retrieve display material</a></li>
+<li><a href="#_tf_02_reconcile_against_what_is_displayed">4.2. TF-02 Reconcile against what is displayed</a></li>
+<li><a href="#_tf_03_fit_an_item_to_the_available_space">4.3. TF-03 Fit an item to the available space</a></li>
+<li><a href="#_tf_04_render_the_surface">4.4. TF-04 Render the surface</a></li>
+</ul>
+</li>
 <li><a href="#_technical_interfaces_inbound">5. Technical interfaces (inbound)</a></li>
-<li><a href="#_technical_interfaces_outbound">6. Technical interfaces (outbound)</a></li>
-<li><a href="#_entities">7. Entities</a></li>
+<li><a href="#_technical_interfaces_outbound">6. Technical interfaces (outbound)</a>
+<ul class="sectlevel2">
+<li><a href="#_to_01_retrieve_display_material">6.1. TO-01 Retrieve display material</a></li>
+</ul>
+</li>
+<li><a href="#_entities">7. Entities</a>
+<ul class="sectlevel2">
+<li><a href="#_e_01_displayed_material">7.1. E-01 Displayed material</a></li>
+</ul>
+</li>
 <li><a href="#_quality_requirements">8. Quality requirements</a>
 <ul class="sectlevel2">
 <li><a href="#_qr_01_readable_at_exhibition_viewing_distance_usability">8.1. QR-01 Readable at exhibition viewing distance <em>(Usability)</em></a></li>
@@ -757,9 +772,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_technical_functions"><a class="anchor" href="#_technical_functions"></a>4. Technical functions</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_tf_01_retrieve_display_material"><a class="anchor" href="#_tf_01_retrieve_display_material"></a>4.1. <a id="TF-01"></a>TF-01 Retrieve display material</h3>
 <div class="paragraph">
-<p><strong><a id="TF-01"></a>TF-01 Retrieve display material</strong><br>
-<em>Detail level:</em> Stepwise<br>
+<p><em>Detail level:</em> Stepwise<br>
 <em>Achieves:</em> <a href="#G-02">G-02 Remain populated at all times</a>, <a href="#G-03">G-03 Stay readable and stable without attention</a></p>
 </div>
 <div class="ulist">
@@ -785,9 +801,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_tf_02_reconcile_against_what_is_displayed"><a class="anchor" href="#_tf_02_reconcile_against_what_is_displayed"></a>4.2. <a id="TF-02"></a>TF-02 Reconcile against what is displayed</h3>
 <div class="paragraph">
-<p><strong><a id="TF-02"></a>TF-02 Reconcile against what is displayed</strong><br>
-<em>Detail level:</em> Stepwise<br>
+<p><em>Detail level:</em> Stepwise<br>
 <em>Achieves:</em> <a href="#G-03">G-03 Stay readable and stable without attention</a></p>
 </div>
 <div class="paragraph">
@@ -809,17 +827,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_tf_03_fit_an_item_to_the_available_space"><a class="anchor" href="#_tf_03_fit_an_item_to_the_available_space"></a>4.3. <a id="TF-03"></a>TF-03 Fit an item to the available space</h3>
 <div class="paragraph">
-<p><strong><a id="TF-03"></a>TF-03 Fit an item to the available space</strong><br>
-<em>Detail level:</em> Narrative<br>
+<p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#G-01">G-01 Make turn-taking visible to people who are not</a></p>
 </div>
 <div class="paragraph">
 <p>Trims an item&#8217;s contribution and response so that the item occupies its allotted space without overflow, preserving enough of both halves that the exchange still reads as an exchange. Trimming only one side would leave a challenge with no visible provocation, which defeats <a href="#G-01">G-01 Make turn-taking visible to people who are not</a>. The initial approach is a character bound per side; rendered-height measurement is the fallback if that proves inadequate (<a href="#TBC-05">TBC-05 Item count and truncation.</a>).</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_tf_04_render_the_surface"><a class="anchor" href="#_tf_04_render_the_surface"></a>4.4. <a id="TF-04"></a>TF-04 Render the surface</h3>
 <div class="paragraph">
-<p><strong><a id="TF-04"></a>TF-04 Render the surface</strong><br>
-<em>Detail level:</em> Narrative<br>
+<p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#G-04">G-04 Distinguish concurrent visitors from one another</a></p>
 </div>
 <div class="paragraph">
@@ -829,6 +851,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The entry transition is restricted to opacity and transform, and applies only to a node <a href="#TF-02">TF-02 Reconcile against what is displayed</a> placed in the add set — never to a node <a href="#TF-02">TF-02 Reconcile against what is displayed</a> placed in the update set. A node in the update set instead gets a brief in-place pulse (also transform-only) on the same node, marking that its content changed without re-adding or moving it. Both are compositor-only, so neither an entering nor an updating item can shift or redraw any other item on the surface, which is what keeps this consistent with <a href="#QR-02">QR-02 Unchanged content does not redraw</a> rather than in tension with it — <a href="#QR-02">QR-02 Unchanged content does not redraw</a> protects <em>other</em> items from disturbance, not whether a changed item itself may carry a cue. A session occupies one node for its lifetime: only its first exchange goes through the add path; every exchange after that is an update to that same node. No sound accompanies this element: it runs unattended (<a href="#QR-03">QR-03 Runs unattended for the full opening period</a>), with no user gesture available to unlock audio playback.</p>
 </div>
 <hr>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -843,9 +866,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_technical_interfaces_outbound"><a class="anchor" href="#_technical_interfaces_outbound"></a>6. Technical interfaces (outbound)</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_to_01_retrieve_display_material"><a class="anchor" href="#_to_01_retrieve_display_material"></a>6.1. <a id="TO-01"></a>TO-01 Retrieve display material</h3>
 <div class="paragraph">
-<p><strong><a id="TO-01"></a>TO-01 Retrieve display material</strong><br>
-<em>Statement:</em> This interface obtains the set of sessions currently eligible for projection by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used on every polling cycle.<br>
+<p><em>Statement:</em> This interface obtains the set of sessions currently eligible for projection by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used on every polling cycle.<br>
 <em>Input:</em> None. The element requests current material and does not parameterise the request, so that item selection remains a backend decision and this element carries no policy.<br>
 <em>Output:</em> An ordered list of items, each carrying a session identifier, a scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency marker.<br>
 <em>Error cases:</em> Service unavailable. Malformed or unexpected response shape.<br>
@@ -866,12 +890,14 @@ No <code>Calls → PE-</code> relation applies. This element reaches no partner 
 <hr>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_entities"><a class="anchor" href="#_entities"></a>7. Entities</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_e_01_displayed_material"><a class="anchor" href="#_e_01_displayed_material"></a>7.1. <a id="E-01"></a>E-01 Displayed material</h3>
 <div class="paragraph">
-<p><strong><a id="E-01"></a>E-01 Displayed material</strong><br>
-<em>Persistence:</em> In-memory. Held only to support reconciliation. Lost on reload and rebuilt on the next cycle, which is acceptable because a reload costs one polling interval.<br>
+<p><em>Persistence:</em> In-memory. Held only to support reconciliation. Lost on reload and rebuilt on the next cycle, which is acceptable because a reload costs one polling interval.<br>
 <em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01 Sparring session</a>, <a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a> (partially; a display-only reconciliation cache, not authoritative — see <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s <a href="L3-SE-03-backend-service.html#E-01">E-01 Session</a>/<a href="L3-SE-03-backend-service.html#E-02">E-02 Exchange</a>)</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -949,6 +975,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </table>
 </div>
 <hr>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1084,7 +1111,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:35:48 +0200
+Last updated 2026-08-20 21:45:59 +0200
 </div>
 </div>
 </body>

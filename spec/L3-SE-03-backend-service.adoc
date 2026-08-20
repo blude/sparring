@@ -92,7 +92,8 @@ Not applicable. This element presents no user interface. xref:L2-system-design-c
 
 == 4. Technical functions
 
-*[[TF-01]]TF-01 Process a visitor turn* +
+=== [[TF-01]]TF-01 Process a visitor turn
+
 _Detail level:_ Stepwise +
 _Achieves:_ <<G-01,G-01 Produce Sparring responses and hold every rule that>>, <<G-04,G-04 Decide what may be stored, and let the visitor's own>>, <<G-06,G-06 Absorb load and misuse without failing>>
 
@@ -116,7 +117,8 @@ The element's central function. Everything that happens between a visitor pressi
 - *[[FA-01-1]]FA-01-1* _(extends <<FS-01-8,FS-01-8>>)_ Provider rate limit, quota exhaustion, timeout, transport failure after retries, or content-policy refusal. All return a generation-failed condition to the caller and write nothing. Grouping is deliberate: the calling client takes the same action for every one of these, and distinguishing them would produce a taxonomy nobody acts on. The distinction is preserved in logs rather than in the response. _Outcome:_ Terminate.
 - *[[FA-01-2]]FA-01-2* _(extends <<FS-01-6,FS-01-6>>)_ The contribution is unsuitable. Unlike <<FA-01-1,FA-01-1>>, this is not terminal — the caller (xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client]) tells the visitor to edit and resubmit, and the input field re-enables with the text preserved. _Outcome:_ Resume.
 
-*[[TF-02]]TF-02 Assess a contribution for projection suitability* +
+=== [[TF-02]]TF-02 Assess a contribution for projection suitability
+
 _Detail level:_ Stepwise +
 _Achieves:_ <<G-04,G-04 Decide what may be stored, and let the visitor's own>>
 
@@ -132,13 +134,15 @@ IMPORTANT: A second distinction the instruction must also get right, found in te
 
 _Contains-personal-information_ covers names, contact details, and health, financial, or comparably personal circumstances. This case is expected to arise most often in exactly the situation xref:L2-system-design-concept.adoc#AP-07[AP-07 Attempts to argue the Sparring partner out of its] protects: a visitor under real pressure disclosing something real while trying to get the system to relent. That turn is rejected and not stored; the visitor edits it and continues — the session is not ended over it.
 
-*[[TF-03]]TF-03 Enforce request limits* +
+=== [[TF-03]]TF-03 Enforce request limits
+
 _Detail level:_ Narrative +
 _Achieves:_ <<G-06,G-06 Absorb load and misuse without failing>>
 
 Reads the current window for the request origin from <<E-03,E-03 Rate limit window>>, increments it, and reports whether the allowance is exceeded. Windows are keyed on a hashed origin (<<E-03.1,E-03.1 originHash>>), so no raw address is stored. Expired windows are reset in place rather than swept by a separate process, which avoids a scheduled job on an unattended host. Threshold and window length are TBC, to be set below the provider's own limits per xref:L2-system-design-concept.adoc#SC-04[SC-04 Generation is rate-limited and metered by the provider]. No goal relation beyond <<G-06,G-06 Absorb load and misuse without failing>>: this is a guard, not business logic.
 
-*[[TF-04]]TF-04 Assemble display material* +
+=== [[TF-04]]TF-04 Assemble display material
+
 _Detail level:_ Stepwise +
 _Achieves:_ <<G-05,G-05 Keep the display surface populated>>, <<G-04,G-04 Decide what may be stored, and let the visitor's own>>
 
@@ -150,13 +154,15 @@ Produces the ordered items the projection renders. Every decision about what app
 - *[[FS-04-4]]FS-04-4* _(Entity-access)_ For each selected session, read its most recent exchange from <<E-02,E-02 Exchange>> (<<E-02.3,E-02.3 visitorContribution>>, <<E-02.4,E-02.4 sparringResponse>>). Which exchange to select is an open decision (xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] xref:L3-SE-02-display-client.adoc#TBC-04[TBC-04 Which exchange pair per session.]); it is made here and changing it does not affect xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client].
 - *[[FS-04-5]]FS-04-5* _(Data-operation)_ Build each item from the session's scenario (<<E-01.5,E-01.5 scenario>>), the exchange pair, the origin (<<E-01.4,E-01.4 origin>>), and a recency position. Return the ordered list.
 
-*[[TF-05]]TF-05 Derive a scenario statement* +
+=== [[TF-05]]TF-05 Derive a scenario statement
+
 _Detail level:_ Narrative +
 _Achieves:_ <<G-05,G-05 Keep the display surface populated>>
 
 Produces the short context line shown above an exchange, from the session's first visitor contribution. The initial approach is to trim that contribution to a bounded length, which costs nothing. If opening contributions prove to read badly as context lines when checked against pilot transcripts, the fallback is a single generation call via <<TO-02,TO-02 Request a classification>>, with the result written once to <<E-01.5,E-01.5 scenario>> and never recomputed. Computing it per render would multiply provider cost by the polling rate, which is the specific mistake this note exists to prevent.
 
-*[[TF-06]]TF-06 Import pilot transcripts* +
+=== [[TF-06]]TF-06 Import pilot transcripts
+
 _Detail level:_ Stepwise +
 _Achieves:_ <<G-03,G-03 Persist every interaction with its origin fixed at>>, <<G-05,G-05 Keep the display surface populated>>
 
@@ -170,7 +176,8 @@ _Achieves:_ <<G-03,G-03 Persist every interaction with its origin fixed at>>, <<
 
 - *[[FA-06-1]]FA-06-1* _(extends <<FS-06-1,FS-06-1>>)_ A transcript is malformed. It is recorded as rejected and the import continues with the remainder. _Outcome:_ Resume.
 
-*[[TF-07]]TF-07 Refine a session title* +
+=== [[TF-07]]TF-07 Refine a session title
+
 _Detail level:_ Narrative
 
 Called once per session by <<TI-06,TI-06 Refine a session title>>, after the session's first exchange exists. Attempts a short (≤38 character) title via <<TO-02,TO-02 Request a classification>> with a title-generation instruction; on any failure (timeout, malformed response, or any other exception) falls back to the same trim-based derivation <<TF-05,TF-05 Derive a scenario statement>> uses for the scenario statement, just capped at 38 characters instead of <<TF-05,TF-05 Derive a scenario statement>>'s own bound. Either path always produces a usable title — there is no "couldn't generate one" outcome from the caller's point of view. Writes the result to <<E-01.12,E-01.12 title>> once and never recomputes it: called again for a session that already has one, it returns the stored value unchanged rather than repeating the provider call. No goal relation: like <<TF-04,TF-04 Assemble display material>> in xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client], this is presentation logic serving xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client]'s header, not a stated business goal.
@@ -179,7 +186,8 @@ Called once per session by <<TI-06,TI-06 Refine a session title>>, after the ses
 
 == Technical interfaces (inbound)
 
-*[[TI-01]]TI-01 Open a session* +
+=== [[TI-01]]TI-01 Open a session
+
 _Call type:_ Synchronous +
 _Calling elements:_ xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] (xref:L3-SE-01-input-client.adoc#TO-01[TO-01 Open a session]) +
 _Input:_ Three consent booleans, optional as a group; absent on creation, all three required together on the decision call: agreement to take part, retention consent, projection consent. +
@@ -191,7 +199,8 @@ _Error cases:_
 - Agreement to take part is false or absent: rejected before it becomes a stored state (unlike the other two, which are legitimate declines) — this is what makes participation itself, as opposed to retention or projection, a precondition rather than an opt-out.
 - Session unknown: the identifier supplied with a decision does not resolve.
 
-*[[TI-02]]TI-02 Submit a contribution* +
+=== [[TI-02]]TI-02 Submit a contribution
+
 _Call type:_ Synchronous +
 _Calling elements:_ xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] (xref:L3-SE-01-input-client.adoc#TO-02[TO-02 Submit a contribution]) +
 _Input:_ Session identifier (string, required), contribution text (string, required). +
@@ -208,7 +217,8 @@ _Error cases:_
 
 IMPORTANT: Unlike the earlier design this superseded, the response's condition list is not silent about suitability — a flagged contribution is a distinct, visible outcome (<<FA-01-2,FA-01-2>>), because the visitor needs to know to edit their message. What the response never carries is which specific field or word triggered the flag, or anything about sessions other than the caller's own. The visitor-facing UI does, deliberately, distinguish two broad categories — personal information versus inappropriate content — from the moderation reason; that coarse hint is not the same as exposing the exact classification or wordlist match, which stays debug-only (xref:L3-SE-01-input-client.adoc#QR-06[QR-06 Diagnostic detail is available to an operator] in L3-SE-01-input-client.adoc).
 
-*[[TI-03]]TI-03 Retrieve a session* +
+=== [[TI-03]]TI-03 Retrieve a session
+
 _Call type:_ Synchronous +
 _Calling elements:_ xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] (xref:L3-SE-01-input-client.adoc#TO-03[TO-03 Retrieve a session]) +
 _Input:_ Session identifier (string, required). +
@@ -218,7 +228,8 @@ _Error cases:_
 
 - Session unknown or expired.
 
-*[[TI-04]]TI-04 Retrieve display material* +
+=== [[TI-04]]TI-04 Retrieve display material
+
 _Call type:_ Synchronous +
 _Calling elements:_ xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] (xref:L3-SE-02-display-client.adoc#TO-01[TO-01 Retrieve display material]) +
 _Input:_ None. +
@@ -228,7 +239,8 @@ _Error cases:_ None specific to this interface. An empty list is a valid respons
 
 _This interface takes no parameters by design. Item count, ordering, exchange selection, and pilot fallback are all decided in <<TF-04,TF-04 Assemble display material>>, so that a change to any of them requires no change in xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] and no coordination between the two._
 
-*[[TI-05]]TI-05 Import pilot material* +
+=== [[TI-05]]TI-05 Import pilot material
+
 _Call type:_ Synchronous +
 _Calling elements:_ xref:L2-system-design-concept.adoc#UT-03[UT-03 Operator], directly on the host. +
 _Input:_ A structured transcript file. +
@@ -239,7 +251,8 @@ _Error cases:_
 - File unreadable or unparseable in full.
 - Individual transcript malformed, reported per transcript rather than as a failure of the call.
 
-*[[TI-06]]TI-06 Refine a session title* +
+=== [[TI-06]]TI-06 Refine a session title
+
 _Call type:_ Synchronous +
 _Calling elements:_ xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] (xref:L3-SE-01-input-client.adoc#TO-04[TO-04 Refine a session title]) +
 _Input:_ Session identifier (string, required). +
@@ -255,7 +268,8 @@ _Error cases:_
 
 == Technical interfaces (outbound)
 
-*[[TO-01]]TO-01 Request a Sparring response* +
+=== [[TO-01]]TO-01 Request a Sparring response
+
 _Statement:_ This interface obtains a Sparring partner reply to a visitor contribution by calling the language generation API (xref:L2-system-design-concept.adoc#PE-01[PE-01 Language generation API]). Used for every visitor turn. The system prompt instructs the model to reply in whichever language (English or German) the visitor's own contribution is written in — a prompt-level behavior, not a parameter of this interface, and independent of xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client]'s UI locale (xref:L3-SE-01-input-client.adoc#QR-08[QR-08 Interface language is selectable and matches on first] in L3-SE-01-input-client.adoc). +
 _Input:_ The Sparring system prompt, the session's prior exchanges as conversational context, the new visitor contribution, and generation parameters. +
 _Output:_ Response text. +
@@ -263,7 +277,8 @@ _Error cases:_ Rate limit exceeded. Quota exhausted. Content-policy refusal. Pro
 _Authoritative spec:_ Provider documentation. No element in this system holds the authoritative specification. +
 _Calls:_ xref:L2-system-design-concept.adoc#PE-01[PE-01 Language generation API]
 
-*[[TO-02]]TO-02 Request a classification* +
+=== [[TO-02]]TO-02 Request a classification
+
 _Statement:_ This interface obtains a suitability classification, a scenario statement, or a session title for a visitor contribution, by calling the language generation API (xref:L2-system-design-concept.adoc#PE-01[PE-01 Language generation API]). Used by <<TF-02,TF-02 Assess a contribution for projection suitability>> on every turn, by <<TF-05,TF-05 Derive a scenario statement>> only if the trimmed-contribution approach proves inadequate, and by <<TF-07,TF-07 Refine a session title>> once per session. +
 _Input:_ The contribution text and a classification instruction, a summarisation instruction, or a title-generation instruction. +
 _Output:_ A classification value, a short statement, or a short title. +
@@ -277,7 +292,8 @@ NOTE: Call behaviour is specified on the calling function steps (<<TF-01,TF-01 P
 
 == Entities
 
-*[[E-01]]E-01 Session* +
+=== [[E-01]]E-01 Session
+
 _Persistence:_ Persistent +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session]
 
@@ -300,7 +316,8 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session]
 
 _E-01.6, <<E-01.7,E-01.7 consentGranted>>, and <<E-01.11,E-01.11 projectionConsent>> govern three separate things: whether the public surface may currently show this session, whether it may be kept after the exhibition, and the visitor's own projection choice — the first is now derived from the third, the second stays fully independent of both. <<E-01.10,E-01.10 tosAgreed>> is different in kind from the other two consent fields: it gates participation itself rather than a data-processing purpose, which is why it is never stored as a decline (see L1 xref:L1-solution-design-concept.adoc#BC-02[BC-02 Public user-generated content is subject to data], L2 xref:L2-system-design-concept.adoc#SC-05[SC-05 Retention requires consent; projection requires])._
 
-*[[E-02]]E-02 Exchange* +
+=== [[E-02]]E-02 Exchange
+
 _Persistence:_ Persistent +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange]
 
@@ -317,7 +334,8 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange]
 
 NOTE: The pair is stored as one record rather than as two turn records. This follows the display unit (xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange]) and removes the possibility of a stored contribution with no response, which is the state a failed generation would otherwise leave behind.
 
-*[[E-03]]E-03 Rate limit window* +
+=== [[E-03]]E-03 Rate limit window
+
 _Persistence:_ Transient. Reset in place on expiry rather than swept.
 
 [options="header"]

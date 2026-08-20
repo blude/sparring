@@ -139,7 +139,8 @@ Masonry has its own version of "does everyone get seen," distinct from <<TBC-02,
 
 == Technical functions
 
-*[[TF-01]]TF-01 Retrieve display material* +
+=== [[TF-01]]TF-01 Retrieve display material
+
 _Detail level:_ Stepwise +
 _Achieves:_ <<G-02,G-02 Remain populated at all times>>, <<G-03,G-03 Stay readable and stable without attention>>
 
@@ -151,7 +152,8 @@ _Achieves:_ <<G-02,G-02 Remain populated at all times>>, <<G-03,G-03 Stay readab
 
 - *[[FA-01-1]]FA-01-1* _(extends <<FS-01-1,FS-01-1>>)_ Timeout, transport failure, or an unexpected status. Return the currently held material, increment the failure count, and take no other action. Grouping is intentional: the element's response is the same for every failure mode. _Outcome:_ Resume.
 
-*[[TF-02]]TF-02 Reconcile against what is displayed* +
+=== [[TF-02]]TF-02 Reconcile against what is displayed
+
 _Detail level:_ Stepwise +
 _Achieves:_ <<G-03,G-03 Stay readable and stable without attention>>
 
@@ -162,13 +164,15 @@ Determines the minimum change needed, so that unchanged items are not redrawn. T
 - *[[FS-02-3]]FS-02-3* _(Data-operation)_ Produce three sets: items to add, items whose content has changed, and items to remove. An item present in both with identical content appears in none of them.
 - *[[FS-02-4]]FS-02-4* _(Entity-access)_ Write the new set to <<E-01,E-01 Displayed material>> once the changes have been applied.
 
-*[[TF-03]]TF-03 Fit an item to the available space* +
+=== [[TF-03]]TF-03 Fit an item to the available space
+
 _Detail level:_ Narrative +
 _Achieves:_ <<G-01,G-01 Make turn-taking visible to people who are not>>
 
 Trims an item's contribution and response so that the item occupies its allotted space without overflow, preserving enough of both halves that the exchange still reads as an exchange. Trimming only one side would leave a challenge with no visible provocation, which defeats <<G-01,G-01 Make turn-taking visible to people who are not>>. The initial approach is a character bound per side; rendered-height measurement is the fallback if that proves inadequate (<<TBC-05,TBC-05 Item count and truncation.>>).
 
-*[[TF-04]]TF-04 Render the surface* +
+=== [[TF-04]]TF-04 Render the surface
+
 _Detail level:_ Narrative +
 _Achieves:_ <<G-04,G-04 Distinguish concurrent visitors from one another>>
 
@@ -186,7 +190,8 @@ None. No element calls this one. It is a leaf that only reads.
 
 == Technical interfaces (outbound)
 
-*[[TO-01]]TO-01 Retrieve display material* +
+=== [[TO-01]]TO-01 Retrieve display material
+
 _Statement:_ This interface obtains the set of sessions currently eligible for projection by calling the backend service (xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]). Used on every polling cycle. +
 _Input:_ None. The element requests current material and does not parameterise the request, so that item selection remains a backend decision and this element carries no policy. +
 _Output:_ An ordered list of items, each carrying a session identifier, a scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency marker. +
@@ -199,7 +204,8 @@ NOTE: No `Calls → PE-` relation applies. This element reaches no partner eleme
 
 == Entities
 
-*[[E-01]]E-01 Displayed material* +
+=== [[E-01]]E-01 Displayed material
+
 _Persistence:_ In-memory. Held only to support reconciliation. Lost on reload and rebuilt on the next cycle, which is acceptable because a reload costs one polling interval. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session], xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange] (partially; a display-only reconciliation cache, not authoritative — see xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#E-01[E-01 Session]/xref:L3-SE-03-backend-service.adoc#E-02[E-02 Exchange])
 

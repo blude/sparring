@@ -202,7 +202,8 @@ None. The element has one surface. The address carries the session identifier bu
 
 == Technical functions
 
-*[[TF-01]]TF-01 Establish the session* +
+=== [[TF-01]]TF-01 Establish the session
+
 _Detail level:_ Stepwise +
 _Achieves:_ <<G-01,G-01 Reach a working input surface with nothing but a scan>>, <<G-02,G-02 Hold the visitor's place through interruption>>
 
@@ -216,13 +217,15 @@ Determines whether a session already exists and produces one either way, so that
 
 - *[[FA-01-1]]FA-01-1* _(extends <<FS-01-2,FS-01-2>>)_ The identifier is unknown or expired. Discard it and continue at <<FS-01-3,FS-01-3>>. _Outcome:_ Resume.
 
-*[[TF-02]]TF-02 Record the consent decision* +
+=== [[TF-02]]TF-02 Record the consent decision
+
 _Detail level:_ Narrative +
 _Achieves:_ <<G-01,G-01 Reach a working input surface with nothing but a scan>>
 
 Sends the visitor's three decisions — agreement to take part, retention, projection — to xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] via <<TO-01,TO-01 Open a session>> and holds the returned confirmation in <<E-01,E-01 Session view state>>. Synchronous, two attempts, 10 second timeout per attempt. Exhausted attempts leave the session unopened and surface a failure, because opening the input field without a recorded decision would retain content the visitor never agreed to. A declined-participation response is not a transport failure and is handled separately (<<EX-01-3,EX-01-3>>): the field simply stays unusable. On a successful decision, a one-time title-card animation plays (<<QR-07,QR-07 Motion respects a reduced-motion preference>>) — purely presentational, no goal relation, and never a condition for the field becoming usable. If the address also carries a recognized opening-prompt identifier — a fixed set authored in code, one per QR code printed for the exhibition — a successful decision additionally triggers <<TF-03,TF-03 Submit a contribution>> once, automatically, with the corresponding pre-authored text as the contribution, before the visitor has typed anything. An unrecognized or absent identifier takes no action; the field opens empty as usual.
 
-*[[TF-03]]TF-03 Submit a contribution* +
+=== [[TF-03]]TF-03 Submit a contribution
+
 _Detail level:_ Stepwise +
 _Achieves:_ <<G-01,G-01 Reach a working input surface with nothing but a scan>>, <<G-03,G-03 Make waiting and failure legible>>
 
@@ -234,18 +237,21 @@ _Achieves:_ <<G-01,G-01 Reach a working input surface with nothing but a scan>>,
 
 - *[[FA-03-1]]FA-03-1* _(extends <<FS-03-2,FS-03-2>>)_ Any reported condition is returned unchanged to the caller, which decides what <<UI-01,UI-01 Session surface>> shows. Grouping is intentional: this function does not distinguish between them because it takes the same action for all. _Outcome:_ Resume.
 
-*[[TF-04]]TF-04 Render the exchange history* +
+=== [[TF-04]]TF-04 Render the exchange history
+
 _Detail level:_ Narrative
 
 Produces the visible history from <<E-01,E-01 Session view state>>. Visitor and Sparring contributions are visually distinguished. Content from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] is inserted as text, never as markup, so that anything a visitor types cannot alter the surface. Submission and its outcome additionally carry a non-blocking presentational layer — a brief motion and sound cue on submit, and on a rejected/failed result — layered on top of this rendering, never gating it (<<QR-07,QR-07 Motion respects a reduced-motion preference>>). No goal relation: this is presentation logic serving use cases that already reference the goals.
 
-*[[TF-05]]TF-05 Derive visitor identity* +
+=== [[TF-05]]TF-05 Derive visitor identity
+
 _Detail level:_ Narrative +
 _Achieves:_ <<G-05,G-05 Give the visitor a light identity>>
 
 Computes a nickname and an avatar emoji as a pure function of the session identifier (<<E-01.1,E-01.1 sessionId>>) — no call to xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service], nothing written anywhere. The same derivation runs in xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client], so a visitor's alias reads identically wherever it appears. Consistent with xref:L2-system-design-concept.adoc#AP-03[AP-03 Session identity travels in the URL; no accounts]: identity stays derived from what already travels in the address, never a new piece of state.
 
-*[[TF-06]]TF-06 Refine the session title* +
+=== [[TF-06]]TF-06 Refine the session title
+
 _Detail level:_ Narrative
 
 Once the first exchange completes (<<UC-02,UC-02 Contribute a turn>>), the element calls <<TO-04,TO-04 Refine a session title>> with the session identifier to request a refined title, and replaces the header's default "Untitled" state with it when one comes back. Deliberately non-blocking and best-effort: it is not a step of <<UC-02,UC-02 Contribute a turn>>'s own sequence, carries no wait bound, and never gates the field or the response the visitor is watching for. Its failure (network, timeout, malformed response) is invisible rather than reported — the header simply stays "Untitled," unlike <<QR-02,QR-02 Every failure produces a statement>>'s failure-statement requirement, which is about the turn itself, not this. No goal relation: like <<TF-04,TF-04 Render the exchange history>>, this is presentation logic layered on a use case that already references the goals.
@@ -260,28 +266,32 @@ None. The element provides no interface to other elements. It is reached by a pe
 
 == Technical interfaces (outbound)
 
-*[[TO-01]]TO-01 Open a session* +
+=== [[TO-01]]TO-01 Open a session
+
 _Statement:_ This interface creates a session and records the consent decision by calling the backend service (xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]). Used for establishing a session before any contribution is possible. +
 _Input:_ Three consent booleans — agreement to take part, retention, projection — required together on the decision call; all absent on the creation call. +
 _Output:_ Session identifier, turn allowance, session state. +
 _Error cases:_ Service unavailable. Malformed request. Declined to agree to take part — distinct from a malformed request, since the shape is valid but the value is a hard no. +
 _Authoritative spec:_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] element design, xref:L3-SE-03-backend-service.adoc#TI-01[TI-01 Open a session].
 
-*[[TO-02]]TO-02 Submit a contribution* +
+=== [[TO-02]]TO-02 Submit a contribution
+
 _Statement:_ This interface submits a visitor contribution and obtains the Sparring response by calling the backend service (xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]). Used for every turn after the session is open. +
 _Input:_ Session identifier, contribution text. +
 _Output:_ The completed exchange, updated remaining turn count, session state. +
 _Error cases:_ Request limit reached. Session turn limit reached. Contribution flagged as unsuitable — the visitor edits and resubmits; the session is unaffected. Generation failed. Session unknown or expired. Contribution rejected as malformed or over-length. +
 _Authoritative spec:_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] element design, xref:L3-SE-03-backend-service.adoc#TI-02[TI-02 Submit a contribution].
 
-*[[TO-03]]TO-03 Retrieve a session* +
+=== [[TO-03]]TO-03 Retrieve a session
+
 _Statement:_ This interface fetches an existing session and its exchanges by calling the backend service (xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]). Used for restoring state after an interruption. +
 _Input:_ Session identifier. +
 _Output:_ Session state, turn allowance and remaining count, ordered exchanges. +
 _Error cases:_ Session unknown or expired. Service unavailable. +
 _Authoritative spec:_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] element design, xref:L3-SE-03-backend-service.adoc#TI-03[TI-03 Retrieve a session].
 
-*[[TO-04]]TO-04 Refine a session title* +
+=== [[TO-04]]TO-04 Refine a session title
+
 _Statement:_ This interface requests a short, refined title for a session's first contribution by calling the backend service (xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]). Used once per session, after the first exchange completes. +
 _Input:_ Session identifier. +
 _Output:_ Refined title (string) — always a usable value when the call succeeds; xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] falls back to a trim-based title internally rather than ever returning failure for "couldn't generate one" (see xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] xref:L3-SE-03-backend-service.adoc#TF-07[TF-07 Refine a session title]). +
@@ -294,7 +304,8 @@ NOTE: No `Calls → PE-` relation applies. This element reaches no partner eleme
 
 == Entities
 
-*[[E-01]]E-01 Session view state* +
+=== [[E-01]]E-01 Session view state
+
 _Persistence:_ In-memory. Discarded when the page unloads, and rebuilt from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] on the next load. Nothing is written to device storage. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session] (partially; the authoritative record is xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#E-01[E-01 Session])
 

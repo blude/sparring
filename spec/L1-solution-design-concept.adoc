@@ -64,14 +64,16 @@ _Rationale:_ This is explicitly secondary. The installation is an exhibition art
 
 == Value proposition
 
-*[[VP-01]]VP-01 Participating visitor* +
+=== [[VP-01]]VP-01 Participating visitor
+
 _Segment characteristics:_ Exhibition audience. Mixed background, largely non-expert in agentic AI. Attention measured in minutes, not hours. Arrives curious, not briefed. +
 _Value delivered:_ Experiences the difference between an AI that resolves a request and one that holds a position. Sees their own thinking reflected back as something worth contesting. Leaves with a felt reference point rather than a description. +
 _Pains addressed:_ Explanations of "productive friction" do not land exclusively as text on a wall panel. The concept is experiential and has, until now, required a scheduled session to convey. +
 _Current alternatives:_ Reading a printed exhibition text about the thesis, or watching a recorded demo video. +
 _Satisfies:_ <<BG-01,BG-01 Make Sparring's friction visible to an audience>>, <<BG-02,BG-02 Give visitors direct, unassisted first-hand experience>>
 
-*[[VP-02]]VP-02 Observing visitor (bystander)* +
+=== [[VP-02]]VP-02 Observing visitor (bystander)
+
 _Segment characteristics:_ Present in the room, not currently interacting. May be waiting, accompanying someone, or passing through. Engagement window of a few seconds. +
 _Value delivered:_ Can read a complete exchange without context or commitment. Understands what the piece does before deciding whether to participate. +
 _Pains addressed:_ Interactive pieces that only reward the person holding the device leave everyone else out of the work. +
@@ -97,22 +99,27 @@ flowchart LR
   VCA04 -.->|language generation| VCA05
 ----
 
-*[[VCA-01]]VCA-01 Participating visitor* _(Customer)_ +
+=== [[VCA-01]]VCA-01 Participating visitor _(Customer)_
+
 Receives the value described in <<VP-01,VP-01 Participating visitor>>. Interacts directly with <<VCA-04,VCA-04 The installation>> through their own device. +
 _Realises:_ <<VP-01,VP-01 Participating visitor>>
 
-*[[VCA-02]]VCA-02 Observing visitor* _(Customer)_ +
+=== [[VCA-02]]VCA-02 Observing visitor _(Customer)_
+
 Receives the value described in <<VP-02,VP-02 Observing visitor (bystander)>> through the projected surface of <<VCA-04,VCA-04 The installation>>, without interacting. +
 _Realises:_ <<VP-02,VP-02 Observing visitor (bystander)>>
 
-*[[VCA-03]]VCA-03 Thesis author / exhibitor* _(Organisation-internal)_ +
+=== [[VCA-03]]VCA-03 Thesis author / exhibitor _(Organisation-internal)_
+
 Provides the pilot session material that populates the installation before and between live sessions, and maintains the running system. Not present continuously during exhibition hours.
 
-*[[VCA-04]]VCA-04 The installation* _(Digital-element)_ +
+=== [[VCA-04]]VCA-04 The installation _(Digital-element)_
+
 The whole technical system, treated as one element at this level. The technical decomposition into clients and backend belongs at L2. +
 _Interacts with:_ <<VCA-01,VCA-01 Participating visitor>>, <<VCA-02,VCA-02 Observing visitor>>, <<VCA-03,VCA-03 Thesis author / exhibitor>>, <<VCA-05,VCA-05 LLM provider>>
 
-*[[VCA-05]]VCA-05 LLM provider* _(Organisation-external)_ +
+=== [[VCA-05]]VCA-05 LLM provider _(Organisation-external)_
+
 Supplies the language generation that produces Sparring responses. Not owned or controlled by the project. +
 _Realises:_ <<VP-01,VP-01 Participating visitor>>
 
@@ -120,22 +127,26 @@ _Realises:_ <<VP-01,VP-01 Participating visitor>>
 
 == Information architecture
 
-*[[BE-01]]BE-01 Sparring session* +
+=== [[BE-01]]BE-01 Sparring session
+
 One visitor's continuous engagement with the installation, from first turn to abandonment or turn cap. +
 _Key information:_ Origin (pilot or live), consent status, display eligibility, scenario label, start and last-activity time, turn count. Display eligibility is now set directly by the visitor's own projection consent (<<BE-04,BE-04 Consent record>>) rather than derived after the fact: a contribution unsuitable for projection is rejected before it is ever stored, so nothing stored is ever retroactively hidden. +
 _Associations:_ Contains many Exchanges (<<BE-02,BE-02 Exchange>>). Carries one Consent record (<<BE-04,BE-04 Consent record>>).
 
-*[[BE-02]]BE-02 Exchange* +
+=== [[BE-02]]BE-02 Exchange
+
 One visitor turn together with the Sparring partner's reply to it. The exchange, not the individual turn, is the unit that carries meaning: a reply without its prompt shows nothing about friction. +
 _Key information:_ Visitor contribution, Sparring contribution, position within the session, time. +
 _Associations:_ Belongs to a Session (<<BE-01,BE-01 Sparring session>>).
 
-*[[BE-03]]BE-03 Scenario* +
+=== [[BE-03]]BE-03 Scenario
+
 A short statement of what a session is about, giving a reader enough context to make sense of an isolated exchange. +
 _Key information:_ Summary text, derivation source (visitor's opening turn or generated label). +
 _Associations:_ Describes one Session (<<BE-01,BE-01 Sparring session>>).
 
-*[[BE-04]]BE-04 Consent record* +
+=== [[BE-04]]BE-04 Consent record
+
 Three independent decisions made together, once, before the session opens: agreement to the terms of participation (a precondition of using the piece at all, not a data-processing choice), consent to have the session retained and reviewed after the exhibition, and consent to have exchanges shown on the projection. The latter two are genuine opt-outs — declining either still lets the visitor spar. +
 _Key information:_ Each of the three, granted or withheld, and time of decision. +
 _Associations:_ Belongs to one Session (<<BE-01,BE-01 Sparring session>>).
