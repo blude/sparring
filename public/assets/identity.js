@@ -142,6 +142,11 @@ window.SparringIdentity = (function () {
         "Nijūgō",     // 二十号 - No. 20
     ];
 
+    const romanNumberals = [
+        "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+        "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX"
+    ];
+
     var AVATARS = ['🐣', '🦊', '🐼', '🐸', '🐢', '🦉', '🐙', '🐿️', '🦔', '🐝', '🦋', '🐳', '🦕', '🐧', '🐨', '🦄', '🦆', '🐲'];
 
     function seed(sessionId) {
@@ -165,7 +170,7 @@ window.SparringIdentity = (function () {
         var prefix = jiraiyaPrefixes[s % jiraiyaPrefixes.length];
         var role = japaneseRoles[Math.floor(s / jiraiyaPrefixes.length) % japaneseRoles.length];
         var properName = jiraiyaProperNames[Math.floor(s / (jiraiyaPrefixes.length * japaneseRoles.length)) % jiraiyaProperNames.length];
-        var number = japaneseNumbers[Math.floor(s / (jiraiyaPrefixes.length * japaneseRoles.length * jiraiyaProperNames.length)) % japaneseNumbers.length];
+        var number = romanNumberals[Math.floor(s / (jiraiyaPrefixes.length * japaneseRoles.length * jiraiyaProperNames.length)) % romanNumberals.length];
         return prefix + role + ' ' + properName + ' ' + number; // naive, by design: [prefix][role] [proper name] [number]
     }
 
