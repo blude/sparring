@@ -375,7 +375,7 @@ _Rationale:_ TODO.md's JUICYNESS requirement is explicitly presentational flair,
 === [[QR-08]]QR-08 Interface language is selectable and matches on first visit where possible _(Usability)_
 
 _Applies to:_ <<UI-01,UI-01 Session surface>> +
-_Acceptance criteria:_ The surface is available in English and German. On a first visit the interface language follows the device/browser's own language setting when it names a supported language, English otherwise; an explicit switch overrides this and persists across the session and future visits on the same device. The AI's own reply language is a separate behavior (<<TF-03,TF-03 Submit a contribution>>/prompt-level, see xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]) that follows what the visitor types, not this setting. +
+_Acceptance criteria:_ The surface is available in English and German. On a first visit the interface language follows the device/browser's own language setting when it names a supported language, English otherwise; an explicit switch overrides this and persists across the session and future visits on the same device. The AI's own reply language is a separate behavior (<<TF-03,TF-03 Submit a contribution>>/prompt-level, see xref:L3-SE-04-system-prompt.adoc#G-04[G-04 Match the visitor's reply language turn by] of xref:L2-system-design-concept.adoc#SE-04[SE-04 System prompt]) that follows what the visitor types, not this setting. +
 _Element specific:_ Yes
 
 '''

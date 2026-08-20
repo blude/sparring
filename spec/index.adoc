@@ -17,6 +17,7 @@ See `CLAUDE.md` for the framework note.
 * xref:L3-SE-01-input-client.adoc[L3 — Input Client (SE-01)] — the visitor-facing input surface.
 * xref:L3-SE-02-display-client.adoc[L3 — Display Client (SE-02)] — the projection surface.
 * xref:L3-SE-03-backend-service.adoc[L3 — Backend Service (SE-03)] — the stateful backend.
+* xref:L3-SE-04-system-prompt.adoc[L3 — System Prompt (SE-04)] — the instruction set governing every Sparring response.
 
 == Extra
 

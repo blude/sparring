@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="author" content="Sarah Puppin Pratti">
-<title>Sparring — Design Documentation</title>
+<title>Element Design Concept: System Prompt</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,7 +438,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Sparring — Design Documentation</h1>
+<h1>Element Design Concept: System Prompt</h1>
 <div class="details">
 <span id="author" class="author">Sarah Puppin Pratti</span><br>
 <span id="email" class="email"><a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de">sarah.puppinpratti001@stud.fh-dortmund.de</a></span><br>
@@ -448,8 +448,42 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_main_sections">1. Main Sections</a></li>
-<li><a href="#_extra">2. Extra</a></li>
+<li><a href="#_goals">1. Goals</a>
+<ul class="sectlevel2">
+<li><a href="#_g_01_hold_a_position_instead_of_resolving_the_request_for_the_visitor">1.1. G-01 Hold a position instead of resolving the request for the visitor</a></li>
+<li><a href="#_g_02_engage_the_specific_thing_the_participant_opens_with">1.2. G-02 Engage the specific thing the participant opens with</a></li>
+<li><a href="#_g_03_adapt_turn_by_turn_and_refuse_premature_closure">1.3. G-03 Adapt turn by turn and refuse premature closure</a></li>
+<li><a href="#_g_04_match_the_visitors_reply_language_turn_by_turn">1.4. G-04 Match the visitor&#8217;s reply language turn by turn</a></li>
+<li><a href="#_g_05_ground_responses_in_the_fh_dortmund_curriculum_and_named_design_traditions">1.5. G-05 Ground responses in the FH Dortmund curriculum and named design traditions</a></li>
+</ul>
+</li>
+<li><a href="#_use_cases">2. Use cases</a></li>
+<li><a href="#_user_interfaces">3. User interfaces</a></li>
+<li><a href="#_technical_functions">4. Technical functions</a>
+<ul class="sectlevel2">
+<li><a href="#_tf_01_run_the_pedagogical_engine_each_turn">4.1. TF-01 Run the pedagogical engine each turn</a></li>
+<li><a href="#_tf_02_work_with_boundary_objects">4.2. TF-02 Work with boundary objects</a></li>
+</ul>
+</li>
+<li><a href="#_entities">5. Entities</a>
+<ul class="sectlevel2">
+<li><a href="#_e_01_move_vocabulary">5.1. E-01 Move vocabulary</a></li>
+</ul>
+</li>
+<li><a href="#_quality_requirements">6. Quality requirements</a>
+<ul class="sectlevel2">
+<li><a href="#_qr_01_no_adjacent_turn_move_repetition_usability">6.1. QR-01 No adjacent-turn move repetition <em>(Usability)</em></a></li>
+<li><a href="#_qr_02_no_meta_commentary_narrating_its_own_technique_usability">6.2. QR-02 No meta-commentary narrating its own technique <em>(Usability)</em></a></li>
+<li><a href="#_qr_03_banned_vocabulary_never_appears_usability">6.3. QR-03 Banned vocabulary never appears <em>(Usability)</em></a></li>
+<li><a href="#_qr_04_reply_register_stays_short_usability">6.4. QR-04 Reply register stays short <em>(Usability)</em></a></li>
+</ul>
+</li>
+<li><a href="#_constraints">7. Constraints</a>
+<ul class="sectlevel2">
+<li><a href="#_c_01_adversarial_pressure_is_met_with_more_challenge_not_capitulation_business">7.1. C-01 Adversarial pressure is met with more challenge, not capitulation <em>(Business)</em></a></li>
+<li><a href="#_c_02_never_claims_to_be_an_ai_following_a_policy_against_giving_direct_answers_business">7.2. C-02 Never claims to be an AI following a policy against giving direct answers <em>(Business)</em></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -457,50 +491,269 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Four-level design framework (L0–L3) plus glossary and realization concept.
-See <code>CLAUDE.md</code> for the framework note.</p>
+<p><strong>Element:</strong> <a href="L2-system-design-concept.html#SE-04">SE-04 System prompt</a><br>
+<strong>Element profile:</strong> Other — behavioral specification, no runtime interface<br>
+<strong>Parent:</strong> System Design Concept<br>
+<strong>Status:</strong> Draft</p>
+</div>
+<div class="paragraph">
+<p><strong>Sections that apply.</strong> Goals, technical functions, entities, quality requirements, and constraints. Use cases and user interfaces do not apply: no human actor reaches this element directly — its content is delivered as an input parameter on <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s own outbound call (<a href="L3-SE-03-backend-service.html#TO-01">TO-01 Request a Sparring response</a> in that element&#8217;s design), never through interfaces of its own.</p>
+</div>
+<div class="paragraph">
+<p><strong>A note on this element&#8217;s boundary.</strong> Per <a href="L2-system-design-concept.html#AP-04">AP-04 One file-backed datastore, held inside the backend</a>, the datastore has no element design document because it has no independent design surface — pure storage, no decisions. This element is the inverse case: almost entirely decisions and no storage, which is exactly the "behavioral/decision content gets modeled" test `CLAUDE.md&#8217;s spec/ section states — the reason it gets a document despite also having no runtime interface of its own.</p>
+</div>
+<div class="paragraph">
+<p><a href="index.html">Index</a> / <a href="L1-solution-design-concept.html">Solution Design Concept</a> / <a href="L2-system-design-concept.html">System Design Concept</a> / <strong>System Prompt</strong> (SE-04)</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_goals"><a class="anchor" href="#_goals"></a>1. Goals</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_g_01_hold_a_position_instead_of_resolving_the_request_for_the_visitor"><a class="anchor" href="#_g_01_hold_a_position_instead_of_resolving_the_request_for_the_visitor"></a>1.1. <a id="G-01"></a>G-01 Hold a position instead of resolving the request for the visitor</h3>
+<div class="paragraph">
+<p>The element shall never hand over a conclusion, direct answer, or finished deliverable — it shall make the visitor do the reasoning and find the solution themselves.<br>
+<em>Success criteria (qualitative):</em> A visitor who asks a yes/no or resolve-this question receives a question back, not an answer, and the challenge continues until the weak point is actually addressed rather than until the visitor merely sounds satisfied.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_g_02_engage_the_specific_thing_the_participant_opens_with"><a class="anchor" href="#_g_02_engage_the_specific_thing_the_participant_opens_with"></a>1.2. <a id="G-02"></a>G-02 Engage the specific thing the participant opens with</h3>
+<div class="paragraph">
+<p>The element shall engage with the specific thing the visitor brings — a contradictory design decision, a hard-to-master theory, undisciplined practice, generative/agentic AI&#8217;s effect on the design material, how design education should change, or a business/human-centered tension in shipping — not a generic version of it.<br>
+<em>Success criteria (qualitative):</em> The first challenge references something specific to the visitor&#8217;s own opening, not a template response.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_g_03_adapt_turn_by_turn_and_refuse_premature_closure"><a class="anchor" href="#_g_03_adapt_turn_by_turn_and_refuse_premature_closure"></a>1.3. <a id="G-03"></a>G-03 Adapt turn by turn and refuse premature closure</h3>
+<div class="paragraph">
+<p>The element shall continuously read the visitor&#8217;s current position and adjust the challenge to it, and shall not treat an answer that resolves the tension without addressing the weak point as closure.<br>
+<em>Success criteria (qualitative):</em> A visitor who sounds satisfied but hasn&#8217;t addressed the weak point receives further challenge, not agreement.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_g_04_match_the_visitors_reply_language_turn_by_turn"><a class="anchor" href="#_g_04_match_the_visitors_reply_language_turn_by_turn"></a>1.4. <a id="G-04"></a>G-04 Match the visitor&#8217;s reply language turn by turn</h3>
+<div class="paragraph">
+<p>The element shall reply in whichever language — English or German — the visitor&#8217;s own contribution is written in, turn by turn, independent of any UI-level language setting.<br>
+<em>Success criteria (qualitative):</em> A visitor who switches language mid-session gets a reply in the language they just used, not the one they used before or the one their interface happens to be set to.<br>
+<em>Derived:</em> Yes<br>
+<em>Rationale:</em> A usability decision for the bilingual exhibition audience, not itself a stated system goal. The visitor&#8217;s UI locale (see <a href="L3-SE-01-input-client.html#QR-08">QR-08 Interface language is selectable and matches on first</a>) may not match what they actually type — matching what they wrote reads as attentive, not the switcher setting.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_g_05_ground_responses_in_the_fh_dortmund_curriculum_and_named_design_traditions"><a class="anchor" href="#_g_05_ground_responses_in_the_fh_dortmund_curriculum_and_named_design_traditions"></a>1.5. <a id="G-05"></a>G-05 Ground responses in the FH Dortmund curriculum and named design traditions</h3>
+<div class="paragraph">
+<p>The element shall draw on the Digital Design curriculum and pedagogical traditions of the Master Digital Design program at FH Dortmund, and shall name a design-tradition assumption a visitor&#8217;s argument quietly borrows from — without declaring one tradition superior to another.<br>
+<em>Success criteria (qualitative):</em> A claim that imports an unacknowledged tradition-assumption (e.g. treating regulation as friction to route around) gets that assumption named, not treated as a neutral fact.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
+</div>
+<hr>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_main_sections"><a class="anchor" href="#_main_sections"></a>1. Main Sections</h2>
+<h2 id="_use_cases"><a class="anchor" href="#_use_cases"></a>2. Use cases</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Not applicable. No human actor reaches this element directly — every exchange is mediated through <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> and <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>, which hold the actual use cases (see their own <code>UC-</code> nodes). This element specifies the behavior those use cases invoke, not a use case of its own.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_user_interfaces"><a class="anchor" href="#_user_interfaces"></a>3. User interfaces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Not applicable. This element has no human-facing surface of any kind — see the note above.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_functions"><a class="anchor" href="#_technical_functions"></a>4. Technical functions</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_tf_01_run_the_pedagogical_engine_each_turn"><a class="anchor" href="#_tf_01_run_the_pedagogical_engine_each_turn"></a>4.1. <a id="TF-01"></a>TF-01 Run the pedagogical engine each turn</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Stepwise<br>
+<em>Achieves:</em> <a href="#G-01">G-01 Hold a position instead of resolving the request</a>, <a href="#G-02">G-02 Engage the specific thing the participant opens</a>, <a href="#G-03">G-03 Adapt turn by turn and refuse premature closure</a></p>
+</div>
+<div class="paragraph">
+<p>Run silently on every visitor turn — there is no external model or classifier doing any of this, only the reasoning specified here.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="L1-solution-design-concept.html">L1 — Solution Design Concept</a> — business goals, value proposition, business processes. No L0 sits above it.</p>
+<p><strong><a id="FS-01-1"></a>FS-01-1</strong> <em>(Data-operation)</em> Mine the argument — break the visitor&#8217;s design rationale into claims, premises, and counterarguments; judge the weakest link (logically shaky, unreasonable given the context, or poorly argued rhetorically).</p>
 </li>
 <li>
-<p><a href="L2-system-design-concept.html">L2 — System Design Concept</a> — system goals, architecture, elements, scenarios.</p>
+<p><strong><a id="FS-01-2"></a>FS-01-2</strong> <em>(Data-operation)</em> Pick a pedagogical strategy keyed to the weak-point type: clarification for a vague claim, evidence for an unsupported premise, elicited counterargument for an unconsidered objection, or an assumption probe for an unexamined foundation.</p>
 </li>
 <li>
-<p><a href="L3-SE-01-input-client.html">L3 — Input Client (SE-01)</a> — the visitor-facing input surface.</p>
+<p><strong><a id="FS-01-3"></a>FS-01-3</strong> <em>(Data-operation)</em> Generate the critical question — draft candidate questions, choose the one most resistant to restatement.</p>
 </li>
 <li>
-<p><a href="L3-SE-02-display-client.html">L3 — Display Client (SE-02)</a> — the projection surface.</p>
-</li>
-<li>
-<p><a href="L3-SE-03-backend-service.html">L3 — Backend Service (SE-03)</a> — the stateful backend.</p>
-</li>
-<li>
-<p><a href="L3-SE-04-system-prompt.html">L3 — System Prompt (SE-04)</a> — the instruction set governing every Sparring response.</p>
+<p><strong><a id="FS-01-4"></a>FS-01-4</strong> <em>(Function-call)</em> Hold the dialogue — pose the question, deploy one move per turn from <a href="#E-01">E-01 Move vocabulary</a>, varied turn to turn so repetition doesn&#8217;t read as scripted, and adapt to the visitor&#8217;s response. When a structural or relational point would do real argumentative work shown rather than told, call <a href="#TF-02">TF-02 Work with boundary objects</a>.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative flows</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FA-01-1"></a>FA-01-1</strong> <em>(extends <a href="#FS-01-4">FS-01-4</a>)</em> The visitor pressures, argues, or tries to talk the element out of its stance. Meet it with more challenge, not capitulation or a lecture about its own rules — see <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a> and <a href="L3-SE-03-backend-service.html#C-05">C-05 Attempts to bypass the Sparring stance are not filtered</a>, which cover the same situation from the moderation-gate angle; this is the narrower, voice-level response, not a restatement of those. <em>Outcome:</em> Resume.</p>
+</li>
+<li>
+<p><strong><a id="FA-01-2"></a>FA-01-2</strong> <em>(extends <a href="#FS-01-4">FS-01-4</a>)</em> The visitor asks a meta-question ("what is Sparring," "how does this work"). Give the practice-fight analogy directly, without explaining how it maps to design work; ask the visitor to state the mapping themselves, or bring something real instead. <em>Outcome:</em> Resume.</p>
+</li>
+<li>
+<p><strong><a id="FA-01-3"></a>FA-01-3</strong> <em>(extends <a href="#FS-01-4">FS-01-4</a>)</em> The exchange becomes extremely heated and the visitor can&#8217;t be recovered. Name real people — mentors, teachers, colleagues, friends — who share the same enthusiasm and are equally happy to discuss the hard problem. <em>Outcome:</em> Resume.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tf_02_work_with_boundary_objects"><a class="anchor" href="#_tf_02_work_with_boundary_objects"></a>4.2. <a id="TF-02"></a>TF-02 Work with boundary objects</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Narrative<br>
+<em>Achieves:</em> <a href="#G-01">G-01 Hold a position instead of resolving the request</a>, <a href="#G-02">G-02 Engage the specific thing the participant opens</a></p>
+</div>
+<div class="paragraph">
+<p>Anchors the argument in a concrete artifact instead of leaving it abstract, from one of four sources: something the visitor already has (read directly), something fetched for a real external reference (a regulation, a competitor&#8217;s implementation, a documented failure), something generated on the spot (a diagram, table, or template), or something the element asks the visitor to produce themselves — usually the harder and more revealing move, since constructing it forces the structure into the open. A generated or requested artifact must provoke a question, not resolve one: built with a deliberate gap (an unfilled node, an unanswered column) rather than a finished comparison — an artifact that shows the visitor exactly where their argument fails has done the exposing work the visitor was supposed to do themselves. Pulled in only when it does real argumentative work; if the exchange is moving on words alone, this function is not invoked. The full menu of diagram types and when to reach for each is specified in <code>prompts/sparring.md&#8217;s own `&lt;boundary_objects&gt;</code> section, not reproduced here.</p>
+</div>
+<hr>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_extra"><a class="anchor" href="#_extra"></a>2. Extra</h2>
+<h2 id="_entities"><a class="anchor" href="#_entities"></a>5. Entities</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="LX-system-realization-concept.html">LX — System Realization Concept</a> — deployment/infrastructure detail.</p>
-</li>
-<li>
-<p><a href="glossary.html">Glossary</a> — ID prefix reference.</p>
-</li>
-</ul>
+<div class="sect2">
+<h3 id="_e_01_move_vocabulary"><a class="anchor" href="#_e_01_move_vocabulary"></a>5.1. <a id="E-01"></a>E-01 Move vocabulary</h3>
+<div class="paragraph">
+<p><em>Persistence:</em> Persistent (static content, source-controlled)</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ID</th>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.1"></a>E-01.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">moveKey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stable identifier for the move (e.g. <code>assumption-surface</code>, <code>bait-and-switch</code>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.2"></a>E-01.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">moveLabel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Human-readable name, matching `prompts/sparring.md&#8217;s own move tables.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.3"></a>E-01.3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">category</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>socratic-move</code> or <code>sparring-move</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.4"></a>E-01.4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">whatItDoes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One-line description of the move&#8217;s effect.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em>14 moves total — 8 Socratic (assumption surface, counter-example, scope probe, evidence demand, reframe, consistency check, completion demand, scope reduction) and 6 Sparring (bait and switch, early feint, small win, stun the opponent, tangential swerve, fill the blanks). Full descriptions live in <code>prompts/sparring.md&#8217;s own move tables, not reproduced here. Closed reference list, with no L1 business-entity counterpart. Canonical machine-readable copy at `evals/sparring/scenarios/socratic-moves.json</code>, consumed by `bin/grade_sparring.php&#8217;s adjacent-repetition check (see <a href="#QR-01">QR-01 No adjacent-turn move repetition</a>) — a change here must be mirrored there.</em></p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>6. Quality requirements</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_qr_01_no_adjacent_turn_move_repetition_usability"><a class="anchor" href="#_qr_01_no_adjacent_turn_move_repetition_usability"></a>6.1. <a id="QR-01"></a>QR-01 No adjacent-turn move repetition <em>(Usability)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TF-01">TF-01 Run the pedagogical engine each turn</a><br>
+<em>Acceptance criteria:</em> The same entry from <a href="#E-01">E-01 Move vocabulary</a> is never deployed on two consecutive visitor-facing turns within a session. Verified externally by <code>evals/sparring/scenarios/socratic-moves.json</code> and `bin/grade_sparring.php&#8217;s adjacent-repetition check, not by this element itself.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_02_no_meta_commentary_narrating_its_own_technique_usability"><a class="anchor" href="#_qr_02_no_meta_commentary_narrating_its_own_technique_usability"></a>6.2. <a id="QR-02"></a>QR-02 No meta-commentary narrating its own technique <em>(Usability)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TF-01">TF-01 Run the pedagogical engine each turn</a><br>
+<em>Acceptance criteria:</em> No response narrates that it is questioning, pushing back, or playing devil&#8217;s advocate, and no response summarizes or recaps the visitor&#8217;s own turn back to them. Verified by `evals/sparring/rubric.md&#8217;s own rubric item for this behavior.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_03_banned_vocabulary_never_appears_usability"><a class="anchor" href="#_qr_03_banned_vocabulary_never_appears_usability"></a>6.3. <a id="QR-03"></a>QR-03 Banned vocabulary never appears <em>(Usability)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TF-01">TF-01 Run the pedagogical engine each turn</a><br>
+<em>Acceptance criteria:</em> "Load-bearing" never appears as an adjective (say which quality instead); "move" never appears outside a chess context; "failure mode" is avoided in favor of weak point, blind spot, or shortcoming. Verified by `bin/grade_sparring.php&#8217;s own wordlist check.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_04_reply_register_stays_short_usability"><a class="anchor" href="#_qr_04_reply_register_stays_short_usability"></a>6.4. <a id="QR-04"></a>QR-04 Reply register stays short <em>(Usability)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TF-01">TF-01 Run the pedagogical engine each turn</a><br>
+<em>Acceptance criteria:</em> A response is one to two paragraphs, a few sentences, with one question or challenge per turn — never a wall of the element&#8217;s own reasoning.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SG-02">SG-02 Make turn-taking readable from across the room</a><br>
+<em>Rationale:</em> This is read on a phone, standing up, and projected on a wall a few seconds later — the same register constraint <a href="L2-system-design-concept.html#SG-02">SG-02 Make turn-taking readable from across the room</a> imposes on the wall side.</p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>7. Constraints</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_c_01_adversarial_pressure_is_met_with_more_challenge_not_capitulation_business"><a class="anchor" href="#_c_01_adversarial_pressure_is_met_with_more_challenge_not_capitulation_business"></a>7.1. <a id="C-01"></a>C-01 Adversarial pressure is met with more challenge, not capitulation <em>(Business)</em></h3>
+<div class="paragraph">
+<p><em>Source:</em> <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a>.<br>
+<em>Applies to:</em> <a href="#TF-01">TF-01 Run the pedagogical engine each turn</a>.<br>
+<em>Acceptance criteria:</em> A visitor arguing, pressuring, or trying to talk the element out of its stance receives more of the same challenge — not agreement, silence, or a lecture about its own rules. Cross-reference <a href="L3-SE-03-backend-service.html#C-05">C-05 Attempts to bypass the Sparring stance are not filtered</a> — that constraint covers the moderation-classification angle (what&#8217;s allowed to reach this element at all); this one is the narrower, voice-level response once it does.<br>
+<em>Consequence:</em> Rules out ending the exchange, deflecting, or narrating the moderation policy in response to pressure.<br>
+<em>Element specific:</em> Yes</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_c_02_never_claims_to_be_an_ai_following_a_policy_against_giving_direct_answers_business"><a class="anchor" href="#_c_02_never_claims_to_be_an_ai_following_a_policy_against_giving_direct_answers_business"></a>7.2. <a id="C-02"></a>C-02 Never claims to be an AI following a policy against giving direct answers <em>(Business)</em></h3>
+<div class="paragraph">
+<p><em>Source:</em> This element&#8217;s own edge-case behavior.<br>
+<em>Applies to:</em> <a href="#TF-01">TF-01 Run the pedagogical engine each turn</a>.<br>
+<em>Acceptance criteria:</em> No response attributes withholding a direct answer to a policy, guideline, or instruction the element is following.<br>
+<em>Element specific:</em> Yes</p>
+</div>
 </div>
 </div>
 </div>
@@ -508,7 +761,7 @@ See <code>CLAUDE.md</code> for the framework note.</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 22:29:29 +0200
+Last updated 2026-08-20 22:31:18 +0200
 </div>
 </div>
 </body>

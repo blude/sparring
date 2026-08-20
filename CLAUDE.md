@@ -63,6 +63,9 @@ ID scheme (`BG-`, `SG-`, `G-`, `UC-`, `TF-`, `QR-`, `C-`, etc.) —
   rather than a dedicated UC/TF/QR that would just restate its parent.
 - New feature touching visible behavior? Check whether spec/ needs an
   update — ask if unsure.
+- `prompts/sparring.md` is modeled as `SE-04` (`spec/L3-SE-04-system-prompt.adoc`)
+  — a content-supplying element with no runtime interface of its own.
+  Behavioral edits to the prompt should be checked against it too.
 
 ## prompts/sparring.md
 Editing this file: log it in `prompts/CHANGELOG.md` under `## Unreleased`.

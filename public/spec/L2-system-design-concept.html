@@ -457,6 +457,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_sg_05_record_every_interaction_with_its_origin_fixed_at_creation">1.5. SG-05 Record every interaction with its origin fixed at creation</a></li>
 <li><a href="#_sg_06_never_present_an_empty_surface">1.6. SG-06 Never present an empty surface</a></li>
 <li><a href="#_sg_07_gate_public_projection_at_the_moment_of_submission_not_after_the_fact">1.7. SG-07 Gate public projection at the moment of submission, not after the fact</a></li>
+<li><a href="#_sg_08_hold_a_pedagogical_position_under_sustained_pressure_or_premature_closure_attempts">1.8. SG-08 Hold a pedagogical position under sustained pressure or premature-closure attempts</a></li>
 </ul>
 </li>
 <li><a href="#_system_architecture">2. System architecture</a>
@@ -490,6 +491,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_se_01_input_client_web_application">3.2.1. SE-01 Input client <em>(Web-application)</em></a></li>
 <li><a href="#_se_02_display_client_web_application">3.2.2. SE-02 Display client <em>(Web-application)</em></a></li>
 <li><a href="#_se_03_backend_service_backend_service">3.2.3. SE-03 Backend service <em>(Backend-service)</em></a></li>
+<li><a href="#_se_04_system_prompt_other_supplies_content_no_runtime_interface_of_its_own">3.2.4. SE-04 System prompt <em>(Other — supplies content, no runtime interface of its own)</em></a></li>
 </ul>
 </li>
 <li><a href="#_hardware_elements">3.3. Hardware elements</a>
@@ -613,6 +615,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <em>Supports:</em> <a href="L1-solution-design-concept.html#BQR-03">BQR-03 Nothing identifying a visitor reaches the projection</a>.<br>
 <em>Rationale:</em> Gating at submission rather than at display means nothing unsuitable is ever written down in the first place — there is no later step where it could leak. This also means projection eligibility for a <em>stored</em> exchange no longer needs a moderation-driven flag of its own: everything stored has already passed the check by construction, so what&#8217;s actually projected is governed by the visitor&#8217;s own projection consent (see <a href="#SC-05">SC-05 Retention requires consent; projection requires</a>), not by re-deciding suitability at read time.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sg_08_hold_a_pedagogical_position_under_sustained_pressure_or_premature_closure_attempts"><a class="anchor" href="#_sg_08_hold_a_pedagogical_position_under_sustained_pressure_or_premature_closure_attempts"></a>1.8. <a id="SG-08"></a>SG-08 Hold a pedagogical position under sustained pressure or premature-closure attempts</h3>
+<div class="paragraph">
+<p>The system shall keep the Sparring partner&#8217;s challenge substantive — not resolved by a confident-sounding answer, capitulation to pressure, or a handed-over conclusion — for the duration of a session.<br>
+<em>Success criteria (qualitative):</em> A visitor who pressures, argues, or sounds satisfied without addressing the weak point still receives further challenge, not agreement or closure.<br>
+<em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-01">BG-01 Make Sparring&#8217;s friction visible to an audience</a><br>
+<em>Supports:</em> <a href="L1-solution-design-concept.html#BQR-01">BQR-01 Visitors experience challenge, not obstruction</a></p>
+</div>
 <hr>
 </div>
 </div>
@@ -684,7 +695,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Content filtering addresses profanity, personal information, and hateful, harassing, threatening, or sexual content targeting a real person or group. It does not address visitors trying to make the system abandon its position.<br>
 <em>Rationale:</em> Whether system-placed friction holds against a motivated user is the question the installation exists to expose. Filtering those attempts would remove the observation the piece is built to produce.<br>
 <em>Implications:</em> Rules out treating persuasion, pressure, or instruction-style attacks on the Sparring stance as abuse. Requires the moderation function to distinguish adversarial-but-engaged input aimed at the Sparring partner from harmful content aimed at a real person, and this distinction must be stated in that function&#8217;s specification rather than left to a wordlist.<br>
-<em>Satisfies:</em> <a href="#SG-05">SG-05 Record every interaction with its origin fixed at</a></p>
+<em>Satisfies:</em> <a href="#SG-05">SG-05 Record every interaction with its origin fixed at</a>, <a href="#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -742,7 +753,7 @@ Lesson from testing: stating the adversarial-vs-target distinction was not suffi
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Dashed link marks the system boundary. Detailed interaction sequences are in section 3, not in the diagram.
+Dashed link marks the system boundary. Detailed interaction sequences are in section 3, not in the diagram. <a href="#SE-04">SE-04 System prompt</a> is deliberately not shown either — it has no network edge of its own, only content supplied on SE-03&#8217;s outbound call to PE-01 (same treatment as <a href="#AP-04">AP-04 One file-backed datastore, held inside the backend</a>'s datastore, which also gets no box).
 </td>
 </tr>
 </table>
@@ -810,10 +821,20 @@ Dashed link marks the system boundary. Detailed interaction sequences are in sec
 <div class="paragraph">
 <p>The single stateful component. Holds the datastore internally (see <a href="#AP-04">AP-04 One file-backed datastore, held inside the backend</a>), so no separate database element is identified.<br>
 <em>Key responsibilities:</em> Issues and resolves session identifiers. Produces Sparring responses by calling <a href="#PE-01">PE-01 Language generation API</a>. Assesses contributions for projection suitability. Enforces request rate, input size, and session length limits. Persists sessions and exchanges with their origin. Assembles the material the projection displays. Accepts pilot material from the operator.<br>
-<em>Interacts with:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-02">SE-02 Display client</a>, <a href="#PE-01">PE-01 Language generation API</a>, <a href="#UT-03">UT-03 Operator</a>, <a href="#HE-03">HE-03 Hosted server</a><br>
+<em>Interacts with:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-02">SE-02 Display client</a>, <a href="#SE-04">SE-04 System prompt</a>, <a href="#PE-01">PE-01 Language generation API</a>, <a href="#UT-03">UT-03 Operator</a>, <a href="#HE-03">HE-03 Hosted server</a><br>
 <em>Realises:</em> <a href="L1-solution-design-concept.html#VCA-04">VCA-04 The installation</a><br>
 <em>Satisfies:</em> <a href="#SG-01">SG-01 Start a session from a personal device with no</a>, <a href="#SG-04">SG-04 Run unattended and absorb misuse without operator</a>, <a href="#SG-05">SG-05 Record every interaction with its origin fixed at</a>, <a href="#SG-06">SG-06 Never present an empty surface</a>, <a href="#SG-07">SG-07 Gate public projection at the moment of submission</a><br>
 <em>Constrained by:</em> <a href="#SC-01">SC-01 PHP with a file-backed store on a single hosted</a>, <a href="#SC-04">SC-04 Generation is rate-limited and metered by the provider</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_se_04_system_prompt_other_supplies_content_no_runtime_interface_of_its_own"><a class="anchor" href="#_se_04_system_prompt_other_supplies_content_no_runtime_interface_of_its_own"></a>3.2.4. <a id="SE-04"></a>SE-04 System prompt <em>(Other — supplies content, no runtime interface of its own)</em></h4>
+<div class="paragraph">
+<p>The instruction set that governs every Sparring response — identity, voice, pedagogical mechanism, and domain grounding — supplied as input content to SE-03&#8217;s outbound call rather than run as a component of its own.<br>
+<em>Key responsibilities:</em> Defines the Sparring persona and behavioral rules. Specifies the four-stage reasoning engine run on every turn. Specifies the closed Socratic/Sparring move vocabulary. Grounds responses in the FH Dortmund Digital Design curriculum and named design-theory traditions. Specifies boundary-object handling and edge-case behavior.<br>
+<em>Interacts with:</em> <a href="#SE-03">SE-03 Backend service</a><br>
+<em>Realises:</em> <a href="L1-solution-design-concept.html#VCA-04">VCA-04 The installation</a><br>
+<em>Satisfies:</em> <a href="#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
 </div>
 </div>
 </div>
@@ -1137,7 +1158,7 @@ Downward references from L3 are not written here. Element designs declare their 
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 22:20:07 +0200
+Last updated 2026-08-20 22:29:11 +0200
 </div>
 </div>
 </body>
