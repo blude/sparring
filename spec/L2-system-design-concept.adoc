@@ -60,7 +60,7 @@ _Rationale:_ Gating at submission rather than at display means nothing unsuitabl
 
 == System architecture
 
-=== 2.1 Architecture overview
+=== Architecture overview
 
 *Architecture style:* Client-server, three participants. Two thin browser clients and one stateful backend, with all logic and all credentials held server-side.
 
