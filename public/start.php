@@ -143,16 +143,21 @@
   }
   footer a { color: #666; }
   .locale-switcher {
-      width: 100%;
-      max-width: 402px;
       box-sizing: border-box;
-      padding: 0.5rem 32px 0;
       font-size: 0.75rem;
       display: flex;
-      gap: 0.5rem;
+      width: fit-content;
+      flex: 0 0 auto;
+      line-height: 1;
+      gap: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      padding: 0.125rem;
+      margin: 0 auto 1rem;
+      background: #fff;
   }
-  .locale-switcher a, .locale-switcher span { color: #888; text-decoration: none; }
-  .locale-switcher .locale-current { color: #222; font-weight: 700; }
+  .locale-switcher a, .locale-switcher span { color: #888; text-decoration: none; padding: 0.5rem 0.75rem; }
+  .locale-switcher .locale-current { color: #222; background: #f0f0f0; border-radius: 0.25rem; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -177,9 +182,9 @@
 </div>
 <hr class="divider">
 <footer>
+    <?= localeSwitcher(); ?>
     <p><?= t('start.footer.craft') ?></p>
     <p><?= t('start.footer.legal') ?></p>
 </footer>
-<?php /* echo localeSwitcher(); */ ?>
 </body>
 </html>

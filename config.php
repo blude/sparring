@@ -252,7 +252,8 @@ function localeSwitcher(): string
     $current = resolve_locale();
     $links = [];
     foreach (SUPPORTED_LOCALES as $loc) {
-        $label = strtoupper($loc);
+        $languages = ['en' => 'English', 'de' => 'Deutsch'];
+        $label = $languages[$loc] ?? $loc;
         if ($loc === $current) {
             $links[] = "<span class=\"locale-current\" aria-current=\"true\">$label</span>";
             continue;
