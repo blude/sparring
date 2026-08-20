@@ -95,7 +95,13 @@ final class AnthropicLlmClient extends AbstractLlmClient
                 $response = $this->client->messages->create(
                     model: GENERATION_MODEL,
                     maxTokens: 1024,
-                    system: $this->sparringPrompt,
+                    // Cached: static per session (only conversation history and the new
+                    // contribution change turn to turn), well over the ~1,024-token
+                    // caching minimum. Without cacheControl this re-bills full input
+                    // cost on every turn instead of a cached-read discount (SE-04 C-03).
+                    system: [
+                        ['type' => 'text', 'text' => $this->sparringPrompt, 'cacheControl' => ['type' => 'ephemeral']],
+                    ],
                     messages: $messages,
                     requestOptions: ['timeout' => (float) GENERATION_TIMEOUT_SECONDS, 'maxRetries' => 0],
                     // Model default-enables extended thinking. Measured across a full
