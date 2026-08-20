@@ -104,11 +104,6 @@ Rationale: the exhibition offers a great sneaky opportunity to collect feedback 
 - [x] Add realistic content to Privacy Policy page
 - [ ] Add realistic content to Credits page (partially done)
 
-## Bug Fixes
-
-- [ ] Investigate some benign visitor messages being blocked by moderation
-  - Maybe loosening the moderation can fix it.
-
 # Done
 
 [Move here completed To Dos]
