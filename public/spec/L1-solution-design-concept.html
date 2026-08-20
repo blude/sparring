@@ -434,8 +434,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
 <h1>Solution Design Concept</h1>
 <div class="details">
@@ -443,6 +444,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="email" class="email"><a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de">sarah.puppinpratti001@stud.fh-dortmund.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
 <span id="revdate">2026-06-19</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_vision">1. Vision</a>
+<ul class="sectlevel2">
+<li><a href="#_future_press_release">1.1. Future Press Release</a></li>
+<li><a href="#_business_goals">1.2. Business goals</a></li>
+</ul>
+</li>
+<li><a href="#_value_proposition">2. Value proposition</a></li>
+<li><a href="#_value_creation_architecture">3. Value creation architecture</a></li>
+<li><a href="#_information_architecture">4. Information architecture</a></li>
+<li><a href="#_business_processes">5. Business processes</a>
+<ul class="sectlevel2">
+<li><a href="#_bp_01_visitor_conducts_a_sparring_session">5.1. BP-01 — Visitor conducts a Sparring session</a></li>
+<li><a href="#_bp_02_recent_sessions_are_shown_to_the_room">5.2. BP-02 — Recent sessions are shown to the room</a></li>
+</ul>
+</li>
+<li><a href="#_quality_requirements">6. Quality requirements</a></li>
+<li><a href="#_constraints">7. Constraints</a></li>
+</ul>
 </div>
 </div>
 <div id="content">
@@ -454,14 +477,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <strong>Status:</strong> Draft<br>
 <strong>Scope note:</strong> Deliberately thin. This level exists to record <em>why</em> the installation is being built and what it must be true from a non-technical perspective. No Digital Design Brief sits above it, so business constraints carry no <code>Refines → BRC-</code> relation. Those relations are omitted rather than pointed at IDs that do not exist.</p>
 </div>
+<div class="paragraph">
+<p><a href="index.html">Index</a> / <strong>Solution Design Concept</strong></p>
+</div>
 <hr>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_vision">1. Vision</h2>
+<h2 id="_vision"><a class="anchor" href="#_vision"></a>1. Vision</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_future_press_release">Future Press Release</h3>
+<h3 id="_future_press_release"><a class="anchor" href="#_future_press_release"></a>1.1. Future Press Release</h3>
 <div class="paragraph">
 <p><strong>Dortmund, October 2026. Sparring goes public at Superraum.</strong></p>
 </div>
@@ -488,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="_business_goals">Business goals</h3>
+<h3 id="_business_goals"><a class="anchor" href="#_business_goals"></a>1.2. Business goals</h3>
 <div class="paragraph">
 <p><strong><a id="BG-01"></a>BG-01 — Make Sparring&#8217;s friction visible to an audience, not just to its user</strong><br>
 The installation shall put the exchange between learner and Sparring partner on a shared surface, so that the pedagogical mechanism is observable by people who are not the participant.<br>
@@ -516,7 +542,7 @@ Interactions shall be captured in a form that can be reviewed after the exhibiti
 </div>
 </div>
 <div class="sect1">
-<h2 id="_2_value_proposition">2. Value proposition</h2>
+<h2 id="_value_proposition"><a class="anchor" href="#_value_proposition"></a>2. Value proposition</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="VP-01"></a>VP-01 — Participating visitor</strong><br>
@@ -537,7 +563,7 @@ Interactions shall be captured in a form that can be reviewed after the exhibiti
 </div>
 </div>
 <div class="sect1">
-<h2 id="_3_value_creation_architecture">3. Value creation architecture</h2>
+<h2 id="_value_creation_architecture"><a class="anchor" href="#_value_creation_architecture"></a>3. Value creation architecture</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -583,7 +609,7 @@ Supplies the language generation that produces Sparring responses. Not owned or 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_4_information_architecture">4. Information architecture</h2>
+<h2 id="_information_architecture"><a class="anchor" href="#_information_architecture"></a>4. Information architecture</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="BE-01"></a>BE-01 — Sparring session</strong><br>
@@ -613,10 +639,10 @@ Three independent decisions made together, once, before the session opens: agree
 </div>
 </div>
 <div class="sect1">
-<h2 id="_5_business_processes">5. Business processes</h2>
+<h2 id="_business_processes"><a class="anchor" href="#_business_processes"></a>5. Business processes</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_bp_01_visitor_conducts_a_sparring_session"><a id="BP-01"></a>BP-01 — Visitor conducts a Sparring session</h3>
+<h3 id="_bp_01_visitor_conducts_a_sparring_session"><a class="anchor" href="#_bp_01_visitor_conducts_a_sparring_session"></a>5.1. <a id="BP-01"></a>BP-01 — Visitor conducts a Sparring session</h3>
 <div class="paragraph">
 <p>A visitor scans the QR code, agrees to take part and makes their retention and projection choices, and exchanges turns with the Sparring partner until they stop or reach the session limit. Their exchanges appear on the projection as they happen, if they consented to that.<br>
 <em>Frequency:</em> Continuously during opening hours, in bursts following visitor traffic.<br>
@@ -682,7 +708,7 @@ Three independent decisions made together, once, before the session opens: agree
 </div>
 </div>
 <div class="sect2">
-<h3 id="_bp_02_recent_sessions_are_shown_to_the_room"><a id="BP-02"></a>BP-02 — Recent sessions are shown to the room</h3>
+<h3 id="_bp_02_recent_sessions_are_shown_to_the_room"><a class="anchor" href="#_bp_02_recent_sessions_are_shown_to_the_room"></a>5.2. <a id="BP-02"></a>BP-02 — Recent sessions are shown to the room</h3>
 <div class="paragraph">
 <p>The projection presents recent exchanges so that people who are not currently participating can read what the installation does. When no live session is running, earlier pilot material keeps the surface populated.<br>
 <em>Frequency:</em> Continuous.<br>
@@ -721,7 +747,7 @@ Three independent decisions made together, once, before the session opens: agree
 </div>
 </div>
 <div class="sect1">
-<h2 id="_6_quality_requirements">6. Quality requirements</h2>
+<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>6. Quality requirements</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="BQR-01"></a>BQR-01 — Visitors experience challenge, not obstruction</strong> <em>(Customer-satisfaction)</em><br>
@@ -753,7 +779,7 @@ The public surface shall not carry names, contact details, or other personal inf
 </div>
 </div>
 <div class="sect1">
-<h2 id="_7_constraints">7. Constraints</h2>
+<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>7. Constraints</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="BC-01"></a>BC-01 — Build effort must not compete with thesis writing</strong> <em>(Business)</em><br>
@@ -788,7 +814,7 @@ The projected layout is marked TO BE REFINED and will be decided against real pi
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 19:29:51 +0200
+Last updated 2026-08-20 20:53:21 +0200
 </div>
 </div>
 </body>

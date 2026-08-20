@@ -434,8 +434,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
 <h1>System Design Concept</h1>
 <div class="details">
@@ -443,6 +444,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="email" class="email"><a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de">sarah.puppinpratti001@stud.fh-dortmund.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
 <span id="revdate">2026-06-19</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_system_goals">1. System goals</a></li>
+<li><a href="#_system_architecture">2. System architecture</a>
+<ul class="sectlevel2">
+<li><a href="#_2_1_architecture_overview">2.1. 2.1 Architecture overview</a>
+<ul class="sectlevel3">
+<li><a href="#_key_architecture_principles">2.1.1. Key architecture principles</a></li>
+</ul>
+</li>
+<li><a href="#_architecture_diagram">2.2. Architecture diagram</a></li>
+<li><a href="#_system_elements">2.3. System elements</a>
+<ul class="sectlevel3">
+<li><a href="#_user_types">2.3.1. User types</a></li>
+<li><a href="#_software_elements">2.3.2. Software elements</a></li>
+<li><a href="#_hardware_elements">2.3.3. Hardware elements</a></li>
+<li><a href="#_partner_elements">2.3.4. Partner elements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_system_scenarios">3. System scenarios</a>
+<ul class="sectlevel2">
+<li><a href="#_ssc_01_a_visitor_conducts_a_sparring_session">3.1. SSc-01 — A visitor conducts a Sparring session</a></li>
+<li><a href="#_ssc_02_the_projection_presents_current_material">3.2. SSc-02 — The projection presents current material</a></li>
+<li><a href="#_ssc_03_the_operator_seeds_pilot_material">3.3. SSc-03 — The operator seeds pilot material</a></li>
+</ul>
+</li>
+<li><a href="#_quality_requirements">4. Quality requirements</a></li>
+<li><a href="#_constraints">5. Constraints</a></li>
+</ul>
 </div>
 </div>
 <div id="content">
@@ -454,11 +488,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <strong>Status:</strong> Draft<br>
 <strong>Scope note:</strong> Deployment architecture (droplet sizing, web server configuration, SSL config, backup scheduling) belongs in a separate System Realization Concept and is deliberately absent here.</p>
 </div>
+<div class="paragraph">
+<p><a href="index.html">Index</a> / <a href="L1-solution-design-concept.html">Solution Design Concept</a> / <strong>System Design Concept</strong></p>
+</div>
 <hr>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_system_goals">1. System goals</h2>
+<h2 id="_system_goals"><a class="anchor" href="#_system_goals"></a>1. System goals</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="SG-01"></a>SG-01 — Start a session from a personal device with no installation or account</strong><br>
@@ -509,15 +546,15 @@ The system shall reject a contribution assessed as unsuitable before it reaches 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_2_system_architecture">2. System architecture</h2>
+<h2 id="_system_architecture"><a class="anchor" href="#_system_architecture"></a>2. System architecture</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_2_1_architecture_overview">2.1 Architecture overview</h3>
+<h3 id="_2_1_architecture_overview"><a class="anchor" href="#_2_1_architecture_overview"></a>2.1. 2.1 Architecture overview</h3>
 <div class="paragraph">
 <p><strong>Architecture style:</strong> Client-server, three participants. Two thin browser clients and one stateful backend, with all logic and all credentials held server-side.</p>
 </div>
 <div class="sect3">
-<h4 id="_key_architecture_principles">Key architecture principles</h4>
+<h4 id="_key_architecture_principles"><a class="anchor" href="#_key_architecture_principles"></a>2.1.1. Key architecture principles</h4>
 <div class="paragraph">
 <p><strong><a id="AP-01"></a>AP-01 — All logic lives in the backend; clients are presentation only</strong><br>
 <em>Rationale:</em> The clients run on devices the project does not control, in a public setting. Placing generation, moderation, rate limiting, or session policy in a client would expose the API credential and make every rule editable by anyone with developer tools.<br>
@@ -567,7 +604,7 @@ Content filtering addresses profanity, personal information, and hateful, harass
 </div>
 </div>
 <div class="sect2">
-<h3 id="_2_2_architecture_diagram">2.2 Architecture diagram</h3>
+<h3 id="_architecture_diagram"><a class="anchor" href="#_architecture_diagram"></a>2.2. Architecture diagram</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-mermaid" data-lang="mermaid">flowchart TB
@@ -606,9 +643,9 @@ Content filtering addresses profanity, personal information, and hateful, harass
 </div>
 </div>
 <div class="sect2">
-<h3 id="_2_3_system_elements">2.3 System elements</h3>
+<h3 id="_system_elements"><a class="anchor" href="#_system_elements"></a>2.3. System elements</h3>
 <div class="sect3">
-<h4 id="_user_types">User types</h4>
+<h4 id="_user_types"><a class="anchor" href="#_user_types"></a>2.3.1. User types</h4>
 <div class="paragraph">
 <p><strong><a id="UT-01"></a>UT-01 — Participating visitor</strong><br>
 An exhibition visitor who chooses to interact. No prior briefing, no expertise in agentic AI assumed, attention measured in minutes.<br>
@@ -632,7 +669,7 @@ The thesis author. Seeds pilot material before the exhibition and intervenes onl
 </div>
 </div>
 <div class="sect3">
-<h4 id="_software_elements">Software elements</h4>
+<h4 id="_software_elements"><a class="anchor" href="#_software_elements"></a>2.3.2. Software elements</h4>
 <div class="paragraph">
 <p><strong><a id="SE-01"></a>SE-01 — Input client</strong> <em>(Web-application)</em><br>
 The surface a visitor reaches by scanning the code, running in their own mobile browser.<br>
@@ -660,7 +697,7 @@ The single stateful component. Holds the datastore internally (see <a href="#AP-
 </div>
 </div>
 <div class="sect3">
-<h4 id="_hardware_elements">Hardware elements</h4>
+<h4 id="_hardware_elements"><a class="anchor" href="#_hardware_elements"></a>2.3.3. Hardware elements</h4>
 <div class="paragraph">
 <p><strong><a id="HE-01"></a>HE-01 — Visitor smartphone</strong><br>
 <em>Procurement:</em> Assumed-existing<br>
@@ -687,7 +724,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_partner_elements">Partner elements</h4>
+<h4 id="_partner_elements"><a class="anchor" href="#_partner_elements"></a>2.3.4. Partner elements</h4>
 <div class="paragraph">
 <p><strong><a id="PE-01"></a>PE-01 — Language generation API</strong><br>
 <em>Provider:</em> Anthropic (default); OpenAI or an OpenAI-compatible local server, operator-selected<br>
@@ -704,10 +741,10 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_3_system_scenarios">3. System scenarios</h2>
+<h2 id="_system_scenarios"><a class="anchor" href="#_system_scenarios"></a>3. System scenarios</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ssc_01_a_visitor_conducts_a_sparring_session">SSc-01 — A visitor conducts a Sparring session</h3>
+<h3 id="_ssc_01_a_visitor_conducts_a_sparring_session"><a class="anchor" href="#_ssc_01_a_visitor_conducts_a_sparring_session"></a>3.1. SSc-01 — A visitor conducts a Sparring session</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Detailed<br>
 <em>Achieves:</em> <a href="#SG-01">SG-01</a>, <a href="#SG-03">SG-03</a>, <a href="#SG-05">SG-05</a>, <a href="#SG-07">SG-07</a><br>
@@ -780,7 +817,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ssc_02_the_projection_presents_current_material">SSc-02 — The projection presents current material</h3>
+<h3 id="_ssc_02_the_projection_presents_current_material"><a class="anchor" href="#_ssc_02_the_projection_presents_current_material"></a>3.2. SSc-02 — The projection presents current material</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#SG-02">SG-02</a>, <a href="#SG-06">SG-06</a><br>
@@ -804,7 +841,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ssc_03_the_operator_seeds_pilot_material">SSc-03 — The operator seeds pilot material</h3>
+<h3 id="_ssc_03_the_operator_seeds_pilot_material"><a class="anchor" href="#_ssc_03_the_operator_seeds_pilot_material"></a>3.3. SSc-03 — The operator seeds pilot material</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#SG-05">SG-05</a>, <a href="#SG-06">SG-06</a></p>
@@ -827,7 +864,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_4_quality_requirements">4. Quality requirements</h2>
+<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>4. Quality requirements</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="SQR-01"></a>SQR-01 — A Sparring response arrives, or its absence is visible</strong> <em>(Performance)</em><br>
@@ -876,7 +913,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_5_constraints">5. Constraints</h2>
+<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>5. Constraints</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="SC-01"></a>SC-01 — PHP with a file-backed store on a single hosted instance</strong> <em>(Technical)</em><br>
@@ -937,7 +974,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 19:29:50 +0200
+Last updated 2026-08-20 20:54:26 +0200
 </div>
 </div>
 </body>

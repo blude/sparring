@@ -434,8 +434,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
 <h1>Element Design Concept: Display Client</h1>
 <div class="details">
@@ -443,6 +444,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="email" class="email"><a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de">sarah.puppinpratti001@stud.fh-dortmund.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
 <span id="revdate">2026-06-19</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_goals">1. Goals</a></li>
+<li><a href="#_use_cases">2. Use cases</a>
+<ul class="sectlevel2">
+<li><a href="#_uc_01_an_observer_reads_the_projection">2.1. UC-01 — An observer reads the projection</a></li>
+</ul>
+</li>
+<li><a href="#_user_interfaces">3. User interfaces</a>
+<ul class="sectlevel2">
+<li><a href="#_ui_01_projection_surface">3.1. UI-01 — Projection surface</a></li>
+<li><a href="#_open_decisions_sc_06">3.2. Open decisions (SC-06)</a></li>
+</ul>
+</li>
+<li><a href="#_technical_functions">4. Technical functions</a></li>
+<li><a href="#_technical_interfaces_inbound">5. Technical interfaces (inbound)</a></li>
+<li><a href="#_technical_interfaces_outbound">6. Technical interfaces (outbound)</a></li>
+<li><a href="#_entities">7. Entities</a></li>
+<li><a href="#_quality_requirements">8. Quality requirements</a></li>
+<li><a href="#_constraints">9. Constraints</a></li>
+</ul>
 </div>
 </div>
 <div id="content">
@@ -457,11 +481,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p><strong>Sections that apply.</strong> Goals, user interfaces, technical functions, outbound interfaces, entities, quality requirements, and constraints. Use cases are thin and unusual here: the element has one user type who does not interact with it. <a href="#UC-01">UC-01</a> is written anyway, because the element&#8217;s timing behaviour is only specifiable as a flow, and an absent use case section would read as an oversight rather than as a property of a non-interactive surface. Inbound technical interfaces do not apply.</p>
 </div>
+<div class="paragraph">
+<p><a href="index.html">Index</a> / <a href="L1-solution-design-concept.html">Solution Design Concept</a> / <a href="L2-system-design-concept.html">System Design Concept</a> / <strong>Display Client</strong> (SE-02)</p>
+</div>
 <hr>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_goals">1. Goals</h2>
+<h2 id="_goals"><a class="anchor" href="#_goals"></a>1. Goals</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="G-01"></a>G-01 — Make turn-taking visible to people who are not participating</strong><br>
@@ -493,10 +520,10 @@ The element shall label each item so an observer can tell exchanges from differe
 </div>
 </div>
 <div class="sect1">
-<h2 id="_2_use_cases">2. Use cases</h2>
+<h2 id="_use_cases"><a class="anchor" href="#_use_cases"></a>2. Use cases</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_uc_01_an_observer_reads_the_projection"><a id="UC-01"></a>UC-01 — An observer reads the projection</h3>
+<h3 id="_uc_01_an_observer_reads_the_projection"><a class="anchor" href="#_uc_01_an_observer_reads_the_projection"></a>2.1. <a id="UC-01"></a>UC-01 — An observer reads the projection</h3>
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-02">UT-02</a>, <a href="L2-system-design-concept.html#SE-03">SE-03</a><br>
 <em>Prerequisites:</em> The element is running and has completed at least one successful retrieval.<br>
@@ -546,10 +573,10 @@ The element shall label each item so an observer can tell exchanges from differe
 </div>
 </div>
 <div class="sect1">
-<h2 id="_3_user_interfaces">3. User interfaces</h2>
+<h2 id="_user_interfaces"><a class="anchor" href="#_user_interfaces"></a>3. User interfaces</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ui_01_projection_surface"><a id="UI-01"></a>UI-01 — Projection surface</h3>
+<h3 id="_ui_01_projection_surface"><a class="anchor" href="#_ui_01_projection_surface"></a>3.1. <a id="UI-01"></a>UI-01 — Projection surface</h3>
 <div class="paragraph">
 <p><em>User type:</em> <a href="L2-system-design-concept.html#UT-02">UT-02</a><br>
 <em>Realises:</em> <a href="#UC-01">UC-01</a></p>
@@ -642,7 +669,7 @@ The element shall label each item so an observer can tell exchanges from differe
 </div>
 </div>
 <div class="sect2">
-<h3 id="_open_decisions_sc_06">Open decisions (<a href="L2-system-design-concept.html#SC-06">SC-06</a>)</h3>
+<h3 id="_open_decisions_sc_06"><a class="anchor" href="#_open_decisions_sc_06"></a>3.2. Open decisions (<a href="L2-system-design-concept.html#SC-06">SC-06</a>)</h3>
 <div class="paragraph">
 <p>Each is deliberately deferred until real pilot transcripts can be seen on <a href="L2-system-design-concept.html#HE-02">HE-02</a> at exhibition viewing distance. None of them changes the interface <a href="L2-system-design-concept.html#SE-03">SE-03</a> provides, so they can be resolved after the rest of the system works.</p>
 </div>
@@ -688,7 +715,7 @@ The element shall label each item so an observer can tell exchanges from differe
 </div>
 </div>
 <div class="sect1">
-<h2 id="_4_technical_functions">4. Technical functions</h2>
+<h2 id="_technical_functions"><a class="anchor" href="#_technical_functions"></a>4. Technical functions</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="TF-01"></a>TF-01 — Retrieve display material</strong><br>
@@ -765,7 +792,7 @@ The element shall label each item so an observer can tell exchanges from differe
 </div>
 </div>
 <div class="sect1">
-<h2 id="_5_technical_interfaces_inbound">5. Technical interfaces (inbound)</h2>
+<h2 id="_technical_interfaces_inbound"><a class="anchor" href="#_technical_interfaces_inbound"></a>5. Technical interfaces (inbound)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>None. No element calls this one. It is a leaf that only reads.</p>
@@ -774,7 +801,7 @@ The element shall label each item so an observer can tell exchanges from differe
 </div>
 </div>
 <div class="sect1">
-<h2 id="_6_technical_interfaces_outbound">6. Technical interfaces (outbound)</h2>
+<h2 id="_technical_interfaces_outbound"><a class="anchor" href="#_technical_interfaces_outbound"></a>6. Technical interfaces (outbound)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="TO-01"></a>TO-01 — Retrieve display material</strong><br>
@@ -791,7 +818,7 @@ The element shall label each item so an observer can tell exchanges from differe
 </div>
 </div>
 <div class="sect1">
-<h2 id="_7_entities">7. Entities</h2>
+<h2 id="_entities"><a class="anchor" href="#_entities"></a>7. Entities</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="E-01"></a>E-01 — Displayed material</strong><br>
@@ -867,7 +894,7 @@ The element shall label each item so an observer can tell exchanges from differe
 </div>
 </div>
 <div class="sect1">
-<h2 id="_8_quality_requirements">8. Quality requirements</h2>
+<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>8. Quality requirements</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="QR-01"></a>QR-01 — Readable at exhibition viewing distance</strong> <em>(Usability)</em><br>
@@ -925,7 +952,7 @@ The element shall label each item so an observer can tell exchanges from differe
 </div>
 </div>
 <div class="sect1">
-<h2 id="_9_constraints">9. Constraints</h2>
+<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>9. Constraints</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="C-01"></a>C-01 — Layout treatment is an open decision</strong> <em>(Organisational)</em><br>
@@ -973,7 +1000,7 @@ The element shall label each item so an observer can tell exchanges from differe
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 19:29:49 +0200
+Last updated 2026-08-20 20:56:06 +0200
 </div>
 </div>
 </body>

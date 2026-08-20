@@ -434,8 +434,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
 <h1>Element Design Concept: Input Client</h1>
 <div class="details">
@@ -443,6 +444,31 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="email" class="email"><a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de">sarah.puppinpratti001@stud.fh-dortmund.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
 <span id="revdate">2026-06-19</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_goals">1. Goals</a></li>
+<li><a href="#_use_cases">2. Use cases</a>
+<ul class="sectlevel2">
+<li><a href="#_uc_01_begin_a_session">2.1. UC-01 — Begin a session</a></li>
+<li><a href="#_uc_02_contribute_a_turn">2.2. UC-02 — Contribute a turn</a></li>
+<li><a href="#_uc_03_resume_an_interrupted_session">2.3. UC-03 — Resume an interrupted session</a></li>
+<li><a href="#_uc_04_start_a_new_session_deliberately">2.4. UC-04 — Start a new session deliberately</a></li>
+</ul>
+</li>
+<li><a href="#_user_interfaces">3. User interfaces</a>
+<ul class="sectlevel2">
+<li><a href="#_ui_01_session_surface">3.1. UI-01 — Session surface</a></li>
+</ul>
+</li>
+<li><a href="#_technical_functions">4. Technical functions</a></li>
+<li><a href="#_technical_interfaces_inbound">5. Technical interfaces (inbound)</a></li>
+<li><a href="#_technical_interfaces_outbound">6. Technical interfaces (outbound)</a></li>
+<li><a href="#_entities">7. Entities</a></li>
+<li><a href="#_8_quality_requirements">8. 8. Quality requirements</a></li>
+<li><a href="#_constraints">9. Constraints</a></li>
+</ul>
 </div>
 </div>
 <div id="content">
@@ -457,11 +483,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p><strong>Sections that apply.</strong> All sections apply, with user interfaces and use cases as the core. Technical functions are thin by design: per <a href="L2-system-design-concept.html#AP-01">AP-01</a>, this element holds no generation, no moderation, and no session policy. Entities cover in-memory view state only, since nothing is stored on the device.</p>
 </div>
+<div class="paragraph">
+<p><a href="index.html">Index</a> / <a href="L1-solution-design-concept.html">Solution Design Concept</a> / <a href="L2-system-design-concept.html">System Design Concept</a> / <strong>Input Client</strong> (SE-01)</p>
+</div>
 <hr>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_goals">1. Goals</h2>
+<h2 id="_goals"><a class="anchor" href="#_goals"></a>1. Goals</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="G-01"></a>G-01 — Reach a working input surface with nothing but a scan</strong><br>
@@ -509,10 +538,10 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </div>
 </div>
 <div class="sect1">
-<h2 id="_2_use_cases">2. Use cases</h2>
+<h2 id="_use_cases"><a class="anchor" href="#_use_cases"></a>2. Use cases</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_uc_01_begin_a_session"><a id="UC-01"></a>UC-01 — Begin a session</h3>
+<h3 id="_uc_01_begin_a_session"><a class="anchor" href="#_uc_01_begin_a_session"></a>2.1. <a id="UC-01"></a>UC-01 — Begin a session</h3>
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a>, <a href="L2-system-design-concept.html#SE-03">SE-03</a><br>
 <em>Prerequisites:</em> None. This is the entry point.<br>
@@ -562,7 +591,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </div>
 </div>
 <div class="sect2">
-<h3 id="_uc_02_contribute_a_turn"><a id="UC-02"></a>UC-02 — Contribute a turn</h3>
+<h3 id="_uc_02_contribute_a_turn"><a class="anchor" href="#_uc_02_contribute_a_turn"></a>2.2. <a id="UC-02"></a>UC-02 — Contribute a turn</h3>
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a>, <a href="L2-system-design-concept.html#SE-03">SE-03</a><br>
 <em>Prerequisites:</em> <a href="#UC-01">UC-01</a> completed, or <a href="#UC-03">UC-03</a> completed.<br>
@@ -615,7 +644,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </div>
 </div>
 <div class="sect2">
-<h3 id="_uc_03_resume_an_interrupted_session"><a id="UC-03"></a>UC-03 — Resume an interrupted session</h3>
+<h3 id="_uc_03_resume_an_interrupted_session"><a class="anchor" href="#_uc_03_resume_an_interrupted_session"></a>2.3. <a id="UC-03"></a>UC-03 — Resume an interrupted session</h3>
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a>, <a href="L2-system-design-concept.html#SE-03">SE-03</a><br>
 <em>Prerequisites:</em> A session identifier is present in the address.<br>
@@ -653,7 +682,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </div>
 </div>
 <div class="sect2">
-<h3 id="_uc_04_start_a_new_session_deliberately"><a id="UC-04"></a>UC-04 — Start a new session deliberately</h3>
+<h3 id="_uc_04_start_a_new_session_deliberately"><a class="anchor" href="#_uc_04_start_a_new_session_deliberately"></a>2.4. <a id="UC-04"></a>UC-04 — Start a new session deliberately</h3>
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a><br>
 <em>Prerequisites:</em> <a href="#UC-01">UC-01</a> or <a href="#UC-03">UC-03</a> completed — a session, active or complete, is currently shown.<br>
@@ -688,10 +717,10 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </div>
 </div>
 <div class="sect1">
-<h2 id="_3_user_interfaces">3. User interfaces</h2>
+<h2 id="_user_interfaces"><a class="anchor" href="#_user_interfaces"></a>3. User interfaces</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ui_01_session_surface"><a id="UI-01"></a>UI-01 — Session surface</h3>
+<h3 id="_ui_01_session_surface"><a class="anchor" href="#_ui_01_session_surface"></a>3.1. <a id="UI-01"></a>UI-01 — Session surface</h3>
 <div class="paragraph">
 <p><em>User type:</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a><br>
 <em>Realises:</em> <a href="#UC-01">UC-01</a>, <a href="#UC-02">UC-02</a>, <a href="#UC-03">UC-03</a>, <a href="#UC-04">UC-04</a></p>
@@ -886,7 +915,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </div>
 </div>
 <div class="sect1">
-<h2 id="_4_technical_functions">4. Technical functions</h2>
+<h2 id="_technical_functions"><a class="anchor" href="#_technical_functions"></a>4. Technical functions</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="TF-01"></a>TF-01 — Establish the session</strong><br>
@@ -981,7 +1010,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </div>
 </div>
 <div class="sect1">
-<h2 id="_5_technical_interfaces_inbound">5. Technical interfaces (inbound)</h2>
+<h2 id="_technical_interfaces_inbound"><a class="anchor" href="#_technical_interfaces_inbound"></a>5. Technical interfaces (inbound)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>None. The element provides no interface to other elements. It is reached by a person opening a URL, which is not an inbound technical interface in the sense this section covers.</p>
@@ -990,7 +1019,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </div>
 </div>
 <div class="sect1">
-<h2 id="_6_technical_interfaces_outbound">6. Technical interfaces (outbound)</h2>
+<h2 id="_technical_interfaces_outbound"><a class="anchor" href="#_technical_interfaces_outbound"></a>6. Technical interfaces (outbound)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="TO-01"></a>TO-01 — Open a session</strong><br>
@@ -1031,7 +1060,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </div>
 </div>
 <div class="sect1">
-<h2 id="_7_entities">7. Entities</h2>
+<h2 id="_entities"><a class="anchor" href="#_entities"></a>7. Entities</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="E-01"></a>E-01 — Session view state</strong><br>
@@ -1107,7 +1136,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </div>
 </div>
 <div class="sect1">
-<h2 id="_8_quality_requirements">8. Quality requirements</h2>
+<h2 id="_8_quality_requirements"><a class="anchor" href="#_8_quality_requirements"></a>8. 8. Quality requirements</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="QR-01"></a>QR-01 — The in-progress state appears immediately</strong> <em>(Performance)</em><br>
@@ -1165,7 +1194,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </div>
 </div>
 <div class="sect1">
-<h2 id="_9_constraints">9. Constraints</h2>
+<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>9. Constraints</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong><a id="C-01"></a>C-01 — No credential, no policy, no generation in this element</strong> <em>(Technical)</em><br>
@@ -1205,7 +1234,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 19:29:50 +0200
+Last updated 2026-08-20 20:57:09 +0200
 </div>
 </div>
 </body>
