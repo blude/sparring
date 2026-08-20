@@ -136,7 +136,7 @@
       padding: 32px;
       box-sizing: border-box;
       font-size: 0.8125rem;
-      color: #444;
+      color: #666;
   }
   footer p {
       margin: 0 0 1rem;
