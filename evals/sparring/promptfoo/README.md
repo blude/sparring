@@ -74,6 +74,13 @@ Any OpenAI-compatible server works (Ollama, LM Studio, vLLM, llama.cpp's server 
 Leave the `*_PROVIDER` vars unset (or `anthropic`) to use the real Anthropic API — this is
 the default and matches the old suite's behavior.
 
+promptfoo auto-loads a `.env` file from the current directory, same as `config.php`'s own
+loader — so these can go in the repo's root `.env` (already gitignored) alongside
+`ANTHROPIC_API_KEY`, instead of `export`ing them each session. Run via `npm run eval:sparring`
+(not a raw `node`/`npx` call from elsewhere) so the CWD is the repo root. To keep eval
+config out of the app's own `.env` instead, set `envPath: evals/sparring/promptfoo/.env` in
+`promptfooconfig.yaml` and use a separate file.
+
 **Before trusting a full run against a local judge**, run the cheap smoke check above with
 the local judge configured and open `promptfoo view` to confirm the structured output
 actually parsed — not every local model honors strict JSON schema output reliably. `grade.js`
