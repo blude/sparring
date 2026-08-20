@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="author" content="Sarah Puppin Pratti">
+<title>Element Design Concept: Input Client</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock pre>code{display:block}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="article">
+<div id="header">
+<h1>Element Design Concept: Input Client</h1>
+<div class="details">
+<span id="author" class="author">Sarah Puppin Pratti</span><br>
+<span id="email" class="email"><a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de">sarah.puppinpratti001@stud.fh-dortmund.de</a></span><br>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2026-06-19</span>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Element:</strong> <a href="L2-system-design-concept.html#SE-01">SE-01</a> Input client<br>
+<strong>Element profile:</strong> User-facing frontend<br>
+<strong>Parent:</strong> System Design Concept<br>
+<strong>Status:</strong> Draft</p>
+</div>
+<div class="paragraph">
+<p><strong>Sections that apply.</strong> All sections apply, with user interfaces and use cases as the core. Technical functions are thin by design: per <a href="L2-system-design-concept.html#AP-01">AP-01</a>, this element holds no generation, no moderation, and no session policy. Entities cover in-memory view state only, since nothing is stored on the device.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_goals">1. Goals</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong><a id="G-01"></a>G-01 — Reach a working input surface with nothing but a scan</strong><br>
+The element shall present a usable input surface immediately on opening, with no installation, registration, or instruction step.<br>
+<em>Success criteria (qualitative):</em> A visitor who has never seen the piece submits their first contribution without asking anyone how it works.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-01">SG-01</a><br>
+<em>Note:</em> <a href="#UI-01">UI-01</a> shows a "Playbook" card of participation rules on screen load.
+It&#8217;s visually an instruction step, but never gates the input surface — the
+field&#8217;s usability doesn&#8217;t depend on it, and it&#8217;s dismissed automatically by
+the visitor&#8217;s first submission rather than requiring an acknowledgement.
+Documented here as a deliberate, non-blocking exception rather than a silent
+one.<br>
+<em>Note:</em> The page also declares a web app manifest (<code>display: standalone</code>,
+home-screen icon) so a visitor <em>may</em> install it — this is an opt-in a
+visitor reaches through their own browser chrome, never a step the flow
+prompts or requires, so it does not gate <a href="#G-01">G-01</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="G-02"></a>G-02 — Hold the visitor&#8217;s place through interruption</strong><br>
+The element shall restore a session and its exchanges after a reload, a locked device, or a backgrounded tab.<br>
+<em>Success criteria (qualitative):</em> Reloading restores the full session with no loss of prior exchanges and no repeated consent step.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-03">SG-03</a></p>
+</div>
+<div class="paragraph">
+<p><strong><a id="G-03"></a>G-03 — Make waiting and failure legible</strong><br>
+The element shall show that a response is being produced, and shall state plainly when one cannot be.<br>
+<em>Success criteria (quantitative):</em> An in-progress state appears within 300 ms of submission.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-04">SG-04</a><br>
+<em>Rationale:</em> Several seconds of unexplained stillness in a gallery reads as a broken piece, not a thinking one.</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="G-04"></a>G-04 — Make unsuitable input visible</strong><br>
+The element shall show that an input is invalid and should require the user to modify its content before sending again.<br>
+<em>Rationale:</em> Participants should be allowed to edit their input to fix the problem.<br>
+<em>Note:</em> this is the authoritative behavior for unsuitable content — an earlier version of L2&#8217;s <a href="L2-system-design-concept.html#AP-05">AP-05</a> described the session ending instead; that reading is superseded (see L2 <a href="L2-system-design-concept.html#AP-05">AP-05</a>'s own note on why).</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="G-05"></a>G-05 — Give the visitor a light identity, and a way to deliberately start over</strong><br>
+The element shall reveal a generated nickname and avatar in the header once consent is recorded, and shall let the visitor abandon the current session and begin a fresh one on request.<br>
+<em>Success criteria (qualitative):</em> A visitor can find their own alias in the header at any point after consenting, and can start a new session from the same screen without navigating away manually.<br>
+<em>Derived:</em> Yes<br>
+<em>Rationale:</em> The alias/avatar follows from <a href="L2-system-design-concept.html#SE-02">SE-02</a>'s <a href="L3-SE-02-display-client.html#G-04">G-04</a> (display element design) — the wall now labels each session by a generated alias, so a visitor can recognise their own item on the shared surface only if the input client shows them the same value. The new-session control is a related convenience bundled into the same header for the same visitor. Neither was asked for by a stakeholder; both are a UX layer on top of the required consent gate.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_use_cases">2. Use cases</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_uc_01_begin_a_session"><a id="UC-01"></a>UC-01 — Begin a session</h3>
+<div class="paragraph">
+<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a>, <a href="L2-system-design-concept.html#SE-03">SE-03</a><br>
+<em>Prerequisites:</em> None. This is the entry point.<br>
+<em>Achieves:</em> <a href="#G-01">G-01</a>, <a href="#G-05">G-05</a><br>
+<em>Realises:</em> SSc-01</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="ST-01-1"></a>ST-01-1</strong> <em>(Function-call)</em> On load, the element calls <a href="#TF-01">TF-01</a> with the address contents. <a href="#TF-01">TF-01</a> finds no session identifier and requests a new session, returning the identifier and an empty session.</p>
+</li>
+<li>
+<p><strong><a id="ST-01-2"></a>ST-01-2</strong> <em>(Activity)</em> The element places the identifier in the address without adding a history entry.</p>
+</li>
+<li>
+<p><strong><a id="ST-01-3"></a>ST-01-3</strong> <em>(User-interaction)</em> <a href="#UI-01">UI-01</a> presents the consent decision: agreement to take part, plus independent retention and projection choices. The contribution field is present but not usable.</p>
+</li>
+<li>
+<p><strong><a id="ST-01-4"></a>ST-01-4</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a> records their three decisions on <a href="#UI-01">UI-01</a>.</p>
+</li>
+<li>
+<p><strong><a id="ST-01-5"></a>ST-01-5</strong> <em>(Function-call)</em> The element calls <a href="#TF-02">TF-02</a> with the three decisions. <a href="#TF-02">TF-02</a> sends them to <a href="L2-system-design-concept.html#SE-03">SE-03</a> and returns confirmation.</p>
+</li>
+<li>
+<p><strong><a id="ST-01-6"></a>ST-01-6</strong> <em>(Activity)</em> The element enables the contribution field. <a href="#UC-02">UC-02</a> becomes available.</p>
+</li>
+<li>
+<p><strong><a id="ST-01-7"></a>ST-01-7</strong> <em>(Function-call)</em> The element calls <a href="#TF-05">TF-05</a> with the session identifier and reveals the resulting alias and avatar in the header. Never shown before this step — consent is what gates it, not the session&#8217;s existence.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative scenarios</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="EX-01-1"></a>EX-01-1</strong> <em>(extends <a href="#ST-01-1">ST-01-1</a>)</em> Session creation fails. <a href="#UI-01">UI-01</a> states that the installation is not accepting sessions and offers a retry. <em>Outcome:</em> Terminate.</p>
+</li>
+<li>
+<p><strong><a id="EX-01-2"></a>EX-01-2</strong> <em>(extends <a href="#ST-01-4">ST-01-4</a>)</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a> declines retention, projection, or both. The decision(s) are recorded as declined and the flow continues unchanged from <a href="#ST-01-5">ST-01-5</a> — these are real opt-outs, not preconditions. Nothing about the surface differs afterwards. <em>Outcome:</em> Alternative-success.</p>
+</li>
+<li>
+<p><strong><a id="EX-01-3"></a>EX-01-3</strong> <em>(extends <a href="#ST-01-4">ST-01-4</a>)</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a> does not agree to take part. Unlike <a href="#EX-01-2">EX-01-2</a>, the flow does not proceed to <a href="#ST-01-5">ST-01-5</a>: the Confirm action stays disabled and the contribution field remains unusable. <em>Outcome:</em> Terminate.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uc_02_contribute_a_turn"><a id="UC-02"></a>UC-02 — Contribute a turn</h3>
+<div class="paragraph">
+<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a>, <a href="L2-system-design-concept.html#SE-03">SE-03</a><br>
+<em>Prerequisites:</em> <a href="#UC-01">UC-01</a> completed, or <a href="#UC-03">UC-03</a> completed.<br>
+<em>Achieves:</em> <a href="#G-01">G-01</a>, <a href="#G-03">G-03</a><br>
+<em>Realises:</em> SSc-01</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="ST-02-1"></a>ST-02-1</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a> enters a contribution in <a href="#UI-01">UI-01</a>'s input field. The remaining character allowance is shown as they type.</p>
+</li>
+<li>
+<p><strong><a id="ST-02-2"></a>ST-02-2</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a> submits.</p>
+</li>
+<li>
+<p><strong><a id="ST-02-3"></a>ST-02-3</strong> <em>(Activity)</em> The element disables the input field and shows the in-progress state.</p>
+</li>
+<li>
+<p><strong><a id="ST-02-4"></a>ST-02-4</strong> <em>(Function-call)</em> The element calls <a href="#TF-03">TF-03</a> with the session identifier and the contribution. <a href="#TF-03">TF-03</a> submits it and returns the completed exchange.</p>
+</li>
+<li>
+<p><strong><a id="ST-02-5"></a>ST-02-5</strong> <em>(Function-call)</em> The element calls <a href="#TF-04">TF-04</a> with the returned exchange, which appends it to the rendered history.</p>
+</li>
+<li>
+<p><strong><a id="ST-02-6"></a>ST-02-6</strong> <em>(Activity)</em> The element clears the in-progress state, empties and re-enables the input field, and scrolls the newest exchange into view.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative scenarios</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="EX-02-1"></a>EX-02-1</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03</a> reports that the request limit has been reached. <a href="#UI-01">UI-01</a> states this and re-enables the field. The typed contribution is preserved. <em>Outcome:</em> Resume.</p>
+</li>
+<li>
+<p><strong><a id="EX-02-2"></a>EX-02-2</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03</a> reports that the session has reached its turn limit. <a href="#UI-01">UI-01</a> presents the session as complete and leaves the field disabled. The history remains readable. <em>Outcome:</em> Terminate.</p>
+</li>
+<li>
+<p><strong><a id="EX-02-3"></a>EX-02-3</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03</a> reports that no response could be produced. <a href="#UI-01">UI-01</a> states plainly that the installation cannot respond right now and re-enables the field with the contribution preserved. <em>Outcome:</em> Resume.</p>
+</li>
+<li>
+<p><strong><a id="EX-02-4"></a>EX-02-4</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> The request does not complete within the element&#8217;s own wait bound. The element stops waiting and behaves as in <a href="#EX-02-3">EX-02-3</a>. <em>Outcome:</em> Resume.</p>
+</li>
+<li>
+<p><strong><a id="EX-02-5"></a>EX-02-5</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03</a> reports the contribution as flagged (unsuitable). <a href="#UI-01">UI-01</a> states that the message can&#8217;t be shown — with wording that varies by coarse category (personal information versus inappropriate content, see <a href="#QR-06">QR-06</a>) — and re-enables the field with the contribution preserved, same shape as <a href="#EX-02-1">EX-02-1</a>/<a href="#EX-02-3">EX-02-3</a>. The session itself is unaffected. <em>Outcome:</em> Resume.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uc_03_resume_an_interrupted_session"><a id="UC-03"></a>UC-03 — Resume an interrupted session</h3>
+<div class="paragraph">
+<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a>, <a href="L2-system-design-concept.html#SE-03">SE-03</a><br>
+<em>Prerequisites:</em> A session identifier is present in the address.<br>
+<em>Achieves:</em> <a href="#G-02">G-02</a>, <a href="#G-05">G-05</a><br>
+<em>Realises:</em> SSc-01</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="ST-03-1"></a>ST-03-1</strong> <em>(Function-call)</em> On load, the element calls <a href="#TF-01">TF-01</a> with the address contents. <a href="#TF-01">TF-01</a> finds an identifier and fetches the existing session from <a href="L2-system-design-concept.html#SE-03">SE-03</a>.</p>
+</li>
+<li>
+<p><strong><a id="ST-03-2"></a>ST-03-2</strong> <em>(Function-call)</em> The element calls <a href="#TF-04">TF-04</a> with the returned exchanges, which renders the history.</p>
+</li>
+<li>
+<p><strong><a id="ST-03-3"></a>ST-03-3</strong> <em>(Activity)</em> The element restores the surface to its correct state: input enabled if the session is open, presented as complete if it has reached its limit. The consent decision is not asked again.</p>
+</li>
+<li>
+<p><strong><a id="ST-03-4"></a>ST-03-4</strong> <em>(Function-call)</em> If the consent decision was already recorded on an earlier visit, the element calls <a href="#TF-05">TF-05</a> and reveals the alias and avatar immediately, same as <a href="#ST-01-7">ST-01-7</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative scenarios</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="EX-03-1"></a>EX-03-1</strong> <em>(extends <a href="#ST-03-1">ST-03-1</a>)</em> The identifier is unknown to <a href="L2-system-design-concept.html#SE-03">SE-03</a> or has expired. The element discards it and continues as <a href="#UC-01">UC-01</a> from <a href="#ST-01-1">ST-01-1</a>. <em>Outcome:</em> Alternative-success.</p>
+</li>
+<li>
+<p><strong><a id="EX-03-2"></a>EX-03-2</strong> <em>(extends <a href="#ST-03-3">ST-03-3</a>)</em> The identifier is known but the consent decision was never recorded (<code>awaiting-decision</code>). The element presents <a href="#UI-01">UI-01</a>'s consent decision again, same as <a href="#ST-01-3">ST-01-3</a>, and continues as <a href="#UC-01">UC-01</a> from there. <em>Outcome:</em> Alternative-success.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uc_04_start_a_new_session_deliberately"><a id="UC-04"></a>UC-04 — Start a new session deliberately</h3>
+<div class="paragraph">
+<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a><br>
+<em>Prerequisites:</em> <a href="#UC-01">UC-01</a> or <a href="#UC-03">UC-03</a> completed — a session, active or complete, is currently shown.<br>
+<em>Achieves:</em> <a href="#G-05">G-05</a><br>
+<em>Realises:</em> SSc-01</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="ST-04-1"></a>ST-04-1</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a> presses "New session" in the header.</p>
+</li>
+<li>
+<p><strong><a id="ST-04-2"></a>ST-04-2</strong> <em>(User-interaction)</em> The element asks <a href="L2-system-design-concept.html#UT-01">UT-01</a> to confirm, stating that the current session will no longer be shown.</p>
+</li>
+<li>
+<p><strong><a id="ST-04-3"></a>ST-04-3</strong> <em>(Activity)</em> On confirmation, the element opens the surface with no session identifier in the address, which begins <a href="#UC-01">UC-01</a> from <a href="#ST-01-1">ST-01-1</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative scenarios</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="EX-04-1"></a>EX-04-1</strong> <em>(extends <a href="#ST-04-2">ST-04-2</a>)</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a> does not confirm. Nothing changes and the current session continues undisturbed. <em>Outcome:</em> Terminate.</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_3_user_interfaces">3. User interfaces</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_ui_01_session_surface"><a id="UI-01"></a>UI-01 — Session surface</h3>
+<div class="paragraph">
+<p><em>User type:</em> <a href="L2-system-design-concept.html#UT-01">UT-01</a><br>
+<em>Realises:</em> <a href="#UC-01">UC-01</a>, <a href="#UC-02">UC-02</a>, <a href="#UC-03">UC-03</a>, <a href="#UC-04">UC-04</a></p>
+</div>
+<div class="paragraph">
+<p>A single scrolling surface. The exchange history occupies the upper region, the input field is anchored below it. There is no navigation, no menu, and no second view.</p>
+</div>
+<div class="paragraph">
+<p><strong>Visible data</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Displayed</th>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Conditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consent notice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What happens to the session, what each of the three decisions means, and which one is required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Static</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Until the decision is recorded</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exchange history</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Visitor contributions and Sparring responses in order, visually distinguished by speaker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.4">E-01.4</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Once at least one exchange exists</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session title</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A short (≤38 character) title summarising the session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-06">TF-06</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"Untitled" from session start; replaced once <a href="#TF-06">TF-06</a> resolves, after the first exchange completes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In-progress state</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">That a response is being produced</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.5">E-01.5</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">While a submission is outstanding</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remaining turns</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many contributions remain in the session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.3">E-01.3</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Always, once the session is open</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Character allowance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Characters remaining for the current contribution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-04">TF-04</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">While the field holds content</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Plain statement of a limit reached or a failure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-01.6">E-01.6</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When set</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Visitor alias</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The generated nickname, shown in a popover on request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-05">TF-05</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Once consent is recorded</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Visitor avatar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string (emoji)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A small avatar in the header, always visible alongside the alias</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-05">TF-05</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Once consent is recorded</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Actions</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Action</th>
+<th class="tableblock halign-left valign-top">Represents</th>
+<th class="tableblock halign-left valign-top">Use case</th>
+<th class="tableblock halign-left valign-top">Conditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record consent decisions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Three checkboxes, none preselected — agreement to take part, retention, projection — plus one Confirm action, enabled only once the participation checkbox is checked</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-01">UC-01</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Before the session is open</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Submit contribution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button press, and keyboard submit on devices with a physical keyboard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-02">UC-02</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enabled only when the field holds content, the session is open, and no submission is outstanding</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button press</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-01">UC-01</a>, <a href="#UC-02">UC-02</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only alongside a failure status message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">View own identity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Press the avatar to open a popover showing the alias; dismissed by pressing elsewhere, pressing the avatar again, or Escape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-01">UC-01</a>, <a href="#UC-03">UC-03</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Once consent is recorded</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start a new session</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button press, with a confirmation step</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-04">UC-04</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Always available once a session exists</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Switch interface language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Press EN or DE; the choice persists across the session and future visits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Always available</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Input fields</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Entered</th>
+<th class="tableblock halign-left valign-top">Validation (UI level only)</th>
+<th class="tableblock halign-left valign-top">Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contribution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What the visitor wants to work on, or their reply to the Sparring partner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required. Bounded length, enforced at the field and again by <a href="L2-system-design-concept.html#SE-03">SE-03</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-02">UC-02</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Navigation</strong></p>
+</div>
+<div class="paragraph">
+<p>None. The element has one surface. The address carries the session identifier but is never used to move between views.</p>
+</div>
+<div class="paragraph">
+<p><strong>Presentation notes.</strong> The consent decision must be answerable without scrolling on a small phone, or it becomes an obstacle at the exact moment the visitor is deciding whether to engage at all. None of the three checkboxes is preselected: a preselected or visually dominant "accept" is a dark pattern and defeats the point of asking. This holds even for the participation checkbox, which is required to proceed — required is not the same as defaulted-on. The avatar and alias stay hidden through the consent decision itself; nothing about "who" a visitor is appears until they have agreed to take part. A brief motion/sound layer on the consent decision and on submission (<a href="#QR-07">QR-07</a>) is thematic flair matching the exhibition&#8217;s martial-arts framing — decorative, never a condition for proceeding.</p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_4_technical_functions">4. Technical functions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong><a id="TF-01"></a>TF-01 — Establish the session</strong><br>
+<em>Detail level:</em> Stepwise<br>
+<em>Achieves:</em> <a href="#G-01">G-01</a>, <a href="#G-02">G-02</a></p>
+</div>
+<div class="paragraph">
+<p>Determines whether a session already exists and produces one either way, so that the calling use case does not branch on it.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FS-01-1"></a>FS-01-1</strong> <em>(Data-operation)</em> Read the session identifier from the address. If absent, continue at <a href="#FS-01-3">FS-01-3</a>.</p>
+</li>
+<li>
+<p><strong><a id="FS-01-2"></a>FS-01-2</strong> <em>(Outbound-call)</em> Call <a href="#TO-03">TO-03</a> with the identifier. On success, return the session and its exchanges, and stop. <em>Call behaviour:</em> Synchronous, single attempt, 10 second timeout. A not-found or expired response is not an error and continues at <a href="#FS-01-3">FS-01-3</a>. A timeout or transport failure surfaces to the caller as a failure.</p>
+</li>
+<li>
+<p><strong><a id="FS-01-3"></a>FS-01-3</strong> <em>(Outbound-call)</em> Call <a href="#TO-01">TO-01</a> to create a session. Return the identifier and an empty exchange list. <em>Call behaviour:</em> Synchronous, two attempts with a 1 second delay between them, 10 second timeout per attempt. Exhausted attempts surface to the caller as a failure.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative flows</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FA-01-1"></a>FA-01-1</strong> <em>(extends <a href="#FS-01-2">FS-01-2</a>)</em> The identifier is unknown or expired. Discard it and continue at <a href="#FS-01-3">FS-01-3</a>. <em>Outcome:</em> Resume.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong><a id="TF-02"></a>TF-02 — Record the consent decision</strong><br>
+<em>Detail level:</em> Narrative<br>
+<em>Achieves:</em> <a href="#G-01">G-01</a></p>
+</div>
+<div class="paragraph">
+<p>Sends the visitor&#8217;s three decisions — agreement to take part, retention, projection — to <a href="L2-system-design-concept.html#SE-03">SE-03</a> via <a href="#TO-01">TO-01</a> and holds the returned confirmation in <a href="#E-01">E-01</a>. Synchronous, two attempts, 10 second timeout per attempt. Exhausted attempts leave the session unopened and surface a failure, because opening the input field without a recorded decision would retain content the visitor never agreed to. A declined-participation response is not a transport failure and is handled separately (<a href="#EX-01-3">EX-01-3</a>): the field simply stays unusable. On a successful decision, a one-time title-card animation plays (<a href="#QR-07">QR-07</a>) — purely presentational, no goal relation, and never a condition for the field becoming usable. If the address also carries a recognized opening-prompt identifier — a fixed set authored in code, one per QR code printed for the exhibition — a successful decision additionally triggers <a href="#TF-03">TF-03</a> once, automatically, with the corresponding pre-authored text as the contribution, before the visitor has typed anything. An unrecognized or absent identifier takes no action; the field opens empty as usual.</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="TF-03"></a>TF-03 — Submit a contribution</strong><br>
+<em>Detail level:</em> Stepwise<br>
+<em>Achieves:</em> <a href="#G-01">G-01</a>, <a href="#G-03">G-03</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FS-03-1"></a>FS-03-1</strong> <em>(Data-operation)</em> Trim the contribution and reject it locally if it is empty or exceeds the bound, without calling out.</p>
+</li>
+<li>
+<p><strong><a id="FS-03-2"></a>FS-03-2</strong> <em>(Outbound-call)</em> Call <a href="#TO-02">TO-02</a> with the session identifier and the contribution. <em>Call behaviour:</em> Synchronous. No retry, because a retried submission risks producing a duplicate exchange and the visitor is watching. Wait bound set slightly above <a href="L2-system-design-concept.html#SE-03">SE-03</a>'s own generation bound, which is TBC alongside <a href="L2-system-design-concept.html#SQR-01">SQR-01</a>. On rate-limit, turn-limit, flagged-content, or generation-failure responses, return the reported condition to the caller rather than treating it as a fault. On timeout or transport failure, return a generation-failure condition.</p>
+</li>
+<li>
+<p><strong><a id="FS-03-3"></a>FS-03-3</strong> <em>(Data-operation)</em> Append the returned exchange to <a href="#E-01">E-01</a> and decrement the remaining turn count.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative flows</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FA-03-1"></a>FA-03-1</strong> <em>(extends <a href="#FS-03-2">FS-03-2</a>)</em> Any reported condition is returned unchanged to the caller, which decides what <a href="#UI-01">UI-01</a> shows. Grouping is intentional: this function does not distinguish between them because it takes the same action for all. <em>Outcome:</em> Resume.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong><a id="TF-04"></a>TF-04 — Render the exchange history</strong><br>
+<em>Detail level:</em> Narrative</p>
+</div>
+<div class="paragraph">
+<p>Produces the visible history from <a href="#E-01">E-01</a>. Visitor and Sparring contributions are visually distinguished. Content from <a href="L2-system-design-concept.html#SE-03">SE-03</a> is inserted as text, never as markup, so that anything a visitor types cannot alter the surface. Submission and its outcome additionally carry a non-blocking presentational layer — a brief motion and sound cue on submit, and on a rejected/failed result — layered on top of this rendering, never gating it (<a href="#QR-07">QR-07</a>). No goal relation: this is presentation logic serving use cases that already reference the goals.</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="TF-05"></a>TF-05 — Derive visitor identity</strong><br>
+<em>Detail level:</em> Narrative<br>
+<em>Achieves:</em> <a href="#G-05">G-05</a></p>
+</div>
+<div class="paragraph">
+<p>Computes a nickname and an avatar emoji as a pure function of the session identifier (<a href="#E-01.1">E-01.1</a>) — no call to <a href="L2-system-design-concept.html#SE-03">SE-03</a>, nothing written anywhere. The same derivation runs in <a href="L2-system-design-concept.html#SE-02">SE-02</a>, so a visitor&#8217;s alias reads identically wherever it appears. Consistent with <a href="L2-system-design-concept.html#AP-03">AP-03</a>: identity stays derived from what already travels in the address, never a new piece of state.</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="TF-06"></a>TF-06 — Refine the session title</strong><br>
+<em>Detail level:</em> Narrative</p>
+</div>
+<div class="paragraph">
+<p>Once the first exchange completes (<a href="#UC-02">UC-02</a>), the element calls <a href="#TO-04">TO-04</a> with the session identifier to request a refined title, and replaces the header&#8217;s default "Untitled" state with it when one comes back. Deliberately non-blocking and best-effort: it is not a step of <a href="#UC-02">UC-02</a>'s own sequence, carries no wait bound, and never gates the field or the response the visitor is watching for. Its failure (network, timeout, malformed response) is invisible rather than reported — the header simply stays "Untitled," unlike <a href="#QR-02">QR-02</a>'s failure-statement requirement, which is about the turn itself, not this. No goal relation: like <a href="#TF-04">TF-04</a>, this is presentation logic layered on a use case that already references the goals.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_5_technical_interfaces_inbound">5. Technical interfaces (inbound)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>None. The element provides no interface to other elements. It is reached by a person opening a URL, which is not an inbound technical interface in the sense this section covers.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_6_technical_interfaces_outbound">6. Technical interfaces (outbound)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong><a id="TO-01"></a>TO-01 — Open a session</strong><br>
+<em>Statement:</em> This interface creates a session and records the consent decision by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03</a>). Used for establishing a session before any contribution is possible.<br>
+<em>Input:</em> Three consent booleans — agreement to take part, retention, projection — required together on the decision call; all absent on the creation call.<br>
+<em>Output:</em> Session identifier, turn allowance, session state.<br>
+<em>Error cases:</em> Service unavailable. Malformed request. Declined to agree to take part — distinct from a malformed request, since the shape is valid but the value is a hard no.<br>
+<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03</a> element design, <a href="L3-SE-03-backend-service.html#TI-01">TI-01</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="TO-02"></a>TO-02 — Submit a contribution</strong><br>
+<em>Statement:</em> This interface submits a visitor contribution and obtains the Sparring response by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03</a>). Used for every turn after the session is open.<br>
+<em>Input:</em> Session identifier, contribution text.<br>
+<em>Output:</em> The completed exchange, updated remaining turn count, session state.<br>
+<em>Error cases:</em> Request limit reached. Session turn limit reached. Contribution flagged as unsuitable — the visitor edits and resubmits; the session is unaffected. Generation failed. Session unknown or expired. Contribution rejected as malformed or over-length.<br>
+<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03</a> element design, <a href="L3-SE-03-backend-service.html#TI-02">TI-02</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="TO-03"></a>TO-03 — Retrieve a session</strong><br>
+<em>Statement:</em> This interface fetches an existing session and its exchanges by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03</a>). Used for restoring state after an interruption.<br>
+<em>Input:</em> Session identifier.<br>
+<em>Output:</em> Session state, turn allowance and remaining count, ordered exchanges.<br>
+<em>Error cases:</em> Session unknown or expired. Service unavailable.<br>
+<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03</a> element design, <a href="L3-SE-03-backend-service.html#TI-03">TI-03</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="TO-04"></a>TO-04 — Refine a session title</strong><br>
+<em>Statement:</em> This interface requests a short, refined title for a session&#8217;s first contribution by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03</a>). Used once per session, after the first exchange completes.<br>
+<em>Input:</em> Session identifier.<br>
+<em>Output:</em> Refined title (string) — always a usable value when the call succeeds; <a href="L2-system-design-concept.html#SE-03">SE-03</a> falls back to a trim-based title internally rather than ever returning failure for "couldn&#8217;t generate one" (see <a href="L2-system-design-concept.html#SE-03">SE-03</a> <a href="L3-SE-03-backend-service.html#TF-07">TF-07</a>).<br>
+<em>Error cases:</em> Service unavailable. Session unknown. Malformed request. None of these are shown to the visitor (<a href="#TF-06">TF-06</a>) — the header simply keeps its default "Untitled" state.<br>
+<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03</a> element design, <a href="L3-SE-03-backend-service.html#TI-06">TI-06</a>.</p>
+</div>
+<div class="paragraph">
+<p><em>No <code>Calls → PE-</code> relation applies. This element reaches no partner element directly, per <a href="L2-system-design-concept.html#AP-01">AP-01</a>.</em></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_7_entities">7. Entities</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong><a id="E-01"></a>E-01 — Session view state</strong><br>
+<em>Persistence:</em> In-memory. Discarded when the page unloads, and rebuilt from <a href="L2-system-design-concept.html#SE-03">SE-03</a> on the next load. Nothing is written to device storage.<br>
+<em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01</a> (partially; the authoritative record is <a href="L2-system-design-concept.html#SE-03">SE-03</a>'s <a href="L3-SE-03-backend-service.html#E-01">E-01</a>)</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ID</th>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.1"></a>E-01.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sessionId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identifier held in the address. Opaque to this element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.2"></a>E-01.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sessionState</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>awaiting-decision</code>, <code>open</code>, <code>complete</code>, <code>failed</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.3"></a>E-01.3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">turnsRemaining</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contributions still permitted. Supplied by <a href="L2-system-design-concept.html#SE-03">SE-03</a>, never computed here.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.4"></a>E-01.4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exchanges</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ordered exchanges, each a visitor contribution and its Sparring response. May be empty.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.5"></a>E-01.5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">submissionOutstanding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether a submission is awaiting a response. Drives the in-progress state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.6"></a>E-01.6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">statusMessage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Plain statement of the current limit or failure. Cleared on the next successful submission.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em>The device holds no consent record. The decision is sent to <a href="L2-system-design-concept.html#SE-03">SE-03</a> and its consequences are enforced there. Holding a local copy would create a second source of truth for the one thing that must not have one.</em></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_8_quality_requirements">8. Quality requirements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong><a id="QR-01"></a>QR-01 — The in-progress state appears immediately</strong> <em>(Performance)</em><br>
+<em>Applies to:</em> <a href="#UI-01">UI-01</a>, <a href="#TF-03">TF-03</a><br>
+<em>Acceptance criteria:</em> The state is visible within 300 ms of submission and persists until the response or a failure arrives.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-01">SQR-01</a></p>
+</div>
+<div class="paragraph">
+<p><strong><a id="QR-02"></a>QR-02 — Every failure produces a statement</strong> <em>(Usability)</em><br>
+<em>Applies to:</em> <a href="#UI-01">UI-01</a>, <a href="#TF-01">TF-01</a>, <a href="#TF-03">TF-03</a><br>
+<em>Acceptance criteria (qualitative):</em> No condition leaves the surface unresponsive or unexplained. Every path that stops shows what happened and whether the visitor can continue.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-07">SQR-07</a></p>
+</div>
+<div class="paragraph">
+<p><strong><a id="QR-03"></a>QR-03 — Usable on a phone held in one hand</strong> <em>(Usability)</em><br>
+<em>Applies to:</em> <a href="#UI-01">UI-01</a><br>
+<em>Acceptance criteria (qualitative):</em> Input field and submit action reachable one-handed on a small phone with the software keyboard raised. The consent decision is answerable without scrolling.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-03">SQR-03</a><br>
+<em>Element specific:</em> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="QR-04"></a>QR-04 — Visitor content cannot alter the surface</strong> <em>(Security)</em><br>
+<em>Applies to:</em> <a href="#TF-04">TF-04</a><br>
+<em>Acceptance criteria:</em> All content returned from <a href="L2-system-design-concept.html#SE-03">SE-03</a> is inserted as text. No path renders it as markup, with one narrow exception: a single <code>mermaid</code> fenced block in a sparring turn is parsed by mermaid.js in <code>securityLevel: 'strict'</code> (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. Visitor turns are never routed through this path regardless of content.<br>
+<em>Element specific:</em> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="QR-05"></a>QR-05 — Works on current mobile browsers without a build step</strong> <em>(Compatibility)</em><br>
+<em>Applies to:</em> The element overall<br>
+<em>Acceptance criteria (qualitative):</em> Functions on current mobile Safari and Chrome. No transpilation, bundling, or framework runtime.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02</a><br>
+<em>Rationale:</em> <a href="L2-system-design-concept.html#SC-03">SC-03</a>. A build pipeline is one more thing that can be broken at 9am on opening day.</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="QR-06"></a>QR-06 — Diagnostic detail is available to an operator, hidden by default</strong> <em>(Maintainability)</em><br>
+<em>Applies to:</em> <a href="#UI-01">UI-01</a><br>
+<em>Acceptance criteria:</em> An address flag reveals session id, origin, rate-limit remaining, generation timing, and the exact moderation reason (from <a href="L2-system-design-concept.html#SE-03">SE-03</a>'s <a href="L3-SE-03-backend-service.html#TI-01">TI-01</a>/<a href="L3-SE-03-backend-service.html#TI-02">TI-02</a>/<a href="L3-SE-03-backend-service.html#TI-03">TI-03</a> outputs) alongside the normal surface. Absent by default; no visitor-facing affordance exposes or hints at the <em>exact</em> reason. The standard (non-debug) flagged-message copy does, deliberately, show a coarser two-category hint derived from the same value — personal information versus inappropriate content — narrow enough that it doesn&#8217;t expose which specific classification or wordlist match fired.<br>
+<em>Element specific:</em> Yes<br>
+<em>Rationale:</em> Serves <a href="L2-system-design-concept.html#UT-03">UT-03</a>'s stated need (L2 §2.3) to diagnose a fault quickly and remotely, without adding an administrative interface (which <a href="L2-system-design-concept.html#SC-03">SC-03</a> rules out).</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="QR-07"></a>QR-07 — Motion respects a reduced-motion preference; every effect is individually switchable</strong> <em>(Usability/Accessibility)</em><br>
+<em>Applies to:</em> <a href="#UI-01">UI-01</a>, <a href="#TF-02">TF-02</a>, <a href="#TF-04">TF-04</a><br>
+<em>Acceptance criteria:</em> Every added animation (consent-decision title card, submit motion, rejection motion) is suppressed when the OS-level reduced-motion preference is set, without disabling submission or the consent decision itself. Sound is a separate signal — <code>prefers-reduced-motion</code> is a vestibular-motion preference and does not govern audio — and is instead gated solely by its own configuration switch. Each effect (title card, submit motion, rejection motion, sound) can be turned off independently by configuration, with no code change, and a single configuration switch turns all of them off at once. The title card plays once the consent decision is recorded, not on any submission, so it never overlaps <a href="#QR-01">QR-01</a>'s in-progress state — the two have no shared trigger.<br>
+<em>Element specific:</em> Yes<br>
+<em>Rationale:</em> TODO.md&#8217;s JUICYNESS requirement is explicitly presentational flair, not core functionality — it must be possible to remove without touching <a href="#TF-01">TF-01</a> through <a href="#TF-03">TF-03</a>, and must never become an accessibility regression.</p>
+</div>
+<div class="paragraph">
+<p><strong><a id="QR-08"></a>QR-08 — Interface language is selectable and matches on first visit where possible</strong> <em>(Usability)</em><br>
+<em>Applies to:</em> <a href="#UI-01">UI-01</a><br>
+<em>Acceptance criteria:</em> The surface is available in English and German. On a first visit the interface language follows the device/browser&#8217;s own language setting when it names a supported language, English otherwise; an explicit switch overrides this and persists across the session and future visits on the same device. The AI&#8217;s own reply language is a separate behavior (<a href="#TF-03">TF-03</a>/prompt-level, see <a href="L2-system-design-concept.html#SE-03">SE-03</a>) that follows what the visitor types, not this setting.<br>
+<em>Element specific:</em> Yes</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_9_constraints">9. Constraints</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong><a id="C-01"></a>C-01 — No credential, no policy, no generation in this element</strong> <em>(Technical)</em><br>
+<em>Source:</em> <a href="L2-system-design-concept.html#AP-01">AP-01</a>.<br>
+<em>Applies to:</em> All technical functions and outbound interfaces.<br>
+<em>Acceptance criteria:</em> The element contains no provider credential and no limit, filter, or generation logic beyond field-level input bounds.<br>
+<em>Consequence:</em> Rules out any direct call to <a href="L2-system-design-concept.html#PE-01">PE-01</a> and any client-side enforcement that <a href="L2-system-design-concept.html#SE-03">SE-03</a> does not repeat.<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-01">SC-01</a></p>
+</div>
+<div class="paragraph">
+<p><strong><a id="C-02"></a>C-02 — Session identity lives in the address, not in device storage</strong> <em>(Technical)</em><br>
+<em>Source:</em> <a href="L2-system-design-concept.html#AP-03">AP-03</a>.<br>
+<em>Applies to:</em> <a href="#TF-01">TF-01</a>, <a href="#E-01">E-01</a>.<br>
+<em>Acceptance criteria:</em> The identifier is read from and written to the address only. No cookie, no local storage, no session storage.<br>
+<em>Consequence:</em> Rules out silent identity persistence across visits. A visitor who closes the tab has ended their session, which is the intended behaviour. Scoped to session identity specifically — a device-level UI language preference (<a href="#QR-08">QR-08</a>) is a separate concern and may persist by whatever means fits, same as the existing sessionStorage-held composer draft.<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-05">SC-05</a></p>
+</div>
+<div class="paragraph">
+<p><strong><a id="C-03"></a>C-03 — Consent is decided before input is possible</strong> <em>(Legal-regulatory)</em><br>
+<em>Source:</em> <a href="L2-system-design-concept.html#SC-05">SC-05</a>.<br>
+<em>Applies to:</em> <a href="#UC-01">UC-01</a>, <a href="#UI-01">UI-01</a>.<br>
+<em>Acceptance criteria:</em> The contribution field cannot be submitted until a decision is recorded. What actually gates it is agreement to take part specifically — retention and projection are recorded at the same moment but, as real opt-outs, do not themselves block anything. None of the three options is preselected or visually favoured.<br>
+<em>Consequence:</em> Rules out deferring the decision until after the first contribution. Rules out treating retention or projection decline as equivalent to declining to take part.<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-05">SC-05</a></p>
+</div>
+<div class="paragraph">
+<p><strong><a id="C-04"></a>C-04 — No build step</strong> <em>(Technical)</em><br>
+<em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03</a>.<br>
+<em>Applies to:</em> The element overall.<br>
+<em>Acceptance criteria:</em> The element ships as files served directly, with no compilation or bundling.<br>
+<em>Consequence:</em> Rules out any framework requiring a build. Deployment is a file copy. One deliberate exception: <code>assets/zzfx.min.js</code> (ZzFX, MIT license) is a vendored, pre-built third-party file loaded via a plain <code>&lt;script&gt;</code> tag — nothing is installed, built, or bundled, so this still satisfies the acceptance criteria above. It is the sound-effect synthesis engine for <a href="#QR-07">QR-07</a>'s motion/sound layer, and the one dependency TODO.md&#8217;s JUICYNESS requirement explicitly authorized ("This is where external dependencies are warranted").<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03</a></p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.0<br>
+Last updated 2026-08-20 19:29:50 +0200
+</div>
+</div>
+</body>
+</html>
