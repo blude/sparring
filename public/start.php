@@ -60,7 +60,7 @@
       height: 112px;
   }
   /* logo: real "Sparring" / "スパーリング" text stays in the DOM for a11y/SEO,
-     visually replaced by the exported logotype SVGs — typography is a deliberate
+     visually replaced by the exported logotype PNG — typography is a deliberate
      design choice, not something a system font can reproduce */
   .logo {
       position: relative;
@@ -83,7 +83,7 @@
       left: 0;
       width: 203px;
       height: 58px;
-      background-image: url(assets/img/logo-sparring-v2b.svg);
+      background-image: url(assets/img/logo-sparring-v2b.png);
   }
   .alpha-notice {
       margin: 0;
