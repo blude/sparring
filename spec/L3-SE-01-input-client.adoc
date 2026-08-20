@@ -1,4 +1,6 @@
 = Element Design Concept: Input Client
+Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
+v.1.0, 2026-06-19
 
 *Element:* xref:L2-system-design-concept.adoc#SE-01[SE-01] Input client +
 *Element profile:* User-facing frontend +

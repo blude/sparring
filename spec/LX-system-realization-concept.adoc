@@ -1,4 +1,6 @@
 = System Realization Concept
+Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
+v.1.0, 2026-06-19
 
 == Available Setup
 

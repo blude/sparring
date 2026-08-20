@@ -1,8 +1,9 @@
 = Solution Design Concept
+Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
+v.1.0, 2026-06-19
 
 *Solution:* Sparring Exhibition Object +
 *Venue:* Superraum, Dortmund +
-*Author:* Sarah Pratti +
 *Status:* Draft +
 *Scope note:* Deliberately thin. This level exists to record _why_ the installation is being built and what it must be true from a non-technical perspective. No Digital Design Brief sits above it, so business constraints carry no `Refines → BRC-` relation. Those relations are omitted rather than pointed at IDs that do not exist.
 
