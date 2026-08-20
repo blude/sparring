@@ -45,7 +45,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
+      gap: 0.5rem;
   }
   .gloves-box {
       width: 112px;
