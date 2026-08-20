@@ -448,7 +448,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_system_goals">1. System goals</a></li>
+<li><a href="#_system_goals">1. System goals</a>
+<ul class="sectlevel2">
+<li><a href="#_sg_01_start_a_session_from_a_personal_device_with_no_installation_or_account">1.1. SG-01 Start a session from a personal device with no installation or account</a></li>
+<li><a href="#_sg_02_make_turn_taking_readable_from_across_the_room">1.2. SG-02 Make turn-taking readable from across the room</a></li>
+<li><a href="#_sg_03_survive_interruption_of_the_visitors_session">1.3. SG-03 Survive interruption of the visitor&#8217;s session</a></li>
+<li><a href="#_sg_04_run_unattended_and_absorb_misuse_without_operator_intervention">1.4. SG-04 Run unattended and absorb misuse without operator intervention</a></li>
+<li><a href="#_sg_05_record_every_interaction_with_its_origin_fixed_at_creation">1.5. SG-05 Record every interaction with its origin fixed at creation</a></li>
+<li><a href="#_sg_06_never_present_an_empty_surface">1.6. SG-06 Never present an empty surface</a></li>
+<li><a href="#_sg_07_gate_public_projection_at_the_moment_of_submission_not_after_the_fact">1.7. SG-07 Gate public projection at the moment of submission, not after the fact</a></li>
+</ul>
+</li>
 <li><a href="#_system_architecture">2. System architecture</a>
 <ul class="sectlevel2">
 <li><a href="#_architecture_overview">2.1. Architecture overview</a>
@@ -474,8 +484,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_ssc_03_the_operator_seeds_pilot_material">3.3. SSc-03 — The operator seeds pilot material</a></li>
 </ul>
 </li>
-<li><a href="#_quality_requirements">4. Quality requirements</a></li>
-<li><a href="#_constraints">5. Constraints</a></li>
+<li><a href="#_quality_requirements">4. Quality requirements</a>
+<ul class="sectlevel2">
+<li><a href="#_sqr_01_a_sparring_response_arrives_or_its_absence_is_visible_performance">4.1. SQR-01 A Sparring response arrives, or its absence is visible <em>(Performance)</em></a></li>
+<li><a href="#_sqr_02_the_installation_recovers_without_a_person_present_availability">4.2. SQR-02 The installation recovers without a person present <em>(Availability)</em></a></li>
+<li><a href="#_sqr_03_the_projection_is_readable_at_exhibition_viewing_distance_usability">4.3. SQR-03 The projection is readable at exhibition viewing distance <em>(Usability)</em></a></li>
+<li><a href="#_sqr_04_credentials_and_quota_are_protected_from_the_public_security">4.4. SQR-04 Credentials and quota are protected from the public <em>(Security)</em></a></li>
+<li><a href="#_sqr_05_origin_is_fixed_at_creation_and_never_inferred_data_integrity">4.5. SQR-05 Origin is fixed at creation and never inferred <em>(Data-integrity)</em></a></li>
+<li><a href="#_sqr_06_public_projection_is_governed_separately_from_retention_compliance">4.6. SQR-06 Public projection is governed separately from retention <em>(Compliance)</em></a></li>
+<li><a href="#_sqr_07_the_installation_degrades_visibly_rather_than_silently_reliability_recorded_under_availability">4.7. SQR-07 The installation degrades visibly rather than silently <em>(Reliability, recorded under Availability)</em></a></li>
+</ul>
+</li>
+<li><a href="#_constraints">5. Constraints</a>
+<ul class="sectlevel2">
+<li><a href="#_sc_01_php_with_a_file_backed_store_on_a_single_hosted_instance_technical">5.1. SC-01 PHP with a file-backed store on a single hosted instance <em>(Technical)</em></a></li>
+<li><a href="#_sc_02_the_public_endpoint_must_be_served_over_https_with_a_valid_certificate_technical">5.2. SC-02 The public endpoint must be served over HTTPS with a valid certificate <em>(Technical)</em></a></li>
+<li><a href="#_sc_03_build_effort_is_capped_and_the_piece_is_expendable_business">5.3. SC-03 Build effort is capped and the piece is expendable <em>(Business)</em></a></li>
+<li><a href="#_sc_04_generation_is_rate_limited_and_metered_by_the_provider_integration">5.4. SC-04 Generation is rate-limited and metered by the provider <em>(Integration)</em></a></li>
+<li><a href="#_sc_05_retention_requires_consent_projection_requires_consent_and_only_ever_carries_content_that_already_passed_suitability_legal_regulatory">5.5. SC-05 Retention requires consent; projection requires consent, and only ever carries content that already passed suitability <em>(Legal-regulatory)</em></a></li>
+<li><a href="#_sc_06_the_projected_layout_is_an_open_decision_organisational">5.6. SC-06 The projected layout is an open decision <em>(Organisational)</em></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -497,52 +526,66 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_system_goals"><a class="anchor" href="#_system_goals"></a>1. System goals</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_sg_01_start_a_session_from_a_personal_device_with_no_installation_or_account"><a class="anchor" href="#_sg_01_start_a_session_from_a_personal_device_with_no_installation_or_account"></a>1.1. <a id="SG-01"></a>SG-01 Start a session from a personal device with no installation or account</h3>
 <div class="paragraph">
-<p><strong><a id="SG-01"></a>SG-01 Start a session from a personal device with no installation or account</strong><br>
-The system shall let a visitor reach a working input surface by scanning a code, with no app, login, or staff assistance.<br>
+<p>The system shall let a visitor reach a working input surface by scanning a code, with no app, login, or staff assistance.<br>
 <em>Success criteria (qualitative):</em> From scan to first submitted turn requires no step other than consent and typing.<br>
 <em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-02">BG-02 Give visitors direct, unassisted first-hand experience</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sg_02_make_turn_taking_readable_from_across_the_room"><a class="anchor" href="#_sg_02_make_turn_taking_readable_from_across_the_room"></a>1.2. <a id="SG-02"></a>SG-02 Make turn-taking readable from across the room</h3>
 <div class="paragraph">
-<p><strong><a id="SG-02"></a>SG-02 Make turn-taking readable from across the room</strong><br>
-The system shall present recent exchanges on a projected surface at a size and pacing that allows a standing observer to read a complete visitor contribution and its Sparring reply.<br>
+<p>The system shall present recent exchanges on a projected surface at a size and pacing that allows a standing observer to read a complete visitor contribution and its Sparring reply.<br>
 <em>Success criteria (qualitative):</em> A complete exchange is legible at typical viewing distance in the exhibition space. Exact typography and layout: TBC.<br>
 <em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-01">BG-01 Make Sparring&#8217;s friction visible to an audience</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sg_03_survive_interruption_of_the_visitors_session"><a class="anchor" href="#_sg_03_survive_interruption_of_the_visitors_session"></a>1.3. <a id="SG-03"></a>SG-03 Survive interruption of the visitor&#8217;s session</h3>
 <div class="paragraph">
-<p><strong><a id="SG-03"></a>SG-03 Survive interruption of the visitor&#8217;s session</strong><br>
-The system shall let a visitor return to their session after a page reload, a locked phone, or a backgrounded browser, without losing prior turns.<br>
+<p>The system shall let a visitor return to their session after a page reload, a locked phone, or a backgrounded browser, without losing prior turns.<br>
 <em>Success criteria (qualitative):</em> Reloading the input surface restores the session and its history.<br>
 <em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-02">BG-02 Give visitors direct, unassisted first-hand experience</a><br>
 <em>Rationale:</em> Exhibition devices are fidgeted with. A session lost to a reload is indistinguishable in the record from a visitor who gave up.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sg_04_run_unattended_and_absorb_misuse_without_operator_intervention"><a class="anchor" href="#_sg_04_run_unattended_and_absorb_misuse_without_operator_intervention"></a>1.4. <a id="SG-04"></a>SG-04 Run unattended and absorb misuse without operator intervention</h3>
 <div class="paragraph">
-<p><strong><a id="SG-04"></a>SG-04 Run unattended and absorb misuse without operator intervention</strong><br>
-The system shall limit request volume per visitor, cap session length and input size, and continue functioning when individual requests are rejected.<br>
+<p>The system shall limit request volume per visitor, cap session length and input size, and continue functioning when individual requests are rejected.<br>
 <em>Success criteria (qualitative):</em> No failure mode requires someone in the room to restore the projection.<br>
 <em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-03">BG-03 Run unattended through exhibition hours</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sg_05_record_every_interaction_with_its_origin_fixed_at_creation"><a class="anchor" href="#_sg_05_record_every_interaction_with_its_origin_fixed_at_creation"></a>1.5. <a id="SG-05"></a>SG-05 Record every interaction with its origin fixed at creation</h3>
 <div class="paragraph">
-<p><strong><a id="SG-05"></a>SG-05 Record every interaction with its origin fixed at creation</strong><br>
-The system shall persist sessions and exchanges tagged as pilot or live at the moment they are created.<br>
+<p>The system shall persist sessions and exchanges tagged as pilot or live at the moment they are created.<br>
 <em>Success criteria (qualitative):</em> Live exhibition material can be extracted without manual sorting.<br>
 <em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sg_06_never_present_an_empty_surface"><a class="anchor" href="#_sg_06_never_present_an_empty_surface"></a>1.6. <a id="SG-06"></a>SG-06 Never present an empty surface</h3>
 <div class="paragraph">
-<p><strong><a id="SG-06"></a>SG-06 Never present an empty surface</strong><br>
-When no live session is available for display, the system shall present pilot material instead.<br>
+<p>When no live session is available for display, the system shall present pilot material instead.<br>
 <em>Success criteria (qualitative):</em> The projection is populated at all times while running.<br>
 <em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-01">BG-01 Make Sparring&#8217;s friction visible to an audience</a>, <a href="L1-solution-design-concept.html#BG-03">BG-03 Run unattended through exhibition hours</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sg_07_gate_public_projection_at_the_moment_of_submission_not_after_the_fact"><a class="anchor" href="#_sg_07_gate_public_projection_at_the_moment_of_submission_not_after_the_fact"></a>1.7. <a id="SG-07"></a>SG-07 Gate public projection at the moment of submission, not after the fact</h3>
 <div class="paragraph">
-<p><strong><a id="SG-07"></a>SG-07 Gate public projection at the moment of submission, not after the fact</strong><br>
-The system shall reject a contribution assessed as unsuitable before it reaches the Sparring partner or the display feed, rather than storing it and hiding it later.<br>
+<p>The system shall reject a contribution assessed as unsuitable before it reaches the Sparring partner or the display feed, rather than storing it and hiding it later.<br>
 <em>Success criteria (qualitative):</em> An unsuitable contribution never becomes an exchange; the visitor sees that it was rejected and can edit and resubmit; the session itself continues.<br>
 <em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-01">BG-01 Make Sparring&#8217;s friction visible to an audience</a><br>
 <em>Supports:</em> <a href="L1-solution-design-concept.html#BQR-03">BQR-03 Nothing identifying a visitor reaches the projection</a>.<br>
 <em>Rationale:</em> Gating at submission rather than at display means nothing unsuitable is ever written down in the first place — there is no later step where it could leak. This also means projection eligibility for a <em>stored</em> exchange no longer needs a moderation-driven flag of its own: everything stored has already passed the check by construction, so what&#8217;s actually projected is governed by the visitor&#8217;s own projection consent (see <a href="#SC-05">SC-05 Retention requires consent; projection requires</a>), not by re-deciding suitability at read time.</p>
 </div>
 <hr>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -886,99 +929,124 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 <div class="sect1">
 <h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>4. Quality requirements</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_sqr_01_a_sparring_response_arrives_or_its_absence_is_visible_performance"><a class="anchor" href="#_sqr_01_a_sparring_response_arrives_or_its_absence_is_visible_performance"></a>4.1. <a id="SQR-01"></a>SQR-01 A Sparring response arrives, or its absence is visible <em>(Performance)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SQR-01"></a>SQR-01 A Sparring response arrives, or its absence is visible</strong> <em>(Performance)</em><br>
-<em>Applies to:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-03">SE-03 Backend service</a>, <a href="#PE-01">PE-01 Language generation API</a><br>
+<p><em>Applies to:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-03">SE-03 Backend service</a>, <a href="#PE-01">PE-01 Language generation API</a><br>
 <em>Acceptance criteria:</em> <a href="#SE-01">SE-01 Input client</a> presents an unambiguous in-progress state within 300 ms of submission and maintains it until a response or failure arrives. <a href="#SE-03">SE-03 Backend service</a> abandons a generation request after a bounded interval rather than leaving the visitor with an indefinite wait. The bound is TBC pending measurement of real response times through <a href="#PE-01">PE-01 Language generation API</a>.<br>
 <em>Supports:</em> <a href="L1-solution-design-concept.html#BQR-01">BQR-01 Visitors experience challenge, not obstruction</a><br>
 <em>Rationale:</em> On a phone in a gallery, several seconds of nothing is read as broken. The in-progress state is not decoration.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sqr_02_the_installation_recovers_without_a_person_present_availability"><a class="anchor" href="#_sqr_02_the_installation_recovers_without_a_person_present_availability"></a>4.2. <a id="SQR-02"></a>SQR-02 The installation recovers without a person present <em>(Availability)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SQR-02"></a>SQR-02 The installation recovers without a person present</strong> <em>(Availability)</em><br>
-<em>Applies to:</em> <a href="#SE-02">SE-02 Display client</a>, <a href="#SE-03">SE-03 Backend service</a>, <a href="#HE-03">HE-03 Hosted server</a><br>
+<p><em>Applies to:</em> <a href="#SE-02">SE-02 Display client</a>, <a href="#SE-03">SE-03 Backend service</a>, <a href="#HE-03">HE-03 Hosted server</a><br>
 <em>Acceptance criteria (qualitative):</em> <a href="#SE-02">SE-02 Display client</a> recovers from a backend outage on its own next interval with no reload. <a href="#SE-03">SE-03 Backend service</a> restarts automatically after a process failure. No fault requires physical access to <a href="#HE-02">HE-02 Projection setup</a> to clear.<br>
 <em>Supports:</em> <a href="L1-solution-design-concept.html#BQR-02">BQR-02 The piece is available whenever the room is open</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sqr_03_the_projection_is_readable_at_exhibition_viewing_distance_usability"><a class="anchor" href="#_sqr_03_the_projection_is_readable_at_exhibition_viewing_distance_usability"></a>4.3. <a id="SQR-03"></a>SQR-03 The projection is readable at exhibition viewing distance <em>(Usability)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SQR-03"></a>SQR-03 The projection is readable at exhibition viewing distance</strong> <em>(Usability)</em><br>
-<em>Applies to:</em> <a href="#SE-02">SE-02 Display client</a>, <a href="#HE-02">HE-02 Projection setup</a><br>
+<p><em>Applies to:</em> <a href="#SE-02">SE-02 Display client</a>, <a href="#HE-02">HE-02 Projection setup</a><br>
 <em>Acceptance criteria (qualitative):</em> A complete exchange is readable by a standing observer at the room&#8217;s typical viewing distance. Verified in place on the actual projector before opening, not in a browser window.<br>
 <em>Supports:</em> <a href="L1-solution-design-concept.html#BQR-01">BQR-01 Visitors experience challenge, not obstruction</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sqr_04_credentials_and_quota_are_protected_from_the_public_security"><a class="anchor" href="#_sqr_04_credentials_and_quota_are_protected_from_the_public_security"></a>4.4. <a id="SQR-04"></a>SQR-04 Credentials and quota are protected from the public <em>(Security)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SQR-04"></a>SQR-04 Credentials and quota are protected from the public</strong> <em>(Security)</em><br>
-<em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
+<p><em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
 <em>Acceptance criteria:</em> The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window. Contribution length is bounded. Session length is bounded. Specific limits TBC pending a cost estimate against expected visitor volume.<br>
 <em>Externally sourced:</em> Yes (provider terms and cost exposure rather than a business quality requirement)</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sqr_05_origin_is_fixed_at_creation_and_never_inferred_data_integrity"><a class="anchor" href="#_sqr_05_origin_is_fixed_at_creation_and_never_inferred_data_integrity"></a>4.5. <a id="SQR-05"></a>SQR-05 Origin is fixed at creation and never inferred <em>(Data-integrity)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SQR-05"></a>SQR-05 Origin is fixed at creation and never inferred</strong> <em>(Data-integrity)</em><br>
-<em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
+<p><em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
 <em>Acceptance criteria (qualitative):</em> Every session carries pilot or live from the moment it is created. No process assigns or corrects origin afterwards. Extraction of exhibition material filters on the stored value.<br>
 <em>Supports:</em> <a href="L1-solution-design-concept.html#BQR-04">BQR-04 Exhibition material is never mistaken for evaluation</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sqr_06_public_projection_is_governed_separately_from_retention_compliance"><a class="anchor" href="#_sqr_06_public_projection_is_governed_separately_from_retention_compliance"></a>4.6. <a id="SQR-06"></a>SQR-06 Public projection is governed separately from retention <em>(Compliance)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SQR-06"></a>SQR-06 Public projection is governed separately from retention</strong> <em>(Compliance)</em><br>
-<em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a>, <a href="#SE-02">SE-02 Display client</a><br>
+<p><em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a>, <a href="#SE-02">SE-02 Display client</a><br>
 <em>Acceptance criteria (qualitative):</em> Display eligibility, retention consent, and agreement to take part are stored as three distinct properties, each recorded independently. A session may be retained and not projected, or projected and not retained, in any combination. Display eligibility is set directly from the visitor&#8217;s projection consent at decision time — suitability is enforced earlier, at write time (<a href="#AP-05">AP-05 Moderation gates storage, not a per-session display</a>/<a href="#SG-07">SG-07 Gate public projection at the moment of submission</a>), so nothing reaches storage that projection consent alone would need to filter back out.<br>
 <em>Supports:</em> <a href="L1-solution-design-concept.html#BQR-03">BQR-03 Nothing identifying a visitor reaches the projection</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sqr_07_the_installation_degrades_visibly_rather_than_silently_reliability_recorded_under_availability"><a class="anchor" href="#_sqr_07_the_installation_degrades_visibly_rather_than_silently_reliability_recorded_under_availability"></a>4.7. <a id="SQR-07"></a>SQR-07 The installation degrades visibly rather than silently <em>(Reliability, recorded under Availability)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SQR-07"></a>SQR-07 The installation degrades visibly rather than silently</strong> <em>(Reliability, recorded under Availability)</em><br>
-<em>Applies to:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-02">SE-02 Display client</a><br>
+<p><em>Applies to:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-02">SE-02 Display client</a><br>
 <em>Acceptance criteria (qualitative):</em> Every failure the visitor can encounter produces a plain statement of what happened. No failure presents as an unresponsive interface. This includes routing failures (unmatched path) and uncaught infrastructure faults on a page request, not only the failure conditions <a href="#SE-01">SE-01 Input client</a>/<a href="#SE-02">SE-02 Display client</a> raise themselves.<br>
 <em>Supports:</em> <a href="L1-solution-design-concept.html#BQR-01">BQR-01 Visitors experience challenge, not obstruction</a></p>
 </div>
 <hr>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_constraints"><a class="anchor" href="#_constraints"></a>5. Constraints</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_sc_01_php_with_a_file_backed_store_on_a_single_hosted_instance_technical"><a class="anchor" href="#_sc_01_php_with_a_file_backed_store_on_a_single_hosted_instance_technical"></a>5.1. <a id="SC-01"></a>SC-01 PHP with a file-backed store on a single hosted instance <em>(Technical)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SC-01"></a>SC-01 PHP with a file-backed store on a single hosted instance</strong> <em>(Technical)</em><br>
-<em>Source:</em> Operator&#8217;s existing capability and maintenance preference.<br>
+<p><em>Source:</em> Operator&#8217;s existing capability and maintenance preference.<br>
 <em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
 <em>Acceptance criteria:</em> The system runs on one instance with no external database or queue service.<br>
 <em>Consequence:</em> Rules out horizontal scaling and any architecture requiring a message broker or separate database host.<br>
 <em>Derived:</em> Yes<br>
 <em>Rationale:</em> A technology choice, not a stated business or legal need — it follows from <a href="L1-solution-design-concept.html#BC-03">BC-03 One developer, no continuous on-site operator</a>'s one-developer, no-ops premise rather than refining it directly.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sc_02_the_public_endpoint_must_be_served_over_https_with_a_valid_certificate_technical"><a class="anchor" href="#_sc_02_the_public_endpoint_must_be_served_over_https_with_a_valid_certificate_technical"></a>5.2. <a id="SC-02"></a>SC-02 The public endpoint must be served over HTTPS with a valid certificate <em>(Technical)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SC-02"></a>SC-02 The public endpoint must be served over HTTPS with a valid certificate</strong> <em>(Technical)</em><br>
-<em>Source:</em> Mobile browser and camera-based code scanning behaviour.<br>
+<p><em>Source:</em> Mobile browser and camera-based code scanning behaviour.<br>
 <em>Applies to:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-02">SE-02 Display client</a>, <a href="#SE-03">SE-03 Backend service</a>, <a href="#HE-03">HE-03 Hosted server</a><br>
 <em>Acceptance criteria:</em> A scanned code opens <a href="#SE-01">SE-01 Input client</a> without a certificate warning on current mobile browsers.<br>
 <em>Consequence:</em> Rules out serving from a bare IP address or a self-signed certificate.<br>
 <em>Externally sourced:</em> Yes</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sc_03_build_effort_is_capped_and_the_piece_is_expendable_business"><a class="anchor" href="#_sc_03_build_effort_is_capped_and_the_piece_is_expendable_business"></a>5.3. <a id="SC-03"></a>SC-03 Build effort is capped and the piece is expendable <em>(Business)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SC-03"></a>SC-03 Build effort is capped and the piece is expendable</strong> <em>(Business)</em><br>
-<em>Source:</em> <a href="L1-solution-design-concept.html#BC-01">BC-01 Build effort must not compete with thesis writing</a>.<br>
+<p><em>Source:</em> <a href="L1-solution-design-concept.html#BC-01">BC-01 Build effort must not compete with thesis writing</a>.<br>
 <em>Applies to:</em> All software elements.<br>
 <em>Acceptance criteria (qualitative):</em> No element depends on infrastructure that would take more than a day to restore, and abandoning the installation entirely would not affect thesis delivery.<br>
 <em>Consequence:</em> Rules out an administrative interface, an analytics layer, and any build pipeline. Operator tasks are performed directly against the instance.<br>
 <em>Refines:</em> <a href="L1-solution-design-concept.html#BC-01">BC-01 Build effort must not compete with thesis writing</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sc_04_generation_is_rate_limited_and_metered_by_the_provider_integration"><a class="anchor" href="#_sc_04_generation_is_rate_limited_and_metered_by_the_provider_integration"></a>5.4. <a id="SC-04"></a>SC-04 Generation is rate-limited and metered by the provider <em>(Integration)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SC-04"></a>SC-04 Generation is rate-limited and metered by the provider</strong> <em>(Integration)</em><br>
-<em>Source:</em> <a href="#PE-01">PE-01 Language generation API</a> provider terms.<br>
+<p><em>Source:</em> <a href="#PE-01">PE-01 Language generation API</a> provider terms.<br>
 <em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
 <em>Acceptance criteria:</em> <a href="#SE-03">SE-03 Backend service</a> handles provider rate-limit and quota responses as expected conditions rather than faults, and its own limits are set below the provider&#8217;s.<br>
 <em>Consequence:</em> Rules out unthrottled request forwarding. Sets an upper bound on concurrent visitors, which is TBC.<br>
 <em>Externally sourced:</em> Yes</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sc_05_retention_requires_consent_projection_requires_consent_and_only_ever_carries_content_that_already_passed_suitability_legal_regulatory"><a class="anchor" href="#_sc_05_retention_requires_consent_projection_requires_consent_and_only_ever_carries_content_that_already_passed_suitability_legal_regulatory"></a>5.5. <a id="SC-05"></a>SC-05 Retention requires consent; projection requires consent, and only ever carries content that already passed suitability <em>(Legal-regulatory)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SC-05"></a>SC-05 Retention requires consent; projection requires consent, and only ever carries content that already passed suitability</strong> <em>(Legal-regulatory)</em><br>
-<em>Source:</em> <a href="L1-solution-design-concept.html#BC-02">BC-02 Public user-generated content is subject to data</a>.<br>
+<p><em>Source:</em> <a href="L1-solution-design-concept.html#BC-02">BC-02 Public user-generated content is subject to data</a>.<br>
 <em>Applies to:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-03">SE-03 Backend service</a><br>
 <em>Acceptance criteria (qualitative):</em> No session is retained past the exhibition without a recorded decision. No session is projected without a recorded projection decision, and nothing unsuitable is ever available to project in the first place — suitability is enforced at write time (<a href="#AP-05">AP-05 Moderation gates storage, not a per-session display</a>), not as a second gate applied to already-stored content. Neither retention nor projection consent may be bundled with the precondition of taking part at all (<a href="L1-solution-design-concept.html#BC-02">BC-02 Public user-generated content is subject to data</a>).<br>
 <em>Consequence:</em> Rules out a single consent switch governing both retention and projection, and rules out treating "may I participate" and "may my content be kept/shown" as the same decision.<br>
 <em>Refines:</em> <a href="L1-solution-design-concept.html#BC-02">BC-02 Public user-generated content is subject to data</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_sc_06_the_projected_layout_is_an_open_decision_organisational"><a class="anchor" href="#_sc_06_the_projected_layout_is_an_open_decision_organisational"></a>5.6. <a id="SC-06"></a>SC-06 The projected layout is an open decision <em>(Organisational)</em></h3>
 <div class="paragraph">
-<p><strong><a id="SC-06"></a>SC-06 The projected layout is an open decision</strong> <em>(Organisational)</em><br>
-<em>Source:</em> <a href="L1-solution-design-concept.html#BC-04">BC-04 Display design is not yet settled</a>.<br>
+<p><em>Source:</em> <a href="L1-solution-design-concept.html#BC-04">BC-04 Display design is not yet settled</a>.<br>
 <em>Applies to:</em> <a href="#SE-02">SE-02 Display client</a><br>
 <em>Acceptance criteria:</em> TBC. To be resolved against real pilot transcripts on <a href="#HE-02">HE-02 Projection setup</a> in the exhibition space.<br>
 <em>Consequence:</em> <a href="#SE-02">SE-02 Display client</a>'s element design specifies a baseline sufficient to build against and marks the layout treatment as TBC. <a href="#SE-03">SE-03 Backend service</a>'s display interface must not encode assumptions specific to one layout.<br>
@@ -1000,10 +1068,11 @@ Downward references from L3 are not written here. Element designs declare their 
 </div>
 </div>
 </div>
+</div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:32:40 +0200
+Last updated 2026-08-20 21:35:48 +0200
 </div>
 </div>
 </body>

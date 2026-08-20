@@ -23,32 +23,38 @@ xref:index.adoc[Index] / xref:L1-solution-design-concept.adoc[Solution Design Co
 
 == Goals
 
-*[[G-01]]G-01 Produce Sparring responses and hold every rule that governs them* +
+=== [[G-01]]G-01 Produce Sparring responses and hold every rule that governs them
+
 The element shall be the sole location of generation, moderation, rate limiting, and session policy, so that no rule is editable from a device the project does not control. +
 _Success criteria (qualitative):_ No client contains a provider credential or any limit the element does not independently enforce. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-01[SG-01 Start a session from a personal device with no], xref:L2-system-design-concept.adoc#SG-04[SG-04 Run unattended and absorb misuse without operator]
 
-*[[G-02]]G-02 Keep a session usable across interruption* +
+=== [[G-02]]G-02 Keep a session usable across interruption
+
 The element shall resolve a session identifier to its full state and history for as long as the session is live. +
 _Success criteria (qualitative):_ A session fetched after an interruption returns identical content to what its participant last saw. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-03[SG-03 Survive interruption of the visitor's session]
 
-*[[G-03]]G-03 Persist every interaction with its origin fixed at creation* +
+=== [[G-03]]G-03 Persist every interaction with its origin fixed at creation
+
 The element shall record sessions and exchanges tagged pilot or live at the moment of creation, with no later assignment or correction. +
 _Success criteria (qualitative):_ Exhibition material is extractable by filtering one stored value. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-05[SG-05 Record every interaction with its origin fixed at]
 
-*[[G-04]]G-04 Decide what may be stored, and let the visitor's own choice decide what may be projected* +
+=== [[G-04]]G-04 Decide what may be stored, and let the visitor's own choice decide what may be projected
+
 The element shall assess each contribution for suitability before it is stored, rejecting an unsuitable one so the visitor can edit and resubmit rather than silently hiding it after the fact. Whether a _stored_ exchange is projected is then a separate question, answered by the visitor's own projection consent, not by re-running suitability at display time. +
 _Success criteria (qualitative):_ Nothing unsuitable is ever stored. A session that declined projection consent never appears on the wall regardless of content; a session that granted it does, for as long as its content keeps passing the write-time check. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-07[SG-07 Gate public projection at the moment of submission]
 
-*[[G-05]]G-05 Keep the display surface populated* +
+=== [[G-05]]G-05 Keep the display surface populated
+
 The element shall supply display material at all times, falling back to pilot-origin sessions when insufficient live material is eligible. +
 _Success criteria (qualitative):_ The display feed is never empty while the element is running and pilot material exists. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-06[SG-06 Never present an empty surface]
 
-*[[G-06]]G-06 Absorb load and misuse without failing* +
+=== [[G-06]]G-06 Absorb load and misuse without failing
+
 The element shall reject excess requests, over-length contributions, and over-long sessions as expected conditions, and shall continue serving other visitors when it does. +
 _Success criteria (qualitative):_ A rejected request affects only its own session. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-04[SG-04 Run unattended and absorb misuse without operator]
@@ -328,58 +334,69 @@ _Purely technical, with no L1 business entity counterpart._
 
 == Quality requirements
 
-*[[QR-01]]QR-01 Generation is bounded and its bound is enforced here* _(Performance)_ +
+=== [[QR-01]]QR-01 Generation is bounded and its bound is enforced here _(Performance)_
+
 _Applies to:_ <<TF-01,TF-01 Process a visitor turn>>, <<TO-01,TO-01 Request a Sparring response>> +
 _Acceptance criteria:_ <<TF-01,TF-01 Process a visitor turn>> abandons a generation request at a fixed bound and returns a generation-failed condition. The bound is TBC, to be set from measured response times, and must be below xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client]'s own wait bound so that the element decides the outcome rather than the client timing out first. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-01[SQR-01 A Sparring response arrives, or its absence is visible]
 
-*[[QR-02]]QR-02 Restarts unattended* _(Availability)_ +
+=== [[QR-02]]QR-02 Restarts unattended _(Availability)_
+
 _Applies to:_ The element overall +
 _Acceptance criteria:_ The process restarts automatically after failure. No in-memory state is required for correctness after a restart, because everything needed is in <<E-01,E-01 Session>> through <<E-03,E-03 Rate limit window>>. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-02[SQR-02 The installation recovers without a person present]
 
-*[[QR-03]]QR-03 A rejected request affects only its own session* _(Availability)_ +
+=== [[QR-03]]QR-03 A rejected request affects only its own session _(Availability)_
+
 _Applies to:_ <<TF-01,TF-01 Process a visitor turn>>, <<TF-03,TF-03 Enforce request limits>> +
 _Acceptance criteria:_ Rate limiting, turn limits, and generation failures return a condition for the requesting session and leave every other session serviceable. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-02[SQR-02 The installation recovers without a person present]
 
-*[[QR-04]]QR-04 The provider credential never leaves the host* _(Security)_ +
+=== [[QR-04]]QR-04 The provider credential never leaves the host _(Security)_
+
 _Applies to:_ <<TO-01,TO-01 Request a Sparring response>>, <<TO-02,TO-02 Request a classification>> +
 _Acceptance criteria:_ The credential is read from host configuration, is absent from version control, and appears in no response body, error message, or log line. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-04[SQR-04 Credentials and quota are protected from the public]
 
-*[[QR-05]]QR-05 Limits are enforced on every path* _(Security)_ +
+=== [[QR-05]]QR-05 Limits are enforced on every path _(Security)_
+
 _Applies to:_ <<TF-01,TF-01 Process a visitor turn>>, <<TF-03,TF-03 Enforce request limits>>, <<TI-02,TI-02 Submit a contribution>> +
 _Acceptance criteria:_ Contribution length, session turn allowance, and request rate are each checked in this element regardless of whether a client has already checked them. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-04[SQR-04 Credentials and quota are protected from the public]
 
-*[[QR-06]]QR-06 Origin is written once* _(Data-integrity)_ +
+=== [[QR-06]]QR-06 Origin is written once _(Data-integrity)_
+
 _Applies to:_ <<E-01,E-01 Session>>, <<TF-06,TF-06 Import pilot transcripts>>, <<TI-01,TI-01 Open a session>> +
 _Acceptance criteria:_ <<E-01.4,E-01.4 origin>> is set at creation and no code path updates it. No process infers origin from any other value. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-05[SQR-05 Origin is fixed at creation and never inferred]
 
-*[[QR-07]]QR-07 No partial exchange is ever stored* _(Data-integrity)_ +
+=== [[QR-07]]QR-07 No partial exchange is ever stored _(Data-integrity)_
+
 _Applies to:_ <<TF-01,TF-01 Process a visitor turn>> +
 _Acceptance criteria:_ <<E-02,E-02 Exchange>> is written only after a response has been received. Every failure path in <<FS-01-8,FS-01-8>> writes nothing. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-05[SQR-05 Origin is fixed at creation and never inferred] +
 _Element specific:_ Yes
 
-*[[QR-08]]QR-08 Suitability assessment fails closed* _(Compliance)_ +
+=== [[QR-08]]QR-08 Suitability assessment fails closed _(Compliance)_
+
 _Applies to:_ <<TF-02,TF-02 Assess a contribution for projection suitability>> +
 _Acceptance criteria:_ Every failure of <<TF-02,TF-02 Assess a contribution for projection suitability>>, including provider unavailability, yields an unsuitable outcome. No path treats an unavailable classifier as permission to project. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-06[SQR-06 Public projection is governed separately from retention]
 
-*[[QR-09]]QR-09 Projection eligibility and retention consent are never conflated* _(Compliance)_ +
+=== [[QR-09]]QR-09 Projection eligibility and retention consent are never conflated _(Compliance)_
+
 _Applies to:_ <<E-01,E-01 Session>>, <<TF-01,TF-01 Process a visitor turn>>, <<TF-04,TF-04 Assemble display material>>, <<TI-01,TI-01 Open a session>> +
 _Acceptance criteria:_ <<E-01.7,E-01.7 consentGranted>> (retention) is read and written independently of <<E-01.6,E-01.6 displayable>>/<<E-01.11,E-01.11 projectionConsent>> (projection). <<E-01.6,E-01.6 displayable>> is permitted to derive from <<E-01.11,E-01.11 projectionConsent>> — that is the one intentional coupling, recorded once at consent time, not re-derived elsewhere — but no path derives <<E-01.7,E-01.7 consentGranted>> from either, or <<E-01.11,E-01.11 projectionConsent>> from <<E-01.7,E-01.7 consentGranted>>. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-06[SQR-06 Public projection is governed separately from retention]
 
-*[[QR-10]]QR-10 No raw request origin is stored* _(Compliance)_ +
+=== [[QR-10]]QR-10 No raw request origin is stored _(Compliance)_
+
 _Applies to:_ <<E-03,E-03 Rate limit window>>, <<TF-03,TF-03 Enforce request limits>> +
 _Acceptance criteria:_ Only the hashed origin is written. The raw value exists in memory for the duration of the request and nowhere else. +
 _Element specific:_ Yes
 
-*[[QR-11]]QR-11 Infrastructure faults degrade to a generic error, not a leak* _(Security)_ +
+=== [[QR-11]]QR-11 Infrastructure faults degrade to a generic error, not a leak _(Security)_
+
 _Applies to:_ <<TI-01,TI-01 Open a session>>, <<TI-02,TI-02 Submit a contribution>>, <<TI-03,TI-03 Retrieve a session>>, <<TI-04,TI-04 Retrieve display material>> +
 _Acceptance criteria:_ An uncaught exception on any public endpoint (missing credential, unwritable store, or any other infrastructure fault) returns a generic JSON error with no file path, stack trace, or exception message. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-04[SQR-04 Credentials and quota are protected from the public]
@@ -388,42 +405,48 @@ _Supports:_ xref:L2-system-design-concept.adoc#SQR-04[SQR-04 Credentials and quo
 
 == Constraints
 
-*[[C-01]]C-01 PHP with a file-backed store on one instance* _(Technical)_ +
+=== [[C-01]]C-01 PHP with a file-backed store on one instance _(Technical)_
+
 _Source:_ xref:L2-system-design-concept.adoc#SC-01[SC-01 PHP with a file-backed store on a single hosted]. +
 _Applies to:_ The element overall, <<E-01,E-01 Session>> through <<E-03,E-03 Rate limit window>>. +
 _Acceptance criteria:_ Runs as a single process group against a single store file, with no external database, cache, or queue service. +
 _Consequence:_ Rules out any design requiring concurrent write scaling or a background worker. Long-running work must complete within the request, which is why <<TF-01,TF-01 Process a visitor turn>> is synchronous, why <<TF-05,TF-05 Derive a scenario statement>> caches its result rather than recomputing, and why <<TF-07,TF-07 Refine a session title>>'s title refinement is triggered by a dedicated client call (<<TI-06,TI-06 Refine a session title>>) rather than a server-side background job — there is no queue or worker process for xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] to hand it to. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-01[SC-01 PHP with a file-backed store on a single hosted]
 
-*[[C-02]]C-02 Provider limits bound the element's own limits* _(Integration)_ +
+=== [[C-02]]C-02 Provider limits bound the element's own limits _(Integration)_
+
 _Source:_ xref:L2-system-design-concept.adoc#SC-04[SC-04 Generation is rate-limited and metered by the provider]. +
 _Applies to:_ <<TF-03,TF-03 Enforce request limits>>, <<TF-01,TF-01 Process a visitor turn>>. +
 _Acceptance criteria:_ The request rate threshold in <<TF-03,TF-03 Enforce request limits>> is set below the provider's limit, so that visitors meet this element's limit rather than the provider's. +
 _Consequence:_ Rules out unthrottled forwarding. Sets an upper bound on concurrent visitors, TBC once the threshold is chosen. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-04[SC-04 Generation is rate-limited and metered by the provider]
 
-*[[C-03]]C-03 The operator path is not publicly reachable* _(Security)_ +
+=== [[C-03]]C-03 The operator path is not publicly reachable _(Security)_
+
 _Source:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable], and the absence of any authentication in this system. +
 _Applies to:_ <<TI-05,TI-05 Import pilot material>>. +
 _Acceptance criteria:_ <<TI-05,TI-05 Import pilot material>> is invoked on the host and is not routed on the public endpoint. +
 _Consequence:_ Rules out remote import and, with it, the need for an authentication mechanism this system otherwise has no use for. Seeding requires host access. +
 _Element specific:_ Yes
 
-*[[C-04]]C-04 No administrative interface, no analytics layer* _(Business)_ +
+=== [[C-04]]C-04 No administrative interface, no analytics layer _(Business)_
+
 _Source:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]. +
 _Applies to:_ The element overall. +
 _Acceptance criteria:_ Operator tasks — seeding, extraction, pruning, reset, and backup — are performed directly against the host and the store file, each its own single-purpose script (`bin/import_pilot.php`, `bin/export.php`, `bin/prune_orphaned_sessions.php`, `bin/reset_db.php`, `bin/backup_db.php`). +
 _Consequence:_ Rules out building any surface for inspecting or moderating sessions during the exhibition. Extraction is a query against the store; pruning and reset are, respectively, a targeted and a bulk delete against the same store; backup is a file-level snapshot; pruning and reset are guarded by an explicit confirmation flag rather than by any authentication this system otherwise has no use for (<<C-03,C-03 The operator path is not publicly reachable>>). +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]
 
-*[[C-05]]C-05 Attempts to bypass the Sparring stance are not filtered* _(Business)_ +
+=== [[C-05]]C-05 Attempts to bypass the Sparring stance are not filtered _(Business)_
+
 _Source:_ xref:L2-system-design-concept.adoc#AP-07[AP-07 Attempts to argue the Sparring partner out of its]. +
 _Applies to:_ <<TF-02,TF-02 Assess a contribution for projection suitability>>. +
 _Acceptance criteria:_ The classification instruction distinguishes hostility directed at the Sparring partner (suitable, however extreme the tone) from harmful content targeting a real person or group (targets-real-person). A visitor arguing the Sparring partner out of its position, however hostile, produces a suitable classification. The instruction also states the exercise's actual subject matter explicitly (<<TF-02,TF-02 Assess a contribution for projection suitability>>) — necessary alongside the target-based distinction, not instead of it; found missing in testing, where its absence alone caused on-topic contributions to fail this same acceptance criterion from the other direction. +
 _Consequence:_ There is no off-topic filter of any kind — disengagement (spam, unrelated chat) is not classified or withheld. Sessions in which the friction is successfully talked away are retained and projected like any other (subject to the visitor's own projection consent, xref:L2-system-design-concept.adoc#SC-05[SC-05 Retention requires consent; projection requires]). +
 _Element specific:_ Yes
 
-*[[C-06]]C-06 Classifier input is untrusted data, not instruction* _(Security)_ +
+=== [[C-06]]C-06 Classifier input is untrusted data, not instruction _(Security)_
+
 _Source:_ this review. +
 _Applies to:_ <<TF-02,TF-02 Assess a contribution for projection suitability>>. +
 _Acceptance criteria:_ The contribution text is delimited and labeled as data in the classification prompt, and delimiter characters that could close that boundary are stripped from the contribution before assembly. +

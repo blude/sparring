@@ -20,7 +20,8 @@ xref:index.adoc[Index] / xref:L1-solution-design-concept.adoc[Solution Design Co
 
 == Goals
 
-*[[G-01]]G-01 Reach a working input surface with nothing but a scan* +
+=== [[G-01]]G-01 Reach a working input surface with nothing but a scan
+
 The element shall present a usable input surface immediately on opening, with no installation, registration, or instruction step. +
 _Success criteria (qualitative):_ A visitor who has never seen the piece submits their first contribution without asking anyone how it works. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-01[SG-01 Start a session from a personal device with no]
@@ -37,24 +38,28 @@ home-screen icon) so a visitor _may_ install it — this is an opt-in a
 visitor reaches through their own browser chrome, never a step the flow
 prompts or requires, so it does not gate <<G-01,G-01 Reach a working input surface with nothing but a scan>>.
 
-*[[G-02]]G-02 Hold the visitor's place through interruption* +
+=== [[G-02]]G-02 Hold the visitor's place through interruption
+
 The element shall restore a session and its exchanges after a reload, a locked device, or a backgrounded tab. +
 _Success criteria (qualitative):_ Reloading restores the full session with no loss of prior exchanges and no repeated consent step. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-03[SG-03 Survive interruption of the visitor's session]
 
-*[[G-03]]G-03 Make waiting and failure legible* +
+=== [[G-03]]G-03 Make waiting and failure legible
+
 The element shall show that a response is being produced, and shall state plainly when one cannot be. +
 _Success criteria (quantitative):_ An in-progress state appears within 300 ms of submission. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-04[SG-04 Run unattended and absorb misuse without operator] +
 _Rationale:_ Several seconds of unexplained stillness in a gallery reads as a broken piece, not a thinking one.
 
-*[[G-04]]G-04 Make unsuitable input visible* +
+=== [[G-04]]G-04 Make unsuitable input visible
+
 The element shall show that an input is invalid and should require the user to modify its content before sending again. +
 _Rationale:_ Participants should be allowed to edit their input to fix the problem.
 
 IMPORTANT: This is the authoritative behavior for unsuitable content — an earlier version of L2's xref:L2-system-design-concept.adoc#AP-05[AP-05 Moderation gates storage, not a per-session display] described the session ending instead; that reading is superseded (see L2 xref:L2-system-design-concept.adoc#AP-05[AP-05 Moderation gates storage, not a per-session display]'s own note on why).
 
-*[[G-05]]G-05 Give the visitor a light identity, and a way to deliberately start over* +
+=== [[G-05]]G-05 Give the visitor a light identity, and a way to deliberately start over
+
 The element shall reveal a generated nickname and avatar in the header once consent is recorded, and shall let the visitor abandon the current session and begin a fresh one on request. +
 _Success criteria (qualitative):_ A visitor can find their own alias in the header at any point after consenting, and can start a new session from the same screen without navigating away manually. +
 _Derived:_ Yes +
@@ -310,46 +315,54 @@ IMPORTANT: The device holds no consent record. The decision is sent to xref:L2-s
 
 == 8. Quality requirements
 
-*[[QR-01]]QR-01 The in-progress state appears immediately* _(Performance)_ +
+=== [[QR-01]]QR-01 The in-progress state appears immediately _(Performance)_
+
 _Applies to:_ <<UI-01,UI-01 Session surface>>, <<TF-03,TF-03 Submit a contribution>> +
 _Acceptance criteria:_ The state is visible within 300 ms of submission and persists until the response or a failure arrives. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-01[SQR-01 A Sparring response arrives, or its absence is visible]
 
-*[[QR-02]]QR-02 Every failure produces a statement* _(Usability)_ +
+=== [[QR-02]]QR-02 Every failure produces a statement _(Usability)_
+
 _Applies to:_ <<UI-01,UI-01 Session surface>>, <<TF-01,TF-01 Establish the session>>, <<TF-03,TF-03 Submit a contribution>> +
 _Acceptance criteria (qualitative):_ No condition leaves the surface unresponsive or unexplained. Every path that stops shows what happened and whether the visitor can continue. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-07[SQR-07 The installation degrades visibly rather than silently]
 
-*[[QR-03]]QR-03 Usable on a phone held in one hand* _(Usability)_ +
+=== [[QR-03]]QR-03 Usable on a phone held in one hand _(Usability)_
+
 _Applies to:_ <<UI-01,UI-01 Session surface>> +
 _Acceptance criteria (qualitative):_ Input field and submit action reachable one-handed on a small phone with the software keyboard raised. The consent decision is answerable without scrolling. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-03[SQR-03 The projection is readable at exhibition viewing] +
 _Element specific:_ Yes
 
-*[[QR-04]]QR-04 Visitor content cannot alter the surface* _(Security)_ +
+=== [[QR-04]]QR-04 Visitor content cannot alter the surface _(Security)_
+
 _Applies to:_ <<TF-04,TF-04 Render the exchange history>> +
 _Acceptance criteria:_ All content returned from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] is inserted as text. No path renders it as markup, with one narrow exception: a single `mermaid` fenced block in a sparring turn is parsed by mermaid.js in `securityLevel: 'strict'` (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. Visitor turns are never routed through this path regardless of content. +
 _Element specific:_ Yes
 
-*[[QR-05]]QR-05 Works on current mobile browsers without a build step* _(Compatibility)_ +
+=== [[QR-05]]QR-05 Works on current mobile browsers without a build step _(Compatibility)_
+
 _Applies to:_ The element overall +
 _Acceptance criteria (qualitative):_ Functions on current mobile Safari and Chrome. No transpilation, bundling, or framework runtime. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-02[SQR-02 The installation recovers without a person present] +
 _Rationale:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]. A build pipeline is one more thing that can be broken at 9am on opening day.
 
-*[[QR-06]]QR-06 Diagnostic detail is available to an operator, hidden by default* _(Maintainability)_ +
+=== [[QR-06]]QR-06 Diagnostic detail is available to an operator, hidden by default _(Maintainability)_
+
 _Applies to:_ <<UI-01,UI-01 Session surface>> +
 _Acceptance criteria:_ An address flag reveals session id, origin, rate-limit remaining, generation timing, and the exact moderation reason (from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#TI-01[TI-01 Open a session]/xref:L3-SE-03-backend-service.adoc#TI-02[TI-02 Submit a contribution]/xref:L3-SE-03-backend-service.adoc#TI-03[TI-03 Retrieve a session] outputs) alongside the normal surface. Absent by default; no visitor-facing affordance exposes or hints at the _exact_ reason. The standard (non-debug) flagged-message copy does, deliberately, show a coarser two-category hint derived from the same value — personal information versus inappropriate content — narrow enough that it doesn't expose which specific classification or wordlist match fired. +
 _Element specific:_ Yes +
 _Rationale:_ Serves xref:L2-system-design-concept.adoc#UT-03[UT-03 Operator]'s stated need (L2 §2.3) to diagnose a fault quickly and remotely, without adding an administrative interface (which xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable] rules out).
 
-*[[QR-07]]QR-07 Motion respects a reduced-motion preference; every effect is individually switchable* _(Usability/Accessibility)_ +
+=== [[QR-07]]QR-07 Motion respects a reduced-motion preference; every effect is individually switchable _(Usability/Accessibility)_
+
 _Applies to:_ <<UI-01,UI-01 Session surface>>, <<TF-02,TF-02 Record the consent decision>>, <<TF-04,TF-04 Render the exchange history>> +
 _Acceptance criteria:_ Every added animation (consent-decision title card, submit motion, rejection motion) is suppressed when the OS-level reduced-motion preference is set, without disabling submission or the consent decision itself. Sound is a separate signal — `prefers-reduced-motion` is a vestibular-motion preference and does not govern audio — and is instead gated solely by its own configuration switch. Each effect (title card, submit motion, rejection motion, sound) can be turned off independently by configuration, with no code change, and a single configuration switch turns all of them off at once. The title card plays once the consent decision is recorded, not on any submission, so it never overlaps <<QR-01,QR-01 The in-progress state appears immediately>>'s in-progress state — the two have no shared trigger. +
 _Element specific:_ Yes +
 _Rationale:_ TODO.md's JUICYNESS requirement is explicitly presentational flair, not core functionality — it must be possible to remove without touching <<TF-01,TF-01 Establish the session>> through <<TF-03,TF-03 Submit a contribution>>, and must never become an accessibility regression.
 
-*[[QR-08]]QR-08 Interface language is selectable and matches on first visit where possible* _(Usability)_ +
+=== [[QR-08]]QR-08 Interface language is selectable and matches on first visit where possible _(Usability)_
+
 _Applies to:_ <<UI-01,UI-01 Session surface>> +
 _Acceptance criteria:_ The surface is available in English and German. On a first visit the interface language follows the device/browser's own language setting when it names a supported language, English otherwise; an explicit switch overrides this and persists across the session and future visits on the same device. The AI's own reply language is a separate behavior (<<TF-03,TF-03 Submit a contribution>>/prompt-level, see xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]) that follows what the visitor types, not this setting. +
 _Element specific:_ Yes
@@ -358,28 +371,32 @@ _Element specific:_ Yes
 
 == Constraints
 
-*[[C-01]]C-01 No credential, no policy, no generation in this element* _(Technical)_ +
+=== [[C-01]]C-01 No credential, no policy, no generation in this element _(Technical)_
+
 _Source:_ xref:L2-system-design-concept.adoc#AP-01[AP-01 All logic lives in the backend]. +
 _Applies to:_ All technical functions and outbound interfaces. +
 _Acceptance criteria:_ The element contains no provider credential and no limit, filter, or generation logic beyond field-level input bounds. +
 _Consequence:_ Rules out any direct call to xref:L2-system-design-concept.adoc#PE-01[PE-01 Language generation API] and any client-side enforcement that xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] does not repeat. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-01[SC-01 PHP with a file-backed store on a single hosted]
 
-*[[C-02]]C-02 Session identity lives in the address, not in device storage* _(Technical)_ +
+=== [[C-02]]C-02 Session identity lives in the address, not in device storage _(Technical)_
+
 _Source:_ xref:L2-system-design-concept.adoc#AP-03[AP-03 Session identity travels in the URL; no accounts]. +
 _Applies to:_ <<TF-01,TF-01 Establish the session>>, <<E-01,E-01 Session view state>>. +
 _Acceptance criteria:_ The identifier is read from and written to the address only. No cookie, no local storage, no session storage. +
 _Consequence:_ Rules out silent identity persistence across visits. A visitor who closes the tab has ended their session, which is the intended behaviour. Scoped to session identity specifically — a device-level UI language preference (<<QR-08,QR-08 Interface language is selectable and matches on first>>) is a separate concern and may persist by whatever means fits, same as the existing sessionStorage-held composer draft. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-05[SC-05 Retention requires consent; projection requires]
 
-*[[C-03]]C-03 Consent is decided before input is possible* _(Legal-regulatory)_ +
+=== [[C-03]]C-03 Consent is decided before input is possible _(Legal-regulatory)_
+
 _Source:_ xref:L2-system-design-concept.adoc#SC-05[SC-05 Retention requires consent; projection requires]. +
 _Applies to:_ <<UC-01,UC-01 Begin a session>>, <<UI-01,UI-01 Session surface>>. +
 _Acceptance criteria:_ The contribution field cannot be submitted until a decision is recorded. What actually gates it is agreement to take part specifically — retention and projection are recorded at the same moment but, as real opt-outs, do not themselves block anything. None of the three options is preselected or visually favoured. +
 _Consequence:_ Rules out deferring the decision until after the first contribution. Rules out treating retention or projection decline as equivalent to declining to take part. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-05[SC-05 Retention requires consent; projection requires]
 
-*[[C-04]]C-04 No build step* _(Technical)_ +
+=== [[C-04]]C-04 No build step _(Technical)_
+
 _Source:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]. +
 _Applies to:_ The element overall. +
 _Acceptance criteria:_ The element ships as files served directly, with no compilation or bundling. +

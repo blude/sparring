@@ -23,23 +23,27 @@ xref:index.adoc[Index] / xref:L1-solution-design-concept.adoc[Solution Design Co
 
 == Goals
 
-*[[G-01]]G-01 Make turn-taking visible to people who are not participating* +
+=== [[G-01]]G-01 Make turn-taking visible to people who are not participating
+
 The element shall present visitor contributions and Sparring responses as paired exchanges, so that an observer sees a challenge and what provoked it rather than an isolated reply. +
 _Success criteria (qualitative):_ An observer reading one projected item can tell that the AI declined to simply resolve the request. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-02[SG-02 Make turn-taking readable from across the room]
 
-*[[G-02]]G-02 Remain populated at all times* +
+=== [[G-02]]G-02 Remain populated at all times
+
 The element shall never present an empty or near-empty surface while running, including before the first visitor of the day and between live sessions. +
 _Success criteria (qualitative):_ The projection carries readable content continuously from start-up onward. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-06[SG-06 Never present an empty surface]
 
-*[[G-03]]G-03 Stay readable and stable without attention* +
+=== [[G-03]]G-03 Stay readable and stable without attention
+
 The element shall run for the duration of exhibition hours without reload, recover from backend interruption on its own, and update without visible redraw of unchanged content. +
 _Success criteria (qualitative):_ No operator action is required at any point during opening hours. Unchanged items do not flicker or reflow on update. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-02[SG-02 Make turn-taking readable from across the room], xref:L2-system-design-concept.adoc#SG-06[SG-06 Never present an empty surface] +
 _Rationale:_ xref:L2-system-design-concept.adoc#SQR-02[SQR-02 The installation recovers without a person present]. A projection that visibly redraws every few seconds reads as a status screen rather than as part of the work.
 
-*[[G-04]]G-04 Distinguish concurrent visitors from one another* +
+=== [[G-04]]G-04 Distinguish concurrent visitors from one another
+
 The element shall label each item so an observer can tell exchanges from different sessions apart, even when several appear in the same view. +
 _Success criteria (qualitative):_ An observer looking at two items can tell whether they belong to the same visitor or different ones, without reading the content of either. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-02[SG-02 Make turn-taking readable from across the room] +
@@ -216,45 +220,53 @@ NOTE: The element derives no ordering, performs no selection, and stores nothing
 
 == Quality requirements
 
-*[[QR-01]]QR-01 Readable at exhibition viewing distance* _(Usability)_ +
+=== [[QR-01]]QR-01 Readable at exhibition viewing distance _(Usability)_
+
 _Applies to:_ <<UI-01,UI-01 Projection surface>> +
 _Acceptance criteria (qualitative):_ A complete exchange is readable by a standing observer at the room's typical viewing distance, verified on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] in the exhibition space before opening. Not verified in a browser window. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-03[SQR-03 The projection is readable at exhibition viewing]
 
-*[[QR-02]]QR-02 Unchanged content does not redraw* _(Usability)_ +
+=== [[QR-02]]QR-02 Unchanged content does not redraw _(Usability)_
+
 _Applies to:_ <<TF-02,TF-02 Reconcile against what is displayed>>, <<TF-04,TF-04 Render the surface>> +
 _Acceptance criteria:_ An update that adds one item leaves every other item visually undisturbed. No full-surface repaint occurs on a polling cycle. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-03[SQR-03 The projection is readable at exhibition viewing]
 
-*[[QR-03]]QR-03 Runs unattended for the full opening period* _(Availability)_ +
+=== [[QR-03]]QR-03 Runs unattended for the full opening period _(Availability)_
+
 _Applies to:_ The element overall +
 _Acceptance criteria (qualitative):_ Runs for the duration of exhibition hours without reload, memory growth that degrades rendering, or accumulated state that requires clearing. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-02[SQR-02 The installation recovers without a person present]
 
-*[[QR-04]]QR-04 Backend interruption is invisible on the surface* _(Availability)_ +
+=== [[QR-04]]QR-04 Backend interruption is invisible on the surface _(Availability)_
+
 _Applies to:_ <<TF-01,TF-01 Retrieve display material>> +
 _Acceptance criteria:_ A failed retrieval leaves the surface unchanged and produces no visible error. Recovery requires no reload. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-02[SQR-02 The installation recovers without a person present], xref:L2-system-design-concept.adoc#SQR-07[SQR-07 The installation degrades visibly rather than silently] +
 _Rationale:_ This deliberately departs from xref:L2-system-design-concept.adoc#SQR-07[SQR-07 The installation degrades visibly rather than silently]'s general rule that failures should be visible. xref:L2-system-design-concept.adoc#SQR-07[SQR-07 The installation degrades visibly rather than silently] protects the participant, who needs to know why nothing is happening. An observer needs no such signal, and an error message projected on a gallery wall is a worse outcome than briefly stale content.
 
-*[[QR-05]]QR-05 Visitor content cannot alter the surface* _(Security)_ +
+=== [[QR-05]]QR-05 Visitor content cannot alter the surface _(Security)_
+
 _Applies to:_ <<TF-04,TF-04 Render the surface>> +
 _Acceptance criteria:_ All content from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] is inserted as text. No path renders it as markup, with one narrow exception: a single `mermaid` fenced block in a sparring response is parsed by mermaid.js in `securityLevel: 'strict'` (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. A response containing a diagram fence is exempt from the trim length (<<TF-03,TF-03 Fit an item to the available space>>) that otherwise bounds displayed text, so the fence isn't cut mid-syntax. +
 _Element specific:_ Yes +
 _Rationale:_ This surface is public and unattended, so the consequence of an injection is a projected wall rather than one person's phone.
 
-*[[QR-06]]QR-06 Fixed viewport, no scroll, no overflow* _(Compatibility)_ +
+=== [[QR-06]]QR-06 Fixed viewport, no scroll, no overflow _(Compatibility)_
+
 _Applies to:_ <<UI-01,UI-01 Projection surface>>, <<TF-03,TF-03 Fit an item to the available space>> +
 _Acceptance criteria:_ Content never extends beyond the projected area at the target resolution. No scrollbar appears under any content length. +
 _Element specific:_ Yes
 
-*[[QR-07]]QR-07 Diagnostic tag is available to an operator, hidden by default* _(Maintainability)_ +
+=== [[QR-07]]QR-07 Diagnostic tag is available to an operator, hidden by default _(Maintainability)_
+
 _Applies to:_ <<UI-01,UI-01 Projection surface>> +
 _Acceptance criteria:_ An address flag appends a session id / origin tag to each item. Absent by default; no visitor-facing affordance exposes or hints at it. +
 _Element specific:_ Yes +
 _Rationale:_ Same operator need as xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] xref:L3-SE-01-input-client.adoc#QR-06[QR-06 Diagnostic detail is available to an operator] — see there.
 
-*[[QR-08]]QR-08 Entry and update motion respect a reduced-motion preference, and are switchable together* _(Usability/Accessibility)_ +
+=== [[QR-08]]QR-08 Entry and update motion respect a reduced-motion preference, and are switchable together _(Usability/Accessibility)_
+
 _Applies to:_ <<UI-01,UI-01 Projection surface>>, <<TF-04,TF-04 Render the surface>> +
 _Acceptance criteria:_ Both the entry transition and the update pulse are suppressed when the OS-level reduced-motion preference is set, and both are turned off together by a single configuration switch, independent of every other element, with no code change. Suppressing either changes nothing else about <<TF-01,TF-01 Retrieve display material>>/<<TF-02,TF-02 Reconcile against what is displayed>> — an added or updated item still appears/updates, without the motion. +
 _Element specific:_ Yes +
@@ -264,35 +276,40 @@ _Rationale:_ Mirrors xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client
 
 == Constraints
 
-*[[C-01]]C-01 Layout treatment is an open decision* _(Organisational)_ +
+=== [[C-01]]C-01 Layout treatment is an open decision _(Organisational)_
+
 _Source:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]. +
 _Applies to:_ <<UI-01,UI-01 Projection surface>>, <<TF-03,TF-03 Fit an item to the available space>>, <<TF-04,TF-04 Render the surface>>. +
 _Acceptance criteria:_ The baseline in section 3 is implemented first. <<TBC-01,TBC-01 Treatment of prominence and recency.>> through <<TBC-06,TBC-06 Whether pilot-origin items are visually>> are resolved against real pilot transcripts on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] before opening. +
 _Consequence:_ Rules out encoding a specific prominence treatment into <<TO-01,TO-01 Retrieve display material>>'s request or into xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s response shape. The interface must serve any of the three candidates without change. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]
 
-*[[C-02]]C-02 This element holds no selection or ordering policy* _(Technical)_ +
+=== [[C-02]]C-02 This element holds no selection or ordering policy _(Technical)_
+
 _Source:_ xref:L2-system-design-concept.adoc#AP-01[AP-01 All logic lives in the backend]. +
 _Applies to:_ <<TF-01,TF-01 Retrieve display material>>, <<TO-01,TO-01 Retrieve display material>>, <<E-01,E-01 Displayed material>>. +
 _Acceptance criteria:_ The element renders what xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] returns, in the order returned. It performs no filtering, no sorting, and no eligibility assessment. +
 _Consequence:_ Rules out client-side filtering of pilot material or of items the element judges unsuitable. Changing what appears is a backend change. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-01[SC-01 PHP with a file-backed store on a single hosted]
 
-*[[C-03]]C-03 Single fixed target resolution* _(Technical)_ +
+=== [[C-03]]C-03 Single fixed target resolution _(Technical)_
+
 _Source:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]. +
 _Applies to:_ <<UI-01,UI-01 Projection surface>>. +
 _Acceptance criteria:_ Renders correctly at the projection's native resolution. No responsive behaviour below or above it. +
 _Consequence:_ Rules out responsive layout work. Requires the projection resolution to be confirmed before <<UI-01,UI-01 Projection surface>> is finalised, which is a dependency on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] procurement being settled. Working assumption for now: 1920×1080 — not yet a confirmed xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] sign-off, but enough to build and tune the masonry treatment (<<TBC-01,TBC-01 Treatment of prominence and recency.>>) against. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]
 
-*[[C-04]]C-04 No build step* _(Technical)_ +
+=== [[C-04]]C-04 No build step _(Technical)_
+
 _Source:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]. +
 _Applies to:_ The element overall. +
 _Acceptance criteria:_ Ships as files served directly, with no compilation or bundling. +
 _Consequence:_ Rules out any framework requiring a build. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]
 
-*[[C-05]]C-05 May deploy as an installed web app on iPad instead of a projector* _(Technical)_ +
+=== [[C-05]]C-05 May deploy as an installed web app on iPad instead of a projector _(Technical)_
+
 _Source:_ TODO.md. +
 _Applies to:_ <<UI-01,UI-01 Projection surface>>. +
 _Acceptance criteria:_ A web app manifest (`display: standalone`, `orientation: landscape`, home-screen icon) lets the element be added to an iPad home screen and opened without browser chrome; pinch-zoom, text selection, and touch callout are disabled so a stray touch on the (now touchscreen) surface can't disrupt an unattended display. +
