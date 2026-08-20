@@ -2,8 +2,61 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-08-20
+
+- `ecce8af` refactor(identity): use roman numerals as suffix
+- `154c232` perf(llm): enable prompt caching on the Sparring system prompt
+- `c05bd78` docs(spec): add SE-04 constraints on context-window sharing and XML structuring
+- `5941863` docs: fix broken sentence in CLAUDE.md's spec/ section
+- `c886401` docs(spec): scaffold SE-04, the system prompt, as a first-class element
+- `7296fd7` docs(spec): promote requirements to sub-sections
+- `459feac` docs(spec): flatten sections of L2 system design
+- `5065b31` docs(spec): resolve stale TBCs against shipped config.php values
+- `368fc30` docs(spec): remove stray section number
+- `02cf81b` docs(spec): give entities, interfaces, technical functions IDs consistent with the rest
+- `3d24016` docs(spec): give goals, quality requirements, and constraints consistent IDs
+- `8f55745` docs(spec): drop em-dash between ID and title in definition lists
+- `87d6649` docs(asciidoc): remove stray section number
+- `e807d3c` docs(spec): fix element-name duplication, restructure SE-04
+- `2cf7206` docs(spec): convert standalone meta-notes into real admonitions
+- `2b923b6` docs(spec): single space between ID and title in link labels
+- `89cc23f` docs(spec): use colon, not em-dash, between ID and title in link labels
+- `108996e` docs(spec): show requirement/element names alongside IDs in link labels
+- `82850a9` docs(asciidoc): add navigation to glossary page too
+- `060e1c8` docs(asciidoc): build spec website
+- `e35e55d` docs(asciidoc): make specs easier to navigate
+- `69b8938` docs(spec): tweak glossary table column size
+- `a05ace4` fix(router): redirect /spec and /spec/ to spec/index.html
+- `179c170` build(spec): add bin/build_spec.sh to rebuild public/spec/
+- `dd0fc73` docs(spec): add index linking all design docs
+- `babf672` docs(spec): publish HTML export to public/spec/
+- `72e5ab4` docs(specs): add version, author and date on the header
+- `0013987` docs(spec): add cross-document references and fill missing links
+- `ecbd9fe` docs(CLAUDE): remove reference to StrictDoc
+- `5bbdbf1` chore(design): priorize rasterized logo
+- `46da3de` chore(design): bring gloves and logotype close together
+- `a70742b` chore(branding): update log with fun style and simplify logotype
+- `656d2ae` chore(img): update apple-touch-icon
+- `42db054` chore(i18n): adjust translation for spar! in title card
+- `5a81441` chore(lang-switcher): hide lang switcher from start page
+- `0f6c67e` docs(todo): tick off recent to dos
+- `25dc577` docs(spec): add German locale switching and reply-language matching to SE-04/SE-02
+- `f90f7a1` feat(prompts): reply/title in the visitor's own message language
+- `afd18da` feat(i18n): wire German translations into every page and dialog
+- `9e07c18` feat(i18n): add German locale infrastructure
+
 ## 2026-08-19
 
+- `6c26c96` test(eval): add multi-turn evaluation suite for prompts/sparring.md
+- `3e2aadd` refactor(dojo): rename opening scenario query param to o, key by number
+- `a906a7f` docs(spec): fix typos across spec docs
+- `bad887e` feat(web): add installable manifest to dojo and arena
+- `d45728e` feat(export): add --csv and --markdown formats
+- `cc0d467` feat(export): add --consented-only flag
+- `aaa804d` fix(export): group --jsonl by session, not by exchange
+- `4a56eea` fix(export): shape --jsonl as OpenAI fine-tuning format
+- `53d966c` docs(spec): add prune_orphaned_sessions.php to C-04
+- `694fb6b` feat(export): add --jsonl and --session flags
 - `836f7eb` feat: add fallback error pages for 404/500
 - `47c4dde` docs: update CHANGELOG through d38afcc
 - `d38afcc` docs: point README setup at tests/run.sh instead of stale two-test list
