@@ -90,7 +90,7 @@ Not applicable. This element presents no user interface. xref:L2-system-design-c
 
 '''
 
-== 4. Technical functions
+== Technical functions
 
 === [[TF-01]]TF-01 Process a visitor turn
 
