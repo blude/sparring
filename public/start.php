@@ -64,7 +64,7 @@
      design choice, not something a system font can reproduce */
   .logo {
       position: relative;
-      width: 183px;
+      width: 203px;
       height: 58px;
   }
   .wordmark, .subtitle {
@@ -81,17 +81,9 @@
   .wordmark {
       top: 0;
       left: 0;
-      width: 183px;
-      height: 47px;
-      background-image: url(assets/img/logo-wordmark.svg);
-  }
-  .subtitle {
-      top: 41px;
-      left: 53%;
-      transform: translateX(-53%);
-      width: 106px;
-      height: 17px;
-      background-image: url(assets/img/logo-subtitle.svg);
+      width: 203px;
+      height: 58px;
+      background-image: url(assets/img/logo-sparring-v2b.svg);
   }
   .alpha-notice {
       margin: 0;
