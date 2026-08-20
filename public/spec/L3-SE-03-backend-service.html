@@ -699,7 +699,7 @@ This path performs no generation and never calls <a href="L2-system-design-conce
 <p><strong><a id="FS-01-7"></a>FS-01-7</strong> <em>(Entity-access)</em> Read the session&#8217;s prior exchanges from <a href="#E-02">E-02 Exchange</a> (<a href="#E-02.3">E-02.3 visitorContribution</a>, <a href="#E-02.4">E-02.4 sparringResponse</a>) in order, to supply conversational context.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-8"></a>FS-01-8</strong> <em>(Outbound-call)</em> Call <a href="#TO-01">TO-01 Request a Sparring response</a> with the Sparring system prompt, the prior exchanges, and the new contribution. Expect a response text. <em>Call behaviour:</em> Synchronous. Timeout TBC, to be set from measured response times (<a href="L2-system-design-concept.html#SQR-01">SQR-01 A Sparring response arrives, or its absence is visible</a>). Two attempts, with a short delay between them, on transport failure, timeout, or a provider 5xx. <strong>No retry on a provider rate-limit or quota response</strong>, because retrying a rate limit deepens it; return a generation-failed condition immediately. <strong>No retry on a content-policy refusal from the provider</strong>, which is a determinate outcome rather than a transient fault. On exhausted attempts, return a generation-failed condition. Nothing is written to <a href="#E-02">E-02 Exchange</a> on any failure path, so a failed turn leaves no partial exchange in the record.</p>
+<p><strong><a id="FS-01-8"></a>FS-01-8</strong> <em>(Outbound-call)</em> Call <a href="#TO-01">TO-01 Request a Sparring response</a> with the Sparring system prompt, the prior exchanges, and the new contribution. Expect a response text. <em>Call behaviour:</em> Synchronous. Timeout is 20 seconds (<code>GENERATION_TIMEOUT_SECONDS</code>, config.php — <a href="L2-system-design-concept.html#SQR-01">SQR-01 A Sparring response arrives, or its absence is visible</a>). Two attempts, with a short delay between them, on transport failure, timeout, or a provider 5xx. <strong>No retry on a provider rate-limit or quota response</strong>, because retrying a rate limit deepens it; return a generation-failed condition immediately. <strong>No retry on a content-policy refusal from the provider</strong>, which is a determinate outcome rather than a transient fault. On exhausted attempts, return a generation-failed condition. Nothing is written to <a href="#E-02">E-02 Exchange</a> on any failure path, so a failed turn leaves no partial exchange in the record.</p>
 </li>
 <li>
 <p><strong><a id="FS-01-9"></a>FS-01-9</strong> <em>(Entity-access)</em> Write a new exchange to <a href="#E-02">E-02 Exchange</a> carrying the contribution (<a href="#E-02.3">E-02.3 visitorContribution</a>), the response (<a href="#E-02.4">E-02.4 sparringResponse</a>), the session reference (<a href="#E-02.2">E-02.2 sessionId</a>), and its position (<a href="#E-02.5">E-02.5 position</a>).</p>
@@ -786,7 +786,7 @@ A second distinction the instruction must also get right, found in testing: stat
 <em>Achieves:</em> <a href="#G-06">G-06 Absorb load and misuse without failing</a></p>
 </div>
 <div class="paragraph">
-<p>Reads the current window for the request origin from <a href="#E-03">E-03 Rate limit window</a>, increments it, and reports whether the allowance is exceeded. Windows are keyed on a hashed origin (<a href="#E-03.1">E-03.1 originHash</a>), so no raw address is stored. Expired windows are reset in place rather than swept by a separate process, which avoids a scheduled job on an unattended host. Threshold and window length are TBC, to be set below the provider&#8217;s own limits per <a href="L2-system-design-concept.html#SC-04">SC-04 Generation is rate-limited and metered by the provider</a>. No goal relation beyond <a href="#G-06">G-06 Absorb load and misuse without failing</a>: this is a guard, not business logic.</p>
+<p>Reads the current window for the request origin from <a href="#E-03">E-03 Rate limit window</a>, increments it, and reports whether the allowance is exceeded. Windows are keyed on a hashed origin (<a href="#E-03.1">E-03.1 originHash</a>), so no raw address is stored. Expired windows are reset in place rather than swept by a separate process, which avoids a scheduled job on an unattended host. Threshold is 10 requests per 60-second window (<code>RATE_LIMIT_MAX_REQUESTS</code>, <code>RATE_LIMIT_WINDOW_SECONDS</code>, config.php), set below the provider&#8217;s own limits per <a href="L2-system-design-concept.html#SC-04">SC-04 Generation is rate-limited and metered by the provider</a>. No goal relation beyond <a href="#G-06">G-06 Absorb load and misuse without failing</a>: this is a guard, not business logic.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1326,7 +1326,7 @@ The pair is stored as one record rather than as two turn records. This follows t
 <h3 id="_qr_01_generation_is_bounded_and_its_bound_is_enforced_here_performance"><a class="anchor" href="#_qr_01_generation_is_bounded_and_its_bound_is_enforced_here_performance"></a>8.1. <a id="QR-01"></a>QR-01 Generation is bounded and its bound is enforced here <em>(Performance)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#TF-01">TF-01 Process a visitor turn</a>, <a href="#TO-01">TO-01 Request a Sparring response</a><br>
-<em>Acceptance criteria:</em> <a href="#TF-01">TF-01 Process a visitor turn</a> abandons a generation request at a fixed bound and returns a generation-failed condition. The bound is TBC, to be set from measured response times, and must be below <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s own wait bound so that the element decides the outcome rather than the client timing out first.<br>
+<em>Acceptance criteria:</em> <a href="#TF-01">TF-01 Process a visitor turn</a> abandons a generation request at a fixed bound and returns a generation-failed condition. The bound is 20 seconds (<code>GENERATION_TIMEOUT_SECONDS</code>, config.php), below <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s own 25-second wait bound so that this element decides the outcome rather than the client timing out first.<br>
 <em>Supports:</em> <a href="L2-system-design-concept.html#SQR-01">SQR-01 A Sparring response arrives, or its absence is visible</a></p>
 </div>
 </div>
@@ -1483,7 +1483,7 @@ The pair is stored as one record rather than as two turn records. This follows t
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:49:11 +0200
+Last updated 2026-08-20 21:57:31 +0200
 </div>
 </div>
 </body>

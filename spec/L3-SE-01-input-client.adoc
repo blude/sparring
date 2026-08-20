@@ -10,7 +10,7 @@ v.1.0, 2026-06-19
 *Element:* xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] +
 *Element profile:* User-facing frontend +
 *Parent:* System Design Concept +
-*Status:* Draft
+*Status:* Stable — no open TBCs remaining
 
 *Sections that apply.* All sections apply, with user interfaces and use cases as the core. Technical functions are thin by design: per xref:L2-system-design-concept.adoc#AP-01[AP-01 All logic lives in the backend], this element holds no generation, no moderation, and no session policy. Entities cover in-memory view state only, since nothing is stored on the device.
 
@@ -230,7 +230,7 @@ _Detail level:_ Stepwise +
 _Achieves:_ <<G-01,G-01 Reach a working input surface with nothing but a scan>>, <<G-03,G-03 Make waiting and failure legible>>
 
 - *[[FS-03-1]]FS-03-1* _(Data-operation)_ Trim the contribution and reject it locally if it is empty or exceeds the bound, without calling out.
-- *[[FS-03-2]]FS-03-2* _(Outbound-call)_ Call <<TO-02,TO-02 Submit a contribution>> with the session identifier and the contribution. _Call behaviour:_ Synchronous. No retry, because a retried submission risks producing a duplicate exchange and the visitor is watching. Wait bound set slightly above xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s own generation bound, which is TBC alongside xref:L2-system-design-concept.adoc#SQR-01[SQR-01 A Sparring response arrives, or its absence is visible]. On rate-limit, turn-limit, flagged-content, or generation-failure responses, return the reported condition to the caller rather than treating it as a fault. On timeout or transport failure, return a generation-failure condition.
+- *[[FS-03-2]]FS-03-2* _(Outbound-call)_ Call <<TO-02,TO-02 Submit a contribution>> with the session identifier and the contribution. _Call behaviour:_ Synchronous. No retry, because a retried submission risks producing a duplicate exchange and the visitor is watching. Wait bound is 25 seconds (`SE01_WAIT_BOUND_SECONDS`, config.php), kept above xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s own 20-second generation bound (xref:L2-system-design-concept.adoc#SQR-01[SQR-01 A Sparring response arrives, or its absence is visible]) so the backend decides the outcome before the client times out first. On rate-limit, turn-limit, flagged-content, or generation-failure responses, return the reported condition to the caller rather than treating it as a fault. On timeout or transport failure, return a generation-failure condition.
 - *[[FS-03-3]]FS-03-3* _(Data-operation)_ Append the returned exchange to <<E-01,E-01 Session view state>> and decrement the remaining turn count.
 
 *Alternative flows*

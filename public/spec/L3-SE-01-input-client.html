@@ -524,7 +524,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong>Element:</strong> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a><br>
 <strong>Element profile:</strong> User-facing frontend<br>
 <strong>Parent:</strong> System Design Concept<br>
-<strong>Status:</strong> Draft</p>
+<strong>Status:</strong> Stable — no open TBCs remaining</p>
 </div>
 <div class="paragraph">
 <p><strong>Sections that apply.</strong> All sections apply, with user interfaces and use cases as the core. Technical functions are thin by design: per <a href="L2-system-design-concept.html#AP-01">AP-01 All logic lives in the backend</a>, this element holds no generation, no moderation, and no session policy. Entities cover in-memory view state only, since nothing is stored on the device.</p>
@@ -1061,7 +1061,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <p><strong><a id="FS-03-1"></a>FS-03-1</strong> <em>(Data-operation)</em> Trim the contribution and reject it locally if it is empty or exceeds the bound, without calling out.</p>
 </li>
 <li>
-<p><strong><a id="FS-03-2"></a>FS-03-2</strong> <em>(Outbound-call)</em> Call <a href="#TO-02">TO-02 Submit a contribution</a> with the session identifier and the contribution. <em>Call behaviour:</em> Synchronous. No retry, because a retried submission risks producing a duplicate exchange and the visitor is watching. Wait bound set slightly above <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s own generation bound, which is TBC alongside <a href="L2-system-design-concept.html#SQR-01">SQR-01 A Sparring response arrives, or its absence is visible</a>. On rate-limit, turn-limit, flagged-content, or generation-failure responses, return the reported condition to the caller rather than treating it as a fault. On timeout or transport failure, return a generation-failure condition.</p>
+<p><strong><a id="FS-03-2"></a>FS-03-2</strong> <em>(Outbound-call)</em> Call <a href="#TO-02">TO-02 Submit a contribution</a> with the session identifier and the contribution. <em>Call behaviour:</em> Synchronous. No retry, because a retried submission risks producing a duplicate exchange and the visitor is watching. Wait bound is 25 seconds (<code>SE01_WAIT_BOUND_SECONDS</code>, config.php), kept above <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s own 20-second generation bound (<a href="L2-system-design-concept.html#SQR-01">SQR-01 A Sparring response arrives, or its absence is visible</a>) so the backend decides the outcome before the client times out first. On rate-limit, turn-limit, flagged-content, or generation-failure responses, return the reported condition to the caller rather than treating it as a fault. On timeout or transport failure, return a generation-failure condition.</p>
 </li>
 <li>
 <p><strong><a id="FS-03-3"></a>FS-03-3</strong> <em>(Data-operation)</em> Append the returned exchange to <a href="#E-01">E-01 Session view state</a> and decrement the remaining turn count.</p>
@@ -1387,7 +1387,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:45:59 +0200
+Last updated 2026-08-20 21:57:43 +0200
 </div>
 </div>
 </body>

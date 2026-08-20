@@ -743,7 +743,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><em>Hybrid.</em> A large primary region plus a thin strip of recent items. Retains both properties at the cost of more layout work.</p>
 </li>
 <li>
-<p><em>Masonry (adopted).</em> <code>DISPLAY_COLUMNS</code> columns, each item placed once into the shortest-by-height column and never moved. Every item stays equally readable (no gradient, no cycling), and height-based placement gives a natural sense of accumulation without a timer. Weakness: strict global recency ordering is lost — a session&#8217;s column position no longer says "newer than everything below it," only "newer than what&#8217;s below it in its own column." Chosen for now because it needs no dwell-time rule (<a href="#TBC-03">TBC-03 Dwell time, if any.</a>) and no live-session interrupt rule (<a href="#TBC-02">TBC-02 Whether a live session interrupts.</a>), unlike rotation/hybrid.</p>
+<p><em>Masonry (adopted, shipped).</em> <code>DISPLAY_COLUMNS</code> columns (2, config.php), each item placed once into the shortest-by-height column and never moved. Every item stays equally readable (no gradient, no cycling), and height-based placement gives a natural sense of accumulation without a timer. Weakness: strict global recency ordering is lost — a session&#8217;s column position no longer says "newer than everything below it," only "newer than what&#8217;s below it in its own column." Chosen for now because it needs no dwell-time rule (<a href="#TBC-03">TBC-03 Dwell time, if any.</a>) and no live-session interrupt rule (<a href="#TBC-02">TBC-02 Whether a live session interrupts.</a>), unlike rotation/hybrid.</p>
 <div class="paragraph">
 <p>Masonry has its own version of "does everyone get seen," distinct from <a href="#TBC-02">TBC-02 Whether a live session interrupts.</a>: with <code>DISPLAY_ITEM_LIMIT</code> items shown and selection by most-recent-activity (<code>Store::getDisplayableSessions</code>, <code>ORDER BY last_active_at DESC</code>), a session that goes quiet is <em>excluded</em>, not merely delayed — it can drop off the wall entirely if enough other sessions stay more active. Accepted as intentional: recency-eviction gives visitors a reason to keep engaging rather than submitting once and disengaging, which fits a piece about friction. Not revisited unless pilot observation shows visitors feeling unfairly dropped rather than prompted to continue.</p>
 </div>
@@ -781,7 +781,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="FS-01-1"></a>FS-01-1</strong> <em>(Outbound-call)</em> Call <a href="#TO-01">TO-01 Retrieve display material</a> for current display material. <em>Call behaviour:</em> Synchronous, no retry within a cycle, timeout shorter than the polling interval so that requests cannot overlap. A failure is not escalated: the function returns the previous material unchanged. Consecutive failures are counted for <a href="#TBC-03">TBC-03 Dwell time, if any.</a> but trigger no action. Polling interval TBC, expected in the 2 to 5 second range.</p>
+<p><strong><a id="FS-01-1"></a>FS-01-1</strong> <em>(Outbound-call)</em> Call <a href="#TO-01">TO-01 Retrieve display material</a> for current display material. <em>Call behaviour:</em> Synchronous, no retry within a cycle, timeout shorter than the polling interval so that requests cannot overlap. A failure is not escalated: the function returns the previous material unchanged. Consecutive failures are counted for <a href="#TBC-03">TBC-03 Dwell time, if any.</a> but trigger no action. Polling interval is 4 seconds (<code>DISPLAY_POLL_INTERVAL_SECONDS</code>, config.php).</p>
 </li>
 <li>
 <p><strong><a id="FS-01-2"></a>FS-01-2</strong> <em>(Data-operation)</em> Validate that the response has the expected shape. Discard it entirely if not, rather than rendering a partial surface.</p>
@@ -1111,7 +1111,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:45:59 +0200
+Last updated 2026-08-20 21:57:21 +0200
 </div>
 </div>
 </body>

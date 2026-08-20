@@ -933,7 +933,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 <h3 id="_sqr_01_a_sparring_response_arrives_or_its_absence_is_visible_performance"><a class="anchor" href="#_sqr_01_a_sparring_response_arrives_or_its_absence_is_visible_performance"></a>4.1. <a id="SQR-01"></a>SQR-01 A Sparring response arrives, or its absence is visible <em>(Performance)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-03">SE-03 Backend service</a>, <a href="#PE-01">PE-01 Language generation API</a><br>
-<em>Acceptance criteria:</em> <a href="#SE-01">SE-01 Input client</a> presents an unambiguous in-progress state within 300 ms of submission and maintains it until a response or failure arrives. <a href="#SE-03">SE-03 Backend service</a> abandons a generation request after a bounded interval rather than leaving the visitor with an indefinite wait. The bound is TBC pending measurement of real response times through <a href="#PE-01">PE-01 Language generation API</a>.<br>
+<em>Acceptance criteria:</em> <a href="#SE-01">SE-01 Input client</a> presents an unambiguous in-progress state within 300 ms of submission and maintains it until a response or failure arrives. <a href="#SE-03">SE-03 Backend service</a> abandons a generation request after a bounded interval rather than leaving the visitor with an indefinite wait. The bound is 20 seconds (<code>GENERATION_TIMEOUT_SECONDS</code>, config.php).<br>
 <em>Supports:</em> <a href="L1-solution-design-concept.html#BQR-01">BQR-01 Visitors experience challenge, not obstruction</a><br>
 <em>Rationale:</em> On a phone in a gallery, several seconds of nothing is read as broken. The in-progress state is not decoration.</p>
 </div>
@@ -958,7 +958,7 @@ Projector and the machine driving it, running a browser in kiosk mode.<br>
 <h3 id="_sqr_04_credentials_and_quota_are_protected_from_the_public_security"><a class="anchor" href="#_sqr_04_credentials_and_quota_are_protected_from_the_public_security"></a>4.4. <a id="SQR-04"></a>SQR-04 Credentials and quota are protected from the public <em>(Security)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
-<em>Acceptance criteria:</em> The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window. Contribution length is bounded. Session length is bounded. Specific limits TBC pending a cost estimate against expected visitor volume.<br>
+<em>Acceptance criteria:</em> The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window (10 requests / 60 seconds — <code>RATE_LIMIT_MAX_REQUESTS</code>, <code>RATE_LIMIT_WINDOW_SECONDS</code>, config.php). Contribution length is bounded (600 characters — <code>CONTRIBUTION_MAX_CHARS</code>). Session length is bounded (10 exchanges — <code>TURN_ALLOWANCE</code>).<br>
 <em>Externally sourced:</em> Yes (provider terms and cost exposure rather than a business quality requirement)</p>
 </div>
 </div>
@@ -1072,7 +1072,7 @@ Downward references from L3 are not written here. Element designs declare their 
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:35:48 +0200
+Last updated 2026-08-20 21:56:59 +0200
 </div>
 </div>
 </body>
