@@ -55,8 +55,7 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
 ## spec/ — design documentation
 Four-level framework (L0 brief, L1 solution, L2 system, L3 per-element),
 ID scheme (`BG-`, `SG-`, `G-`, `UC-`, `TF-`, `QR-`, `C-`, etc.) —
-**hand-written AsciiDoc mimicking StrictDoc IDs, not a real validated
-StrictDoc project** (no `.sgra`/`.sdoc` files, don't run `strictdoc` here).
+**AsciiDoc**).
 - Only behavioral/decision content gets modeled. Static pages
   (`privacy.php`, `terms.php`) and single-purpose CLI ops scripts
   (`bin/export.php`) are **intentionally unmodeled** — covered by existing
