@@ -49,7 +49,7 @@ return [
     'dojo.composer.disclaimer' => 'Sparring ist KI und kann Fehler machen',
     'dojo.titleCard.line1' => 'BEREIT?',
     'dojo.titleCard.line2' => 'FERTIG',
-    'dojo.titleCard.line3' => 'LOS!',
+    'dojo.titleCard.line3' => 'SPARR!',
 
     'dojo.js.outcomeRateLimited' => 'Zu viele Anfragen — warte einen Moment und versuch es erneut.',
     'dojo.js.outcomeRejected' => 'Diese Nachricht ist leer oder zu lang — bearbeite sie und versuch es erneut.',
