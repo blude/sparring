@@ -7,7 +7,7 @@ v.1.0, 2026-06-19
 :sectanchors:
 :sectnums:
 
-*Element:* xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] Backend service +
+*Element:* xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] +
 *Element profile:* Backend service / API +
 *Parent:* System Design Concept +
 *Status:* Draft

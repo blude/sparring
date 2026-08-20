@@ -7,10 +7,12 @@ v.1.0, 2026-06-19
 :sectanchors:
 :sectnums:
 
-*Element:* xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] Display client +
+*Element:* xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] +
 *Element profile:* User-facing frontend (presentation only, no input) +
 *Parent:* System Design Concept +
-*Status:* Draft. *Layout treatment is TO BE REFINED (xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]).* This document specifies a baseline complete enough to build against, and marks each open decision explicitly.
+*Status:* Draft.
+
+*Layout treatment is TO BE REFINED (xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]).* This document specifies a baseline complete enough to build against, and marks each open decision explicitly.
 
 *Sections that apply.* Goals, user interfaces, technical functions, outbound interfaces, entities, quality requirements, and constraints. Use cases are thin and unusual here: the element has one user type who does not interact with it. <<UC-01,UC-01 An observer reads the projection>> is written anyway, because the element's timing behaviour is only specifiable as a flow, and an absent use case section would read as an oversight rather than as a property of a non-interactive surface. Inbound technical interfaces do not apply.
 
@@ -104,7 +106,9 @@ Two properties of this baseline are settled and should not be revisited without 
 
 *Navigation.* None.
 
-=== Open decisions (xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision])
+=== Open decisions
+
+_Source:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]
 
 Each is deliberately deferred until real pilot transcripts can be seen on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] at exhibition viewing distance. None of them changes the interface xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] provides, so they can be resolved after the rest of the system works.
 

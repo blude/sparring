@@ -7,7 +7,7 @@ v.1.0, 2026-06-19
 :sectanchors:
 :sectnums:
 
-*Element:* xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] Input client +
+*Element:* xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] +
 *Element profile:* User-facing frontend +
 *Parent:* System Design Concept +
 *Status:* Draft
