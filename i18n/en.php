@@ -31,7 +31,7 @@ return [
     'start.copy.punchline' => 'Prepare your sharpest arguments, throw in your hardest punches, and be ready to take some well-intentioned blows back!',
     'start.cta' => 'Start a new session',
     'start.learnMore' => '<a href="/philosophy">Learn more</a> about Sparring&rsquo;s philosophy.',
-    'start.footer.craft' => 'Craft with #DigitalMaterial &middot; <a href="/credits">Credits</a>',
+    'start.footer.craft' => '&copy; {year} &middot; Craft with #DigitalMaterial &middot; <a href="/credits">Credits</a>',
     'start.footer.legal' => '<a href="/terms">Terms</a> and <a href="/privacy">Privacy</a>',
 
     // --- dojo.php (SE-01) + dojo.js ---

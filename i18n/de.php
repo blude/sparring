@@ -24,7 +24,7 @@ return [
     'start.copy.punchline' => 'Bereite deine schärfsten Argumente vor, teile deine härtesten Schläge aus und sei bereit, wohlmeinende Konter einzustecken!',
     'start.cta' => 'Neue Sitzung starten',
     'start.learnMore' => '<a href="/philosophy">Erfahre mehr</a> über die Philosophie von Sparring.',
-    'start.footer.craft' => 'Craft mit #DigitalMaterial &middot; <a href="/credits">Credits</a>',
+    'start.footer.craft' => '&copy; {year} &middot; Craft mit #DigitalMaterial &middot; <a href="/credits">Credits</a>',
     'start.footer.legal' => '<a href="/terms">AGB</a> und <a href="/privacy">Datenschutz</a>',
 
     // --- dojo.php (SE-01) + dojo.js ---
