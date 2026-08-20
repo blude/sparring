@@ -451,12 +451,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_goals">1. Goals</a></li>
 <li><a href="#_use_cases">2. Use cases</a>
 <ul class="sectlevel2">
-<li><a href="#_uc_01_an_observer_reads_the_projection">2.1. UC-01 — An observer reads the projection</a></li>
+<li><a href="#_uc_01_an_observer_reads_the_projection">2.1. UC-01 An observer reads the projection</a></li>
 </ul>
 </li>
 <li><a href="#_user_interfaces">3. User interfaces</a>
 <ul class="sectlevel2">
-<li><a href="#_ui_01_projection_surface">3.1. UI-01 — Projection surface</a></li>
+<li><a href="#_ui_01_projection_surface">3.1. UI-01 Projection surface</a></li>
 <li><a href="#_open_decisions">3.2. Open decisions</a></li>
 </ul>
 </li>
@@ -494,26 +494,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_goals"><a class="anchor" href="#_goals"></a>1. Goals</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong><a id="G-01"></a>G-01 — Make turn-taking visible to people who are not participating</strong><br>
+<p><strong><a id="G-01"></a>G-01 Make turn-taking visible to people who are not participating</strong><br>
 The element shall present visitor contributions and Sparring responses as paired exchanges, so that an observer sees a challenge and what provoked it rather than an isolated reply.<br>
 <em>Success criteria (qualitative):</em> An observer reading one projected item can tell that the AI declined to simply resolve the request.<br>
 <em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-02">SG-02 Make turn-taking readable from across the room</a></p>
 </div>
 <div class="paragraph">
-<p><strong><a id="G-02"></a>G-02 — Remain populated at all times</strong><br>
+<p><strong><a id="G-02"></a>G-02 Remain populated at all times</strong><br>
 The element shall never present an empty or near-empty surface while running, including before the first visitor of the day and between live sessions.<br>
 <em>Success criteria (qualitative):</em> The projection carries readable content continuously from start-up onward.<br>
 <em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-06">SG-06 Never present an empty surface</a></p>
 </div>
 <div class="paragraph">
-<p><strong><a id="G-03"></a>G-03 — Stay readable and stable without attention</strong><br>
+<p><strong><a id="G-03"></a>G-03 Stay readable and stable without attention</strong><br>
 The element shall run for the duration of exhibition hours without reload, recover from backend interruption on its own, and update without visible redraw of unchanged content.<br>
 <em>Success criteria (qualitative):</em> No operator action is required at any point during opening hours. Unchanged items do not flicker or reflow on update.<br>
 <em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-02">SG-02 Make turn-taking readable from across the room</a>, <a href="L2-system-design-concept.html#SG-06">SG-06 Never present an empty surface</a><br>
 <em>Rationale:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02 The installation recovers without a person present</a>. A projection that visibly redraws every few seconds reads as a status screen rather than as part of the work.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="G-04"></a>G-04 — Distinguish concurrent visitors from one another</strong><br>
+<p><strong><a id="G-04"></a>G-04 Distinguish concurrent visitors from one another</strong><br>
 The element shall label each item so an observer can tell exchanges from different sessions apart, even when several appear in the same view.<br>
 <em>Success criteria (qualitative):</em> An observer looking at two items can tell whether they belong to the same visitor or different ones, without reading the content of either.<br>
 <em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-02">SG-02 Make turn-taking readable from across the room</a><br>
@@ -526,7 +526,7 @@ The element shall label each item so an observer can tell exchanges from differe
 <h2 id="_use_cases"><a class="anchor" href="#_use_cases"></a>2. Use cases</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_uc_01_an_observer_reads_the_projection"><a class="anchor" href="#_uc_01_an_observer_reads_the_projection"></a>2.1. <a id="UC-01"></a>UC-01 — An observer reads the projection</h3>
+<h3 id="_uc_01_an_observer_reads_the_projection"><a class="anchor" href="#_uc_01_an_observer_reads_the_projection"></a>2.1. <a id="UC-01"></a>UC-01 An observer reads the projection</h3>
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-02">UT-02 Observing visitor</a>, <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a><br>
 <em>Prerequisites:</em> The element is running and has completed at least one successful retrieval.<br>
@@ -579,7 +579,7 @@ The element shall label each item so an observer can tell exchanges from differe
 <h2 id="_user_interfaces"><a class="anchor" href="#_user_interfaces"></a>3. User interfaces</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ui_01_projection_surface"><a class="anchor" href="#_ui_01_projection_surface"></a>3.1. <a id="UI-01"></a>UI-01 — Projection surface</h3>
+<h3 id="_ui_01_projection_surface"><a class="anchor" href="#_ui_01_projection_surface"></a>3.1. <a id="UI-01"></a>UI-01 Projection surface</h3>
 <div class="paragraph">
 <p><em>User type:</em> <a href="L2-system-design-concept.html#UT-02">UT-02 Observing visitor</a><br>
 <em>Realises:</em> <a href="#UC-01">UC-01 An observer reads the projection</a></p>
@@ -680,7 +680,7 @@ The element shall label each item so an observer can tell exchanges from differe
 <p>Each is deliberately deferred until real pilot transcripts can be seen on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> at exhibition viewing distance. None of them changes the interface <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> provides, so they can be resolved after the rest of the system works.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-01"></a>TBC-01 — Treatment of prominence and recency.</strong> Four candidates now exist; masonry is adopted as a working default, the other three remain open:</p>
+<p><strong><a id="TBC-01"></a>TBC-01 Treatment of prominence and recency.</strong> Four candidates now exist; masonry is adopted as a working default, the other three remain open:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -702,19 +702,19 @@ The element shall label each item so an observer can tell exchanges from differe
 </ul>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-02"></a>TBC-02 — Whether a live session interrupts.</strong> Only applicable if <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> resolves to rotation or hybrid. If a visitor&#8217;s exchange does not appear promptly on the wall, the connection between typing and projection is lost, and that connection is much of what makes the piece an installation rather than a screen. Under the size-gradient baseline this is automatic and needs no rule. Under masonry, the analogous question is resolved above, not by this TBC.</p>
+<p><strong><a id="TBC-02"></a>TBC-02 Whether a live session interrupts.</strong> Only applicable if <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> resolves to rotation or hybrid. If a visitor&#8217;s exchange does not appear promptly on the wall, the connection between typing and projection is lost, and that connection is much of what makes the piece an installation rather than a screen. Under the size-gradient baseline this is automatic and needs no rule. Under masonry, the analogous question is resolved above, not by this TBC.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-03"></a>TBC-03 — Dwell time, if any.</strong> A fixed interval will feel wrong in both directions: too long for a short exchange, too short for a dense one. Scaling to content length is the obvious alternative. Not decidable without real transcripts.</p>
+<p><strong><a id="TBC-03"></a>TBC-03 Dwell time, if any.</strong> A fixed interval will feel wrong in both directions: too long for a short exchange, too short for a dense one. Scaling to content length is the obvious alternative. Not decidable without real transcripts.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-04"></a>TBC-04 — Which exchange pair per session.</strong> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> currently supplies the most recent, on the reasoning that friction has usually built by then. The most demonstrative pair may be the second or third. To be checked against pilot material. This is a change to <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s <a href="L3-SE-03-backend-service.html#TF-04">TF-04 Assemble display material</a> if revised, not to this element.</p>
+<p><strong><a id="TBC-04"></a>TBC-04 Which exchange pair per session.</strong> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> currently supplies the most recent, on the reasoning that friction has usually built by then. The most demonstrative pair may be the second or third. To be checked against pilot material. This is a change to <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s <a href="L3-SE-03-backend-service.html#TF-04">TF-04 Assemble display material</a> if revised, not to this element.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-05"></a>TBC-05 — Item count and truncation.</strong> How many items fit, and how a long contribution is trimmed. Begin with a fixed item count plus a character bound, and only measure rendered height if that proves inadequate. See <a href="#TF-03">TF-03 Fit an item to the available space</a>.</p>
+<p><strong><a id="TBC-05"></a>TBC-05 Item count and truncation.</strong> How many items fit, and how a long contribution is trimmed. Begin with a fixed item count plus a character bound, and only measure rendered height if that proves inadequate. See <a href="#TF-03">TF-03 Fit an item to the available space</a>.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-06"></a>TBC-06 — Whether pilot-origin items are visually distinguishable.</strong> They carry an origin value and could be marked. Leaving them unmarked keeps the surface uniform; marking them is more honest to an observer who assumes everything shown is live. Not urgent, but a decision rather than an oversight.</p>
+<p><strong><a id="TBC-06"></a>TBC-06 Whether pilot-origin items are visually distinguishable.</strong> They carry an origin value and could be marked. Leaving them unmarked keeps the surface uniform; marking them is more honest to an observer who assumes everything shown is live. Not urgent, but a decision rather than an oversight.</p>
 </div>
 <hr>
 </div>
@@ -724,7 +724,7 @@ The element shall label each item so an observer can tell exchanges from differe
 <h2 id="_technical_functions"><a class="anchor" href="#_technical_functions"></a>4. Technical functions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong><a id="TF-01"></a>TF-01 — Retrieve display material</strong><br>
+<p><strong><a id="TF-01"></a>TF-01 Retrieve display material</strong><br>
 <em>Detail level:</em> Stepwise<br>
 <em>Achieves:</em> <a href="#G-02">G-02 Remain populated at all times</a>, <a href="#G-03">G-03 Stay readable and stable without attention</a></p>
 </div>
@@ -752,7 +752,7 @@ The element shall label each item so an observer can tell exchanges from differe
 </ul>
 </div>
 <div class="paragraph">
-<p><strong><a id="TF-02"></a>TF-02 — Reconcile against what is displayed</strong><br>
+<p><strong><a id="TF-02"></a>TF-02 Reconcile against what is displayed</strong><br>
 <em>Detail level:</em> Stepwise<br>
 <em>Achieves:</em> <a href="#G-03">G-03 Stay readable and stable without attention</a></p>
 </div>
@@ -776,7 +776,7 @@ The element shall label each item so an observer can tell exchanges from differe
 </ul>
 </div>
 <div class="paragraph">
-<p><strong><a id="TF-03"></a>TF-03 — Fit an item to the available space</strong><br>
+<p><strong><a id="TF-03"></a>TF-03 Fit an item to the available space</strong><br>
 <em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#G-01">G-01 Make turn-taking visible to people who are not</a></p>
 </div>
@@ -784,7 +784,7 @@ The element shall label each item so an observer can tell exchanges from differe
 <p>Trims an item&#8217;s contribution and response so that the item occupies its allotted space without overflow, preserving enough of both halves that the exchange still reads as an exchange. Trimming only one side would leave a challenge with no visible provocation, which defeats <a href="#G-01">G-01 Make turn-taking visible to people who are not</a>. The initial approach is a character bound per side; rendered-height measurement is the fallback if that proves inadequate (<a href="#TBC-05">TBC-05 Item count and truncation.</a>).</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TF-04"></a>TF-04 — Render the surface</strong><br>
+<p><strong><a id="TF-04"></a>TF-04 Render the surface</strong><br>
 <em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#G-04">G-04 Distinguish concurrent visitors from one another</a></p>
 </div>
@@ -810,7 +810,7 @@ The element shall label each item so an observer can tell exchanges from differe
 <h2 id="_technical_interfaces_outbound"><a class="anchor" href="#_technical_interfaces_outbound"></a>6. Technical interfaces (outbound)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong><a id="TO-01"></a>TO-01 — Retrieve display material</strong><br>
+<p><strong><a id="TO-01"></a>TO-01 Retrieve display material</strong><br>
 <em>Statement:</em> This interface obtains the set of sessions currently eligible for projection by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used on every polling cycle.<br>
 <em>Input:</em> None. The element requests current material and does not parameterise the request, so that item selection remains a backend decision and this element carries no policy.<br>
 <em>Output:</em> An ordered list of items, each carrying a session identifier, a scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency marker.<br>
@@ -836,7 +836,7 @@ No <code>Calls → PE-</code> relation applies. This element reaches no partner 
 <h2 id="_entities"><a class="anchor" href="#_entities"></a>7. Entities</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong><a id="E-01"></a>E-01 — Displayed material</strong><br>
+<p><strong><a id="E-01"></a>E-01 Displayed material</strong><br>
 <em>Persistence:</em> In-memory. Held only to support reconciliation. Lost on reload and rebuilt on the next cycle, which is acceptable because a reload costs one polling interval.<br>
 <em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01 Sparring session</a>, <a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a> (partially; a display-only reconciliation cache, not authoritative — see <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s <a href="L3-SE-03-backend-service.html#E-01">E-01 Session</a>/<a href="L3-SE-03-backend-service.html#E-02">E-02 Exchange</a>)</p>
 </div>
@@ -921,52 +921,52 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>8. Quality requirements</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong><a id="QR-01"></a>QR-01 — Readable at exhibition viewing distance</strong> <em>(Usability)</em><br>
+<p><strong><a id="QR-01"></a>QR-01 Readable at exhibition viewing distance</strong> <em>(Usability)</em><br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a><br>
 <em>Acceptance criteria (qualitative):</em> A complete exchange is readable by a standing observer at the room&#8217;s typical viewing distance, verified on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> in the exhibition space before opening. Not verified in a browser window.<br>
 <em>Supports:</em> <a href="L2-system-design-concept.html#SQR-03">SQR-03 The projection is readable at exhibition viewing</a></p>
 </div>
 <div class="paragraph">
-<p><strong><a id="QR-02"></a>QR-02 — Unchanged content does not redraw</strong> <em>(Usability)</em><br>
+<p><strong><a id="QR-02"></a>QR-02 Unchanged content does not redraw</strong> <em>(Usability)</em><br>
 <em>Applies to:</em> <a href="#TF-02">TF-02 Reconcile against what is displayed</a>, <a href="#TF-04">TF-04 Render the surface</a><br>
 <em>Acceptance criteria:</em> An update that adds one item leaves every other item visually undisturbed. No full-surface repaint occurs on a polling cycle.<br>
 <em>Supports:</em> <a href="L2-system-design-concept.html#SQR-03">SQR-03 The projection is readable at exhibition viewing</a></p>
 </div>
 <div class="paragraph">
-<p><strong><a id="QR-03"></a>QR-03 — Runs unattended for the full opening period</strong> <em>(Availability)</em><br>
+<p><strong><a id="QR-03"></a>QR-03 Runs unattended for the full opening period</strong> <em>(Availability)</em><br>
 <em>Applies to:</em> The element overall<br>
 <em>Acceptance criteria (qualitative):</em> Runs for the duration of exhibition hours without reload, memory growth that degrades rendering, or accumulated state that requires clearing.<br>
 <em>Supports:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02 The installation recovers without a person present</a></p>
 </div>
 <div class="paragraph">
-<p><strong><a id="QR-04"></a>QR-04 — Backend interruption is invisible on the surface</strong> <em>(Availability)</em><br>
+<p><strong><a id="QR-04"></a>QR-04 Backend interruption is invisible on the surface</strong> <em>(Availability)</em><br>
 <em>Applies to:</em> <a href="#TF-01">TF-01 Retrieve display material</a><br>
 <em>Acceptance criteria:</em> A failed retrieval leaves the surface unchanged and produces no visible error. Recovery requires no reload.<br>
 <em>Supports:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02 The installation recovers without a person present</a>, <a href="L2-system-design-concept.html#SQR-07">SQR-07 The installation degrades visibly rather than silently</a><br>
 <em>Rationale:</em> This deliberately departs from <a href="L2-system-design-concept.html#SQR-07">SQR-07 The installation degrades visibly rather than silently</a>'s general rule that failures should be visible. <a href="L2-system-design-concept.html#SQR-07">SQR-07 The installation degrades visibly rather than silently</a> protects the participant, who needs to know why nothing is happening. An observer needs no such signal, and an error message projected on a gallery wall is a worse outcome than briefly stale content.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="QR-05"></a>QR-05 — Visitor content cannot alter the surface</strong> <em>(Security)</em><br>
+<p><strong><a id="QR-05"></a>QR-05 Visitor content cannot alter the surface</strong> <em>(Security)</em><br>
 <em>Applies to:</em> <a href="#TF-04">TF-04 Render the surface</a><br>
 <em>Acceptance criteria:</em> All content from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> is inserted as text. No path renders it as markup, with one narrow exception: a single <code>mermaid</code> fenced block in a sparring response is parsed by mermaid.js in <code>securityLevel: 'strict'</code> (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. A response containing a diagram fence is exempt from the trim length (<a href="#TF-03">TF-03 Fit an item to the available space</a>) that otherwise bounds displayed text, so the fence isn&#8217;t cut mid-syntax.<br>
 <em>Element specific:</em> Yes<br>
 <em>Rationale:</em> This surface is public and unattended, so the consequence of an injection is a projected wall rather than one person&#8217;s phone.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="QR-06"></a>QR-06 — Fixed viewport, no scroll, no overflow</strong> <em>(Compatibility)</em><br>
+<p><strong><a id="QR-06"></a>QR-06 Fixed viewport, no scroll, no overflow</strong> <em>(Compatibility)</em><br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>, <a href="#TF-03">TF-03 Fit an item to the available space</a><br>
 <em>Acceptance criteria:</em> Content never extends beyond the projected area at the target resolution. No scrollbar appears under any content length.<br>
 <em>Element specific:</em> Yes</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="QR-07"></a>QR-07 — Diagnostic tag is available to an operator, hidden by default</strong> <em>(Maintainability)</em><br>
+<p><strong><a id="QR-07"></a>QR-07 Diagnostic tag is available to an operator, hidden by default</strong> <em>(Maintainability)</em><br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a><br>
 <em>Acceptance criteria:</em> An address flag appends a session id / origin tag to each item. Absent by default; no visitor-facing affordance exposes or hints at it.<br>
 <em>Element specific:</em> Yes<br>
 <em>Rationale:</em> Same operator need as <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> <a href="L3-SE-01-input-client.html#QR-06">QR-06 Diagnostic detail is available to an operator</a> — see there.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="QR-08"></a>QR-08 — Entry and update motion respect a reduced-motion preference, and are switchable together</strong> <em>(Usability/Accessibility)</em><br>
+<p><strong><a id="QR-08"></a>QR-08 Entry and update motion respect a reduced-motion preference, and are switchable together</strong> <em>(Usability/Accessibility)</em><br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>, <a href="#TF-04">TF-04 Render the surface</a><br>
 <em>Acceptance criteria:</em> Both the entry transition and the update pulse are suppressed when the OS-level reduced-motion preference is set, and both are turned off together by a single configuration switch, independent of every other element, with no code change. Suppressing either changes nothing else about <a href="#TF-01">TF-01 Retrieve display material</a>/<a href="#TF-02">TF-02 Reconcile against what is displayed</a> — an added or updated item still appears/updates, without the motion.<br>
 <em>Element specific:</em> Yes<br>
@@ -979,7 +979,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <h2 id="_constraints"><a class="anchor" href="#_constraints"></a>9. Constraints</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong><a id="C-01"></a>C-01 — Layout treatment is an open decision</strong> <em>(Organisational)</em><br>
+<p><strong><a id="C-01"></a>C-01 Layout treatment is an open decision</strong> <em>(Organisational)</em><br>
 <em>Source:</em> <a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a>.<br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>, <a href="#TF-03">TF-03 Fit an item to the available space</a>, <a href="#TF-04">TF-04 Render the surface</a>.<br>
 <em>Acceptance criteria:</em> The baseline in section 3 is implemented first. <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> through <a href="#TBC-06">TBC-06 Whether pilot-origin items are visually</a> are resolved against real pilot transcripts on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> before opening.<br>
@@ -987,7 +987,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a></p>
 </div>
 <div class="paragraph">
-<p><strong><a id="C-02"></a>C-02 — This element holds no selection or ordering policy</strong> <em>(Technical)</em><br>
+<p><strong><a id="C-02"></a>C-02 This element holds no selection or ordering policy</strong> <em>(Technical)</em><br>
 <em>Source:</em> <a href="L2-system-design-concept.html#AP-01">AP-01 All logic lives in the backend</a>.<br>
 <em>Applies to:</em> <a href="#TF-01">TF-01 Retrieve display material</a>, <a href="#TO-01">TO-01 Retrieve display material</a>, <a href="#E-01">E-01 Displayed material</a>.<br>
 <em>Acceptance criteria:</em> The element renders what <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> returns, in the order returned. It performs no filtering, no sorting, and no eligibility assessment.<br>
@@ -995,7 +995,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-01">SC-01 PHP with a file-backed store on a single hosted</a></p>
 </div>
 <div class="paragraph">
-<p><strong><a id="C-03"></a>C-03 — Single fixed target resolution</strong> <em>(Technical)</em><br>
+<p><strong><a id="C-03"></a>C-03 Single fixed target resolution</strong> <em>(Technical)</em><br>
 <em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>.<br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>.<br>
 <em>Acceptance criteria:</em> Renders correctly at the projection&#8217;s native resolution. No responsive behaviour below or above it.<br>
@@ -1003,7 +1003,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a></p>
 </div>
 <div class="paragraph">
-<p><strong><a id="C-04"></a>C-04 — No build step</strong> <em>(Technical)</em><br>
+<p><strong><a id="C-04"></a>C-04 No build step</strong> <em>(Technical)</em><br>
 <em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>.<br>
 <em>Applies to:</em> The element overall.<br>
 <em>Acceptance criteria:</em> Ships as files served directly, with no compilation or bundling.<br>
@@ -1011,7 +1011,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a></p>
 </div>
 <div class="paragraph">
-<p><strong><a id="C-05"></a>C-05 — May deploy as an installed web app on iPad instead of a projector</strong> <em>(Technical)</em><br>
+<p><strong><a id="C-05"></a>C-05 May deploy as an installed web app on iPad instead of a projector</strong> <em>(Technical)</em><br>
 <em>Source:</em> TODO.md.<br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>.<br>
 <em>Acceptance criteria:</em> A web app manifest (<code>display: standalone</code>, <code>orientation: landscape</code>, home-screen icon) lets the element be added to an iPad home screen and opened without browser chrome; pinch-zoom, text selection, and touch callout are disabled so a stray touch on the (now touchscreen) surface can&#8217;t disrupt an unattended display.<br>
@@ -1024,7 +1024,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:26:39 +0200
+Last updated 2026-08-20 21:32:40 +0200
 </div>
 </div>
 </body>

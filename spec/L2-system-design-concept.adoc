@@ -18,38 +18,38 @@ xref:index.adoc[Index] / xref:L1-solution-design-concept.adoc[Solution Design Co
 
 == System goals
 
-*[[SG-01]]SG-01 — Start a session from a personal device with no installation or account* +
+*[[SG-01]]SG-01 Start a session from a personal device with no installation or account* +
 The system shall let a visitor reach a working input surface by scanning a code, with no app, login, or staff assistance. +
 _Success criteria (qualitative):_ From scan to first submitted turn requires no step other than consent and typing. +
 _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-02[BG-02 Give visitors direct, unassisted first-hand experience]
 
-*[[SG-02]]SG-02 — Make turn-taking readable from across the room* +
+*[[SG-02]]SG-02 Make turn-taking readable from across the room* +
 The system shall present recent exchanges on a projected surface at a size and pacing that allows a standing observer to read a complete visitor contribution and its Sparring reply. +
 _Success criteria (qualitative):_ A complete exchange is legible at typical viewing distance in the exhibition space. Exact typography and layout: TBC. +
 _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-01[BG-01 Make Sparring's friction visible to an audience]
 
-*[[SG-03]]SG-03 — Survive interruption of the visitor's session* +
+*[[SG-03]]SG-03 Survive interruption of the visitor's session* +
 The system shall let a visitor return to their session after a page reload, a locked phone, or a backgrounded browser, without losing prior turns. +
 _Success criteria (qualitative):_ Reloading the input surface restores the session and its history. +
 _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-02[BG-02 Give visitors direct, unassisted first-hand experience] +
 _Rationale:_ Exhibition devices are fidgeted with. A session lost to a reload is indistinguishable in the record from a visitor who gave up.
 
-*[[SG-04]]SG-04 — Run unattended and absorb misuse without operator intervention* +
+*[[SG-04]]SG-04 Run unattended and absorb misuse without operator intervention* +
 The system shall limit request volume per visitor, cap session length and input size, and continue functioning when individual requests are rejected. +
 _Success criteria (qualitative):_ No failure mode requires someone in the room to restore the projection. +
 _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-03[BG-03 Run unattended through exhibition hours]
 
-*[[SG-05]]SG-05 — Record every interaction with its origin fixed at creation* +
+*[[SG-05]]SG-05 Record every interaction with its origin fixed at creation* +
 The system shall persist sessions and exchanges tagged as pilot or live at the moment they are created. +
 _Success criteria (qualitative):_ Live exhibition material can be extracted without manual sorting. +
 _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-04[BG-04 Produce a record of public interactions as secondary]
 
-*[[SG-06]]SG-06 — Never present an empty surface* +
+*[[SG-06]]SG-06 Never present an empty surface* +
 When no live session is available for display, the system shall present pilot material instead. +
 _Success criteria (qualitative):_ The projection is populated at all times while running. +
 _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-01[BG-01 Make Sparring's friction visible to an audience], xref:L1-solution-design-concept.adoc#BG-03[BG-03 Run unattended through exhibition hours]
 
-*[[SG-07]]SG-07 — Gate public projection at the moment of submission, not after the fact* +
+*[[SG-07]]SG-07 Gate public projection at the moment of submission, not after the fact* +
 The system shall reject a contribution assessed as unsuitable before it reaches the Sparring partner or the display feed, rather than storing it and hiding it later. +
 _Success criteria (qualitative):_ An unsuitable contribution never becomes an exchange; the visitor sees that it was rejected and can edit and resubmit; the session itself continues. +
 _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-01[BG-01 Make Sparring's friction visible to an audience] +
@@ -66,39 +66,39 @@ _Rationale:_ Gating at submission rather than at display means nothing unsuitabl
 
 ==== Key architecture principles
 
-*[[AP-01]]AP-01 — All logic lives in the backend; clients are presentation only* +
+*[[AP-01]]AP-01 All logic lives in the backend; clients are presentation only* +
 _Rationale:_ The clients run on devices the project does not control, in a public setting. Placing generation, moderation, rate limiting, or session policy in a client would expose the API credential and make every rule editable by anyone with developer tools. +
 _Implications:_ Rules out client-side calls to the language provider. Any behaviour change ships as a backend change, not a client change. +
 _Satisfies:_ <<SG-04,SG-04 Run unattended and absorb misuse without operator>>
 
-*[[AP-02]]AP-02 — Polling, not push* +
+*[[AP-02]]AP-02 Polling, not push* +
 The projection asks the backend for current material on a fixed interval rather than holding an open connection. +
 _Rationale:_ A projection refreshing every few seconds is indistinguishable from live at exhibition pace. A persistent connection is one more thing to keep alive across a multi-day unattended run, with reconnection logic that only manifests as a fault when nobody is watching. +
 _Implications:_ Rules out server-sent events and websockets. Accepts a few seconds of latency between a turn completing and its appearance on the wall. +
 _Satisfies:_ <<SG-04,SG-04 Run unattended and absorb misuse without operator>>, <<SG-06,SG-06 Never present an empty surface>>
 
-*[[AP-03]]AP-03 — Session identity travels in the URL; no accounts, no identity cookies* +
+*[[AP-03]]AP-03 Session identity travels in the URL; no accounts, no identity cookies* +
 _Rationale:_ An identifier in the address survives reload, which is the specific failure this system is exposed to. Accounts would defeat <<SG-01,SG-01 Start a session from a personal device with no>>, and identity cookies add a consent surface for no benefit. +
 _Implications:_ Session identifiers are guessable-resistant but not secret. Rules out storing anything in a session that would be harmful if the URL were shared. Rules out any per-visitor authentication. +
 _Satisfies:_ <<SG-01,SG-01 Start a session from a personal device with no>>, <<SG-03,SG-03 Survive interruption of the visitor's session>>
 
-*[[AP-04]]AP-04 — One file-backed datastore, held inside the backend element* +
+*[[AP-04]]AP-04 One file-backed datastore, held inside the backend element* +
 _Rationale:_ Exhibition-scale volume does not warrant a database server. A single file is copied to back up and inspected with one command, which matters when the maintainer is not on site. +
 _Implications:_ Rules out concurrent write scaling. Accepts that the store has no independent design surface, so no separate element design document exists for it. +
 _Satisfies:_ <<SG-04,SG-04 Run unattended and absorb misuse without operator>>, <<SG-05,SG-05 Record every interaction with its origin fixed at>>
 
-*[[AP-05]]AP-05 — Moderation gates storage, not a per-session display flag* +
+*[[AP-05]]AP-05 Moderation gates storage, not a per-session display flag* +
 Content assessed as unsuitable is rejected before it is ever written down: no exchange is stored, no turn is consumed, and the Sparring partner is never called. The visitor edits the contribution and resubmits; the session itself is not ended. +
 _Rationale:_ An earlier version of this decision ended the participant's session outright on a moderation hit, on the reasoning that a defensive stance was warranted even at the cost of a visible, unexplained interruption. Built and tested, that traded one problem for a worse one: it gives the visitor no way to recover from a false positive, and — per <<AP-07,AP-07 Attempts to argue the Sparring partner out of its>> — a visitor pressuring the Sparring partner is _supposed_ to keep going, not be cut off. Rejecting the single turn and letting the visitor fix it protects the public surface just as well without punishing engagement the piece exists to produce. +
 _Implications:_ Moderation runs before the provider call, immediately after the length check (same reasoning: cheapest rejection path, no cost incurred). No `is_appropriate` ruling is stored against the session, because there is nothing to rule on after the fact — a stored exchange has already passed. +
 _Satisfies:_ <<SG-07,SG-07 Gate public projection at the moment of submission>>
 
-*[[AP-06]]AP-06 — Pilot and live material share one storage and display path, separated by an origin flag* +
+*[[AP-06]]AP-06 Pilot and live material share one storage and display path, separated by an origin flag* +
 _Rationale:_ A second path for pilot content would need its own rendering and its own failure modes. One path with one discriminating field is less code and makes the separation checkable. +
 _Implications:_ Requires origin to be set at creation and never inferred. Any extraction of exhibition material must filter on it explicitly. +
 _Satisfies:_ <<SG-05,SG-05 Record every interaction with its origin fixed at>>, <<SG-06,SG-06 Never present an empty surface>>
 
-*[[AP-07]]AP-07 — Attempts to argue the Sparring partner out of its stance are in scope* +
+*[[AP-07]]AP-07 Attempts to argue the Sparring partner out of its stance are in scope* +
 Content filtering addresses profanity, personal information, and hateful, harassing, threatening, or sexual content targeting a real person or group. It does not address visitors trying to make the system abandon its position. +
 _Rationale:_ Whether system-placed friction holds against a motivated user is the question the installation exists to expose. Filtering those attempts would remove the observation the piece is built to produce. +
 _Implications:_ Rules out treating persuasion, pressure, or instruction-style attacks on the Sparring stance as abuse. Requires the moderation function to distinguish adversarial-but-engaged input aimed at the Sparring partner from harmful content aimed at a real person, and this distinction must be stated in that function's specification rather than left to a wordlist. +
@@ -147,19 +147,19 @@ NOTE: Dashed link marks the system boundary. Detailed interaction sequences are 
 
 ==== User types
 
-*[[UT-01]]UT-01 — Participating visitor* +
+*[[UT-01]]UT-01 Participating visitor* +
 An exhibition visitor who chooses to interact. No prior briefing, no expertise in agentic AI assumed, attention measured in minutes. +
 _Primary goals:_ Find out what the piece does. Get a response to something they actually care about. Understand why the system is not simply answering them. +
 _Interacts with:_ <<SE-01,SE-01 Input client>> +
 _Represents:_ xref:L1-solution-design-concept.adoc#VCA-01[VCA-01 Participating visitor]
 
-*[[UT-02]]UT-02 — Observing visitor* +
+*[[UT-02]]UT-02 Observing visitor* +
 Present in the space, not interacting. May be accompanying a participant, waiting, or passing through. +
 _Primary goals:_ Understand what the piece is without committing to it. Decide whether to participate. +
 _Interacts with:_ <<SE-02,SE-02 Display client>> (viewing only, no input) +
 _Represents:_ xref:L1-solution-design-concept.adoc#VCA-02[VCA-02 Observing visitor]
 
-*[[UT-03]]UT-03 — Operator* +
+*[[UT-03]]UT-03 Operator* +
 The thesis author. Seeds pilot material before the exhibition and intervenes only when something has failed. +
 _Primary goals:_ Populate the installation before opening. Extract exhibition material afterwards. Diagnose a fault quickly and remotely. +
 _Interacts with:_ <<SE-03,SE-03 Backend service>> +
@@ -167,21 +167,21 @@ _Represents:_ xref:L1-solution-design-concept.adoc#VCA-03[VCA-03 Thesis author /
 
 ==== Software elements
 
-*[[SE-01]]SE-01 — Input client* _(Web-application)_ +
+*[[SE-01]]SE-01 Input client* _(Web-application)_ +
 The surface a visitor reaches by scanning the code, running in their own mobile browser. +
 _Key responsibilities:_ Presents the consent decision before any input is possible. Accepts and submits visitor contributions. Displays the session's exchanges to its own participant. Restores an interrupted session from the identifier in the address. Signals that a response is being produced. Reveals a generated visitor alias and avatar once consent is recorded, and lets the visitor deliberately start a new session. +
 _Interacts with:_ <<UT-01,UT-01 Participating visitor>>, <<SE-03,SE-03 Backend service>>, <<HE-01,HE-01 Visitor smartphone>> +
 _Realises:_ xref:L1-solution-design-concept.adoc#VCA-04[VCA-04 The installation] +
 _Satisfies:_ <<SG-01,SG-01 Start a session from a personal device with no>>, <<SG-03,SG-03 Survive interruption of the visitor's session>>
 
-*[[SE-02]]SE-02 — Display client* _(Web-application)_ +
+*[[SE-02]]SE-02 Display client* _(Web-application)_ +
 The projected surface, running unattended in a browser on the projection machine. +
 _Key responsibilities:_ Requests current display material at a fixed interval. Renders exchanges with the scenario that gives them context. Gives prominence to recent material and recedes older material. Fits content to the projection without overflow. Labels each item with a generated visitor alias so exchanges from concurrent sessions are distinguishable. +
 _Interacts with:_ <<UT-02,UT-02 Observing visitor>>, <<SE-03,SE-03 Backend service>>, <<HE-02,HE-02 Projection setup>> +
 _Realises:_ xref:L1-solution-design-concept.adoc#VCA-04[VCA-04 The installation] +
 _Satisfies:_ <<SG-02,SG-02 Make turn-taking readable from across the room>>, <<SG-06,SG-06 Never present an empty surface>>
 
-*[[SE-03]]SE-03 — Backend service* _(Backend-service)_ +
+*[[SE-03]]SE-03 Backend service* _(Backend-service)_ +
 The single stateful component. Holds the datastore internally (see <<AP-04,AP-04 One file-backed datastore, held inside the backend>>), so no separate database element is identified. +
 _Key responsibilities:_ Issues and resolves session identifiers. Produces Sparring responses by calling <<PE-01,PE-01 Language generation API>>. Assesses contributions for projection suitability. Enforces request rate, input size, and session length limits. Persists sessions and exchanges with their origin. Assembles the material the projection displays. Accepts pilot material from the operator. +
 _Interacts with:_ <<SE-01,SE-01 Input client>>, <<SE-02,SE-02 Display client>>, <<PE-01,PE-01 Language generation API>>, <<UT-03,UT-03 Operator>>, <<HE-03,HE-03 Hosted server>> +
@@ -191,13 +191,13 @@ _Constrained by:_ <<SC-01,SC-01 PHP with a file-backed store on a single hosted>
 
 ==== Hardware elements
 
-*[[HE-01]]HE-01 — Visitor smartphone* +
+*[[HE-01]]HE-01 Visitor smartphone* +
 _Procurement:_ Assumed-existing +
 _Managed by:_ The visitor +
 _Runs:_ <<SE-01,SE-01 Input client>> +
 _Characteristics:_ Any current mobile browser with camera-based code scanning. No minimum specification beyond this.
 
-*[[HE-02]]HE-02 — Projection setup* +
+*[[HE-02]]HE-02 Projection setup* +
 Projector and the machine driving it, running a browser in kiosk mode. +
 _Procurement:_ Supplied by Fachbereich Informatik at FH Dortmund. +
 _Managed by:_ The operator. +
@@ -205,7 +205,7 @@ _Location:_ Fixed in the exhibition space. Throw distance and surface determine 
 _Runs:_ <<SE-02,SE-02 Display client>> +
 _Characteristics:_ One projector, one display machine, wired network preferred over wireless for an unattended multi-day run.
 
-*[[HE-03]]HE-03 — Hosted server* +
+*[[HE-03]]HE-03 Hosted server* +
 _Procurement:_ Managed-service +
 _Managed by:_ Cloud provider +
 _Location:_ EU region. +
@@ -214,7 +214,7 @@ _Characteristics:_ Smallest generally available instance. Public HTTPS endpoint 
 
 ==== Partner elements
 
-*[[PE-01]]PE-01 — Language generation API* +
+*[[PE-01]]PE-01 Language generation API* +
 _Provider:_ Anthropic (default); OpenAI or an OpenAI-compatible local server, operator-selected +
 _Partner type:_ Third-party-API +
 _Dependency:_ Critical. The installation produces no Sparring response without it, and there is no degraded mode that preserves the piece's purpose. +
@@ -282,38 +282,38 @@ Before the exhibition opens, <<UT-03,UT-03 Operator>> supplies transcripts from 
 
 == Quality requirements
 
-*[[SQR-01]]SQR-01 — A Sparring response arrives, or its absence is visible* _(Performance)_ +
+*[[SQR-01]]SQR-01 A Sparring response arrives, or its absence is visible* _(Performance)_ +
 _Applies to:_ <<SE-01,SE-01 Input client>>, <<SE-03,SE-03 Backend service>>, <<PE-01,PE-01 Language generation API>> +
 _Acceptance criteria:_ <<SE-01,SE-01 Input client>> presents an unambiguous in-progress state within 300 ms of submission and maintains it until a response or failure arrives. <<SE-03,SE-03 Backend service>> abandons a generation request after a bounded interval rather than leaving the visitor with an indefinite wait. The bound is TBC pending measurement of real response times through <<PE-01,PE-01 Language generation API>>. +
 _Supports:_ xref:L1-solution-design-concept.adoc#BQR-01[BQR-01 Visitors experience challenge, not obstruction] +
 _Rationale:_ On a phone in a gallery, several seconds of nothing is read as broken. The in-progress state is not decoration.
 
-*[[SQR-02]]SQR-02 — The installation recovers without a person present* _(Availability)_ +
+*[[SQR-02]]SQR-02 The installation recovers without a person present* _(Availability)_ +
 _Applies to:_ <<SE-02,SE-02 Display client>>, <<SE-03,SE-03 Backend service>>, <<HE-03,HE-03 Hosted server>> +
 _Acceptance criteria (qualitative):_ <<SE-02,SE-02 Display client>> recovers from a backend outage on its own next interval with no reload. <<SE-03,SE-03 Backend service>> restarts automatically after a process failure. No fault requires physical access to <<HE-02,HE-02 Projection setup>> to clear. +
 _Supports:_ xref:L1-solution-design-concept.adoc#BQR-02[BQR-02 The piece is available whenever the room is open]
 
-*[[SQR-03]]SQR-03 — The projection is readable at exhibition viewing distance* _(Usability)_ +
+*[[SQR-03]]SQR-03 The projection is readable at exhibition viewing distance* _(Usability)_ +
 _Applies to:_ <<SE-02,SE-02 Display client>>, <<HE-02,HE-02 Projection setup>> +
 _Acceptance criteria (qualitative):_ A complete exchange is readable by a standing observer at the room's typical viewing distance. Verified in place on the actual projector before opening, not in a browser window. +
 _Supports:_ xref:L1-solution-design-concept.adoc#BQR-01[BQR-01 Visitors experience challenge, not obstruction]
 
-*[[SQR-04]]SQR-04 — Credentials and quota are protected from the public* _(Security)_ +
+*[[SQR-04]]SQR-04 Credentials and quota are protected from the public* _(Security)_ +
 _Applies to:_ <<SE-03,SE-03 Backend service>> +
 _Acceptance criteria:_ The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window. Contribution length is bounded. Session length is bounded. Specific limits TBC pending a cost estimate against expected visitor volume. +
 _Externally sourced:_ Yes (provider terms and cost exposure rather than a business quality requirement)
 
-*[[SQR-05]]SQR-05 — Origin is fixed at creation and never inferred* _(Data-integrity)_ +
+*[[SQR-05]]SQR-05 Origin is fixed at creation and never inferred* _(Data-integrity)_ +
 _Applies to:_ <<SE-03,SE-03 Backend service>> +
 _Acceptance criteria (qualitative):_ Every session carries pilot or live from the moment it is created. No process assigns or corrects origin afterwards. Extraction of exhibition material filters on the stored value. +
 _Supports:_ xref:L1-solution-design-concept.adoc#BQR-04[BQR-04 Exhibition material is never mistaken for evaluation]
 
-*[[SQR-06]]SQR-06 — Public projection is governed separately from retention* _(Compliance)_ +
+*[[SQR-06]]SQR-06 Public projection is governed separately from retention* _(Compliance)_ +
 _Applies to:_ <<SE-03,SE-03 Backend service>>, <<SE-02,SE-02 Display client>> +
 _Acceptance criteria (qualitative):_ Display eligibility, retention consent, and agreement to take part are stored as three distinct properties, each recorded independently. A session may be retained and not projected, or projected and not retained, in any combination. Display eligibility is set directly from the visitor's projection consent at decision time — suitability is enforced earlier, at write time (<<AP-05,AP-05 Moderation gates storage, not a per-session display>>/<<SG-07,SG-07 Gate public projection at the moment of submission>>), so nothing reaches storage that projection consent alone would need to filter back out. +
 _Supports:_ xref:L1-solution-design-concept.adoc#BQR-03[BQR-03 Nothing identifying a visitor reaches the projection]
 
-*[[SQR-07]]SQR-07 — The installation degrades visibly rather than silently* _(Reliability, recorded under Availability)_ +
+*[[SQR-07]]SQR-07 The installation degrades visibly rather than silently* _(Reliability, recorded under Availability)_ +
 _Applies to:_ <<SE-01,SE-01 Input client>>, <<SE-02,SE-02 Display client>> +
 _Acceptance criteria (qualitative):_ Every failure the visitor can encounter produces a plain statement of what happened. No failure presents as an unresponsive interface. This includes routing failures (unmatched path) and uncaught infrastructure faults on a page request, not only the failure conditions <<SE-01,SE-01 Input client>>/<<SE-02,SE-02 Display client>> raise themselves. +
 _Supports:_ xref:L1-solution-design-concept.adoc#BQR-01[BQR-01 Visitors experience challenge, not obstruction]
@@ -322,7 +322,7 @@ _Supports:_ xref:L1-solution-design-concept.adoc#BQR-01[BQR-01 Visitors experien
 
 == Constraints
 
-*[[SC-01]]SC-01 — PHP with a file-backed store on a single hosted instance* _(Technical)_ +
+*[[SC-01]]SC-01 PHP with a file-backed store on a single hosted instance* _(Technical)_ +
 _Source:_ Operator's existing capability and maintenance preference. +
 _Applies to:_ <<SE-03,SE-03 Backend service>> +
 _Acceptance criteria:_ The system runs on one instance with no external database or queue service. +
@@ -330,35 +330,35 @@ _Consequence:_ Rules out horizontal scaling and any architecture requiring a mes
 _Derived:_ Yes +
 _Rationale:_ A technology choice, not a stated business or legal need — it follows from xref:L1-solution-design-concept.adoc#BC-03[BC-03 One developer, no continuous on-site operator]'s one-developer, no-ops premise rather than refining it directly.
 
-*[[SC-02]]SC-02 — The public endpoint must be served over HTTPS with a valid certificate* _(Technical)_ +
+*[[SC-02]]SC-02 The public endpoint must be served over HTTPS with a valid certificate* _(Technical)_ +
 _Source:_ Mobile browser and camera-based code scanning behaviour. +
 _Applies to:_ <<SE-01,SE-01 Input client>>, <<SE-02,SE-02 Display client>>, <<SE-03,SE-03 Backend service>>, <<HE-03,HE-03 Hosted server>> +
 _Acceptance criteria:_ A scanned code opens <<SE-01,SE-01 Input client>> without a certificate warning on current mobile browsers. +
 _Consequence:_ Rules out serving from a bare IP address or a self-signed certificate. +
 _Externally sourced:_ Yes
 
-*[[SC-03]]SC-03 — Build effort is capped and the piece is expendable* _(Business)_ +
+*[[SC-03]]SC-03 Build effort is capped and the piece is expendable* _(Business)_ +
 _Source:_ xref:L1-solution-design-concept.adoc#BC-01[BC-01 Build effort must not compete with thesis writing]. +
 _Applies to:_ All software elements. +
 _Acceptance criteria (qualitative):_ No element depends on infrastructure that would take more than a day to restore, and abandoning the installation entirely would not affect thesis delivery. +
 _Consequence:_ Rules out an administrative interface, an analytics layer, and any build pipeline. Operator tasks are performed directly against the instance. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BC-01[BC-01 Build effort must not compete with thesis writing]
 
-*[[SC-04]]SC-04 — Generation is rate-limited and metered by the provider* _(Integration)_ +
+*[[SC-04]]SC-04 Generation is rate-limited and metered by the provider* _(Integration)_ +
 _Source:_ <<PE-01,PE-01 Language generation API>> provider terms. +
 _Applies to:_ <<SE-03,SE-03 Backend service>> +
 _Acceptance criteria:_ <<SE-03,SE-03 Backend service>> handles provider rate-limit and quota responses as expected conditions rather than faults, and its own limits are set below the provider's. +
 _Consequence:_ Rules out unthrottled request forwarding. Sets an upper bound on concurrent visitors, which is TBC. +
 _Externally sourced:_ Yes
 
-*[[SC-05]]SC-05 — Retention requires consent; projection requires consent, and only ever carries content that already passed suitability* _(Legal-regulatory)_ +
+*[[SC-05]]SC-05 Retention requires consent; projection requires consent, and only ever carries content that already passed suitability* _(Legal-regulatory)_ +
 _Source:_ xref:L1-solution-design-concept.adoc#BC-02[BC-02 Public user-generated content is subject to data]. +
 _Applies to:_ <<SE-01,SE-01 Input client>>, <<SE-03,SE-03 Backend service>> +
 _Acceptance criteria (qualitative):_ No session is retained past the exhibition without a recorded decision. No session is projected without a recorded projection decision, and nothing unsuitable is ever available to project in the first place — suitability is enforced at write time (<<AP-05,AP-05 Moderation gates storage, not a per-session display>>), not as a second gate applied to already-stored content. Neither retention nor projection consent may be bundled with the precondition of taking part at all (xref:L1-solution-design-concept.adoc#BC-02[BC-02 Public user-generated content is subject to data]). +
 _Consequence:_ Rules out a single consent switch governing both retention and projection, and rules out treating "may I participate" and "may my content be kept/shown" as the same decision. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BC-02[BC-02 Public user-generated content is subject to data]
 
-*[[SC-06]]SC-06 — The projected layout is an open decision* _(Organisational)_ +
+*[[SC-06]]SC-06 The projected layout is an open decision* _(Organisational)_ +
 _Source:_ xref:L1-solution-design-concept.adoc#BC-04[BC-04 Display design is not yet settled]. +
 _Applies to:_ <<SE-02,SE-02 Display client>> +
 _Acceptance criteria:_ TBC. To be resolved against real pilot transcripts on <<HE-02,HE-02 Projection setup>> in the exhibition space. +

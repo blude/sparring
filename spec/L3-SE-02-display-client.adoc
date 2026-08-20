@@ -23,23 +23,23 @@ xref:index.adoc[Index] / xref:L1-solution-design-concept.adoc[Solution Design Co
 
 == Goals
 
-*[[G-01]]G-01 — Make turn-taking visible to people who are not participating* +
+*[[G-01]]G-01 Make turn-taking visible to people who are not participating* +
 The element shall present visitor contributions and Sparring responses as paired exchanges, so that an observer sees a challenge and what provoked it rather than an isolated reply. +
 _Success criteria (qualitative):_ An observer reading one projected item can tell that the AI declined to simply resolve the request. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-02[SG-02 Make turn-taking readable from across the room]
 
-*[[G-02]]G-02 — Remain populated at all times* +
+*[[G-02]]G-02 Remain populated at all times* +
 The element shall never present an empty or near-empty surface while running, including before the first visitor of the day and between live sessions. +
 _Success criteria (qualitative):_ The projection carries readable content continuously from start-up onward. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-06[SG-06 Never present an empty surface]
 
-*[[G-03]]G-03 — Stay readable and stable without attention* +
+*[[G-03]]G-03 Stay readable and stable without attention* +
 The element shall run for the duration of exhibition hours without reload, recover from backend interruption on its own, and update without visible redraw of unchanged content. +
 _Success criteria (qualitative):_ No operator action is required at any point during opening hours. Unchanged items do not flicker or reflow on update. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-02[SG-02 Make turn-taking readable from across the room], xref:L2-system-design-concept.adoc#SG-06[SG-06 Never present an empty surface] +
 _Rationale:_ xref:L2-system-design-concept.adoc#SQR-02[SQR-02 The installation recovers without a person present]. A projection that visibly redraws every few seconds reads as a status screen rather than as part of the work.
 
-*[[G-04]]G-04 — Distinguish concurrent visitors from one another* +
+*[[G-04]]G-04 Distinguish concurrent visitors from one another* +
 The element shall label each item so an observer can tell exchanges from different sessions apart, even when several appear in the same view. +
 _Success criteria (qualitative):_ An observer looking at two items can tell whether they belong to the same visitor or different ones, without reading the content of either. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-02[SG-02 Make turn-taking readable from across the room] +
@@ -49,7 +49,7 @@ _Rationale:_ Readability (xref:L2-system-design-concept.adoc#SG-02[SG-02 Make tu
 
 == Use cases
 
-=== [[UC-01]]UC-01 — An observer reads the projection
+=== [[UC-01]]UC-01 An observer reads the projection
 
 _Actors:_ xref:L2-system-design-concept.adoc#UT-02[UT-02 Observing visitor], xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] +
 _Prerequisites:_ The element is running and has completed at least one successful retrieval. +
@@ -74,7 +74,7 @@ xref:L2-system-design-concept.adoc#UT-02[UT-02 Observing visitor] performs no ac
 
 == User interfaces
 
-=== [[UI-01]]UI-01 — Projection surface
+=== [[UI-01]]UI-01 Projection surface
 
 _User type:_ xref:L2-system-design-concept.adoc#UT-02[UT-02 Observing visitor] +
 _Realises:_ <<UC-01,UC-01 An observer reads the projection>>
@@ -112,7 +112,7 @@ _Source:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is
 
 Each is deliberately deferred until real pilot transcripts can be seen on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] at exhibition viewing distance. None of them changes the interface xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] provides, so they can be resolved after the rest of the system works.
 
-*[[TBC-01]]TBC-01 — Treatment of prominence and recency.* Four candidates now exist; masonry is adopted as a working default, the other three remain open:
+*[[TBC-01]]TBC-01 Treatment of prominence and recency.* Four candidates now exist; masonry is adopted as a working default, the other three remain open:
 
 - _Size gradient._ Newest item largest, older items progressively smaller and dimmer. Conveys accumulation well. Weakness: older items become texture rather than content, so most of the surface is not actually readable.
 - _Rotation._ One or two items at full size, cycling on a timer, with an indicator of how many others exist. Every item gets a turn at being readable. Weakness: loses the sense of accumulation, and requires a live-session priority rule so that a visitor who has just contributed sees their own exchange rather than waiting for the cycle.
@@ -121,21 +121,21 @@ Each is deliberately deferred until real pilot transcripts can be seen on xref:L
 +
 Masonry has its own version of "does everyone get seen," distinct from <<TBC-02,TBC-02 Whether a live session interrupts.>>: with `DISPLAY_ITEM_LIMIT` items shown and selection by most-recent-activity (`Store::getDisplayableSessions`, `ORDER BY last_active_at DESC`), a session that goes quiet is _excluded_, not merely delayed — it can drop off the wall entirely if enough other sessions stay more active. Accepted as intentional: recency-eviction gives visitors a reason to keep engaging rather than submitting once and disengaging, which fits a piece about friction. Not revisited unless pilot observation shows visitors feeling unfairly dropped rather than prompted to continue.
 
-*[[TBC-02]]TBC-02 — Whether a live session interrupts.* Only applicable if <<TBC-01,TBC-01 Treatment of prominence and recency.>> resolves to rotation or hybrid. If a visitor's exchange does not appear promptly on the wall, the connection between typing and projection is lost, and that connection is much of what makes the piece an installation rather than a screen. Under the size-gradient baseline this is automatic and needs no rule. Under masonry, the analogous question is resolved above, not by this TBC.
+*[[TBC-02]]TBC-02 Whether a live session interrupts.* Only applicable if <<TBC-01,TBC-01 Treatment of prominence and recency.>> resolves to rotation or hybrid. If a visitor's exchange does not appear promptly on the wall, the connection between typing and projection is lost, and that connection is much of what makes the piece an installation rather than a screen. Under the size-gradient baseline this is automatic and needs no rule. Under masonry, the analogous question is resolved above, not by this TBC.
 
-*[[TBC-03]]TBC-03 — Dwell time, if any.* A fixed interval will feel wrong in both directions: too long for a short exchange, too short for a dense one. Scaling to content length is the obvious alternative. Not decidable without real transcripts.
+*[[TBC-03]]TBC-03 Dwell time, if any.* A fixed interval will feel wrong in both directions: too long for a short exchange, too short for a dense one. Scaling to content length is the obvious alternative. Not decidable without real transcripts.
 
-*[[TBC-04]]TBC-04 — Which exchange pair per session.* xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] currently supplies the most recent, on the reasoning that friction has usually built by then. The most demonstrative pair may be the second or third. To be checked against pilot material. This is a change to xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#TF-04[TF-04 Assemble display material] if revised, not to this element.
+*[[TBC-04]]TBC-04 Which exchange pair per session.* xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] currently supplies the most recent, on the reasoning that friction has usually built by then. The most demonstrative pair may be the second or third. To be checked against pilot material. This is a change to xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#TF-04[TF-04 Assemble display material] if revised, not to this element.
 
-*[[TBC-05]]TBC-05 — Item count and truncation.* How many items fit, and how a long contribution is trimmed. Begin with a fixed item count plus a character bound, and only measure rendered height if that proves inadequate. See <<TF-03,TF-03 Fit an item to the available space>>.
+*[[TBC-05]]TBC-05 Item count and truncation.* How many items fit, and how a long contribution is trimmed. Begin with a fixed item count plus a character bound, and only measure rendered height if that proves inadequate. See <<TF-03,TF-03 Fit an item to the available space>>.
 
-*[[TBC-06]]TBC-06 — Whether pilot-origin items are visually distinguishable.* They carry an origin value and could be marked. Leaving them unmarked keeps the surface uniform; marking them is more honest to an observer who assumes everything shown is live. Not urgent, but a decision rather than an oversight.
+*[[TBC-06]]TBC-06 Whether pilot-origin items are visually distinguishable.* They carry an origin value and could be marked. Leaving them unmarked keeps the surface uniform; marking them is more honest to an observer who assumes everything shown is live. Not urgent, but a decision rather than an oversight.
 
 '''
 
 == Technical functions
 
-*[[TF-01]]TF-01 — Retrieve display material* +
+*[[TF-01]]TF-01 Retrieve display material* +
 _Detail level:_ Stepwise +
 _Achieves:_ <<G-02,G-02 Remain populated at all times>>, <<G-03,G-03 Stay readable and stable without attention>>
 
@@ -147,7 +147,7 @@ _Achieves:_ <<G-02,G-02 Remain populated at all times>>, <<G-03,G-03 Stay readab
 
 - *[[FA-01-1]]FA-01-1* _(extends <<FS-01-1,FS-01-1>>)_ Timeout, transport failure, or an unexpected status. Return the currently held material, increment the failure count, and take no other action. Grouping is intentional: the element's response is the same for every failure mode. _Outcome:_ Resume.
 
-*[[TF-02]]TF-02 — Reconcile against what is displayed* +
+*[[TF-02]]TF-02 Reconcile against what is displayed* +
 _Detail level:_ Stepwise +
 _Achieves:_ <<G-03,G-03 Stay readable and stable without attention>>
 
@@ -158,13 +158,13 @@ Determines the minimum change needed, so that unchanged items are not redrawn. T
 - *[[FS-02-3]]FS-02-3* _(Data-operation)_ Produce three sets: items to add, items whose content has changed, and items to remove. An item present in both with identical content appears in none of them.
 - *[[FS-02-4]]FS-02-4* _(Entity-access)_ Write the new set to <<E-01,E-01 Displayed material>> once the changes have been applied.
 
-*[[TF-03]]TF-03 — Fit an item to the available space* +
+*[[TF-03]]TF-03 Fit an item to the available space* +
 _Detail level:_ Narrative +
 _Achieves:_ <<G-01,G-01 Make turn-taking visible to people who are not>>
 
 Trims an item's contribution and response so that the item occupies its allotted space without overflow, preserving enough of both halves that the exchange still reads as an exchange. Trimming only one side would leave a challenge with no visible provocation, which defeats <<G-01,G-01 Make turn-taking visible to people who are not>>. The initial approach is a character bound per side; rendered-height measurement is the fallback if that proves inadequate (<<TBC-05,TBC-05 Item count and truncation.>>).
 
-*[[TF-04]]TF-04 — Render the surface* +
+*[[TF-04]]TF-04 Render the surface* +
 _Detail level:_ Narrative +
 _Achieves:_ <<G-04,G-04 Distinguish concurrent visitors from one another>>
 
@@ -182,7 +182,7 @@ None. No element calls this one. It is a leaf that only reads.
 
 == Technical interfaces (outbound)
 
-*[[TO-01]]TO-01 — Retrieve display material* +
+*[[TO-01]]TO-01 Retrieve display material* +
 _Statement:_ This interface obtains the set of sessions currently eligible for projection by calling the backend service (xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]). Used on every polling cycle. +
 _Input:_ None. The element requests current material and does not parameterise the request, so that item selection remains a backend decision and this element carries no policy. +
 _Output:_ An ordered list of items, each carrying a session identifier, a scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency marker. +
@@ -195,7 +195,7 @@ NOTE: No `Calls → PE-` relation applies. This element reaches no partner eleme
 
 == Entities
 
-*[[E-01]]E-01 — Displayed material* +
+*[[E-01]]E-01 Displayed material* +
 _Persistence:_ In-memory. Held only to support reconciliation. Lost on reload and rebuilt on the next cycle, which is acceptable because a reload costs one polling interval. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session], xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange] (partially; a display-only reconciliation cache, not authoritative — see xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#E-01[E-01 Session]/xref:L3-SE-03-backend-service.adoc#E-02[E-02 Exchange])
 
@@ -216,45 +216,45 @@ NOTE: The element derives no ordering, performs no selection, and stores nothing
 
 == Quality requirements
 
-*[[QR-01]]QR-01 — Readable at exhibition viewing distance* _(Usability)_ +
+*[[QR-01]]QR-01 Readable at exhibition viewing distance* _(Usability)_ +
 _Applies to:_ <<UI-01,UI-01 Projection surface>> +
 _Acceptance criteria (qualitative):_ A complete exchange is readable by a standing observer at the room's typical viewing distance, verified on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] in the exhibition space before opening. Not verified in a browser window. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-03[SQR-03 The projection is readable at exhibition viewing]
 
-*[[QR-02]]QR-02 — Unchanged content does not redraw* _(Usability)_ +
+*[[QR-02]]QR-02 Unchanged content does not redraw* _(Usability)_ +
 _Applies to:_ <<TF-02,TF-02 Reconcile against what is displayed>>, <<TF-04,TF-04 Render the surface>> +
 _Acceptance criteria:_ An update that adds one item leaves every other item visually undisturbed. No full-surface repaint occurs on a polling cycle. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-03[SQR-03 The projection is readable at exhibition viewing]
 
-*[[QR-03]]QR-03 — Runs unattended for the full opening period* _(Availability)_ +
+*[[QR-03]]QR-03 Runs unattended for the full opening period* _(Availability)_ +
 _Applies to:_ The element overall +
 _Acceptance criteria (qualitative):_ Runs for the duration of exhibition hours without reload, memory growth that degrades rendering, or accumulated state that requires clearing. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-02[SQR-02 The installation recovers without a person present]
 
-*[[QR-04]]QR-04 — Backend interruption is invisible on the surface* _(Availability)_ +
+*[[QR-04]]QR-04 Backend interruption is invisible on the surface* _(Availability)_ +
 _Applies to:_ <<TF-01,TF-01 Retrieve display material>> +
 _Acceptance criteria:_ A failed retrieval leaves the surface unchanged and produces no visible error. Recovery requires no reload. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-02[SQR-02 The installation recovers without a person present], xref:L2-system-design-concept.adoc#SQR-07[SQR-07 The installation degrades visibly rather than silently] +
 _Rationale:_ This deliberately departs from xref:L2-system-design-concept.adoc#SQR-07[SQR-07 The installation degrades visibly rather than silently]'s general rule that failures should be visible. xref:L2-system-design-concept.adoc#SQR-07[SQR-07 The installation degrades visibly rather than silently] protects the participant, who needs to know why nothing is happening. An observer needs no such signal, and an error message projected on a gallery wall is a worse outcome than briefly stale content.
 
-*[[QR-05]]QR-05 — Visitor content cannot alter the surface* _(Security)_ +
+*[[QR-05]]QR-05 Visitor content cannot alter the surface* _(Security)_ +
 _Applies to:_ <<TF-04,TF-04 Render the surface>> +
 _Acceptance criteria:_ All content from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] is inserted as text. No path renders it as markup, with one narrow exception: a single `mermaid` fenced block in a sparring response is parsed by mermaid.js in `securityLevel: 'strict'` (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. A response containing a diagram fence is exempt from the trim length (<<TF-03,TF-03 Fit an item to the available space>>) that otherwise bounds displayed text, so the fence isn't cut mid-syntax. +
 _Element specific:_ Yes +
 _Rationale:_ This surface is public and unattended, so the consequence of an injection is a projected wall rather than one person's phone.
 
-*[[QR-06]]QR-06 — Fixed viewport, no scroll, no overflow* _(Compatibility)_ +
+*[[QR-06]]QR-06 Fixed viewport, no scroll, no overflow* _(Compatibility)_ +
 _Applies to:_ <<UI-01,UI-01 Projection surface>>, <<TF-03,TF-03 Fit an item to the available space>> +
 _Acceptance criteria:_ Content never extends beyond the projected area at the target resolution. No scrollbar appears under any content length. +
 _Element specific:_ Yes
 
-*[[QR-07]]QR-07 — Diagnostic tag is available to an operator, hidden by default* _(Maintainability)_ +
+*[[QR-07]]QR-07 Diagnostic tag is available to an operator, hidden by default* _(Maintainability)_ +
 _Applies to:_ <<UI-01,UI-01 Projection surface>> +
 _Acceptance criteria:_ An address flag appends a session id / origin tag to each item. Absent by default; no visitor-facing affordance exposes or hints at it. +
 _Element specific:_ Yes +
 _Rationale:_ Same operator need as xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] xref:L3-SE-01-input-client.adoc#QR-06[QR-06 Diagnostic detail is available to an operator] — see there.
 
-*[[QR-08]]QR-08 — Entry and update motion respect a reduced-motion preference, and are switchable together* _(Usability/Accessibility)_ +
+*[[QR-08]]QR-08 Entry and update motion respect a reduced-motion preference, and are switchable together* _(Usability/Accessibility)_ +
 _Applies to:_ <<UI-01,UI-01 Projection surface>>, <<TF-04,TF-04 Render the surface>> +
 _Acceptance criteria:_ Both the entry transition and the update pulse are suppressed when the OS-level reduced-motion preference is set, and both are turned off together by a single configuration switch, independent of every other element, with no code change. Suppressing either changes nothing else about <<TF-01,TF-01 Retrieve display material>>/<<TF-02,TF-02 Reconcile against what is displayed>> — an added or updated item still appears/updates, without the motion. +
 _Element specific:_ Yes +
@@ -264,35 +264,35 @@ _Rationale:_ Mirrors xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client
 
 == Constraints
 
-*[[C-01]]C-01 — Layout treatment is an open decision* _(Organisational)_ +
+*[[C-01]]C-01 Layout treatment is an open decision* _(Organisational)_ +
 _Source:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]. +
 _Applies to:_ <<UI-01,UI-01 Projection surface>>, <<TF-03,TF-03 Fit an item to the available space>>, <<TF-04,TF-04 Render the surface>>. +
 _Acceptance criteria:_ The baseline in section 3 is implemented first. <<TBC-01,TBC-01 Treatment of prominence and recency.>> through <<TBC-06,TBC-06 Whether pilot-origin items are visually>> are resolved against real pilot transcripts on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] before opening. +
 _Consequence:_ Rules out encoding a specific prominence treatment into <<TO-01,TO-01 Retrieve display material>>'s request or into xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s response shape. The interface must serve any of the three candidates without change. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]
 
-*[[C-02]]C-02 — This element holds no selection or ordering policy* _(Technical)_ +
+*[[C-02]]C-02 This element holds no selection or ordering policy* _(Technical)_ +
 _Source:_ xref:L2-system-design-concept.adoc#AP-01[AP-01 All logic lives in the backend]. +
 _Applies to:_ <<TF-01,TF-01 Retrieve display material>>, <<TO-01,TO-01 Retrieve display material>>, <<E-01,E-01 Displayed material>>. +
 _Acceptance criteria:_ The element renders what xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] returns, in the order returned. It performs no filtering, no sorting, and no eligibility assessment. +
 _Consequence:_ Rules out client-side filtering of pilot material or of items the element judges unsuitable. Changing what appears is a backend change. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-01[SC-01 PHP with a file-backed store on a single hosted]
 
-*[[C-03]]C-03 — Single fixed target resolution* _(Technical)_ +
+*[[C-03]]C-03 Single fixed target resolution* _(Technical)_ +
 _Source:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]. +
 _Applies to:_ <<UI-01,UI-01 Projection surface>>. +
 _Acceptance criteria:_ Renders correctly at the projection's native resolution. No responsive behaviour below or above it. +
 _Consequence:_ Rules out responsive layout work. Requires the projection resolution to be confirmed before <<UI-01,UI-01 Projection surface>> is finalised, which is a dependency on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] procurement being settled. Working assumption for now: 1920×1080 — not yet a confirmed xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] sign-off, but enough to build and tune the masonry treatment (<<TBC-01,TBC-01 Treatment of prominence and recency.>>) against. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]
 
-*[[C-04]]C-04 — No build step* _(Technical)_ +
+*[[C-04]]C-04 No build step* _(Technical)_ +
 _Source:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]. +
 _Applies to:_ The element overall. +
 _Acceptance criteria:_ Ships as files served directly, with no compilation or bundling. +
 _Consequence:_ Rules out any framework requiring a build. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]
 
-*[[C-05]]C-05 — May deploy as an installed web app on iPad instead of a projector* _(Technical)_ +
+*[[C-05]]C-05 May deploy as an installed web app on iPad instead of a projector* _(Technical)_ +
 _Source:_ TODO.md. +
 _Applies to:_ <<UI-01,UI-01 Projection surface>>. +
 _Acceptance criteria:_ A web app manifest (`display: standalone`, `orientation: landscape`, home-screen icon) lets the element be added to an iPad home screen and opened without browser chrome; pinch-zoom, text selection, and touch callout are disabled so a stray touch on the (now touchscreen) surface can't disrupt an unattended display. +
