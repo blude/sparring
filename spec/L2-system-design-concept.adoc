@@ -102,8 +102,9 @@ _Satisfies:_ <<SG-05,SG-05 Record every interaction with its origin fixed at>>, 
 Content filtering addresses profanity, personal information, and hateful, harassing, threatening, or sexual content targeting a real person or group. It does not address visitors trying to make the system abandon its position. +
 _Rationale:_ Whether system-placed friction holds against a motivated user is the question the installation exists to expose. Filtering those attempts would remove the observation the piece is built to produce. +
 _Implications:_ Rules out treating persuasion, pressure, or instruction-style attacks on the Sparring stance as abuse. Requires the moderation function to distinguish adversarial-but-engaged input aimed at the Sparring partner from harmful content aimed at a real person, and this distinction must be stated in that function's specification rather than left to a wordlist. +
-_Lesson from testing:_ stating the adversarial-vs-target distinction was not sufficient on its own. The classification instruction must also state what the exercise's subject matter actually _is_ — without that, the classifier has nothing to check arguing-the-exercise against, so the subject matter has to be explicit alongside the target-based carve-out, not just the one that looks like the harder problem. +
 _Satisfies:_ <<SG-05,SG-05 Record every interaction with its origin fixed at>>
+
+IMPORTANT: Lesson from testing: stating the adversarial-vs-target distinction was not sufficient on its own. The classification instruction must also state what the exercise's subject matter actually _is_ — without that, the classifier has nothing to check arguing-the-exercise against, so the subject matter has to be explicit alongside the target-based carve-out, not just the one that looks like the harder problem.
 
 === Architecture diagram
 
@@ -140,7 +141,7 @@ flowchart TB
   SE03 -.->|generation and classification| PE01
 ----
 
-_Dashed link marks the system boundary. Detailed interaction sequences are in section 3, not in the diagram._
+NOTE: Dashed link marks the system boundary. Detailed interaction sequences are in section 3, not in the diagram.
 
 === System elements
 
@@ -366,4 +367,4 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BC-04[BC-04 Display design is no
 
 '''
 
-_Downward references from L3 are not written here. Element designs declare their own upward relations._
+NOTE: Downward references from L3 are not written here. Element designs declare their own upward relations.

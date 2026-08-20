@@ -23,14 +23,16 @@ xref:index.adoc[Index] / xref:L1-solution-design-concept.adoc[Solution Design Co
 *[[G-01]]G-01 — Reach a working input surface with nothing but a scan* +
 The element shall present a usable input surface immediately on opening, with no installation, registration, or instruction step. +
 _Success criteria (qualitative):_ A visitor who has never seen the piece submits their first contribution without asking anyone how it works. +
-_Satisfies:_ xref:L2-system-design-concept.adoc#SG-01[SG-01 Start a session from a personal device with no] +
-_Note:_ <<UI-01,UI-01 Session surface>> shows a "Playbook" card of participation rules on screen load.
+_Satisfies:_ xref:L2-system-design-concept.adoc#SG-01[SG-01 Start a session from a personal device with no]
+
+NOTE: <<UI-01,UI-01 Session surface>> shows a "Playbook" card of participation rules on screen load.
 It's visually an instruction step, but never gates the input surface — the
 field's usability doesn't depend on it, and it's dismissed automatically by
 the visitor's first submission rather than requiring an acknowledgement.
 Documented here as a deliberate, non-blocking exception rather than a silent
-one. +
-_Note:_ The page also declares a web app manifest (`display: standalone`,
+one.
+
+NOTE: The page also declares a web app manifest (`display: standalone`,
 home-screen icon) so a visitor _may_ install it — this is an opt-in a
 visitor reaches through their own browser chrome, never a step the flow
 prompts or requires, so it does not gate <<G-01,G-01 Reach a working input surface with nothing but a scan>>.
@@ -48,8 +50,9 @@ _Rationale:_ Several seconds of unexplained stillness in a gallery reads as a br
 
 *[[G-04]]G-04 — Make unsuitable input visible* +
 The element shall show that an input is invalid and should require the user to modify its content before sending again. +
-_Rationale:_ Participants should be allowed to edit their input to fix the problem. +
-_Note:_ this is the authoritative behavior for unsuitable content — an earlier version of L2's xref:L2-system-design-concept.adoc#AP-05[AP-05 Moderation gates storage, not a per-session display] described the session ending instead; that reading is superseded (see L2 xref:L2-system-design-concept.adoc#AP-05[AP-05 Moderation gates storage, not a per-session display]'s own note on why).
+_Rationale:_ Participants should be allowed to edit their input to fix the problem.
+
+IMPORTANT: This is the authoritative behavior for unsuitable content — an earlier version of L2's xref:L2-system-design-concept.adoc#AP-05[AP-05 Moderation gates storage, not a per-session display] described the session ending instead; that reading is superseded (see L2 xref:L2-system-design-concept.adoc#AP-05[AP-05 Moderation gates storage, not a per-session display]'s own note on why).
 
 *[[G-05]]G-05 — Give the visitor a light identity, and a way to deliberately start over* +
 The element shall reveal a generated nickname and avatar in the header once consent is recorded, and shall let the visitor abandon the current session and begin a fresh one on request. +
@@ -280,7 +283,7 @@ _Output:_ Refined title (string) — always a usable value when the call succeed
 _Error cases:_ Service unavailable. Session unknown. Malformed request. None of these are shown to the visitor (<<TF-06,TF-06 Refine the session title>>) — the header simply keeps its default "Untitled" state. +
 _Authoritative spec:_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] element design, xref:L3-SE-03-backend-service.adoc#TI-06[TI-06 Refine a session title].
 
-_No `Calls → PE-` relation applies. This element reaches no partner element directly, per xref:L2-system-design-concept.adoc#AP-01[AP-01 All logic lives in the backend]._
+NOTE: No `Calls → PE-` relation applies. This element reaches no partner element directly, per xref:L2-system-design-concept.adoc#AP-01[AP-01 All logic lives in the backend].
 
 '''
 
@@ -301,7 +304,7 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session] (p
 | [[E-01.6]]E-01.6 | statusMessage | string | optional | Plain statement of the current limit or failure. Cleared on the next successful submission.
 |===
 
-_The device holds no consent record. The decision is sent to xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] and its consequences are enforced there. Holding a local copy would create a second source of truth for the one thing that must not have one._
+IMPORTANT: The device holds no consent record. The decision is sent to xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] and its consequences are enforced there. Holding a local copy would create a second source of truth for the one thing that must not have one.
 
 '''
 

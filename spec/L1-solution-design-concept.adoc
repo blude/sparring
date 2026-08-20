@@ -167,7 +167,7 @@ _Supports:_ <<BG-01,BG-01 Make Sparring's friction visible to an audience>>, <<B
 - *[[PA-01-5]]PA-01-5* _(extends <<PS-01-2,PS-01-2>>)_ Visitor declines to agree to the terms of participation. Unlike retention and projection, this is not an opt-out the session can proceed without: the input surface stays unusable until it is agreed to. _Outcome:_ Terminate.
 - *[[PA-01-6]]PA-01-6* _(extends <<PS-01-1,PS-01-1>>)_ Visitor reaches the installation via a landing screen at the site's own address rather than a scanned code — typed directly, bookmarked, or shared. The same session surface opens and the process continues unchanged from <<PS-01-2,PS-01-2>>. _Outcome:_ Alternative-success.
 
-*Note on scope.* A visitor who spends the session trying to argue the Sparring partner out of its stance is following <<BP-01,BP-01 Visitor conducts a Sparring session>>, not deviating from it. This is deliberate and is not treated as an exception path.
+NOTE: A visitor who spends the session trying to argue the Sparring partner out of its stance is following <<BP-01,BP-01 Visitor conducts a Sparring session>>, not deviating from it. This is deliberate and is not treated as an exception path.
 
 === [[BP-02]]BP-02 — Recent sessions are shown to the room
 
@@ -238,4 +238,4 @@ _Acceptance criteria:_ TBC.
 
 '''
 
-_Downward references ("implemented by", "realised by") are not written at this level. They are the reverse view of relations declared at L2 and L3._
+NOTE: Downward references ("implemented by", "realised by") are not written at this level. They are the reverse view of relations declared at L2 and L3.

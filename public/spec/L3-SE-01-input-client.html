@@ -496,17 +496,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong><a id="G-01"></a>G-01 — Reach a working input surface with nothing but a scan</strong><br>
 The element shall present a usable input surface immediately on opening, with no installation, registration, or instruction step.<br>
 <em>Success criteria (qualitative):</em> A visitor who has never seen the piece submits their first contribution without asking anyone how it works.<br>
-<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-01">SG-01 Start a session from a personal device with no</a><br>
-<em>Note:</em> <a href="#UI-01">UI-01 Session surface</a> shows a "Playbook" card of participation rules on screen load.
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-01">SG-01 Start a session from a personal device with no</a></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<a href="#UI-01">UI-01 Session surface</a> shows a "Playbook" card of participation rules on screen load.
 It&#8217;s visually an instruction step, but never gates the input surface — the
 field&#8217;s usability doesn&#8217;t depend on it, and it&#8217;s dismissed automatically by
 the visitor&#8217;s first submission rather than requiring an acknowledgement.
 Documented here as a deliberate, non-blocking exception rather than a silent
-one.<br>
-<em>Note:</em> The page also declares a web app manifest (<code>display: standalone</code>,
+one.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The page also declares a web app manifest (<code>display: standalone</code>,
 home-screen icon) so a visitor <em>may</em> install it — this is an opt-in a
 visitor reaches through their own browser chrome, never a step the flow
-prompts or requires, so it does not gate <a href="#G-01">G-01 Reach a working input surface with nothing but a scan</a>.</p>
+prompts or requires, so it does not gate <a href="#G-01">G-01 Reach a working input surface with nothing but a scan</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong><a id="G-02"></a>G-02 — Hold the visitor&#8217;s place through interruption</strong><br>
@@ -524,8 +546,19 @@ The element shall show that a response is being produced, and shall state plainl
 <div class="paragraph">
 <p><strong><a id="G-04"></a>G-04 — Make unsuitable input visible</strong><br>
 The element shall show that an input is invalid and should require the user to modify its content before sending again.<br>
-<em>Rationale:</em> Participants should be allowed to edit their input to fix the problem.<br>
-<em>Note:</em> this is the authoritative behavior for unsuitable content — an earlier version of L2&#8217;s <a href="L2-system-design-concept.html#AP-05">AP-05 Moderation gates storage, not a per-session display</a> described the session ending instead; that reading is superseded (see L2 <a href="L2-system-design-concept.html#AP-05">AP-05 Moderation gates storage, not a per-session display</a>'s own note on why).</p>
+<em>Rationale:</em> Participants should be allowed to edit their input to fix the problem.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is the authoritative behavior for unsuitable content — an earlier version of L2&#8217;s <a href="L2-system-design-concept.html#AP-05">AP-05 Moderation gates storage, not a per-session display</a> described the session ending instead; that reading is superseded (see L2 <a href="L2-system-design-concept.html#AP-05">AP-05 Moderation gates storage, not a per-session display</a>'s own note on why).
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong><a id="G-05"></a>G-05 — Give the visitor a light identity, and a way to deliberately start over</strong><br>
@@ -1053,8 +1086,17 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <em>Error cases:</em> Service unavailable. Session unknown. Malformed request. None of these are shown to the visitor (<a href="#TF-06">TF-06 Refine the session title</a>) — the header simply keeps its default "Untitled" state.<br>
 <em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-06">TI-06 Refine a session title</a>.</p>
 </div>
-<div class="paragraph">
-<p><em>No <code>Calls → PE-</code> relation applies. This element reaches no partner element directly, per <a href="L2-system-design-concept.html#AP-01">AP-01 All logic lives in the backend</a>.</em></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+No <code>Calls → PE-</code> relation applies. This element reaches no partner element directly, per <a href="L2-system-design-concept.html#AP-01">AP-01 All logic lives in the backend</a>.
+</td>
+</tr>
+</table>
 </div>
 <hr>
 </div>
@@ -1129,8 +1171,17 @@ The element shall reveal a generated nickname and avatar in the header once cons
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p><em>The device holds no consent record. The decision is sent to <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> and its consequences are enforced there. Holding a local copy would create a second source of truth for the one thing that must not have one.</em></p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The device holds no consent record. The decision is sent to <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> and its consequences are enforced there. Holding a local copy would create a second source of truth for the one thing that must not have one.
+</td>
+</tr>
+</table>
 </div>
 <hr>
 </div>
@@ -1234,7 +1285,7 @@ The element shall reveal a generated nickname and avatar in the header once cons
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:09:10 +0200
+Last updated 2026-08-20 21:13:12 +0200
 </div>
 </div>
 </body>

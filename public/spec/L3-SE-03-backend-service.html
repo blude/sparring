@@ -564,8 +564,17 @@ The element shall reject excess requests, over-length contributions, and over-lo
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><strong>Note.</strong> This path performs no generation and never calls <a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a>. The Sparring responses already exist in the transcripts, and regenerating them would produce material that no pilot session actually contained.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This path performs no generation and never calls <a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a>. The Sparring responses already exist in the transcripts, and regenerating them would produce material that no pilot session actually contained.
+</td>
+</tr>
+</table>
 </div>
 <hr>
 </div>
@@ -665,11 +674,29 @@ The element shall reject excess requests, over-length contributions, and over-lo
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><strong>The distinction this function must get right (<a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a>).</strong> <em>Targets-real-person</em> means the harmful content — hate speech, harassment, threats, sexual content — is aimed at or about a real, identifiable person or group. It does <strong>not</strong> mean a visitor who is hostile toward, arguing with, pressuring, or instructing the Sparring partner to abandon its position, however extreme the tone — the Sparring partner is software, not a person, and that visitor is engaged with the exercise; their attempt is the observation the installation exists to produce. The classification instruction must state this distinction explicitly rather than leaving it to the model&#8217;s default reading of "unsafe language", because hostility-at-the-AI and harm-at-a-person can otherwise look similar and only one should be withheld.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The distinction this function must get right (<a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a>): <em>Targets-real-person</em> means the harmful content — hate speech, harassment, threats, sexual content — is aimed at or about a real, identifiable person or group. It does <strong>not</strong> mean a visitor who is hostile toward, arguing with, pressuring, or instructing the Sparring partner to abandon its position, however extreme the tone — the Sparring partner is software, not a person, and that visitor is engaged with the exercise; their attempt is the observation the installation exists to produce. The classification instruction must state this distinction explicitly rather than leaving it to the model&#8217;s default reading of "unsafe language", because hostility-at-the-AI and harm-at-a-person can otherwise look similar and only one should be withheld.
+</td>
+</tr>
+</table>
 </div>
-<div class="paragraph">
-<p><strong>A second distinction the instruction must also get right, found in testing.</strong> Stating the <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a> distinction was not enough on its own: without also stating what the exercise&#8217;s subject matter actually <em>is</em>, the classifier had nothing to check arguing-the-exercise against, which produced misclassifications in the other direction. Both the topic itself and the target-based carve-out need to be explicit in the instruction — omitting either produces a failure mode this requirement exists to prevent, from a different direction.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+A second distinction the instruction must also get right, found in testing: stating the <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a> distinction was not enough on its own — without also stating what the exercise&#8217;s subject matter actually <em>is</em>, the classifier had nothing to check arguing-the-exercise against, which produced misclassifications in the other direction. Both the topic itself and the target-based carve-out need to be explicit in the instruction — omitting either produces a failure mode this requirement exists to prevent, from a different direction.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><em>Contains-personal-information</em> covers names, contact details, and health, financial, or comparably personal circumstances. This case is expected to arise most often in exactly the situation <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a> protects: a visitor under real pressure disclosing something real while trying to get the system to relent. That turn is rejected and not stored; the visitor edits it and continues — the session is not ended over it.</p>
@@ -817,8 +844,17 @@ The element shall reject excess requests, over-length contributions, and over-lo
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><em>Unlike the earlier design this superseded, the response&#8217;s condition list is not silent about suitability — a flagged contribution is a distinct, visible outcome (<a href="#FA-01-2">FA-01-2</a>), because the visitor needs to know to edit their message. What the response never carries is which specific field or word triggered the flag, or anything about sessions other than the caller&#8217;s own. The visitor-facing UI does, deliberately, distinguish two broad categories — personal information versus inappropriate content — from the moderation reason; that coarse hint is not the same as exposing the exact classification or wordlist match, which stays debug-only (<a href="L3-SE-01-input-client.html#QR-06">QR-06 Diagnostic detail is available to an operator</a> in L3-SE-01-input-client.adoc).</em></p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Unlike the earlier design this superseded, the response&#8217;s condition list is not silent about suitability — a flagged contribution is a distinct, visible outcome (<a href="#FA-01-2">FA-01-2</a>), because the visitor needs to know to edit their message. What the response never carries is which specific field or word triggered the flag, or anything about sessions other than the caller&#8217;s own. The visitor-facing UI does, deliberately, distinguish two broad categories — personal information versus inappropriate content — from the moderation reason; that coarse hint is not the same as exposing the exact classification or wordlist match, which stays debug-only (<a href="L3-SE-01-input-client.html#QR-06">QR-06 Diagnostic detail is available to an operator</a> in L3-SE-01-input-client.adoc).
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong><a id="TI-03"></a>TI-03 — Retrieve a session</strong><br>
@@ -913,8 +949,17 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <em>Authoritative spec:</em> Provider documentation.<br>
 <em>Calls:</em> <a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a></p>
 </div>
-<div class="paragraph">
-<p><em>Call behaviour is specified on the calling function steps (<a href="#TF-01">TF-01 Process a visitor turn</a> <a href="#FS-01-8">FS-01-8</a>, <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> <a href="#FS-02-2">FS-02-2</a>), or in the calling function&#8217;s own narrative for <a href="#TF-07">TF-07 Refine a session title</a>, not here. The three differ substantially: <a href="#TF-01">TF-01 Process a visitor turn</a> retries and fails open to an error the visitor sees; <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> does not retry and fails closed to unsuitable; <a href="#TF-07">TF-07 Refine a session title</a> does not retry and fails open to a trim-based fallback, never an error.</em></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Call behaviour is specified on the calling function steps (<a href="#TF-01">TF-01 Process a visitor turn</a> <a href="#FS-01-8">FS-01-8</a>, <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> <a href="#FS-02-2">FS-02-2</a>), or in the calling function&#8217;s own narrative for <a href="#TF-07">TF-07 Refine a session title</a>, not here. The three differ substantially: <a href="#TF-01">TF-01 Process a visitor turn</a> retries and fails open to an error the visitor sees; <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> does not retry and fails closed to unsuitable; <a href="#TF-07">TF-07 Refine a session title</a> does not retry and fails open to a trim-based fallback, never an error.
+</td>
+</tr>
+</table>
 </div>
 <hr>
 </div>
@@ -1101,8 +1146,17 @@ The element shall reject excess requests, over-length contributions, and over-lo
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p><em>The pair is stored as one record rather than as two turn records. This follows the display unit (<a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a>) and removes the possibility of a stored contribution with no response, which is the state a failed generation would otherwise leave behind.</em></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The pair is stored as one record rather than as two turn records. This follows the display unit (<a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a>) and removes the possibility of a stored contribution with no response, which is the state a failed generation would otherwise leave behind.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong><a id="E-03"></a>E-03 — Rate limit window</strong><br>
@@ -1285,7 +1339,7 @@ The element shall reject excess requests, over-length contributions, and over-lo
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 21:09:10 +0200
+Last updated 2026-08-20 21:12:35 +0200
 </div>
 </div>
 </body>

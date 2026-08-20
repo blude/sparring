@@ -185,7 +185,7 @@ _Output:_ An ordered list of items, each carrying a session identifier, a scenar
 _Error cases:_ Service unavailable. Malformed or unexpected response shape. +
 _Authoritative spec:_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] element design, xref:L3-SE-03-backend-service.adoc#TI-04[TI-04 Retrieve display material].
 
-_No `Calls → PE-` relation applies. This element reaches no partner element._
+NOTE: No `Calls → PE-` relation applies. This element reaches no partner element.
 
 '''
 
@@ -206,7 +206,7 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session], x
 | [[E-01.6]]E-01.6 | origin | enum | required | `pilot` or `live`. Not rendered on the normal surface (retained for <<TBC-06,TBC-06 Whether pilot-origin items are visually>>); shown per item only behind the debug flag (<<QR-07,QR-07 Diagnostic tag is available to an operator>>).
 |===
 
-_The element derives no ordering, performs no selection, and stores nothing beyond the current cycle. Every decision about what appears is made by xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]._
+NOTE: The element derives no ordering, performs no selection, and stores nothing beyond the current cycle. Every decision about what appears is made by xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service].
 
 '''
 
