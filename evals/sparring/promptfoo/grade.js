@@ -262,8 +262,14 @@ function moveVarietyFinding(moveLabels) {
 |--------------------------------------------------------------------------
 */
 
-module.exports = async (output) => {
-  const transcript = JSON.parse(output);
+module.exports = async (output, context) => {
+  // provider.js puts the structured transcript in metadata and a human-readable version
+  // in `output` (so promptfoo view shows a real conversation, not a JSON blob) — grade on
+  // the structured one.
+  const transcript = context.providerResponse?.metadata?.transcript;
+  if (!transcript) {
+    return { pass: false, score: 0, reason: 'no transcript metadata on provider response — provider.js/grade.js are out of sync' };
+  }
   const expectations = mechanicalChecks(transcript.exchanges);
 
   // Judge rubric applies to the real-prompt arm only — grading the no-prompt baseline

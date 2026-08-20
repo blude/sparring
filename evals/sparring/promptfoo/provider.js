@@ -139,6 +139,13 @@ async function baselineGenerate(priorExchanges, newContribution) {
   return block.text;
 }
 
+// Node's fetch wraps the real failure reason (connection refused, DNS, TLS, ...) inside
+// error.cause and leaves error.message as the useless literal "fetch failed" — this
+// unwraps it so a dead APP_URL actually says so instead of forcing a debugger.
+function describeFetchError(e) {
+  return e.cause?.message || e.message;
+}
+
 async function createSession() {
   const createRes = await fetch(`${APP_URL}/api/session`, {
     method: 'POST',
@@ -166,6 +173,19 @@ async function createSession() {
     throw new Error(`consent recording failed: ${JSON.stringify(consented)}`);
   }
   return created.sessionId;
+}
+
+// Renders a transcript as plain conversational text for promptfoo view — the structured
+// version (what grade.js actually reads) travels separately via the `metadata` field.
+function formatTranscript(transcript) {
+  const lines = transcript.exchanges.flatMap((ex, i) => [
+    `Turn ${i + 1} — Visitor: ${ex.visitorContribution}`,
+    `Turn ${i + 1} — Sparring: ${ex.sparringResponse}`,
+  ]);
+  if (transcript.endedEarly) {
+    lines.push('', `[ended early: ${transcript.endedEarly}]`);
+  }
+  return lines.join('\n\n') || '[no turns completed]';
 }
 
 async function contribute(sessionId, contribution) {
@@ -199,7 +219,7 @@ class SparringProvider {
       try {
         sessionId = await createSession();
       } catch (e) {
-        return { error: `session setup failed: ${e.message}` };
+        return { error: `session setup failed against ${APP_URL} — is \`php -S localhost:8080 -t public public/index.php\` running? (${describeFetchError(e)})` };
       }
     }
 
@@ -219,11 +239,17 @@ class SparringProvider {
         }
       } else {
         if (turn > 1) await sleep(TURN_PACE_MS); // pace-sleep BEFORE each call, see TURN_PACE_MS comment
-        let result = await contribute(sessionId, contribution);
-        if (result.status === 'rate-limited') {
-          // One-shot retry — defensive, not the primary defense (pacing is).
-          await sleep(60_000);
+        let result;
+        try {
           result = await contribute(sessionId, contribution);
+          if (result.status === 'rate-limited') {
+            // One-shot retry — defensive, not the primary defense (pacing is).
+            await sleep(60_000);
+            result = await contribute(sessionId, contribution);
+          }
+        } catch (e) {
+          endedEarly = `contribute request failed against ${APP_URL} (${describeFetchError(e)})`;
+          break;
         }
         if (result.status !== 'ok') {
           // Non-'ok' (content-flagged, turn-limit, rate-limited again, generation-failed,
@@ -248,13 +274,14 @@ class SparringProvider {
       }
     }
 
+    const transcript = { scenarioId: scenario.id, baseline, endedEarly, exchanges };
+
     return {
-      output: JSON.stringify({
-        scenarioId: scenario.id,
-        baseline,
-        endedEarly,
-        exchanges,
-      }),
+      // Human-readable — this is what promptfoo view shows as "the response". The
+      // structured transcript grade.js actually grades goes in `metadata` instead, so the
+      // UI shows a real conversation, not a JSON blob.
+      output: formatTranscript(transcript),
+      metadata: { transcript },
     };
   }
 }
