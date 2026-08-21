@@ -4,8 +4,8 @@ require __DIR__ . '/../src/Store.php';
 $openingMessage = resolve_opening_message($_GET['o'] ?? null);
 // QR-reply flow: unknown/tampered/non-displayable id resolves to null, same
 // fallback idiom as resolve_opening_message() above.
-$replyQuote = isset($_GET['reply']) && is_numeric($_GET['reply'])
-    ? (new Store(STORE_DB_PATH))->getQuotableExchange((int) $_GET['reply'])
+$replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
+    ? (new Store(STORE_DB_PATH))->getQuotableExchange((int) $_GET['r'])
     : null;
 ?>
 <!doctype html>

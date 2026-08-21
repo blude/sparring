@@ -83,7 +83,7 @@ window.SparringArenaDiff = {
         return text.length > n ? text.slice(0, n - 1) + '…' : text;
     }
 
-    // QR-reply flow: links a wall item's AI response to /dojo?reply=<exchangeId>
+    // QR-reply flow: links a wall item's AI response to /dojo?r=<exchangeId>
     // and shows its reply counter. `el.dataset.exchangeId` lets updateItem skip
     // rebuilding the QR SVG on a poll where only the counter changed.
     function renderReply(el, qrEl, countEl, item) {
@@ -91,7 +91,7 @@ window.SparringArenaDiff = {
             el.dataset.exchangeId = String(item.exchangeId);
             qrEl.textContent = '';
             var link = document.createElement('a');
-            link.href = location.origin + '/dojo?reply=' + item.exchangeId;
+            link.href = location.origin + '/dojo?r=' + item.exchangeId;
             qrEl.appendChild(link);
             window.SparringQr.renderInto(link, link.href);
         }
