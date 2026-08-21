@@ -28,7 +28,9 @@ window.SparringArenaDiff = {
                 toAdd.push(item);
             } else if (existing.scenario !== item.scenario
                 || existing.visitorContribution !== item.visitorContribution
-                || existing.sparringResponse !== item.sparringResponse) {
+                || existing.sparringResponse !== item.sparringResponse
+                || existing.exchangeId !== item.exchangeId
+                || existing.replyCount !== item.replyCount) {
                 toUpdate.push(item);
             }
         });
@@ -79,6 +81,21 @@ window.SparringArenaDiff = {
 
     function trim(text, n) {
         return text.length > n ? text.slice(0, n - 1) + '…' : text;
+    }
+
+    // QR-reply flow: links a wall item's AI response to /dojo?reply=<exchangeId>
+    // and shows its reply counter. `el.dataset.exchangeId` lets updateItem skip
+    // rebuilding the QR SVG on a poll where only the counter changed.
+    function renderReply(el, qrEl, countEl, item) {
+        if (el.dataset.exchangeId !== String(item.exchangeId)) {
+            el.dataset.exchangeId = String(item.exchangeId);
+            qrEl.textContent = '';
+            var link = document.createElement('a');
+            link.href = location.origin + '/dojo?reply=' + item.exchangeId;
+            qrEl.appendChild(link);
+            window.SparringQr.renderInto(link, link.href);
+        }
+        countEl.textContent = window.REPLY_COUNT_LABEL.replace('{n}', String(item.replyCount));
     }
 
     // Sparring response only (never .contribution, which is visitor text and
@@ -153,7 +170,13 @@ window.SparringArenaDiff = {
         response.className = 'response';
         renderResponse(response, item.sparringResponse);
 
-        el.append(scenario, visitorName, contribution, response);
+        var replyQr = document.createElement('div');
+        replyQr.className = 'reply-qr';
+        var replyCount = document.createElement('div');
+        replyCount.className = 'reply-count';
+        renderReply(el, replyQr, replyCount, item);
+
+        el.append(scenario, visitorName, contribution, response, replyQr, replyCount);
 
         if (DEBUG) {
             var debugTag = document.createElement('span');
@@ -182,6 +205,7 @@ window.SparringArenaDiff = {
         el.querySelector('.scenario').textContent = item.scenario;
         el.querySelector('.contribution').textContent = trim(item.visitorContribution, TRIM_CHARS);
         renderResponse(el.querySelector('.response'), item.sparringResponse);
+        renderReply(el, el.querySelector('.reply-qr'), el.querySelector('.reply-count'), item);
         if (window.isJuicyOn('displayEntrance')) {
             el.classList.remove('updating');
             void el.offsetWidth; // force the removal to commit so re-adding the class retriggers the animation

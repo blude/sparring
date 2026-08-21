@@ -51,6 +51,8 @@ return [
     'dojo.consent.projectionLabel' => 'I agree that my exchanged messages may be displayed on the projector during the session.',
     'dojo.consent.retentionLabel' => 'I agree that my session may be collected and analyzed for this thesis.',
     'dojo.consent.confirm' => 'Confirm choices',
+    'dojo.replyQuote.label' => 'Replying to:',
+    'dojo.replyQuote.cancelAriaLabel' => 'Cancel reply',
     'dojo.composer.placeholder' => "What's on your mind?",
     'dojo.composer.sendAriaLabel' => 'Send',
     'dojo.composer.disclaimer' => 'Sparring is AI and can make mistakes',
@@ -74,6 +76,7 @@ return [
 
     // --- arena.php (SE-02) ---
     'arena.title' => 'Arena — Sparring',
+    'arena.js.replyCount' => '{n} replies',
 
     // --- credits.php ---
     'credits.title' => 'Credits — Sparring',

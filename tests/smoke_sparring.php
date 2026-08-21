@@ -23,9 +23,11 @@ final class FakeLlmClient implements LlmClientInterface
     public bool $throwOnClassify = false;
     public bool $throwOnGenerate = false;
     public string $cannedResponse = 'What makes you think it has a clean answer?';
+    public ?string $lastNewContribution = null; // QR-reply flow: what processTurn actually sent to the LLM
 
     public function generateResponse(array $priorExchanges, string $newContribution): string
     {
+        $this->lastNewContribution = $newContribution;
         if ($this->throwOnGenerate) {
             throw new GenerationFailedException('fake generation failure');
         }
@@ -216,6 +218,44 @@ withOrigin('10.0.0.9', function () use ($store, $sparring) {
     $result = $sparring->processTurn($session['id'], 'over the limit');
     assert($result['status'] === 'rate-limited');
     assert($result['rateLimitRemaining'] === 0);
+});
+
+/*
+|--------------------------------------------------------------------------
+| QR-reply flow: processTurn's optional $replyToExchangeId
+|--------------------------------------------------------------------------
+*/
+
+// Honored on turn 1: quoted text is re-resolved server-side and wrapped only
+// for the LLM call — the persisted/returned exchange stays the clean, typed text.
+withOrigin('10.0.1.1', function () use ($store, $sparring, $llm) {
+    $quotedSession = $store->createSession('live');
+    $quoted = $store->appendExchange($quotedSession['id'], 'a first visitor', 'the quoted sparring response');
+    $store->setDisplayable($quotedSession['id'], true); // getQuotableExchange requires displayable
+
+    $replier = $store->createSession('live');
+    $result = $sparring->processTurn($replier['id'], 'I disagree.', $quoted['id']);
+    assert($result['status'] === 'ok');
+    assert($result['exchange']['visitorContribution'] === 'I disagree.'); // clean, unwrapped
+    assert(str_contains($llm->lastNewContribution, 'the quoted sparring response')); // reached the LLM
+    assert(str_contains($llm->lastNewContribution, 'I disagree.'));
+    assert($store->getQuotableExchange($quoted['id'])['text'] === 'the quoted sparring response'); // unchanged
+    assert($store->getExchanges($quotedSession['id'])[0]['replyCount'] === 1); // incremented exactly once
+
+    // Ignored on turn 2 of the same session — not the first turn anymore.
+    $result2 = $sparring->processTurn($replier['id'], 'a second turn', $quoted['id']);
+    assert($result2['status'] === 'ok');
+    assert(!str_contains($llm->lastNewContribution, 'Replying to'));
+    assert($store->getExchanges($quotedSession['id'])[0]['replyCount'] === 1); // unchanged
+});
+
+// Unknown/non-displayable id on turn 1 falls through silently as an ordinary turn.
+withOrigin('10.0.1.2', function () use ($store, $sparring, $llm) {
+    $session = $store->createSession('live');
+    $result = $sparring->processTurn($session['id'], 'a normal reply', 999999);
+    assert($result['status'] === 'ok');
+    assert($result['exchange']['visitorContribution'] === 'a normal reply');
+    assert(!str_contains($llm->lastNewContribution, 'Replying to'));
 });
 
 unlink($dbPath);

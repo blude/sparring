@@ -349,6 +349,53 @@ main {
 }
 #consent-confirm:disabled { opacity: 0.5; }
 
+/* QR-reply flow: non-editable quote of the AI response being replied to,
+   shown above #composer-row. Never inserted into the textarea (never counted
+   against CONTRIBUTION_MAX_CHARS) — see dojo.js's showReplyQuote/hideReplyQuote. */
+#reply-quote {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-bottom: 0.5rem;
+    padding: 0.6rem 2rem 0.6rem 0.85rem; /* right padding clears the cancel button */
+    background: var(--bubble-sparring-bg);
+    border-radius: 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.35;
+}
+
+#reply-quote-label {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #666;
+}
+
+#reply-quote-text {
+    margin: 0;
+    /* long AI responses are still fully sent to the LLM as context — this
+       clamp is cosmetic only, it never truncates what's actually stored/sent. */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#reply-quote-cancel {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1;
+    font-size: 1.1rem;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+}
+
 #composer {
     position: relative;
     display: flex;

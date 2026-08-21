@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
+require __DIR__ . '/../src/Store.php';
 $openingMessage = resolve_opening_message($_GET['o'] ?? null);
+// QR-reply flow: unknown/tampered/non-displayable id resolves to null, same
+// fallback idiom as resolve_opening_message() above.
+$replyQuote = isset($_GET['reply']) && is_numeric($_GET['reply'])
+    ? (new Store(STORE_DB_PATH))->getQuotableExchange((int) $_GET['reply'])
+    : null;
 ?>
 <!doctype html>
 <html lang="<?= resolve_locale() ?>">
@@ -66,6 +72,12 @@ $openingMessage = resolve_opening_message($_GET['o'] ?? null);
     <button id="consent-confirm" type="button" disabled><?= t('dojo.consent.confirm') ?></button>
   </div>
 
+  <div id="reply-quote" hidden>
+    <p id="reply-quote-label"><?= t('dojo.replyQuote.label') ?></p>
+    <p id="reply-quote-text"></p>
+    <button id="reply-quote-cancel" type="button" aria-label="<?= t('dojo.replyQuote.cancelAriaLabel') ?>">&times;</button>
+  </div>
+
   <form id="composer">
     <div id="composer-row">
       <textarea id="contribution" placeholder="<?= t('dojo.composer.placeholder') ?>" disabled></textarea>
@@ -87,6 +99,7 @@ $openingMessage = resolve_opening_message($_GET['o'] ?? null);
 <script>
 window.CONTRIBUTION_MAX_CHARS = <?= (int) CONTRIBUTION_MAX_CHARS ?>;
 window.OPENING_MESSAGE = <?= json_encode($openingMessage) ?>;
+window.REPLY_QUOTE = <?= json_encode($replyQuote) ?>;
 window.SE01_WAIT_BOUND_MS = <?= (int) (SE01_WAIT_BOUND_SECONDS * 1000) ?>;
 window.LOCALE = <?= json_encode(resolve_locale()) ?>;
 window.STRINGS = {

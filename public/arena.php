@@ -21,6 +21,7 @@ declare(strict_types=1);
 <script>window.DISPLAY_COLUMNS = <?= (int) DISPLAY_COLUMNS ?>;</script>
 <script>window.DISPLAY_ITEM_LIMIT = <?= (int) DISPLAY_ITEM_LIMIT ?>;</script>
 <script>window.LOCALE = <?= json_encode(resolve_locale()) ?>;</script>
+<script>window.REPLY_COUNT_LABEL = <?= json_encode(t('arena.js.replyCount')) ?>;</script>
 <script>
 window.JUICY = {
     enabled: <?= JUICY_ENABLED ? 'true' : 'false' ?>,
@@ -31,6 +32,8 @@ window.JUICY = {
 <script src="<?= fasset('juicy.js') ?>"></script>
 <script src="<?= fasset('mermaid.min.js') ?>"></script>
 <script src="<?= fasset('mermaid-render.js') ?>"></script>
+<script src="<?= fasset('qrcode-generator.js') ?>"></script>
+<script src="<?= fasset('qr-render.js') ?>"></script>
 <script src="<?= fasset('arena.js') ?>"></script>
 </body>
 </html>

@@ -65,8 +65,17 @@ final class Sparring
      * the turn is not counted, and the visitor can edit and resubmit. This
      * satisfies SE-01 G-04 / SE-03 G-04 literally; it does not end the
      * session, per the user's resolution of the AP-05 vs G-04 conflict.
+     *
+     * $replyToExchangeId: QR-reply flow — only honored when this is the
+     * session's first turn (turnCount === 0); silently ignored on any later
+     * turn (stale chip left on screen, or a direct API call — both just fall
+     * back to an ordinary turn, no error surfaced). When honored, the quoted
+     * text is re-resolved here via Store::getQuotableExchange() — the id is
+     * the only thing that crosses the trust boundary, a client-supplied quote
+     * string is never trusted. An unknown/non-displayable id resolves to
+     * null and is likewise treated as an ordinary turn.
      */
-    public function processTurn(string $sessionId, string $rawContribution): array
+    public function processTurn(string $sessionId, string $rawContribution, ?int $replyToExchangeId = null): array
     {
         if ($this->llm === null || $this->rateLimiter === null) {
             throw new LogicException('processTurn needs an LlmClientInterface and RateLimiter');
@@ -104,17 +113,28 @@ final class Sparring
         // FS-01-7: prior exchanges as conversational context.
         $priorExchanges = $this->store->getExchanges($sessionId);
 
+        // QR-reply flow (see method doc above): only ever meaningful on turn 1.
+        // The wrap is prompt-only — $contribution (already validated against
+        // CONTRIBUTION_MAX_CHARS above) is what actually gets persisted, so
+        // the quote never eats into the visitor's own character budget.
+        $quotedExchange = ($replyToExchangeId !== null && $session['turnCount'] === 0)
+            ? $this->store->getQuotableExchange($replyToExchangeId)
+            : null;
+        $promptContribution = $quotedExchange !== null
+            ? "Replying to: \"{$quotedExchange['text']}\"\n\n$contribution"
+            : $contribution;
+
         // FS-01-8: the provider call. Every failure path throws GenerationFailedException.
         $generationStart = microtime(true);
         try {
-            $response = $this->llm->generateResponse($priorExchanges, $contribution);
+            $response = $this->llm->generateResponse($priorExchanges, $promptContribution);
         } catch (GenerationFailedException) {
             return ['status' => 'generation-failed', 'rateLimitRemaining' => $rateLimit['remaining']];
         }
         $generationMs = (int) round((microtime(true) - $generationStart) * 1000);
 
         // FS-01-9/10: write the exchange, advance the turn count, in one operation (QR-07).
-        $exchange = $this->store->appendExchange($sessionId, $contribution, $response);
+        $exchange = $this->store->appendExchange($sessionId, $contribution, $response, $quotedExchange['exchangeId'] ?? null);
 
         // FS-01-11: first exchange derives the scenario, written once (TF-05).
         if ($exchange['position'] === 1) {
@@ -271,6 +291,8 @@ final class Sparring
                 'sparringResponse' => $exchange['sparringResponse'],
                 'origin' => $session['origin'],
                 'recencyRank' => $position++,
+                'exchangeId' => $exchange['id'],
+                'replyCount' => $exchange['replyCount'],
             ];
         }
 

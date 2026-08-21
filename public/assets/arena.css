@@ -175,6 +175,31 @@ body {
     margin-bottom: 0.15rem;
 }
 
+/* QR-reply flow: sits under the AI response, same alignment (.response is
+   align-self: flex-end above) since the QR belongs to that message. */
+.exchange .reply-qr {
+    align-self: flex-end;
+    width: 4.5rem;
+    margin: 0.3rem 0.85rem 0.1rem;
+}
+
+.exchange .reply-qr a {
+    display: block;
+}
+
+.exchange .reply-qr svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.exchange .reply-count {
+    align-self: flex-end;
+    margin: 0 0.85rem;
+    font-size: 0.75rem;
+    color: var(--scenario-color);
+}
+
 .debug-tag {
     display: block;
     font-size: 0.7rem;
