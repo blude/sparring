@@ -95,7 +95,14 @@ window.SparringArenaDiff = {
             qrEl.appendChild(link);
             window.SparringQr.renderInto(link, link.href);
         }
-        countEl.textContent = window.REPLY_COUNT_LABEL.replace('{n}', String(item.replyCount));
+        // Reaction-style pill: glove icon + bare count, hidden at 0 (EX-01-3).
+        // The full sentence stays as an aria-label — sighted users get the
+        // glove as the "replies" cue, screen readers still hear a sentence.
+        // Icon is a static child built once in buildItemElement; only the
+        // number text updates here, so we never clobber it.
+        countEl.hidden = item.replyCount === 0;
+        countEl.setAttribute('aria-label', window.REPLY_COUNT_LABEL.replace('{n}', String(item.replyCount)));
+        countEl.querySelector('.reply-count-number').textContent = String(item.replyCount);
     }
 
     // Sparring response only (never .contribution, which is visitor text and
@@ -174,9 +181,15 @@ window.SparringArenaDiff = {
         replyQr.className = 'reply-qr';
         var replyCount = document.createElement('div');
         replyCount.className = 'reply-count';
+        var replyCountIcon = document.createElement('span');
+        replyCountIcon.className = 'reply-count-icon';
+        var replyCountNumber = document.createElement('span');
+        replyCountNumber.className = 'reply-count-number';
+        replyCount.append(replyCountIcon, replyCountNumber);
+        response.appendChild(replyCount); // nested so the pill's absolute position anchors to the bubble, not the card
         renderReply(el, replyQr, replyCount, item);
 
-        el.append(scenario, visitorName, contribution, response, replyQr, replyCount);
+        el.append(scenario, visitorName, contribution, response, replyQr);
 
         if (DEBUG) {
             var debugTag = document.createElement('span');
