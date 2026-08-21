@@ -237,7 +237,7 @@ withOrigin('10.0.1.1', function () use ($store, $sparring, $llm) {
     $replier = $store->createSession('live');
     $result = $sparring->processTurn($replier['id'], 'I disagree.', $quoted['id']);
     assert($result['status'] === 'ok');
-    $expected = "\"the quoted sparring response\"\n\nI disagree.";
+    $expected = "Replying to: \"the quoted sparring response\"\n\nI disagree.";
     assert($result['exchange']['visitorContribution'] === $expected); // quote-prefixed, persisted as-is
     assert($llm->lastNewContribution === $expected); // exact same string reached the LLM
     assert($store->getQuotableExchange($quoted['id'])['text'] === 'the quoted sparring response'); // unchanged

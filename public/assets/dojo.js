@@ -151,9 +151,10 @@ window.SparringDojoOutcome = {
 
     // Same text prepended into both the optimistic bubble (submitContribution)
     // and the persisted exchange (Sparring::processTurn) — kept in one place
-    // so the two never drift out of sync with each other.
+    // so the two never drift out of sync with each other. "Replying to: "
+    // prefix matches Sparring::processTurn's $storedContribution exactly.
     function withQuotePrefix(quote, text) {
-        return '"' + quote.text + '"\n\n' + text;
+        return 'Replying to: "' + quote.text + '"\n\n' + text;
     }
 
     /*

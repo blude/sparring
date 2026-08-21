@@ -119,11 +119,15 @@ final class Sparring
         // $contribution itself, which stays the visitor's own typed words for
         // the length check above (already run) and scenario derivation below
         // (a quote would otherwise hijack the wall's "scenario" heading).
+        // "Replying to: " prefix: a cue for the model (not just the human
+        // reader) that the quoted line is someone else's prior response, not
+        // this visitor's own words — same literal string dojo.js's
+        // withQuotePrefix builds for the optimistic bubble, kept in sync.
         $quotedExchange = ($replyToExchangeId !== null && $session['turnCount'] === 0)
             ? $this->store->getQuotableExchange($replyToExchangeId)
             : null;
         $storedContribution = $quotedExchange !== null
-            ? "\"{$quotedExchange['text']}\"\n\n$contribution"
+            ? "Replying to: \"{$quotedExchange['text']}\"\n\n$contribution"
             : $contribution;
 
         // FS-01-8: the provider call. Every failure path throws GenerationFailedException.
