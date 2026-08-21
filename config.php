@@ -295,7 +295,7 @@ const JUICY_DISPLAY_ENTRANCE = true;
 
 function fasset(string $file): string
 {
-    return "assets/$file?v=" . filemtime(__DIR__ . "/public/assets/$file");
+    return "/assets/$file?v=" . filemtime(__DIR__ . "/public/assets/$file");
 }
 
 /*

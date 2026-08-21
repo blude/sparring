@@ -31,6 +31,18 @@ resolve_locale();
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
+// Trailing slash isn't a distinct route ($routes only has the bare form) —
+// redirect to the canonical slash-less form rather than serving the same
+// page at both URLs (avoids duplicate content at two URLs for one page).
+if ($path !== '/' && str_ends_with($path, '/')) {
+    $canonical = rtrim($path, '/');
+    if (isset($routes[$canonical])) {
+        $qs = $_SERVER['QUERY_STRING'] ?? '';
+        header('Location: ' . $canonical . ($qs !== '' ? "?$qs" : ''), true, 301);
+        exit;
+    }
+}
+
 // php -S with a router script intercepts *every* request, including real
 // static files (assets/*.js, favicon.ico, ...) — unlike Valet/nginx, which
 // serve those before PHP ever runs. Returning false here hands it back to
