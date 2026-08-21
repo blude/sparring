@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'RethinkSans';
+    src: url('fonts/RethinkSans-ExtraBoldItalic.woff2') format('woff2');
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
+}
+
 /* QR-03: reachable one-handed on a small phone, retention decision answerable
    without scrolling. Everything else here is a placeholder — refined later. */
 :root {
@@ -19,7 +27,7 @@ body {
        resolves to San Francisco on Apple devices, a visibly different
        typeface. Helvetica Neue is a standard iOS/macOS system font, so
        this costs nothing and matches the mockups directly. */
-    font-family: 'Helvetica Neue', 'Helvetica', system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
     display: flex;
     flex-direction: column;
     height: 100vh; /* fallback for browsers without dvh support */
@@ -505,13 +513,6 @@ main {
 | bundled with the OS; we self-host it here.
 |
 */
-@font-face {
-    font-family: 'RethinkSans';
-    src: url('fonts/RethinkSans-ExtraBoldItalic.woff2') format('woff2');
-    font-weight: 800;
-    font-style: italic;
-    font-display: swap;
-}
 
 /* Floating box, not full-screen — width fixed so translateX(-100%/100%)
    below lands exactly at the box's own edges, and overflow:hidden clips
