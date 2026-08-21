@@ -114,29 +114,32 @@ final class Sparring
         $priorExchanges = $this->store->getExchanges($sessionId);
 
         // QR-reply flow (see method doc above): only ever meaningful on turn 1.
-        // The wrap is prompt-only — $contribution (already validated against
-        // CONTRIBUTION_MAX_CHARS above) is what actually gets persisted, so
-        // the quote never eats into the visitor's own character budget.
+        // The quote is prepended to $storedContribution — what's persisted,
+        // shown in the chat bubble/wall, and sent to the LLM — but never to
+        // $contribution itself, which stays the visitor's own typed words for
+        // the length check above (already run) and scenario derivation below
+        // (a quote would otherwise hijack the wall's "scenario" heading).
         $quotedExchange = ($replyToExchangeId !== null && $session['turnCount'] === 0)
             ? $this->store->getQuotableExchange($replyToExchangeId)
             : null;
-        $promptContribution = $quotedExchange !== null
-            ? "Replying to: \"{$quotedExchange['text']}\"\n\n$contribution"
+        $storedContribution = $quotedExchange !== null
+            ? "\"{$quotedExchange['text']}\"\n\n$contribution"
             : $contribution;
 
         // FS-01-8: the provider call. Every failure path throws GenerationFailedException.
         $generationStart = microtime(true);
         try {
-            $response = $this->llm->generateResponse($priorExchanges, $promptContribution);
+            $response = $this->llm->generateResponse($priorExchanges, $storedContribution);
         } catch (GenerationFailedException) {
             return ['status' => 'generation-failed', 'rateLimitRemaining' => $rateLimit['remaining']];
         }
         $generationMs = (int) round((microtime(true) - $generationStart) * 1000);
 
         // FS-01-9/10: write the exchange, advance the turn count, in one operation (QR-07).
-        $exchange = $this->store->appendExchange($sessionId, $contribution, $response, $quotedExchange['exchangeId'] ?? null);
+        $exchange = $this->store->appendExchange($sessionId, $storedContribution, $response, $quotedExchange['exchangeId'] ?? null);
 
-        // FS-01-11: first exchange derives the scenario, written once (TF-05).
+        // FS-01-11: first exchange derives the scenario, written once (TF-05) —
+        // from the clean $contribution, not the quote-prefixed $storedContribution.
         if ($exchange['position'] === 1) {
             $this->store->setScenario($sessionId, derive_scenario_statement($contribution), 'first-contribution');
         }

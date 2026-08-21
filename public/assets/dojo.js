@@ -141,12 +141,20 @@ window.SparringDojoOutcome = {
         replyQuoteEl.hidden = false;
     }
 
-    function hideReplyQuote() {
+    // Cancel button: full clear — nothing left to send, chip gone for good.
+    function cancelReplyQuote() {
         pendingReplyQuote = null;
         replyQuoteEl.hidden = true;
     }
 
-    replyQuoteCancelBtn.addEventListener('click', hideReplyQuote);
+    replyQuoteCancelBtn.addEventListener('click', cancelReplyQuote);
+
+    // Same text prepended into both the optimistic bubble (submitContribution)
+    // and the persisted exchange (Sparring::processTurn) — kept in one place
+    // so the two never drift out of sync with each other.
+    function withQuotePrefix(quote, text) {
+        return '"' + quote.text + '"\n\n' + text;
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -466,7 +474,13 @@ window.SparringDojoOutcome = {
         triggerPunch();
 
         setComposerEnabled(false);
-        optimisticTurnEl = appendTurn('visitor', text); // shown ahead of the response; pruned on failure (clearOptimisticTurn)
+        // QR-reply flow: prepend the quote into the optimistic bubble (matches
+        // what the server will persist) and hide the chip instantly — both
+        // happen right here, not on the server round trip, so sending feels
+        // immediate. pendingReplyQuote itself stays set until 'ok' confirms
+        // the turn landed, so a failure can restore the chip for retry.
+        optimisticTurnEl = appendTurn('visitor', pendingReplyQuote ? withQuotePrefix(pendingReplyQuote, text) : text); // pruned on failure (clearOptimisticTurn)
+        if (pendingReplyQuote) replyQuoteEl.hidden = true;
         fieldEl.value = ''; // cached in `text`/submittedText below, restored on failure
         sessionStorage.removeItem(DRAFT_KEY); // sent — draft below restores it again on failure
         updateCharRemaining();
@@ -507,7 +521,7 @@ window.SparringDojoOutcome = {
         switch (data.status) {
             case 'ok':
                 optimisticTurnEl = null; // confirmed — stop tracking it, nothing left to prune
-                if (pendingReplyQuote) hideReplyQuote(); // only ever relevant to turn 1; landed, so it's done
+                pendingReplyQuote = null; // chip already hidden at submit time (see submitContribution) — landed, nothing left to retry
                 appendTurn('sparring', data.exchange.sparringResponse);
                 applySessionState(data.sessionState, data.turnsRemaining);
                 // Fire-and-forget title generation: doesn't block anything above,
@@ -549,6 +563,10 @@ window.SparringDojoOutcome = {
                 clearOptimisticTurn();
                 setHistoryStatus(outcome.message, false);
                 if (outcome.restoreText) fieldEl.value = submittedText;
+                // didn't land — chip was hidden optimistically at submit time (see
+                // submitContribution); pendingReplyQuote is still set, so bring it
+                // back alongside the restored text for a retry.
+                if (outcome.restoreText && pendingReplyQuote) replyQuoteEl.hidden = false;
                 if (outcome.enableComposer) setComposerEnabled(true);
                 if (outcome.wiggle) triggerWiggle();
                 if (outcome.sound) window.SparringSfx.play(outcome.sound);

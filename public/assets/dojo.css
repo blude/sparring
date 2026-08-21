@@ -176,7 +176,14 @@ main {
 #history .turn p { margin: 0 0 0.5rem; }
 #history .turn p:last-child { margin-bottom: 0; }
 #history .turn .diagram svg { max-width: 100%; height: auto; }
-#history .visitor { align-self: flex-end; background: var(--bubble-visitor-bg); color: var(--bubble-visitor-text); }
+/* white-space: pre-wrap so a QR-reply's "quote"\n\n reply textContent (see
+   dojo.js's withQuotePrefix) actually shows the blank line separating the
+   quoted text from the visitor's own reply, instead of the default
+   `normal` collapsing it to one run-on line — still plain textContent, no
+   markup, purely a rendering difference. Scoped to .visitor only: sparring
+   turns render through SparringMermaid, whose own <p> spacing this must
+   not touch. */
+#history .visitor { align-self: flex-end; background: var(--bubble-visitor-bg); color: var(--bubble-visitor-text); white-space: pre-wrap; }
 #history .sparring { align-self: flex-start; background: var(--bubble-sparring-bg); color: var(--bubble-sparring-text); }
 
 /* Status turns (formerly the separate #status element — QR-02's "no

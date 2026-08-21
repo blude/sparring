@@ -153,6 +153,11 @@ body {
     align-self: flex-start;
     background: var(--accent-bubble-bg);
     color: var(--accent-bubble-text);
+    /* QR-reply flow: a replying visitor's contribution is stored as
+       "quote"\n\nreply (dojo.js/Sparring::processTurn) — preserve that blank
+       line instead of collapsing it to a run-on line. Plain textContent
+       either way, just a rendering difference. */
+    white-space: pre-wrap;
 }
 
 .exchange .response {

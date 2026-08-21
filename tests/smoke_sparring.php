@@ -226,8 +226,9 @@ withOrigin('10.0.0.9', function () use ($store, $sparring) {
 |--------------------------------------------------------------------------
 */
 
-// Honored on turn 1: quoted text is re-resolved server-side and wrapped only
-// for the LLM call — the persisted/returned exchange stays the clean, typed text.
+// Honored on turn 1: quoted text is re-resolved server-side and prepended to
+// both what's persisted/returned (chat bubble, wall) and what the LLM sees —
+// the same string, so the two can never drift out of sync with each other.
 withOrigin('10.0.1.1', function () use ($store, $sparring, $llm) {
     $quotedSession = $store->createSession('live');
     $quoted = $store->appendExchange($quotedSession['id'], 'a first visitor', 'the quoted sparring response');
@@ -236,16 +237,17 @@ withOrigin('10.0.1.1', function () use ($store, $sparring, $llm) {
     $replier = $store->createSession('live');
     $result = $sparring->processTurn($replier['id'], 'I disagree.', $quoted['id']);
     assert($result['status'] === 'ok');
-    assert($result['exchange']['visitorContribution'] === 'I disagree.'); // clean, unwrapped
-    assert(str_contains($llm->lastNewContribution, 'the quoted sparring response')); // reached the LLM
-    assert(str_contains($llm->lastNewContribution, 'I disagree.'));
+    $expected = "\"the quoted sparring response\"\n\nI disagree.";
+    assert($result['exchange']['visitorContribution'] === $expected); // quote-prefixed, persisted as-is
+    assert($llm->lastNewContribution === $expected); // exact same string reached the LLM
     assert($store->getQuotableExchange($quoted['id'])['text'] === 'the quoted sparring response'); // unchanged
     assert($store->getExchanges($quotedSession['id'])[0]['replyCount'] === 1); // incremented exactly once
 
     // Ignored on turn 2 of the same session — not the first turn anymore.
     $result2 = $sparring->processTurn($replier['id'], 'a second turn', $quoted['id']);
     assert($result2['status'] === 'ok');
-    assert(!str_contains($llm->lastNewContribution, 'Replying to'));
+    assert($result2['exchange']['visitorContribution'] === 'a second turn'); // clean, no quote prefix
+    assert($llm->lastNewContribution === 'a second turn');
     assert($store->getExchanges($quotedSession['id'])[0]['replyCount'] === 1); // unchanged
 });
 
@@ -255,7 +257,7 @@ withOrigin('10.0.1.2', function () use ($store, $sparring, $llm) {
     $result = $sparring->processTurn($session['id'], 'a normal reply', 999999);
     assert($result['status'] === 'ok');
     assert($result['exchange']['visitorContribution'] === 'a normal reply');
-    assert(!str_contains($llm->lastNewContribution, 'Replying to'));
+    assert($llm->lastNewContribution === 'a normal reply'); // no quote prefix — unresolved id, not honored
 });
 
 unlink($dbPath);
