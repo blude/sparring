@@ -32,7 +32,7 @@ return [
     'start.cta' => 'Start a new session',
     'start.learnMore' => 'Learn more about <a href="/philosophy">Sparring&rsquo;s philosophy</a>.',
     'start.footer.craft' => '&copy; {year} &middot; Craft with #DigitalMaterial &middot; <a href="/credits">Credits</a>',
-    'start.footer.legal' => '<a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/privacy#cookies">Cookies</a>',
+    'start.footer.legal' => '<a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/privacy#cookies">Cookies</a> &middot; 🏳️‍⚧️',
 
     // --- dojo.php (SE-01) + dojo.js ---
     'dojo.title' => 'Dojo — Sparring',
