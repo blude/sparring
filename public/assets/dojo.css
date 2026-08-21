@@ -365,6 +365,13 @@ main {
     line-height: 1.35;
 }
 
+/* #reply-quote's own `display: flex` above outranks the UA stylesheet's
+   [hidden] { display: none } (author rule beats UA default regardless of
+   attribute state) — without this, toggling the `hidden` attribute in JS
+   (showReplyQuote/hideReplyQuote) has no visible effect at all. Same fix
+   already applied to #title-card below. */
+#reply-quote[hidden] { display: none; }
+
 #reply-quote-label {
     margin: 0;
     font-weight: 600;
