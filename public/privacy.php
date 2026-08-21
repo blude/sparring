@@ -16,6 +16,7 @@
 <p><?= t('privacy.p3') ?></p>
 <p><?= t('privacy.p4') ?></p>
 <p><?= t('privacy.p5') ?></p>
+<p><?= t('privacy.p6') ?></p>
 <p><?= t('privacy.contact') ?></p>
 <p><a href="/"><?= t('common.back') ?></a></p>
 </body>
