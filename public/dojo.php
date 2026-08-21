@@ -116,7 +116,8 @@ window.STRINGS = {
         installationUnavailable: <?= json_encode(t('dojo.js.installationUnavailable')) ?>,
         consentFailed: <?= json_encode(t('dojo.js.consentFailed')) ?>,
         thinking: <?= json_encode(t('dojo.js.thinking')) ?>,
-        charsRemaining: <?= json_encode(t('dojo.js.charsRemaining')) ?>
+        charsRemaining: <?= json_encode(t('dojo.js.charsRemaining')) ?>,
+        replyQuoteLabel: <?= json_encode(t('dojo.replyQuote.label')) ?>
     }
 };
 window.JUICY = {

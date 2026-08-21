@@ -119,15 +119,19 @@ final class Sparring
         // $contribution itself, which stays the visitor's own typed words for
         // the length check above (already run) and scenario derivation below
         // (a quote would otherwise hijack the wall's "scenario" heading).
-        // "Replying to: " prefix: a cue for the model (not just the human
-        // reader) that the quoted line is someone else's prior response, not
-        // this visitor's own words — same literal string dojo.js's
-        // withQuotePrefix builds for the optimistic bubble, kept in sync.
+        // Label prefix ("Replying to:" / dojo.replyQuote.label, same key as
+        // the pre-send chip's heading): a cue for the model (not just the
+        // human reader) that the quoted line is someone else's prior
+        // response, not this visitor's own words. t() resolves off this
+        // request's own locale (query/cookie/Accept-Language — see
+        // resolve_locale()), i.e. the replying visitor's language, same as
+        // dojo.js's withQuotePrefix builds for the optimistic bubble via
+        // window.STRINGS.dojo.replyQuoteLabel — kept in sync deliberately.
         $quotedExchange = ($replyToExchangeId !== null && $session['turnCount'] === 0)
             ? $this->store->getQuotableExchange($replyToExchangeId)
             : null;
         $storedContribution = $quotedExchange !== null
-            ? "Replying to: \"{$quotedExchange['text']}\"\n\n$contribution"
+            ? t('dojo.replyQuote.label') . " \"{$quotedExchange['text']}\"\n\n$contribution"
             : $contribution;
 
         // FS-01-8: the provider call. Every failure path throws GenerationFailedException.

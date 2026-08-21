@@ -151,10 +151,11 @@ window.SparringDojoOutcome = {
 
     // Same text prepended into both the optimistic bubble (submitContribution)
     // and the persisted exchange (Sparring::processTurn) — kept in one place
-    // so the two never drift out of sync with each other. "Replying to: "
-    // prefix matches Sparring::processTurn's $storedContribution exactly.
+    // so the two never drift out of sync with each other. Label comes from
+    // window.STRINGS (dojo.replyQuote.label via t(), i.e. this request's own
+    // locale) rather than a literal, matching Sparring::processTurn exactly.
     function withQuotePrefix(quote, text) {
-        return 'Replying to: "' + quote.text + '"\n\n' + text;
+        return window.STRINGS.dojo.replyQuoteLabel + ' "' + quote.text + '"\n\n' + text;
     }
 
     /*
