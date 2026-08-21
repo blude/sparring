@@ -108,7 +108,7 @@ return [
     'privacy.p5' => 'Stored sessions are kept until the thesis and any related publications are complete, after which they are deleted. You may withdraw your consent to storage at any point during the exhibition by stopping the session; because sessions are not linked to your identity, withdrawal after the exhibition ends is not technically possible, as there is no way to locate your specific session among others.',
     'privacy.cookies.subheading' => '<a name="cookies"></a>Cookies',
     'privacy.cookies.p1' => 'This site uses one cookie, storing your chosen language for up to a year, so it does not have to be re-selected on every visit. No tracking, analytics, or advertising cookies are used.',
-    'privacy.contact' => 'For questions about this policy or your data, contact Sarah Puppin-Pratti (<a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Privacy%20Policy">sarah.puppinpratti001@stud.fh-dortmund.de</a>).',
+    'privacy.contact' => 'For questions about this policy or your data, contact Sarah Puppin Pratti (<a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Privacy%20Policy">sarah.puppinpratti001@stud.fh-dortmund.de</a>).',
 
     // --- terms.php ---
     'terms.title' => 'Terms of Service — Sparring',
