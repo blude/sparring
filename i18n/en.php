@@ -32,7 +32,7 @@ return [
     'start.cta' => 'Start a new session',
     'start.learnMore' => 'Learn more about <a href="/philosophy">Sparring&rsquo;s philosophy</a>.',
     'start.footer.craft' => '&copy; {year} &middot; Craft with #DigitalMaterial &middot; <a href="/credits">Credits</a>',
-    'start.footer.legal' => '<a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a>',
+    'start.footer.legal' => '<a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/privacy#cookies">Cookies</a>',
 
     // --- dojo.php (SE-01) + dojo.js ---
     'dojo.title' => 'Dojo — Sparring',
@@ -106,7 +106,8 @@ return [
     'privacy.p3' => 'Contributions that appear to contain personal information (a name, contact detail, or a health/financial circumstance) are not shown on the projection regardless of your choices above.',
     'privacy.p4' => 'If you agree that your session may be collected and analyzed for this thesis, the exchanged messages and their timestamps are stored on a server under my control. No other metadata — device, location, or IP address — is retained beyond what is technically necessary to serve the page during your session. Stored sessions are used only for this thesis and any resulting academic publications, are not sold or shared with third parties beyond Anthropic (who processes your input to generate a response, per their own terms), and are analyzed and referenced only in anonymized or aggregate form.',
     'privacy.p5' => 'Stored sessions are kept until the thesis and any related publications are complete, after which they are deleted. You may withdraw your consent to storage at any point during the exhibition by stopping the session; because sessions are not linked to your identity, withdrawal after the exhibition ends is not technically possible, as there is no way to locate your specific session among others.',
-    'privacy.p6' => 'This site uses one cookie, storing your chosen language for up to a year, so it does not have to be re-selected on every visit. No tracking, analytics, or advertising cookies are used.',
+    'privacy.cookies.subheading' => '<a name="cookies"></a>Cookies',
+    'privacy.cookies.p1' => 'This site uses one cookie, storing your chosen language for up to a year, so it does not have to be re-selected on every visit. No tracking, analytics, or advertising cookies are used.',
     'privacy.contact' => 'For questions about this policy or your data, contact Sarah Puppin-Pratti (<a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Privacy%20Policy">sarah.puppinpratti001@stud.fh-dortmund.de</a>).',
 
     // --- terms.php ---

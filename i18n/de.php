@@ -25,7 +25,7 @@ return [
     'start.cta' => 'Neue Sitzung starten',
     'start.learnMore' => 'Erfahre mehr über die <a href="/philosophy">Philosophie von Sparring</a>.',
     'start.footer.craft' => '&copy; {year} &middot; Craft mit #DigitalMaterial &middot; <a href="/credits">Credits</a>',
-    'start.footer.legal' => '<a href="/terms">AGB</a> &middot; <a href="/privacy">Datenschutz</a> &middot; 🏳️‍⚧️',
+    'start.footer.legal' => '<a href="/terms">AGB</a> &middot; <a href="/privacy">Datenschutz</a> &middot; <a href="/privacy#cookies">Cookies</a>',
 
     // --- dojo.php (SE-01) + dojo.js ---
     'dojo.title' => 'Dojo — Sparring',
@@ -102,7 +102,8 @@ return [
     'privacy.p3' => 'Beiträge, die persönliche Informationen zu enthalten scheinen (ein Name, eine Kontaktangabe oder gesundheitliche/finanzielle Umstände), werden unabhängig von deinen obigen Entscheidungen nicht auf der Projektion gezeigt.',
     'privacy.p4' => 'Wenn du zustimmst, dass deine Sitzung für diese Abschlussarbeit gesammelt und ausgewertet werden darf, werden die ausgetauschten Nachrichten und ihre Zeitstempel auf einem Server unter meiner Kontrolle gespeichert. Es werden keine weiteren Metadaten — Gerät, Standort oder IP-Adresse — über das technisch Notwendige zur Bereitstellung der Seite während deiner Sitzung hinaus gespeichert. Gespeicherte Sitzungen werden ausschließlich für diese Abschlussarbeit und daraus resultierende wissenschaftliche Veröffentlichungen verwendet, nicht verkauft oder an Dritte außer Anthropic weitergegeben (das deine Eingaben gemäß seinen eigenen Bedingungen verarbeitet, um eine Antwort zu erzeugen), und werden nur anonymisiert oder aggregiert analysiert und referenziert.',
     'privacy.p5' => 'Gespeicherte Sitzungen werden aufbewahrt, bis die Abschlussarbeit und etwaige zugehörige Veröffentlichungen abgeschlossen sind, und danach gelöscht. Du kannst deine Zustimmung zur Speicherung jederzeit während der Ausstellung widerrufen, indem du die Sitzung beendest; da Sitzungen nicht mit deiner Identität verknüpft sind, ist ein Widerruf nach Ende der Ausstellung technisch nicht möglich, da deine spezifische Sitzung unter anderen nicht auffindbar ist.',
-    'privacy.p6' => 'Diese Seite verwendet ein einziges Cookie, das deine gewählte Sprache für bis zu ein Jahr speichert, damit sie nicht bei jedem Besuch erneut ausgewählt werden muss. Es werden keine Tracking-, Analyse- oder Werbe-Cookies eingesetzt.',
+    'privacy.cookies.subheading' => '<a name="cookies"></a>Cookies',
+    'privacy.cookies.p1' => 'Diese Seite verwendet ein einziges Cookie, das deine gewählte Sprache für bis zu ein Jahr speichert, damit sie nicht bei jedem Besuch erneut ausgewählt werden muss. Es werden keine Tracking-, Analyse- oder Werbe-Cookies eingesetzt.',
     'privacy.contact' => 'Bei Fragen zu dieser Erklärung oder deinen Daten wende dich an Sarah Puppin-Pratti (<a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Privacy%20Policy">sarah.puppinpratti001@stud.fh-dortmund.de</a>).',
 
     'terms.title' => 'Nutzungsbedingungen — Sparring',
