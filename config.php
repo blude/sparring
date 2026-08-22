@@ -113,6 +113,23 @@ const PILOT_DATA_DIR = __DIR__ . '/data/pilot';
 
 /*
 |--------------------------------------------------------------------------
+| Juiciness toggles (TODO.md JUICYNESS)
+|--------------------------------------------------------------------------
+|
+| Global kill switch plus one per effect, each independently flippable —
+| no code change needed to turn any of this off for a demo or a fault.
+|
+*/
+
+const JUICY_ENABLED = true;
+const JUICY_PUNCH = true;
+const JUICY_TITLE_CARD = true;
+const JUICY_WIGGLE = true;
+const JUICY_SOUND = true;
+const JUICY_DISPLAY_ENTRANCE = true;
+
+/*
+|--------------------------------------------------------------------------
 | Opening prompts (QR-code-driven session starters, /dojo?o=<n>)
 |--------------------------------------------------------------------------
 |
@@ -296,23 +313,6 @@ function pageFooter(): string
         </footer>
         HTML;
 }
-
-/*
-|--------------------------------------------------------------------------
-| Juiciness toggles (TODO.md JUICYNESS)
-|--------------------------------------------------------------------------
-|
-| Global kill switch plus one per effect, each independently flippable —
-| no code change needed to turn any of this off for a demo or a fault.
-|
-*/
-
-const JUICY_ENABLED = true;
-const JUICY_PUNCH = true;
-const JUICY_TITLE_CARD = true;
-const JUICY_WIGGLE = true;
-const JUICY_SOUND = true;
-const JUICY_DISPLAY_ENTRANCE = true;
 
 /*
 |--------------------------------------------------------------------------
