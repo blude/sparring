@@ -19,6 +19,7 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
 <link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
 <link rel="manifest" href="/dojo.webmanifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#d32f2f">
 </head>
