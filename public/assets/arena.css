@@ -64,14 +64,27 @@ html, body {
 }
 
 body {
+    position: relative; /* containing block for .gradient-top */
     display: flex;
     flex-direction: column;
 }
 
+/* decorative color wash, pinned to the top edge behind the logo */
+.gradient-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 170px;
+    pointer-events: none;
+}
+
 #logo {
+    position: relative; /* stack above .gradient-top (positioned elements paint last) */
+    z-index: 1;
     flex: 0 0 auto;
     margin: 0;
-    padding: 1rem 0 0 2rem;
+    padding: 2rem 2rem 0;
     text-align: left;
 }
 
