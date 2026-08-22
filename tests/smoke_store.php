@@ -94,6 +94,8 @@ assert($exchanges[0]['position'] === 1 && $exchanges[1]['position'] === 2);
 $latest = $store->getLatestExchange($session['id']);
 assert($latest['position'] === 2);
 
+assert($store->countExchanges() === 2); // arena header stat: lifetime total, fresh db so this is exact
+
 /*
 |--------------------------------------------------------------------------
 | QR-reply flow: reply_count + getQuotableExchange

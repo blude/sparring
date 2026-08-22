@@ -55,6 +55,7 @@ window.SparringArenaDiff = {
     var wall = document.getElementById('wall');
     var columns = buildColumns();
     var displayed = new Map(); // sessionId -> item, mirrors E-01 of this element
+    var lastExchangeCount = null; // skip the DOM write when unchanged, same principle as EX-01-2 below
 
     // Header clock: date + time, client-rendered from the system clock and
     // window.LOCALE (set in arena.php, otherwise unread by any JS). Minute
@@ -142,7 +143,8 @@ window.SparringArenaDiff = {
             })
             .then(function (data) {
                 if (!data || !Array.isArray(data.items)) return; // FS-01-2: discard malformed shape entirely
-                if (typeof data.exchangeCount === 'number') {
+                if (typeof data.exchangeCount === 'number' && data.exchangeCount !== lastExchangeCount) {
+                    lastExchangeCount = data.exchangeCount;
                     document.getElementById('exchange-count').textContent =
                         window.EXCHANGE_COUNT_LABEL.replace('{n}', String(data.exchangeCount));
                 }

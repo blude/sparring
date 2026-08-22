@@ -153,7 +153,6 @@ Produces the ordered items the projection renders. Every decision about what app
 - *[[FS-04-3]]FS-04-3* _(Entity-access)_ Read pilot-origin sessions from <<E-01,E-01 Session>> under the same eligibility conditions, ordered by <<E-01.9,E-01.9 lastActiveAt>> descending, and append until the limit is reached.
 - *[[FS-04-4]]FS-04-4* _(Entity-access)_ For each selected session, read its most recent exchange from <<E-02,E-02 Exchange>> (<<E-02.3,E-02.3 visitorContribution>>, <<E-02.4,E-02.4 sparringResponse>>). Which exchange to select is an open decision (xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] xref:L3-SE-02-display-client.adoc#TBC-04[TBC-04 Which exchange pair per session.]); it is made here and changing it does not affect xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client].
 - *[[FS-04-5]]FS-04-5* _(Data-operation)_ Build each item from the session's scenario (<<E-01.5,E-01.5 scenario>>), the exchange pair, the origin (<<E-01.4,E-01.4 origin>>), and a recency position. Return the ordered list.
-- *[[FS-04-6]]FS-04-6* _(Entity-access)_ Separately, count all rows in <<E-02,E-02 Exchange>> — a plain total, not scoped to the sessions selected above and not a selection or ordering decision. Returned alongside the item list, for xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client]'s header stat.
 
 === [[TF-05]]TF-05 Derive a scenario statement
 
@@ -235,7 +234,7 @@ _Call type:_ Synchronous +
 _Calling elements:_ xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] (xref:L3-SE-02-display-client.adoc#TO-01[TO-01 Retrieve display material]) +
 _Input:_ None. +
 _Output:_ An ordered list of items, each carrying a session identifier, scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total exchange count (integer) — every exchange ever recorded, live and pilot, not scoped to the items returned. +
-_Action:_ Calls <<TF-04,TF-04 Assemble display material>> and returns its result. Returns immediately. +
+_Action:_ Calls <<TF-04,TF-04 Assemble display material>> for the item list, and separately counts all rows in <<E-02,E-02 Exchange>> for the total exchange count — a plain total, not scoped to the sessions <<TF-04,TF-04 Assemble display material>> selects and not a selection or ordering decision, so it stays outside that function's policy. Returns both immediately. +
 _Error cases:_ None specific to this interface. An empty list is a valid response and occurs only when no pilot material has been imported.
 
 _This interface takes no parameters by design. Item count, ordering, exchange selection, and pilot fallback are all decided in <<TF-04,TF-04 Assemble display material>>, so that a change to any of them requires no change in xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] and no coordination between the two._
