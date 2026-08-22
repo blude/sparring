@@ -15,7 +15,7 @@
     --accent-bubble-bg: color-mix(in srgb, var(--brand-red) 12%, white);    /* light tint, visitor bubble background */
     --accent-bubble-text: color-mix(in srgb, var(--brand-red) 70%, black);  /* darkened, visitor bubble text */
 
-    --bg: #f7f7f7;
+    --bg: #fff;
     --fg: #111;
     --border: #ddd;
     --scenario-color: #666;
@@ -47,7 +47,10 @@ html, body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    background: var(--bg);
+    /* subtle dot-grid texture, matching start.css/dojo.css's background */
+    background:
+        radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
+        var(--bg);
     color: var(--fg);
     font-family: system-ui, sans-serif;
     font-size: 1.05rem; /* less dense at 2x2 than the 3-col baseline, but both rows must still fit (QR-06) */
@@ -68,11 +71,20 @@ body {
 #logo {
     flex: 0 0 auto;
     margin: 0;
-    padding: 1rem 0 0;
-    text-align: center;
-    font-size: 1.5rem;
-    letter-spacing: 0.05em;
-    color: var(--fg);
+    padding: 1rem 0 0 2rem;
+    text-align: left;
+}
+
+/* real "Sparring" text stays in the DOM for a11y/SEO, visually replaced by
+   the exported logotype PNG — same technique as start.css's .wordmark */
+#logo .wordmark {
+    display: inline-block;
+    margin: 0;
+    width: 203px;
+    height: 58px; /* logo-sparring-v2b.png's native size */
+    overflow: hidden;
+    text-indent: -9999px;
+    background: url('img/logo-sparring-v2b.png') no-repeat center / contain;
 }
 
 #wall {

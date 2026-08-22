@@ -15,7 +15,7 @@ declare(strict_types=1);
 <meta name="theme-color" content="#d32f2f">
 </head>
 <body>
-<h1 id="logo">Sparring</h1>
+<div id="logo"><h1 class="wordmark">Sparring</h1></div>
 <main id="wall" aria-live="off"></main>
 <script>window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;</script>
 <script>window.DISPLAY_COLUMNS = <?= (int) DISPLAY_COLUMNS ?>;</script>
