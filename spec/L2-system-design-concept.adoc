@@ -343,7 +343,7 @@ _Supports:_ xref:L1-solution-design-concept.adoc#BQR-01[BQR-01 Visitors experien
 === [[SQR-04]]SQR-04 Credentials and quota are protected from the public _(Security)_
 
 _Applies to:_ <<SE-03,SE-03 Backend service>> +
-_Acceptance criteria:_ The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window (10 requests / 60 seconds — `RATE_LIMIT_MAX_REQUESTS`, `RATE_LIMIT_WINDOW_SECONDS`, config.php). Contribution length is bounded (600 characters — `CONTRIBUTION_MAX_CHARS`). Session length is bounded (10 exchanges — `TURN_ALLOWANCE`). +
+_Acceptance criteria:_ The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window (10 requests / 60 seconds — `RATE_LIMIT_MAX_REQUESTS`, `RATE_LIMIT_WINDOW_SECONDS`, config.php). Contribution length is bounded (600 characters — `CONTRIBUTION_MAX_CHARS`). Session length is bounded (16 exchanges — `TURN_ALLOWANCE`). +
 _Externally sourced:_ Yes (provider terms and cost exposure rather than a business quality requirement)
 
 === [[SQR-05]]SQR-05 Origin is fixed at creation and never inferred _(Data-integrity)_

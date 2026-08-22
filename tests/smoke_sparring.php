@@ -206,8 +206,9 @@ withOrigin('10.0.0.8', function () use ($store, $sparring) {
     assert($store->getSession($session['id'])['turnCount'] === TURN_ALLOWANCE); // not incremented further
 });
 
-// FS-01-1: rate limit exhausted. RATE_LIMIT_MAX_REQUESTS === TURN_ALLOWANCE here,
-// so the (max+1)th call always hits the rate gate first — it's checked before turn count.
+// FS-01-1: rate limit exhausted, well within TURN_ALLOWANCE. processTurn checks
+// the rate gate before turn count unconditionally, so this fires regardless of
+// how the two constants compare.
 withOrigin('10.0.0.9', function () use ($store, $sparring) {
     $session = $store->createSession('live');
     for ($i = 0; $i < RATE_LIMIT_MAX_REQUESTS; $i++) {
