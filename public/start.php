@@ -39,5 +39,6 @@
     <p><?= t('start.footer.craft', ['{year}' => date('Y')]) ?></p>
     <p><?= t('start.footer.legal') ?></p>
 </footer>
+<?= sillyBanner() ?>
 </body>
 </html>

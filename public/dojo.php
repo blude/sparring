@@ -97,6 +97,7 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
   <span class="title-card__line title-card__line--slide"><?= t('dojo.titleCard.line2') ?></span>
   <span class="title-card__line title-card__line--grow"><?= t('dojo.titleCard.line3') ?></span>
 </div>
+<?= sillyBanner() ?>
 <script>
 window.CONTRIBUTION_MAX_CHARS = <?= (int) CONTRIBUTION_MAX_CHARS ?>;
 window.OPENING_MESSAGE = <?= json_encode($openingMessage) ?>;

@@ -25,5 +25,6 @@
 <p><?= t('privacy.cookies.p1') ?></p>
 <p><?= t('privacy.contact') ?></p>
 <?= pageFooter() ?>
+<?= sillyBanner() ?>
 </body>
 </html>

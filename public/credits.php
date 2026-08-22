@@ -40,5 +40,6 @@
 <li><a href="https://github.com/anthropics/claude-api">Claude API</a> and Claude Code</li>
 </ul>
 <?= pageFooter() ?>
+<?= sillyBanner() ?>
 </body>
 </html>

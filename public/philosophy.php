@@ -19,5 +19,6 @@
 <h2><?= t('philosophy.subheading') ?></h2>
 <p><?= t('philosophy.body') ?></p>
 <?= pageFooter() ?>
+<?= sillyBanner() ?>
 </body>
 </html>

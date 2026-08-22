@@ -23,5 +23,6 @@
 <p><?= t('terms.p5') ?></p>
 <p><?= t('terms.privacyLink') ?></p>
 <?= pageFooter() ?>
+<?= sillyBanner() ?>
 </body>
 </html>

@@ -25,6 +25,7 @@ declare(strict_types=1);
   </div>
 </div>
 <main id="wall" aria-live="off"></main>
+<?= sillyBanner() ?>
 <script>
 window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;
 window.DISPLAY_COLUMNS = <?= (int) DISPLAY_COLUMNS ?>;
