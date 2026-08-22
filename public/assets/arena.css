@@ -189,13 +189,16 @@ body {
 .exchange .reply-qr {
     position: absolute;
     top: 0;
-    right: 0.4rem;
-    transform: translateY(-50%);
-    width: 3.0rem;
+    right: 0.85rem;
+    transform: translateY(-90%);
+    width: 4rem;
 }
 
 .exchange .reply-qr a {
     display: block;
+    padding: 0.125rem;
+    border-radius: 0.125rem;
+    background: #fff;
 }
 
 .exchange .reply-qr svg {
