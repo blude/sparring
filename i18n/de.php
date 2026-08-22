@@ -44,6 +44,8 @@ return [
     'dojo.consent.projectionLabel' => 'Ich bin einverstanden, dass meine ausgetauschten Nachrichten während der Sitzung auf dem Projektor angezeigt werden dürfen.',
     'dojo.consent.retentionLabel' => 'Ich bin einverstanden, dass meine Sitzung für diese Abschlussarbeit gesammelt und ausgewertet werden darf.',
     'dojo.consent.confirm' => 'Auswahl bestätigen',
+    'dojo.replyQuote.label' => 'Antwort auf:',
+    'dojo.replyQuote.cancelAriaLabel' => 'Antwort abbrechen',
     'dojo.composer.placeholder' => 'Was beschäftigt dich?',
     'dojo.composer.sendAriaLabel' => 'Senden',
     'dojo.composer.disclaimer' => 'Sparring ist KI und kann Fehler machen',
@@ -67,6 +69,7 @@ return [
 
     // --- arena.php (SE-02) ---
     'arena.title' => 'Arena — Sparring',
+    'arena.js.replyCount' => '{n} Antworten',
 
     // --- credits.php ---
     'credits.title' => 'Credits — Sparring',

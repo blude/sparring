@@ -24,7 +24,7 @@ eval(source.slice(0, iifeStart));
 const diff = window.SparringArenaDiff.diff;
 
 function item(id, overrides) {
-    return Object.assign({ sessionId: id, scenario: 's', visitorContribution: 'v', sparringResponse: 'r' }, overrides || {});
+    return Object.assign({ sessionId: id, scenario: 's', visitorContribution: 'v', sparringResponse: 'r', exchangeId: 1, replyCount: 0 }, overrides || {});
 }
 
 /*
@@ -61,6 +61,24 @@ result = diff(displayed, [item('a', { sparringResponse: 'a different response' }
 assert.strictEqual(result.toAdd.length, 0);
 assert.strictEqual(result.toUpdate.length, 1);
 assert.strictEqual(result.toUpdate[0].sparringResponse, 'a different response');
+assert.strictEqual(result.toRemove.length, 0);
+
+/*
+|--------------------------------------------------------------------------
+| QR-reply flow: replyCount-only or exchangeId-only change still updates
+|--------------------------------------------------------------------------
+*/
+
+result = diff(displayed, [item('a', { replyCount: 1 })]);
+assert.strictEqual(result.toAdd.length, 0);
+assert.strictEqual(result.toUpdate.length, 1);
+assert.strictEqual(result.toUpdate[0].replyCount, 1);
+assert.strictEqual(result.toRemove.length, 0);
+
+result = diff(displayed, [item('a', { exchangeId: 2 })]);
+assert.strictEqual(result.toAdd.length, 0);
+assert.strictEqual(result.toUpdate.length, 1);
+assert.strictEqual(result.toUpdate[0].exchangeId, 2);
 assert.strictEqual(result.toRemove.length, 0);
 
 /*

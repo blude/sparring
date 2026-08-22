@@ -28,7 +28,9 @@ window.SparringArenaDiff = {
                 toAdd.push(item);
             } else if (existing.scenario !== item.scenario
                 || existing.visitorContribution !== item.visitorContribution
-                || existing.sparringResponse !== item.sparringResponse) {
+                || existing.sparringResponse !== item.sparringResponse
+                || existing.exchangeId !== item.exchangeId
+                || existing.replyCount !== item.replyCount) {
                 toUpdate.push(item);
             }
         });
@@ -79,6 +81,29 @@ window.SparringArenaDiff = {
 
     function trim(text, n) {
         return text.length > n ? text.slice(0, n - 1) + '…' : text;
+    }
+
+    // QR-reply flow: links a wall item's AI response to /dojo?r=<exchangeId>
+    // and shows its reply counter. `el.dataset.exchangeId` lets updateItem skip
+    // rebuilding the QR SVG on a poll where only the counter changed.
+    function renderReply(el, qrEl, countEl, item) {
+        if (el.dataset.exchangeId !== String(item.exchangeId)) {
+            el.dataset.exchangeId = String(item.exchangeId);
+            qrEl.textContent = '';
+            var link = document.createElement('a');
+            link.href = location.origin + '/dojo?r=' + item.exchangeId;
+            link.target = '_blank';
+            qrEl.appendChild(link);
+            window.SparringQr.renderInto(link, link.href);
+        }
+        // Reaction-style pill: glove icon + bare count, hidden at 0 (EX-01-3).
+        // The full sentence stays as an aria-label — sighted users get the
+        // glove as the "replies" cue, screen readers still hear a sentence.
+        // Icon is a static child built once in buildItemElement; only the
+        // number text updates here, so we never clobber it.
+        countEl.hidden = item.replyCount === 0;
+        countEl.setAttribute('aria-label', window.REPLY_COUNT_LABEL.replace('{n}', String(item.replyCount)));
+        countEl.querySelector('.reply-count-number').textContent = String(item.replyCount);
     }
 
     // Sparring response only (never .contribution, which is visitor text and
@@ -151,7 +176,28 @@ window.SparringArenaDiff = {
 
         var response = document.createElement('div');
         response.className = 'response';
-        renderResponse(response, item.sparringResponse);
+        // Actual rendered content lives in its own child, never touched
+        // directly — renderResponse/mermaid's renderInto both wipe whatever
+        // container they're given, so the QR/reply-count badges below live
+        // as .response's *siblings* to that child, not inside it (they'd
+        // get erased on every re-render otherwise).
+        var responseText = document.createElement('div');
+        responseText.className = 'response-text';
+        renderResponse(responseText, item.sparringResponse);
+
+        var replyQr = document.createElement('div');
+        replyQr.className = 'reply-qr';
+        var replyCount = document.createElement('div');
+        replyCount.className = 'reply-count';
+        var replyCountIcon = document.createElement('span');
+        replyCountIcon.className = 'reply-count-icon';
+        var replyCountNumber = document.createElement('span');
+        replyCountNumber.className = 'reply-count-number';
+        replyCount.append(replyCountIcon, replyCountNumber);
+        // Both badges nested in .response (not responseText) so their
+        // absolute position anchors to the bubble, not the card.
+        response.append(responseText, replyQr, replyCount);
+        renderReply(el, replyQr, replyCount, item);
 
         el.append(scenario, visitorName, contribution, response);
 
@@ -181,7 +227,8 @@ window.SparringArenaDiff = {
         if (!el) { addItem(item); return; }
         el.querySelector('.scenario').textContent = item.scenario;
         el.querySelector('.contribution').textContent = trim(item.visitorContribution, TRIM_CHARS);
-        renderResponse(el.querySelector('.response'), item.sparringResponse);
+        renderResponse(el.querySelector('.response-text'), item.sparringResponse);
+        renderReply(el, el.querySelector('.reply-qr'), el.querySelector('.reply-count'), item);
         if (window.isJuicyOn('displayEntrance')) {
             el.classList.remove('updating');
             void el.offsetWidth; // force the removal to commit so re-adding the class retriggers the animation

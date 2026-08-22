@@ -96,6 +96,35 @@ assert($latest['position'] === 2);
 
 /*
 |--------------------------------------------------------------------------
+| QR-reply flow: reply_count + getQuotableExchange
+|--------------------------------------------------------------------------
+*/
+
+assert($exchange['replyCount'] === 0); // a freshly-appended exchange never has replies of its own yet
+
+// getQuotableExchange: unknown id; a non-displayable session's exchange
+// ($consentOnlySession never granted projection consent, so displayable stays
+// false); and $session, which recordConsentDecision above already made
+// displayable (projectionGranted: true), resolves to the narrow shape.
+$nonDisplayableExchange = $store->appendExchange($consentOnlySession['id'], 'not shown', 'not shown either');
+assert($store->getQuotableExchange(999999) === null);
+assert($store->getQuotableExchange($nonDisplayableExchange['id']) === null);
+assert($store->getQuotableExchange($exchange['id']) === ['exchangeId' => $exchange['id'], 'text' => $exchange['sparringResponse']]);
+
+// appendExchange's reply-count increment: only fires when position === 1 AND
+// a replyToExchangeId is passed — exactly-once, same transaction as the insert.
+$replierSession = $store->createSession('live');
+$repliedExchange = $store->appendExchange($replierSession['id'], 'I disagree.', 'On what grounds?', $exchange['id']);
+assert($repliedExchange['position'] === 1);
+assert($store->getQuotableExchange($exchange['id'])['exchangeId'] === $exchange['id']); // still resolves
+assert($store->getExchanges($session['id'])[0]['replyCount'] === 1); // the quoted exchange, incremented
+
+// a later turn (position !== 1) passing a replyToExchangeId must NOT increment
+$store->appendExchange($replierSession['id'], 'a second turn', 'a second response', $exchange['id']);
+assert($store->getExchanges($session['id'])[0]['replyCount'] === 1); // unchanged
+
+/*
+|--------------------------------------------------------------------------
 | displayable / scenario
 |--------------------------------------------------------------------------
 */
@@ -123,12 +152,12 @@ assert(count($store->getDisplayableSessions('pilot', 10)) === 1);
 */
 
 $allSessionIds = array_column($store->getAllSessions(), 'id');
-foreach ([$session['id'], $consentOnlySession['id'], $titleSession['id'], $pilotSession['id']] as $id) {
+foreach ([$session['id'], $consentOnlySession['id'], $titleSession['id'], $replierSession['id'], $pilotSession['id']] as $id) {
     assert(in_array($id, $allSessionIds, true));
 }
-assert(count($allSessionIds) === 4); // every session created so far, live and pilot alike
+assert(count($allSessionIds) === 5); // every session created so far, live and pilot alike
 $allExchanges = $store->getAllExchanges();
-assert(count($allExchanges) === 3); // 2 on $session, 1 on $pilotSession — the other two sessions have none
+assert(count($allExchanges) === 6); // 2 on $session, 1 on $consentOnlySession, 2 on $replierSession, 1 on $pilotSession
 
 /*
 |--------------------------------------------------------------------------
@@ -167,8 +196,8 @@ assert($b3 === ['allowed' => true, 'remaining' => 4]);
 */
 
 $before = $store->getCounts();
-assert($before['sessions'] === 4); // $session, $consentOnlySession, $titleSession, $pilotSession created above
-assert($before['exchanges'] === 3); // 2 on $session, 1 on $pilotSession
+assert($before['sessions'] === 5); // $session, $consentOnlySession, $titleSession, $replierSession, $pilotSession created above
+assert($before['exchanges'] === 6); // 2 on $session, 1 on $consentOnlySession, 2 on $replierSession, 1 on $pilotSession
 assert($before['rateLimitWindows'] === 2); // $hash + $boundaryHash above
 $deleted = $store->resetAll();
 assert($deleted === $before);

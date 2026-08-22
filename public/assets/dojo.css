@@ -184,7 +184,14 @@ main {
 #history .turn p { margin: 0 0 0.5rem; }
 #history .turn p:last-child { margin-bottom: 0; }
 #history .turn .diagram svg { max-width: 100%; height: auto; }
-#history .visitor { align-self: flex-end; background: var(--bubble-visitor-bg); color: var(--bubble-visitor-text); }
+/* white-space: pre-wrap so a QR-reply's "quote"\n\n reply textContent (see
+   dojo.js's withQuotePrefix) actually shows the blank line separating the
+   quoted text from the visitor's own reply, instead of the default
+   `normal` collapsing it to one run-on line — still plain textContent, no
+   markup, purely a rendering difference. Scoped to .visitor only: sparring
+   turns render through SparringMermaid, whose own <p> spacing this must
+   not touch. */
+#history .visitor { align-self: flex-end; background: var(--bubble-visitor-bg); color: var(--bubble-visitor-text); white-space: pre-wrap; }
 #history .sparring { align-self: flex-start; background: var(--bubble-sparring-bg); color: var(--bubble-sparring-text); }
 
 /* Status turns (formerly the separate #status element — QR-02's "no
@@ -356,6 +363,60 @@ main {
     border-radius: 0.5rem;
 }
 #consent-confirm:disabled { opacity: 0.5; }
+
+/* QR-reply flow: non-editable quote of the AI response being replied to,
+   shown above #composer-row. Never inserted into the textarea (never counted
+   against CONTRIBUTION_MAX_CHARS) — see dojo.js's showReplyQuote/hideReplyQuote. */
+#reply-quote {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-bottom: 0.5rem;
+    padding: 0.6rem 2rem 0.6rem 0.85rem; /* right padding clears the cancel button */
+    background: var(--bubble-sparring-bg);
+    border-radius: 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.35;
+}
+
+/* #reply-quote's own `display: flex` above outranks the UA stylesheet's
+   [hidden] { display: none } (author rule beats UA default regardless of
+   attribute state) — without this, toggling the `hidden` attribute in JS
+   (showReplyQuote/hideReplyQuote) has no visible effect at all. Same fix
+   already applied to #title-card below. */
+#reply-quote[hidden] { display: none; }
+
+#reply-quote-label {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #666;
+}
+
+#reply-quote-text {
+    margin: 0;
+    /* long AI responses are still fully sent to the LLM as context — this
+       clamp is cosmetic only, it never truncates what's actually stored/sent. */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#reply-quote-cancel {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1;
+    font-size: 1.1rem;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+}
 
 #composer {
     position: relative;

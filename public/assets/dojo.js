@@ -67,10 +67,14 @@ window.SparringDojoOutcome = {
     var avatarAliasEl = document.getElementById('avatar-alias');
     var newSessionBtn = document.getElementById('new-session-btn');
     var titleCardEl = document.getElementById('title-card');
+    var replyQuoteEl = document.getElementById('reply-quote');
+    var replyQuoteTextEl = document.getElementById('reply-quote-text');
+    var replyQuoteCancelBtn = document.getElementById('reply-quote-cancel');
 
     var sessionId = null;
     var statusTurnEl = null; // the one managed "status" entry in #history, if any (see setHistoryStatus)
     var optimisticTurnEl = null; // visitor turn shown ahead of the server response (see submitContribution); pruned on any non-'ok' outcome
+    var pendingReplyQuote = null; // {exchangeId, text} — QR-reply flow; only ever set on a fresh session's first turn, cleared on cancel or on 'ok'
     var titleRequested = false; // guards the fire-and-forget /api/title fetch to once per page load (see handleContributionResult)
     var debugPanel = null;
     var lastDebugInfo = {};
@@ -120,6 +124,39 @@ window.SparringDojoOutcome = {
             window.location.href = '/';
         }
     });
+
+    /*
+    |--------------------------------------------------------------------------
+    | QR-reply flow: quote chip above the composer
+    |--------------------------------------------------------------------------
+    |
+    | Shown for a fresh session only (never on resumeSession — see
+    | createSession() below), never editable, never counted against
+    | CONTRIBUTION_MAX_CHARS since the quoted text never enters fieldEl.value.
+    |
+    */
+    function showReplyQuote(quote) {
+        pendingReplyQuote = quote;
+        replyQuoteTextEl.textContent = quote.text;
+        replyQuoteEl.hidden = false;
+    }
+
+    // Cancel button: full clear — nothing left to send, chip gone for good.
+    function cancelReplyQuote() {
+        pendingReplyQuote = null;
+        replyQuoteEl.hidden = true;
+    }
+
+    replyQuoteCancelBtn.addEventListener('click', cancelReplyQuote);
+
+    // Same text prepended into both the optimistic bubble (submitContribution)
+    // and the persisted exchange (Sparring::processTurn) — kept in one place
+    // so the two never drift out of sync with each other. Label comes from
+    // window.STRINGS (dojo.replyQuote.label via t(), i.e. this request's own
+    // locale) rather than a literal, matching Sparring::processTurn exactly.
+    function withQuotePrefix(quote, text) {
+        return window.STRINGS.dojo.replyQuoteLabel + ' "' + quote.text + '"\n\n' + text;
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -349,6 +386,10 @@ window.SparringDojoOutcome = {
                 sessionId = data.sessionId;
                 setUrlSessionId(sessionId);
                 retentionEl.hidden = false; // ST-01-3: decision presented, field stays disabled
+                // QR-reply flow: shown before consent too — gives the visitor
+                // context for what they're walking into. Never shown on a
+                // resumed session (see resumeSession, no equivalent call there).
+                if (window.REPLY_QUOTE) showReplyQuote(window.REPLY_QUOTE);
             })
             .catch(function () {
                 setHistoryStatus(window.STRINGS.dojo.installationUnavailable, false);
@@ -408,8 +449,10 @@ window.SparringDojoOutcome = {
                 updateDebugPanel({ sessionId: sessionId, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
                 showTitleCard();
                 // QR-code-seeded session: auto-send the opening line as the first
-                // turn instead of waiting for the visitor to type one.
-                if (window.OPENING_MESSAGE && data.sessionState === 'open') {
+                // turn instead of waiting for the visitor to type one. Skipped when
+                // a reply quote is pending — that's a more specific signal than a
+                // generic numbered opener, and both can't own the same first turn.
+                if (window.OPENING_MESSAGE && !pendingReplyQuote && data.sessionState === 'open') {
                     submitContribution(window.OPENING_MESSAGE);
                 }
             })
@@ -433,7 +476,13 @@ window.SparringDojoOutcome = {
         triggerPunch();
 
         setComposerEnabled(false);
-        optimisticTurnEl = appendTurn('visitor', text); // shown ahead of the response; pruned on failure (clearOptimisticTurn)
+        // QR-reply flow: prepend the quote into the optimistic bubble (matches
+        // what the server will persist) and hide the chip instantly — both
+        // happen right here, not on the server round trip, so sending feels
+        // immediate. pendingReplyQuote itself stays set until 'ok' confirms
+        // the turn landed, so a failure can restore the chip for retry.
+        optimisticTurnEl = appendTurn('visitor', pendingReplyQuote ? withQuotePrefix(pendingReplyQuote, text) : text); // pruned on failure (clearOptimisticTurn)
+        if (pendingReplyQuote) replyQuoteEl.hidden = true;
         fieldEl.value = ''; // cached in `text`/submittedText below, restored on failure
         sessionStorage.removeItem(DRAFT_KEY); // sent — draft below restores it again on failure
         updateCharRemaining();
@@ -445,7 +494,10 @@ window.SparringDojoOutcome = {
         fetch('/api/contribute', {
             method: 'POST',
             signal: controller.signal,
-            body: JSON.stringify({ sessionId: sessionId, contribution: text }),
+            // replyToExchangeId: only ever meaningful on the first turn; an
+            // undefined value here is dropped by JSON.stringify, so no separate
+            // branch is needed once pendingReplyQuote is cleared (see 'ok' below).
+            body: JSON.stringify({ sessionId: sessionId, contribution: text, replyToExchangeId: pendingReplyQuote ? pendingReplyQuote.exchangeId : undefined }),
         })
             .then(function (res) { return res.json().then(function (data) { return { res: res, data: data }; }); })
             .then(function (result) {
@@ -471,6 +523,7 @@ window.SparringDojoOutcome = {
         switch (data.status) {
             case 'ok':
                 optimisticTurnEl = null; // confirmed — stop tracking it, nothing left to prune
+                pendingReplyQuote = null; // chip already hidden at submit time (see submitContribution) — landed, nothing left to retry
                 appendTurn('sparring', data.exchange.sparringResponse);
                 applySessionState(data.sessionState, data.turnsRemaining);
                 // Fire-and-forget title generation: doesn't block anything above,
@@ -512,6 +565,10 @@ window.SparringDojoOutcome = {
                 clearOptimisticTurn();
                 setHistoryStatus(outcome.message, false);
                 if (outcome.restoreText) fieldEl.value = submittedText;
+                // didn't land — chip was hidden optimistically at submit time (see
+                // submitContribution); pendingReplyQuote is still set, so bring it
+                // back alongside the restored text for a retry.
+                if (outcome.restoreText && pendingReplyQuote) replyQuoteEl.hidden = false;
                 if (outcome.enableComposer) setComposerEnabled(true);
                 if (outcome.wiggle) triggerWiggle();
                 if (outcome.sound) window.SparringSfx.play(outcome.sound);
