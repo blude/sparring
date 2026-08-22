@@ -2,8 +2,78 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-08-22
+
+- `a867370` fix(css): left align locale swicher on content pages
+- `5533ed3` perf(js): minify qrcode generator
+- `fa51fc4` refactor(arena): merge window-var scripts into one <script> tag
+- `b5cc174` refactor(assets): move vendored libs to assets/vendor/
+- `abd9967` refactor(content-pages): extract shared style block to content-page.css
+- `43f3562` style(content-pages): reuse start page's footer/locale-switcher CSS
+- `ac40e81` refactor(css): add drop shadow to locale switcher
+- `88ac8dd` feat(credits): update exhibition opening hours
+- `99f50ee` refactor(config): wrap page-chrome helpers in a section header
+- `f1f57ec` docs(credits): add qrcode-generator to acknowledgments
+- `5671c65` feat(content-pages): add header/footer chrome to philosophy/privacy/terms/credits
+- `96fa9bf` docs(TODO): tick off recently implemented to dos
+- `a543d1d` feat(config): raise TURN_ALLOWANCE to 16 exchanges per session
+- `5ac7ee2` refactor(start): tweak design of locale switcher - swap background and selected color - back container pill-shaped
+- `8d99765` feat(arena): add session count to header stat
+- `7e99c7a` fix(arena): increase clock font size
+- `6e8cb2b` fix(arena): drop trailing period from German month abbreviation
+- `69d1358` fix(arena): correct invalid align-items value
+- `45e282b` fix(arena): 24-hour clock format
+- `1b056ed` fix(arena): align header items to the top
+- `ce74b3e` test(store): de-brittle countExchanges assertion
+- `0e83ef7` fix(arena): address advisor findings on header stats commit
+- `b746df4` feat(arena): header stats — live clock + total exchange count
+- `54e4007` refactor(arena): gradient-top as CSS background, not img
+- `baf9f63` refactor(arena): rename gradient-top
+- `6c25335` feat(arena): add gradient-top color wash behind logo
+- `0bd6348` perf(images): compress images to webp
+- `de31dbb` chore(assets): remove unused logo SVGs
+- `bcd2604` fix(pwa): add standard mobile-web-app-capable meta tag
+- `d3ae9ac` refactor(arena): swap logo for sparring wordmark, dot-grid background
+- `543be9d` refactor(arena): flip alignment of messages
+- `4d62ddf` refactor(arena): nest visitor-name inside contribution, mirroring response-text
+- `123caa1` chore(git): merge worktree-qr-quote-reply into develop
+- `1fe4b8d` style(arena): brand-red glove icon, match reply-qr's corner offset
+- `59b8d3d` refactor(arena): force QR code links opening in new tab
+- `19570eb` refactor(arena): adjust positioning of QR Code
+- `6c5854e` feat(arena): move reply QR to a top-right corner badge on the response
+- `3ffae10` feat(arena): show reply count as a glove-icon reaction pill
+- `5d9e036` refactor(dojo): rename reply query param to r for consistency
+
+## 2026-08-21
+
+- `c1404fa` fix(i18n): route the quote's Replying to label through t() instead of a literal
+- `4d586fc` feat(dojo): label the quote as 'Replying to:' for the model, not just the visitor
+- `c71aec7` fix(dojo): hide quote chip instantly on send, persist quote in the bubble
+- `3f0dcbc` fix(dojo): #reply-quote's display:flex overrode the hidden attribute
+- `f866f4a` feat(arena): QR quote-reply from wall messages to dojo
+- `855504b` build(assets): vendor qrcode-generator for client-side QR rendering
+- `34acfb9` fix(routing): serve trailing-slash routes and use absolute asset paths
+- `335fdc5` refactor(css): move font declaration to start of file
+- `48c320f` fix(design): adopt default system-ui font for most text
+- `9e32511` feat: add trans flag in footer
+- `b71832c` fix(typo): author name correction
+- `f0d08ef` refactor(content): add cookie privacy info
+- `786e5c4` docs(privacy): add cookie usage paragraph
+- `29471cb` refactor(design): make playbook note more subtle
+- `7b3c383` refactor: extract start.php inline CSS to assets/start.css
+- `ba2858b` refactor: swap philosophy link location
+- `94bb017` refactor: make footer text lighter
+- `d3eacf7` refactor(i18n): simplify legal line
+- `06fd122` refactor: add copyright {year}
+- `a77eda9` refactor: fix design of localeSwitcher
+
 ## 2026-08-20
 
+- `910caa9` refactor(input): remove localeSwitcher from top bar
+- `4aa2c19` docs(todo): remove stale bug todo item
+- `f0fbdae` docs(todo): tick off recently completed to dos
+- `78b1828` docs(spec): add line breaks to improve legibility
+- `c25f82b` docs: update CHANGELOG through ecce8af
 - `ecce8af` refactor(identity): use roman numerals as suffix
 - `154c232` perf(llm): enable prompt caching on the Sparring system prompt
 - `c05bd78` docs(spec): add SE-04 constraints on context-window sharing and XML structuring
