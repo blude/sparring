@@ -290,14 +290,17 @@ function pageHeader(): string
 
 function pageFooter(): string
 {
+    // footer/.locale-switcher styling comes from each page's own <style>
+    // block (copied from start.css) rather than inline styles here, so
+    // both pages render the switcher identically.
     $switcher = localeSwitcher();
     $craft = t('start.footer.craft', ['{year}' => date('Y')]);
     $legal = t('start.footer.legal');
     return <<<HTML
-        <footer style="margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(0,0,0,.1);font-size:.8125rem;color:#666">
+        <footer>
         $switcher
-        <p style="margin:1rem 0 .5rem">$craft</p>
-        <p style="margin:0">$legal</p>
+        <p>$craft</p>
+        <p>$legal</p>
         </footer>
         HTML;
 }
