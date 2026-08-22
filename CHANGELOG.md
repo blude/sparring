@@ -4,6 +4,13 @@ Generated from git history. Grouped by commit date, newest first.
 
 ## 2026-08-22
 
+- `297fd82` chore(config): move juiciness flags up
+- `d84cdff` chore(config): move environment and error handling down
+- `3ec732f` chore(config): move LLM config up
+- `b27d612` refactor(config): extract web app meta tags
+- `d1af924` feat: add silly ASCII art banner on every page
+- `0c82574` fix: unify meta tag inclusion
+- `60c3881` docs: update CHANGELOG through 2408255
 - `2408255` feat(dojo): rotate thinking-status message per turn
 - `b913544` fix(i18n): unify thinking status message
 - `6e39d8e` chore: bump version to 0.14.0
