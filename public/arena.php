@@ -16,7 +16,7 @@ declare(strict_types=1);
 <meta name="theme-color" content="#d32f2f">
 </head>
 <body>
-<img class="gradient-top" src="assets/img/arena-gradient-top.webp" alt="" aria-hidden="true">
+<div class="gradient-top" aria-hidden="true"></div>
 <div id="logo"><h1 class="wordmark">Sparring</h1></div>
 <main id="wall" aria-live="off"></main>
 <script>window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;</script>
