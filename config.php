@@ -264,6 +264,35 @@ function localeSwitcher(): string
     return '<nav class="locale-switcher" aria-label="Language">' . implode(' ', $links) . '</nav>';
 }
 
+// Header/footer for the content pages (philosophy/privacy/terms/credits),
+// which otherwise carry no branding or way back to "/". Byte-identical
+// across all four, so one shared helper — same pattern as localeSwitcher()
+// above — rather than duplicating markup in each page. Styled inline since
+// each page's own <style> block is small and doesn't need extending for this.
+function pageHeader(): string
+{
+    $logo = fasset('img/logo-sparring-v2b.png'); // same logo image as start.php
+    return <<<HTML
+        <header style="margin-bottom:1.5rem">
+        <a href="/" style="display:inline-block;width:150px;height:43px;text-indent:-9999px;overflow:hidden;background:url('$logo') center/contain no-repeat">Sparring</a>
+        </header>
+        HTML;
+}
+
+function pageFooter(): string
+{
+    $switcher = localeSwitcher();
+    $craft = t('start.footer.craft', ['{year}' => date('Y')]);
+    $legal = t('start.footer.legal');
+    return <<<HTML
+        <footer style="margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(0,0,0,.1);font-size:.8125rem;color:#666">
+        $switcher
+        <p style="margin:1rem 0 .5rem">$craft</p>
+        <p style="margin:0">$legal</p>
+        </footer>
+        HTML;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Juiciness toggles (TODO.md JUICYNESS)
