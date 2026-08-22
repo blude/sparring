@@ -213,9 +213,9 @@ body {
    the bubble and the page behind it. */
 .exchange .reply-count {
     position: absolute;
-    left: 0.4rem;
+    left: 0.85rem;
     bottom: 0;
-    transform: translateY(50%);
+    transform: translateY(90%);
     display: flex;
     align-items: center;
     gap: 0.3rem;
@@ -235,7 +235,7 @@ body {
 .exchange .reply-count-icon {
     width: 0.8rem;
     height: 0.8rem;
-    background-color: currentColor;
+    background-color: var(--brand-red);
     -webkit-mask-image: url('img/glove.svg');
     mask-image: url('img/glove.svg');
     -webkit-mask-repeat: no-repeat;
