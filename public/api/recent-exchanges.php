@@ -22,7 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 $store = new Store(STORE_DB_PATH);
 $sparring = new Sparring($store);
 
+$counts = $store->getCounts();
+
 echo json_encode([
     'items' => $sparring->assembleDisplayMaterial(),
-    'exchangeCount' => $store->countExchanges(),
+    'sessionCount' => $counts['sessions'],
+    'exchangeCount' => $counts['exchanges'],
 ], JSON_UNESCAPED_SLASHES);

@@ -70,7 +70,7 @@ return [
     // --- arena.php (SE-02) ---
     'arena.title' => 'Arena — Sparring',
     'arena.js.replyCount' => '{n} Antworten',
-    'arena.js.exchangeCount' => '{n} Runden',
+    'arena.js.stats' => '{sessions} Sitzungen / {exchanges} Runden',
 
     // --- credits.php ---
     'credits.title' => 'Credits — Sparring',

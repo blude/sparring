@@ -233,8 +233,8 @@ _Error cases:_
 _Call type:_ Synchronous +
 _Calling elements:_ xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] (xref:L3-SE-02-display-client.adoc#TO-01[TO-01 Retrieve display material]) +
 _Input:_ None. +
-_Output:_ An ordered list of items, each carrying a session identifier, scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total exchange count (integer) — every exchange ever recorded, live and pilot, not scoped to the items returned. +
-_Action:_ Calls <<TF-04,TF-04 Assemble display material>> for the item list, and separately counts all rows in <<E-02,E-02 Exchange>> for the total exchange count — a plain total, not scoped to the sessions <<TF-04,TF-04 Assemble display material>> selects and not a selection or ordering decision, so it stays outside that function's policy. Returns both immediately. +
+_Output:_ An ordered list of items, each carrying a session identifier, scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total session count and a total exchange count (both integers) — every session and exchange ever recorded, live and pilot, not scoped to the items returned. +
+_Action:_ Calls <<TF-04,TF-04 Assemble display material>> for the item list, and separately counts all rows in <<E-01,E-01 Session>> and <<E-02,E-02 Exchange>> for the two totals — plain totals, not scoped to the sessions <<TF-04,TF-04 Assemble display material>> selects and not a selection or ordering decision, so they stay outside that function's policy. Returns all three immediately. +
 _Error cases:_ None specific to this interface. An empty list is a valid response and occurs only when no pilot material has been imported.
 
 _This interface takes no parameters by design. Item count, ordering, exchange selection, and pilot fallback are all decided in <<TF-04,TF-04 Assemble display material>>, so that a change to any of them requires no change in xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] and no coordination between the two._

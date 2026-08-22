@@ -92,7 +92,7 @@ Two properties of this baseline are settled and should not be revisited without 
 - *The exchange pair is the unit.* A single turn shown alone conveys nothing about friction. The pair is the smallest thing that shows the mechanism.
 - *Every item has the same shape.* A design that renders the newest session differently from the rest requires two layouts, two truncation rules, and a decision about what happens when the newest session is unusually long. Uniformity removes all three. This is about shared _template and truncation rule_, not shared rendered height — height already varied with content length under the single-column baseline, and still does under masonry; that variance is what the column-balancing works with, not a departure from uniformity.
 
-A header above the wall carries the logo, a live clock, and the total exchange count. The clock is rendered entirely client-side from the system clock and the resolved locale — it reflects no backend data and needs no entity or interface entry of its own. The exchange count does come from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] (<<E-02,E-02 Wall statistics>>) and is listed in *Visible data* below.
+A header above the wall carries the logo, a live clock, and a total session/exchange count. The clock is rendered entirely client-side from the system clock and the resolved locale — it reflects no backend data and needs no entity or interface entry of its own. The counts do come from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] (<<E-02,E-02 Wall statistics>>) and are listed in *Visible data* below.
 
 *Visible data*
 
@@ -104,7 +104,8 @@ A header above the wall carries the logo, a live clock, and the total exchange c
 | Visitor contribution | string | The visitor's turn | <<E-01.3,E-01.3 visitorContribution>> | Per item, always
 | Sparring response | string | The reply to that turn | <<E-01.4,E-01.4 sparringResponse>> | Per item, always
 | Recency position | integer | Implied by the item's position within its column; a session's column assignment is sticky and does not reflect global recency across columns | <<E-01.5,E-01.5 recencyRank>> | Per item, always
-| Exchange count | integer | Total exchanges ever recorded, live and pilot, shown in the header | <<E-02.1,E-02.1 exchangeCount>> | Once per poll cycle, always
+| Session count | integer | Total sessions ever created, live and pilot, shown in the header | <<E-02.1,E-02.1 sessionCount>> | Once per poll cycle, always
+| Exchange count | integer | Total exchanges ever recorded, live and pilot, shown in the header | <<E-02.2,E-02.2 exchangeCount>> | Once per poll cycle, always
 |===
 
 *Actions.* None. The element accepts no input.
@@ -197,7 +198,7 @@ None. No element calls this one. It is a leaf that only reads.
 
 _Statement:_ This interface obtains the set of sessions currently eligible for projection by calling the backend service (xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]). Used on every polling cycle. +
 _Input:_ None. The element requests current material and does not parameterise the request, so that item selection remains a backend decision and this element carries no policy. +
-_Output:_ An ordered list of items, each carrying a session identifier, a scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency marker; alongside the list, a total exchange count (integer, <<E-02.1,E-02.1 exchangeCount>>). +
+_Output:_ An ordered list of items, each carrying a session identifier, a scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency marker; alongside the list, a total session count (integer, <<E-02.1,E-02.1 sessionCount>>) and a total exchange count (integer, <<E-02.2,E-02.2 exchangeCount>>). +
 _Error cases:_ Service unavailable. Malformed or unexpected response shape. +
 _Authoritative spec:_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] element design, xref:L3-SE-03-backend-service.adoc#TI-04[TI-04 Retrieve display material].
 
@@ -227,13 +228,14 @@ NOTE: The element derives no ordering, performs no selection, and stores nothing
 
 === [[E-02]]E-02 Wall statistics
 
-_Persistence:_ In-memory, same lifetime as <<E-01,E-01 Displayed material>> — held only to render the header stat, replaced each polling cycle. +
-_Refines:_ xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange] (a lifetime total, not the per-item cache <<E-01,E-01 Displayed material>> already is)
+_Persistence:_ In-memory, same lifetime as <<E-01,E-01 Displayed material>> — held only to render the header stats, replaced each polling cycle. +
+_Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session], xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange] (lifetime totals of each, not the per-item cache <<E-01,E-01 Displayed material>> already is)
 
 [options="header"]
 |===
 | ID | Attribute | Type | Required | Description
-| [[E-02.1]]E-02.1 | exchangeCount | integer | required | Total exchanges ever recorded (live and pilot), supplied by xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] alongside <<E-01,E-01 Displayed material>> on the same poll. Not scoped to the items shown.
+| [[E-02.1]]E-02.1 | sessionCount | integer | required | Total sessions ever created (live and pilot), supplied by xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] alongside <<E-01,E-01 Displayed material>> on the same poll. Not scoped to the sessions shown.
+| [[E-02.2]]E-02.2 | exchangeCount | integer | required | Total exchanges ever recorded (live and pilot), supplied the same way. Not scoped to the items shown.
 |===
 
 '''

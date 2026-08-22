@@ -30,7 +30,7 @@ declare(strict_types=1);
 <script>window.DISPLAY_ITEM_LIMIT = <?= (int) DISPLAY_ITEM_LIMIT ?>;</script>
 <script>window.LOCALE = <?= json_encode(resolve_locale()) ?>;</script>
 <script>window.REPLY_COUNT_LABEL = <?= json_encode(t('arena.js.replyCount')) ?>;</script>
-<script>window.EXCHANGE_COUNT_LABEL = <?= json_encode(t('arena.js.exchangeCount')) ?>;</script>
+<script>window.STATS_LABEL = <?= json_encode(t('arena.js.stats')) ?>;</script>
 <script>
 window.JUICY = {
     enabled: <?= JUICY_ENABLED ? 'true' : 'false' ?>,

@@ -654,7 +654,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 <div class="paragraph">
-<p>A header above the wall carries the logo, a live clock, and the total exchange count. The clock is rendered entirely client-side from the system clock and the resolved locale — it reflects no backend data and needs no entity or interface entry of its own. The exchange count does come from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> (<a href="#E-02">E-02 Wall statistics</a>) and is listed in <strong>Visible data</strong> below.</p>
+<p>A header above the wall carries the logo, a live clock, and a total session/exchange count. The clock is rendered entirely client-side from the system clock and the resolved locale — it reflects no backend data and needs no entity or interface entry of its own. The counts do come from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> (<a href="#E-02">E-02 Wall statistics</a>) and are listed in <strong>Visible data</strong> below.</p>
 </div>
 <div class="paragraph">
 <p><strong>Visible data</strong></p>
@@ -713,10 +713,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">Per item, always</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session count</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total sessions ever created, live and pilot, shown in the header</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-02.1">E-02.1 sessionCount</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Once per poll cycle, always</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Exchange count</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Total exchanges ever recorded, live and pilot, shown in the header</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-02.1">E-02.1 exchangeCount</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#E-02.2">E-02.2 exchangeCount</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Once per poll cycle, always</p></td>
 </tr>
 </tbody>
@@ -882,7 +889,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p><em>Statement:</em> This interface obtains the set of sessions currently eligible for projection by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used on every polling cycle.<br>
 <em>Input:</em> None. The element requests current material and does not parameterise the request, so that item selection remains a backend decision and this element carries no policy.<br>
-<em>Output:</em> An ordered list of items, each carrying a session identifier, a scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency marker; alongside the list, a total exchange count (integer, <a href="#E-02.1">E-02.1 exchangeCount</a>).<br>
+<em>Output:</em> An ordered list of items, each carrying a session identifier, a scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency marker; alongside the list, a total session count (integer, <a href="#E-02.1">E-02.1 sessionCount</a>) and a total exchange count (integer, <a href="#E-02.2">E-02.2 exchangeCount</a>).<br>
 <em>Error cases:</em> Service unavailable. Malformed or unexpected response shape.<br>
 <em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-04">TI-04 Retrieve display material</a>.</p>
 </div>
@@ -989,8 +996,8 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <div class="sect2">
 <h3 id="_e_02_wall_statistics"><a class="anchor" href="#_e_02_wall_statistics"></a>7.2. <a id="E-02"></a>E-02 Wall statistics</h3>
 <div class="paragraph">
-<p><em>Persistence:</em> In-memory, same lifetime as <a href="#E-01">E-01 Displayed material</a> — held only to render the header stat, replaced each polling cycle.<br>
-<em>Refines:</em> <a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a> (a lifetime total, not the per-item cache <a href="#E-01">E-01 Displayed material</a> already is)</p>
+<p><em>Persistence:</em> In-memory, same lifetime as <a href="#E-01">E-01 Displayed material</a> — held only to render the header stats, replaced each polling cycle.<br>
+<em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01 Sparring session</a>, <a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a> (lifetime totals of each, not the per-item cache <a href="#E-01">E-01 Displayed material</a> already is)</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1012,10 +1019,17 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-02.1"></a>E-02.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sessionCount</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total sessions ever created (live and pilot), supplied by <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> alongside <a href="#E-01">E-01 Displayed material</a> on the same poll. Not scoped to the sessions shown.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-02.2"></a>E-02.2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">exchangeCount</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Total exchanges ever recorded (live and pilot), supplied by <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> alongside <a href="#E-01">E-01 Displayed material</a> on the same poll. Not scoped to the items shown.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total exchanges ever recorded (live and pilot), supplied the same way. Not scoped to the items shown.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1156,7 +1170,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-22 17:59:34 +0200
+Last updated 2026-08-22 18:50:02 +0200
 </div>
 </div>
 </body>

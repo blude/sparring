@@ -972,8 +972,8 @@ Unlike the earlier design this superseded, the response&#8217;s condition list i
 <p><em>Call type:</em> Synchronous<br>
 <em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> (<a href="L3-SE-02-display-client.html#TO-01">TO-01 Retrieve display material</a>)<br>
 <em>Input:</em> None.<br>
-<em>Output:</em> An ordered list of items, each carrying a session identifier, scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total exchange count (integer) — every exchange ever recorded, live and pilot, not scoped to the items returned.<br>
-<em>Action:</em> Calls <a href="#TF-04">TF-04 Assemble display material</a> for the item list, and separately counts all rows in <a href="#E-02">E-02 Exchange</a> for the total exchange count — a plain total, not scoped to the sessions <a href="#TF-04">TF-04 Assemble display material</a> selects and not a selection or ordering decision, so it stays outside that function&#8217;s policy. Returns both immediately.<br>
+<em>Output:</em> An ordered list of items, each carrying a session identifier, scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total session count and a total exchange count (both integers) — every session and exchange ever recorded, live and pilot, not scoped to the items returned.<br>
+<em>Action:</em> Calls <a href="#TF-04">TF-04 Assemble display material</a> for the item list, and separately counts all rows in <a href="#E-01">E-01 Session</a> and <a href="#E-02">E-02 Exchange</a> for the two totals — plain totals, not scoped to the sessions <a href="#TF-04">TF-04 Assemble display material</a> selects and not a selection or ordering decision, so they stay outside that function&#8217;s policy. Returns all three immediately.<br>
 <em>Error cases:</em> None specific to this interface. An empty list is a valid response and occurs only when no pilot material has been imported.</p>
 </div>
 <div class="paragraph">
@@ -1483,7 +1483,7 @@ The pair is stored as one record rather than as two turn records. This follows t
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-22 18:03:50 +0200
+Last updated 2026-08-22 18:50:23 +0200
 </div>
 </div>
 </body>
