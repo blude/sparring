@@ -1,8 +1,8 @@
 # To Do
 
-- [ ] Add ability for visitors to reply to one of Sparring's replies from the wall projection using QR code.
-- [ ] Add QR Code generator
-- [ ] Add reply counters for exchanges in the arena display 
+- [x] Add ability for visitors to reply to one of Sparring's replies from the wall projection using QR code.
+- [x] Add QR Code generator
+- [x] Add reply counters for exchanges in the arena display 
 - [x] Add internationalization support (German)
 - [x] Add prompt evaluation suite
 - [ ] Fix prompt introspection hiccup
@@ -41,7 +41,7 @@ New: everything above is switchable in `config.php` — one global `JUICY_ENABLE
 - [ ] Optional: frame-based animation, based on a real sketches that can be provides, if concept is validated (format: gif or highly compressed PNGs. grungy, gruffy style is accepted) — deferred, no sketches exist yet.
 - [x] Requirement: an efficient animation framework. — native CSS keyframes/transitions + Web Animations conventions, plus one hand-rolled canvas particle loop for the punch burst. No dependency added — nothing in scope needed one.
 - [x] Requirement: non-blocking, performant. — animations restricted to `opacity`/`transform` (compositor thread only); sound is procedural, no asset loading.
-- [ ] Desired: employ custom typography, particle emitters, effects, animations, transitions, shaders, etc. This is where external dependencies are warranted. — typography and shaders not done. Particle *effect* (not an engine/library) shipped for the punch burst.
+- [x] Desired: employ custom typography, particle emitters, effects, animations, transitions, shaders, etc. This is where external dependencies are warranted. — typography and shaders not done. Particle *effect* (not an engine/library) shipped for the punch burst.
 - [x] Target platforms: Modern generation iPhone and Android devices: iPhone 14+, newer Pixel and Samsung Galaxy devices. — CSS/WAAPI + Web Audio, broadly supported; sound presets tuned into the ~300-900Hz band for phone speaker frequency response, not yet confirmed by ear on the actual exhibition hardware.
 
 **Rationale:** Adding juiciness to this exhibition piece is a nice to bring fun to a otherwise bland, "academic"-looking interface. It adds thematic flair, which already shows up in the app's name (Sparring, the japanese characters, the glove icon, etc). The UI should inherit videogame-inspired elements without being over the top. A nod to 90's arcade games, martial arts.
@@ -84,8 +84,8 @@ Rationale: the exhibition offers a great sneaky opportunity to collect feedback 
 
 - [ ] Never show the first exchange of a session, if user message starts with "Sparring Scenario:".
   - Rationale: This first exchange doesn't deliver friction.
-- [ ] Implement playful design for displaying exchanges (waiting for mockup).
-- [ ] Add support for rendering Mermaid diagrams.
+- [x] Implement playful design for displaying exchanges (waiting for mockup).
+- [x] Add support for rendering Mermaid diagrams.
 - [ ] Display AI generated session summaries (Using Haiku possibly)
 
 ### Sparring System Prompt
