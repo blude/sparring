@@ -62,7 +62,7 @@ window.SparringArenaDiff = {
     // resolution is enough on a wall no one watches second-by-second.
     function updateClock() {
         document.getElementById('clock').textContent = new Intl.DateTimeFormat(
-            window.LOCALE, { dateStyle: 'medium', timeStyle: 'short' }
+            window.LOCALE, { dateStyle: 'medium', timeStyle: 'short', hourCycle: 'h23' }
         ).format(new Date());
     }
     updateClock();
