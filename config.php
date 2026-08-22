@@ -61,66 +61,6 @@ function createLlmClient(): LlmClientInterface
 
 /*
 |--------------------------------------------------------------------------
-| Environment
-|--------------------------------------------------------------------------
-|
-| ponytail: hand-rolled .env loader, not vlucas/phpdotenv — one file,
-| KEY=VALUE lines, no quoting/interpolation support. Needed because the
-| web SAPI (Valet's php-fpm, or any prod php-fpm pool) doesn't inherit a
-| shell's `export`, unlike `php -S` run from a terminal. Real env vars
-| always win — this only fills gaps.
-|
-*/
-
-$dotenvPath = __DIR__ . '/.env';
-if (is_file($dotenvPath)) {
-    foreach (file($dotenvPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
-        $line = trim($line);
-        if ($line === '' || $line[0] === '#' || !str_contains($line, '=')) {
-            continue;
-        }
-        [$key, $value] = explode('=', $line, 2);
-        $key = trim($key);
-        if (getenv($key) === false) { // real env takes precedence over .env
-            putenv($key . '=' . trim($value));
-        }
-    }
-}
-unset($dotenvPath, $line, $key, $value);
-
-/*
-|--------------------------------------------------------------------------
-| Error handling
-|--------------------------------------------------------------------------
-|
-| QR-11: an uncaught exception on any public endpoint (missing credential,
-| unwritable store, ...) must not leak a stack trace or filesystem path.
-| Every public/api/*.php requires this file first, so one handler covers
-| all. Scoped to the web SAPI only — bin/*.php CLI scripts also require
-| this file, and an admin running reset_db.php/backup_db.php needs the
-| real exception and stack trace on stderr, not a swallowed
-| "{"status":"error"}".
-|
-*/
-
-if (PHP_SAPI !== 'cli') {
-    ini_set('display_errors', '0');
-    set_exception_handler(static function (Throwable $e): void {
-        // API endpoints are fetched by JS, not viewed — keep the JSON reply.
-        // Everything else is a page a visitor is looking at, so it gets the
-        // same HTML fallback as a 404.
-        if (str_starts_with($_SERVER['REQUEST_URI'], '/api/')) {
-            http_response_code(500);
-            header('Content-Type: application/json');
-            echo json_encode(['status' => 'error']);
-            return;
-        }
-        renderErrorPage(500, t('error.500'));
-    });
-}
-
-/*
-|--------------------------------------------------------------------------
 | Session / turn limits
 |--------------------------------------------------------------------------
 */
@@ -510,4 +450,64 @@ function webAppTags(): string
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="$themeColor">
 HTML;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Environment
+|--------------------------------------------------------------------------
+|
+| ponytail: hand-rolled .env loader, not vlucas/phpdotenv — one file,
+| KEY=VALUE lines, no quoting/interpolation support. Needed because the
+| web SAPI (Valet's php-fpm, or any prod php-fpm pool) doesn't inherit a
+| shell's `export`, unlike `php -S` run from a terminal. Real env vars
+| always win — this only fills gaps.
+|
+*/
+
+$dotenvPath = __DIR__ . '/.env';
+if (is_file($dotenvPath)) {
+    foreach (file($dotenvPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $line = trim($line);
+        if ($line === '' || $line[0] === '#' || !str_contains($line, '=')) {
+            continue;
+        }
+        [$key, $value] = explode('=', $line, 2);
+        $key = trim($key);
+        if (getenv($key) === false) { // real env takes precedence over .env
+            putenv($key . '=' . trim($value));
+        }
+    }
+}
+unset($dotenvPath, $line, $key, $value);
+
+/*
+|--------------------------------------------------------------------------
+| Error handling
+|--------------------------------------------------------------------------
+|
+| QR-11: an uncaught exception on any public endpoint (missing credential,
+| unwritable store, ...) must not leak a stack trace or filesystem path.
+| Every public/api/*.php requires this file first, so one handler covers
+| all. Scoped to the web SAPI only — bin/*.php CLI scripts also require
+| this file, and an admin running reset_db.php/backup_db.php needs the
+| real exception and stack trace on stderr, not a swallowed
+| "{"status":"error"}".
+|
+*/
+
+if (PHP_SAPI !== 'cli') {
+    ini_set('display_errors', '0');
+    set_exception_handler(static function (Throwable $e): void {
+        // API endpoints are fetched by JS, not viewed — keep the JSON reply.
+        // Everything else is a page a visitor is looking at, so it gets the
+        // same HTML fallback as a 404.
+        if (str_starts_with($_SERVER['REQUEST_URI'], '/api/')) {
+            http_response_code(500);
+            header('Content-Type: application/json');
+            echo json_encode(['status' => 'error']);
+            return;
+        }
+        renderErrorPage(500, t('error.500'));
+    });
 }
