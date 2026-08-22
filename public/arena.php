@@ -38,12 +38,12 @@ window.JUICY = {
     displayEntrance: <?= JUICY_DISPLAY_ENTRANCE ? 'true' : 'false' ?>
 };
 </script>
-<script src="<?= fasset('identity.js') ?>"></script>
-<script src="<?= fasset('juicy.js') ?>"></script>
-<script src="<?= fasset('vendor/mermaid.min.js') ?>"></script>
-<script src="<?= fasset('mermaid-render.js') ?>"></script>
-<script src="<?= fasset('vendor/qrcode-generator.min.js') ?>"></script>
-<script src="<?= fasset('qr-render.js') ?>"></script>
-<script src="<?= fasset('arena.js') ?>"></script>
+<script src="<?= fasset('identity.js') ?>" defer></script>
+<script src="<?= fasset('juicy.js') ?>" defer></script>
+<script src="<?= fasset('vendor/mermaid.min.js') ?>" defer></script>
+<script src="<?= fasset('mermaid-render.js') ?>" defer></script>
+<script src="<?= fasset('vendor/qrcode-generator.min.js') ?>" defer></script>
+<script src="<?= fasset('qr-render.js') ?>" defer></script>
+<script src="<?= fasset('arena.js') ?>" defer></script>
 </body>
 </html>

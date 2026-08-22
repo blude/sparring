@@ -125,13 +125,13 @@ window.JUICY = {
     sound: <?= JUICY_SOUND ? 'true' : 'false' ?>
 };
 </script>
-<script src="<?= fasset('identity.js') ?>"></script>
-<script src="<?= fasset('juicy.js') ?>"></script>
-<script src="<?= fasset('vendor/zzfx.min.js') ?>"></script>
-<script src="<?= fasset('sfx.js') ?>"></script>
-<script src="<?= fasset('particles.js') ?>"></script>
-<script src="<?= fasset('vendor/mermaid.min.js') ?>"></script>
-<script src="<?= fasset('mermaid-render.js') ?>"></script>
-<script src="<?= fasset('dojo.js') ?>"></script>
+<script src="<?= fasset('identity.js') ?>" defer></script>
+<script src="<?= fasset('juicy.js') ?>" defer></script>
+<script src="<?= fasset('vendor/zzfx.min.js') ?>" defer></script>
+<script src="<?= fasset('sfx.js') ?>" defer></script>
+<script src="<?= fasset('particles.js') ?>" defer></script>
+<script src="<?= fasset('vendor/mermaid.min.js') ?>" defer></script>
+<script src="<?= fasset('mermaid-render.js') ?>" defer></script>
+<script src="<?= fasset('dojo.js') ?>" defer></script>
 </body>
 </html>
