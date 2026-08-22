@@ -416,6 +416,7 @@ HTML;
 function sillyBanner(): string
 {
     return <<<HTML
+
 <!--
 
   .--.--.                                                                           
