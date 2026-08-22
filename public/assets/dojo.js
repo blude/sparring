@@ -223,6 +223,16 @@ window.SparringDojoOutcome = {
         historyEl.scrollTop = historyEl.scrollHeight;
     }
 
+    // Next "thinking" status: one call per turn, walks up
+    // window.STRINGS.dojo.thinkingStatuses and wraps back to the start —
+    // no timer, the message just changes turn to turn.
+    var thinkingStatusIndex = -1;
+    function nextThinkingStatus() {
+        var statuses = window.STRINGS.dojo.thinkingStatuses;
+        thinkingStatusIndex = (thinkingStatusIndex + 1) % statuses.length;
+        return statuses[thinkingStatusIndex];
+    }
+
     // Removes the optimistically-placed visitor turn (see submitContribution)
     // when the server outcome isn't 'ok' — history stays a mirror of
     // confirmed exchanges, never a submission that didn't land.
@@ -486,7 +496,7 @@ window.SparringDojoOutcome = {
         fieldEl.value = ''; // cached in `text`/submittedText below, restored on failure
         sessionStorage.removeItem(DRAFT_KEY); // sent — draft below restores it again on failure
         updateCharRemaining();
-        setHistoryStatus(window.STRINGS.dojo.thinking, true); // in-progress state, shown synchronously (QR-01: within 300ms)
+        setHistoryStatus(nextThinkingStatus(), true); // in-progress state, shown synchronously (QR-01: within 300ms)
 
         var controller = new AbortController();
         var timeout = setTimeout(function () { controller.abort(); }, WAIT_MS);

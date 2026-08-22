@@ -64,7 +64,13 @@ return [
     'dojo.js.sessionComplete' => 'Diese Sitzung hat ihr Limit erreicht — danke fürs Sparring.',
     'dojo.js.installationUnavailable' => 'Die Installation nimmt gerade keine Sitzungen an — lade die Seite neu, um es erneut zu versuchen.',
     'dojo.js.consentFailed' => 'Diese Auswahl konnte nicht gespeichert werden — versuch es erneut.',
-    'dojo.js.thinking' => 'Sparring läuft…',
+    'dojo.js.thinking.0' => 'Sparring läuft…',
+    'dojo.js.thinking.1' => 'Im Ring…',
+    'dojo.js.thinking.2' => 'Handschuhe schnüren…',
+    'dojo.js.thinking.3' => 'Schlagabtausch…',
+    'dojo.js.thinking.4' => 'Beäugt dich…',
+    'dojo.js.thinking.5' => 'Umkreist…',
+    'dojo.js.thinking.6' => 'Sucht eine Lücke…',
     'dojo.js.charsRemaining' => 'Noch {n} Zeichen', // German word order: count doesn't lead the sentence like the English "N characters left"
 
     // --- arena.php (SE-02) ---

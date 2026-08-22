@@ -116,7 +116,7 @@ window.STRINGS = {
         sessionComplete: <?= json_encode(t('dojo.js.sessionComplete')) ?>,
         installationUnavailable: <?= json_encode(t('dojo.js.installationUnavailable')) ?>,
         consentFailed: <?= json_encode(t('dojo.js.consentFailed')) ?>,
-        thinking: <?= json_encode(t('dojo.js.thinking')) ?>,
+        thinkingStatuses: <?= json_encode(array_map(fn($i) => t("dojo.js.thinking.$i"), range(0, 6))) ?>,
         charsRemaining: <?= json_encode(t('dojo.js.charsRemaining')) ?>,
         replyQuoteLabel: <?= json_encode(t('dojo.replyQuote.label')) ?>
     }

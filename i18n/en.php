@@ -71,7 +71,16 @@ return [
     'dojo.js.sessionComplete' => 'This session has reached its limit — thanks for sparring.',
     'dojo.js.installationUnavailable' => 'The installation is not accepting sessions right now — reload to retry.',
     'dojo.js.consentFailed' => 'Could not record that choice — try again.',
-    'dojo.js.thinking' => 'Sparring in progress…',
+    // Cycled while waiting for a response (dojo.js) — walks up the list on
+    // an interval, wrapping back to index 0. Order matters; keep in sync
+    // with i18n/de.php's dojo.js.thinking.* set.
+    'dojo.js.thinking.0' => 'Sparring in progress…',
+    'dojo.js.thinking.1' => 'In the ring…',
+    'dojo.js.thinking.2' => 'Warming up the gloves…',
+    'dojo.js.thinking.3' => 'Trading blows…',
+    'dojo.js.thinking.4' => 'Sizing you up…',
+    'dojo.js.thinking.5' => 'Circling…',
+    'dojo.js.thinking.6' => 'Finding an opening…',
     'dojo.js.charsRemaining' => '{n} characters left',
 
     // --- arena.php (SE-02) ---
