@@ -150,7 +150,7 @@ body {
 }
 
 .exchange .contribution {
-    align-self: flex-start;
+    align-self: flex-end;
     background: var(--accent-bubble-bg);
     color: var(--accent-bubble-text);
     /* QR-reply flow: a replying visitor's contribution is stored as
@@ -162,7 +162,7 @@ body {
 
 .exchange .response {
     position: relative; /* anchors .reply-count's bottom-left pill to this bubble */
-    align-self: flex-end;
+    align-self: flex-start;
     background: var(--response-bg);
     color: var(--response-text);
 }
@@ -188,10 +188,10 @@ body {
    in space that was already going unused instead of pushing the card taller. */
 .exchange .reply-qr {
     position: absolute;
-    top: 0;
-    right: 0.85rem;
-    transform: translateY(-90%);
-    width: 4rem;
+    bottom: 0;
+    right: -0.25rem;
+    transform: translateX(100%);
+    width: 3rem;
 }
 
 .exchange .reply-qr a {
