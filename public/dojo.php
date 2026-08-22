@@ -131,10 +131,10 @@ window.JUICY = {
 </script>
 <script src="<?= fasset('identity.js') ?>"></script>
 <script src="<?= fasset('juicy.js') ?>"></script>
-<script src="<?= fasset('zzfx.min.js') ?>"></script>
+<script src="<?= fasset('vendor/zzfx.min.js') ?>"></script>
 <script src="<?= fasset('sfx.js') ?>"></script>
 <script src="<?= fasset('particles.js') ?>"></script>
-<script src="<?= fasset('mermaid.min.js') ?>"></script>
+<script src="<?= fasset('vendor/mermaid.min.js') ?>"></script>
 <script src="<?= fasset('mermaid-render.js') ?>"></script>
 <script src="<?= fasset('dojo.js') ?>"></script>
 </body>

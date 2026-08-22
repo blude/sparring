@@ -19,7 +19,7 @@ pre{background:#111;color:#f88;padding:0.75rem;border-radius:0.5rem;overflow-x:a
 
 <p>Previews a <a href="https://killedbyapixel.github.io/ZzFX/" target="_blank" rel="noopener">ZzFX</a>
 parameter array through this app's actual vendored engine
-(<code>public/assets/zzfx.min.js</code>). Not linked from the app — dev
+(<code>public/assets/vendor/zzfx.min.js</code>). Not linked from the app — dev
 tool only. Design a sound in the official Sound Designer above, paste its
 exported array below to confirm it sounds right here, then copy it into
 <code>public/assets/sfx.js</code>'s <code>PRESETS</code>.</p>
@@ -75,7 +75,7 @@ or a chord (multiple bracketed notes on one line, separated by <code>;</code>, p
 </div>
 
 <script src="assets/juicy.js"></script>
-<script src="assets/zzfx.min.js"></script>
+<script src="assets/vendor/zzfx.min.js"></script>
 <script src="assets/sfx.js"></script>
 <script>
 (function () {

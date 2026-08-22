@@ -1,5 +1,5 @@
 /*
- * Thin wrapper around the vendored qrcode-generator (public/assets/
+ * Thin wrapper around the vendored qrcode-generator (public/assets/vendor/
  * qrcode-generator.js — kazuhikoarase, MIT, unmodified) for arena.js (SE-02).
  * Builds the <svg> itself via createElementNS + one <rect> per dark module —
  * no innerHTML, same "no path renders untrusted markup" discipline

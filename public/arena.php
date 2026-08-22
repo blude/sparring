@@ -39,9 +39,9 @@ window.JUICY = {
 </script>
 <script src="<?= fasset('identity.js') ?>"></script>
 <script src="<?= fasset('juicy.js') ?>"></script>
-<script src="<?= fasset('mermaid.min.js') ?>"></script>
+<script src="<?= fasset('vendor/mermaid.min.js') ?>"></script>
 <script src="<?= fasset('mermaid-render.js') ?>"></script>
-<script src="<?= fasset('qrcode-generator.js') ?>"></script>
+<script src="<?= fasset('vendor/qrcode-generator.js') ?>"></script>
 <script src="<?= fasset('qr-render.js') ?>"></script>
 <script src="<?= fasset('arena.js') ?>"></script>
 </body>
