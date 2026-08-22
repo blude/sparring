@@ -4,6 +4,10 @@ Generated from git history. Grouped by commit date, newest first.
 
 ## 2026-08-22
 
+- `2408255` feat(dojo): rotate thinking-status message per turn
+- `b913544` fix(i18n): unify thinking status message
+- `6e39d8e` chore: bump version to 0.14.0
+- `ec8e9d6` docs: update CHANGELOG through a867370
 - `a867370` fix(css): left align locale swicher on content pages
 - `5533ed3` perf(js): minify qrcode generator
 - `fa51fc4` refactor(arena): merge window-var scripts into one <script> tag
