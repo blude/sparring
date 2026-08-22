@@ -33,7 +33,7 @@ footer a { color: #666; }
     border: 1px solid #ddd;
     border-radius: 999px;
     padding: 0.125rem;
-    margin: 0 auto 1rem;
+    margin: 0 0 1rem;
     background: #f0f0f0;
 }
 .locale-switcher a, .locale-switcher span { color: #888; text-decoration: none; padding: 0.5rem 0.75rem; }
