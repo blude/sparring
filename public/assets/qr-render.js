@@ -1,6 +1,6 @@
 /*
  * Thin wrapper around the vendored qrcode-generator (public/assets/vendor/
- * qrcode-generator.js — kazuhikoarase, MIT, unmodified) for arena.js (SE-02).
+ * qrcode-generator.min.js — kazuhikoarase, MIT, unmodified) for arena.js (SE-02).
  * Builds the <svg> itself via createElementNS + one <rect> per dark module —
  * no innerHTML, same "no path renders untrusted markup" discipline
  * mermaid-render.js follows for QR-05 (the target text here is always a
