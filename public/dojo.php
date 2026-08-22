@@ -16,12 +16,7 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
 <title><?= t('dojo.title') ?></title>
 <?= ogTags('/dojo', t('dojo.title'), t('dojo.ogDescription')) ?>
 <link rel="stylesheet" href="<?= fasset('dojo.css') ?>">
-<link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
-<link rel="manifest" href="/app.webmanifest">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#d32f2f">
+<?= webAppTags() ?>
 </head>
 <body>
 <main>

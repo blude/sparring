@@ -438,6 +438,30 @@ HTML;
 
 /*
 |--------------------------------------------------------------------------
+| Web app tags (manifest, apple-touch-icon, theme-color)
+|--------------------------------------------------------------------------
+|
+| Shared across all pages so one place to change the manifest or icon.
+|
+*/
+function webAppTags(): string
+{
+    $favicon = fasset('favicon.ico');
+    $manifest = '/app.webmanifest';
+    $appleIcon = '/apple-touch-icon.png';
+    $themeColor = '#d32f2f';
+    return <<<HTML
+<link rel="icon" type="image/x-icon" href="$favicon">
+<link rel="manifest" href="$manifest">
+<link rel="apple-touch-icon" href="$appleIcon">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="$themeColor">
+HTML;
+}
+
+/*
+|--------------------------------------------------------------------------
 | LLM (PE-01)
 |--------------------------------------------------------------------------
 |
