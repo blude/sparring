@@ -148,4 +148,4 @@ footer a { color: #666; }
     background: #f0f0f0;
 }
 .locale-switcher a, .locale-switcher span { color: #888; text-decoration: none; padding: 0.5rem 0.75rem; }
-.locale-switcher .locale-current { color: #222; background: #fff; border-radius: 999px; font-weight: 700; }
+.locale-switcher .locale-current { color: #222; background: #fff; border-radius: 999px; font-weight: 700; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); }
