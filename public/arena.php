@@ -25,13 +25,13 @@ declare(strict_types=1);
   </div>
 </div>
 <main id="wall" aria-live="off"></main>
-<script>window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;</script>
-<script>window.DISPLAY_COLUMNS = <?= (int) DISPLAY_COLUMNS ?>;</script>
-<script>window.DISPLAY_ITEM_LIMIT = <?= (int) DISPLAY_ITEM_LIMIT ?>;</script>
-<script>window.LOCALE = <?= json_encode(resolve_locale()) ?>;</script>
-<script>window.REPLY_COUNT_LABEL = <?= json_encode(t('arena.js.replyCount')) ?>;</script>
-<script>window.STATS_LABEL = <?= json_encode(t('arena.js.stats')) ?>;</script>
 <script>
+window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;
+window.DISPLAY_COLUMNS = <?= (int) DISPLAY_COLUMNS ?>;
+window.DISPLAY_ITEM_LIMIT = <?= (int) DISPLAY_ITEM_LIMIT ?>;
+window.LOCALE = <?= json_encode(resolve_locale()) ?>;
+window.REPLY_COUNT_LABEL = <?= json_encode(t('arena.js.replyCount')) ?>;
+window.STATS_LABEL = <?= json_encode(t('arena.js.stats')) ?>;
 window.JUICY = {
     enabled: <?= JUICY_ENABLED ? 'true' : 'false' ?>,
     displayEntrance: <?= JUICY_DISPLAY_ENTRANCE ? 'true' : 'false' ?>
