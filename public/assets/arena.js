@@ -170,9 +170,16 @@ window.SparringArenaDiff = {
         visitorName.className = 'visitor-name';
         visitorName.textContent = window.SparringIdentity.alias(item.sessionId); // write-once: invariant per sessionId
 
-        var contribution = document.createElement('p');
+        // div, not <p> — a <p> can't validly contain visitorName/contributionText's
+        // block children (the browser would silently close the <p> early).
+        // contribution-text mirrors response-text: its own child so a plain
+        // textContent update (below) never wipes the nested visitor-name.
+        var contribution = document.createElement('div');
         contribution.className = 'contribution';
-        contribution.textContent = trim(item.visitorContribution, TRIM_CHARS);
+        var contributionText = document.createElement('div');
+        contributionText.className = 'contribution-text';
+        contributionText.textContent = trim(item.visitorContribution, TRIM_CHARS);
+        contribution.append(visitorName, contributionText);
 
         var response = document.createElement('div');
         response.className = 'response';
@@ -199,7 +206,7 @@ window.SparringArenaDiff = {
         response.append(responseText, replyQr, replyCount);
         renderReply(el, replyQr, replyCount, item);
 
-        el.append(scenario, visitorName, contribution, response);
+        el.append(scenario, contribution, response);
 
         if (DEBUG) {
             var debugTag = document.createElement('span');
@@ -226,7 +233,7 @@ window.SparringArenaDiff = {
         var el = wall.querySelector('[data-session-id="' + item.sessionId + '"]');
         if (!el) { addItem(item); return; }
         el.querySelector('.scenario').textContent = item.scenario;
-        el.querySelector('.contribution').textContent = trim(item.visitorContribution, TRIM_CHARS);
+        el.querySelector('.contribution-text').textContent = trim(item.visitorContribution, TRIM_CHARS);
         renderResponse(el.querySelector('.response-text'), item.sparringResponse);
         renderReply(el, el.querySelector('.reply-qr'), el.querySelector('.reply-count'), item);
         if (window.isJuicyOn('displayEntrance')) {
