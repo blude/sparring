@@ -264,11 +264,20 @@ function localeSwitcher(): string
     return '<nav class="locale-switcher" aria-label="Language">' . implode(' ', $links) . '</nav>';
 }
 
-// Header/footer for the content pages (philosophy/privacy/terms/credits),
-// which otherwise carry no branding or way back to "/". Byte-identical
-// across all four, so one shared helper — same pattern as localeSwitcher()
-// above — rather than duplicating markup in each page. Styled inline since
-// each page's own <style> block is small and doesn't need extending for this.
+/*
+|--------------------------------------------------------------------------
+| Page chrome (content pages)
+|--------------------------------------------------------------------------
+|
+| Header/footer for the content pages (philosophy/privacy/terms/credits),
+| which otherwise carry no branding or way back to "/". Byte-identical
+| across all four, so one shared helper per element — same pattern as
+| localeSwitcher()/ogTags() above — rather than duplicating markup in each
+| page. Styled inline since each page's own <style> block is small and
+| doesn't need extending for this.
+|
+*/
+
 function pageHeader(): string
 {
     $logo = fasset('img/logo-sparring-v2b.png'); // same logo image as start.php
