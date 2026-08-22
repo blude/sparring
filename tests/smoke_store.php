@@ -94,7 +94,9 @@ assert($exchanges[0]['position'] === 1 && $exchanges[1]['position'] === 2);
 $latest = $store->getLatestExchange($session['id']);
 assert($latest['position'] === 2);
 
-assert($store->countExchanges() === 2); // arena header stat: lifetime total, fresh db so this is exact
+// arena header stat: lifetime total. Derived rather than a literal count, so an
+// appendExchange added earlier in this file doesn't silently break this line.
+assert($store->countExchanges() === count($store->getExchanges($session['id'])));
 
 /*
 |--------------------------------------------------------------------------
