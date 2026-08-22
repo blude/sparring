@@ -61,9 +61,17 @@ window.SparringArenaDiff = {
     // window.LOCALE (set in arena.php, otherwise unread by any JS). Minute
     // resolution is enough on a wall no one watches second-by-second.
     function updateClock() {
-        document.getElementById('clock').textContent = new Intl.DateTimeFormat(
-            window.LOCALE, { dateStyle: 'medium', timeStyle: 'short', hourCycle: 'h23' }
-        ).format(new Date());
+        // dateStyle/timeStyle presets can't be hand-tuned, and German's
+        // 'short' month otherwise renders with a trailing period ("22. Aug.
+        // 2026") — formatToParts lets us drop just that one, keeping the
+        // day's own period (which German date style does want).
+        var parts = new Intl.DateTimeFormat(window.LOCALE, {
+            day: 'numeric', month: 'short', year: 'numeric',
+            hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+        }).formatToParts(new Date());
+        document.getElementById('clock').textContent = parts
+            .map(function (p) { return p.type === 'month' ? p.value.replace(/\.$/, '') : p.value; })
+            .join('');
     }
     updateClock();
     setInterval(updateClock, 30000);
