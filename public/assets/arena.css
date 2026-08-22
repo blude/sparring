@@ -86,7 +86,7 @@ body {
     flex: 0 0 auto;
     display: flex;
     justify-content: space-between;
-    align-items: flex-middle;
+    align-items: flex-start;
     padding: 2rem 2rem 0;
 }
 
