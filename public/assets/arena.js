@@ -175,7 +175,14 @@ window.SparringArenaDiff = {
 
         var response = document.createElement('div');
         response.className = 'response';
-        renderResponse(response, item.sparringResponse);
+        // Actual rendered content lives in its own child, never touched
+        // directly — renderResponse/mermaid's renderInto both wipe whatever
+        // container they're given, so the QR/reply-count badges below live
+        // as .response's *siblings* to that child, not inside it (they'd
+        // get erased on every re-render otherwise).
+        var responseText = document.createElement('div');
+        responseText.className = 'response-text';
+        renderResponse(responseText, item.sparringResponse);
 
         var replyQr = document.createElement('div');
         replyQr.className = 'reply-qr';
@@ -186,10 +193,12 @@ window.SparringArenaDiff = {
         var replyCountNumber = document.createElement('span');
         replyCountNumber.className = 'reply-count-number';
         replyCount.append(replyCountIcon, replyCountNumber);
-        response.appendChild(replyCount); // nested so the pill's absolute position anchors to the bubble, not the card
+        // Both badges nested in .response (not responseText) so their
+        // absolute position anchors to the bubble, not the card.
+        response.append(responseText, replyQr, replyCount);
         renderReply(el, replyQr, replyCount, item);
 
-        el.append(scenario, visitorName, contribution, response, replyQr);
+        el.append(scenario, visitorName, contribution, response);
 
         if (DEBUG) {
             var debugTag = document.createElement('span');
@@ -217,7 +226,7 @@ window.SparringArenaDiff = {
         if (!el) { addItem(item); return; }
         el.querySelector('.scenario').textContent = item.scenario;
         el.querySelector('.contribution').textContent = trim(item.visitorContribution, TRIM_CHARS);
-        renderResponse(el.querySelector('.response'), item.sparringResponse);
+        renderResponse(el.querySelector('.response-text'), item.sparringResponse);
         renderReply(el, el.querySelector('.reply-qr'), el.querySelector('.reply-count'), item);
         if (window.isJuicyOn('displayEntrance')) {
             el.classList.remove('updating');

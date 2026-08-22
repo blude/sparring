@@ -181,12 +181,17 @@ body {
     margin-bottom: 0.15rem;
 }
 
-/* QR-reply flow: sits under the AI response, same alignment (.response is
-   align-self: flex-end above) since the QR belongs to that message. */
+/* QR-reply flow: corner badge, top-right of the response bubble it belongs
+   to (mirrors .reply-count's bottom-left badge below). Out of flow so it no
+   longer adds its own row under the bubble — the contribution bubble above
+   already leaves this space empty (max-width: 80%), so the badge now sits
+   in space that was already going unused instead of pushing the card taller. */
 .exchange .reply-qr {
-    align-self: flex-end;
-    width: 4.5rem;
-    margin: 0.3rem 0.85rem 0.1rem;
+    position: absolute;
+    top: 0;
+    right: 0.4rem;
+    transform: translateY(-50%);
+    width: 3.0rem;
 }
 
 .exchange .reply-qr a {
