@@ -56,6 +56,17 @@ window.SparringArenaDiff = {
     var columns = buildColumns();
     var displayed = new Map(); // sessionId -> item, mirrors E-01 of this element
 
+    // Header clock: date + time, client-rendered from the system clock and
+    // window.LOCALE (set in arena.php, otherwise unread by any JS). Minute
+    // resolution is enough on a wall no one watches second-by-second.
+    function updateClock() {
+        document.getElementById('clock').textContent = new Intl.DateTimeFormat(
+            window.LOCALE, { dateStyle: 'medium', timeStyle: 'short' }
+        ).format(new Date());
+    }
+    updateClock();
+    setInterval(updateClock, 30000);
+
     function buildColumns() {
         var cols = [];
         for (var i = 0; i < COLUMN_COUNT; i++) {
@@ -131,6 +142,10 @@ window.SparringArenaDiff = {
             })
             .then(function (data) {
                 if (!data || !Array.isArray(data.items)) return; // FS-01-2: discard malformed shape entirely
+                if (typeof data.exchangeCount === 'number') {
+                    document.getElementById('exchange-count').textContent =
+                        window.EXCHANGE_COUNT_LABEL.replace('{n}', String(data.exchangeCount));
+                }
                 reconcile(data.items);
             })
             .catch(function () {

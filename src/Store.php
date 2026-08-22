@@ -292,6 +292,12 @@ final class Store
         return $row === false ? null : $this->hydrateExchange($row);
     }
 
+    /** Total exchanges ever recorded, live + pilot (arena header stat). */
+    public function countExchanges(): int
+    {
+        return (int) $this->pdo->query('SELECT COUNT(*) FROM exchanges')->fetchColumn();
+    }
+
     /**
      * A quotable exchange for the QR-reply flow: only resolves if its session is
      * displayable (privacy — an exchange whose visitor never consented to

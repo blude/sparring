@@ -815,6 +815,9 @@ A second distinction the instruction must also get right, found in testing: stat
 <li>
 <p><strong><a id="FS-04-5"></a>FS-04-5</strong> <em>(Data-operation)</em> Build each item from the session&#8217;s scenario (<a href="#E-01.5">E-01.5 scenario</a>), the exchange pair, the origin (<a href="#E-01.4">E-01.4 origin</a>), and a recency position. Return the ordered list.</p>
 </li>
+<li>
+<p><strong><a id="FS-04-6"></a>FS-04-6</strong> <em>(Entity-access)</em> Separately, count all rows in <a href="#E-02">E-02 Exchange</a> — a plain total, not scoped to the sessions selected above and not a selection or ordering decision. Returned alongside the item list, for <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a>'s header stat.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -972,7 +975,7 @@ Unlike the earlier design this superseded, the response&#8217;s condition list i
 <p><em>Call type:</em> Synchronous<br>
 <em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> (<a href="L3-SE-02-display-client.html#TO-01">TO-01 Retrieve display material</a>)<br>
 <em>Input:</em> None.<br>
-<em>Output:</em> An ordered list of items, each carrying a session identifier, scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency position.<br>
+<em>Output:</em> An ordered list of items, each carrying a session identifier, scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total exchange count (integer) — every exchange ever recorded, live and pilot, not scoped to the items returned.<br>
 <em>Action:</em> Calls <a href="#TF-04">TF-04 Assemble display material</a> and returns its result. Returns immediately.<br>
 <em>Error cases:</em> None specific to this interface. An empty list is a valid response and occurs only when no pilot material has been imported.</p>
 </div>
@@ -1483,7 +1486,7 @@ The pair is stored as one record rather than as two turn records. This follows t
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 22:29:21 +0200
+Last updated 2026-08-22 17:59:00 +0200
 </div>
 </div>
 </body>

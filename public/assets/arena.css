@@ -80,13 +80,18 @@ body {
     background: url('img/arena-gradient-top.webp') no-repeat center / cover;
 }
 
-#logo {
+.header {
     position: relative; /* stack above .gradient-top (positioned elements paint last) */
     z-index: 1;
     flex: 0 0 auto;
-    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     padding: 2rem 2rem 0;
-    text-align: left;
+}
+
+#logo {
+    margin: 0;
 }
 
 /* real "Sparring" text stays in the DOM for a11y/SEO, visually replaced by
@@ -99,6 +104,16 @@ body {
     overflow: hidden;
     text-indent: -9999px;
     background: url('img/logo-sparring-v2b.png') no-repeat center / contain;
+}
+
+/* header stats: live clock + running exchange total, no icon fits either
+   (unlike .reply-count's glove) so it's plain right-aligned text */
+#stats {
+    margin: 0;
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--scenario-color);
+    line-height: 1.4;
 }
 
 #wall {

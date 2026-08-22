@@ -77,6 +77,7 @@ return [
     // --- arena.php (SE-02) ---
     'arena.title' => 'Arena — Sparring',
     'arena.js.replyCount' => '{n} replies',
+    'arena.js.exchangeCount' => '{n} exchanges',
 
     // --- credits.php ---
     'credits.title' => 'Credits — Sparring',

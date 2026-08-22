@@ -24,4 +24,5 @@ $sparring = new Sparring($store);
 
 echo json_encode([
     'items' => $sparring->assembleDisplayMaterial(),
+    'exchangeCount' => $store->countExchanges(),
 ], JSON_UNESCAPED_SLASHES);

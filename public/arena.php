@@ -17,13 +17,20 @@ declare(strict_types=1);
 </head>
 <body>
 <div class="gradient-top" aria-hidden="true"></div>
-<div id="logo"><h1 class="wordmark">Sparring</h1></div>
+<div class="header">
+  <div id="logo"><h1 class="wordmark">Sparring</h1></div>
+  <div id="stats">
+    <time id="clock"></time>
+    <div id="exchange-count"></div>
+  </div>
+</div>
 <main id="wall" aria-live="off"></main>
 <script>window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;</script>
 <script>window.DISPLAY_COLUMNS = <?= (int) DISPLAY_COLUMNS ?>;</script>
 <script>window.DISPLAY_ITEM_LIMIT = <?= (int) DISPLAY_ITEM_LIMIT ?>;</script>
 <script>window.LOCALE = <?= json_encode(resolve_locale()) ?>;</script>
 <script>window.REPLY_COUNT_LABEL = <?= json_encode(t('arena.js.replyCount')) ?>;</script>
+<script>window.EXCHANGE_COUNT_LABEL = <?= json_encode(t('arena.js.exchangeCount')) ?>;</script>
 <script>
 window.JUICY = {
     enabled: <?= JUICY_ENABLED ? 'true' : 'false' ?>,
