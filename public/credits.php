@@ -17,6 +17,7 @@
 <p><?= t('credits.duration.opening') ?></p>
 <p><?= t('credits.duration.dates') ?></p>
 <p><?= t('credits.duration.hours') ?></p>
+<p><?= t('credits.duration.special') ?></p>
 <h2><?= t('credits.author.heading') ?></h2>
 <p><?= t('credits.author.bio') ?></p>
 <p><?= t('credits.author.contact') ?></p>
