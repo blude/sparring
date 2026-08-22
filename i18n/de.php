@@ -64,7 +64,7 @@ return [
     'dojo.js.sessionComplete' => 'Diese Sitzung hat ihr Limit erreicht — danke fürs Sparring.',
     'dojo.js.installationUnavailable' => 'Die Installation nimmt gerade keine Sitzungen an — lade die Seite neu, um es erneut zu versuchen.',
     'dojo.js.consentFailed' => 'Diese Auswahl konnte nicht gespeichert werden — versuch es erneut.',
-    'dojo.js.thinking' => 'Sparring denkt nach…',
+    'dojo.js.thinking' => 'Sparring läuft…',
     'dojo.js.charsRemaining' => 'Noch {n} Zeichen', // German word order: count doesn't lead the sentence like the English "N characters left"
 
     // --- arena.php (SE-02) ---

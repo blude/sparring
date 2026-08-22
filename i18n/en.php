@@ -71,7 +71,7 @@ return [
     'dojo.js.sessionComplete' => 'This session has reached its limit — thanks for sparring.',
     'dojo.js.installationUnavailable' => 'The installation is not accepting sessions right now — reload to retry.',
     'dojo.js.consentFailed' => 'Could not record that choice — try again.',
-    'dojo.js.thinking' => 'Sparring is thinking…',
+    'dojo.js.thinking' => 'Sparring in progress…',
     'dojo.js.charsRemaining' => '{n} characters left',
 
     // --- arena.php (SE-02) ---
