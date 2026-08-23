@@ -73,6 +73,7 @@ const TITLE_MAX_CHARS = 38;     // header title generated from the first contrib
 // Outside the served docroot on the real host; project-root-relative here.
 const STORE_DB_PATH = __DIR__ . '/data/store.db';
 const PILOT_DATA_DIR = __DIR__ . '/data/pilot';
+const CURRICULUM_DATA_DIR = __DIR__ . '/data/curriculum'; // gitignored — poor man's RAG source markdown, bin/import_curriculum.php
 
 // --- Juiciness toggles (TODO.md JUICYNESS) ---
 // Global kill switch plus one per effect, each independently flippable —

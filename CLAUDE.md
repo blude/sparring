@@ -19,7 +19,8 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   helpers), `php tests/smoke_sparring.php` (`Sparring::processTurn`'s gates +
   `sessionStateFor`/`isExpired`), `php tests/smoke_domain.php`
   (`derive_scenario_statement`, `AbstractLlmClient::stripDelimiterTag`,
-  `bin/import_pilot.php::validate_transcript`). JS (Node only to run the
+  `bin/import_pilot.php::validate_transcript`,
+  `bin/import_curriculum.php::parse_curriculum_file`). JS (Node only to run the
   check, not a project dependency): `node tests/smoke_juicy.js`
   (`public/assets/juicy.js`), `node tests/smoke_mermaid.js` (fence-detection
   in `public/assets/mermaid-render.js`), `node tests/smoke_identity.js`

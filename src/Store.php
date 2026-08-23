@@ -78,6 +78,19 @@ final class Store
         SQL);
 
         $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_sessions_display ON sessions(origin, displayable, last_active_at)');
+
+        // --- Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php) ---
+        // Requires FTS5, compiled into the sqlite3 lib PHP links against — verified
+        // present in this environment; if a deploy target lacks it, this throws at
+        // Store construction rather than silently degrading search.
+        $this->pdo->exec(<<<SQL
+            CREATE VIRTUAL TABLE IF NOT EXISTS curriculum_chunks USING fts5(
+                title,
+                body,
+                path UNINDEXED,
+                updated_at UNINDEXED
+            )
+        SQL);
     }
 
     // --- Sessions (E-01) ---
@@ -336,6 +349,107 @@ final class Store
         );
         $stmt->execute(['h' => $originHash]);
         return ['allowed' => true, 'remaining' => $maxRequests - ((int) $row['request_count'] + 1)];
+    }
+
+    // --- Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php) ---
+    // Disk-derived cache, not visitor data: deliberately kept out of getCounts()/
+    // resetAll() (scoped to sessions/exchanges/rate-limit windows) so an
+    // exhibition-session reset never wipes the curriculum corpus.
+
+    /**
+     * Replaces the entire curriculum_chunks table with $chunks in one transaction —
+     * the whole-corpus rebuild bin/import_curriculum.php does on every run. Full
+     * rebuild rather than incremental upsert: makes a file removed from disk simply
+     * absent from $chunks, so its chunk is gone after commit with no separate
+     * orphan-sweep needed. $chunks: list of ['title' => string, 'body' => string,
+     * 'path' => string]. Returns ['before' => int, 'after' => int] for the
+     * importer's summary line.
+     */
+    public function replaceCurriculumChunks(array $chunks): array
+    {
+        $before = $this->getCurriculumChunkCount();
+        $now = self::now();
+
+        $this->pdo->beginTransaction();
+        try {
+            $this->pdo->exec('DELETE FROM curriculum_chunks');
+            $stmt = $this->pdo->prepare(
+                'INSERT INTO curriculum_chunks (title, body, path, updated_at) VALUES (:title, :body, :path, :now)'
+            );
+            foreach ($chunks as $chunk) {
+                $stmt->execute([
+                    'title' => $chunk['title'],
+                    'body' => $chunk['body'],
+                    'path' => $chunk['path'],
+                    'now' => $now,
+                ]);
+            }
+            $this->pdo->commit();
+        } catch (Throwable $e) {
+            $this->pdo->rollBack();
+            throw $e;
+        }
+
+        return ['before' => $before, 'after' => count($chunks)];
+    }
+
+    /** Row count, used by the importer's summary line and by tests. */
+    public function getCurriculumChunkCount(): int
+    {
+        return (int) $this->pdo->query('SELECT COUNT(*) FROM curriculum_chunks')->fetchColumn();
+    }
+
+    /**
+     * Keyword search over curriculum_chunks, ranked by BM25 (more negative = more
+     * relevant — ascending sort is correct, don't flip it). Returns [] for an
+     * empty or entirely-punctuation query rather than throwing.
+     */
+    public function searchCurriculum(string $query, int $limit = 5): array
+    {
+        $sanitized = self::sanitizeFtsQuery($query);
+        if ($sanitized === null) {
+            return [];
+        }
+
+        $stmt = $this->pdo->prepare(
+            "SELECT path, title,
+                    snippet(curriculum_chunks, 1, '', '', '…', 12) AS snippet,
+                    bm25(curriculum_chunks) AS score
+             FROM curriculum_chunks
+             WHERE curriculum_chunks MATCH :q
+             ORDER BY score
+             LIMIT :limit"
+        );
+        $stmt->bindValue('q', $sanitized, PDO::PARAM_STR);
+        $stmt->bindValue('limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return array_map(
+            static fn(array $row): array => [
+                'path' => $row['path'],
+                'title' => $row['title'],
+                'snippet' => $row['snippet'],
+                'score' => (float) $row['score'],
+            ],
+            $stmt->fetchAll(PDO::FETCH_ASSOC)
+        );
+    }
+
+    /**
+     * FTS5's query syntax (quoting, column filters, NEAR, leading '-') throws a
+     * PDOException on malformed input — a real risk here since the eventual
+     * caller is free-text a visitor typed, not an operator-authored query.
+     * Reduces to a flat OR-of-tokens MATCH expression instead: favors recall
+     * over precision on a small corpus, where a strict multi-word AND (FTS5's
+     * default) could too easily return nothing. Returns null if $raw has no
+     * word/number tokens at all (caller then returns [] without querying).
+     */
+    private static function sanitizeFtsQuery(string $raw): ?string
+    {
+        if (!preg_match_all('/[\p{L}\p{N}]+/u', $raw, $matches)) {
+            return null;
+        }
+        return implode(' OR ', $matches[0]);
     }
 
     // --- Maintenance (bin/reset_db.php, bin/backup_db.php) ---

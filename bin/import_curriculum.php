@@ -1,0 +1,145 @@
+<?php
+declare(strict_types=1);
+
+/**
+ * "Poor man's RAG" ingestion (step 1 of 2 — see prompts/sparring.md's
+ * <domain_grounding> for the prose this is meant to eventually ground).
+ * Syncs data/curriculum/*.md into the curriculum_chunks FTS5 table so
+ * Store::searchCurriculum() can keyword-search it. Run on the host, never
+ * web-routed — this script has no HTTP entry point.
+ *
+ * Rebuilds the ENTIRE curriculum_chunks table on every run (delete + reinsert
+ * in one transaction) rather than diffing against what's already stored —
+ * this is what makes editing or deleting a source file converge correctly:
+ * a file removed from data/curriculum/ is simply absent from this run's
+ * insert set, so its chunk is gone after commit with no separate cleanup
+ * pass needed. No spec/ entry exists for this yet (no visitor-visible
+ * behavior changes here — wiring retrieved chunks into actual generation is
+ * a separate follow-up, not done by this script).
+ *
+ * Usage: php bin/import_curriculum.php [directory]   (defaults to config's CURRICULUM_DATA_DIR)
+ */
+
+require __DIR__ . '/../config.php';
+require __DIR__ . '/../src/Store.php';
+
+/**
+ * One markdown file -> one curriculum chunk. A leading `---`...`---` front
+ * matter block is stripped so it doesn't pollute the indexed/prompt-facing
+ * body — best-effort line matching, not a YAML parser; front-matter fields
+ * are never read for anything. An unterminated front-matter block (opens
+ * with `---` but no closing line) is left untouched rather than guessed at.
+ * Title is the first ATX H1 after stripping, else a filename-derived
+ * fallback; the H1 line (if any) is left in $body too — simpler than
+ * surgically removing it, and harmless duplication.
+ *
+ * @return array{ok: bool, reason?: string, title?: string, body?: string, path?: string}
+ */
+function parse_curriculum_file(string $path, string $content): array
+{
+    $lines = explode("\n", $content);
+    if (($lines[0] ?? null) === '---') {
+        $closingIndex = null;
+        for ($i = 1; $i < count($lines); $i++) {
+            if ($lines[$i] === '---') {
+                $closingIndex = $i;
+                break;
+            }
+        }
+        if ($closingIndex !== null) {
+            $lines = array_slice($lines, $closingIndex + 1);
+        }
+    }
+    $body = trim(implode("\n", $lines));
+
+    if ($body === '') {
+        return ['ok' => false, 'reason' => 'empty after stripping front matter'];
+    }
+
+    $title = null;
+    foreach ($lines as $line) {
+        $trimmedLine = trim($line);
+        if ($trimmedLine === '') {
+            continue;
+        }
+        if (preg_match('/^#\s+(.+)$/', $trimmedLine, $m)) {
+            $title = trim($m[1]);
+        }
+        break; // only the first non-blank line is ever considered
+    }
+    if ($title === null) {
+        $title = str_replace(['-', '_'], ' ', basename($path, '.md'));
+    }
+
+    return ['ok' => true, 'title' => $title, 'body' => $body, 'path' => basename($path)];
+}
+
+/**
+ * Full-corpus rebuild: every current data/curriculum/*.md file becomes exactly
+ * one row in curriculum_chunks (see parse_curriculum_file's doc for why a
+ * deleted file needs no separate cleanup here).
+ */
+function import_curriculum_directory(Store $store, string $dir): array
+{
+    $chunks = [];
+    $rejected = [];
+
+    $files = glob(rtrim($dir, '/') . '/*.md') ?: [];
+    sort($files);
+
+    foreach ($files as $path) {
+        $name = basename($path);
+        $raw = file_get_contents($path);
+        if ($raw === false) {
+            $rejected[] = ['file' => $name, 'reason' => 'unreadable'];
+            continue;
+        }
+
+        $result = parse_curriculum_file($path, $raw);
+        if (!$result['ok']) {
+            $rejected[] = ['file' => $name, 'reason' => $result['reason']];
+            continue;
+        }
+
+        $chunks[] = ['title' => $result['title'], 'body' => $result['body'], 'path' => $result['path']];
+    }
+
+    $counts = $store->replaceCurriculumChunks($chunks);
+
+    return [
+        'imported' => $chunks,
+        'rejected' => $rejected,
+        'before' => $counts['before'],
+        'after' => $counts['after'],
+    ];
+}
+
+// --- entry point ---
+if (php_sapi_name() !== 'cli') {
+    http_response_code(403);
+    exit("this script runs on the host only\n");
+}
+
+if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
+    exit(
+        "Usage: php bin/import_curriculum.php [directory]   (defaults to config's CURRICULUM_DATA_DIR)\n" .
+        "Rebuilds the entire curriculum_chunks table from *.md files in the directory on every\n" .
+        "run — a file removed from disk since the last run is dropped, not just added/changed ones.\n"
+    );
+}
+
+$dir = $argv[1] ?? CURRICULUM_DATA_DIR;
+$store = new Store(STORE_DB_PATH);
+$outcome = import_curriculum_directory($store, $dir);
+
+printf("imported %d curriculum file(s) from %s\n", count($outcome['imported']), $dir);
+foreach ($outcome['imported'] as $row) {
+    printf("  ok   %-30s title=%s\n", $row['path'], $row['title']);
+}
+foreach ($outcome['rejected'] as $row) {
+    printf("  FAIL %-30s %s\n", $row['file'], $row['reason']);
+}
+if ($outcome['rejected'] !== []) {
+    printf("%d file(s) rejected — see above\n", count($outcome['rejected']));
+}
+printf("curriculum_chunks: %d -> %d\n", $outcome['before'], $outcome['after']);

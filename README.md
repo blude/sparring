@@ -14,6 +14,7 @@ composer install                       # pulls anthropic-ai/sdk into vendor/
 cp .env.example .env                   # then edit it, ANTHROPIC_API_KEY=sk-ant-...
 sh tests/run.sh                        # runs all 10 smoke tests (PHP + Node), no API key needed
 php bin/import_pilot.php               # M1: seeds data/store.db from data/pilot/*.json
+php bin/import_curriculum.php          # syncs curriculum_chunks FTS5 table from data/curriculum/*.md
 valet link                             # once per checkout; serves this dir at https://sparring.test
 ```
 
