@@ -381,7 +381,6 @@ HTML;
 
 const SITE_NAME = 'Sparring';
 const SITE_URL = 'https://sparringmethod.com';
-const OG_IMAGE = SITE_URL . '/assets/img/share-image.png'; // 1200x630 og:image spec, gets cropped on some platforms
 
 // site_name/type/image/twitter:card never change per page, only these three do.
 // twitter:title/description/image are deliberately omitted — Twitter falls
@@ -390,7 +389,7 @@ function ogTags(string $path, string $title, string $description): string
 {
     $site_name = SITE_NAME; // heredoc interpolates variables, not bare constants
     $url = SITE_URL . $path;
-    $image = OG_IMAGE; // heredoc interpolates variables, not bare constants
+    $image = fasset('img/share-image.png'); // heredoc interpolates variables, not bare constants
     return <<<HTML
 <meta name="description" content="$description">
 <meta property="og:type" content="website">
