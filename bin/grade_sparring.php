@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Grades transcript.json files produced by bin/eval_sparring.php.
  *
- * Mechanical checks (banned phrases, length, question marks, Mermaid fence
- * validity) run first, in plain code, free and zero-variance. Judged checks
+ * Mechanical checks (banned phrases, length, question marks) run first, in
+ * plain code, free and zero-variance. Judged checks
  * (evals/sparring/rubric.md's interpretive items, plus per-turn Socratic
  * move labeling from evals/sparring/socratic-moves.json) go through one
  * structured-output LLM call per transcript. Both land in the same
@@ -58,18 +58,6 @@ $client = new Client(apiKey: $key);
 |--------------------------------------------------------------------------
 */
 
-// Mirrors public/assets/mermaid-render.js's SparringMermaid.extract() regex
-// exactly (tests/smoke_mermaid.js exercises the JS original) — a fence is
-// well-formed if this matches; anything else (no fence, or an unterminated
-// one) is fine too, since the client falls back to plain text either way.
-function mermaidFenceOk(string $text): bool
-{
-    if (!str_contains($text, '```mermaid')) {
-        return true; // no fence attempted — nothing to validate
-    }
-    return (bool) preg_match('/```mermaid\r?\n([\s\S]*?)\r?\n```/', $text);
-}
-
 function mechanicalChecks(array $exchanges): array
 {
     $sparringTurns = array_column($exchanges, 'sparringResponse');
@@ -94,7 +82,6 @@ function mechanicalChecks(array $exchanges): array
 
     $lengthFailures = [];
     $questionFlags = [];
-    $fenceFailures = [];
     foreach ($sparringTurns as $i => $turn) {
         $paragraphs = array_filter(array_map('trim', preg_split('/\n\s*\n/', $turn)));
         $words = str_word_count($turn);
@@ -103,9 +90,6 @@ function mechanicalChecks(array $exchanges): array
         }
         if (substr_count($turn, '?') > 1) {
             $questionFlags[] = $i + 1;
-        }
-        if (!mermaidFenceOk($turn)) {
-            $fenceFailures[] = $i + 1;
         }
     }
 
@@ -123,7 +107,6 @@ function mechanicalChecks(array $exchanges): array
         $mk("[flag] word 'move(s)' used outside a chess context", $moveFlags, "uses 'move'/'moves' — check it's not standing in for decision/step/action"),
         $mk('length fits phone/wall reading (≤2 paragraphs, ≤~120 words)', $lengthFailures, 'turn runs long'),
         $mk('[flag] at most one question per turn', $questionFlags, 'turn asks more than one question'),
-        $mk('well-formed Mermaid fence when one is attempted', $fenceFailures, 'unterminated or malformed ```mermaid fence'),
     ];
 }
 

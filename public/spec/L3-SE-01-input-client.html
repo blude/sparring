@@ -1296,7 +1296,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 <h3 id="_qr_04_visitor_content_cannot_alter_the_surface_security"><a class="anchor" href="#_qr_04_visitor_content_cannot_alter_the_surface_security"></a>8.4. <a id="QR-04"></a>QR-04 Visitor content cannot alter the surface <em>(Security)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#TF-04">TF-04 Render the exchange history</a><br>
-<em>Acceptance criteria:</em> All content returned from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> is inserted as text. No path renders it as markup, with one narrow exception: a single <code>mermaid</code> fenced block in a sparring turn is parsed by mermaid.js in <code>securityLevel: 'strict'</code> (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. Visitor turns are never routed through this path regardless of content.<br>
+<em>Acceptance criteria:</em> All content returned from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> is inserted as text. No path renders it as markup.<br>
 <em>Element specific:</em> Yes</p>
 </div>
 </div>

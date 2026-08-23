@@ -4,9 +4,9 @@ Applied per-transcript by an LLM judge (see `bin/grade_sparring.php`). Every
 Sparring turn is graded against every applicable item below; report
 `passed: true/false` plus one-sentence `evidence` quoting the turn.
 
-Mechanical checks (banned phrases, length, question-mark count, Mermaid
-fences) run separately in plain code — not here. This rubric only covers
-what needs interpretation.
+Mechanical checks (banned phrases, length, question-mark count) run
+separately in plain code — not here. This rubric only covers what needs
+interpretation.
 
 ## 1. No handed-over conclusion (`BG-01`, `<voice>`)
 

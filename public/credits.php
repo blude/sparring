@@ -26,7 +26,6 @@
 <ul>
 <li><a href="https://github.com/KilledByAPixel/ZzFX">ZzFX</a> by Frank Force</li>
 <li><a href="https://github.com/kazuhikoarase/qrcode-generator">qrcode-generator</a> by Kazuhiko Arase</li>
-<li><a href="https://github.com/mermaid-js/mermaid">mermaid.js</a></li>
 <li><a href="https://github.com/hans-thiessen/Rethink-Sans/">RethinkSans</a> by Rethink</li>
 <li><a href="https://pictogrammers.com/library/mdi/">Material Design Icons</a> by the Pictogrammers group</li>
 <li><a href="https://easyengine.io/">EasyEngine</a></li>
