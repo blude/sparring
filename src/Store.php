@@ -57,6 +57,15 @@ final class Store
             }
         }
 
+        // ponytail: one row per exchange (contribution + response), not the more
+        // typical one-row-per-message shape (role-tagged messages table). This is
+        // on purpose (spec E-02, L3-SE-03-backend-service.md) and safe specifically
+        // because the project's scope ends with the exhibition: no streaming, no
+        // edit/regenerate, no per-message metadata anywhere in this codebase. If it
+        // ever outlives the exhibition and needs any of those, this table is the
+        // thing to replace with a messages table — nothing outside this file reads
+        // the raw row shape (everything consumes hydrateExchange()'s pair), so the
+        // change stays contained to this class plus a one-time data migration.
         $this->pdo->exec(<<<SQL
             CREATE TABLE IF NOT EXISTS exchanges (
                 id                   INTEGER PRIMARY KEY AUTOINCREMENT,
