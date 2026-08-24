@@ -119,7 +119,21 @@ assert($frontMatterOnly === ['ok' => false, 'reason' => 'empty after stripping f
 // unterminated front matter (opens with '---' but no closing line) -> left untouched
 $unterminated = parse_curriculum_file('/some/dir/notes.md', "---\ntags: [systems]\nMore text without closing marker.\n");
 assert($unterminated['ok'] === true);
-assert($unterminated['title'] === 'notes'); // first non-blank line is the stray '---', not an H1 -> filename fallback
+assert($unterminated['title'] === 'notes'); // no line anywhere matches the H1 pattern -> filename fallback
 assert(str_starts_with($unterminated['body'], '---')); // never stripped, since no closing marker was found
+
+// H1 preceded by preamble text -> title is still found, not a filename fallback
+// (title detection scans the whole body, not just the first non-blank line)
+$h1AfterPreamble = parse_curriculum_file('/some/dir/x.md', "Some intro prose before the heading.\n\n# Wicked Problems\n\nBody text.\n");
+assert($h1AfterPreamble['ok'] === true);
+assert($h1AfterPreamble['title'] === 'Wicked Problems');
+assert(str_starts_with($h1AfterPreamble['body'], 'Some intro prose'));
+
+// CRLF line endings (e.g. a Windows-authored file) must not defeat the exact
+// '---' front-matter delimiter comparison
+$crlf = parse_curriculum_file('/some/dir/x.md', "---\r\ntags: [systems]\r\n---\r\n# Wicked Problems\r\n\r\nBody text.\r\n");
+assert($crlf['ok'] === true);
+assert($crlf['title'] === 'Wicked Problems');
+assert(!str_contains($crlf['body'], 'tags:')); // front matter stripped despite CRLF
 
 echo "smoke_domain: ok\n";

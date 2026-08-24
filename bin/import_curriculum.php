@@ -29,14 +29,21 @@ require __DIR__ . '/../src/Store.php';
  * body — best-effort line matching, not a YAML parser; front-matter fields
  * are never read for anything. An unterminated front-matter block (opens
  * with `---` but no closing line) is left untouched rather than guessed at.
- * Title is the first ATX H1 after stripping, else a filename-derived
- * fallback; the H1 line (if any) is left in $body too — simpler than
- * surgically removing it, and harmless duplication.
+ * Title is the first ATX H1 found anywhere in the body after stripping
+ * (not just the first line — a file can open with plain prose before its
+ * heading), else a filename-derived fallback; the H1 line (if any) is left
+ * in $body too — simpler than surgically removing it, and harmless
+ * duplication.
  *
  * @return array{ok: bool, reason?: string, title?: string, body?: string, path?: string}
  */
 function parse_curriculum_file(string $path, string $content): array
 {
+    // Normalized once up front: CRLF (or stray CR) line endings would
+    // otherwise survive explode("\n", ...) as a trailing "\r" on every line,
+    // silently defeating the exact '---' string comparison below on any
+    // Windows-authored/exported markdown file.
+    $content = str_replace(["\r\n", "\r"], "\n", $content);
     $lines = explode("\n", $content);
     if (($lines[0] ?? null) === '---') {
         $closingIndex = null;
@@ -58,14 +65,10 @@ function parse_curriculum_file(string $path, string $content): array
 
     $title = null;
     foreach ($lines as $line) {
-        $trimmedLine = trim($line);
-        if ($trimmedLine === '') {
-            continue;
-        }
-        if (preg_match('/^#\s+(.+)$/', $trimmedLine, $m)) {
+        if (preg_match('/^#\s+(.+)$/', trim($line), $m)) {
             $title = trim($m[1]);
+            break;
         }
-        break; // only the first non-blank line is ever considered
     }
     if ($title === null) {
         $title = str_replace(['-', '_'], ' ', basename($path, '.md'));
@@ -78,9 +81,25 @@ function parse_curriculum_file(string $path, string $content): array
  * Full-corpus rebuild: every current data/curriculum/*.md file becomes exactly
  * one row in curriculum_chunks (see parse_curriculum_file's doc for why a
  * deleted file needs no separate cleanup here).
+ *
+ * Two conditions abort the whole run (throw, before replaceCurriculumChunks()
+ * is ever called) rather than proceeding with a partial result: a missing/
+ * wrong directory and an unreadable file mid-scan. Both are I/O-level
+ * failures, not content problems — proceeding anyway would let the
+ * full-rebuild design turn a transient error (typo'd path, a permissions
+ * hiccup) into permanent data loss, silently wiping or shrinking the table
+ * with nothing louder than a rejected-file log line to notice it by. A
+ * *content* problem in one file (parse_curriculum_file() returning
+ * ok: false — e.g. empty after stripping front matter) stays non-fatal and
+ * reported via $rejected, same as bin/import_pilot.php's precedent: that's
+ * an operator-visible bad file, not a sign the read itself can't be trusted.
  */
 function import_curriculum_directory(Store $store, string $dir): array
 {
+    if (!is_dir($dir)) {
+        throw new RuntimeException("curriculum directory not found: $dir");
+    }
+
     $chunks = [];
     $rejected = [];
 
@@ -91,8 +110,7 @@ function import_curriculum_directory(Store $store, string $dir): array
         $name = basename($path);
         $raw = file_get_contents($path);
         if ($raw === false) {
-            $rejected[] = ['file' => $name, 'reason' => 'unreadable'];
-            continue;
+            throw new RuntimeException("unreadable file: $name — aborting import, curriculum_chunks left untouched");
         }
 
         $result = parse_curriculum_file($path, $raw);
@@ -130,7 +148,12 @@ if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
 
 $dir = $argv[1] ?? CURRICULUM_DATA_DIR;
 $store = new Store(STORE_DB_PATH);
-$outcome = import_curriculum_directory($store, $dir);
+try {
+    $outcome = import_curriculum_directory($store, $dir);
+} catch (RuntimeException $e) {
+    fwrite(STDERR, "error: {$e->getMessage()}\n");
+    exit(1);
+}
 
 printf("imported %d curriculum file(s) from %s\n", count($outcome['imported']), $dir);
 foreach ($outcome['imported'] as $row) {

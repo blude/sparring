@@ -449,7 +449,16 @@ final class Store
         if (!preg_match_all('/[\p{L}\p{N}]+/u', $raw, $matches)) {
             return null;
         }
-        return implode(' OR ', $matches[0]);
+        // Quoted as an FTS5 string literal (embedded '"' doubled, the standard
+        // escape) rather than joined bare: an unquoted token that happens to be
+        // and/or/not/near (case-insensitively) would otherwise be parsed as an
+        // FTS5 operator instead of a search term — exactly the failure this
+        // sanitizer exists to prevent. Quoting makes every token a literal
+        // match regardless of its text, closing that hole by construction.
+        return implode(' OR ', array_map(
+            static fn(string $token): string => '"' . str_replace('"', '""', $token) . '"',
+            $matches[0]
+        ));
     }
 
     // --- Maintenance (bin/reset_db.php, bin/backup_db.php) ---

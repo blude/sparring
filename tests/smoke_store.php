@@ -151,6 +151,12 @@ assert($store->searchCurriculum('col:value') === []); // neither token present
 assert($store->searchCurriculum('.') === []); // no word/number tokens at all
 assert($store->searchCurriculum('') === []);
 
+// a token that collides with an FTS5 keyword (and/or/not/near) must still be
+// treated as a literal search term, not parsed as an operator — the exact
+// remaining chunk's body contains the literal word "and"
+$andResult = $store->searchCurriculum('and');
+assert(count($andResult) === 1 && $andResult[0]['path'] === 'feasibility.md');
+
 unlink($dbPath);
 foreach (['-wal', '-shm'] as $suffix) {
     @unlink($dbPath . $suffix);
