@@ -2,6 +2,10 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-08-25
+
+- `1f2b2f6` build(deploy): add deploy_curriculum.sh script
+
 ## 2026-08-24
 
 - `68cdcda` build(spec): share one stylesheet instead of embedding it per page
