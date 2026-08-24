@@ -54,8 +54,7 @@ cat <<EOF
 Deployed.
 First deploy on a fresh site only:
   - create htdocs/.env from .env.example with ANTHROPIC_API_KEY set
-    (config.php only reads htdocs/.env, not EasyEngine's site-root .env —
-    never overwritten by this script since it's git-ignored)
+    (not EasyEngine's site-root .env — different file)
   - seed data/store.db (host PHP may be older than 8.2+, run it in-container):
       ssh $REMOTE_HOST "ee shell $SITE_NAME --command='php bin/import_pilot.php'"
   - confirm data/ is writable by the container's PHP-FPM user
