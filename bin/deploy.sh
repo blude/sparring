@@ -59,4 +59,8 @@ First deploy on a fresh site only:
   - seed data/store.db (host PHP may be older than 8.2+, run it in-container):
       ssh $REMOTE_HOST "ee shell $SITE_NAME --command='php bin/import_pilot.php'"
   - confirm data/ is writable by the container's PHP-FPM user
+  - data/curriculum/ is git-ignored, not synced by this script — copy the
+    corpus and import it separately, whenever it changes (not every deploy):
+      rsync -rlptDz data/curriculum/ $REMOTE_HOST:${REMOTE_PATH}data/curriculum/
+      ssh $REMOTE_HOST "ee shell $SITE_NAME --command='php bin/import_curriculum.php'"
 EOF
