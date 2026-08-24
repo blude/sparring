@@ -462,6 +462,14 @@ final class Store
      * Keyword search over curriculum_chunks, ranked by BM25 (more negative = more
      * relevant — ascending sort is correct, don't flip it). Returns [] for an
      * empty or entirely-punctuation query rather than throwing.
+     *
+     * bm25(curriculum_chunks, 3.0, 1.0) weights a title match 3x a body
+     * match — title is short and topic-precise (a page's own name), so a
+     * hit there is a much stronger relevance signal than the same token
+     * once in a long body. Args are positional over the table's *indexed*
+     * columns only (title, body — path/updated_at are UNINDEXED and excluded
+     * from bm25 entirely), verified against a real sqlite3 build before
+     * relying on it.
      */
     public function searchCurriculum(string $query, int $limit = 5): array
     {
@@ -473,7 +481,7 @@ final class Store
         $stmt = $this->pdo->prepare(
             "SELECT path, title,
                     snippet(curriculum_chunks, 1, '', '', '…', 12) AS snippet,
-                    bm25(curriculum_chunks) AS score
+                    bm25(curriculum_chunks, 3.0, 1.0) AS score
              FROM curriculum_chunks
              WHERE curriculum_chunks MATCH :q
              ORDER BY score
@@ -494,6 +502,42 @@ final class Store
         );
     }
 
+    // Closed-class German function words (articles, pronouns, prepositions,
+    // conjunctions, common auxiliary/modal verb forms) dropped from a query
+    // before it's OR-joined below. Root cause this exists for: an OR query
+    // sums BM25 contributions across every matched term, so a free-text
+    // sentence otherwise lets a document that happens to contain many
+    // filler words (die, eine, ist, an, zu...) outscore one that contains
+    // only the 1-2 rare, actually-relevant terms — confirmed empirically
+    // against the real corpus (see tests/smoke_curriculum_retrieval.php).
+    // ponytail: hand-curated list, not a real German lemmatizer/stopword
+    // library — misses inflected stopword forms (e.g. "einem", "dessen")
+    // it wasn't seeded with. Upgrade path: a proper stopword package if
+    // this ever proves insufficient.
+    private const FTS_STOPWORDS = [
+        'der', 'die', 'das', 'dem', 'den', 'des',
+        'ein', 'eine', 'einer', 'eines', 'einem', 'einen',
+        'und', 'oder', 'aber', 'doch', 'sondern', 'denn',
+        'ist', 'sind', 'war', 'waren', 'wird', 'werden', 'wurde', 'wurden', 'sein', 'seins',
+        'bin', 'bist', 'seid', 'habe', 'hast', 'hat', 'haben', 'hatte', 'hatten',
+        'nicht', 'kein', 'keine', 'keinen', 'keiner', 'keines', 'keinem',
+        'zu', 'zur', 'zum', 'an', 'auf', 'in', 'im', 'aus', 'mit', 'nach',
+        'bei', 'für', 'von', 'vor', 'über', 'unter', 'durch', 'gegen', 'ohne', 'um',
+        'dass', 'wenn', 'weil', 'als', 'wie',
+        'ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr', 'man',
+        'mein', 'dein', 'unser', 'euer',
+        'auch', 'nur', 'schon', 'noch', 'mehr', 'sehr', 'immer', 'so',
+        'dann', 'hier', 'da', 'dort', 'etwas', 'alle', 'alles',
+        'jede', 'jeder', 'jedes', 'diese', 'dieser', 'dieses', 'jene', 'jener', 'jenes',
+    ];
+
+    // Tokens shorter than this stay exact-match — prefix matching on a short
+    // token (e.g. "an*") explodes into false positives (matches "Architektur",
+    // "Anordnung", "Analyse"...). Longer tokens get a trailing '*' so German
+    // inflection (Ziele -> Ziel*) and compounding still recall the base
+    // concept without a full stemmer.
+    private const FTS_PREFIX_MIN_LENGTH = 5;
+
     /**
      * FTS5's query syntax (quoting, column filters, NEAR, leading '-') throws a
      * PDOException on malformed input — a real risk here since the eventual
@@ -508,15 +552,32 @@ final class Store
         if (!preg_match_all('/[\p{L}\p{N}]+/u', $raw, $matches)) {
             return null;
         }
+        $tokens = array_filter(
+            $matches[0],
+            static fn(string $token): bool => !in_array(mb_strtolower($token), self::FTS_STOPWORDS, true)
+        );
+        // An all-stopword query (or a corpus-language mismatch) would
+        // otherwise filter down to nothing and silently return no results —
+        // fall back to the unfiltered tokens rather than lose the query.
+        if ($tokens === []) {
+            $tokens = $matches[0];
+        }
         // Quoted as an FTS5 string literal (embedded '"' doubled, the standard
         // escape) rather than joined bare: an unquoted token that happens to be
         // and/or/not/near (case-insensitively) would otherwise be parsed as an
         // FTS5 operator instead of a search term — exactly the failure this
         // sanitizer exists to prevent. Quoting makes every token a literal
         // match regardless of its text, closing that hole by construction.
+        // A '*' appended *after* the closing quote is still valid FTS5 prefix
+        // syntax (verified: `"foo"*` behaves the same as bare `foo*`) — so
+        // long tokens get prefix matching without losing the operator-keyword
+        // protection quoting provides.
         return implode(' OR ', array_map(
-            static fn(string $token): string => '"' . str_replace('"', '""', $token) . '"',
-            $matches[0]
+            static function (string $token): string {
+                $quoted = '"' . str_replace('"', '""', $token) . '"';
+                return mb_strlen($token) >= self::FTS_PREFIX_MIN_LENGTH ? $quoted . '*' : $quoted;
+            },
+            $tokens
         ));
     }
 
