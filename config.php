@@ -364,9 +364,10 @@ function renderErrorPage(int $code, string $message): never
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>$code — Sparring</title>
-<style>body{font:16px/1.5 system-ui,sans-serif;max-width:40rem;margin:2rem auto;padding:0 1rem;text-align:center;touch-action:manipulation;}h1{font-size:3rem;margin:0;}a{color:#d32f2f;}a:visited{color:#7b5940;}</style>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:40rem;margin:2rem auto;padding:0 1rem;text-align:center;touch-action:manipulation;}h1{font-size:3rem;margin:0;}a{color:#d32f2f;}a:visited{color:#7b5940;}.shrug{color:#999;font-size:1.5rem;}</style>
 </head>
 <body>
+<p class="shrug">¯\_(ツ)_/¯</p>
 <h1>$code</h1>
 <p>$message</p>
 <p><a href="/">$backToStart</a></p>
