@@ -16,17 +16,22 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   why), stops on first failure. Individually — PHP: `php tests/smoke_store.php`
   (`Store`), `php tests/smoke_llm_client.php` (provider dispatch +
   `OpenAiLlmClient`/`AnthropicLlmClient`'s pure response/failure-classification
-  helpers), `php tests/smoke_sparring.php` (`Sparring::processTurn`'s gates,
-  `sessionStateFor`/`isExpired`, and `RateLimiter::resolveClientOrigin`),
+  helpers, and each's `buildSystemMessages()`/`buildSystemBlocks()` — how
+  turn-1 curriculum grounding does/doesn't get attached without disturbing
+  the cached sparring-prompt block), `php tests/smoke_sparring.php`
+  (`Sparring::processTurn`'s gates, `sessionStateFor`/`isExpired`,
+  `RateLimiter::resolveClientOrigin`, and turn-1-only curriculum grounding),
   `php tests/smoke_domain.php`
   (`derive_scenario_statement`, `AbstractLlmClient::stripDelimiterTag`,
   `bin/import_pilot.php::validate_transcript`,
   `bin/import_curriculum.php::parse_curriculum_file`),
   `php tests/smoke_curriculum_retrieval.php` (`Store::searchCurriculum()`
   retrieval quality — stopword filtering, title-weighted BM25, prefix
-  matching — against `tests/fixtures/curriculum/`, verbatim excerpts of the
-  real, gitignored `data/curriculum/` corpus, kept small and committed so
-  this stays reproducible on a fresh checkout). JS (Node only to run the
+  matching — and `Store::searchCurriculumConcepts()`'s vocabulary-restricted
+  turn-1 auto-grounding lookup, against `tests/fixtures/curriculum/`,
+  verbatim excerpts of the real, gitignored `data/curriculum/` corpus, kept
+  small and committed so this stays reproducible on a fresh checkout). JS
+  (Node only to run the
   check, not a project dependency): `node tests/smoke_juicy.js`
   (`public/assets/juicy.js`), `node tests/smoke_mermaid.js` (fence-detection
   in `public/assets/mermaid-render.js`), `node tests/smoke_identity.js`

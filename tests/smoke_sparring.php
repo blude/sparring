@@ -24,10 +24,12 @@ final class FakeLlmClient implements LlmClientInterface
     public bool $throwOnGenerate = false;
     public string $cannedResponse = 'What makes you think it has a clean answer?';
     public ?string $lastNewContribution = null; // QR-reply flow: what processTurn actually sent to the LLM
+    public ?string $lastGroundingContext = null; // turn-1 curriculum grounding: what processTurn actually sent to the LLM
 
-    public function generateResponse(array $priorExchanges, string $newContribution): string
+    public function generateResponse(array $priorExchanges, string $newContribution, ?string $groundingContext = null): string
     {
         $this->lastNewContribution = $newContribution;
+        $this->lastGroundingContext = $groundingContext;
         if ($this->throwOnGenerate) {
             throw new GenerationFailedException('fake generation failure');
         }
@@ -259,6 +261,56 @@ withOrigin('10.0.1.2', function () use ($store, $sparring, $llm) {
     assert($result['status'] === 'ok');
     assert($result['exchange']['visitorContribution'] === 'a normal reply');
     assert($llm->lastNewContribution === 'a normal reply'); // no quote prefix — unresolved id, not honored
+});
+
+// Turn-1 curriculum grounding (Store::searchCurriculumConcepts): seed one
+// real-shaped chunk so a genuine keyword match is possible, then check the
+// three cases that actually distinguish correct wiring from a no-op.
+$store->replaceCurriculumChunks([
+    ['title' => 'Wertversprechen', 'body' => 'Definition: der Nutzen der Lösung aus Kundensicht.', 'path' => 'wertversprechen.md'],
+]);
+
+// Turn 1, contribution names the concept -> grounding context reaches the LLM.
+withOrigin('10.0.1.3', function () use ($store, $sparring, $llm) {
+    $session = $store->createSession('live');
+    $result = $sparring->processTurn($session['id'], 'Was genau ist ein Wertversprechen?');
+    assert($result['status'] === 'ok');
+    assert($llm->lastGroundingContext !== null, 'turn 1 naming a known concept should ground the call');
+    assert(str_contains($llm->lastGroundingContext, 'Wertversprechen'));
+    assert(str_contains($llm->lastGroundingContext, 'curriculum_excerpts'));
+});
+
+// Turn 1, contribution shares no word with any known concept title -> no grounding.
+withOrigin('10.0.1.4', function () use ($store, $sparring, $llm) {
+    $session = $store->createSession('live');
+    $result = $sparring->processTurn($session['id'], 'Wie ist eigentlich das Wetter heute?');
+    assert($result['status'] === 'ok');
+    assert($llm->lastGroundingContext === null, 'turn 1 with no concept-vocabulary overlap should not ground the call');
+});
+
+// Turn 2+ never triggers a lookup, even naming the same concept turn 1 matched.
+withOrigin('10.0.1.5', function () use ($store, $sparring, $llm) {
+    $session = $store->createSession('live');
+    $sparring->processTurn($session['id'], 'a first, unrelated turn');
+    $result = $sparring->processTurn($session['id'], 'Was genau ist ein Wertversprechen?');
+    assert($result['status'] === 'ok');
+    assert($llm->lastGroundingContext === null, 'grounding is turn-1-only, not re-run on later turns');
+});
+
+// QR-seeded session (dojo.js's window.OPENING_MESSAGE auto-send, see
+// config.php's resolve_opening_message()): the canned opener occupies turn
+// 1, so the visitor's own first real words land on turn 2 instead — that's
+// the turn grounding must fire on, not turn 1's scripted line.
+withOrigin('10.0.1.6', function () use ($store, $sparring, $llm) {
+    $session = $store->createSession('live');
+    $opener = $sparring->processTurn($session['id'], OPENING_MESSAGE_PREFIX . 'Some decisions can never fully be "solved".');
+    assert($opener['status'] === 'ok');
+    assert($llm->lastGroundingContext === null, 'the canned opener itself should never be grounded');
+
+    $result = $sparring->processTurn($session['id'], 'Was genau ist ein Wertversprechen?');
+    assert($result['status'] === 'ok');
+    assert($llm->lastGroundingContext !== null, "visitor's real first turn (turn 2 here) should still be grounded");
+    assert(str_contains($llm->lastGroundingContext, 'Wertversprechen'));
 });
 
 unlink($dbPath);

@@ -90,6 +90,31 @@ assert(
 $case2 = top3($store, 'Ich finde nicht, dass digitale Systeme immer eine klare Wertschöpfungsarchitektur brauchen, das klingt nach unnötiger Bürokratie für ein kleines Team.');
 assert(!in_array('wertschoepfungsarchitektur.md', $case2, true), 'case 2: wertschoepfungsarchitektur.md now in top 3 (' . implode(', ', $case2) . ') — the known gap this documents may be fixed; update this test to assert the fix instead of the gap');
 
+// --- Store::searchCurriculumConcepts() — turn-1 auto-grounding lookup ---
+// Vocabulary-restricted: only tokens that are also a word in some page's
+// own title survive into the query, so filler/generic content words never
+// dilute the match the way they do in searchCurriculum() above.
+
+// Same case 2 sentence as above: under free-text searchCurriculum() the
+// target loses to a hub page entirely (documented known gap above). Under
+// concept-vocabulary matching, every filler/content word except the one
+// exact title match ("Wertschöpfungsarchitektur") drops out before the
+// query is even built — target now wins outright.
+$conceptCase2 = $store->searchCurriculumConcepts('Ich finde nicht, dass digitale Systeme immer eine klare Wertschöpfungsarchitektur brauchen, das klingt nach unnötiger Bürokratie für ein kleines Team.', 3);
+assert($conceptCase2 !== [] && $conceptCase2[0]['path'] === 'wertschoepfungsarchitektur.md', 'concept case 2: expected wertschoepfungsarchitektur.md as top hit — got: ' . implode(', ', array_column($conceptCase2, 'path')));
+
+// A vague, off-topic sentence shares no word with any page's title — clean
+// empty result, no score threshold needed to detect "nothing relevant".
+$vague = $store->searchCurriculumConcepts('Ich weiß nicht so recht was ich dazu sagen soll, das ist schwierig');
+assert($vague === [], 'vague off-topic sentence should yield no concept matches — got: ' . implode(', ', array_column($vague, 'path')));
+
+// Excerpt is a bounded truncation of the real body, not the full text and
+// not the tiny FTS5 snippet() used by probe_curriculum.php/searchCurriculum().
+foreach ($conceptCase2 as $hit) {
+    assert(array_key_exists('excerpt', $hit), 'concept hit missing excerpt key');
+    assert(mb_strlen($hit['excerpt']) <= 701, 'excerpt exceeds the ~700 char truncation bound: ' . mb_strlen($hit['excerpt']));
+}
+
 unlink($dbPath);
 foreach (['-wal', '-shm'] as $suffix) {
     @unlink($dbPath . $suffix);

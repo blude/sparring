@@ -463,6 +463,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_tf_01_run_the_pedagogical_engine_each_turn">4.1. TF-01 Run the pedagogical engine each turn</a></li>
 <li><a href="#_tf_02_work_with_boundary_objects">4.2. TF-02 Work with boundary objects</a></li>
+<li><a href="#_tf_03_ground_the_first_turn_with_retrieved_curriculum_excerpts">4.3. TF-03 Ground the first turn with retrieved curriculum excerpts</a></li>
 </ul>
 </li>
 <li><a href="#_entities">5. Entities</a>
@@ -655,6 +656,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Anchors the argument in a concrete artifact instead of leaving it abstract, from one of four sources: something the visitor already has (read directly), something fetched for a real external reference (a regulation, a competitor&#8217;s implementation, a documented failure), something generated on the spot (a diagram, table, or template), or something the element asks the visitor to produce themselves — usually the harder and more revealing move, since constructing it forces the structure into the open. A generated or requested artifact must provoke a question, not resolve one: built with a deliberate gap (an unfilled node, an unanswered column) rather than a finished comparison — an artifact that shows the visitor exactly where their argument fails has done the exposing work the visitor was supposed to do themselves. Pulled in only when it does real argumentative work; if the exchange is moving on words alone, this function is not invoked. The full menu of diagram types and when to reach for each is specified in <code>prompts/sparring.md&#8217;s own `&lt;boundary_objects&gt;</code> section, not reproduced here.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_tf_03_ground_the_first_turn_with_retrieved_curriculum_excerpts"><a class="anchor" href="#_tf_03_ground_the_first_turn_with_retrieved_curriculum_excerpts"></a>4.3. <a id="TF-03"></a>TF-03 Ground the first turn with retrieved curriculum excerpts</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Narrative</p>
+</div>
+<div class="paragraph">
+<p><em>Achieves:</em> <a href="#G-05">G-05 Ground responses in the FH Dortmund curriculum and named design traditions</a></p>
+</div>
+<div class="paragraph">
+<p>Supplements the static <code>&lt;domain_grounding&gt;</code> section (general design-theory grounding, present every turn) with excerpts specific to what the visitor actually opened with — on the visitor&#8217;s own first real contribution only, never re-run on later turns. "First real contribution" is not always turn 1&#8217;s row: a QR-code-seeded session (<a href="L3-SE-01-input-client.html">SE-01</a>'s <code>?o=&lt;n&gt;</code> opener) auto-sends a pre-authored line as turn 1, so grounding is held until the turn after it instead — the canned opener itself is never matched against the corpus. The contribution is matched against <code>data/curriculum/</code> (a personal knowledge base of Digital Design concepts, kept out of version control, ingested into a keyword-searchable index by <code>bin/import_curriculum.php</code>); matching is deliberately restricted to the corpus&#8217;s own vocabulary of concept names rather than free-text keyword matching, so most unrelated wording drops out before the query is even built — substantially reducing, not eliminating, the chance that one concept&#8217;s page loses to another&#8217;s when a contribution names more than one (the corpus&#8217;s own network of cross-references means two real concept names can still compete against each other). A contribution sharing no concept name with the corpus at all yields no excerpts, which is treated as the ordinary case, not a failure. Any match is passed to the model as supplementary context, not asserted as fact — the model is instructed to use it only where it actually fits the exchange. A lookup failure (the corpus store being briefly unavailable, for instance) degrades to no excerpts rather than blocking the turn: this function is an enhancement to G-05, never load-bearing for producing a response at all. The corpus vocabulary is overwhelmingly German; per <a href="#G-04">G-04 Match the visitor&#8217;s reply language turn by turn</a> a visitor may write in English, and an English contribution can coincidentally share a word with a German page&#8217;s title (several concept names use English loanwords) and surface an unrelated excerpt with the same apparent confidence as a real match — a known, undetected-language gap, not a crash risk given the excerpts are never asserted as fact.</p>
+</div>
+<div class="paragraph">
+<p><em>Consequence:</em> Sent to the provider as a separate, uncached block/message from the main prompt (see <a href="#C-03">C-03 The prompt shares the model&#8217;s context window</a>) — so it never disturbs that block&#8217;s prompt-caching discount, at the cost of being billed as fresh input tokens on every first turn rather than benefiting from the cache itself.</p>
+</div>
 <hr>
 </div>
 </div>
@@ -827,7 +843,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><em>Acceptance criteria:</em> The prompt is billed and budgeted as ordinary input tokens, sharing <code>GENERATION_MODEL&#8217;s (`claude-sonnet-5</code>) 1M-token context window with the session&#8217;s prior exchanges and the new contribution — not a separate quota. At its current size (376 lines, ~3,000 words, comfortably under 1% of that window even with a full 10-exchange history attached), this is not a binding limit.</p>
 </div>
 <div class="paragraph">
-<p><em>Consequence:</em> Growing the prompt substantially, or raising <code>TURN_ALLOWANCE</code>, narrows the same shared budget rather than hitting an independent limit — there is no separate warning threshold to watch besides the model&#8217;s own context window. The prompt is passed with <code>cacheControl: ['type' &#8658; 'ephemeral']</code> (<code>AnthropicLlmClient.php</code>) — static within a session and comfortably over the ~1,024-token minimum for prompt caching, so repeat turns get a cached-read discount on it rather than re-billing its full token cost each time.</p>
+<p><em>Consequence:</em> Growing the prompt substantially, or raising <code>TURN_ALLOWANCE</code>, narrows the same shared budget rather than hitting an independent limit — there is no separate warning threshold to watch besides the model&#8217;s own context window. The prompt is passed with <code>cacheControl: ['type' &#8658; 'ephemeral']</code> (<code>AnthropicLlmClient.php</code>) — static within a session and comfortably over the ~1,024-token minimum for prompt caching, so repeat turns get a cached-read discount on it rather than re-billing its full token cost each time. <a href="#TF-03">TF-03 Ground the first turn with retrieved curriculum excerpts</a>'s per-turn excerpts travel as a second, deliberately uncached block alongside this one, precisely so they never break that discount by making the cached block&#8217;s content vary turn to turn.</p>
 </div>
 <div class="paragraph">
 <p><em>Externally sourced:</em> Yes</p>
@@ -857,7 +873,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-20 23:41:08 +0200
+Last updated 2026-08-24 20:34:20 +0200
 </div>
 </div>
 </body>

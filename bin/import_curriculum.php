@@ -2,20 +2,19 @@
 declare(strict_types=1);
 
 /**
- * "Poor man's RAG" ingestion (step 1 of 2 — see prompts/sparring.md's
- * <domain_grounding> for the prose this is meant to eventually ground).
- * Syncs data/curriculum/*.md into the curriculum_chunks FTS5 table so
- * Store::searchCurriculum() can keyword-search it. Run on the host, never
- * web-routed — this script has no HTTP entry point.
+ * "Poor man's RAG" ingestion. Syncs data/curriculum/*.md into the
+ * curriculum_chunks FTS5 table so Store::searchCurriculum() (general
+ * free-text search) and Store::searchCurriculumConcepts() (vocabulary-
+ * restricted turn-1 auto-grounding, see Sparring::processTurn and
+ * spec/L3-SE-04-system-prompt.adoc's TF-03) can both query it. Run on the
+ * host, never web-routed — this script has no HTTP entry point.
  *
  * Rebuilds the ENTIRE curriculum_chunks table on every run (delete + reinsert
  * in one transaction) rather than diffing against what's already stored —
  * this is what makes editing or deleting a source file converge correctly:
  * a file removed from data/curriculum/ is simply absent from this run's
  * insert set, so its chunk is gone after commit with no separate cleanup
- * pass needed. No spec/ entry exists for this yet (no visitor-visible
- * behavior changes here — wiring retrieved chunks into actual generation is
- * a separate follow-up, not done by this script).
+ * pass needed.
  *
  * Usage: php bin/import_curriculum.php [directory]   (defaults to config's CURRICULUM_DATA_DIR)
  */

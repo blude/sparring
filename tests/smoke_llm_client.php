@@ -91,4 +91,46 @@ assert(AnthropicLlmClient::classifyGenerationFailure(Anthropic\Core\Exceptions\I
 assert(AnthropicLlmClient::classifyGenerationFailure(Anthropic\Core\Exceptions\APIConnectionException::class) === null);
 assert(AnthropicLlmClient::classifyGenerationFailure(RuntimeException::class) === null); // unrelated class: no match
 
+/*
+|--------------------------------------------------------------------------
+| AnthropicLlmClient::buildSystemBlocks() — turn-1 curriculum grounding
+|--------------------------------------------------------------------------
+*/
+
+// No grounding context: exactly the one cached block generateResponse()
+// always sent before this feature existed — untouched, still cached.
+assert(AnthropicLlmClient::buildSystemBlocks('SPARRING PROMPT', null) === [
+    ['type' => 'text', 'text' => 'SPARRING PROMPT', 'cacheControl' => ['type' => 'ephemeral']],
+]);
+
+// Grounding context present: a second, *uncached* block — the static
+// prompt's cache-read discount (SE-04 C-03) must survive this feature.
+assert(AnthropicLlmClient::buildSystemBlocks('SPARRING PROMPT', '<curriculum_excerpts>...</curriculum_excerpts>') === [
+    ['type' => 'text', 'text' => 'SPARRING PROMPT', 'cacheControl' => ['type' => 'ephemeral']],
+    ['type' => 'text', 'text' => '<curriculum_excerpts>...</curriculum_excerpts>'],
+]);
+
+// Empty string treated the same as null (Sparring.php should never send
+// one, but the pure helper shouldn't emit a pointless empty block either).
+assert(AnthropicLlmClient::buildSystemBlocks('SPARRING PROMPT', '') === [
+    ['type' => 'text', 'text' => 'SPARRING PROMPT', 'cacheControl' => ['type' => 'ephemeral']],
+]);
+
+/*
+|--------------------------------------------------------------------------
+| OpenAiLlmClient::buildSystemMessages() — same feature, OpenAI shape
+|--------------------------------------------------------------------------
+*/
+
+assert(OpenAiLlmClient::buildSystemMessages('SPARRING PROMPT', null) === [
+    ['role' => 'system', 'content' => 'SPARRING PROMPT'],
+]);
+assert(OpenAiLlmClient::buildSystemMessages('SPARRING PROMPT', '<curriculum_excerpts>...</curriculum_excerpts>') === [
+    ['role' => 'system', 'content' => 'SPARRING PROMPT'],
+    ['role' => 'system', 'content' => '<curriculum_excerpts>...</curriculum_excerpts>'],
+]);
+assert(OpenAiLlmClient::buildSystemMessages('SPARRING PROMPT', '') === [
+    ['role' => 'system', 'content' => 'SPARRING PROMPT'],
+]);
+
 echo "smoke_llm_client: ok\n";

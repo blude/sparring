@@ -56,7 +56,7 @@ final class TestLlmClient extends AbstractLlmClient
         return self::stripDelimiterTag($contribution);
     }
 
-    public function generateResponse(array $priorExchanges, string $newContribution): string
+    public function generateResponse(array $priorExchanges, string $newContribution, ?string $groundingContext = null): string
     {
         return '';
     }

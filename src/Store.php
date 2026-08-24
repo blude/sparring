@@ -581,6 +581,123 @@ final class Store
         ));
     }
 
+    // Excerpt length for searchCurriculumConcepts() below — enough for the
+    // model to actually use the concept (definition + surrounding context),
+    // capped so 1-2 chunks stay a bounded addition to a turn-1 prompt rather
+    // than the full file. Plain char truncation (no word-boundary care),
+    // same style as derive_scenario_statement()'s.
+    private const CONCEPT_EXCERPT_MAX_CHARS = 700;
+
+    /**
+     * Turn-1 auto-grounding lookup (see prompts/sparring.md's
+     * <domain_grounding>/<curriculum_excerpts> and Sparring::processTurn):
+     * unlike searchCurriculum() above, this restricts matching to tokens
+     * that are also a word in some page's own title — a vocabulary
+     * auto-derived from the corpus (SELECT DISTINCT title, stopword-
+     * filtered), not hand-maintained, so it stays in sync with
+     * data/curriculum/ automatically. This exists because free-text
+     * OR-of-every-token matching lets generic content words (not just
+     * stopwords) dilute a query past usefulness — confirmed empirically
+     * against the real corpus (see tests/smoke_curriculum_retrieval.php).
+     * Restricting to title-vocabulary words also gives a clean "nothing
+     * relevant" signal for free: a sentence sharing no word with any title
+     * naturally returns [] before a query is even built, which a raw BM25
+     * score threshold can't do reliably (a single exact-word match can
+     * score *weaker* in magnitude than a long irrelevant sentence, since
+     * BM25 sums contributions across every matched term).
+     *
+     * Returns list<array{path: string, title: string, excerpt: string, score: float}>,
+     * excerpt truncated to CONCEPT_EXCERPT_MAX_CHARS (not the full body,
+     * not the tiny snippet() searchCurriculum() uses for display).
+     *
+     * ponytail: the corpus (and so the title vocabulary) is overwhelmingly
+     * German, but several titles contain plain English words (`Use`, `Case`,
+     * `System`, `Force`, `Service`...) — an English contribution (G-04
+     * supports both languages) can coincidentally match one of these and
+     * surface an unrelated page with real confidence, since nothing here
+     * is language-aware. Not a crash risk (the caller's prompt text already
+     * says "may or may not be relevant"), just noisier grounding for
+     * English visitors than German ones. Upgrade path if this proves to
+     * matter in practice: detect the contribution's language before
+     * calling this, or restrict the vocabulary to titles/words that don't
+     * double as common English ones.
+     */
+    public function searchCurriculumConcepts(string $text, int $limit = 2): array
+    {
+        $vocabulary = $this->curriculumTitleVocabulary();
+        if (!preg_match_all('/[\p{L}\p{N}]+/u', $text, $matches)) {
+            return [];
+        }
+        $keywords = array_values(array_unique(array_filter(
+            $matches[0],
+            static fn(string $token): bool => isset($vocabulary[mb_strtolower($token)])
+        )));
+        if ($keywords === []) {
+            return [];
+        }
+
+        $query = implode(' OR ', array_map(
+            static fn(string $token): string => '"' . str_replace('"', '""', $token) . '"',
+            $keywords
+        ));
+
+        $stmt = $this->pdo->prepare(
+            'SELECT path, title, body, bm25(curriculum_chunks, 3.0, 1.0) AS score
+             FROM curriculum_chunks
+             WHERE curriculum_chunks MATCH :q
+             ORDER BY score
+             LIMIT :limit'
+        );
+        $stmt->bindValue('q', $query, PDO::PARAM_STR);
+        $stmt->bindValue('limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return array_map(
+            static fn(array $row): array => [
+                'path' => $row['path'],
+                'title' => $row['title'],
+                'excerpt' => self::truncateExcerpt($row['body']),
+                'score' => (float) $row['score'],
+            ],
+            $stmt->fetchAll(PDO::FETCH_ASSOC)
+        );
+    }
+
+    /**
+     * Every distinct page title in the corpus, tokenized and stopword-
+     * filtered into a lookup set — recomputed on every call rather than
+     * cached, since this only ever runs once per session (turn 1) against
+     * a corpus of ~100 rows; caching would be complexity with nothing real
+     * to buy.
+     *
+     * @return array<string, true>
+     */
+    private function curriculumTitleVocabulary(): array
+    {
+        $titles = $this->pdo->query('SELECT DISTINCT title FROM curriculum_chunks')->fetchAll(PDO::FETCH_COLUMN);
+        $vocabulary = [];
+        foreach ($titles as $title) {
+            if (!preg_match_all('/[\p{L}\p{N}]+/u', $title, $matches)) {
+                continue;
+            }
+            foreach ($matches[0] as $word) {
+                $lower = mb_strtolower($word);
+                if (!in_array($lower, self::FTS_STOPWORDS, true)) {
+                    $vocabulary[$lower] = true;
+                }
+            }
+        }
+        return $vocabulary;
+    }
+
+    private static function truncateExcerpt(string $body): string
+    {
+        $trimmed = trim($body);
+        return mb_strlen($trimmed) <= self::CONCEPT_EXCERPT_MAX_CHARS
+            ? $trimmed
+            : mb_substr($trimmed, 0, self::CONCEPT_EXCERPT_MAX_CHARS) . '…';
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Maintenance (bin/reset_db.php, bin/backup_db.php)

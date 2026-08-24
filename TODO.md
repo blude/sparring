@@ -114,9 +114,16 @@ Rationale: the exhibition offers a great sneaky opportunity to collect feedback 
   `tests/smoke_curriculum_retrieval.php`'s documented case 2 known gap.
 - [ ] Tailor the exhibition's opening prompts (`OPENING_PROMPTS` in
   `config.php`) to steer visitor phrasing toward language the curriculum
-  corpus actually surfaces well — ties into wiring `Store::searchCurriculum()`
-  into actual generation (still not built, see `bin/import_curriculum.php`'s
-  docblock).
+  corpus actually surfaces well — turn-1 auto-grounding is wired in now
+  (`Store::searchCurriculumConcepts()`, `Sparring::processTurn`, spec's
+  TF-03), so this is about improving what it finds, not enabling it.
+- [ ] English contributions can coincidentally match German page titles
+  carrying English loanwords (`Use`, `Case`, `System`, `Force`, `Service`,
+  `Build`) — G-04 supports both languages, but `searchCurriculumConcepts()`
+  isn't language-aware. Non-blocking (excerpts are never asserted as
+  fact); upgrade path is detecting language before grounding, or
+  excluding titles whose words double as common English ones. See
+  `Store::searchCurriculumConcepts()`'s ponytail note and spec TF-03.
 
 # Done
 

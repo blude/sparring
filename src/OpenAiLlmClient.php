@@ -48,10 +48,39 @@ final class OpenAiLlmClient extends AbstractLlmClient
     |--------------------------------------------------------------------------
     */
 
-    /** TO-01, same two-attempt policy as AnthropicLlmClient::generateResponse(). */
-    public function generateResponse(array $priorExchanges, string $newContribution): string
+    /**
+     * Same turn-1 curriculum grounding as AnthropicLlmClient::buildSystemBlocks()
+     * — see that method's doc for why the static prompt and any per-turn
+     * grounding text stay in separate messages. OpenAI's chat-completions
+     * shape takes multiple system-role messages rather than Anthropic's
+     * block array, but the intent is identical.
+     *
+     * ponytail: verified against the real Anthropic API for buildSystemBlocks()
+     * (see AnthropicLlmClient's doc), but NOT verified live here — no
+     * OPENAI_API_KEY configured to test against. Two role:system messages
+     * is convention for OpenAI's own API, not a documented contract the way
+     * Anthropic's system array is, and this client also targets OpenAI-
+     * compatible local servers (LM Studio etc. — see createLlmClient()'s
+     * doc in config.php), which are exactly where a second system message
+     * is most likely to be rejected or silently merged wrong. If a target
+     * turns out not to honor it: concatenate $groundingContext into the
+     * first message's content instead of appending a second message.
+     *
+     * @return list<array{role: string, content: string}>
+     */
+    public static function buildSystemMessages(string $sparringPrompt, ?string $groundingContext): array
     {
-        $messages = [['role' => 'system', 'content' => $this->sparringPrompt]];
+        $messages = [['role' => 'system', 'content' => $sparringPrompt]];
+        if ($groundingContext !== null && $groundingContext !== '') {
+            $messages[] = ['role' => 'system', 'content' => $groundingContext];
+        }
+        return $messages;
+    }
+
+    /** TO-01, same two-attempt policy as AnthropicLlmClient::generateResponse(). */
+    public function generateResponse(array $priorExchanges, string $newContribution, ?string $groundingContext = null): string
+    {
+        $messages = self::buildSystemMessages($this->sparringPrompt, $groundingContext);
         foreach ($priorExchanges as $exchange) {
             $messages[] = ['role' => 'user', 'content' => $exchange['visitorContribution']];
             $messages[] = ['role' => 'assistant', 'content' => $exchange['sparringResponse']];
