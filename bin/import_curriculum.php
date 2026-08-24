@@ -26,14 +26,16 @@ require __DIR__ . '/../src/Store.php';
 /**
  * One markdown file -> one curriculum chunk. A leading `---`...`---` front
  * matter block is stripped so it doesn't pollute the indexed/prompt-facing
- * body — best-effort line matching, not a YAML parser; front-matter fields
- * are never read for anything. An unterminated front-matter block (opens
- * with `---` but no closing line) is left untouched rather than guessed at.
- * Title is the first ATX H1 found anywhere in the body after stripping
- * (not just the first line — a file can open with plain prose before its
- * heading), else a filename-derived fallback; the H1 line (if any) is left
- * in $body too — simpler than surgically removing it, and harmless
- * duplication.
+ * body — best-effort line matching, not a YAML parser. One field IS read:
+ * `typ: stub` marks a redirect-only page (renamed/merged concept, body is
+ * just a pointer to the real page) and is rejected rather than indexed —
+ * every other front-matter field is still ignored. An unterminated
+ * front-matter block (opens with `---` but no closing line) is left
+ * untouched rather than guessed at. Title is the first ATX H1 found anywhere
+ * in the body after stripping (not just the first line — a file can open
+ * with plain prose before its heading), else a filename-derived fallback;
+ * the H1 line (if any) is left in $body too — simpler than surgically
+ * removing it, and harmless duplication.
  *
  * @return array{ok: bool, reason?: string, title?: string, body?: string, path?: string}
  */
@@ -45,6 +47,7 @@ function parse_curriculum_file(string $path, string $content): array
     // Windows-authored/exported markdown file.
     $content = str_replace(["\r\n", "\r"], "\n", $content);
     $lines = explode("\n", $content);
+    $frontMatterLines = [];
     if (($lines[0] ?? null) === '---') {
         $closingIndex = null;
         for ($i = 1; $i < count($lines); $i++) {
@@ -54,7 +57,13 @@ function parse_curriculum_file(string $path, string $content): array
             }
         }
         if ($closingIndex !== null) {
+            $frontMatterLines = array_slice($lines, 1, $closingIndex - 1);
             $lines = array_slice($lines, $closingIndex + 1);
+        }
+    }
+    foreach ($frontMatterLines as $line) {
+        if (preg_match('/^typ:\s*stub\s*$/', trim($line))) {
+            return ['ok' => false, 'reason' => 'stub page (typ: stub) — redirect only, not indexed'];
         }
     }
     $body = trim(implode("\n", $lines));

@@ -163,4 +163,12 @@ assert($crlf['ok'] === true);
 assert($crlf['title'] === 'Wicked Problems');
 assert(!str_contains($crlf['body'], 'tags:')); // front matter stripped despite CRLF
 
+// typ: stub -> rejected regardless of body content (redirect-only page, not indexed)
+$stub = parse_curriculum_file('/some/dir/x.md', "---\nname: Old Name\ntyp: stub\n---\n# Old Name (Stub)\n\nMoved elsewhere.\n");
+assert($stub === ['ok' => false, 'reason' => 'stub page (typ: stub) — redirect only, not indexed']);
+
+// typ: konzept (or any non-stub value) -> not rejected, front matter still stripped as usual
+$nonStub = parse_curriculum_file('/some/dir/x.md', "---\nname: X\ntyp: konzept\n---\n# X\n\nBody.\n");
+assert($nonStub['ok'] === true);
+
 echo "smoke_domain: ok\n";
