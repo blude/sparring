@@ -1,6 +1,6 @@
 /*
  * SE-01 only (arena.php never loads this — no user gesture on the wall
- * to unlock AudioContext). Engine is ZzFXMicro (assets/zzfx.min.js,
+ * to unlock AudioContext). Engine is ZzFXMicro (assets/vendor/zzfx.min.js,
  * vendored, MIT license — https://github.com/KilledByAPixel/ZzFX), loaded
  * before this file. It declares zzfx/zzfxX/zzfxV via top-level `let`, not
  * as window properties, so they're referenced bare here, not via `window.`.

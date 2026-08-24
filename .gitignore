@@ -10,3 +10,5 @@
 /bin/deploy.env
 
 /workspace-local/
+
+/evals/sparring/sparring-workspace/

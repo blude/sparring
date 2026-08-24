@@ -19,6 +19,12 @@ final class Sparring
     ) {
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Session state
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * TI-01/TI-03: "unknown or expired" is treated identically everywhere it's checked.
      * $now defaults to time() — injectable so a test can check the TTL boundary
@@ -41,6 +47,12 @@ final class Sparring
         return 'open';
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Turn processing (TF-01)
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * TF-01: everything between a visitor pressing submit and a response
      * returning. Returns ['status' => ..., ...] rather than throwing, because
@@ -53,8 +65,17 @@ final class Sparring
      * the turn is not counted, and the visitor can edit and resubmit. This
      * satisfies SE-01 G-04 / SE-03 G-04 literally; it does not end the
      * session, per the user's resolution of the AP-05 vs G-04 conflict.
+     *
+     * $replyToExchangeId: QR-reply flow — only honored when this is the
+     * session's first turn (turnCount === 0); silently ignored on any later
+     * turn (stale chip left on screen, or a direct API call — both just fall
+     * back to an ordinary turn, no error surfaced). When honored, the quoted
+     * text is re-resolved here via Store::getQuotableExchange() — the id is
+     * the only thing that crosses the trust boundary, a client-supplied quote
+     * string is never trusted. An unknown/non-displayable id resolves to
+     * null and is likewise treated as an ordinary turn.
      */
-    public function processTurn(string $sessionId, string $rawContribution): array
+    public function processTurn(string $sessionId, string $rawContribution, ?int $replyToExchangeId = null): array
     {
         if ($this->llm === null || $this->rateLimiter === null) {
             throw new LogicException('processTurn needs an LlmClientInterface and RateLimiter');
@@ -92,19 +113,41 @@ final class Sparring
         // FS-01-7: prior exchanges as conversational context.
         $priorExchanges = $this->store->getExchanges($sessionId);
 
+        // QR-reply flow (see method doc above): only ever meaningful on turn 1.
+        // The quote is prepended to $storedContribution — what's persisted,
+        // shown in the chat bubble/wall, and sent to the LLM — but never to
+        // $contribution itself, which stays the visitor's own typed words for
+        // the length check above (already run) and scenario derivation below
+        // (a quote would otherwise hijack the wall's "scenario" heading).
+        // Label prefix ("Replying to:" / dojo.replyQuote.label, same key as
+        // the pre-send chip's heading): a cue for the model (not just the
+        // human reader) that the quoted line is someone else's prior
+        // response, not this visitor's own words. t() resolves off this
+        // request's own locale (query/cookie/Accept-Language — see
+        // resolve_locale()), i.e. the replying visitor's language, same as
+        // dojo.js's withQuotePrefix builds for the optimistic bubble via
+        // window.STRINGS.dojo.replyQuoteLabel — kept in sync deliberately.
+        $quotedExchange = ($replyToExchangeId !== null && $session['turnCount'] === 0)
+            ? $this->store->getQuotableExchange($replyToExchangeId)
+            : null;
+        $storedContribution = $quotedExchange !== null
+            ? t('dojo.replyQuote.label') . " \"{$quotedExchange['text']}\"\n\n$contribution"
+            : $contribution;
+
         // FS-01-8: the provider call. Every failure path throws GenerationFailedException.
         $generationStart = microtime(true);
         try {
-            $response = $this->llm->generateResponse($priorExchanges, $contribution);
+            $response = $this->llm->generateResponse($priorExchanges, $storedContribution);
         } catch (GenerationFailedException) {
             return ['status' => 'generation-failed', 'rateLimitRemaining' => $rateLimit['remaining']];
         }
         $generationMs = (int) round((microtime(true) - $generationStart) * 1000);
 
         // FS-01-9/10: write the exchange, advance the turn count, in one operation (QR-07).
-        $exchange = $this->store->appendExchange($sessionId, $contribution, $response);
+        $exchange = $this->store->appendExchange($sessionId, $storedContribution, $response, $quotedExchange['exchangeId'] ?? null);
 
-        // FS-01-11: first exchange derives the scenario, written once (TF-05).
+        // FS-01-11: first exchange derives the scenario, written once (TF-05) —
+        // from the clean $contribution, not the quote-prefixed $storedContribution.
         if ($exchange['position'] === 1) {
             $this->store->setScenario($sessionId, derive_scenario_statement($contribution), 'first-contribution');
         }
@@ -120,6 +163,12 @@ final class Sparring
             'generationMs' => $generationMs,
         ];
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Title generation
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Generates and persists a session's header title, derived from its
@@ -163,6 +212,12 @@ final class Sparring
         $this->store->setTitle($sessionId, $title);
         return $title;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Moderation (TF-02)
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * TF-02: whether a contribution may appear on the public surface. Never
@@ -216,6 +271,12 @@ final class Sparring
         return (bool) preg_match('/\b(' . implode('|', $terms) . ')\b/iu', $contribution);
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Display assembly (TF-04)
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * TF-04: assembles the ordered items the projection renders. Every decision
      * about what appears on the wall is made here, so SE-02 carries no policy (its C-02).
@@ -241,6 +302,8 @@ final class Sparring
                 'sparringResponse' => $exchange['sparringResponse'],
                 'origin' => $session['origin'],
                 'recencyRank' => $position++,
+                'exchangeId' => $exchange['id'],
+                'replyCount' => $exchange['replyCount'],
             ];
         }
 

@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $body = json_decode(file_get_contents('php://input') ?: '', true);
-if (!is_array($body) || !isset($body['sessionId'], $body['contribution']) || !is_string($body['sessionId']) || !is_string($body['contribution'])) {
+if (!is_array($body) || !isset($body['sessionId'], $body['contribution']) || !is_string($body['sessionId']) || $body['sessionId'] === '' || !is_string($body['contribution'])) {
     http_response_code(400);
     echo json_encode(['error' => 'malformed-request']);
     exit;
@@ -30,7 +30,14 @@ $llm = createLlmClient();
 $rateLimiter = new RateLimiter($store);
 $sparring = new Sparring($store, $llm, $rateLimiter);
 
-$result = $sparring->processTurn($body['sessionId'], $body['contribution']);
+// QR-reply flow: optional, malformed value is nulled rather than a 400 —
+// same "untrusted value in, one of the known-good shapes out" idiom as
+// resolve_opening_message() in config.php.
+$replyToExchangeId = isset($body['replyToExchangeId']) && is_numeric($body['replyToExchangeId'])
+    ? (int) $body['replyToExchangeId']
+    : null;
+
+$result = $sparring->processTurn($body['sessionId'], $body['contribution'], $replyToExchangeId);
 
 // Every non-'ok' status is an expected condition (TI-02's own error-case list),
 // mapped to the HTTP code closest in meaning — none of these are 5xx faults.

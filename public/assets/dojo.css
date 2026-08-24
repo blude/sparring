@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'RethinkSans';
+    src: url('fonts/RethinkSans-ExtraBoldItalic.woff2') format('woff2');
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
+}
+
 /* QR-03: reachable one-handed on a small phone, retention decision answerable
    without scrolling. Everything else here is a placeholder — refined later. */
 :root {
@@ -19,7 +27,7 @@ body {
        resolves to San Francisco on Apple devices, a visibly different
        typeface. Helvetica Neue is a standard iOS/macOS system font, so
        this costs nothing and matches the mockups directly. */
-    font-family: 'Helvetica Neue', 'Helvetica', system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
     display: flex;
     flex-direction: column;
     height: 100vh; /* fallback for browsers without dvh support */
@@ -91,7 +99,23 @@ main {
 #top-bar-trailing {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
     flex-shrink: 0;
+}
+
+.locale-switcher {
+    display: flex;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+}
+.locale-switcher a,
+.locale-switcher span {
+    color: #999;
+    text-decoration: none;
+}
+.locale-switcher .locale-current {
+    color: #111;
+    font-weight: 700;
 }
 
 #avatar-btn {
@@ -160,7 +184,14 @@ main {
 #history .turn p { margin: 0 0 0.5rem; }
 #history .turn p:last-child { margin-bottom: 0; }
 #history .turn .diagram svg { max-width: 100%; height: auto; }
-#history .visitor { align-self: flex-end; background: var(--bubble-visitor-bg); color: var(--bubble-visitor-text); }
+/* white-space: pre-wrap so a QR-reply's "quote"\n\n reply textContent (see
+   dojo.js's withQuotePrefix) actually shows the blank line separating the
+   quoted text from the visitor's own reply, instead of the default
+   `normal` collapsing it to one run-on line — still plain textContent, no
+   markup, purely a rendering difference. Scoped to .visitor only: sparring
+   turns render through SparringMermaid, whose own <p> spacing this must
+   not touch. */
+#history .visitor { align-self: flex-end; background: var(--bubble-visitor-bg); color: var(--bubble-visitor-text); white-space: pre-wrap; }
 #history .sparring { align-self: flex-start; background: var(--bubble-sparring-bg); color: var(--bubble-sparring-text); }
 
 /* Status turns (formerly the separate #status element — QR-02's "no
@@ -198,37 +229,51 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
     width: min(88vw, 296px);
-    opacity: 1; /* per the mockup — dimmed, secondary to the input surface */
+    opacity: 0.8;
 }
-
-/* Diagonal-cut backing shapes peeking out behind the card — both are
-   effectively a plain rect sheared with skewY (Shadow 1's edges are exact
-   parallelogram lengths; Shadow 2's are within ~1%, imperceptible),
-   so plain skewed divs replace the two exported SVGs. Height is each
-   shape's own left-edge length (skewY only shears x-based, so left/right
-   edges stay vertical — the height doesn't change, only the top/bottom
-   slant does), width/angle from the same source path data. */
-#playbook-shape-1, #playbook-shape-2 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 296px;
-    z-index: -1;
-}
-#playbook-shape-1 { height: 335px; background: #eaeaea; transform: translate(-50%, -50%) skewY(-11.27deg); }
-#playbook-shape-2 { height: 304px; background: #dddddd; transform: translate(-50%, -50%) skewY(-5.41deg); }
 
 #playbook-body {
+    position: relative;
     background: #fff;
-    padding: 2rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
+    border-radius: 1rem;
+    border: 1px solid #eee;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
 }
 
 #playbook-heading { margin: 0; font-size: 1.125rem; font-weight: 700; color: #666; text-align: center; }
+
+#playbook-heading::before {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 1rem;
+    background: #ccc;
+    position: absolute;
+    left: 1.5rem;
+    top: -0.5rem;
+    opacity: 0.8;
+    transform: rotate(-2deg);
+    border-radius: 1px;
+}
+
+#playbook-heading::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 1rem;
+    background: #ccc;
+    position: absolute;
+    right: 1.5rem;
+    top: -0.5rem;
+    opacity: 0.8;
+    transform: rotate(-1deg);
+    border-radius: 1px;
+}
 
 #playbook-rules {
     margin: 0;
@@ -237,7 +282,7 @@ main {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 #playbook-rules li { display: flex; align-items: center; gap: 1rem; }
@@ -318,6 +363,60 @@ main {
     border-radius: 0.5rem;
 }
 #consent-confirm:disabled { opacity: 0.5; }
+
+/* QR-reply flow: non-editable quote of the AI response being replied to,
+   shown above #composer-row. Never inserted into the textarea (never counted
+   against CONTRIBUTION_MAX_CHARS) — see dojo.js's showReplyQuote/hideReplyQuote. */
+#reply-quote {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-bottom: 0.5rem;
+    padding: 0.6rem 2rem 0.6rem 0.85rem; /* right padding clears the cancel button */
+    background: var(--bubble-sparring-bg);
+    border-radius: 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.35;
+}
+
+/* #reply-quote's own `display: flex` above outranks the UA stylesheet's
+   [hidden] { display: none } (author rule beats UA default regardless of
+   attribute state) — without this, toggling the `hidden` attribute in JS
+   (showReplyQuote/hideReplyQuote) has no visible effect at all. Same fix
+   already applied to #title-card below. */
+#reply-quote[hidden] { display: none; }
+
+#reply-quote-label {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #666;
+}
+
+#reply-quote-text {
+    margin: 0;
+    /* long AI responses are still fully sent to the LLM as context — this
+       clamp is cosmetic only, it never truncates what's actually stored/sent. */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#reply-quote-cancel {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1;
+    font-size: 1.1rem;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+}
 
 #composer {
     position: relative;
@@ -432,7 +531,11 @@ main {
     mask-image: url('img/glove.svg');
 }
 
-/* --- Juiciness (TODO.md JUICYNESS) --- */
+/*
+|--------------------------------------------------------------------------
+| Juiciness (TODO.md JUICYNESS)
+|--------------------------------------------------------------------------
+*/
 
 .particle-burst {
     position: fixed;
@@ -461,17 +564,16 @@ main {
 
 #composer.wiggling { animation: wiggle 350ms ease; }
 
-/* --- Title Card (QR-02) --- */
-/* RethinkSans is a custom font, not a system font — the mockups use it for
-   the title card's "SPAR!" wordmark. It's a open-source font, so it's not bundled
-   with the OS; we self-host it here. */
-@font-face {
-    font-family: 'RethinkSans';
-    src: url('fonts/RethinkSans-ExtraBoldItalic.woff2') format('woff2');
-    font-weight: 800;
-    font-style: italic;
-    font-display: swap;
-}
+/*
+|--------------------------------------------------------------------------
+| Title Card (QR-02)
+|--------------------------------------------------------------------------
+|
+| RethinkSans is a custom font, not a system font — the mockups use it for
+| the title card's "SPAR!" wordmark. It's a open-source font, so it's not
+| bundled with the OS; we self-host it here.
+|
+*/
 
 /* Floating box, not full-screen — width fixed so translateX(-100%/100%)
    below lands exactly at the box's own edges, and overflow:hidden clips

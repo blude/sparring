@@ -1,0 +1,8 @@
+{
+  "id": "meta-question",
+  "opener": "Wait, what even is Sparring? How does this work?",
+  "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+  "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+  "turns": 4,
+  "source": "prompts/sparring.md <edge_cases> — meta questions should get the practice-fight analogy directly, not an explanation of the pedagogical mapping"
+}

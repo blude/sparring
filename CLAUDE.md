@@ -16,8 +16,9 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   why), stops on first failure. Individually — PHP: `php tests/smoke_store.php`
   (`Store`), `php tests/smoke_llm_client.php` (provider dispatch +
   `OpenAiLlmClient`/`AnthropicLlmClient`'s pure response/failure-classification
-  helpers), `php tests/smoke_sparring.php` (`Sparring::processTurn`'s gates +
-  `sessionStateFor`/`isExpired`), `php tests/smoke_domain.php`
+  helpers), `php tests/smoke_sparring.php` (`Sparring::processTurn`'s gates,
+  `sessionStateFor`/`isExpired`, and `RateLimiter::resolveClientOrigin`),
+  `php tests/smoke_domain.php`
   (`derive_scenario_statement`, `AbstractLlmClient::stripDelimiterTag`,
   `bin/import_pilot.php::validate_transcript`,
   `bin/import_curriculum.php::parse_curriculum_file`). JS (Node only to run the
@@ -30,8 +31,17 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   `public/assets/arena.js`), and `node tests/smoke_sfx.js` (note-duration/
   chord-detection logic in `public/assets/sfx.js`).
 - No linter configured — check changed files with `php -l <file>`.
+- `tests/run.sh` is plumbing only — it never calls a real LLM. Conversational/
+  pedagogical quality of `prompts/sparring.md` itself is covered separately by
+  `evals/sparring/` (multi-turn simulated-visitor eval suite, real Anthropic
+  calls, own `README.md`), not part of `tests/run.sh`.
 
 ## Conventions
+- Commits follow [Conventional Commits](https://www.conventionalcommits.org/):
+  `type(scope)?: subject`, types `feat fix docs style refactor perf test chore
+  build ci revert`, imperative subject, one logical change per commit. A
+  `.githooks/commit-msg` hook enforces this — `composer install` wires
+  `core.hooksPath` to it automatically (see README Setup).
 - `bin/*.php` CLI scripts: CLI-only guard (`php_sapi_name() !== 'cli'`),
   `require config.php` + relevant `src/*.php`, plain positional `$argv[1]`
   or `in_array('--flag', $argv, true)` — no `getopt()`, no CLI arg library.
@@ -45,16 +55,18 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
 
 ## spec/ — design documentation
 Four-level framework (L0 brief, L1 solution, L2 system, L3 per-element),
-ID scheme (`BG-`, `SG-`, `G-`, `UC-`, `TF-`, `QR-`, `C-`, etc.) —
-**hand-written Markdown mimicking StrictDoc IDs, not a real validated
-StrictDoc project** (no `.sgra`/`.sdoc` files, don't run `strictdoc` here).
+ID scheme (`BG-`, `SG-`, `G-`, `UC-`, `TF-`, `QR-`, `C-`, etc.), written
+in AsciiDoc and built to `public/spec/` with `bin/build_spec.sh`.
 - Only behavioral/decision content gets modeled. Static pages
   (`privacy.php`, `terms.php`) and single-purpose CLI ops scripts
   (`bin/export.php`) are **intentionally unmodeled** — covered by existing
-  generic constraint language (see `C-04` in `L3-SE-03-backend-service.md`)
+  generic constraint language (see `C-04` in `L3-SE-03-backend-service.adoc`)
   rather than a dedicated UC/TF/QR that would just restate its parent.
 - New feature touching visible behavior? Check whether spec/ needs an
   update — ask if unsure.
+- `prompts/sparring.md` is modeled as `SE-04` (`spec/L3-SE-04-system-prompt.adoc`)
+  — a content-supplying element with no runtime interface of its own.
+  Behavioral edits to the prompt should be checked against it too.
 
 ## prompts/sparring.md
 Editing this file: log it in `prompts/CHANGELOG.md` under `## Unreleased`.

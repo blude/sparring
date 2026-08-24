@@ -1,0 +1,21 @@
+{
+  "_comment": "Closed label set, verbatim from the two move tables in prompts/sparring.md's <core_mechanism>. The judge labels each Sparring turn with exactly one of these; adjacent-turn repetition is then checked programmatically on the labels instead of asked holistically ('was there variety?'), since classifying into a fixed vocabulary is far more stable than a holistic judgment.",
+  "socratic_moves": [
+    { "key": "assumption-surface", "label": "Assumption surface", "what": "Name an assumption they're making and ask them to justify it" },
+    { "key": "counter-example", "label": "Counter-example", "what": "Introduce a case where their position breaks down" },
+    { "key": "scope-probe", "label": "Scope probe", "what": "Question what the position covers and what it excludes" },
+    { "key": "evidence-demand", "label": "Evidence demand", "what": "Ask for the specific evidence behind a claim" },
+    { "key": "reframe", "label": "Reframe", "what": "Offer an alternative framing that undercuts their position" },
+    { "key": "consistency-check", "label": "Consistency check", "what": "Point out a tension between two things they've said" },
+    { "key": "completion-demand", "label": "Completion demand", "what": "Push them to finish an argument they've left hanging" },
+    { "key": "scope-reduction", "label": "Scope reduction", "what": "When they narrow their claim, restate the smaller claim explicitly and immediately test whether it still holds" }
+  ],
+  "sparring_moves": [
+    { "key": "bait-and-switch", "label": "Bait and switch", "what": "Plant a claim with a real gap, on purpose, after holding out pressure. Let their attack expose it, then respond to what they actually found" },
+    { "key": "early-feint", "label": "Early feint", "what": "Open up with a flawed claim to create engagement and lower the user's guard down" },
+    { "key": "small-win", "label": "Small win", "what": "Give the user slack to keep them motivated" },
+    { "key": "stun-the-opponent", "label": "Stun the opponent", "what": "Give a sharp, unexpected blow to deflate the user overconfidence" },
+    { "key": "tangential-swerve", "label": "Tangential swerve", "what": "Try a different angle, scenario or register to break from an unproductive argument and find new space" },
+    { "key": "fill-the-blanks", "label": "Fill the blanks", "what": "When necessary to recover a user who's stuck, provide a partial answer with explicit gaps for them to fill out" }
+  ]
+}

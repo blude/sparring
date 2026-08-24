@@ -18,21 +18,41 @@ const source = fs.readFileSync(path.join(__dirname, '../public/assets/juicy.js')
 eval(source);
 const isJuicyOn = window.isJuicyOn;
 
-// --- default: no window.JUICY set at all -> fails open ---
+/*
+|--------------------------------------------------------------------------
+| default: no window.JUICY set at all -> fails open
+|--------------------------------------------------------------------------
+*/
+
 window.JUICY = undefined;
 assert.strictEqual(isJuicyOn('punch'), true);
 
-// --- global switch off overrides every per-effect flag ---
+/*
+|--------------------------------------------------------------------------
+| global switch off overrides every per-effect flag
+|--------------------------------------------------------------------------
+*/
+
 window.JUICY = { enabled: false, punch: true, sound: true };
 assert.strictEqual(isJuicyOn('punch'), false);
 assert.strictEqual(isJuicyOn('sound'), false);
 
-// --- global on, one effect off: only that effect is suppressed ---
+/*
+|--------------------------------------------------------------------------
+| global on, one effect off: only that effect is suppressed
+|--------------------------------------------------------------------------
+*/
+
 window.JUICY = { enabled: true, punch: false, sound: true };
 assert.strictEqual(isJuicyOn('punch'), false);
 assert.strictEqual(isJuicyOn('sound'), true);
 
-// --- an effect key absent from the object still fails open ---
+/*
+|--------------------------------------------------------------------------
+| an effect key absent from the object still fails open
+|--------------------------------------------------------------------------
+*/
+
 window.JUICY = { enabled: true, punch: false };
 assert.strictEqual(isJuicyOn('titleCard'), true);
 

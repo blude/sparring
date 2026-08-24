@@ -19,6 +19,12 @@ final class AnthropicLlmClient extends AbstractLlmClient
 {
     private Client $client;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Setup
+    |--------------------------------------------------------------------------
+    */
+
     public function __construct(?string $apiKey = null)
     {
         $key = $apiKey ?? (getenv(ANTHROPIC_API_KEY_ENV) ?: null);
@@ -28,6 +34,12 @@ final class AnthropicLlmClient extends AbstractLlmClient
         $this->client = new Client(apiKey: $key);
         $this->loadPrompts();
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Failure classification
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Pure exception-class -> outcome mapping, mirroring
@@ -51,6 +63,12 @@ final class AnthropicLlmClient extends AbstractLlmClient
             default => null, // APIConnectionException (not an APIStatusException at all): also retryable
         };
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Generation (TO-01)
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * TO-01. $priorExchanges: ordered list of ['visitorContribution' => ..., 'sparringResponse' => ...].
@@ -77,7 +95,13 @@ final class AnthropicLlmClient extends AbstractLlmClient
                 $response = $this->client->messages->create(
                     model: GENERATION_MODEL,
                     maxTokens: 1024,
-                    system: $this->sparringPrompt,
+                    // Cached: static per session (only conversation history and the new
+                    // contribution change turn to turn), well over the ~1,024-token
+                    // caching minimum. Without cacheControl this re-bills full input
+                    // cost on every turn instead of a cached-read discount (SE-04 C-03).
+                    system: [
+                        ['type' => 'text', 'text' => $this->sparringPrompt, 'cacheControl' => ['type' => 'ephemeral']],
+                    ],
                     messages: $messages,
                     requestOptions: ['timeout' => (float) GENERATION_TIMEOUT_SECONDS, 'maxRetries' => 0],
                     // Model default-enables extended thinking. Measured across a full
@@ -115,6 +139,12 @@ final class AnthropicLlmClient extends AbstractLlmClient
 
         throw new GenerationFailedException('generation failed after retries', 0, $lastError);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Classification (TO-02)
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * TO-02 classification half. Single attempt, no retry — TF-02 fails closed on
@@ -168,6 +198,12 @@ final class AnthropicLlmClient extends AbstractLlmClient
 
         throw new RuntimeException('classification response missing a valid classification');
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Title generation
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Generates a short (TITLE_MAX_CHARS) header title from a session's first

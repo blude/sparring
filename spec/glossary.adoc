@@ -1,0 +1,63 @@
+= Glossary
+Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
+v.1.0, 2026-06-19
+:toc: left
+:toclevels: 3
+:icons: font
+:sectanchors:
+:sectnums:
+
+xref:index.adoc[Index] / *Glossary*
+
+== Solution Design Concept
+
+[options="header", cols="1,4"]
+|===
+| Prefix | Description
+| BG-xx | Business Goal
+| VP-xx | Value Proposition
+| VCA-xx | Value Creation Architecture
+| BE-xx | Business Element
+| BP-xx | Business Process
+| PS-xx-x | Business Process Step
+| PA-xx-x | Business Process Step Alternative
+| BQR-xx | Business Quality Requirements
+| BC-xx | Business Constraints
+|===
+
+== System Design Concept
+
+[options="header", cols="1,4"]
+|===
+| Prefix | Description
+| SG-xx | System Goal
+| AP-xx | System Architecture Principle
+| UT-xx | User Type
+| SE-xx | Software Element
+| HE-xx | Hardware Element
+| SSc-xx | System Scenario
+| SSt-xx-x | System Scenario Step
+| SA-xx-x | System Scenario Step Alternative
+| SQR-xx | System Quality Requirement
+| SC-xx | System Constraint
+|===
+
+== Element Design Concept
+
+[options="header", cols="1,4"]
+|===
+| Prefix | Description
+| G-xx | Goal
+| UC-xx | Use Case
+| ST-xx-x | Use Case Step
+| EX-xx-x | Use Case Step Alternative
+| UI-xx | User Interface
+| TF-xx | Technical Function
+| FS-xx-x | Technical Function Step
+| FA-xx-x | Technical Function Step Alternative
+| TI-xx | Technical Interface (inbound)
+| TO-xx | Technical Interface (outbound)
+| E-xx | Entity
+| QR-xx | Quality Requirement
+| C-xx | Constraint
+|===

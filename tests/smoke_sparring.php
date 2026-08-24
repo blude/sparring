@@ -23,9 +23,11 @@ final class FakeLlmClient implements LlmClientInterface
     public bool $throwOnClassify = false;
     public bool $throwOnGenerate = false;
     public string $cannedResponse = 'What makes you think it has a clean answer?';
+    public ?string $lastNewContribution = null; // QR-reply flow: what processTurn actually sent to the LLM
 
     public function generateResponse(array $priorExchanges, string $newContribution): string
     {
+        $this->lastNewContribution = $newContribution;
         if ($this->throwOnGenerate) {
             throw new GenerationFailedException('fake generation failure');
         }
@@ -60,7 +62,11 @@ function withOrigin(string $addr, callable $fn): void
     $fn();
 }
 
-// --- pure helpers, no DB/network at all ---
+/*
+|--------------------------------------------------------------------------
+| pure helpers, no DB/network at all
+|--------------------------------------------------------------------------
+*/
 
 // sessionStateFor: 3-branch decision, pure given a plain array.
 assert($sparring->sessionStateFor(['tosAgreed' => null, 'turnCount' => 0]) === 'awaiting-decision');
@@ -81,7 +87,27 @@ $fixedStale = gmdate('Y-m-d\TH:i:s\Z', $fixedNow - (SESSION_TTL_HOURS * 3600 + 6
 assert($sparring->isExpired(['lastActiveAt' => $fixedFresh], $fixedNow) === false);
 assert($sparring->isExpired(['lastActiveAt' => $fixedStale], $fixedNow) === true);
 
-// --- processTurn gates, each on its own rate-limit bucket ---
+// RateLimiter::resolveClientOrigin: XFF multi-hop takes the LAST entry (see
+// its own docblock — nginx here appends the real IP rather than overwriting).
+unset($_SERVER['HTTP_X_FORWARDED_FOR']);
+$_SERVER['REMOTE_ADDR'] = '203.0.113.9';
+assert(RateLimiter::resolveClientOrigin() === '203.0.113.9'); // no XFF: falls back to REMOTE_ADDR
+$_SERVER['HTTP_X_FORWARDED_FOR'] = '198.51.100.1';
+assert(RateLimiter::resolveClientOrigin() === '198.51.100.1'); // single hop
+$_SERVER['HTTP_X_FORWARDED_FOR'] = '1.2.3.4, 2.214.252.236';
+assert(RateLimiter::resolveClientOrigin() === '2.214.252.236'); // multi-hop: last, not first
+$_SERVER['HTTP_X_FORWARDED_FOR'] = ' 1.2.3.4 ,  2.214.252.236  ';
+assert(RateLimiter::resolveClientOrigin() === '2.214.252.236'); // surrounding whitespace trimmed
+$_SERVER['HTTP_X_FORWARDED_FOR'] = '';
+assert(RateLimiter::resolveClientOrigin() === '203.0.113.9'); // empty XFF: falls back to REMOTE_ADDR too
+unset($_SERVER['HTTP_X_FORWARDED_FOR'], $_SERVER['REMOTE_ADDR']);
+assert(RateLimiter::resolveClientOrigin() === 'unknown'); // neither set
+
+/*
+|--------------------------------------------------------------------------
+| processTurn gates, each on its own rate-limit bucket
+|--------------------------------------------------------------------------
+*/
 
 // FS-01-9/10/11: happy path, exchange persisted, scenario set once (first turn only).
 withOrigin('10.0.0.1', function () use ($store, $sparring) {
@@ -180,8 +206,9 @@ withOrigin('10.0.0.8', function () use ($store, $sparring) {
     assert($store->getSession($session['id'])['turnCount'] === TURN_ALLOWANCE); // not incremented further
 });
 
-// FS-01-1: rate limit exhausted. RATE_LIMIT_MAX_REQUESTS === TURN_ALLOWANCE here,
-// so the (max+1)th call always hits the rate gate first — it's checked before turn count.
+// FS-01-1: rate limit exhausted, well within TURN_ALLOWANCE. processTurn checks
+// the rate gate before turn count unconditionally, so this fires regardless of
+// how the two constants compare.
 withOrigin('10.0.0.9', function () use ($store, $sparring) {
     $session = $store->createSession('live');
     for ($i = 0; $i < RATE_LIMIT_MAX_REQUESTS; $i++) {
@@ -192,6 +219,46 @@ withOrigin('10.0.0.9', function () use ($store, $sparring) {
     $result = $sparring->processTurn($session['id'], 'over the limit');
     assert($result['status'] === 'rate-limited');
     assert($result['rateLimitRemaining'] === 0);
+});
+
+/*
+|--------------------------------------------------------------------------
+| QR-reply flow: processTurn's optional $replyToExchangeId
+|--------------------------------------------------------------------------
+*/
+
+// Honored on turn 1: quoted text is re-resolved server-side and prepended to
+// both what's persisted/returned (chat bubble, wall) and what the LLM sees —
+// the same string, so the two can never drift out of sync with each other.
+withOrigin('10.0.1.1', function () use ($store, $sparring, $llm) {
+    $quotedSession = $store->createSession('live');
+    $quoted = $store->appendExchange($quotedSession['id'], 'a first visitor', 'the quoted sparring response');
+    $store->setDisplayable($quotedSession['id'], true); // getQuotableExchange requires displayable
+
+    $replier = $store->createSession('live');
+    $result = $sparring->processTurn($replier['id'], 'I disagree.', $quoted['id']);
+    assert($result['status'] === 'ok');
+    $expected = "Replying to: \"the quoted sparring response\"\n\nI disagree.";
+    assert($result['exchange']['visitorContribution'] === $expected); // quote-prefixed, persisted as-is
+    assert($llm->lastNewContribution === $expected); // exact same string reached the LLM
+    assert($store->getQuotableExchange($quoted['id'])['text'] === 'the quoted sparring response'); // unchanged
+    assert($store->getExchanges($quotedSession['id'])[0]['replyCount'] === 1); // incremented exactly once
+
+    // Ignored on turn 2 of the same session — not the first turn anymore.
+    $result2 = $sparring->processTurn($replier['id'], 'a second turn', $quoted['id']);
+    assert($result2['status'] === 'ok');
+    assert($result2['exchange']['visitorContribution'] === 'a second turn'); // clean, no quote prefix
+    assert($llm->lastNewContribution === 'a second turn');
+    assert($store->getExchanges($quotedSession['id'])[0]['replyCount'] === 1); // unchanged
+});
+
+// Unknown/non-displayable id on turn 1 falls through silently as an ordinary turn.
+withOrigin('10.0.1.2', function () use ($store, $sparring, $llm) {
+    $session = $store->createSession('live');
+    $result = $sparring->processTurn($session['id'], 'a normal reply', 999999);
+    assert($result['status'] === 'ok');
+    assert($result['exchange']['visitorContribution'] === 'a normal reply');
+    assert($llm->lastNewContribution === 'a normal reply'); // no quote prefix — unresolved id, not honored
 });
 
 unlink($dbPath);

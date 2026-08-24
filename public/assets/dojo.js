@@ -15,30 +15,31 @@
  */
 window.SparringDojoOutcome = {
     resolveOutcome: function (status, moderationReason) {
+        var strings = window.STRINGS.dojo;
         switch (status) {
             case 'rate-limited':
-                return { message: 'Too many requests — wait a moment and try again.', restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
+                return { message: strings.outcomeRateLimited, restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
 
             case 'rejected':
-                return { message: 'That message is empty or too long — edit it and try again.', restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
+                return { message: strings.outcomeRejected, restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
 
             case 'content-flagged': {
                 // Coarse category only, never the exact reason — see
                 // spec/L3-SE-03-backend-service.md's note on this field.
-                var message = "That message can't be shown here — edit it and try again."; // fallback: classifier failure, real reason unknown
+                var message = strings.outcomeFlaggedGeneric; // fallback: classifier failure, real reason unknown
                 if (moderationReason === 'contains-personal-information') {
-                    message = "That message includes personal information and can't be shown here — edit it and try again.";
+                    message = strings.outcomeFlaggedPersonalInfo;
                 } else if (moderationReason === 'targets-real-person' || moderationReason === 'blocked-term') {
-                    message = "That message isn't appropriate for this exhibition — edit it and try again.";
+                    message = strings.outcomeFlaggedInappropriate;
                 }
                 return { message: message, restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
             }
 
             case 'session-unknown':
-                return { message: 'This session is no longer available — reload to start a new one.', restoreText: false, enableComposer: false, wiggle: false, sound: null };
+                return { message: strings.outcomeSessionUnknown, restoreText: false, enableComposer: false, wiggle: false, sound: null };
 
             default: // generation-failed, or anything unrecognised
-                return { message: 'The installation cannot respond right now — try again.', restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
+                return { message: strings.outcomeGenerationFailed, restoreText: true, enableComposer: true, wiggle: true, sound: 'fumble' };
         }
     },
 };
@@ -66,16 +67,26 @@ window.SparringDojoOutcome = {
     var avatarAliasEl = document.getElementById('avatar-alias');
     var newSessionBtn = document.getElementById('new-session-btn');
     var titleCardEl = document.getElementById('title-card');
+    var replyQuoteEl = document.getElementById('reply-quote');
+    var replyQuoteTextEl = document.getElementById('reply-quote-text');
+    var replyQuoteCancelBtn = document.getElementById('reply-quote-cancel');
 
     var sessionId = null;
-    var sessionState = null; // 'awaiting-decision' | 'open' | 'complete' | 'failed'
     var statusTurnEl = null; // the one managed "status" entry in #history, if any (see setHistoryStatus)
     var optimisticTurnEl = null; // visitor turn shown ahead of the server response (see submitContribution); pruned on any non-'ok' outcome
+    var pendingReplyQuote = null; // {exchangeId, text} — QR-reply flow; only ever set on a fresh session's first turn, cleared on cancel or on 'ok'
     var titleRequested = false; // guards the fire-and-forget /api/title fetch to once per page load (see handleContributionResult)
     var debugPanel = null;
     var lastDebugInfo = {};
 
-    // --- identity: avatar + alias, revealed only once consent is recorded ---
+    /*
+    |--------------------------------------------------------------------------
+    | Identity: avatar + alias
+    |--------------------------------------------------------------------------
+    |
+    | Revealed only once consent is recorded.
+    |
+    */
     function revealIdentity(id) {
         avatarBtn.textContent = window.SparringIdentity.avatar(id);
         avatarAliasEl.textContent = window.SparringIdentity.alias(id);
@@ -108,13 +119,53 @@ window.SparringDojoOutcome = {
     // feedback/evaluation dialog, not just bounce home. For now it still
     // navigates back to the home screen — confirmation dialog unchanged.
     newSessionBtn.addEventListener('click', function () {
-        if (window.confirm('End this session? Your current session will no longer be shown.')) {
+        if (window.confirm(window.STRINGS.dojo.confirmEndSession)) {
             sessionStorage.removeItem(DRAFT_KEY); // ending session should not leave next session's composer pre-filled
             window.location.href = '/';
         }
     });
 
-    // --- debug mode (?debug=1): surfaces values already computed server-side, nothing new to compute ---
+    /*
+    |--------------------------------------------------------------------------
+    | QR-reply flow: quote chip above the composer
+    |--------------------------------------------------------------------------
+    |
+    | Shown for a fresh session only (never on resumeSession — see
+    | createSession() below), never editable, never counted against
+    | CONTRIBUTION_MAX_CHARS since the quoted text never enters fieldEl.value.
+    |
+    */
+    function showReplyQuote(quote) {
+        pendingReplyQuote = quote;
+        replyQuoteTextEl.textContent = quote.text;
+        replyQuoteEl.hidden = false;
+    }
+
+    // Cancel button: full clear — nothing left to send, chip gone for good.
+    function cancelReplyQuote() {
+        pendingReplyQuote = null;
+        replyQuoteEl.hidden = true;
+    }
+
+    replyQuoteCancelBtn.addEventListener('click', cancelReplyQuote);
+
+    // Same text prepended into both the optimistic bubble (submitContribution)
+    // and the persisted exchange (Sparring::processTurn) — kept in one place
+    // so the two never drift out of sync with each other. Label comes from
+    // window.STRINGS (dojo.replyQuote.label via t(), i.e. this request's own
+    // locale) rather than a literal, matching Sparring::processTurn exactly.
+    function withQuotePrefix(quote, text) {
+        return window.STRINGS.dojo.replyQuoteLabel + ' "' + quote.text + '"\n\n' + text;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Debug mode (?debug=1)
+    |--------------------------------------------------------------------------
+    |
+    | Surfaces values already computed server-side, nothing new to compute.
+    |
+    */
     function updateDebugPanel(info) {
         if (!DEBUG) return;
         if (!debugPanel) {
@@ -128,10 +179,17 @@ window.SparringDojoOutcome = {
 
     fieldEl.setAttribute('maxlength', String(MAX_CHARS));
 
-    // --- rendering (TF-04): all content inserted as text, never markup (QR-04 /
-    // display QR-05 counterpart) — except a sparring turn's own ```mermaid fence,
-    // see mermaid-render.js for the narrowly-scoped exception. Visitor turns
-    // (role === 'visitor') and status turns always stay plain textContent. ---
+    /*
+    |--------------------------------------------------------------------------
+    | Rendering (TF-04)
+    |--------------------------------------------------------------------------
+    |
+    | All content inserted as text, never markup (QR-04 / display QR-05
+    | counterpart) — except a sparring turn's own ```mermaid fence, see
+    | mermaid-render.js for the narrowly-scoped exception. Visitor turns
+    | (role === 'visitor') and status turns always stay plain textContent.
+    |
+    */
     function appendTurn(role, text) {
         var el = document.createElement('div');
         el.className = 'turn ' + role;
@@ -165,6 +223,16 @@ window.SparringDojoOutcome = {
         historyEl.scrollTop = historyEl.scrollHeight;
     }
 
+    // Next "thinking" status: one call per turn, walks up
+    // window.STRINGS.dojo.thinkingStatuses and wraps back to the start —
+    // no timer, the message just changes turn to turn.
+    var thinkingStatusIndex = -1;
+    function nextThinkingStatus() {
+        var statuses = window.STRINGS.dojo.thinkingStatuses;
+        thinkingStatusIndex = (thinkingStatusIndex + 1) % statuses.length;
+        return statuses[thinkingStatusIndex];
+    }
+
     // Removes the optimistically-placed visitor turn (see submitContribution)
     // when the server outcome isn't 'ok' — history stays a mirror of
     // confirmed exchanges, never a submission that didn't land.
@@ -196,10 +264,16 @@ window.SparringDojoOutcome = {
         sessionTitleEl.classList.add('set');
     }
 
-    // --- juiciness (TODO.md JUICYNESS): purely presentational, layered on
-    // top of the flows above, never gates them. Every trigger below checks
-    // its own isJuicyOn() flag, so config.php can kill any one of these
-    // independently with no code change. ---
+    /*
+    |--------------------------------------------------------------------------
+    | Juiciness (TODO.md JUICYNESS)
+    |--------------------------------------------------------------------------
+    |
+    | Purely presentational, layered on top of the flows above, never gates
+    | them. Every trigger below checks its own isJuicyOn() flag, so
+    | config.php can kill any one of these independently with no code change.
+    |
+    */
 
     // One-time overlay shown once the consent decision is recorded (UC-01)
     // — not tied to any particular submission, so it never competes with
@@ -248,7 +322,7 @@ window.SparringDojoOutcome = {
     }
 
     function updateCharRemaining() {
-        charRemainingEl.textContent = (MAX_CHARS - fieldEl.value.length) + ' characters left';
+        charRemainingEl.textContent = window.STRINGS.dojo.charsRemaining.replace('{n}', String(MAX_CHARS - fieldEl.value.length));
         autoGrowField();
     }
 
@@ -266,10 +340,9 @@ window.SparringDojoOutcome = {
     }
 
     function applySessionState(state, turnsRemaining) {
-        sessionState = state;
         if (state === 'complete') {
             setComposerEnabled(false);
-            setHistoryStatus('This session has reached its limit — thanks for sparring.', false);
+            setHistoryStatus(window.STRINGS.dojo.sessionComplete, false);
         } else if (state === 'open') {
             setComposerEnabled(true);
         }
@@ -278,7 +351,11 @@ window.SparringDojoOutcome = {
         }
     }
 
-    // --- TF-01: establish the session (UC-01 / UC-03) ---
+    /*
+    |--------------------------------------------------------------------------
+    | TF-01: establish the session (UC-01 / UC-03)
+    |--------------------------------------------------------------------------
+    */
     function urlSessionId() {
         return new URLSearchParams(window.location.search).get('s');
     }
@@ -303,7 +380,7 @@ window.SparringDojoOutcome = {
                     return createSession();
                 })
                 .catch(function () {
-                    setHistoryStatus('The installation is not accepting sessions right now — reload to retry.', false);
+                    setHistoryStatus(window.STRINGS.dojo.installationUnavailable, false);
                 });
         }
         return createSession();
@@ -319,9 +396,13 @@ window.SparringDojoOutcome = {
                 sessionId = data.sessionId;
                 setUrlSessionId(sessionId);
                 retentionEl.hidden = false; // ST-01-3: decision presented, field stays disabled
+                // QR-reply flow: shown before consent too — gives the visitor
+                // context for what they're walking into. Never shown on a
+                // resumed session (see resumeSession, no equivalent call there).
+                if (window.REPLY_QUOTE) showReplyQuote(window.REPLY_QUOTE);
             })
             .catch(function () {
-                setHistoryStatus('The installation is not accepting sessions right now — reload to retry.', false);
+                setHistoryStatus(window.STRINGS.dojo.installationUnavailable, false);
             });
     }
 
@@ -339,7 +420,14 @@ window.SparringDojoOutcome = {
         updateDebugPanel({ sessionId: id, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
     }
 
-    // --- TF-02: record the consent decision (ToS required, retention/projection are real opt-outs) ---
+    /*
+    |--------------------------------------------------------------------------
+    | TF-02: record the consent decision
+    |--------------------------------------------------------------------------
+    |
+    | ToS required; retention and projection are real opt-outs.
+    |
+    */
     var tosCheckbox = document.getElementById('consent-tos');
     var projectionCheckbox = document.getElementById('consent-projection');
     var retentionCheckbox = document.getElementById('consent-retention');
@@ -350,6 +438,7 @@ window.SparringDojoOutcome = {
     });
 
     confirmButton.addEventListener('click', function () {
+        confirmButton.disabled = true; // guard against a double-tap firing two consent POSTs (and double-sending OPENING_MESSAGE below)
         fetch('/api/session', {
             method: 'POST',
             body: JSON.stringify({
@@ -369,13 +458,25 @@ window.SparringDojoOutcome = {
                 applySessionState(data.sessionState, data.turnsRemaining);
                 updateDebugPanel({ sessionId: sessionId, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
                 showTitleCard();
+                // QR-code-seeded session: auto-send the opening line as the first
+                // turn instead of waiting for the visitor to type one. Skipped when
+                // a reply quote is pending — that's a more specific signal than a
+                // generic numbered opener, and both can't own the same first turn.
+                if (window.OPENING_MESSAGE && !pendingReplyQuote && data.sessionState === 'open') {
+                    submitContribution(window.OPENING_MESSAGE);
+                }
             })
             .catch(function () {
-                setHistoryStatus('Could not record that choice — try again.', false);
+                confirmButton.disabled = false; // let the visitor retry
+                setHistoryStatus(window.STRINGS.dojo.consentFailed, false);
             });
     });
 
-    // --- TF-03: submit a contribution ---
+    /*
+    |--------------------------------------------------------------------------
+    | TF-03: submit a contribution
+    |--------------------------------------------------------------------------
+    */
     function submitContribution(text) {
         playbookEl.hidden = true; // first sent message auto-dismisses the Playbook card
         // No instant raw-text placeholder here (that was setSessionTitle's old job) —
@@ -385,11 +486,17 @@ window.SparringDojoOutcome = {
         triggerPunch();
 
         setComposerEnabled(false);
-        optimisticTurnEl = appendTurn('visitor', text); // shown ahead of the response; pruned on failure (clearOptimisticTurn)
+        // QR-reply flow: prepend the quote into the optimistic bubble (matches
+        // what the server will persist) and hide the chip instantly — both
+        // happen right here, not on the server round trip, so sending feels
+        // immediate. pendingReplyQuote itself stays set until 'ok' confirms
+        // the turn landed, so a failure can restore the chip for retry.
+        optimisticTurnEl = appendTurn('visitor', pendingReplyQuote ? withQuotePrefix(pendingReplyQuote, text) : text); // pruned on failure (clearOptimisticTurn)
+        if (pendingReplyQuote) replyQuoteEl.hidden = true;
         fieldEl.value = ''; // cached in `text`/submittedText below, restored on failure
         sessionStorage.removeItem(DRAFT_KEY); // sent — draft below restores it again on failure
         updateCharRemaining();
-        setHistoryStatus('Consequently sparring…', true); // in-progress state, shown synchronously (QR-01: within 300ms)
+        setHistoryStatus(nextThinkingStatus(), true); // in-progress state, shown synchronously (QR-01: within 300ms)
 
         var controller = new AbortController();
         var timeout = setTimeout(function () { controller.abort(); }, WAIT_MS);
@@ -397,21 +504,24 @@ window.SparringDojoOutcome = {
         fetch('/api/contribute', {
             method: 'POST',
             signal: controller.signal,
-            body: JSON.stringify({ sessionId: sessionId, contribution: text }),
+            // replyToExchangeId: only ever meaningful on the first turn; an
+            // undefined value here is dropped by JSON.stringify, so no separate
+            // branch is needed once pendingReplyQuote is cleared (see 'ok' below).
+            body: JSON.stringify({ sessionId: sessionId, contribution: text, replyToExchangeId: pendingReplyQuote ? pendingReplyQuote.exchangeId : undefined }),
         })
             .then(function (res) { return res.json().then(function (data) { return { res: res, data: data }; }); })
             .then(function (result) {
                 clearTimeout(timeout);
-                handleContributionResult(result.res.status, result.data, text);
+                handleContributionResult(result.data, text);
             })
             .catch(function () {
                 clearTimeout(timeout);
                 // FA-03-1 grouping: timeout or transport failure is treated as a generation failure.
-                handleContributionResult(502, { status: 'generation-failed' }, text);
+                handleContributionResult({ status: 'generation-failed' }, text);
             });
     }
 
-    function handleContributionResult(httpStatus, data, submittedText) {
+    function handleContributionResult(data, submittedText) {
         // sessionState/turnsRemaining are only present on some outcomes (e.g. 'ok');
         // merge them only when present so a rate-limited/rejected response doesn't
         // blank out the last good values via updateDebugPanel's Object.assign.
@@ -423,6 +533,7 @@ window.SparringDojoOutcome = {
         switch (data.status) {
             case 'ok':
                 optimisticTurnEl = null; // confirmed — stop tracking it, nothing left to prune
+                pendingReplyQuote = null; // chip already hidden at submit time (see submitContribution) — landed, nothing left to retry
                 appendTurn('sparring', data.exchange.sparringResponse);
                 applySessionState(data.sessionState, data.turnsRemaining);
                 // Fire-and-forget title generation: doesn't block anything above,
@@ -464,6 +575,10 @@ window.SparringDojoOutcome = {
                 clearOptimisticTurn();
                 setHistoryStatus(outcome.message, false);
                 if (outcome.restoreText) fieldEl.value = submittedText;
+                // didn't land — chip was hidden optimistically at submit time (see
+                // submitContribution); pendingReplyQuote is still set, so bring it
+                // back alongside the restored text for a retry.
+                if (outcome.restoreText && pendingReplyQuote) replyQuoteEl.hidden = false;
                 if (outcome.enableComposer) setComposerEnabled(true);
                 if (outcome.wiggle) triggerWiggle();
                 if (outcome.sound) window.SparringSfx.play(outcome.sound);

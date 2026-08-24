@@ -23,7 +23,25 @@ $routes = [
 
 require_once __DIR__ . '/../config.php';
 
+// Resolved once, up front, for every request (page or /api/*) — this is
+// what actually sends the locale cookie on an explicit ?lang= override, and
+// it must happen before any output. Later calls to resolve_locale()/t() in
+// the same request reuse this memoized result.
+resolve_locale();
+
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// Trailing slash isn't a distinct route ($routes only has the bare form) —
+// redirect to the canonical slash-less form rather than serving the same
+// page at both URLs (avoids duplicate content at two URLs for one page).
+if ($path !== '/' && str_ends_with($path, '/')) {
+    $canonical = rtrim($path, '/');
+    if (isset($routes[$canonical])) {
+        $qs = $_SERVER['QUERY_STRING'] ?? '';
+        header('Location: ' . $canonical . ($qs !== '' ? "?$qs" : ''), true, 301);
+        exit;
+    }
+}
 
 // php -S with a router script intercepts *every* request, including real
 // static files (assets/*.js, favicon.ico, ...) — unlike Valet/nginx, which
@@ -36,8 +54,16 @@ if ($path !== '/' && is_file($asFile) && !str_ends_with($asFile, '.php')) {
     return false;
 }
 
+// public/spec/ has no directory-index behaviour of its own under php -S or
+// Valet (both route everything through here) — the static-file check above
+// only matches an exact filename, not a bare directory request.
+if ($path === '/spec' || $path === '/spec/') {
+    header('Location: /spec/index.html', true, 302);
+    exit;
+}
+
 if (!isset($routes[$path])) {
-    renderErrorPage(404, "This page doesn't exist or may have moved.");
+    renderErrorPage(404, t('error.404'));
 }
 
 require $routes[$path];

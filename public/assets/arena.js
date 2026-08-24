@@ -28,7 +28,9 @@ window.SparringArenaDiff = {
                 toAdd.push(item);
             } else if (existing.scenario !== item.scenario
                 || existing.visitorContribution !== item.visitorContribution
-                || existing.sparringResponse !== item.sparringResponse) {
+                || existing.sparringResponse !== item.sparringResponse
+                || existing.exchangeId !== item.exchangeId
+                || existing.replyCount !== item.replyCount) {
                 toUpdate.push(item);
             }
         });
@@ -53,7 +55,27 @@ window.SparringArenaDiff = {
     var wall = document.getElementById('wall');
     var columns = buildColumns();
     var displayed = new Map(); // sessionId -> item, mirrors E-01 of this element
-    var placement = new Map(); // sessionId -> column element, sticky for the item's lifetime
+    var lastSessionCount = null; // skip the DOM write when unchanged, same principle as EX-01-2 below
+    var lastExchangeCount = null;
+
+    // Header clock: date + time, client-rendered from the system clock and
+    // window.LOCALE (set in arena.php, otherwise unread by any JS). Minute
+    // resolution is enough on a wall no one watches second-by-second.
+    function updateClock() {
+        // dateStyle/timeStyle presets can't be hand-tuned, and German's
+        // 'short' month otherwise renders with a trailing period ("22. Aug.
+        // 2026") — formatToParts lets us drop just that one, keeping the
+        // day's own period (which German date style does want).
+        var parts = new Intl.DateTimeFormat(window.LOCALE, {
+            day: 'numeric', month: 'short', year: 'numeric',
+            hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+        }).formatToParts(new Date());
+        document.getElementById('clock').textContent = parts
+            .map(function (p) { return p.type === 'month' ? p.value.replace(/\.$/, '') : p.value; })
+            .join('');
+    }
+    updateClock();
+    setInterval(updateClock, 30000);
 
     function buildColumns() {
         var cols = [];
@@ -82,6 +104,29 @@ window.SparringArenaDiff = {
         return text.length > n ? text.slice(0, n - 1) + '…' : text;
     }
 
+    // QR-reply flow: links a wall item's AI response to /dojo?r=<exchangeId>
+    // and shows its reply counter. `el.dataset.exchangeId` lets updateItem skip
+    // rebuilding the QR SVG on a poll where only the counter changed.
+    function renderReply(el, qrEl, countEl, item) {
+        if (el.dataset.exchangeId !== String(item.exchangeId)) {
+            el.dataset.exchangeId = String(item.exchangeId);
+            qrEl.textContent = '';
+            var link = document.createElement('a');
+            link.href = location.origin + '/dojo?r=' + item.exchangeId;
+            link.target = '_blank';
+            qrEl.appendChild(link);
+            window.SparringQr.renderInto(link, link.href);
+        }
+        // Reaction-style pill: glove icon + bare count, hidden at 0 (EX-01-3).
+        // The full sentence stays as an aria-label — sighted users get the
+        // glove as the "replies" cue, screen readers still hear a sentence.
+        // Icon is a static child built once in buildItemElement; only the
+        // number text updates here, so we never clobber it.
+        countEl.hidden = item.replyCount === 0;
+        countEl.setAttribute('aria-label', window.REPLY_COUNT_LABEL.replace('{n}', String(item.replyCount)));
+        countEl.querySelector('.reply-count-number').textContent = String(item.replyCount);
+    }
+
     // Sparring response only (never .contribution, which is visitor text and
     // stays plain-trimmed textContent): a mermaid fence is exempt from
     // TRIM_CHARS (it would otherwise get cut mid-syntax) and rendered via
@@ -107,6 +152,14 @@ window.SparringArenaDiff = {
             })
             .then(function (data) {
                 if (!data || !Array.isArray(data.items)) return; // FS-01-2: discard malformed shape entirely
+                if (typeof data.sessionCount === 'number' && typeof data.exchangeCount === 'number'
+                    && (data.sessionCount !== lastSessionCount || data.exchangeCount !== lastExchangeCount)) {
+                    lastSessionCount = data.sessionCount;
+                    lastExchangeCount = data.exchangeCount;
+                    document.getElementById('exchange-count').textContent = window.STATS_LABEL
+                        .replace('{sessions}', String(data.sessionCount))
+                        .replace('{exchanges}', String(data.exchangeCount));
+                }
                 reconcile(data.items);
             })
             .catch(function () {
@@ -146,15 +199,43 @@ window.SparringArenaDiff = {
         visitorName.className = 'visitor-name';
         visitorName.textContent = window.SparringIdentity.alias(item.sessionId); // write-once: invariant per sessionId
 
-        var contribution = document.createElement('p');
+        // div, not <p> — a <p> can't validly contain visitorName/contributionText's
+        // block children (the browser would silently close the <p> early).
+        // contribution-text mirrors response-text: its own child so a plain
+        // textContent update (below) never wipes the nested visitor-name.
+        var contribution = document.createElement('div');
         contribution.className = 'contribution';
-        contribution.textContent = trim(item.visitorContribution, TRIM_CHARS);
+        var contributionText = document.createElement('div');
+        contributionText.className = 'contribution-text';
+        contributionText.textContent = trim(item.visitorContribution, TRIM_CHARS);
+        contribution.append(visitorName, contributionText);
 
         var response = document.createElement('div');
         response.className = 'response';
-        renderResponse(response, item.sparringResponse);
+        // Actual rendered content lives in its own child, never touched
+        // directly — renderResponse/mermaid's renderInto both wipe whatever
+        // container they're given, so the QR/reply-count badges below live
+        // as .response's *siblings* to that child, not inside it (they'd
+        // get erased on every re-render otherwise).
+        var responseText = document.createElement('div');
+        responseText.className = 'response-text';
+        renderResponse(responseText, item.sparringResponse);
 
-        el.append(scenario, visitorName, contribution, response);
+        var replyQr = document.createElement('div');
+        replyQr.className = 'reply-qr';
+        var replyCount = document.createElement('div');
+        replyCount.className = 'reply-count';
+        var replyCountIcon = document.createElement('span');
+        replyCountIcon.className = 'reply-count-icon';
+        var replyCountNumber = document.createElement('span');
+        replyCountNumber.className = 'reply-count-number';
+        replyCount.append(replyCountIcon, replyCountNumber);
+        // Both badges nested in .response (not responseText) so their
+        // absolute position anchors to the bubble, not the card.
+        response.append(responseText, replyQr, replyCount);
+        renderReply(el, replyQr, replyCount, item);
+
+        el.append(scenario, contribution, response);
 
         if (DEBUG) {
             var debugTag = document.createElement('span');
@@ -169,7 +250,6 @@ window.SparringArenaDiff = {
     function addItem(item) {
         var el = buildItemElement(item);
         var col = pickColumn();
-        placement.set(item.sessionId, col);
         col.appendChild(el); // only this column's height changes; every other column is untouched (QR-02)
         void el.offsetWidth; // force the 'entering' style to commit before scheduling its removal — this
         // whole insertion happens inside poll()'s Promise chain, not a direct user gesture, and a bare
@@ -182,8 +262,9 @@ window.SparringArenaDiff = {
         var el = wall.querySelector('[data-session-id="' + item.sessionId + '"]');
         if (!el) { addItem(item); return; }
         el.querySelector('.scenario').textContent = item.scenario;
-        el.querySelector('.contribution').textContent = trim(item.visitorContribution, TRIM_CHARS);
-        renderResponse(el.querySelector('.response'), item.sparringResponse);
+        el.querySelector('.contribution-text').textContent = trim(item.visitorContribution, TRIM_CHARS);
+        renderResponse(el.querySelector('.response-text'), item.sparringResponse);
+        renderReply(el, el.querySelector('.reply-qr'), el.querySelector('.reply-count'), item);
         if (window.isJuicyOn('displayEntrance')) {
             el.classList.remove('updating');
             void el.offsetWidth; // force the removal to commit so re-adding the class retriggers the animation
@@ -194,7 +275,6 @@ window.SparringArenaDiff = {
     function removeItem(sessionId) {
         var el = wall.querySelector('[data-session-id="' + sessionId + '"]');
         if (el) el.remove(); // compacts only its own column, same as baseline single-column removal
-        placement.delete(sessionId);
     }
 
     poll();

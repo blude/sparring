@@ -13,9 +13,19 @@ require __DIR__ . '/../../src/Sparring.php';
 
 header('Content-Type: application/json');
 
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405);
+    echo json_encode(['error' => 'method-not-allowed']);
+    exit;
+}
+
 $store = new Store(STORE_DB_PATH);
 $sparring = new Sparring($store);
 
+$counts = $store->getCounts();
+
 echo json_encode([
     'items' => $sparring->assembleDisplayMaterial(),
+    'sessionCount' => $counts['sessions'],
+    'exchangeCount' => $counts['exchanges'],
 ], JSON_UNESCAPED_SLASHES);

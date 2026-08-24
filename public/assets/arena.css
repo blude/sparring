@@ -15,7 +15,7 @@
     --accent-bubble-bg: color-mix(in srgb, var(--brand-red) 12%, white);    /* light tint, visitor bubble background */
     --accent-bubble-text: color-mix(in srgb, var(--brand-red) 70%, black);  /* darkened, visitor bubble text */
 
-    --bg: #f7f7f7;
+    --bg: #fff;
     --fg: #111;
     --border: #ddd;
     --scenario-color: #666;
@@ -47,25 +47,78 @@ html, body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    background: var(--bg);
+    /* subtle dot-grid texture, matching start.css/dojo.css's background */
+    background:
+        radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
+        var(--bg);
     color: var(--fg);
-    font-family: 'Helvetica Neue', 'Helvetica', system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
     font-size: 1.05rem; /* less dense at 2x2 than the 3-col baseline, but both rows must still fit (QR-06) */
+    /* iPad-as-arena: block pinch/select/callout so a stray touch can't
+       disrupt the unattended display (projector has no touchscreen to guard
+       against). */
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
 
 body {
+    position: relative; /* containing block for .gradient-top */
     display: flex;
     flex-direction: column;
 }
 
-#logo {
+/* decorative color wash, pinned to the top edge behind the logo */
+.gradient-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 170px;
+    pointer-events: none;
+    background: url('img/arena-gradient-top.webp') no-repeat center / cover;
+}
+
+.header {
+    position: relative; /* stack above .gradient-top (positioned elements paint last) */
+    z-index: 1;
     flex: 0 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2rem 2rem 0;
+}
+
+#logo {
     margin: 0;
-    padding: 1rem 0 0;
-    text-align: center;
-    font-size: 1.5rem;
-    letter-spacing: 0.05em;
-    color: var(--fg);
+}
+
+/* real "Sparring" text stays in the DOM for a11y/SEO, visually replaced by
+   the exported logotype PNG — same technique as start.css's .wordmark */
+#logo .wordmark {
+    display: inline-block;
+    margin: 0;
+    width: 203px;
+    height: 58px; /* logo-sparring-v2b.png's native size */
+    overflow: hidden;
+    text-indent: -9999px;
+    background: url('img/logo-sparring-v2b.png') no-repeat center / contain;
+}
+
+/* header stats: live clock + running exchange total, no icon fits either
+   (unlike .reply-count's glove) so it's plain right-aligned text */
+#stats {
+    margin: 0;
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--scenario-color);
+    line-height: 1.4;
+}
+
+#clock {
+    font-weight: 500;
+    font-size: 1.2rem;
 }
 
 #wall {
@@ -143,13 +196,19 @@ body {
 }
 
 .exchange .contribution {
-    align-self: flex-start;
+    align-self: flex-end;
     background: var(--accent-bubble-bg);
     color: var(--accent-bubble-text);
+    /* QR-reply flow: a replying visitor's contribution is stored as
+       "quote"\n\nreply (dojo.js/Sparring::processTurn) — preserve that blank
+       line instead of collapsing it to a run-on line. Plain textContent
+       either way, just a rendering difference. */
+    white-space: pre-wrap;
 }
 
 .exchange .response {
-    align-self: flex-end;
+    position: relative; /* anchors .reply-count's bottom-left pill to this bubble */
+    align-self: flex-start;
     background: var(--response-bg);
     color: var(--response-text);
 }
@@ -166,6 +225,71 @@ body {
     font-weight: 600;
     font-size: 0.9rem;
     margin-bottom: 0.15rem;
+}
+
+/* QR-reply flow: corner badge, top-right of the response bubble it belongs
+   to (mirrors .reply-count's bottom-left badge below). Out of flow so it no
+   longer adds its own row under the bubble — the contribution bubble above
+   already leaves this space empty (max-width: 80%), so the badge now sits
+   in space that was already going unused instead of pushing the card taller. */
+.exchange .reply-qr {
+    position: absolute;
+    bottom: 0;
+    right: -0.25rem;
+    transform: translateX(100%);
+    width: 3rem;
+}
+
+.exchange .reply-qr a {
+    display: block;
+    padding: 0.125rem;
+    border-radius: 0.125rem;
+    background: #fff;
+}
+
+.exchange .reply-qr svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Reaction-style pill, bottom-left corner of the response bubble —
+   messaging-app reaction convention (glove icon + bare count). Half-overlaps
+   the bubble's bottom edge, so it needs its own border to read against both
+   the bubble and the page behind it. */
+.exchange .reply-count {
+    position: absolute;
+    left: 0.85rem;
+    bottom: 0;
+    transform: translateY(90%);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--response-bg);
+    color: var(--scenario-color);
+    font-size: 0.75rem;
+    line-height: 1;
+}
+
+.exchange .reply-count[hidden] {
+    display: none; /* our display:flex above outranks the UA [hidden] rule otherwise */
+}
+
+.exchange .reply-count-icon {
+    width: 0.8rem;
+    height: 0.8rem;
+    background-color: var(--brand-red);
+    -webkit-mask-image: url('img/glove.svg');
+    mask-image: url('img/glove.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
 }
 
 .debug-tag {

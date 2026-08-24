@@ -1,0 +1,25 @@
+= Sparring — Design Documentation
+Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
+v.1.0, 2026-06-19
+:toc: left
+:toclevels: 3
+:icons: font
+:sectanchors:
+:sectnums:
+
+Four-level design framework (L0–L3) plus glossary and realization concept.
+See `CLAUDE.md` for the framework note.
+
+== Main Sections
+
+* xref:L1-solution-design-concept.adoc[L1 — Solution Design Concept] — business goals, value proposition, business processes. No L0 sits above it.
+* xref:L2-system-design-concept.adoc[L2 — System Design Concept] — system goals, architecture, elements, scenarios.
+* xref:L3-SE-01-input-client.adoc[L3 — Input Client (SE-01)] — the visitor-facing input surface.
+* xref:L3-SE-02-display-client.adoc[L3 — Display Client (SE-02)] — the projection surface.
+* xref:L3-SE-03-backend-service.adoc[L3 — Backend Service (SE-03)] — the stateful backend.
+* xref:L3-SE-04-system-prompt.adoc[L3 — System Prompt (SE-04)] — the instruction set governing every Sparring response.
+
+== Extra
+
+* xref:LX-system-realization-concept.adoc[LX — System Realization Concept] — deployment/infrastructure detail.
+* xref:glossary.adoc[Glossary] — ID prefix reference.

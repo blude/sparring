@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="author" content="Sarah Puppin Pratti">
+<title>Element Design Concept: Backend Service</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock pre>code{display:block}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>Element Design Concept: Backend Service</h1>
+<div class="details">
+<span id="author" class="author">Sarah Puppin Pratti</span><br>
+<span id="email" class="email"><a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de">sarah.puppinpratti001@stud.fh-dortmund.de</a></span><br>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2026-06-19</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_goals">1. Goals</a>
+<ul class="sectlevel2">
+<li><a href="#_g_01_produce_sparring_responses_and_hold_every_rule_that_governs_them">1.1. G-01 Produce Sparring responses and hold every rule that governs them</a></li>
+<li><a href="#_g_02_keep_a_session_usable_across_interruption">1.2. G-02 Keep a session usable across interruption</a></li>
+<li><a href="#_g_03_persist_every_interaction_with_its_origin_fixed_at_creation">1.3. G-03 Persist every interaction with its origin fixed at creation</a></li>
+<li><a href="#_g_04_decide_what_may_be_stored_and_let_the_visitors_own_choice_decide_what_may_be_projected">1.4. G-04 Decide what may be stored, and let the visitor&#8217;s own choice decide what may be projected</a></li>
+<li><a href="#_g_05_keep_the_display_surface_populated">1.5. G-05 Keep the display surface populated</a></li>
+<li><a href="#_g_06_absorb_load_and_misuse_without_failing">1.6. G-06 Absorb load and misuse without failing</a></li>
+</ul>
+</li>
+<li><a href="#_use_cases">2. Use cases</a>
+<ul class="sectlevel2">
+<li><a href="#_uc_01_the_operator_seeds_pilot_material">2.1. UC-01 The operator seeds pilot material</a></li>
+</ul>
+</li>
+<li><a href="#_user_interfaces">3. User interfaces</a></li>
+<li><a href="#_technical_functions">4. Technical functions</a>
+<ul class="sectlevel2">
+<li><a href="#_tf_01_process_a_visitor_turn">4.1. TF-01 Process a visitor turn</a></li>
+<li><a href="#_tf_02_assess_a_contribution_for_projection_suitability">4.2. TF-02 Assess a contribution for projection suitability</a></li>
+<li><a href="#_tf_03_enforce_request_limits">4.3. TF-03 Enforce request limits</a></li>
+<li><a href="#_tf_04_assemble_display_material">4.4. TF-04 Assemble display material</a></li>
+<li><a href="#_tf_05_derive_a_scenario_statement">4.5. TF-05 Derive a scenario statement</a></li>
+<li><a href="#_tf_06_import_pilot_transcripts">4.6. TF-06 Import pilot transcripts</a></li>
+<li><a href="#_tf_07_refine_a_session_title">4.7. TF-07 Refine a session title</a></li>
+</ul>
+</li>
+<li><a href="#_technical_interfaces_inbound">5. Technical interfaces (inbound)</a>
+<ul class="sectlevel2">
+<li><a href="#_ti_01_open_a_session">5.1. TI-01 Open a session</a></li>
+<li><a href="#_ti_02_submit_a_contribution">5.2. TI-02 Submit a contribution</a></li>
+<li><a href="#_ti_03_retrieve_a_session">5.3. TI-03 Retrieve a session</a></li>
+<li><a href="#_ti_04_retrieve_display_material">5.4. TI-04 Retrieve display material</a></li>
+<li><a href="#_ti_05_import_pilot_material">5.5. TI-05 Import pilot material</a></li>
+<li><a href="#_ti_06_refine_a_session_title">5.6. TI-06 Refine a session title</a></li>
+</ul>
+</li>
+<li><a href="#_technical_interfaces_outbound">6. Technical interfaces (outbound)</a>
+<ul class="sectlevel2">
+<li><a href="#_to_01_request_a_sparring_response">6.1. TO-01 Request a Sparring response</a></li>
+<li><a href="#_to_02_request_a_classification">6.2. TO-02 Request a classification</a></li>
+</ul>
+</li>
+<li><a href="#_entities">7. Entities</a>
+<ul class="sectlevel2">
+<li><a href="#_e_01_session">7.1. E-01 Session</a></li>
+<li><a href="#_e_02_exchange">7.2. E-02 Exchange</a></li>
+<li><a href="#_e_03_rate_limit_window">7.3. E-03 Rate limit window</a></li>
+</ul>
+</li>
+<li><a href="#_quality_requirements">8. Quality requirements</a>
+<ul class="sectlevel2">
+<li><a href="#_qr_01_generation_is_bounded_and_its_bound_is_enforced_here_performance">8.1. QR-01 Generation is bounded and its bound is enforced here <em>(Performance)</em></a></li>
+<li><a href="#_qr_02_restarts_unattended_availability">8.2. QR-02 Restarts unattended <em>(Availability)</em></a></li>
+<li><a href="#_qr_03_a_rejected_request_affects_only_its_own_session_availability">8.3. QR-03 A rejected request affects only its own session <em>(Availability)</em></a></li>
+<li><a href="#_qr_04_the_provider_credential_never_leaves_the_host_security">8.4. QR-04 The provider credential never leaves the host <em>(Security)</em></a></li>
+<li><a href="#_qr_05_limits_are_enforced_on_every_path_security">8.5. QR-05 Limits are enforced on every path <em>(Security)</em></a></li>
+<li><a href="#_qr_06_origin_is_written_once_data_integrity">8.6. QR-06 Origin is written once <em>(Data-integrity)</em></a></li>
+<li><a href="#_qr_07_no_partial_exchange_is_ever_stored_data_integrity">8.7. QR-07 No partial exchange is ever stored <em>(Data-integrity)</em></a></li>
+<li><a href="#_qr_08_suitability_assessment_fails_closed_compliance">8.8. QR-08 Suitability assessment fails closed <em>(Compliance)</em></a></li>
+<li><a href="#_qr_09_projection_eligibility_and_retention_consent_are_never_conflated_compliance">8.9. QR-09 Projection eligibility and retention consent are never conflated <em>(Compliance)</em></a></li>
+<li><a href="#_qr_10_no_raw_request_origin_is_stored_compliance">8.10. QR-10 No raw request origin is stored <em>(Compliance)</em></a></li>
+<li><a href="#_qr_11_infrastructure_faults_degrade_to_a_generic_error_not_a_leak_security">8.11. QR-11 Infrastructure faults degrade to a generic error, not a leak <em>(Security)</em></a></li>
+</ul>
+</li>
+<li><a href="#_constraints">9. Constraints</a>
+<ul class="sectlevel2">
+<li><a href="#_c_01_php_with_a_file_backed_store_on_one_instance_technical">9.1. C-01 PHP with a file-backed store on one instance <em>(Technical)</em></a></li>
+<li><a href="#_c_02_provider_limits_bound_the_elements_own_limits_integration">9.2. C-02 Provider limits bound the element&#8217;s own limits <em>(Integration)</em></a></li>
+<li><a href="#_c_03_the_operator_path_is_not_publicly_reachable_security">9.3. C-03 The operator path is not publicly reachable <em>(Security)</em></a></li>
+<li><a href="#_c_04_no_administrative_interface_no_analytics_layer_business">9.4. C-04 No administrative interface, no analytics layer <em>(Business)</em></a></li>
+<li><a href="#_c_05_attempts_to_bypass_the_sparring_stance_are_not_filtered_business">9.5. C-05 Attempts to bypass the Sparring stance are not filtered <em>(Business)</em></a></li>
+<li><a href="#_c_06_classifier_input_is_untrusted_data_not_instruction_security">9.6. C-06 Classifier input is untrusted data, not instruction <em>(Security)</em></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Element:</strong> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a><br>
+<strong>Element profile:</strong> Backend service / API<br>
+<strong>Parent:</strong> System Design Concept<br>
+<strong>Status:</strong> Draft</p>
+</div>
+<div class="paragraph">
+<p><strong>Sections that apply.</strong> Goals, use cases, both technical interface sections, technical functions, entities, quality requirements, and constraints. User interfaces do not apply: this element has no human-facing surface. Its only human actor is <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a>, who reaches it through the operator interface (<a href="#TI-05">TI-05 Import pilot material</a>) rather than through a UI.</p>
+</div>
+<div class="paragraph">
+<p><strong>A note on the datastore.</strong> Per <a href="L2-system-design-concept.html#AP-04">AP-04 One file-backed datastore, held inside the backend</a>, storage is held inside this element rather than identified as a separate software element at L2. Its entities are therefore specified here, in section 7.</p>
+</div>
+<div class="paragraph">
+<p><a href="index.html">Index</a> / <a href="L1-solution-design-concept.html">Solution Design Concept</a> / <a href="L2-system-design-concept.html">System Design Concept</a> / <strong>Backend Service</strong> (SE-03)</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_goals"><a class="anchor" href="#_goals"></a>1. Goals</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_g_01_produce_sparring_responses_and_hold_every_rule_that_governs_them"><a class="anchor" href="#_g_01_produce_sparring_responses_and_hold_every_rule_that_governs_them"></a>1.1. <a id="G-01"></a>G-01 Produce Sparring responses and hold every rule that governs them</h3>
+<div class="paragraph">
+<p>The element shall be the sole location of generation, moderation, rate limiting, and session policy, so that no rule is editable from a device the project does not control.<br>
+<em>Success criteria (qualitative):</em> No client contains a provider credential or any limit the element does not independently enforce.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-01">SG-01 Start a session from a personal device with no</a>, <a href="L2-system-design-concept.html#SG-04">SG-04 Run unattended and absorb misuse without operator</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_g_02_keep_a_session_usable_across_interruption"><a class="anchor" href="#_g_02_keep_a_session_usable_across_interruption"></a>1.2. <a id="G-02"></a>G-02 Keep a session usable across interruption</h3>
+<div class="paragraph">
+<p>The element shall resolve a session identifier to its full state and history for as long as the session is live.<br>
+<em>Success criteria (qualitative):</em> A session fetched after an interruption returns identical content to what its participant last saw.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-03">SG-03 Survive interruption of the visitor&#8217;s session</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_g_03_persist_every_interaction_with_its_origin_fixed_at_creation"><a class="anchor" href="#_g_03_persist_every_interaction_with_its_origin_fixed_at_creation"></a>1.3. <a id="G-03"></a>G-03 Persist every interaction with its origin fixed at creation</h3>
+<div class="paragraph">
+<p>The element shall record sessions and exchanges tagged pilot or live at the moment of creation, with no later assignment or correction.<br>
+<em>Success criteria (qualitative):</em> Exhibition material is extractable by filtering one stored value.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-05">SG-05 Record every interaction with its origin fixed at</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_g_04_decide_what_may_be_stored_and_let_the_visitors_own_choice_decide_what_may_be_projected"><a class="anchor" href="#_g_04_decide_what_may_be_stored_and_let_the_visitors_own_choice_decide_what_may_be_projected"></a>1.4. <a id="G-04"></a>G-04 Decide what may be stored, and let the visitor&#8217;s own choice decide what may be projected</h3>
+<div class="paragraph">
+<p>The element shall assess each contribution for suitability before it is stored, rejecting an unsuitable one so the visitor can edit and resubmit rather than silently hiding it after the fact. Whether a <em>stored</em> exchange is projected is then a separate question, answered by the visitor&#8217;s own projection consent, not by re-running suitability at display time.<br>
+<em>Success criteria (qualitative):</em> Nothing unsuitable is ever stored. A session that declined projection consent never appears on the wall regardless of content; a session that granted it does, for as long as its content keeps passing the write-time check.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-07">SG-07 Gate public projection at the moment of submission</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_g_05_keep_the_display_surface_populated"><a class="anchor" href="#_g_05_keep_the_display_surface_populated"></a>1.5. <a id="G-05"></a>G-05 Keep the display surface populated</h3>
+<div class="paragraph">
+<p>The element shall supply display material at all times, falling back to pilot-origin sessions when insufficient live material is eligible.<br>
+<em>Success criteria (qualitative):</em> The display feed is never empty while the element is running and pilot material exists.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-06">SG-06 Never present an empty surface</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_g_06_absorb_load_and_misuse_without_failing"><a class="anchor" href="#_g_06_absorb_load_and_misuse_without_failing"></a>1.6. <a id="G-06"></a>G-06 Absorb load and misuse without failing</h3>
+<div class="paragraph">
+<p>The element shall reject excess requests, over-length contributions, and over-long sessions as expected conditions, and shall continue serving other visitors when it does.<br>
+<em>Success criteria (qualitative):</em> A rejected request affects only its own session.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-04">SG-04 Run unattended and absorb misuse without operator</a></p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_cases"><a class="anchor" href="#_use_cases"></a>2. Use cases</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Use cases at this level are thin, because most of this element&#8217;s behaviour is reached through technical interfaces rather than as user-facing functionality. The one exception is the operator path, which is a genuine use case with a human actor.</p>
+</div>
+<div class="sect2">
+<h3 id="_uc_01_the_operator_seeds_pilot_material"><a class="anchor" href="#_uc_01_the_operator_seeds_pilot_material"></a>2.1. <a id="UC-01"></a>UC-01 The operator seeds pilot material</h3>
+<div class="paragraph">
+<p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a><br>
+<em>Prerequisites:</em> Pilot transcripts exist in the expected structured form.<br>
+<em>Achieves:</em> <a href="#G-03">G-03 Persist every interaction with its origin fixed at</a>, <a href="#G-05">G-05 Keep the display surface populated</a><br>
+<em>Realises:</em> SSc-03</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="ST-01-1"></a>ST-01-1</strong> <em>(Activity)</em> <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a> places a transcript file where the element can read it and invokes the import path (<a href="#TI-05">TI-05 Import pilot material</a>).</p>
+</li>
+<li>
+<p><strong><a id="ST-01-2"></a>ST-01-2</strong> <em>(Function-call)</em> The element calls <a href="#TF-06">TF-06 Import pilot transcripts</a> with the file contents. <a href="#TF-06">TF-06 Import pilot transcripts</a> validates each transcript, creates its session and exchanges with origin fixed as pilot, and returns a per-transcript outcome.</p>
+</li>
+<li>
+<p><strong><a id="ST-01-3"></a>ST-01-3</strong> <em>(Activity)</em> The element reports how many transcripts were imported and names any that were rejected.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative scenarios</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="EX-01-1"></a>EX-01-1</strong> <em>(extends <a href="#ST-01-2">ST-01-2</a>)</em> One or more transcripts are malformed. Those are rejected and named; the remainder are imported. The import does not abort. <em>Outcome:</em> Alternative-success.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This path performs no generation and never calls <a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a>. The Sparring responses already exist in the transcripts, and regenerating them would produce material that no pilot session actually contained.
+</td>
+</tr>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_user_interfaces"><a class="anchor" href="#_user_interfaces"></a>3. User interfaces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Not applicable. This element presents no user interface. <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a> reaches it through <a href="#TI-05">TI-05 Import pilot material</a>, which is a technical interface invoked directly on the host rather than a surface.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_functions"><a class="anchor" href="#_technical_functions"></a>4. Technical functions</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_tf_01_process_a_visitor_turn"><a class="anchor" href="#_tf_01_process_a_visitor_turn"></a>4.1. <a id="TF-01"></a>TF-01 Process a visitor turn</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Stepwise<br>
+<em>Achieves:</em> <a href="#G-01">G-01 Produce Sparring responses and hold every rule that</a>, <a href="#G-04">G-04 Decide what may be stored, and let the visitor&#8217;s own</a>, <a href="#G-06">G-06 Absorb load and misuse without failing</a></p>
+</div>
+<div class="paragraph">
+<p>The element&#8217;s central function. Everything that happens between a visitor pressing submit and a response returning is here, which is what keeps retry and error handling in one place rather than scattered across interfaces.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FS-01-1"></a>FS-01-1</strong> <em>(Function-call)</em> Call <a href="#TF-03">TF-03 Enforce request limits</a> with the request origin. If it reports the limit reached, return that condition and stop.</p>
+</li>
+<li>
+<p><strong><a id="FS-01-2"></a>FS-01-2</strong> <em>(Entity-access)</em> Read the session from <a href="#E-01">E-01 Session</a> by its identifier (<a href="#E-01.1">E-01.1 sessionId</a>). If absent or expired, return a session-unknown condition and stop.</p>
+</li>
+<li>
+<p><strong><a id="FS-01-3"></a>FS-01-3</strong> <em>(Data-operation)</em> Compare <a href="#E-01.8">E-01.8 turnCount</a> (turnCount) against the session turn allowance. If the allowance is exhausted, return a turn-limit condition and stop.</p>
+</li>
+<li>
+<p><strong><a id="FS-01-4"></a>FS-01-4</strong> <em>(Data-operation)</em> Trim the contribution and check it against the length bound. If it is empty or over-length, return a rejected condition and stop. No provider call has been made at this point, which matters because this is the cheapest rejection path and the one most likely to fire.</p>
+</li>
+<li>
+<p><strong><a id="FS-01-5"></a>FS-01-5</strong> <em>(Function-call)</em> Call <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> with the contribution. <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> returns a suitability outcome.</p>
+</li>
+<li>
+<p><strong><a id="FS-01-6"></a>FS-01-6</strong> <em>(Data-operation)</em> If <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> reported the contribution unsuitable, return a content-flagged condition and stop. Nothing is written to <a href="#E-01">E-01 Session</a> or <a href="#E-02">E-02 Exchange</a>, and no provider call for a response is made — this is the same cheap-rejection reasoning as <a href="#FS-01-4">FS-01-4</a>, just one check later. The session itself is not altered; only this turn is rejected.</p>
+</li>
+<li>
+<p><strong><a id="FS-01-7"></a>FS-01-7</strong> <em>(Entity-access)</em> Read the session&#8217;s prior exchanges from <a href="#E-02">E-02 Exchange</a> (<a href="#E-02.3">E-02.3 visitorContribution</a>, <a href="#E-02.4">E-02.4 sparringResponse</a>) in order, to supply conversational context.</p>
+</li>
+<li>
+<p><strong><a id="FS-01-8"></a>FS-01-8</strong> <em>(Outbound-call)</em> Call <a href="#TO-01">TO-01 Request a Sparring response</a> with the system prompt (<a href="L2-system-design-concept.html#SE-04">SE-04 System prompt</a>), the prior exchanges, and the new contribution. Expect a response text. <em>Call behaviour:</em> Synchronous. Timeout is 20 seconds (<code>GENERATION_TIMEOUT_SECONDS</code>, config.php — <a href="L2-system-design-concept.html#SQR-01">SQR-01 A Sparring response arrives, or its absence is visible</a>). Two attempts, with a short delay between them, on transport failure, timeout, or a provider 5xx. <strong>No retry on a provider rate-limit or quota response</strong>, because retrying a rate limit deepens it; return a generation-failed condition immediately. <strong>No retry on a content-policy refusal from the provider</strong>, which is a determinate outcome rather than a transient fault. On exhausted attempts, return a generation-failed condition. Nothing is written to <a href="#E-02">E-02 Exchange</a> on any failure path, so a failed turn leaves no partial exchange in the record.</p>
+</li>
+<li>
+<p><strong><a id="FS-01-9"></a>FS-01-9</strong> <em>(Entity-access)</em> Write a new exchange to <a href="#E-02">E-02 Exchange</a> carrying the contribution (<a href="#E-02.3">E-02.3 visitorContribution</a>), the response (<a href="#E-02.4">E-02.4 sparringResponse</a>), the session reference (<a href="#E-02.2">E-02.2 sessionId</a>), and its position (<a href="#E-02.5">E-02.5 position</a>).</p>
+</li>
+<li>
+<p><strong><a id="FS-01-10"></a>FS-01-10</strong> <em>(Entity-access)</em> Increment <a href="#E-01.8">E-01.8 turnCount</a> (turnCount) and update <a href="#E-01.9">E-01.9 lastActiveAt</a> (lastActiveAt).</p>
+</li>
+<li>
+<p><strong><a id="FS-01-11"></a>FS-01-11</strong> <em>(Function-call)</em> If this was the session&#8217;s first exchange, call <a href="#TF-05">TF-05 Derive a scenario statement</a> to derive the scenario statement and write it to <a href="#E-01.5">E-01.5 scenario</a>.</p>
+</li>
+<li>
+<p><strong><a id="FS-01-12"></a>FS-01-12</strong> <em>(Data-operation)</em> Return the response, the remaining turn allowance, and the session state.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative flows</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FA-01-1"></a>FA-01-1</strong> <em>(extends <a href="#FS-01-8">FS-01-8</a>)</em> Provider rate limit, quota exhaustion, timeout, transport failure after retries, or content-policy refusal. All return a generation-failed condition to the caller and write nothing. Grouping is deliberate: the calling client takes the same action for every one of these, and distinguishing them would produce a taxonomy nobody acts on. The distinction is preserved in logs rather than in the response. <em>Outcome:</em> Terminate.</p>
+</li>
+<li>
+<p><strong><a id="FA-01-2"></a>FA-01-2</strong> <em>(extends <a href="#FS-01-6">FS-01-6</a>)</em> The contribution is unsuitable. Unlike <a href="#FA-01-1">FA-01-1</a>, this is not terminal — the caller (<a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>) tells the visitor to edit and resubmit, and the input field re-enables with the text preserved. <em>Outcome:</em> Resume.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tf_02_assess_a_contribution_for_projection_suitability"><a class="anchor" href="#_tf_02_assess_a_contribution_for_projection_suitability"></a>4.2. <a id="TF-02"></a>TF-02 Assess a contribution for projection suitability</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Stepwise<br>
+<em>Achieves:</em> <a href="#G-04">G-04 Decide what may be stored, and let the visitor&#8217;s own</a></p>
+</div>
+<div class="paragraph">
+<p>Determines whether a contribution may be stored and answered at all — and, because only stored content can ever be projected (<a href="#G-04">G-04 Decide what may be stored, and let the visitor&#8217;s own</a>), this is also what keeps unsuitable material off the public surface. It determines whether <em>this turn</em> proceeds, not whether the visitor&#8217;s session does: on an unsuitable result the visitor edits and resubmits, they are not cut off.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FS-02-1"></a>FS-02-1</strong> <em>(Data-operation)</em> Check the contribution against a maintained term list covering profanity. A match returns unsuitable without a provider call.</p>
+</li>
+<li>
+<p><strong><a id="FS-02-2"></a>FS-02-2</strong> <em>(Outbound-call)</em> Call <a href="#TO-02">TO-02 Request a classification</a> with the contribution and a classification instruction. Expect one of: suitable, contains-personal-information, targets-real-person. <em>Call behaviour:</em> Synchronous, short timeout, single attempt, no retry. <strong>On any failure, return unsuitable.</strong> Failing closed is correct here: the cost of not projecting a suitable contribution is that one item is missing from a wall, and the cost of projecting an unsuitable one is unrecoverable once it is six feet tall in a public room.</p>
+</li>
+<li>
+<p><strong><a id="FS-02-3"></a>FS-02-3</strong> <em>(Data-operation)</em> Map the classification to an outcome and return it.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The distinction this function must get right (<a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a>): <em>Targets-real-person</em> means the harmful content — hate speech, harassment, threats, sexual content — is aimed at or about a real, identifiable person or group. It does <strong>not</strong> mean a visitor who is hostile toward, arguing with, pressuring, or instructing the Sparring partner to abandon its position, however extreme the tone — the Sparring partner is software, not a person, and that visitor is engaged with the exercise; their attempt is the observation the installation exists to produce. The classification instruction must state this distinction explicitly rather than leaving it to the model&#8217;s default reading of "unsafe language", because hostility-at-the-AI and harm-at-a-person can otherwise look similar and only one should be withheld.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+A second distinction the instruction must also get right, found in testing: stating the <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a> distinction was not enough on its own — without also stating what the exercise&#8217;s subject matter actually <em>is</em>, the classifier had nothing to check arguing-the-exercise against, which produced misclassifications in the other direction. Both the topic itself and the target-based carve-out need to be explicit in the instruction — omitting either produces a failure mode this requirement exists to prevent, from a different direction.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><em>Contains-personal-information</em> covers names, contact details, and health, financial, or comparably personal circumstances. This case is expected to arise most often in exactly the situation <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a> protects: a visitor under real pressure disclosing something real while trying to get the system to relent. That turn is rejected and not stored; the visitor edits it and continues — the session is not ended over it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tf_03_enforce_request_limits"><a class="anchor" href="#_tf_03_enforce_request_limits"></a>4.3. <a id="TF-03"></a>TF-03 Enforce request limits</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Narrative<br>
+<em>Achieves:</em> <a href="#G-06">G-06 Absorb load and misuse without failing</a></p>
+</div>
+<div class="paragraph">
+<p>Reads the current window for the request origin from <a href="#E-03">E-03 Rate limit window</a>, increments it, and reports whether the allowance is exceeded. Windows are keyed on a hashed origin (<a href="#E-03.1">E-03.1 originHash</a>), so no raw address is stored. Expired windows are reset in place rather than swept by a separate process, which avoids a scheduled job on an unattended host. Threshold is 10 requests per 60-second window (<code>RATE_LIMIT_MAX_REQUESTS</code>, <code>RATE_LIMIT_WINDOW_SECONDS</code>, config.php), set below the provider&#8217;s own limits per <a href="L2-system-design-concept.html#SC-04">SC-04 Generation is rate-limited and metered by the provider</a>. No goal relation beyond <a href="#G-06">G-06 Absorb load and misuse without failing</a>: this is a guard, not business logic.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tf_04_assemble_display_material"><a class="anchor" href="#_tf_04_assemble_display_material"></a>4.4. <a id="TF-04"></a>TF-04 Assemble display material</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Stepwise<br>
+<em>Achieves:</em> <a href="#G-05">G-05 Keep the display surface populated</a>, <a href="#G-04">G-04 Decide what may be stored, and let the visitor&#8217;s own</a></p>
+</div>
+<div class="paragraph">
+<p>Produces the ordered items the projection renders. Every decision about what appears on the wall is made here, so that <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> carries no policy (<a href="L3-SE-02-display-client.html#C-02">C-02 This element holds no selection or ordering policy</a> of that element).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FS-04-1"></a>FS-04-1</strong> <em>(Entity-access)</em> Read live-origin sessions from <a href="#E-01">E-01 Session</a> where <a href="#E-01.6">E-01.6 displayable</a> (displayable) is true and at least one exchange exists, ordered by <a href="#E-01.9">E-01.9 lastActiveAt</a> (lastActiveAt) descending, up to the item limit.</p>
+</li>
+<li>
+<p><strong><a id="FS-04-2"></a>FS-04-2</strong> <em>(Data-operation)</em> If fewer items were found than the limit, continue at <a href="#FS-04-3">FS-04-3</a>. Otherwise continue at <a href="#FS-04-4">FS-04-4</a>.</p>
+</li>
+<li>
+<p><strong><a id="FS-04-3"></a>FS-04-3</strong> <em>(Entity-access)</em> Read pilot-origin sessions from <a href="#E-01">E-01 Session</a> under the same eligibility conditions, ordered by <a href="#E-01.9">E-01.9 lastActiveAt</a> descending, and append until the limit is reached.</p>
+</li>
+<li>
+<p><strong><a id="FS-04-4"></a>FS-04-4</strong> <em>(Entity-access)</em> For each selected session, read its most recent exchange from <a href="#E-02">E-02 Exchange</a> (<a href="#E-02.3">E-02.3 visitorContribution</a>, <a href="#E-02.4">E-02.4 sparringResponse</a>). Which exchange to select is an open decision (<a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> <a href="L3-SE-02-display-client.html#TBC-04">TBC-04 Which exchange pair per session.</a>); it is made here and changing it does not affect <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a>.</p>
+</li>
+<li>
+<p><strong><a id="FS-04-5"></a>FS-04-5</strong> <em>(Data-operation)</em> Build each item from the session&#8217;s scenario (<a href="#E-01.5">E-01.5 scenario</a>), the exchange pair, the origin (<a href="#E-01.4">E-01.4 origin</a>), and a recency position. Return the ordered list.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tf_05_derive_a_scenario_statement"><a class="anchor" href="#_tf_05_derive_a_scenario_statement"></a>4.5. <a id="TF-05"></a>TF-05 Derive a scenario statement</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Narrative<br>
+<em>Achieves:</em> <a href="#G-05">G-05 Keep the display surface populated</a></p>
+</div>
+<div class="paragraph">
+<p>Produces the short context line shown above an exchange, from the session&#8217;s first visitor contribution. The initial approach is to trim that contribution to a bounded length, which costs nothing. If opening contributions prove to read badly as context lines when checked against pilot transcripts, the fallback is a single generation call via <a href="#TO-02">TO-02 Request a classification</a>, with the result written once to <a href="#E-01.5">E-01.5 scenario</a> and never recomputed. Computing it per render would multiply provider cost by the polling rate, which is the specific mistake this note exists to prevent.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tf_06_import_pilot_transcripts"><a class="anchor" href="#_tf_06_import_pilot_transcripts"></a>4.6. <a id="TF-06"></a>TF-06 Import pilot transcripts</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Stepwise<br>
+<em>Achieves:</em> <a href="#G-03">G-03 Persist every interaction with its origin fixed at</a>, <a href="#G-05">G-05 Keep the display surface populated</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FS-06-1"></a>FS-06-1</strong> <em>(Data-operation)</em> Parse the supplied file and validate each transcript&#8217;s structure. Collect malformed ones for reporting rather than aborting.</p>
+</li>
+<li>
+<p><strong><a id="FS-06-2"></a>FS-06-2</strong> <em>(Entity-access)</em> For each valid transcript, write a session to <a href="#E-01">E-01 Session</a> with <a href="#E-01.4">E-01.4 origin</a> (origin) set to <code>pilot</code>, <a href="#E-01.6">E-01.6 displayable</a> (displayable) set to true, and <a href="#E-01.7">E-01.7 consentGranted</a> (consentGranted) set to true. <a href="#E-01.10">E-01.10 tosAgreed</a> (tosAgreed) and <a href="#E-01.11">E-01.11 projectionConsent</a> (projectionConsent) are left unset — pilot sessions have no visitor to ask, and displayable is set directly rather than derived from a projection consent that doesn&#8217;t apply here.</p>
+</li>
+<li>
+<p><strong><a id="FS-06-3"></a>FS-06-3</strong> <em>(Entity-access)</em> Write each exchange to <a href="#E-02">E-02 Exchange</a> in transcript order.</p>
+</li>
+<li>
+<p><strong><a id="FS-06-4"></a>FS-06-4</strong> <em>(Function-call)</em> Call <a href="#TF-05">TF-05 Derive a scenario statement</a> for each session to derive its scenario statement.</p>
+</li>
+<li>
+<p><strong><a id="FS-06-5"></a>FS-06-5</strong> <em>(Data-operation)</em> Return per-transcript outcomes.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative flows</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FA-06-1"></a>FA-06-1</strong> <em>(extends <a href="#FS-06-1">FS-06-1</a>)</em> A transcript is malformed. It is recorded as rejected and the import continues with the remainder. <em>Outcome:</em> Resume.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tf_07_refine_a_session_title"><a class="anchor" href="#_tf_07_refine_a_session_title"></a>4.7. <a id="TF-07"></a>TF-07 Refine a session title</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Narrative</p>
+</div>
+<div class="paragraph">
+<p>Called once per session by <a href="#TI-06">TI-06 Refine a session title</a>, after the session&#8217;s first exchange exists. Attempts a short (≤38 character) title via <a href="#TO-02">TO-02 Request a classification</a> with a title-generation instruction; on any failure (timeout, malformed response, or any other exception) falls back to the same trim-based derivation <a href="#TF-05">TF-05 Derive a scenario statement</a> uses for the scenario statement, just capped at 38 characters instead of <a href="#TF-05">TF-05 Derive a scenario statement</a>'s own bound. Either path always produces a usable title — there is no "couldn&#8217;t generate one" outcome from the caller&#8217;s point of view. Writes the result to <a href="#E-01.12">E-01.12 title</a> once and never recomputes it: called again for a session that already has one, it returns the stored value unchanged rather than repeating the provider call. No goal relation: like <a href="#TF-04">TF-04 Assemble display material</a> in <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>, this is presentation logic serving <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s header, not a stated business goal.</p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_interfaces_inbound"><a class="anchor" href="#_technical_interfaces_inbound"></a>5. Technical interfaces (inbound)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_ti_01_open_a_session"><a class="anchor" href="#_ti_01_open_a_session"></a>5.1. <a id="TI-01"></a>TI-01 Open a session</h3>
+<div class="paragraph">
+<p><em>Call type:</em> Synchronous<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> (<a href="L3-SE-01-input-client.html#TO-01">TO-01 Open a session</a>)<br>
+<em>Input:</em> Three consent booleans, optional as a group; absent on creation, all three required together on the decision call: agreement to take part, retention consent, projection consent.<br>
+<em>Output:</em> Session identifier (string), turn allowance (integer), session state (enum), origin (enum). Origin is always included — cheap to compute, and consumed only by <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s own debug-mode display (<a href="L3-SE-01-input-client.html#QR-06">QR-06 Diagnostic detail is available to an operator</a>), not gated on this side.<br>
+<em>Action:</em> Creates a session in <a href="#E-01">E-01 Session</a> with origin fixed as <code>live</code> and a generated identifier, or records the three-part decision against an existing session by writing <a href="#E-01.7">E-01.7 consentGranted</a>, <a href="#E-01.10">E-01.10 tosAgreed</a>, and <a href="#E-01.11">E-01.11 projectionConsent</a> — and sets <a href="#E-01.6">E-01.6 displayable</a> (displayable) directly from the projection choice in the same write. Returns immediately.<br>
+<em>Error cases:</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Malformed request: missing or non-boolean value on any of the three, on the decision call.</p>
+</li>
+<li>
+<p>Agreement to take part is false or absent: rejected before it becomes a stored state (unlike the other two, which are legitimate declines) — this is what makes participation itself, as opposed to retention or projection, a precondition rather than an opt-out.</p>
+</li>
+<li>
+<p>Session unknown: the identifier supplied with a decision does not resolve.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ti_02_submit_a_contribution"><a class="anchor" href="#_ti_02_submit_a_contribution"></a>5.2. <a id="TI-02"></a>TI-02 Submit a contribution</h3>
+<div class="paragraph">
+<p><em>Call type:</em> Synchronous<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> (<a href="L3-SE-01-input-client.html#TO-02">TO-02 Submit a contribution</a>)<br>
+<em>Input:</em> Session identifier (string, required), contribution text (string, required).<br>
+<em>Output:</em> The completed exchange (visitor contribution and Sparring response), remaining turn allowance (integer), session state (enum). Returned once generation has completed. Every response, regardless of outcome, also carries rate-limit remaining (integer, from <a href="#TF-03">TF-03 Enforce request limits</a>); an <code>ok</code> response additionally carries generation time in milliseconds (from <a href="#FS-01-8">FS-01-8</a>'s timing), and a flagged response carries the moderation reason (from <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>'s outcome — <code>blocked-term</code>, <code>contains-personal-information</code>, <code>targets-real-person</code>, or <code>llm-classification</code> if the classifier call itself failed). All three are cheap to compute and are included unconditionally. The exact reason is consumed only by <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s own debug-mode display (<a href="L3-SE-01-input-client.html#QR-06">QR-06 Diagnostic detail is available to an operator</a>); <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s standard (non-debug) UI derives a coarser two-category hint from the same value — see <a href="L3-SE-01-input-client.html#QR-06">QR-06 Diagnostic detail is available to an operator</a>'s note.<br>
+<em>Action:</em> Calls <a href="#TF-01">TF-01 Process a visitor turn</a> with the session identifier and contribution, and returns its result. Response time is dominated by the provider call in <a href="#TF-01">TF-01 Process a visitor turn</a> <a href="#FS-01-8">FS-01-8</a> and is expected to run to several seconds.<br>
+<em>Error cases:</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Request limit reached (from <a href="#TF-03">TF-03 Enforce request limits</a>).</p>
+</li>
+<li>
+<p>Session unknown or expired.</p>
+</li>
+<li>
+<p>Turn limit reached.</p>
+</li>
+<li>
+<p>Contribution rejected: empty or over-length.</p>
+</li>
+<li>
+<p>Contribution flagged: unsuitable per <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> (<a href="#FA-01-2">FA-01-2</a>) — distinct from generation-failed. The visitor edits and resubmits; nothing about the session changes.</p>
+</li>
+<li>
+<p>Generation failed: any condition grouped by <a href="#FA-01-1">FA-01-1</a>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Unlike the earlier design this superseded, the response&#8217;s condition list is not silent about suitability — a flagged contribution is a distinct, visible outcome (<a href="#FA-01-2">FA-01-2</a>), because the visitor needs to know to edit their message. What the response never carries is which specific field or word triggered the flag, or anything about sessions other than the caller&#8217;s own. The visitor-facing UI does, deliberately, distinguish two broad categories — personal information versus inappropriate content — from the moderation reason; that coarse hint is not the same as exposing the exact classification or wordlist match, which stays debug-only (<a href="L3-SE-01-input-client.html#QR-06">QR-06 Diagnostic detail is available to an operator</a> in L3-SE-01-input-client.adoc).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ti_03_retrieve_a_session"><a class="anchor" href="#_ti_03_retrieve_a_session"></a>5.3. <a id="TI-03"></a>TI-03 Retrieve a session</h3>
+<div class="paragraph">
+<p><em>Call type:</em> Synchronous<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> (<a href="L3-SE-01-input-client.html#TO-03">TO-03 Retrieve a session</a>)<br>
+<em>Input:</em> Session identifier (string, required).<br>
+<em>Output:</em> Session state (enum), turn allowance and remaining count (integers), ordered exchanges (array), whether the consent decision has been recorded (boolean) — one flag covering all three parts, since they are always recorded together — and origin (enum), same rationale as <a href="#TI-01">TI-01 Open a session</a>'s.<br>
+<em>Action:</em> Reads the session from <a href="#E-01">E-01 Session</a> and its exchanges from <a href="#E-02">E-02 Exchange</a> in order. Returns immediately.<br>
+<em>Error cases:</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Session unknown or expired.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ti_04_retrieve_display_material"><a class="anchor" href="#_ti_04_retrieve_display_material"></a>5.4. <a id="TI-04"></a>TI-04 Retrieve display material</h3>
+<div class="paragraph">
+<p><em>Call type:</em> Synchronous<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> (<a href="L3-SE-02-display-client.html#TO-01">TO-01 Retrieve display material</a>)<br>
+<em>Input:</em> None.<br>
+<em>Output:</em> An ordered list of items, each carrying a session identifier, scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total session count and a total exchange count (both integers) — every session and exchange ever recorded, live and pilot, not scoped to the items returned.<br>
+<em>Action:</em> Calls <a href="#TF-04">TF-04 Assemble display material</a> for the item list, and separately counts all rows in <a href="#E-01">E-01 Session</a> and <a href="#E-02">E-02 Exchange</a> for the two totals — plain totals, not scoped to the sessions <a href="#TF-04">TF-04 Assemble display material</a> selects and not a selection or ordering decision, so they stay outside that function&#8217;s policy. Returns all three immediately.<br>
+<em>Error cases:</em> None specific to this interface. An empty list is a valid response and occurs only when no pilot material has been imported.</p>
+</div>
+<div class="paragraph">
+<p><em>This interface takes no parameters by design. Item count, ordering, exchange selection, and pilot fallback are all decided in <a href="#TF-04">TF-04 Assemble display material</a>, so that a change to any of them requires no change in <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> and no coordination between the two.</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ti_05_import_pilot_material"><a class="anchor" href="#_ti_05_import_pilot_material"></a>5.5. <a id="TI-05"></a>TI-05 Import pilot material</h3>
+<div class="paragraph">
+<p><em>Call type:</em> Synchronous<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a>, directly on the host.<br>
+<em>Input:</em> A structured transcript file.<br>
+<em>Output:</em> Per-transcript outcomes: imported or rejected, with a reason for each rejection.<br>
+<em>Action:</em> Calls <a href="#TF-06">TF-06 Import pilot transcripts</a>. Not reachable over the public endpoint (<a href="#C-03">C-03 The operator path is not publicly reachable</a>).<br>
+<em>Error cases:</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>File unreadable or unparseable in full.</p>
+</li>
+<li>
+<p>Individual transcript malformed, reported per transcript rather than as a failure of the call.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ti_06_refine_a_session_title"><a class="anchor" href="#_ti_06_refine_a_session_title"></a>5.6. <a id="TI-06"></a>TI-06 Refine a session title</h3>
+<div class="paragraph">
+<p><em>Call type:</em> Synchronous<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> (<a href="L3-SE-01-input-client.html#TO-04">TO-04 Refine a session title</a>)<br>
+<em>Input:</em> Session identifier (string, required).<br>
+<em>Output:</em> Refined title (string) — always present when the call succeeds.<br>
+<em>Action:</em> Calls <a href="#TF-07">TF-07 Refine a session title</a> and returns its result. Returns once the provider call (or its fallback) completes.<br>
+<em>Error cases:</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Session unknown.</p>
+</li>
+<li>
+<p>Malformed request.</p>
+</li>
+<li>
+<p>No exchange yet exists for the session — the caller normally only invokes this after the first exchange completes.</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_interfaces_outbound"><a class="anchor" href="#_technical_interfaces_outbound"></a>6. Technical interfaces (outbound)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_to_01_request_a_sparring_response"><a class="anchor" href="#_to_01_request_a_sparring_response"></a>6.1. <a id="TO-01"></a>TO-01 Request a Sparring response</h3>
+<div class="paragraph">
+<p><em>Statement:</em> This interface obtains a Sparring partner reply to a visitor contribution by calling the language generation API (<a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a>). Used for every visitor turn. Reply-language matching (English or German, whichever the visitor&#8217;s own contribution is written in) is specified in <a href="L3-SE-04-system-prompt.html#G-04">G-04 Match the visitor&#8217;s reply language turn by</a> of <a href="L2-system-design-concept.html#SE-04">SE-04 System prompt</a> — a prompt-level behavior, not a parameter of this interface, and independent of <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s UI locale (<a href="L3-SE-01-input-client.html#QR-08">QR-08 Interface language is selectable and matches on first</a>).<br>
+<em>Input:</em> The system prompt supplied by <a href="L2-system-design-concept.html#SE-04">SE-04 System prompt</a>, the session&#8217;s prior exchanges as conversational context, the new visitor contribution, and generation parameters.<br>
+<em>Output:</em> Response text.<br>
+<em>Error cases:</em> Rate limit exceeded. Quota exhausted. Content-policy refusal. Provider server error. Timeout. Transport failure. Authentication failure.<br>
+<em>Authoritative spec:</em> Provider documentation. No element in this system holds the authoritative specification.<br>
+<em>Calls:</em> <a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_to_02_request_a_classification"><a class="anchor" href="#_to_02_request_a_classification"></a>6.2. <a id="TO-02"></a>TO-02 Request a classification</h3>
+<div class="paragraph">
+<p><em>Statement:</em> This interface obtains a suitability classification, a scenario statement, or a session title for a visitor contribution, by calling the language generation API (<a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a>). Used by <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> on every turn, by <a href="#TF-05">TF-05 Derive a scenario statement</a> only if the trimmed-contribution approach proves inadequate, and by <a href="#TF-07">TF-07 Refine a session title</a> once per session.<br>
+<em>Input:</em> The contribution text and a classification instruction, a summarisation instruction, or a title-generation instruction.<br>
+<em>Output:</em> A classification value, a short statement, or a short title.<br>
+<em>Error cases:</em> As <a href="#TO-01">TO-01 Request a Sparring response</a>.<br>
+<em>Authoritative spec:</em> Provider documentation.<br>
+<em>Calls:</em> <a href="L2-system-design-concept.html#PE-01">PE-01 Language generation API</a></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Call behaviour is specified on the calling function steps (<a href="#TF-01">TF-01 Process a visitor turn</a> <a href="#FS-01-8">FS-01-8</a>, <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> <a href="#FS-02-2">FS-02-2</a>), or in the calling function&#8217;s own narrative for <a href="#TF-07">TF-07 Refine a session title</a>, not here. The three differ substantially: <a href="#TF-01">TF-01 Process a visitor turn</a> retries and fails open to an error the visitor sees; <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a> does not retry and fails closed to unsuitable; <a href="#TF-07">TF-07 Refine a session title</a> does not retry and fails open to a trim-based fallback, never an error.
+</td>
+</tr>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_entities"><a class="anchor" href="#_entities"></a>7. Entities</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_e_01_session"><a class="anchor" href="#_e_01_session"></a>7.1. <a id="E-01"></a>E-01 Session</h3>
+<div class="paragraph">
+<p><em>Persistence:</em> Persistent<br>
+<em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01 Sparring session</a></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ID</th>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.1"></a>E-01.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sessionId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generated identifier, sufficiently random to resist enumeration. Travels in the client address (<a href="L2-system-design-concept.html#AP-03">AP-03 Session identity travels in the URL; no accounts</a>), so it is not secret and nothing sensitive may be derived from it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.2"></a>E-01.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createdAt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">datetime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When the session was created.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.3"></a>E-01.3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scenarioSource</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>first-contribution</code> or <code>generated</code>. Records how <a href="#E-01.5">E-01.5 scenario</a> was produced, so a later change of approach is visible in the data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.4"></a>E-01.4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">origin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pilot</code> or <code>live</code>. Written at creation and never modified (<a href="L2-system-design-concept.html#SQR-05">SQR-05 Origin is fixed at creation and never inferred</a>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.5"></a>E-01.5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scenario</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The context line shown with the exchange. Absent until the first exchange exists.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.6"></a>E-01.6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">displayable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the session may appear on the projection. Defaults false; set directly from <a href="#E-01.11">E-01.11 projectionConsent</a> (projectionConsent) when the consent decision is recorded — not by moderation. Nothing unsuitable can reach <a href="#E-02">E-02 Exchange</a> in the first place (<a href="#G-04">G-04 Decide what may be stored, and let the visitor&#8217;s own</a>/<a href="L2-system-design-concept.html#AP-05">AP-05 Moderation gates storage, not a per-session display</a>), so there is no separate moderation-driven display flag to maintain. Independent of <a href="#E-01.7">E-01.7 consentGranted</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.7"></a>E-01.7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">consentGranted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the participant agreed to retention. Absent until the decision is recorded. Independent of <a href="#E-01.6">E-01.6 displayable</a> (<a href="L2-system-design-concept.html#SQR-06">SQR-06 Public projection is governed separately from retention</a>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.8"></a>E-01.8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">turnCount</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exchanges completed. Compared against the turn allowance.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.9"></a>E-01.9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lastActiveAt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">datetime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time of the most recent exchange. Drives display ordering and expiry.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.10"></a>E-01.10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tosAgreed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the participant agreed to the terms of participation. Absent until recorded; once recorded it is always true — a decline is rejected at <a href="#TI-01">TI-01 Open a session</a> before it becomes a stored value (unlike <a href="#E-01.7">E-01.7 consentGranted</a> and <a href="#E-01.11">E-01.11 projectionConsent</a>, which legitimately store <code>false</code>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.11"></a>E-01.11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">projectionConsent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the participant agreed to projection. Absent until the decision is recorded. Drives <a href="#E-01.6">E-01.6 displayable</a> directly. Independent of <a href="#E-01.7">E-01.7 consentGranted</a> — a session may be retained and not projected, or projected and not retained.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.12"></a>E-01.12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">title</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short (≤38 character) header title, refined once from the first contribution and never recomputed (<a href="#TF-07">TF-07 Refine a session title</a>). Absent until refined.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em>E-01.6, <a href="#E-01.7">E-01.7 consentGranted</a>, and <a href="#E-01.11">E-01.11 projectionConsent</a> govern three separate things: whether the public surface may currently show this session, whether it may be kept after the exhibition, and the visitor&#8217;s own projection choice — the first is now derived from the third, the second stays fully independent of both. <a href="#E-01.10">E-01.10 tosAgreed</a> is different in kind from the other two consent fields: it gates participation itself rather than a data-processing purpose, which is why it is never stored as a decline (see L1 <a href="L1-solution-design-concept.html#BC-02">BC-02 Public user-generated content is subject to data</a>, L2 <a href="L2-system-design-concept.html#SC-05">SC-05 Retention requires consent; projection requires</a>).</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_e_02_exchange"><a class="anchor" href="#_e_02_exchange"></a>7.2. <a id="E-02"></a>E-02 Exchange</h3>
+<div class="paragraph">
+<p><em>Persistence:</em> Persistent<br>
+<em>Refines:</em> <a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ID</th>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-02.1"></a>E-02.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exchangeId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identifier, ordered by creation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-02.2"></a>E-02.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sessionId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to <a href="#E-01.1">E-01.1 sessionId</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-02.3"></a>E-02.3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">visitorContribution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The visitor&#8217;s turn as submitted, after trimming.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-02.4"></a>E-02.4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sparringResponse</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The reply produced for that turn.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-02.5"></a>E-02.5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">position</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Position within the session, from one.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-02.6"></a>E-02.6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createdAt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">datetime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When the exchange completed.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The pair is stored as one record rather than as two turn records. This follows the display unit (<a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a>) and removes the possibility of a stored contribution with no response, which is the state a failed generation would otherwise leave behind.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_e_03_rate_limit_window"><a class="anchor" href="#_e_03_rate_limit_window"></a>7.3. <a id="E-03"></a>E-03 Rate limit window</h3>
+<div class="paragraph">
+<p><em>Persistence:</em> Transient. Reset in place on expiry rather than swept.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ID</th>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-03.1"></a>E-03.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">originHash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hash of the request origin. The raw address is never stored.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-03.2"></a>E-03.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">windowStart</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">datetime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start of the current counting window.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-03.3"></a>E-03.3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">requestCount</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requests counted in the current window.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em>Purely technical, with no L1 business entity counterpart.</em></p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>8. Quality requirements</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_qr_01_generation_is_bounded_and_its_bound_is_enforced_here_performance"><a class="anchor" href="#_qr_01_generation_is_bounded_and_its_bound_is_enforced_here_performance"></a>8.1. <a id="QR-01"></a>QR-01 Generation is bounded and its bound is enforced here <em>(Performance)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TF-01">TF-01 Process a visitor turn</a>, <a href="#TO-01">TO-01 Request a Sparring response</a><br>
+<em>Acceptance criteria:</em> <a href="#TF-01">TF-01 Process a visitor turn</a> abandons a generation request at a fixed bound and returns a generation-failed condition. The bound is 20 seconds (<code>GENERATION_TIMEOUT_SECONDS</code>, config.php), below <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s own 25-second wait bound so that this element decides the outcome rather than the client timing out first.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-01">SQR-01 A Sparring response arrives, or its absence is visible</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_02_restarts_unattended_availability"><a class="anchor" href="#_qr_02_restarts_unattended_availability"></a>8.2. <a id="QR-02"></a>QR-02 Restarts unattended <em>(Availability)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> The element overall<br>
+<em>Acceptance criteria:</em> The process restarts automatically after failure. No in-memory state is required for correctness after a restart, because everything needed is in <a href="#E-01">E-01 Session</a> through <a href="#E-03">E-03 Rate limit window</a>.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02 The installation recovers without a person present</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_03_a_rejected_request_affects_only_its_own_session_availability"><a class="anchor" href="#_qr_03_a_rejected_request_affects_only_its_own_session_availability"></a>8.3. <a id="QR-03"></a>QR-03 A rejected request affects only its own session <em>(Availability)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TF-01">TF-01 Process a visitor turn</a>, <a href="#TF-03">TF-03 Enforce request limits</a><br>
+<em>Acceptance criteria:</em> Rate limiting, turn limits, and generation failures return a condition for the requesting session and leave every other session serviceable.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-02">SQR-02 The installation recovers without a person present</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_04_the_provider_credential_never_leaves_the_host_security"><a class="anchor" href="#_qr_04_the_provider_credential_never_leaves_the_host_security"></a>8.4. <a id="QR-04"></a>QR-04 The provider credential never leaves the host <em>(Security)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TO-01">TO-01 Request a Sparring response</a>, <a href="#TO-02">TO-02 Request a classification</a><br>
+<em>Acceptance criteria:</em> The credential is read from host configuration, is absent from version control, and appears in no response body, error message, or log line.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-04">SQR-04 Credentials and quota are protected from the public</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_05_limits_are_enforced_on_every_path_security"><a class="anchor" href="#_qr_05_limits_are_enforced_on_every_path_security"></a>8.5. <a id="QR-05"></a>QR-05 Limits are enforced on every path <em>(Security)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TF-01">TF-01 Process a visitor turn</a>, <a href="#TF-03">TF-03 Enforce request limits</a>, <a href="#TI-02">TI-02 Submit a contribution</a><br>
+<em>Acceptance criteria:</em> Contribution length, session turn allowance, and request rate are each checked in this element regardless of whether a client has already checked them.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-04">SQR-04 Credentials and quota are protected from the public</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_06_origin_is_written_once_data_integrity"><a class="anchor" href="#_qr_06_origin_is_written_once_data_integrity"></a>8.6. <a id="QR-06"></a>QR-06 Origin is written once <em>(Data-integrity)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#E-01">E-01 Session</a>, <a href="#TF-06">TF-06 Import pilot transcripts</a>, <a href="#TI-01">TI-01 Open a session</a><br>
+<em>Acceptance criteria:</em> <a href="#E-01.4">E-01.4 origin</a> is set at creation and no code path updates it. No process infers origin from any other value.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-05">SQR-05 Origin is fixed at creation and never inferred</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_07_no_partial_exchange_is_ever_stored_data_integrity"><a class="anchor" href="#_qr_07_no_partial_exchange_is_ever_stored_data_integrity"></a>8.7. <a id="QR-07"></a>QR-07 No partial exchange is ever stored <em>(Data-integrity)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TF-01">TF-01 Process a visitor turn</a><br>
+<em>Acceptance criteria:</em> <a href="#E-02">E-02 Exchange</a> is written only after a response has been received. Every failure path in <a href="#FS-01-8">FS-01-8</a> writes nothing.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-05">SQR-05 Origin is fixed at creation and never inferred</a><br>
+<em>Element specific:</em> Yes</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_08_suitability_assessment_fails_closed_compliance"><a class="anchor" href="#_qr_08_suitability_assessment_fails_closed_compliance"></a>8.8. <a id="QR-08"></a>QR-08 Suitability assessment fails closed <em>(Compliance)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a><br>
+<em>Acceptance criteria:</em> Every failure of <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>, including provider unavailability, yields an unsuitable outcome. No path treats an unavailable classifier as permission to project.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-06">SQR-06 Public projection is governed separately from retention</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_09_projection_eligibility_and_retention_consent_are_never_conflated_compliance"><a class="anchor" href="#_qr_09_projection_eligibility_and_retention_consent_are_never_conflated_compliance"></a>8.9. <a id="QR-09"></a>QR-09 Projection eligibility and retention consent are never conflated <em>(Compliance)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#E-01">E-01 Session</a>, <a href="#TF-01">TF-01 Process a visitor turn</a>, <a href="#TF-04">TF-04 Assemble display material</a>, <a href="#TI-01">TI-01 Open a session</a><br>
+<em>Acceptance criteria:</em> <a href="#E-01.7">E-01.7 consentGranted</a> (retention) is read and written independently of <a href="#E-01.6">E-01.6 displayable</a>/<a href="#E-01.11">E-01.11 projectionConsent</a> (projection). <a href="#E-01.6">E-01.6 displayable</a> is permitted to derive from <a href="#E-01.11">E-01.11 projectionConsent</a> — that is the one intentional coupling, recorded once at consent time, not re-derived elsewhere — but no path derives <a href="#E-01.7">E-01.7 consentGranted</a> from either, or <a href="#E-01.11">E-01.11 projectionConsent</a> from <a href="#E-01.7">E-01.7 consentGranted</a>.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-06">SQR-06 Public projection is governed separately from retention</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_10_no_raw_request_origin_is_stored_compliance"><a class="anchor" href="#_qr_10_no_raw_request_origin_is_stored_compliance"></a>8.10. <a id="QR-10"></a>QR-10 No raw request origin is stored <em>(Compliance)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#E-03">E-03 Rate limit window</a>, <a href="#TF-03">TF-03 Enforce request limits</a><br>
+<em>Acceptance criteria:</em> Only the hashed origin is written. The raw value exists in memory for the duration of the request and nowhere else.<br>
+<em>Element specific:</em> Yes</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qr_11_infrastructure_faults_degrade_to_a_generic_error_not_a_leak_security"><a class="anchor" href="#_qr_11_infrastructure_faults_degrade_to_a_generic_error_not_a_leak_security"></a>8.11. <a id="QR-11"></a>QR-11 Infrastructure faults degrade to a generic error, not a leak <em>(Security)</em></h3>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TI-01">TI-01 Open a session</a>, <a href="#TI-02">TI-02 Submit a contribution</a>, <a href="#TI-03">TI-03 Retrieve a session</a>, <a href="#TI-04">TI-04 Retrieve display material</a><br>
+<em>Acceptance criteria:</em> An uncaught exception on any public endpoint (missing credential, unwritable store, or any other infrastructure fault) returns a generic JSON error with no file path, stack trace, or exception message.<br>
+<em>Supports:</em> <a href="L2-system-design-concept.html#SQR-04">SQR-04 Credentials and quota are protected from the public</a></p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>9. Constraints</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_c_01_php_with_a_file_backed_store_on_one_instance_technical"><a class="anchor" href="#_c_01_php_with_a_file_backed_store_on_one_instance_technical"></a>9.1. <a id="C-01"></a>C-01 PHP with a file-backed store on one instance <em>(Technical)</em></h3>
+<div class="paragraph">
+<p><em>Source:</em> <a href="L2-system-design-concept.html#SC-01">SC-01 PHP with a file-backed store on a single hosted</a>.<br>
+<em>Applies to:</em> The element overall, <a href="#E-01">E-01 Session</a> through <a href="#E-03">E-03 Rate limit window</a>.<br>
+<em>Acceptance criteria:</em> Runs as a single process group against a single store file, with no external database, cache, or queue service.<br>
+<em>Consequence:</em> Rules out any design requiring concurrent write scaling or a background worker. Long-running work must complete within the request, which is why <a href="#TF-01">TF-01 Process a visitor turn</a> is synchronous, why <a href="#TF-05">TF-05 Derive a scenario statement</a> caches its result rather than recomputing, and why <a href="#TF-07">TF-07 Refine a session title</a>'s title refinement is triggered by a dedicated client call (<a href="#TI-06">TI-06 Refine a session title</a>) rather than a server-side background job — there is no queue or worker process for <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> to hand it to.<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-01">SC-01 PHP with a file-backed store on a single hosted</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_c_02_provider_limits_bound_the_elements_own_limits_integration"><a class="anchor" href="#_c_02_provider_limits_bound_the_elements_own_limits_integration"></a>9.2. <a id="C-02"></a>C-02 Provider limits bound the element&#8217;s own limits <em>(Integration)</em></h3>
+<div class="paragraph">
+<p><em>Source:</em> <a href="L2-system-design-concept.html#SC-04">SC-04 Generation is rate-limited and metered by the provider</a>.<br>
+<em>Applies to:</em> <a href="#TF-03">TF-03 Enforce request limits</a>, <a href="#TF-01">TF-01 Process a visitor turn</a>.<br>
+<em>Acceptance criteria:</em> The request rate threshold in <a href="#TF-03">TF-03 Enforce request limits</a> is set below the provider&#8217;s limit, so that visitors meet this element&#8217;s limit rather than the provider&#8217;s.<br>
+<em>Consequence:</em> Rules out unthrottled forwarding. Sets an upper bound on concurrent visitors, TBC once the threshold is chosen.<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-04">SC-04 Generation is rate-limited and metered by the provider</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_c_03_the_operator_path_is_not_publicly_reachable_security"><a class="anchor" href="#_c_03_the_operator_path_is_not_publicly_reachable_security"></a>9.3. <a id="C-03"></a>C-03 The operator path is not publicly reachable <em>(Security)</em></h3>
+<div class="paragraph">
+<p><em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>, and the absence of any authentication in this system.<br>
+<em>Applies to:</em> <a href="#TI-05">TI-05 Import pilot material</a>.<br>
+<em>Acceptance criteria:</em> <a href="#TI-05">TI-05 Import pilot material</a> is invoked on the host and is not routed on the public endpoint.<br>
+<em>Consequence:</em> Rules out remote import and, with it, the need for an authentication mechanism this system otherwise has no use for. Seeding requires host access.<br>
+<em>Element specific:</em> Yes</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_c_04_no_administrative_interface_no_analytics_layer_business"><a class="anchor" href="#_c_04_no_administrative_interface_no_analytics_layer_business"></a>9.4. <a id="C-04"></a>C-04 No administrative interface, no analytics layer <em>(Business)</em></h3>
+<div class="paragraph">
+<p><em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>.<br>
+<em>Applies to:</em> The element overall.<br>
+<em>Acceptance criteria:</em> Operator tasks — seeding, extraction, pruning, reset, and backup — are performed directly against the host and the store file, each its own single-purpose script (<code>bin/import_pilot.php</code>, <code>bin/export.php</code>, <code>bin/prune_orphaned_sessions.php</code>, <code>bin/reset_db.php</code>, <code>bin/backup_db.php</code>).<br>
+<em>Consequence:</em> Rules out building any surface for inspecting or moderating sessions during the exhibition. Extraction is a query against the store; pruning and reset are, respectively, a targeted and a bulk delete against the same store; backup is a file-level snapshot; pruning and reset are guarded by an explicit confirmation flag rather than by any authentication this system otherwise has no use for (<a href="#C-03">C-03 The operator path is not publicly reachable</a>).<br>
+<em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_c_05_attempts_to_bypass_the_sparring_stance_are_not_filtered_business"><a class="anchor" href="#_c_05_attempts_to_bypass_the_sparring_stance_are_not_filtered_business"></a>9.5. <a id="C-05"></a>C-05 Attempts to bypass the Sparring stance are not filtered <em>(Business)</em></h3>
+<div class="paragraph">
+<p><em>Source:</em> <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a>.<br>
+<em>Applies to:</em> <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>.<br>
+<em>Acceptance criteria:</em> The classification instruction distinguishes hostility directed at the Sparring partner (suitable, however extreme the tone) from harmful content targeting a real person or group (targets-real-person). A visitor arguing the Sparring partner out of its position, however hostile, produces a suitable classification. The instruction also states the exercise&#8217;s actual subject matter explicitly (<a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>) — necessary alongside the target-based distinction, not instead of it; found missing in testing, where its absence alone caused on-topic contributions to fail this same acceptance criterion from the other direction.<br>
+<em>Consequence:</em> There is no off-topic filter of any kind — disengagement (spam, unrelated chat) is not classified or withheld. Sessions in which the friction is successfully talked away are retained and projected like any other (subject to the visitor&#8217;s own projection consent, <a href="L2-system-design-concept.html#SC-05">SC-05 Retention requires consent; projection requires</a>).<br>
+<em>Element specific:</em> Yes</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_c_06_classifier_input_is_untrusted_data_not_instruction_security"><a class="anchor" href="#_c_06_classifier_input_is_untrusted_data_not_instruction_security"></a>9.6. <a id="C-06"></a>C-06 Classifier input is untrusted data, not instruction <em>(Security)</em></h3>
+<div class="paragraph">
+<p><em>Source:</em> this review.<br>
+<em>Applies to:</em> <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>.<br>
+<em>Acceptance criteria:</em> The contribution text is delimited and labeled as data in the classification prompt, and delimiter characters that could close that boundary are stripped from the contribution before assembly.<br>
+<em>Consequence:</em> Distinct from <a href="#C-05">C-05 Attempts to bypass the Sparring stance are not filtered</a> — that constraint accepts persona-steering as the exhibit&#8217;s own subject; this one closes the separate case of a contribution engineered to flip the moderation verdict itself, which has no comparable justification for staying open.<br>
+<em>Element specific:</em> Yes</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.0<br>
+Last updated 2026-08-22 18:53:32 +0200
+</div>
+</div>
+</body>
+</html>

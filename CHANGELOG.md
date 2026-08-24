@@ -2,8 +2,142 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-08-22
+
+- `297fd82` chore(config): move juiciness flags up
+- `d84cdff` chore(config): move environment and error handling down
+- `3ec732f` chore(config): move LLM config up
+- `b27d612` refactor(config): extract web app meta tags
+- `d1af924` feat: add silly ASCII art banner on every page
+- `0c82574` fix: unify meta tag inclusion
+- `60c3881` docs: update CHANGELOG through 2408255
+- `2408255` feat(dojo): rotate thinking-status message per turn
+- `b913544` fix(i18n): unify thinking status message
+- `6e39d8e` chore: bump version to 0.14.0
+- `ec8e9d6` docs: update CHANGELOG through a867370
+- `a867370` fix(css): left align locale swicher on content pages
+- `5533ed3` perf(js): minify qrcode generator
+- `fa51fc4` refactor(arena): merge window-var scripts into one <script> tag
+- `b5cc174` refactor(assets): move vendored libs to assets/vendor/
+- `abd9967` refactor(content-pages): extract shared style block to content-page.css
+- `43f3562` style(content-pages): reuse start page's footer/locale-switcher CSS
+- `ac40e81` refactor(css): add drop shadow to locale switcher
+- `88ac8dd` feat(credits): update exhibition opening hours
+- `99f50ee` refactor(config): wrap page-chrome helpers in a section header
+- `f1f57ec` docs(credits): add qrcode-generator to acknowledgments
+- `5671c65` feat(content-pages): add header/footer chrome to philosophy/privacy/terms/credits
+- `96fa9bf` docs(TODO): tick off recently implemented to dos
+- `a543d1d` feat(config): raise TURN_ALLOWANCE to 16 exchanges per session
+- `5ac7ee2` refactor(start): tweak design of locale switcher - swap background and selected color - back container pill-shaped
+- `8d99765` feat(arena): add session count to header stat
+- `7e99c7a` fix(arena): increase clock font size
+- `6e8cb2b` fix(arena): drop trailing period from German month abbreviation
+- `69d1358` fix(arena): correct invalid align-items value
+- `45e282b` fix(arena): 24-hour clock format
+- `1b056ed` fix(arena): align header items to the top
+- `ce74b3e` test(store): de-brittle countExchanges assertion
+- `0e83ef7` fix(arena): address advisor findings on header stats commit
+- `b746df4` feat(arena): header stats — live clock + total exchange count
+- `54e4007` refactor(arena): gradient-top as CSS background, not img
+- `baf9f63` refactor(arena): rename gradient-top
+- `6c25335` feat(arena): add gradient-top color wash behind logo
+- `0bd6348` perf(images): compress images to webp
+- `de31dbb` chore(assets): remove unused logo SVGs
+- `bcd2604` fix(pwa): add standard mobile-web-app-capable meta tag
+- `d3ae9ac` refactor(arena): swap logo for sparring wordmark, dot-grid background
+- `543be9d` refactor(arena): flip alignment of messages
+- `4d62ddf` refactor(arena): nest visitor-name inside contribution, mirroring response-text
+- `123caa1` chore(git): merge worktree-qr-quote-reply into develop
+- `1fe4b8d` style(arena): brand-red glove icon, match reply-qr's corner offset
+- `59b8d3d` refactor(arena): force QR code links opening in new tab
+- `19570eb` refactor(arena): adjust positioning of QR Code
+- `6c5854e` feat(arena): move reply QR to a top-right corner badge on the response
+- `3ffae10` feat(arena): show reply count as a glove-icon reaction pill
+- `5d9e036` refactor(dojo): rename reply query param to r for consistency
+
+## 2026-08-21
+
+- `c1404fa` fix(i18n): route the quote's Replying to label through t() instead of a literal
+- `4d586fc` feat(dojo): label the quote as 'Replying to:' for the model, not just the visitor
+- `c71aec7` fix(dojo): hide quote chip instantly on send, persist quote in the bubble
+- `3f0dcbc` fix(dojo): #reply-quote's display:flex overrode the hidden attribute
+- `f866f4a` feat(arena): QR quote-reply from wall messages to dojo
+- `855504b` build(assets): vendor qrcode-generator for client-side QR rendering
+- `34acfb9` fix(routing): serve trailing-slash routes and use absolute asset paths
+- `335fdc5` refactor(css): move font declaration to start of file
+- `48c320f` fix(design): adopt default system-ui font for most text
+- `9e32511` feat: add trans flag in footer
+- `b71832c` fix(typo): author name correction
+- `f0d08ef` refactor(content): add cookie privacy info
+- `786e5c4` docs(privacy): add cookie usage paragraph
+- `29471cb` refactor(design): make playbook note more subtle
+- `7b3c383` refactor: extract start.php inline CSS to assets/start.css
+- `ba2858b` refactor: swap philosophy link location
+- `94bb017` refactor: make footer text lighter
+- `d3eacf7` refactor(i18n): simplify legal line
+- `06fd122` refactor: add copyright {year}
+- `a77eda9` refactor: fix design of localeSwitcher
+
+## 2026-08-20
+
+- `910caa9` refactor(input): remove localeSwitcher from top bar
+- `4aa2c19` docs(todo): remove stale bug todo item
+- `f0fbdae` docs(todo): tick off recently completed to dos
+- `78b1828` docs(spec): add line breaks to improve legibility
+- `c25f82b` docs: update CHANGELOG through ecce8af
+- `ecce8af` refactor(identity): use roman numerals as suffix
+- `154c232` perf(llm): enable prompt caching on the Sparring system prompt
+- `c05bd78` docs(spec): add SE-04 constraints on context-window sharing and XML structuring
+- `5941863` docs: fix broken sentence in CLAUDE.md's spec/ section
+- `c886401` docs(spec): scaffold SE-04, the system prompt, as a first-class element
+- `7296fd7` docs(spec): promote requirements to sub-sections
+- `459feac` docs(spec): flatten sections of L2 system design
+- `5065b31` docs(spec): resolve stale TBCs against shipped config.php values
+- `368fc30` docs(spec): remove stray section number
+- `02cf81b` docs(spec): give entities, interfaces, technical functions IDs consistent with the rest
+- `3d24016` docs(spec): give goals, quality requirements, and constraints consistent IDs
+- `8f55745` docs(spec): drop em-dash between ID and title in definition lists
+- `87d6649` docs(asciidoc): remove stray section number
+- `e807d3c` docs(spec): fix element-name duplication, restructure SE-04
+- `2cf7206` docs(spec): convert standalone meta-notes into real admonitions
+- `2b923b6` docs(spec): single space between ID and title in link labels
+- `89cc23f` docs(spec): use colon, not em-dash, between ID and title in link labels
+- `108996e` docs(spec): show requirement/element names alongside IDs in link labels
+- `82850a9` docs(asciidoc): add navigation to glossary page too
+- `060e1c8` docs(asciidoc): build spec website
+- `e35e55d` docs(asciidoc): make specs easier to navigate
+- `69b8938` docs(spec): tweak glossary table column size
+- `a05ace4` fix(router): redirect /spec and /spec/ to spec/index.html
+- `179c170` build(spec): add bin/build_spec.sh to rebuild public/spec/
+- `dd0fc73` docs(spec): add index linking all design docs
+- `babf672` docs(spec): publish HTML export to public/spec/
+- `72e5ab4` docs(specs): add version, author and date on the header
+- `0013987` docs(spec): add cross-document references and fill missing links
+- `ecbd9fe` docs(CLAUDE): remove reference to StrictDoc
+- `5bbdbf1` chore(design): priorize rasterized logo
+- `46da3de` chore(design): bring gloves and logotype close together
+- `a70742b` chore(branding): update log with fun style and simplify logotype
+- `656d2ae` chore(img): update apple-touch-icon
+- `42db054` chore(i18n): adjust translation for spar! in title card
+- `5a81441` chore(lang-switcher): hide lang switcher from start page
+- `0f6c67e` docs(todo): tick off recent to dos
+- `25dc577` docs(spec): add German locale switching and reply-language matching to SE-04/SE-02
+- `f90f7a1` feat(prompts): reply/title in the visitor's own message language
+- `afd18da` feat(i18n): wire German translations into every page and dialog
+- `9e07c18` feat(i18n): add German locale infrastructure
+
 ## 2026-08-19
 
+- `6c26c96` test(eval): add multi-turn evaluation suite for prompts/sparring.md
+- `3e2aadd` refactor(dojo): rename opening scenario query param to o, key by number
+- `a906a7f` docs(spec): fix typos across spec docs
+- `bad887e` feat(web): add installable manifest to dojo and arena
+- `d45728e` feat(export): add --csv and --markdown formats
+- `cc0d467` feat(export): add --consented-only flag
+- `aaa804d` fix(export): group --jsonl by session, not by exchange
+- `4a56eea` fix(export): shape --jsonl as OpenAI fine-tuning format
+- `53d966c` docs(spec): add prune_orphaned_sessions.php to C-04
+- `694fb6b` feat(export): add --jsonl and --session flags
 - `836f7eb` feat: add fallback error pages for 404/500
 - `47c4dde` docs: update CHANGELOG through d38afcc
 - `d38afcc` docs: point README setup at tests/run.sh instead of stale two-test list

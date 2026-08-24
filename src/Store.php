@@ -69,6 +69,14 @@ final class Store
         SQL);
         $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_exchanges_session ON exchanges(session_id)');
 
+        // Guard for a store.db created before reply_count existed — same
+        // ALTER-if-missing idiom as the sessions table above. Non-null
+        // default (0) makes the bare ADD COLUMN valid with no backfill.
+        $existingExchangeColumns = array_column($this->pdo->query('PRAGMA table_info(exchanges)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+        if (!in_array('reply_count', $existingExchangeColumns, true)) {
+            $this->pdo->exec('ALTER TABLE exchanges ADD COLUMN reply_count INTEGER NOT NULL DEFAULT 0');
+        }
+
         $this->pdo->exec(<<<SQL
             CREATE TABLE IF NOT EXISTS rate_limit_windows (
                 origin_hash    TEXT PRIMARY KEY,
@@ -79,8 +87,8 @@ final class Store
 
         $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_sessions_display ON sessions(origin, displayable, last_active_at)');
 
-        // --- Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php) ---
-        // Requires FTS5, compiled into the sqlite3 lib PHP links against — verified
+        // Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php):
+        // requires FTS5, compiled into the sqlite3 lib PHP links against — verified
         // present in this environment; if a deploy target lacks it, this throws at
         // Store construction rather than silently degrading search.
         $this->pdo->exec(<<<SQL
@@ -93,7 +101,11 @@ final class Store
         SQL);
     }
 
-    // --- Sessions (E-01) ---
+    /*
+    |--------------------------------------------------------------------------
+    | Sessions (E-01)
+    |--------------------------------------------------------------------------
+    */
 
     /** Creates a session with origin fixed at creation (SQR-05) and no other value assigned yet. */
     public function createSession(string $origin): array
@@ -203,14 +215,24 @@ final class Store
         $stmt->execute(['t' => $title, 'id' => $id]);
     }
 
-    // --- Exchanges (E-02) ---
+    /*
+    |--------------------------------------------------------------------------
+    | Exchanges (E-02)
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Writes one completed exchange and advances the session's turn count in the same
      * operation, so a failed generation (caller never reaches here) leaves no partial
      * exchange behind (QR-07).
+     *
+     * $replyToExchangeId: set only when this exchange is a session's first turn
+     * (position 1) sent in reply to another exchange's QR code. Incrementing the
+     * quoted row's reply_count inside this same transaction, gated on position === 1,
+     * is what makes the increment exactly-once — only one position-1 row can ever
+     * exist per session, so there is no separate read-then-write race window.
      */
-    public function appendExchange(string $sessionId, string $contribution, string $response): array
+    public function appendExchange(string $sessionId, string $contribution, string $response, ?int $replyToExchangeId = null): array
     {
         $session = $this->getSession($sessionId);
         if ($session === null) {
@@ -240,6 +262,11 @@ final class Store
             );
             $stmt->execute(['pos' => $position, 'now' => $now, 'id' => $sessionId]);
 
+            if ($replyToExchangeId !== null && $position === 1) {
+                $stmt = $this->pdo->prepare('UPDATE exchanges SET reply_count = reply_count + 1 WHERE id = :rid');
+                $stmt->execute(['rid' => $replyToExchangeId]);
+            }
+
             $this->pdo->commit();
         } catch (Throwable $e) {
             $this->pdo->rollBack();
@@ -253,6 +280,7 @@ final class Store
             'sparringResponse' => $response,
             'position' => $position,
             'createdAt' => $now,
+            'replyCount' => 0, // a freshly-appended exchange never has replies of its own yet
         ];
     }
 
@@ -275,6 +303,27 @@ final class Store
         $stmt->execute(['sid' => $sessionId]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row === false ? null : $this->hydrateExchange($row);
+    }
+
+    /**
+     * A quotable exchange for the QR-reply flow: only resolves if its session is
+     * displayable (privacy — an exchange whose visitor never consented to
+     * projection must never be readable by scanning/guessing its id, same
+     * consent gate the wall itself already respects). Unknown id or a
+     * non-displayable session both resolve to null. Returns a narrow shape —
+     * deliberately not the full hydrated exchange — so nothing else
+     * (visitorContribution, sessionId) can leak through this call site.
+     */
+    public function getQuotableExchange(int $exchangeId): ?array
+    {
+        $stmt = $this->pdo->prepare(
+            'SELECT e.sparring_response FROM exchanges e
+             JOIN sessions s ON s.id = e.session_id
+             WHERE e.id = :id AND s.displayable = 1'
+        );
+        $stmt->execute(['id' => $exchangeId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row === false ? null : ['exchangeId' => $exchangeId, 'text' => $row['sparring_response']];
     }
 
     /** Every session, any origin (bin/export.php — C-04: extraction is a query against the store). */
@@ -310,7 +359,11 @@ final class Store
         return array_map($this->hydrateSession(...), $stmt->fetchAll(PDO::FETCH_ASSOC));
     }
 
-    // --- Rate limiting (E-03) ---
+    /*
+    |--------------------------------------------------------------------------
+    | Rate limiting (E-03)
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Reads/increments the counting window for a hashed origin, resetting it in place
@@ -351,10 +404,16 @@ final class Store
         return ['allowed' => true, 'remaining' => $maxRequests - ((int) $row['request_count'] + 1)];
     }
 
-    // --- Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php) ---
-    // Disk-derived cache, not visitor data: deliberately kept out of getCounts()/
-    // resetAll() (scoped to sessions/exchanges/rate-limit windows) so an
-    // exhibition-session reset never wipes the curriculum corpus.
+    /*
+    |--------------------------------------------------------------------------
+    | Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php)
+    |--------------------------------------------------------------------------
+    |
+    | Disk-derived cache, not visitor data: deliberately kept out of getCounts()/
+    | resetAll() (scoped to sessions/exchanges/rate-limit windows) so an
+    | exhibition-session reset never wipes the curriculum corpus.
+    |
+    */
 
     /**
      * Replaces the entire curriculum_chunks table with $chunks in one transaction —
@@ -461,7 +520,11 @@ final class Store
         ));
     }
 
-    // --- Maintenance (bin/reset_db.php, bin/backup_db.php) ---
+    /*
+    |--------------------------------------------------------------------------
+    | Maintenance (bin/reset_db.php, bin/backup_db.php)
+    |--------------------------------------------------------------------------
+    */
 
     /** Row counts across every table this store owns — used by --dry-run and post-reset reporting. */
     public function getCounts(): array
@@ -524,7 +587,11 @@ final class Store
         return $stmt->rowCount();
     }
 
-    // --- Helpers ---
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     private static function now(): string
     {
@@ -545,6 +612,7 @@ final class Store
             'sparringResponse' => $row['sparring_response'],
             'position' => (int) $row['position'],
             'createdAt' => $row['created_at'],
+            'replyCount' => (int) $row['reply_count'],
         ];
     }
 

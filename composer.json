@@ -2,7 +2,7 @@
     "name": "sparring/exhibition-object",
     "description": "Sparring exhibition object backend (SE-03) — PHP, SQLite, switchable LLM provider",
     "license": "MIT",
-    "version": "0.1.0",
+    "version": "0.14.0",
     "require": {
         "php": ">=8.2",
         "anthropic-ai/sdk": "^0.7",
@@ -12,5 +12,9 @@
         "allow-plugins": {
             "php-http/discovery": true
         }
+    },
+    "scripts": {
+        "post-install-cmd": "git config core.hooksPath .githooks 2>/dev/null || true",
+        "post-update-cmd": "git config core.hooksPath .githooks 2>/dev/null || true"
     }
 }

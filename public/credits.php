@@ -1,28 +1,31 @@
 <!doctype html>
-<html lang="en">
+<html lang="<?= resolve_locale() ?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Credits — Sparring</title>
-<?= ogTags('/credits', 'Credits — Sparring', 'Sparring is a thesis exhibition piece by Sarah Puppin Pratti.') ?>
-<link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
-<style>body{font:16px/1.5 system-ui,sans-serif;max-width:40rem;margin:2rem auto;padding:0 1rem;touch-action:manipulation;}a{color:#d32f2f;}a:visited{color:#7b5940;}</style>
+<title><?= t('credits.title') ?></title>
+<?= ogTags('/credits', t('credits.title'), t('credits.intro')) ?>
+<link rel="stylesheet" href="<?= fasset('content-page.css') ?>">
+<?= webAppTags() ?>
 </head>
 <body>
-<h1>Credits</h1>
-<p>Sparring is a thesis exhibition piece by Sarah Puppin Pratti.</p>
-<p>Built with Anthropic's Claude API for response generation and moderation.</p>
-<h2>Duration of the Exhibition</h2>
-<p>Opening Ceremony: 4 September 2026, 18:00 TBC</p>
-<p>From 4 to 21 September 2026 at SUPERRAUM, Brückstraße 64, 44135 Dortmund</p>
-<p>Opening Hours: TBC</p>
-<h2>About the Author</h2>
-<p>Sarah is a designer and researcher based in Dortmund. She is currently a student of the Master Digital Design program at the Fachhochschule Dortmund, where she investigates the role of AI in design education. Her work explores the intersection of technology, creativity, and human-computer interaction.</p>
-<p><strong>Contact:</strong> For inquiries, please contact <a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Inquiry">sarah.puppinpratti001@stud.fh-dortmund.de</a></p>
-<h2>Acknowledgements</h2>
-<p>Sparring uses the following open-source libraries and technologies:</p>
+<?= pageHeader() ?>
+<h1><?= t('credits.heading') ?></h1>
+<p><?= t('credits.intro') ?></p>
+<p><?= t('credits.builtWith') ?></p>
+<h2><?= t('credits.duration.heading') ?></h2>
+<p><?= t('credits.duration.opening') ?></p>
+<p><?= t('credits.duration.dates') ?></p>
+<p><?= t('credits.duration.hours') ?></p>
+<p><?= t('credits.duration.special') ?></p>
+<h2><?= t('credits.author.heading') ?></h2>
+<p><?= t('credits.author.bio') ?></p>
+<p><?= t('credits.author.contact') ?></p>
+<h2><?= t('credits.ack.heading') ?></h2>
+<p><?= t('credits.ack.intro') ?></p>
 <ul>
 <li><a href="https://github.com/KilledByAPixel/ZzFX">ZzFX</a> by Frank Force</li>
+<li><a href="https://github.com/kazuhikoarase/qrcode-generator">qrcode-generator</a> by Kazuhiko Arase</li>
 <li><a href="https://github.com/mermaid-js/mermaid">mermaid.js</a></li>
 <li><a href="https://github.com/hans-thiessen/Rethink-Sans/">RethinkSans</a> by Rethink</li>
 <li><a href="https://pictogrammers.com/library/mdi/">Material Design Icons</a> by the Pictogrammers group</li>
@@ -31,6 +34,7 @@
 <li><a href="https://figma.com/">Figma</a></li>
 <li><a href="https://github.com/anthropics/claude-api">Claude API</a> and Claude Code</li>
 </ul>
-<p><a href="/">Back</a></p>
+<?= pageFooter() ?>
+<?= sillyBanner() ?>
 </body>
 </html>
