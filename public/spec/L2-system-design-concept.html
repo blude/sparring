@@ -899,6 +899,72 @@ Dashed link marks the system boundary. Detailed interaction sequences are in sec
 <em>Achieves:</em> <a href="#SG-01">SG-01 Start a session from a personal device with no</a>, <a href="#SG-03">SG-03 Survive interruption of the visitor&#8217;s session</a>, <a href="#SG-05">SG-05 Record every interaction with its origin fixed at</a>, <a href="#SG-07">SG-07 Gate public projection at the moment of submission</a><br>
 <em>Realises:</em> <a href="L1-solution-design-concept.html#BP-01">BP-01 Visitor conducts a Sparring session</a></p>
 </div>
+<div class="paragraph">
+<p>Visual companion to the steps below — main success path plus the three
+branches that change the interaction pattern (limit, moderation, provider
+failure). The step list is the authoritative source; step IDs and
+alternative-flow IDs (<code>SA-01-*</code>) are there, not repeated in the diagram.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+  actor UT01 as UT-01 Participating visitor
+  participant SE01 as SE-01 Input client
+  participant SE03 as SE-03 Backend service
+  participant PE01 as PE-01 Language generation API
+  participant SE02 as SE-02 Display client
+
+  UT01-&gt;&gt;SE01: scans code (no session in URL)
+  SE01-&gt;&gt;SE03: request new session
+  SE03--&gt;&gt;SE01: session id
+  SE01-&gt;&gt;UT01: presents consent decision
+  UT01--&gt;&gt;SE01: agrees (holds input surface until then)
+  UT01-&gt;&gt;SE01: submits contribution
+  SE01-&gt;&gt;SE03: forwards contribution
+
+  SE03-&gt;&gt;SE03: check rate/size limits
+  alt over limit
+    SE03--&gt;&gt;SE01: reject — limit exceeded
+    SE01--&gt;&gt;UT01: tells visitor plainly (session stays usable)
+  else within limit
+    SE03-&gt;&gt;SE03: assess suitability
+    alt unsuitable
+      SE03--&gt;&gt;SE01: reject — nothing stored, turn not consumed
+      SE01--&gt;&gt;UT01: asks to edit and resubmit
+    else suitable
+      SE03-&gt;&gt;PE01: request response (prior exchanges)
+      alt unavailable or fails after retries
+        PE01--&gt;&gt;SE03: failure
+        SE03--&gt;&gt;SE01: failure
+        SE01--&gt;&gt;UT01: states the installation cannot respond
+      else
+        PE01--&gt;&gt;SE03: response
+        SE03-&gt;&gt;SE03: store contribution + response as one exchange
+        SE03--&gt;&gt;SE01: response
+        SE01--&gt;&gt;UT01: presents response, reopens input
+        Note over SE03,SE02: exchange available on SE-02's next poll, if projection-eligible
+      end
+    end
+  end</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Not encoded above, to keep it readable — see the alternative flows
+list for these: <a href="#SA-01-1">SA-01-1</a> (declining retention/projection is an
+opt-out, not a branch in the call chain), <a href="#SA-01-5">SA-01-5</a> (turn limit
+reached), <a href="#SA-01-6">SA-01-6</a> (reload resumes an existing session, skipping
+consent), <a href="#SA-01-7">SA-01-7</a> (declining the terms themselves, which — unlike
+the other opt-outs — does end the flow).
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -1158,7 +1224,7 @@ Downward references from L3 are not written here. Element designs declare their 
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-24 22:46:05 +0200
+Last updated 2026-08-24 23:07:42 +0200
 </div>
 </div>
 <!-- Mermaid support for [source,mermaid] code blocks. Asciidoctor has no

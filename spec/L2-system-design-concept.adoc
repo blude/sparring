@@ -271,6 +271,61 @@ _Detail level:_ Detailed +
 _Achieves:_ <<SG-01,SG-01 Start a session from a personal device with no>>, <<SG-03,SG-03 Survive interruption of the visitor's session>>, <<SG-05,SG-05 Record every interaction with its origin fixed at>>, <<SG-07,SG-07 Gate public projection at the moment of submission>> +
 _Realises:_ xref:L1-solution-design-concept.adoc#BP-01[BP-01 Visitor conducts a Sparring session]
 
+Visual companion to the steps below — main success path plus the three
+branches that change the interaction pattern (limit, moderation, provider
+failure). The step list is the authoritative source; step IDs and
+alternative-flow IDs (`SA-01-*`) are there, not repeated in the diagram.
+
+[source,mermaid]
+----
+sequenceDiagram
+  actor UT01 as UT-01 Participating visitor
+  participant SE01 as SE-01 Input client
+  participant SE03 as SE-03 Backend service
+  participant PE01 as PE-01 Language generation API
+  participant SE02 as SE-02 Display client
+
+  UT01->>SE01: scans code (no session in URL)
+  SE01->>SE03: request new session
+  SE03-->>SE01: session id
+  SE01->>UT01: presents consent decision
+  UT01-->>SE01: agrees (holds input surface until then)
+  UT01->>SE01: submits contribution
+  SE01->>SE03: forwards contribution
+
+  SE03->>SE03: check rate/size limits
+  alt over limit
+    SE03-->>SE01: reject — limit exceeded
+    SE01-->>UT01: tells visitor plainly (session stays usable)
+  else within limit
+    SE03->>SE03: assess suitability
+    alt unsuitable
+      SE03-->>SE01: reject — nothing stored, turn not consumed
+      SE01-->>UT01: asks to edit and resubmit
+    else suitable
+      SE03->>PE01: request response (prior exchanges)
+      alt unavailable or fails after retries
+        PE01-->>SE03: failure
+        SE03-->>SE01: failure
+        SE01-->>UT01: states the installation cannot respond
+      else
+        PE01-->>SE03: response
+        SE03->>SE03: store contribution + response as one exchange
+        SE03-->>SE01: response
+        SE01-->>UT01: presents response, reopens input
+        Note over SE03,SE02: exchange available on SE-02's next poll, if projection-eligible
+      end
+    end
+  end
+----
+
+NOTE: Not encoded above, to keep it readable — see the alternative flows
+list for these: <<SA-01-1,SA-01-1>> (declining retention/projection is an
+opt-out, not a branch in the call chain), <<SA-01-5,SA-01-5>> (turn limit
+reached), <<SA-01-6,SA-01-6>> (reload resumes an existing session, skipping
+consent), <<SA-01-7,SA-01-7>> (declining the terms themselves, which — unlike
+the other opt-outs — does end the flow).
+
 - *SSt-01-1* <<UT-01,UT-01 Participating visitor>> scans the code and <<SE-01,SE-01 Input client>> opens without a session identifier. _(Performed by: <<UT-01,UT-01 Participating visitor>>; Affects: <<SE-01,SE-01 Input client>>)_
 - *SSt-01-2* <<SE-01,SE-01 Input client>> requests a new session from <<SE-03,SE-03 Backend service>> and receives an identifier, which it places in the address. _(Performed by: <<SE-01,SE-01 Input client>>; Affects: <<SE-03,SE-03 Backend service>>)_
 - *SSt-01-3* <<SE-01,SE-01 Input client>> presents the consent decision — agreement to take part, plus independent retention and projection choices — and holds the input surface until <<UT-01,UT-01 Participating visitor>> responds. _(Performed by: <<SE-01,SE-01 Input client>>; Affects: <<UT-01,UT-01 Participating visitor>>)_
