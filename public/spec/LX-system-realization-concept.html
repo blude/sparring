@@ -587,5 +587,19 @@ Version 1.0<br>
 Last updated 2026-08-24 22:41:22 +0200
 </div>
 </div>
+<!-- Mermaid support for [source,mermaid] code blocks. Asciidoctor has no
+     native Mermaid renderer, so this is client-side: turn the generated
+     `code.language-mermaid` block into what Mermaid expects and let its
+     browser build render it on load. -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  document.querySelectorAll('pre.highlight code.language-mermaid').forEach(function (code) {
+    var div = document.createElement('div');
+    div.className = 'mermaid';
+    div.textContent = code.textContent;
+    code.closest('pre').replaceWith(div);
+  });
+  mermaid.initialize({ startOnLoad: true });
+</script>
 </body>
 </html>

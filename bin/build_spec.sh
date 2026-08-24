@@ -14,5 +14,5 @@ if ! command -v asciidoctor >/dev/null; then
     exit 1
 fi
 
-asciidoctor -D public/spec spec/*.adoc
+asciidoctor -D public/spec -a docinfo=shared-footer spec/*.adoc
 echo "Built $(ls public/spec/*.html | wc -l | tr -d ' ') files into public/spec/."
