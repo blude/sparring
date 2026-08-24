@@ -13,8 +13,15 @@ final class GenerationFailedException extends RuntimeException
  */
 interface LlmClientInterface
 {
-    /** TO-01. $priorExchanges: ordered list of ['visitorContribution' => ..., 'sparringResponse' => ...]. */
-    public function generateResponse(array $priorExchanges, string $newContribution): string;
+    /**
+     * TO-01. $priorExchanges: ordered list of ['visitorContribution' => ..., 'sparringResponse' => ...].
+     * $groundingContext: turn-1 curriculum excerpts (see Sparring::processTurn/
+     * Store::searchCurriculumConcepts), sent as framework-level context
+     * separate from the sparring prompt and from $newContribution — never
+     * persisted/displayed, and (for providers with explicit prompt caching)
+     * never part of the cached block. null when nothing relevant was found.
+     */
+    public function generateResponse(array $priorExchanges, string $newContribution, ?string $groundingContext = null): string;
 
     /** TO-02 classification half. Returns one of 'suitable'|'contains-personal-information'|'targets-real-person'. */
     public function classify(string $contribution): string;

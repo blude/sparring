@@ -5,6 +5,7 @@
 /data/store.db-wal
 /data/store.db-shm
 /data/backups/
+/data/curriculum/
 .env
 /bin/deploy.env
 

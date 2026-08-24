@@ -80,7 +80,31 @@ final class AnthropicLlmClient extends AbstractLlmClient
      * on certain conditions, so the SDK's own default retry (2 more, on top of ours, with no
      * visibility into which error triggered it) would fight that policy rather than serve it.
      */
-    public function generateResponse(array $priorExchanges, string $newContribution): string
+    /**
+     * Turn-1 curriculum grounding (see Sparring::processTurn/
+     * Store::searchCurriculumConcepts): $groundingContext, when present,
+     * becomes a *second*, uncached system block — the first block (the
+     * static sparring prompt) must stay byte-identical turn to turn for
+     * its cacheControl discount (SE-04 C-03) to keep applying; splicing
+     * per-turn content into that block instead would re-bill its full
+     * cost every single turn. null/'' omits the block entirely — pure
+     * function, no SDK call, so it's unit-testable without network
+     * (tests/smoke_llm_client.php).
+     *
+     * @return list<array{type: string, text: string, cacheControl?: array{type: string}}>
+     */
+    public static function buildSystemBlocks(string $sparringPrompt, ?string $groundingContext): array
+    {
+        $blocks = [
+            ['type' => 'text', 'text' => $sparringPrompt, 'cacheControl' => ['type' => 'ephemeral']],
+        ];
+        if ($groundingContext !== null && $groundingContext !== '') {
+            $blocks[] = ['type' => 'text', 'text' => $groundingContext];
+        }
+        return $blocks;
+    }
+
+    public function generateResponse(array $priorExchanges, string $newContribution, ?string $groundingContext = null): string
     {
         $messages = [];
         foreach ($priorExchanges as $exchange) {
@@ -99,9 +123,7 @@ final class AnthropicLlmClient extends AbstractLlmClient
                     // contribution change turn to turn), well over the ~1,024-token
                     // caching minimum. Without cacheControl this re-bills full input
                     // cost on every turn instead of a cached-read discount (SE-04 C-03).
-                    system: [
-                        ['type' => 'text', 'text' => $this->sparringPrompt, 'cacheControl' => ['type' => 'ephemeral']],
-                    ],
+                    system: self::buildSystemBlocks($this->sparringPrompt, $groundingContext),
                     messages: $messages,
                     requestOptions: ['timeout' => (float) GENERATION_TIMEOUT_SECONDS, 'maxRetries' => 0],
                     // Model default-enables extended thinking. Measured across a full

@@ -110,6 +110,7 @@ const TITLE_MAX_CHARS = 38;     // header title generated from the first contrib
 
 const STORE_DB_PATH = __DIR__ . '/data/store.db';
 const PILOT_DATA_DIR = __DIR__ . '/data/pilot';
+const CURRICULUM_DATA_DIR = __DIR__ . '/data/curriculum'; // gitignored — poor man's RAG source markdown, bin/import_curriculum.php
 
 /*
 |--------------------------------------------------------------------------
@@ -143,6 +144,13 @@ const JUICY_DISPLAY_ENTRANCE = true;
 |
 */
 
+// Shared marker for "this contribution is a pre-authored opener, not the
+// visitor's own words" — read by resolve_opening_message() below and by
+// Sparring::processTurn's curriculum-grounding trigger (turn-1 grounding
+// must fire on whichever turn is the visitor's actual first contribution,
+// not on this canned line when a QR code seeded the session).
+const OPENING_MESSAGE_PREFIX = 'Sparring Scenario: ';
+
 const OPENING_PROMPTS = [
     1 => 'Some decisions can never fully be "solved" — only managed.',
     // add one entry per QR code before the exhibition
@@ -157,7 +165,7 @@ function resolve_opening_message(?string $id): ?string
     if ($id === null || $id === '' || !isset(OPENING_PROMPTS[$id])) {
         return null;
     }
-    return 'Sparring Scenario: ' . OPENING_PROMPTS[$id];
+    return OPENING_MESSAGE_PREFIX . OPENING_PROMPTS[$id];
 }
 
 /*

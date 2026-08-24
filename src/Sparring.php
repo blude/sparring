@@ -134,10 +134,40 @@ final class Sparring
             ? t('dojo.replyQuote.label') . " \"{$quotedExchange['text']}\"\n\n$contribution"
             : $contribution;
 
+        // Turn-1 curriculum grounding (G-05, spec/L3-SE-04-system-prompt.adoc):
+        // supplements the static <domain_grounding> block in prompts/sparring.md
+        // with excerpts retrieved from this specific contribution — see
+        // Store::searchCurriculumConcepts() for why vocabulary-restricted
+        // matching, and AnthropicLlmClient::buildSystemBlocks()/
+        // OpenAiLlmClient::buildSystemMessages() for why this travels
+        // separately from $storedContribution rather than prepended to it
+        // (never persisted/displayed; the static prompt's cache discount
+        // must survive turn to turn). Runs on $contribution (the visitor's
+        // own words), not $storedContribution, so a QR-reply quote never
+        // feeds the lookup. Wrapped defensively: this is a supplementary
+        // enhancement, not core to producing a response at all — a lookup
+        // failure degrades to no grounding, never blocks the turn.
+        //
+        // Not simply "turnCount === 0": a QR-code-seeded session (dojo.js's
+        // window.OPENING_MESSAGE, config.php's resolve_opening_message())
+        // auto-sends a canned OPENING_MESSAGE_PREFIX-prefixed line as turn
+        // 1, so the visitor's own first real words land on turn 2 instead —
+        // that scripted opener has nothing to ground, and grounding it
+        // there would mean the visitor's actual first turn never gets
+        // grounded at all. So: look at what's actually in $priorExchanges
+        // (already fetched above) rather than trust the turn count alone.
+        $isVisitorsFirstRealContribution = match (count($priorExchanges)) {
+            0 => !str_starts_with($contribution, OPENING_MESSAGE_PREFIX),
+            1 => str_starts_with($priorExchanges[0]['visitorContribution'], OPENING_MESSAGE_PREFIX)
+                && !str_starts_with($contribution, OPENING_MESSAGE_PREFIX),
+            default => false,
+        };
+        $groundingContext = $isVisitorsFirstRealContribution ? $this->curriculumGroundingContext($contribution) : null;
+
         // FS-01-8: the provider call. Every failure path throws GenerationFailedException.
         $generationStart = microtime(true);
         try {
-            $response = $this->llm->generateResponse($priorExchanges, $storedContribution);
+            $response = $this->llm->generateResponse($priorExchanges, $storedContribution, $groundingContext);
         } catch (GenerationFailedException) {
             return ['status' => 'generation-failed', 'rateLimitRemaining' => $rateLimit['remaining']];
         }
@@ -162,6 +192,34 @@ final class Sparring
             'rateLimitRemaining' => $rateLimit['remaining'],
             'generationMs' => $generationMs,
         ];
+    }
+
+    /**
+     * Turn-1 curriculum grounding — see processTurn's call site for the
+     * design rationale. Returns null on no concept match (the common case:
+     * most first turns won't literally name a page's own title) and on any
+     * lookup failure (Store::searchCurriculumConcepts() is a supplementary
+     * enhancement, never load-bearing for producing a response at all).
+     */
+    private function curriculumGroundingContext(string $contribution): ?string
+    {
+        try {
+            $hits = $this->store->searchCurriculumConcepts($contribution);
+        } catch (Throwable) {
+            return null;
+        }
+        if ($hits === []) {
+            return null;
+        }
+
+        $sections = array_map(
+            static fn(array $hit): string => "## {$hit['title']}\n{$hit['excerpt']}",
+            $hits
+        );
+        return "<curriculum_excerpts>\n"
+            . "Retrieved from the Digital Design curriculum based on this contribution — may or may not be relevant; use only what actually fits.\n\n"
+            . implode("\n\n", $sections)
+            . "\n</curriculum_excerpts>";
     }
 
     /*

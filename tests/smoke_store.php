@@ -225,6 +225,47 @@ assert($store->pruneOrphanedSessions(-3600) === 1);
 assert($store->getSession($orphan['id']) === null);
 assert($store->getSession($busy['id']) !== null); // has an exchange, never an orphan regardless of age
 
+// --- curriculum search (poor man's RAG ingestion, bin/import_curriculum.php) ---
+assert($store->getCurriculumChunkCount() === 0);
+
+$replaceCounts = $store->replaceCurriculumChunks([
+    ['title' => 'Wicked Problems', 'body' => 'A wicked problem resists a single clean fix.', 'path' => 'wicked-problems.md'],
+    ['title' => 'Feasibility Desirability Viability', 'body' => 'A wicked design decision balances feasibility, desirability and viability.', 'path' => 'feasibility.md'],
+]);
+assert($replaceCounts === ['before' => 0, 'after' => 2]);
+assert($store->getCurriculumChunkCount() === 2);
+
+$uniqueHit = $store->searchCurriculum('resists');
+assert(count($uniqueHit) === 1 && $uniqueHit[0]['path'] === 'wicked-problems.md');
+
+$sharedHit = $store->searchCurriculum('wicked'); // present in both bodies
+assert(count($sharedHit) === 2);
+foreach ($sharedHit as $row) {
+    assert(is_float($row['score']));
+}
+
+// simulates wicked-problems.md having been deleted from disk before the next import run
+$replaceCounts = $store->replaceCurriculumChunks([
+    ['title' => 'Feasibility Desirability Viability', 'body' => 'A wicked design decision balances feasibility, desirability and viability.', 'path' => 'feasibility.md'],
+]);
+assert($replaceCounts === ['before' => 2, 'after' => 1]);
+assert($store->getCurriculumChunkCount() === 1);
+assert($store->searchCurriculum('resists') === []); // dropped chunk's content no longer matches anything
+
+// pathological queries (FTS5 query-syntax edge cases) must not throw
+assert($store->searchCurriculum('"unterminated') === []); // no matching token in the remaining corpus
+$dashResult = $store->searchCurriculum('-viability'); // leading '-' stripped by the sanitizer, not read as FTS5 NOT
+assert(count($dashResult) === 1 && $dashResult[0]['path'] === 'feasibility.md');
+assert($store->searchCurriculum('col:value') === []); // neither token present
+assert($store->searchCurriculum('.') === []); // no word/number tokens at all
+assert($store->searchCurriculum('') === []);
+
+// a token that collides with an FTS5 keyword (and/or/not/near) must still be
+// treated as a literal search term, not parsed as an operator — the exact
+// remaining chunk's body contains the literal word "and"
+$andResult = $store->searchCurriculum('and');
+assert(count($andResult) === 1 && $andResult[0]['path'] === 'feasibility.md');
+
 unlink($dbPath);
 foreach (['-wal', '-shm'] as $suffix) {
     @unlink($dbPath . $suffix);

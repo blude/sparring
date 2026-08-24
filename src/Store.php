@@ -86,6 +86,19 @@ final class Store
         SQL);
 
         $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_sessions_display ON sessions(origin, displayable, last_active_at)');
+
+        // Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php):
+        // requires FTS5, compiled into the sqlite3 lib PHP links against — verified
+        // present in this environment; if a deploy target lacks it, this throws at
+        // Store construction rather than silently degrading search.
+        $this->pdo->exec(<<<SQL
+            CREATE VIRTUAL TABLE IF NOT EXISTS curriculum_chunks USING fts5(
+                title,
+                body,
+                path UNINDEXED,
+                updated_at UNINDEXED
+            )
+        SQL);
     }
 
     /*
@@ -389,6 +402,300 @@ final class Store
         );
         $stmt->execute(['h' => $originHash]);
         return ['allowed' => true, 'remaining' => $maxRequests - ((int) $row['request_count'] + 1)];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php)
+    |--------------------------------------------------------------------------
+    |
+    | Disk-derived cache, not visitor data: deliberately kept out of getCounts()/
+    | resetAll() (scoped to sessions/exchanges/rate-limit windows) so an
+    | exhibition-session reset never wipes the curriculum corpus.
+    |
+    */
+
+    /**
+     * Replaces the entire curriculum_chunks table with $chunks in one transaction —
+     * the whole-corpus rebuild bin/import_curriculum.php does on every run. Full
+     * rebuild rather than incremental upsert: makes a file removed from disk simply
+     * absent from $chunks, so its chunk is gone after commit with no separate
+     * orphan-sweep needed. $chunks: list of ['title' => string, 'body' => string,
+     * 'path' => string]. Returns ['before' => int, 'after' => int] for the
+     * importer's summary line.
+     */
+    public function replaceCurriculumChunks(array $chunks): array
+    {
+        $before = $this->getCurriculumChunkCount();
+        $now = self::now();
+
+        $this->pdo->beginTransaction();
+        try {
+            $this->pdo->exec('DELETE FROM curriculum_chunks');
+            $stmt = $this->pdo->prepare(
+                'INSERT INTO curriculum_chunks (title, body, path, updated_at) VALUES (:title, :body, :path, :now)'
+            );
+            foreach ($chunks as $chunk) {
+                $stmt->execute([
+                    'title' => $chunk['title'],
+                    'body' => $chunk['body'],
+                    'path' => $chunk['path'],
+                    'now' => $now,
+                ]);
+            }
+            $this->pdo->commit();
+        } catch (Throwable $e) {
+            $this->pdo->rollBack();
+            throw $e;
+        }
+
+        return ['before' => $before, 'after' => count($chunks)];
+    }
+
+    /** Row count, used by the importer's summary line and by tests. */
+    public function getCurriculumChunkCount(): int
+    {
+        return (int) $this->pdo->query('SELECT COUNT(*) FROM curriculum_chunks')->fetchColumn();
+    }
+
+    /**
+     * Keyword search over curriculum_chunks, ranked by BM25 (more negative = more
+     * relevant — ascending sort is correct, don't flip it). Returns [] for an
+     * empty or entirely-punctuation query rather than throwing.
+     *
+     * bm25(curriculum_chunks, 3.0, 1.0) weights a title match 3x a body
+     * match — title is short and topic-precise (a page's own name), so a
+     * hit there is a much stronger relevance signal than the same token
+     * once in a long body. Args are positional over the table's *indexed*
+     * columns only (title, body — path/updated_at are UNINDEXED and excluded
+     * from bm25 entirely), verified against a real sqlite3 build before
+     * relying on it.
+     */
+    public function searchCurriculum(string $query, int $limit = 5): array
+    {
+        $sanitized = self::sanitizeFtsQuery($query);
+        if ($sanitized === null) {
+            return [];
+        }
+
+        $stmt = $this->pdo->prepare(
+            "SELECT path, title,
+                    snippet(curriculum_chunks, 1, '', '', '…', 12) AS snippet,
+                    bm25(curriculum_chunks, 3.0, 1.0) AS score
+             FROM curriculum_chunks
+             WHERE curriculum_chunks MATCH :q
+             ORDER BY score
+             LIMIT :limit"
+        );
+        $stmt->bindValue('q', $sanitized, PDO::PARAM_STR);
+        $stmt->bindValue('limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return array_map(
+            static fn(array $row): array => [
+                'path' => $row['path'],
+                'title' => $row['title'],
+                'snippet' => $row['snippet'],
+                'score' => (float) $row['score'],
+            ],
+            $stmt->fetchAll(PDO::FETCH_ASSOC)
+        );
+    }
+
+    // Closed-class German function words (articles, pronouns, prepositions,
+    // conjunctions, common auxiliary/modal verb forms) dropped from a query
+    // before it's OR-joined below. Root cause this exists for: an OR query
+    // sums BM25 contributions across every matched term, so a free-text
+    // sentence otherwise lets a document that happens to contain many
+    // filler words (die, eine, ist, an, zu...) outscore one that contains
+    // only the 1-2 rare, actually-relevant terms — confirmed empirically
+    // against the real corpus (see tests/smoke_curriculum_retrieval.php).
+    // ponytail: hand-curated list, not a real German lemmatizer/stopword
+    // library — misses inflected stopword forms (e.g. "einem", "dessen")
+    // it wasn't seeded with. Upgrade path: a proper stopword package if
+    // this ever proves insufficient.
+    private const FTS_STOPWORDS = [
+        'der', 'die', 'das', 'dem', 'den', 'des',
+        'ein', 'eine', 'einer', 'eines', 'einem', 'einen',
+        'und', 'oder', 'aber', 'doch', 'sondern', 'denn',
+        'ist', 'sind', 'war', 'waren', 'wird', 'werden', 'wurde', 'wurden', 'sein', 'seins',
+        'bin', 'bist', 'seid', 'habe', 'hast', 'hat', 'haben', 'hatte', 'hatten',
+        'nicht', 'kein', 'keine', 'keinen', 'keiner', 'keines', 'keinem',
+        'zu', 'zur', 'zum', 'an', 'auf', 'in', 'im', 'aus', 'mit', 'nach',
+        'bei', 'für', 'von', 'vor', 'über', 'unter', 'durch', 'gegen', 'ohne', 'um',
+        'dass', 'wenn', 'weil', 'als', 'wie',
+        'ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr', 'man',
+        'mein', 'dein', 'unser', 'euer',
+        'auch', 'nur', 'schon', 'noch', 'mehr', 'sehr', 'immer', 'so',
+        'dann', 'hier', 'da', 'dort', 'etwas', 'alle', 'alles',
+        'jede', 'jeder', 'jedes', 'diese', 'dieser', 'dieses', 'jene', 'jener', 'jenes',
+    ];
+
+    // Tokens shorter than this stay exact-match — prefix matching on a short
+    // token (e.g. "an*") explodes into false positives (matches "Architektur",
+    // "Anordnung", "Analyse"...). Longer tokens get a trailing '*' so German
+    // inflection (Ziele -> Ziel*) and compounding still recall the base
+    // concept without a full stemmer.
+    private const FTS_PREFIX_MIN_LENGTH = 5;
+
+    /**
+     * FTS5's query syntax (quoting, column filters, NEAR, leading '-') throws a
+     * PDOException on malformed input — a real risk here since the eventual
+     * caller is free-text a visitor typed, not an operator-authored query.
+     * Reduces to a flat OR-of-tokens MATCH expression instead: favors recall
+     * over precision on a small corpus, where a strict multi-word AND (FTS5's
+     * default) could too easily return nothing. Returns null if $raw has no
+     * word/number tokens at all (caller then returns [] without querying).
+     */
+    private static function sanitizeFtsQuery(string $raw): ?string
+    {
+        if (!preg_match_all('/[\p{L}\p{N}]+/u', $raw, $matches)) {
+            return null;
+        }
+        $tokens = array_filter(
+            $matches[0],
+            static fn(string $token): bool => !in_array(mb_strtolower($token), self::FTS_STOPWORDS, true)
+        );
+        // An all-stopword query (or a corpus-language mismatch) would
+        // otherwise filter down to nothing and silently return no results —
+        // fall back to the unfiltered tokens rather than lose the query.
+        if ($tokens === []) {
+            $tokens = $matches[0];
+        }
+        // Quoted as an FTS5 string literal (embedded '"' doubled, the standard
+        // escape) rather than joined bare: an unquoted token that happens to be
+        // and/or/not/near (case-insensitively) would otherwise be parsed as an
+        // FTS5 operator instead of a search term — exactly the failure this
+        // sanitizer exists to prevent. Quoting makes every token a literal
+        // match regardless of its text, closing that hole by construction.
+        // A '*' appended *after* the closing quote is still valid FTS5 prefix
+        // syntax (verified: `"foo"*` behaves the same as bare `foo*`) — so
+        // long tokens get prefix matching without losing the operator-keyword
+        // protection quoting provides.
+        return implode(' OR ', array_map(
+            static function (string $token): string {
+                $quoted = '"' . str_replace('"', '""', $token) . '"';
+                return mb_strlen($token) >= self::FTS_PREFIX_MIN_LENGTH ? $quoted . '*' : $quoted;
+            },
+            $tokens
+        ));
+    }
+
+    // Excerpt length for searchCurriculumConcepts() below — enough for the
+    // model to actually use the concept (definition + surrounding context),
+    // capped so 1-2 chunks stay a bounded addition to a turn-1 prompt rather
+    // than the full file. Plain char truncation (no word-boundary care),
+    // same style as derive_scenario_statement()'s.
+    private const CONCEPT_EXCERPT_MAX_CHARS = 700;
+
+    /**
+     * Turn-1 auto-grounding lookup (see prompts/sparring.md's
+     * <domain_grounding>/<curriculum_excerpts> and Sparring::processTurn):
+     * unlike searchCurriculum() above, this restricts matching to tokens
+     * that are also a word in some page's own title — a vocabulary
+     * auto-derived from the corpus (SELECT DISTINCT title, stopword-
+     * filtered), not hand-maintained, so it stays in sync with
+     * data/curriculum/ automatically. This exists because free-text
+     * OR-of-every-token matching lets generic content words (not just
+     * stopwords) dilute a query past usefulness — confirmed empirically
+     * against the real corpus (see tests/smoke_curriculum_retrieval.php).
+     * Restricting to title-vocabulary words also gives a clean "nothing
+     * relevant" signal for free: a sentence sharing no word with any title
+     * naturally returns [] before a query is even built, which a raw BM25
+     * score threshold can't do reliably (a single exact-word match can
+     * score *weaker* in magnitude than a long irrelevant sentence, since
+     * BM25 sums contributions across every matched term).
+     *
+     * Returns list<array{path: string, title: string, excerpt: string, score: float}>,
+     * excerpt truncated to CONCEPT_EXCERPT_MAX_CHARS (not the full body,
+     * not the tiny snippet() searchCurriculum() uses for display).
+     *
+     * ponytail: the corpus (and so the title vocabulary) is overwhelmingly
+     * German, but several titles contain plain English words (`Use`, `Case`,
+     * `System`, `Force`, `Service`...) — an English contribution (G-04
+     * supports both languages) can coincidentally match one of these and
+     * surface an unrelated page with real confidence, since nothing here
+     * is language-aware. Not a crash risk (the caller's prompt text already
+     * says "may or may not be relevant"), just noisier grounding for
+     * English visitors than German ones. Upgrade path if this proves to
+     * matter in practice: detect the contribution's language before
+     * calling this, or restrict the vocabulary to titles/words that don't
+     * double as common English ones.
+     */
+    public function searchCurriculumConcepts(string $text, int $limit = 2): array
+    {
+        $vocabulary = $this->curriculumTitleVocabulary();
+        if (!preg_match_all('/[\p{L}\p{N}]+/u', $text, $matches)) {
+            return [];
+        }
+        $keywords = array_values(array_unique(array_filter(
+            $matches[0],
+            static fn(string $token): bool => isset($vocabulary[mb_strtolower($token)])
+        )));
+        if ($keywords === []) {
+            return [];
+        }
+
+        $query = implode(' OR ', array_map(
+            static fn(string $token): string => '"' . str_replace('"', '""', $token) . '"',
+            $keywords
+        ));
+
+        $stmt = $this->pdo->prepare(
+            'SELECT path, title, body, bm25(curriculum_chunks, 3.0, 1.0) AS score
+             FROM curriculum_chunks
+             WHERE curriculum_chunks MATCH :q
+             ORDER BY score
+             LIMIT :limit'
+        );
+        $stmt->bindValue('q', $query, PDO::PARAM_STR);
+        $stmt->bindValue('limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return array_map(
+            static fn(array $row): array => [
+                'path' => $row['path'],
+                'title' => $row['title'],
+                'excerpt' => self::truncateExcerpt($row['body']),
+                'score' => (float) $row['score'],
+            ],
+            $stmt->fetchAll(PDO::FETCH_ASSOC)
+        );
+    }
+
+    /**
+     * Every distinct page title in the corpus, tokenized and stopword-
+     * filtered into a lookup set — recomputed on every call rather than
+     * cached, since this only ever runs once per session (turn 1) against
+     * a corpus of ~100 rows; caching would be complexity with nothing real
+     * to buy.
+     *
+     * @return array<string, true>
+     */
+    private function curriculumTitleVocabulary(): array
+    {
+        $titles = $this->pdo->query('SELECT DISTINCT title FROM curriculum_chunks')->fetchAll(PDO::FETCH_COLUMN);
+        $vocabulary = [];
+        foreach ($titles as $title) {
+            if (!preg_match_all('/[\p{L}\p{N}]+/u', $title, $matches)) {
+                continue;
+            }
+            foreach ($matches[0] as $word) {
+                $lower = mb_strtolower($word);
+                if (!in_array($lower, self::FTS_STOPWORDS, true)) {
+                    $vocabulary[$lower] = true;
+                }
+            }
+        }
+        return $vocabulary;
+    }
+
+    private static function truncateExcerpt(string $body): string
+    {
+        $trimmed = trim($body);
+        return mb_strlen($trimmed) <= self::CONCEPT_EXCERPT_MAX_CHARS
+            ? $trimmed
+            : mb_substr($trimmed, 0, self::CONCEPT_EXCERPT_MAX_CHARS) . '…';
     }
 
     /*
