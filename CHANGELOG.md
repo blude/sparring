@@ -2,8 +2,45 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-08-24
+
+- `68cdcda` build(spec): share one stylesheet instead of embedding it per page
+- `0355d13` build(spec): drop Asciidoctor's default footer
+- `976b1e0` docs(spec): add gate-logic flowchart to TF-01
+- `31da67a` docs(spec): add sequence diagram to SSc-01
+- `2f6207f` docs(spec): add technology-stack diagram to LX
+- `4267848` build(spec): render mermaid diagrams client-side
+- `f172dff` docs(spec): surface curriculum grounding in L2's architecture diagram
+- `3fd4181` docs(spec): add detailed architecture diagram to LX
+- `7485de6` docs(deploy): trim post-deploy env note, keep the disambiguation
+- `9695c58` feat(dojo): hide playbook by default, show only for new/empty session
+- `d105f31` docs(deploy): document curriculum corpus seed as separate post-deploy step
+- `399b7c2` docs: reorganize TODO.md by priority, consolidate Done section
+- `09201e4` docs(prompts): backfill changelog headings for v7 prompt changes
+- `4864db8` chore: merge pull request #3 from blude/claude/remove-mermaid-support-mholi1
+- `5ca1dcb` chore: merge pull request #2 from blude/claude/rag-curriculum-knowledge-yiwl97
+- `657ddd5` feat: wire curriculum retrieval into turn-1 generation (G-05)
+- `509316e` fix(tests): correct German grammar in case 1's probe sentence
+- `1bac29a` docs: track curriculum retrieval follow-ups in TODO.md
+- `078a539` feat(store): mechanical retrieval-quality fixes for curriculum search
+- `30ac702` feat(bin): add probe_curriculum.php for manual retrieval checks
+- `2588018` feat(bin): add clear_curriculum.php to empty curriculum_chunks
+- `27c77fc` feat(import_curriculum): skip typ: stub pages during ingestion
+- `f8da0c7` Fix Copilot review findings: FTS5 quoting + importer failure paths
+
+## 2026-08-23
+
+- `72a1b44` perf: remove mermaid diagram rendering support
+- `75f00bf` Add curriculum FTS5 ingestion + search (poor man's RAG, step 1)
+- `a2f6c73` fix: fasset() to load open graph img
+
 ## 2026-08-22
 
+- `9ed4d90` chore: extra line break
+- `0591bcc` refactor: add wrapper tag to locale switcher
+- `b4ce37c` fix(ascii): change font to avoid character scaping
+- `7c7dd86` perf: defer JS includes in arena and dojo pages
+- `ecc1ff0` docs: update CHANGELOG through 297fd82
 - `297fd82` chore(config): move juiciness flags up
 - `d84cdff` chore(config): move environment and error handling down
 - `3ec732f` chore(config): move LLM config up
