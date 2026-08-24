@@ -16,6 +16,7 @@ sh tests/run.sh                        # runs all 10 smoke tests (PHP + Node), n
 php bin/import_pilot.php               # M1: seeds data/store.db from data/pilot/*.json
 php bin/import_curriculum.php          # syncs curriculum_chunks FTS5 table from data/curriculum/*.md
 php bin/clear_curriculum.php           # empties curriculum_chunks (disk-derived cache, safe to redo)
+php bin/probe_curriculum.php "<text>"  # prints what curriculum_chunks matches would surface for free-text <text>
 valet link                             # once per checkout; serves this dir at https://sparring.test
 ```
 
