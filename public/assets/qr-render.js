@@ -2,10 +2,10 @@
  * Thin wrapper around the vendored qrcode-generator (public/assets/vendor/
  * qrcode-generator.min.js — kazuhikoarase, MIT, unmodified) for arena.js (SE-02).
  * Builds the <svg> itself via createElementNS + one <rect> per dark module —
- * no innerHTML, same "no path renders untrusted markup" discipline
- * mermaid-render.js follows for QR-05 (the target text here is always a
- * server-built /dojo?r=<id> URL, never visitor-authored, but the
- * discipline costs nothing to keep consistent).
+ * no innerHTML, same "no path renders untrusted markup" discipline QR-05
+ * requires (the target text here is always a server-built /dojo?r=<id> URL,
+ * never visitor-authored, but the discipline costs nothing to keep
+ * consistent).
  */
 window.SparringQr = (function () {
     'use strict';

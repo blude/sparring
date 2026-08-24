@@ -6,7 +6,7 @@
  * (public/assets/sfx.js). Doesn't exercise play()/playSequence()/unlock()/
  * playChain() itself — those call the real zzfx/zzfxX engine globals
  * (bare, not window-namespaced — see the file's own top comment), out of
- * scope for a Node script, same boundary smoke_mermaid.js draws.
+ * scope for a Node script, same boundary smoke_arena.js draws.
  * Run: node tests/smoke_sfx.js
  */
 

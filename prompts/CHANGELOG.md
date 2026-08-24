@@ -9,6 +9,13 @@ keyed by date + commit.
   visitor's contribution is written in (English or German) — part of
   adding German UI support alongside English. The AI's reply language
   follows what the visitor typed, not the resolved UI locale toggle.
+- prompt: remove Mermaid diagram generation from `<boundary_objects>` —
+  dropped the "draw a small diagram" instruction and the six worked
+  examples (flowchart/sequence/class/state/ER/pie/quadrant). Mermaid
+  rendering support is removed client-side too (`mermaid.min.js` was the
+  single largest asset on first load, for a capability that saw no real
+  use); the prompt no longer tells Sparring to produce a fence nothing
+  renders.
 
 ## 2026-08-18 — `73583bd` prompt: add edge case rule for meta questions
 - Added edge-case rule: meta questions ("what is Sparring," "how does this

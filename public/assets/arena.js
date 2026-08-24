@@ -1,8 +1,7 @@
 /*
  * SE-02: no build step (C-04), no framework. Implements TF-01 (poll),
  * TF-02 (reconcile — the whole reason unchanged items don't redraw),
- * TF-03 (fit to space), TF-04 (render, text-only per QR-05 except a
- * sparring response's own ```mermaid fence — see mermaid-render.js).
+ * TF-03 (fit to space), TF-04 (render, text-only per QR-05).
  *
  * TBC-01: masonry layout, DISPLAY_COLUMNS columns. Each session is placed
  * once (pickColumn) and never moves after — that's what keeps QR-02
@@ -127,18 +126,6 @@ window.SparringArenaDiff = {
         countEl.querySelector('.reply-count-number').textContent = String(item.replyCount);
     }
 
-    // Sparring response only (never .contribution, which is visitor text and
-    // stays plain-trimmed textContent): a mermaid fence is exempt from
-    // TRIM_CHARS (it would otherwise get cut mid-syntax) and rendered via
-    // the shared helper; anything else keeps today's trim + textContent.
-    function renderResponse(el, text) {
-        if (window.SparringMermaid.extract(text)) {
-            window.SparringMermaid.renderInto(el, text);
-        } else {
-            el.textContent = trim(text, TRIM_CHARS);
-        }
-    }
-
     // --- TF-01: retrieve display material ---
     function poll() {
         var controller = new AbortController();
@@ -213,13 +200,12 @@ window.SparringArenaDiff = {
         var response = document.createElement('div');
         response.className = 'response';
         // Actual rendered content lives in its own child, never touched
-        // directly — renderResponse/mermaid's renderInto both wipe whatever
-        // container they're given, so the QR/reply-count badges below live
-        // as .response's *siblings* to that child, not inside it (they'd
-        // get erased on every re-render otherwise).
+        // directly, so the QR/reply-count badges below live as .response's
+        // *siblings* to that child, not inside it (they'd get erased on
+        // every re-render otherwise).
         var responseText = document.createElement('div');
         responseText.className = 'response-text';
-        renderResponse(responseText, item.sparringResponse);
+        responseText.textContent = trim(item.sparringResponse, TRIM_CHARS);
 
         var replyQr = document.createElement('div');
         replyQr.className = 'reply-qr';
@@ -263,7 +249,7 @@ window.SparringArenaDiff = {
         if (!el) { addItem(item); return; }
         el.querySelector('.scenario').textContent = item.scenario;
         el.querySelector('.contribution-text').textContent = trim(item.visitorContribution, TRIM_CHARS);
-        renderResponse(el.querySelector('.response-text'), item.sparringResponse);
+        el.querySelector('.response-text').textContent = trim(item.sparringResponse, TRIM_CHARS);
         renderReply(el, el.querySelector('.reply-qr'), el.querySelector('.reply-count'), item);
         if (window.isJuicyOn('displayEntrance')) {
             el.classList.remove('updating');

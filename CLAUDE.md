@@ -33,8 +33,7 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   small and committed so this stays reproducible on a fresh checkout). JS
   (Node only to run the
   check, not a project dependency): `node tests/smoke_juicy.js`
-  (`public/assets/juicy.js`), `node tests/smoke_mermaid.js` (fence-detection
-  in `public/assets/mermaid-render.js`), `node tests/smoke_identity.js`
+  (`public/assets/juicy.js`), `node tests/smoke_identity.js`
   (alias/avatar seed in `public/assets/identity.js`), `node tests/smoke_dojo.js`
   (`handleContributionResult`'s outcome table in `public/assets/dojo.js`),
   `node tests/smoke_arena.js` (the wall's add/update/remove diff in

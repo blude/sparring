@@ -130,8 +130,6 @@ window.JUICY = {
 <script src="<?= fasset('vendor/zzfx.min.js') ?>" defer></script>
 <script src="<?= fasset('sfx.js') ?>" defer></script>
 <script src="<?= fasset('particles.js') ?>" defer></script>
-<script src="<?= fasset('vendor/mermaid.min.js') ?>" defer></script>
-<script src="<?= fasset('mermaid-render.js') ?>" defer></script>
 <script src="<?= fasset('dojo.js') ?>" defer></script>
 </body>
 </html>

@@ -348,7 +348,7 @@ _Element specific:_ Yes
 === [[QR-04]]QR-04 Visitor content cannot alter the surface _(Security)_
 
 _Applies to:_ <<TF-04,TF-04 Render the exchange history>> +
-_Acceptance criteria:_ All content returned from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] is inserted as text. No path renders it as markup, with one narrow exception: a single `mermaid` fenced block in a sparring turn is parsed by mermaid.js in `securityLevel: 'strict'` (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. Visitor turns are never routed through this path regardless of content. +
+_Acceptance criteria:_ All content returned from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] is inserted as text. No path renders it as markup. +
 _Element specific:_ Yes
 
 === [[QR-05]]QR-05 Works on current mobile browsers without a build step _(Compatibility)_

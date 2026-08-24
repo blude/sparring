@@ -270,7 +270,7 @@ _Rationale:_ This deliberately departs from xref:L2-system-design-concept.adoc#S
 === [[QR-05]]QR-05 Visitor content cannot alter the surface _(Security)_
 
 _Applies to:_ <<TF-04,TF-04 Render the surface>> +
-_Acceptance criteria:_ All content from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] is inserted as text. No path renders it as markup, with one narrow exception: a single `mermaid` fenced block in a sparring response is parsed by mermaid.js in `securityLevel: 'strict'` (sanitizes labels, disables click/script bindings) and only its resulting SVG is inserted. Any parse/render failure falls back to plain text, unchanged from the general rule. A response containing a diagram fence is exempt from the trim length (<<TF-03,TF-03 Fit an item to the available space>>) that otherwise bounds displayed text, so the fence isn't cut mid-syntax. +
+_Acceptance criteria:_ All content from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] is inserted as text. No path renders it as markup. +
 _Element specific:_ Yes +
 _Rationale:_ This surface is public and unattended, so the consequence of an injection is a projected wall rather than one person's phone.
 

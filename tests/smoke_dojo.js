@@ -7,7 +7,7 @@
  * logic behind handleContributionResult's switch, minus 'ok'/'turn-limit'
  * (those don't select from a table, see the function's own doc comment).
  * Doesn't exercise the rest of dojo.js — that's all DOM/fetch orchestration,
- * out of scope for a Node script, same boundary smoke_mermaid.js draws.
+ * out of scope for a Node script, same boundary smoke_sfx.js draws.
  * Run: node tests/smoke_dojo.js
  */
 

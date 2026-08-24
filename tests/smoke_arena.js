@@ -5,7 +5,7 @@
  * decision (public/assets/arena.js) — the diffing logic behind reconcile(),
  * pulled out so it's checkable without a DOM. Doesn't exercise the rest of
  * arena.js (poll/render/masonry placement) — that's all DOM/fetch, out of
- * scope for a Node script, same boundary smoke_mermaid.js draws.
+ * scope for a Node script, same boundary smoke_sfx.js draws.
  * Run: node tests/smoke_arena.js
  */
 

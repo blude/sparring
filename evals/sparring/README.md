@@ -133,9 +133,7 @@ skill-creator eval-viewer depends on).
 phrases (`load-bearing`, `failure mode` hard-fail; `move`/`moves` outside
 a chess context only *flags*, since the prompt allows the word there and
 hard-failing produces false positives), length (≤2 paragraphs, ≤~120
-words), more-than-one-question-per-turn (flag), Mermaid fence well-
-formedness (mirrors the regex in `public/assets/mermaid-render.js`'s
-`SparringMermaid.extract()`).
+words), more-than-one-question-per-turn (flag).
 
 **Judge** (one structured-output LLM call per non-baseline transcript,
 against `rubric.md`): handed-over-conclusion, held-position vs.
