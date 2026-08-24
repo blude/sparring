@@ -34,11 +34,12 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
   <div id="history" aria-live="polite"></div>
 
   <?php
-    /* Playbook: visible from screen load (independent of #retention below —
-      the two can be on screen at once), auto-dismissed on the first sent
-      message. No dismiss control by design. */
+    /* Playbook: [hidden] by default, dojo.js fades it in only for a new/
+      empty session (independent of #retention below — the two can be on
+      screen at once), then fades it out again on the first sent message.
+      No dismiss control by design. */
   ?>
-  <div id="playbook">
+  <div id="playbook" hidden>
     <div id="playbook-body">
       <h2 id="playbook-heading"><?= t('dojo.playbook.heading') ?></h2>
       <ol id="playbook-rules">

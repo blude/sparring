@@ -210,8 +210,10 @@ main {
 
 /* Playbook: floating card, positioned the same way #title-card already is
    (fixed + centered via translate) rather than inventing a second overlay
-   pattern. Visible from page load by default (no [hidden] in the markup);
-   dojo.js hides it once, on the first sent message. */
+   pattern. [hidden] by default; dojo.js fades it in for a new/empty session
+   and fades it out again on the first sent message — same collapsed/[hidden]
+   split as #title-card below, opacity instead of height since this card
+   doesn't need to reflow anything as it appears/disappears. */
 #playbook {
     /* absolute (not fixed) — fixed rubber-bands separately from the page
        during iOS overscroll, visibly detaching from the rest of the UI.
@@ -222,7 +224,10 @@ main {
     transform: translate(-50%, -50%);
     width: min(88vw, 296px);
     opacity: 0.8;
+    transition: opacity 300ms ease;
 }
+#playbook[hidden] { display: none; }
+#playbook.fading { opacity: 0; }
 
 #playbook-body {
     position: relative;
@@ -653,6 +658,9 @@ main {
         animation: none;
     }
     #composer-row {
+        transition: none;
+    }
+    #playbook {
         transition: none;
     }
     #history .turn--pending {

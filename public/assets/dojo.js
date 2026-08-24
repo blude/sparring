@@ -390,6 +390,7 @@ window.SparringDojoOutcome = {
                 sessionId = data.sessionId;
                 setUrlSessionId(sessionId);
                 retentionEl.hidden = false; // ST-01-3: decision presented, field stays disabled
+                showPlaybook(); // brand-new session, no turns yet
                 // QR-reply flow: shown before consent too — gives the visitor
                 // context for what they're walking into. Never shown on a
                 // resumed session (see resumeSession, no equivalent call there).
@@ -400,6 +401,25 @@ window.SparringDojoOutcome = {
             });
     }
 
+    // Fades #playbook in (0 -> 0.8 opacity per its own CSS). Only ever called
+    // for a new/empty session — see createSession and resumeSession below.
+    function showPlaybook() {
+        playbookEl.classList.add('fading'); // start at 0 opacity while still [hidden]
+        playbookEl.hidden = false;
+        void playbookEl.offsetWidth; // commit the 0-opacity state before animating away from it
+        requestAnimationFrame(function () {
+            playbookEl.classList.remove('fading'); // fades 0 -> 0.8
+        });
+    }
+
+    // Fades #playbook out, then [hidden]s it once the fade finishes so it
+    // stops intercepting taps (matches the 300ms transition in dojo.css).
+    function hidePlaybook() {
+        if (playbookEl.hidden) return; // already hidden, or never shown this session
+        playbookEl.classList.add('fading'); // fades 0.8 -> 0
+        setTimeout(function () { playbookEl.hidden = true; }, 300);
+    }
+
     function resumeSession(id, data) {
         sessionId = id;
         data.exchanges.forEach(function (exchange) {
@@ -407,7 +427,9 @@ window.SparringDojoOutcome = {
             appendTurn('sparring', exchange.sparringResponse);
         });
         if (data.exchanges.length > 0) setSessionTitle(data.exchanges[0].visitorContribution);
-        playbookEl.hidden = data.exchanges.length > 0; // already past the "Instructions" state if there's history
+        // Playbook only belongs on a new/empty session — resuming one with
+        // history skips it entirely (stays [hidden], no fade either way).
+        if (data.exchanges.length === 0) showPlaybook();
         retentionEl.hidden = data.sessionState !== 'awaiting-decision'; // EX-03-2: still shown if consent was never recorded
         if (data.sessionState !== 'awaiting-decision') revealIdentity(id); // consent already recorded
         applySessionState(data.sessionState, data.turnsRemaining);
@@ -472,7 +494,7 @@ window.SparringDojoOutcome = {
     |--------------------------------------------------------------------------
     */
     function submitContribution(text) {
-        playbookEl.hidden = true; // first sent message auto-dismisses the Playbook card
+        hidePlaybook(); // first sent message auto-dismisses the Playbook card
         // No instant raw-text placeholder here (that was setSessionTitle's old job) —
         // #session-title stays "Untitled" until /api/title resolves to a real title
         // (LLM or its trim-fallback), fired once turn 1 succeeds (see 'ok' case below).

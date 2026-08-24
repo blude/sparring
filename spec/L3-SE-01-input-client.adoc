@@ -26,7 +26,7 @@ The element shall present a usable input surface immediately on opening, with no
 _Success criteria (qualitative):_ A visitor who has never seen the piece submits their first contribution without asking anyone how it works. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-01[SG-01 Start a session from a personal device with no]
 
-NOTE: <<UI-01,UI-01 Session surface>> shows a "Playbook" card of participation rules on screen load.
+NOTE: <<UI-01,UI-01 Session surface>> shows a "Playbook" card of participation rules for a new/empty session (not a resumed one with prior turns).
 It's visually an instruction step, but never gates the input surface — the
 field's usability doesn't depend on it, and it's dismissed automatically by
 the visitor's first submission rather than requiring an acknowledgement.
