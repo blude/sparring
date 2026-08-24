@@ -106,3 +106,27 @@ process, not a separate service; `prompts/sparring.md` (`SE-04`) is
 supplied as content on the outbound call, not a component with its own
 network edge. No websocket/SSE connection — the wall polls
 `/api/recent-exchanges` on an interval instead.
+
+== Technology stack
+
+What each element is built out of, not what talks to what — see the
+diagram above for that.
+
+[source,mermaid]
+----
+flowchart TB
+  subgraph frontend ["Front end — browser"]
+    fe["Vanilla JavaScript<br/>no framework, no bundler, no build step"]
+  end
+  subgraph backend ["Back end — SE-03, one PHP process"]
+    php["PHP 8.2+"]
+    sqlite[("SQLite<br/>single file, WAL mode")]
+    php --- sqlite
+  end
+  subgraph partner ["Partner"]
+    llm["Language generation API<br/>Anthropic / OpenAI / local"]
+  end
+
+  frontend -->|HTTPS| backend
+  backend -.->|HTTPS| partner
+----
