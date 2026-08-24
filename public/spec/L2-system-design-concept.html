@@ -743,7 +743,7 @@ Lesson from testing: stating the adversarial-vs-target distinction was not suffi
   SE02 --&gt; HE02
   SE01 --&gt;|submits turn, fetches session| SE03
   SE02 --&gt;|polls feed| SE03
-  SE03 -.-&gt;|generation and classification| PE01</code></pre>
+  SE03 -.-&gt;|generation, classification, curriculum grounding| PE01</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -753,7 +753,7 @@ Lesson from testing: stating the adversarial-vs-target distinction was not suffi
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Dashed link marks the system boundary. Detailed interaction sequences are in section 3, not in the diagram. <a href="#SE-04">SE-04 System prompt</a> is deliberately not shown either — it has no network edge of its own, only content supplied on SE-03&#8217;s outbound call to PE-01 (same treatment as <a href="#AP-04">AP-04 One file-backed datastore, held inside the backend</a>'s datastore, which also gets no box).
+Dashed link marks the system boundary. Detailed interaction sequences are in section 3, not in the diagram. <a href="#SE-04">SE-04 System prompt</a> is deliberately not shown either — it has no network edge of its own, only content supplied on SE-03&#8217;s outbound call to PE-01 (same treatment as <a href="#AP-04">AP-04 One file-backed datastore, held inside the backend</a>'s datastore, which also gets no box). Turn-1 curriculum grounding follows the same rule: it&#8217;s a lookup SE-03 runs against its own datastore, folded into that one outbound edge, not a separate call or box.
 </td>
 </tr>
 </table>
@@ -1158,7 +1158,7 @@ Downward references from L3 are not written here. Element designs declare their 
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-24 11:18:50 +0200
+Last updated 2026-08-24 22:46:05 +0200
 </div>
 </div>
 </body>

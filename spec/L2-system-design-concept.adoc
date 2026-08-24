@@ -159,10 +159,10 @@ flowchart TB
   SE02 --> HE02
   SE01 -->|submits turn, fetches session| SE03
   SE02 -->|polls feed| SE03
-  SE03 -.->|generation and classification| PE01
+  SE03 -.->|generation, classification, curriculum grounding| PE01
 ----
 
-NOTE: Dashed link marks the system boundary. Detailed interaction sequences are in section 3, not in the diagram. <<SE-04,SE-04 System prompt>> is deliberately not shown either — it has no network edge of its own, only content supplied on SE-03's outbound call to PE-01 (same treatment as <<AP-04,AP-04 One file-backed datastore, held inside the backend>>'s datastore, which also gets no box).
+NOTE: Dashed link marks the system boundary. Detailed interaction sequences are in section 3, not in the diagram. <<SE-04,SE-04 System prompt>> is deliberately not shown either — it has no network edge of its own, only content supplied on SE-03's outbound call to PE-01 (same treatment as <<AP-04,AP-04 One file-backed datastore, held inside the backend>>'s datastore, which also gets no box). Turn-1 curriculum grounding follows the same rule: it's a lookup SE-03 runs against its own datastore, folded into that one outbound edge, not a separate call or box.
 
 == System elements
 
