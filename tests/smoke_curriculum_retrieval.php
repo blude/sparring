@@ -57,21 +57,20 @@ function top3(Store $store, string $query): array
     return array_map(static fn(array $h) => $h['path'], $store->searchCurriculum($query, 3));
 }
 
-// Case 1: a sentence naming two distinct concepts (Ziel, Wertversprechen) in
-// otherwise ordinary German prose. Before stopword filtering, common filler
-// tokens (die/eine/ist/an/zu) let distractors (konsistenzregeln.md,
-// loesungsebene.md, service-typen.md, ebenenmodell.md) outrank both targets
-// entirely. After filtering, ziel.md reliably lands in top 3 — but
-// wertversprechen.md still doesn't: konsistenzregeln.md/loesungsebene.md are
-// real topically-adjacent hub pages in this corpus that shallowly match
-// several of the sentence's *content* words (digitale/Lösung/Kunden/
-// liefern) across a longer body, out-summing wertversprechen.md's one deep,
-// exact, narrow match. That's a structural ceiling of OR-summed BM25 over a
-// sentence naming multiple concepts, not something stopwords/weighting/
-// prefix matching close — asserting only one of the two lands in top 3
-// reflects that, deliberately, rather than chasing a stricter bar these
-// fixes don't reach.
-$case1 = top3($store, 'Die Ziele eine digitale Lösung ist, Wertversprechen an Kunden zu liefern');
+// Case 1: a grammatically-correct sentence naming two distinct concepts
+// (Ziel, Wertversprechen) in otherwise ordinary German prose. Before
+// stopword filtering, common filler tokens (einer/ist/es/und/ein/zu) let
+// distractor pages outrank both targets entirely by matching more of them.
+// After filtering, ziel.md reliably lands in top 3 — but wertversprechen.md
+// still doesn't: real topically-adjacent hub pages in this corpus (e.g.
+// konsistenzregeln.md) shallowly match several of the sentence's *content*
+// words (digitalen/Lösung/Kunden/liefern) across a longer body, out-summing
+// wertversprechen.md's one deep, exact, narrow match. That's a structural
+// ceiling of OR-summed BM25 over a sentence naming multiple concepts, not
+// something stopwords/weighting/prefix matching close — asserting only one
+// of the two lands in top 3 reflects that, deliberately, rather than
+// chasing a stricter bar these fixes don't reach.
+$case1 = top3($store, 'Ziel einer digitalen Lösung ist es, Kundinnen und Kunden ein Wertversprechen zu liefern');
 assert(
     in_array('ziel.md', $case1, true) || in_array('wertversprechen.md', $case1, true),
     'case 1: neither ziel.md nor wertversprechen.md in top 3 — got: ' . implode(', ', $case1)
