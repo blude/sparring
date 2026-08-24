@@ -449,6 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_available_setup">1. Available Setup</a></li>
+<li><a href="#_detailed_architecture_diagram">2. Detailed architecture diagram</a></li>
 </ul>
 </div>
 </div>
@@ -484,11 +485,106 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_detailed_architecture_diagram"><a class="anchor" href="#_detailed_architecture_diagram"></a>2. Detailed architecture diagram</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Implementation-level companion to
+<a href="L2-system-design-concept.html">L2</a>'s own Architecture diagram, which is
+deliberately minimal (no datastore box, no SE-04 box — see that section&#8217;s
+note). This one adds the routes, <code>src/</code> components, and infrastructure
+detail that belongs here rather than at L2, per the framework&#8217;s own
+deployment-detail rule. Boxes carry the same element IDs as L2 so the two
+diagrams can be checked against each other; sub-boxes inside an element are
+implementation detail, not separate modeled elements.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-mermaid" data-lang="mermaid">flowchart TB
+  UT01(["UT-01 Participating visitor"])
+  UT02(["UT-02 Observing visitor"])
+  UT03(["UT-03 Operator"])
+
+  subgraph devices ["Devices"]
+    HE01[/"HE-01 Visitor smartphone"/]
+    HE02[/"HE-02 Projection setup"/]
+  end
+
+  subgraph server ["HE-03 Hosted server — single PHP app, no build step"]
+    direction TB
+
+    subgraph se01 ["SE-01 Input client — /dojo"]
+      dojoUI["dojo.php + assets/dojo.js&lt;br/&gt;consent, chat UI, alias/avatar"]
+    end
+
+    subgraph se02 ["SE-02 Display client — /arena"]
+      arenaUI["arena.php + assets/arena.js&lt;br/&gt;polls feed, masonry wall diff"]
+    end
+
+    subgraph api [" /api/* — SE-03 outward interface "]
+      apiSession["session.php"]
+      apiState["session-state.php"]
+      apiContribute["contribute.php"]
+      apiRecent["recent-exchanges.php"]
+      apiTitle["title.php"]
+    end
+
+    subgraph core ["SE-03 internals — src/"]
+      sparring["Sparring.php&lt;br/&gt;turn pipeline: gates → moderate → generate → persist"]
+      rateLimiter["RateLimiter.php"]
+      llmClient["LlmClientInterface&lt;br/&gt;Anthropic/OpenAi client&lt;br/&gt;+ curriculum grounding on turn 1"]
+      store[("Store.php&lt;br/&gt;SQLite data/store.db (WAL)&lt;br/&gt;sessions · exchanges · rate_limits · curriculum_chunks")]
+    end
+
+    se04["SE-04 System prompt&lt;br/&gt;prompts/sparring.md&lt;br/&gt;(content only, no network edge)"]
+  end
+
+  PE01{{"PE-01 Language generation API&lt;br/&gt;Anthropic (default) / OpenAI /&lt;br/&gt;local OpenAI-compatible server"}}
+
+  bin["bin/*.php — operator CLI&lt;br/&gt;import_pilot, import_curriculum,&lt;br/&gt;export, backup_db, deploy.sh"]
+
+  UT01 --&gt; HE01
+  UT02 --&gt; HE02
+  UT03 -.-&gt;|SSH / ee shell| bin
+
+  HE01 --&gt;|HTTPS| dojoUI
+  HE02 --&gt;|HTTPS, polling| arenaUI
+
+  dojoUI --&gt;|submits turn, fetches session| api
+  arenaUI --&gt;|polls every few seconds| apiRecent
+
+  apiSession --&gt; sparring
+  apiState --&gt; sparring
+  apiContribute --&gt; sparring
+  apiRecent --&gt; sparring
+  apiTitle --&gt; sparring
+
+  sparring --&gt; rateLimiter
+  sparring --&gt; store
+  sparring --&gt;|generation + moderation call| llmClient
+  llmClient -.-&gt;|reads content of| se04
+  llmClient ==&gt;|HTTPS, credential held server-side| PE01
+
+  bin --&gt; store</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Reading it: two thin clients (<code>SE-01</code>/<code>SE-02</code>) hold no logic beyond
+presentation — every rule (moderation, rate limits, session policy, the API
+credential) lives in <code>SE-03</code>, and <code>SE-03&#8217;s only outbound dependency is
+`PE-01</code>. <code>data/store.db</code> is a single SQLite file inside the backend
+process, not a separate service; <code>prompts/sparring.md</code> (<code>SE-04</code>) is
+supplied as content on the outbound call, not a component with its own
+network edge. No websocket/SSE connection — the wall polls
+<code>/api/recent-exchanges</code> on an interval instead.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-24 11:18:50 +0200
+Last updated 2026-08-24 22:41:22 +0200
 </div>
 </div>
 </body>

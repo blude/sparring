@@ -16,3 +16,93 @@ xref:index.adoc[Index] / *System Realization Concept*
 - _PHP Version:_ 8.4
 - _Backup Scheduling:_ not configured
 - _SSL Provisioning:_ Let's Encrypt
+
+== Detailed architecture diagram
+
+Implementation-level companion to
+xref:L2-system-design-concept.adoc[L2]'s own Architecture diagram, which is
+deliberately minimal (no datastore box, no SE-04 box — see that section's
+note). This one adds the routes, `src/` components, and infrastructure
+detail that belongs here rather than at L2, per the framework's own
+deployment-detail rule. Boxes carry the same element IDs as L2 so the two
+diagrams can be checked against each other; sub-boxes inside an element are
+implementation detail, not separate modeled elements.
+
+[source,mermaid]
+----
+flowchart TB
+  UT01(["UT-01 Participating visitor"])
+  UT02(["UT-02 Observing visitor"])
+  UT03(["UT-03 Operator"])
+
+  subgraph devices ["Devices"]
+    HE01[/"HE-01 Visitor smartphone"/]
+    HE02[/"HE-02 Projection setup"/]
+  end
+
+  subgraph server ["HE-03 Hosted server — single PHP app, no build step"]
+    direction TB
+
+    subgraph se01 ["SE-01 Input client — /dojo"]
+      dojoUI["dojo.php + assets/dojo.js<br/>consent, chat UI, alias/avatar"]
+    end
+
+    subgraph se02 ["SE-02 Display client — /arena"]
+      arenaUI["arena.php + assets/arena.js<br/>polls feed, masonry wall diff"]
+    end
+
+    subgraph api [" /api/* — SE-03 outward interface "]
+      apiSession["session.php"]
+      apiState["session-state.php"]
+      apiContribute["contribute.php"]
+      apiRecent["recent-exchanges.php"]
+      apiTitle["title.php"]
+    end
+
+    subgraph core ["SE-03 internals — src/"]
+      sparring["Sparring.php<br/>turn pipeline: gates → moderate → generate → persist"]
+      rateLimiter["RateLimiter.php"]
+      llmClient["LlmClientInterface<br/>Anthropic/OpenAi client<br/>+ curriculum grounding on turn 1"]
+      store[("Store.php<br/>SQLite data/store.db (WAL)<br/>sessions · exchanges · rate_limits · curriculum_chunks")]
+    end
+
+    se04["SE-04 System prompt<br/>prompts/sparring.md<br/>(content only, no network edge)"]
+  end
+
+  PE01{{"PE-01 Language generation API<br/>Anthropic (default) / OpenAI /<br/>local OpenAI-compatible server"}}
+
+  bin["bin/*.php — operator CLI<br/>import_pilot, import_curriculum,<br/>export, backup_db, deploy.sh"]
+
+  UT01 --> HE01
+  UT02 --> HE02
+  UT03 -.->|SSH / ee shell| bin
+
+  HE01 -->|HTTPS| dojoUI
+  HE02 -->|HTTPS, polling| arenaUI
+
+  dojoUI -->|submits turn, fetches session| api
+  arenaUI -->|polls every few seconds| apiRecent
+
+  apiSession --> sparring
+  apiState --> sparring
+  apiContribute --> sparring
+  apiRecent --> sparring
+  apiTitle --> sparring
+
+  sparring --> rateLimiter
+  sparring --> store
+  sparring -->|generation + moderation call| llmClient
+  llmClient -.->|reads content of| se04
+  llmClient ==>|HTTPS, credential held server-side| PE01
+
+  bin --> store
+----
+
+Reading it: two thin clients (`SE-01`/`SE-02`) hold no logic beyond
+presentation — every rule (moderation, rate limits, session policy, the API
+credential) lives in `SE-03`, and `SE-03`'s only outbound dependency is
+`PE-01`. `data/store.db` is a single SQLite file inside the backend
+process, not a separate service; `prompts/sparring.md` (`SE-04`) is
+supplied as content on the outbound call, not a component with its own
+network edge. No websocket/SSE connection — the wall polls
+`/api/recent-exchanges` on an interval instead.
