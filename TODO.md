@@ -104,6 +104,20 @@ Rationale: the exhibition offers a great sneaky opportunity to collect feedback 
 - [x] Add realistic content to Privacy Policy page
 - [ ] Add realistic content to Credits page (partially done)
 
+### Curriculum retrieval (poor man's RAG)
+
+- [ ] Narrow/restructure hub-like pages in `data/curriculum/` (e.g.
+  `loesungsebene.md`, `aufbauorganisation-grundgestalt.md`) that
+  cross-reference many concepts broadly — they out-rank narrowly-relevant
+  pages in FTS5 search by matching more of a query's content words
+  shallowly. Content-authorship, not a code fix; see
+  `tests/smoke_curriculum_retrieval.php`'s documented case 2 known gap.
+- [ ] Tailor the exhibition's opening prompts (`OPENING_PROMPTS` in
+  `config.php`) to steer visitor phrasing toward language the curriculum
+  corpus actually surfaces well — ties into wiring `Store::searchCurriculum()`
+  into actual generation (still not built, see `bin/import_curriculum.php`'s
+  docblock).
+
 # Done
 
 [Move here completed To Dos]
