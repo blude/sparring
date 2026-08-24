@@ -675,6 +675,46 @@ This path performs no generation and never calls <a href="L2-system-design-conce
 <div class="paragraph">
 <p>The element&#8217;s central function. Everything that happens between a visitor pressing submit and a response returning is here, which is what keeps retry and error handling in one place rather than scattered across interfaces.</p>
 </div>
+<div class="paragraph">
+<p>Visual companion to the steps below — the gate order and its five
+cheap-reject branches, cheapest checks first. The step list is the
+authoritative source.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-mermaid" data-lang="mermaid">flowchart TD
+  start(["Visitor submits a turn"]) --&gt; rl{"Rate limit reached?"}
+  rl -- yes --&gt; stopRate["Return: limit reached — FS-01-1"]
+  rl -- no --&gt; sess{"Session known, not expired?"}
+  sess -- no --&gt; stopSess["Return: session unknown — FS-01-2"]
+  sess -- yes --&gt; turn{"Turn allowance exhausted?"}
+  turn -- yes --&gt; stopTurn["Return: turn limit — FS-01-3"]
+  turn -- no --&gt; len{"Empty or over-length?"}
+  len -- yes --&gt; stopLen["Return: rejected — FS-01-4"]
+  len -- no --&gt; mod{"Suitable for projection? — TF-02"}
+  mod -- no --&gt; stopMod["Return: content-flagged&lt;br/&gt;FA-01-2, resume — visitor edits and resubmits"]
+  mod -- yes --&gt; gen["Request response from PE-01 — FS-01-7/8, TO-01"]
+  gen --&gt; ok{"Response received?"}
+  ok -- no, exhausted retries --&gt; stopGen["Return: generation-failed&lt;br/&gt;FA-01-1, terminate"]
+  ok -- yes --&gt; persist["Write exchange, increment turnCount,&lt;br/&gt;derive scenario on first turn — FS-01-9…11"]
+  persist --&gt; done(["Return response + remaining allowance"])</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Every <code>stop*</code> box writes nothing to <a href="#E-01">E-01 Session</a> or
+<a href="#E-02">E-02 Exchange</a> — only the persist step does. The first four gates
+(rate limit, session, turn count, length) never reach a provider call;
+suitability is the last cheap check before one is made.
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -1483,7 +1523,7 @@ The pair is stored as one record rather than as two turn records. This follows t
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-08-24 11:18:50 +0200
+Last updated 2026-08-24 23:12:17 +0200
 </div>
 </div>
 <!-- Mermaid support for [source,mermaid] code blocks. Asciidoctor has no

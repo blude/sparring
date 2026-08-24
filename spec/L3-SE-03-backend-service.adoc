@@ -99,6 +99,35 @@ _Achieves:_ <<G-01,G-01 Produce Sparring responses and hold every rule that>>, <
 
 The element's central function. Everything that happens between a visitor pressing submit and a response returning is here, which is what keeps retry and error handling in one place rather than scattered across interfaces.
 
+Visual companion to the steps below — the gate order and its five
+cheap-reject branches, cheapest checks first. The step list is the
+authoritative source.
+
+[source,mermaid]
+----
+flowchart TD
+  start(["Visitor submits a turn"]) --> rl{"Rate limit reached?"}
+  rl -- yes --> stopRate["Return: limit reached — FS-01-1"]
+  rl -- no --> sess{"Session known, not expired?"}
+  sess -- no --> stopSess["Return: session unknown — FS-01-2"]
+  sess -- yes --> turn{"Turn allowance exhausted?"}
+  turn -- yes --> stopTurn["Return: turn limit — FS-01-3"]
+  turn -- no --> len{"Empty or over-length?"}
+  len -- yes --> stopLen["Return: rejected — FS-01-4"]
+  len -- no --> mod{"Suitable for projection? — TF-02"}
+  mod -- no --> stopMod["Return: content-flagged<br/>FA-01-2, resume — visitor edits and resubmits"]
+  mod -- yes --> gen["Request response from PE-01 — FS-01-7/8, TO-01"]
+  gen --> ok{"Response received?"}
+  ok -- no, exhausted retries --> stopGen["Return: generation-failed<br/>FA-01-1, terminate"]
+  ok -- yes --> persist["Write exchange, increment turnCount,<br/>derive scenario on first turn — FS-01-9…11"]
+  persist --> done(["Return response + remaining allowance"])
+----
+
+NOTE: Every `stop*` box writes nothing to <<E-01,E-01 Session>> or
+<<E-02,E-02 Exchange>> — only the persist step does. The first four gates
+(rate limit, session, turn count, length) never reach a provider call;
+suitability is the last cheap check before one is made.
+
 - *[[FS-01-1]]FS-01-1* _(Function-call)_ Call <<TF-03,TF-03 Enforce request limits>> with the request origin. If it reports the limit reached, return that condition and stop.
 - *[[FS-01-2]]FS-01-2* _(Entity-access)_ Read the session from <<E-01,E-01 Session>> by its identifier (<<E-01.1,E-01.1 sessionId>>). If absent or expired, return a session-unknown condition and stop.
 - *[[FS-01-3]]FS-01-3* _(Data-operation)_ Compare <<E-01.8,E-01.8 turnCount>> (turnCount) against the session turn allowance. If the allowance is exhausted, return a turn-limit condition and stop.
