@@ -127,9 +127,7 @@ window.SparringDojoOutcome = {
     newSessionBtn.addEventListener('click', function () {
         if (window.confirm(window.STRINGS.dojo.confirmEndSession)) {
             sessionStorage.removeItem(DRAFT_KEY); // ending session should not leave next session's composer pre-filled
-            showEvalDialog(sessionId, function () {
-                window.location.href = '/';
-            });
+            showEvalDialog(sessionId);
         }
     });
 
@@ -358,11 +356,13 @@ window.SparringDojoOutcome = {
     | End-of-session feedback dialog (TODO.md "Session Evaluation")
     |--------------------------------------------------------------------------
     |
-    | Always skippable — no field is required. Shown at most once per session
-    | per browser (sessionStorage flag, same idiom as DRAFT_KEY), so resuming
-    | an already-complete session on reload doesn't re-show it. Answers/
-    | feedback POST fire-and-forget to /api/evaluate — a failed request
-    | shouldn't block the visitor from leaving, same as the /api/title call.
+    | Always skippable — no field is required. The rating/feedback form itself
+    | is answered at most once per session per browser (sessionStorage flag,
+    | same idiom as DRAFT_KEY, set on actual completion — see showSuccess
+    | below), so a later "End session" press goes straight to the same
+    | confirmation screen instead of asking again. Answers/feedback POST
+    | fire-and-forget to /api/evaluate — a failed request shouldn't block the
+    | visitor from leaving, same as the /api/title call.
     */
     // Glove-rating widgets have no visible text of their own (see dojo.php/
     // dojo.css) — this is what shows the picked option's label above them.
@@ -381,9 +381,9 @@ window.SparringDojoOutcome = {
         return 'sparring-eval-shown-' + id;
     }
 
-    function showEvalDialog(id, onClose) {
-        if (!evalDialogEl || sessionStorage.getItem(evalShownKey(id))) {
-            if (onClose) onClose();
+    function showEvalDialog(id) {
+        if (!evalDialogEl) {
+            window.location.href = '/'; // defensive only — the markup should always be there
             return;
         }
         evalDialogEl.hidden = false;
@@ -443,6 +443,18 @@ window.SparringDojoOutcome = {
             evalStartNewBtn.removeEventListener('click', onStartNew);
             evalGoToStartBtn.removeEventListener('click', onGoToStart);
             window.location.href = '/';
+        }
+
+        if (sessionStorage.getItem(evalShownKey(id))) {
+            // Already answered in an earlier attempt — reloading doesn't
+            // bring the confirmation screen back on its own (it's DOM
+            // state, not persisted), so a later "End session" press has
+            // nothing to show the visitor but the same two follow-up
+            // actions. Skips straight there rather than asking again, and
+            // — this is the bug this branch replaces — rather than
+            // silently falling through to onClose's hard navigate.
+            showSuccess(window.STRINGS.dojo.evalSkipMessage);
+            return;
         }
         evalSkipBtn.addEventListener('click', onSkip);
         evalSubmitBtn.addEventListener('click', onSubmit);
@@ -673,7 +685,7 @@ window.SparringDojoOutcome = {
                 }
                 if (data.sessionState === 'complete') {
                     window.SparringSfx.playSequence('sessionEnd');
-                    showEvalDialog(sessionId); // no onClose — finished conversation stays visible
+                    showEvalDialog(sessionId); // finished conversation stays visible underneath
                 } else {
                     setComposerEnabled(true);
                     window.SparringSfx.play('parry');
