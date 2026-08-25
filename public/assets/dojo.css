@@ -331,6 +331,7 @@ main {
     color-scheme: dark; /* native checkbox rendering matches the dark card */
     border-radius: 0.75rem;
     padding: 0.75rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25); /* lifts the card off the page it's floating over */
 }
 
 #consent-heading {
@@ -390,6 +391,7 @@ main {
     color-scheme: dark;
     border-radius: 0.75rem;
     padding: 0.75rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25); /* lifts the card off the page it's floating over, same as #retention */
     /* Two 5-way scales plus a textarea can still run taller than fits
        centered on a small phone — overflow-y:auto keeps Send/Skip
        reachable instead of the card overshooting the viewport. */
