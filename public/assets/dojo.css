@@ -361,25 +361,32 @@ main {
 }
 #consent-confirm:disabled { opacity: 0.5; }
 
-/* End-of-session feedback dialog — same in-flow dark-card treatment as
-   #retention above (not #playbook's absolute-centered card: two 5-way
-   scales plus a textarea run taller than fits centered on a small phone). */
+/* End-of-session feedback dialog — absolute-centered overlay, same pattern
+   as #playbook (anchored to main, position:relative), so it sits over the
+   finished conversation/composer instead of pushing them around. z-index
+   above #retention's 11: the two never show together in practice, but if
+   they ever did, the dialog reporting on a session that's already ending
+   should win. */
 #eval-dialog {
-    position: relative;
-    z-index: 11;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+    width: min(92vw, 360px);
     background: #1a1a1a;
     border: 1px solid #333;
     color: #f2f2f2;
     color-scheme: dark;
     border-radius: 0.75rem;
     padding: 0.75rem;
-    /* Two 5-way scales plus a textarea run taller than the fixed-viewport
-       page (body is 100dvh, nothing scrolls except #history) has room for
-       below the header — same overflow-y:auto escape hatch #history uses,
-       so Send/Skip stay reachable instead of clipping off-screen. */
+    /* Two 5-way scales plus a textarea can still run taller than fits
+       centered on a small phone — overflow-y:auto keeps Send/Skip
+       reachable instead of the card overshooting the viewport. */
     max-height: 70dvh;
     overflow-y: auto;
 }
+#eval-dialog[hidden] { display: none; } /* same explicit belt-and-suspenders as #playbook/#reply-quote/#title-card */
 
 #eval-heading {
     margin: 0.25rem 0 0.75rem;
