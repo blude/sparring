@@ -326,6 +326,7 @@ main {
     color-scheme: dark; /* native checkbox rendering matches the dark card */
     padding: 0.75rem;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25); /* lifts the card off the page it's floating over */
+    border-radius: 1.25rem;
 }
 .gate-card[hidden] { display: none; } /* same explicit belt-and-suspenders as #playbook/#reply-quote/#title-card */
 
@@ -335,7 +336,6 @@ main {
        #confirm-dialog's 13 (never shown together in practice, but if they
        ever were, the more time-sensitive prompt should win). */
     z-index: 11;
-    border-radius: 0.75rem;
 }
 
 #consent-heading {
@@ -382,7 +382,6 @@ main {
    should win. */
 #eval-dialog {
     z-index: 12;
-    border-radius: 1rem;
 }
 
 /* Custom confirm dialog, replacing window.confirm() for "End this
@@ -391,7 +390,6 @@ main {
    the one whose own action can open #eval-dialog next. */
 #confirm-dialog {
     z-index: 13;
-    border-radius: 1rem;
 }
 
 #confirm-heading {
@@ -724,7 +722,7 @@ main {
     overflow: hidden;
     background: #000;
     color: #fff;
-    border-radius: 1rem;
+    border-radius: 1.25rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     font-size: 3.5rem;
     font-weight: 800;
