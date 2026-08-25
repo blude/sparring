@@ -310,10 +310,19 @@ main {
 }
 
 #retention {
-    /* position+z-index so it stacks above #playbook (fixed, z-index:10)
-       wherever the two overlap — ToS is the one that must win. */
-    position: relative;
+    /* Same absolute-overlay treatment as #eval-dialog below, for
+       consistency between the two dark "gate" cards — bottom-anchored,
+       centered, anchored to main (position:relative). z-index above
+       #playbook (stacks above it wherever the two overlap — ToS is the
+       one that must win), below #eval-dialog's 12 (the two never show
+       together in practice, but if they ever did, the dialog reporting on
+       a session that's already ending should win). */
+    position: absolute;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 11;
+    width: min(92vw, 360px);
     /* deliberately inverted against the page's light theme so the consent
        dialog pops — not a prefers-color-scheme response, always dark */
     background: #1a1a1a;
