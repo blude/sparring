@@ -69,6 +69,35 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
     <button id="consent-confirm" type="button" disabled><?= t('dojo.consent.confirm') ?></button>
   </div>
 
+  <?php
+    /* End-of-session feedback (TODO.md "Session Evaluation"). Always
+      skippable — every question and the feedback field are optional, per
+      EVAL_QUESTIONS/EVAL_SCALE_SIZE in config.php. Shown by dojo.js on
+      natural turn-limit completion and on a deliberate "End session" press. */
+  ?>
+  <div id="eval-dialog" hidden>
+    <h2 id="eval-heading"><?= t('dojo.eval.heading') ?></h2>
+    <?php foreach (EVAL_QUESTIONS as $q): ?>
+    <fieldset class="eval-question" data-question="<?= $q ?>">
+      <legend><?= t("dojo.eval.q.$q.prompt") ?></legend>
+      <div class="eval-scale">
+        <?php for ($i = 1; $i <= EVAL_SCALE_SIZE; $i++): ?>
+        <label class="eval-scale-option">
+          <input type="radio" name="eval-<?= $q ?>" value="<?= $i ?>">
+          <span><?= t("dojo.eval.q.$q.label.$i") ?></span>
+        </label>
+        <?php endfor; ?>
+      </div>
+    </fieldset>
+    <?php endforeach; ?>
+    <label id="eval-feedback-label" for="eval-feedback"><?= t('dojo.eval.feedback.label') ?></label>
+    <textarea id="eval-feedback" maxlength="<?= (int) CONTRIBUTION_MAX_CHARS ?>"></textarea>
+    <div id="eval-actions">
+      <button id="eval-skip" type="button"><?= t('dojo.eval.skip') ?></button>
+      <button id="eval-submit" type="button"><?= t('dojo.eval.submit') ?></button>
+    </div>
+  </div>
+
   <div id="reply-quote" hidden>
     <p id="reply-quote-label"><?= t('dojo.replyQuote.label') ?></p>
     <p id="reply-quote-text"></p>

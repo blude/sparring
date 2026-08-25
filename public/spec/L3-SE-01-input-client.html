@@ -30,6 +30,7 @@
 <li><a href="#_g_03_make_waiting_and_failure_legible">1.3. G-03 Make waiting and failure legible</a></li>
 <li><a href="#_g_04_make_unsuitable_input_visible">1.4. G-04 Make unsuitable input visible</a></li>
 <li><a href="#_g_05_give_the_visitor_a_light_identity_and_a_way_to_deliberately_start_over">1.5. G-05 Give the visitor a light identity, and a way to deliberately start over</a></li>
+<li><a href="#_g_06_offer_a_light_always_skippable_way_to_react_to_a_finished_session">1.6. G-06 Offer a light, always-skippable way to react to a finished session</a></li>
 </ul>
 </li>
 <li><a href="#_use_cases">2. Use cases</a>
@@ -53,6 +54,7 @@
 <li><a href="#_tf_04_render_the_exchange_history">4.4. TF-04 Render the exchange history</a></li>
 <li><a href="#_tf_05_derive_visitor_identity">4.5. TF-05 Derive visitor identity</a></li>
 <li><a href="#_tf_06_refine_the_session_title">4.6. TF-06 Refine the session title</a></li>
+<li><a href="#_tf_07_present_the_session_evaluation">4.7. TF-07 Present the session evaluation</a></li>
 </ul>
 </li>
 <li><a href="#_technical_interfaces_inbound">5. Technical interfaces (inbound)</a></li>
@@ -62,6 +64,7 @@
 <li><a href="#_to_02_submit_a_contribution">6.2. TO-02 Submit a contribution</a></li>
 <li><a href="#_to_03_retrieve_a_session">6.3. TO-03 Retrieve a session</a></li>
 <li><a href="#_to_04_refine_a_session_title">6.4. TO-04 Refine a session title</a></li>
+<li><a href="#_to_05_submit_a_session_evaluation">6.5. TO-05 Submit a session evaluation</a></li>
 </ul>
 </li>
 <li><a href="#_entities">7. Entities</a>
@@ -197,6 +200,14 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <em>Derived:</em> Yes<br>
 <em>Rationale:</em> The alias/avatar follows from <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a>'s <a href="L3-SE-02-display-client.html#G-04">G-04 Distinguish concurrent visitors from one another</a> (display element design) — the wall now labels each session by a generated alias, so a visitor can recognise their own item on the shared surface only if the input client shows them the same value. The new-session control is a related convenience bundled into the same header for the same visitor. Neither was asked for by a stakeholder; both are a UX layer on top of the required consent gate.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_g_06_offer_a_light_always_skippable_way_to_react_to_a_finished_session"><a class="anchor" href="#_g_06_offer_a_light_always_skippable_way_to_react_to_a_finished_session"></a>1.6. <a id="G-06"></a>G-06 Offer a light, always-skippable way to react to a finished session</h3>
+<div class="paragraph">
+<p>The element shall present a short rating and open-feedback prompt when a session ends, and shall let the visitor leave without answering any part of it.<br>
+<em>Success criteria (qualitative):</em> Dismissing the prompt with nothing answered is exactly as available as answering it, from the visitor&#8217;s first look at it.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-09">SG-09 Collect an optional visitor self-report at session</a></p>
+</div>
 <hr>
 </div>
 </div>
@@ -293,7 +304,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <p><strong><a id="EX-02-1"></a>EX-02-1</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports that the request limit has been reached. <a href="#UI-01">UI-01 Session surface</a> states this and re-enables the field. The typed contribution is preserved. <em>Outcome:</em> Resume.</p>
 </li>
 <li>
-<p><strong><a id="EX-02-2"></a>EX-02-2</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports that the session has reached its turn limit. <a href="#UI-01">UI-01 Session surface</a> presents the session as complete and leaves the field disabled. The history remains readable. <em>Outcome:</em> Terminate.</p>
+<p><strong><a id="EX-02-2"></a>EX-02-2</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports that the session has reached its turn limit. <a href="#UI-01">UI-01 Session surface</a> presents the session as complete, leaves the field disabled, and calls <a href="#TF-07">TF-07 Present the session evaluation</a>. The history remains readable underneath the prompt. <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
 <p><strong><a id="EX-02-3"></a>EX-02-3</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports that no response could be produced. <a href="#UI-01">UI-01 Session surface</a> states plainly that the installation cannot respond right now and re-enables the field with the contribution preserved. <em>Outcome:</em> Resume.</p>
@@ -350,7 +361,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a><br>
 <em>Prerequisites:</em> <a href="#UC-01">UC-01 Begin a session</a> or <a href="#UC-03">UC-03 Resume an interrupted session</a> completed — a session, active or complete, is currently shown.<br>
-<em>Achieves:</em> <a href="#G-05">G-05 Give the visitor a light identity</a><br>
+<em>Achieves:</em> <a href="#G-05">G-05 Give the visitor a light identity</a>, <a href="#G-06">G-06 Offer a light, always-skippable way to react</a><br>
 <em>Realises:</em> SSc-01</p>
 </div>
 <div class="ulist">
@@ -362,7 +373,10 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <p><strong><a id="ST-04-2"></a>ST-04-2</strong> <em>(User-interaction)</em> The element asks <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> to confirm, stating that the current session will no longer be shown.</p>
 </li>
 <li>
-<p><strong><a id="ST-04-3"></a>ST-04-3</strong> <em>(Activity)</em> On confirmation, the element opens the surface with no session identifier in the address, which begins <a href="#UC-01">UC-01 Begin a session</a> from <a href="#ST-01-1">ST-01-1</a>.</p>
+<p><strong><a id="ST-04-3"></a>ST-04-3</strong> <em>(Function-call)</em> On confirmation, the element calls <a href="#TF-07">TF-07 Present the session evaluation</a>, which shows the evaluation prompt and returns once <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> answers or skips it.</p>
+</li>
+<li>
+<p><strong><a id="ST-04-4"></a>ST-04-4</strong> <em>(Activity)</em> The element opens the surface with no session identifier in the address, which begins <a href="#UC-01">UC-01 Begin a session</a> from <a href="#ST-01-1">ST-01-1</a>.</p>
 </li>
 </ul>
 </div>
@@ -476,6 +490,13 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-05">TF-05 Derive visitor identity</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Once consent is recorded</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Evaluation prompt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">form</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A short rating question per configured topic (fixed scale, custom label per point) plus one open-feedback field, all optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-07">TF-07 Present the session evaluation</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Once, at the moment a session ends, on the first ending encountered</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -532,6 +553,12 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <td class="tableblock halign-left valign-top"><p class="tableblock">Press EN or DE; the choice persists across the session and future visits</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Always available</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Answer or skip the evaluation prompt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fill in any subset of the rating questions and the feedback field, then press Send; or press Skip with nothing filled in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-02">UC-02 Contribute a turn</a>, <a href="#UC-04">UC-04 Start a new session deliberately</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">While the evaluation prompt is shown</p></td>
 </tr>
 </tbody>
 </table>
@@ -681,6 +708,16 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <div class="paragraph">
 <p>Once the first exchange completes (<a href="#UC-02">UC-02 Contribute a turn</a>), the element calls <a href="#TO-04">TO-04 Refine a session title</a> with the session identifier to request a refined title, and replaces the header&#8217;s default "Untitled" state with it when one comes back. Deliberately non-blocking and best-effort: it is not a step of <a href="#UC-02">UC-02 Contribute a turn</a>'s own sequence, carries no wait bound, and never gates the field or the response the visitor is watching for. Its failure (network, timeout, malformed response) is invisible rather than reported — the header simply stays "Untitled," unlike <a href="#QR-02">QR-02 Every failure produces a statement</a>'s failure-statement requirement, which is about the turn itself, not this. No goal relation: like <a href="#TF-04">TF-04 Render the exchange history</a>, this is presentation logic layered on a use case that already references the goals.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_tf_07_present_the_session_evaluation"><a class="anchor" href="#_tf_07_present_the_session_evaluation"></a>4.7. <a id="TF-07"></a>TF-07 Present the session evaluation</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Narrative<br>
+<em>Achieves:</em> <a href="#G-06">G-06 Offer a light, always-skippable way to react</a></p>
+</div>
+<div class="paragraph">
+<p>Shown at most once per session — a flag kept in the browser (not <a href="#E-01">E-01 Session view state</a>, since it must survive nothing more than a reload of the same tab) guards against a resumed already-complete session showing it again. Every rating question and the open-feedback field are optional; a Skip action and a Send action are both available from the first moment the prompt is shown, and both dismiss it. Send calls <a href="#TO-05">TO-05 Submit a session evaluation</a> with whichever fields were filled in (possibly none) and does not wait for the result before dismissing — a failed submission is invisible to the visitor, matching <a href="#TF-06">TF-06 Refine the session title</a>'s best-effort treatment of a non-essential background call. Skip calls nothing. Which rating questions are offered, and how many points each scale has, is fixed in code ahead of time — a fixed set authored in code, same as <a href="#TF-02">TF-02 Record the consent decision</a>'s opening-prompt identifiers — and this function presents whatever set it&#8217;s given, deciding none of it itself.</p>
+</div>
 <hr>
 </div>
 </div>
@@ -744,6 +781,28 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </td>
 <td class="content">
 No <code>Calls → PE-</code> relation applies. This element reaches no partner element directly, per <a href="L2-system-design-concept.html#AP-01">AP-01 All logic lives in the backend</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_to_05_submit_a_session_evaluation"><a class="anchor" href="#_to_05_submit_a_session_evaluation"></a>6.5. <a id="TO-05"></a>TO-05 Submit a session evaluation</h3>
+<div class="paragraph">
+<p><em>Statement:</em> This interface records whatever the visitor answered in the evaluation prompt by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used once per session, from <a href="#TF-07">TF-07 Present the session evaluation</a>'s Send action.<br>
+<em>Input:</em> Session identifier, zero or more rating answers, optional open-feedback text.<br>
+<em>Output:</em> None consumed by the caller — <a href="#TF-07">TF-07 Present the session evaluation</a> dismisses the prompt without waiting for a result.<br>
+<em>Error cases:</em> Service unavailable. Session unknown. Malformed request. None of these are shown to the visitor, same treatment as <a href="#TO-04">TO-04 Refine a session title</a>'s failure cases.<br>
+<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-07">TI-07 Submit a session evaluation</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+No <code>Calls → PE-</code> relation applies, same reason as <a href="#TO-04">TO-04 Refine a session title</a>'s.
 </td>
 </tr>
 </table>

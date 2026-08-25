@@ -70,6 +70,13 @@ _Success criteria (qualitative):_ A visitor who pressures, argues, or sounds sat
 _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-01[BG-01 Make Sparring's friction visible to an audience] +
 _Supports:_ xref:L1-solution-design-concept.adoc#BQR-01[BQR-01 Visitors experience challenge, not obstruction]
 
+=== [[SG-09]]SG-09 Collect an optional visitor self-report at session end
+
+The system shall offer the visitor a short, always-skippable rating and open-feedback prompt when their session ends, and record whatever they choose to answer. +
+_Success criteria (qualitative):_ A visitor can leave a rating, leave open feedback, leave both, or leave neither, without any of those choices affecting how the session itself concludes. +
+_Satisfies:_ xref:L1-solution-design-concept.adoc#BG-04[BG-04 Produce a record of public interactions as secondary] +
+_Rationale:_ Same secondary, non-rigorous status as the rest of xref:L1-solution-design-concept.adoc#BG-04[BG-04 Produce a record of public interactions as secondary] — a self-report gathered in passing from an unbriefed visitor, not xref:L1-solution-design-concept.adoc#BQR-04[BQR-04 Exhibition material is never mistaken for evaluation]'s formal evaluation sessions.
+
 '''
 
 == System architecture
@@ -344,7 +351,7 @@ the other opt-outs — does end the flow).
 - *[[SA-01-2]]SA-01-2* _(extends SSt-01-5)_ The request exceeds the rate or size limit. <<SE-03,SE-03 Backend service>> rejects it and <<SE-01,SE-01 Input client>> tells <<UT-01,UT-01 Participating visitor>> plainly. The session remains usable. _Outcome:_ Resume.
 - *[[SA-01-3]]SA-01-3* _(extends SSt-01-6)_ The contribution is assessed as unsuitable for projection. <<SE-03,SE-03 Backend service>> rejects the turn and returns that condition to <<SE-01,SE-01 Input client>>, which tells <<UT-01,UT-01 Participating visitor>> to edit and resubmit. Nothing is stored, no turn is consumed, and the session is otherwise unaffected. _Outcome:_ Resume.
 - *[[SA-01-4]]SA-01-4* _(extends SSt-01-7)_ <<PE-01,PE-01 Language generation API>> is unavailable or fails after retries. <<SE-03,SE-03 Backend service>> returns a failure and <<SE-01,SE-01 Input client>> states that the installation cannot respond. _Outcome:_ Terminate.
-- *[[SA-01-5]]SA-01-5* _(extends SSt-01-4)_ The session has reached its turn limit. <<SE-03,SE-03 Backend service>> rejects the contribution and <<SE-01,SE-01 Input client>> presents the session as complete. _Outcome:_ Terminate.
+- *[[SA-01-5]]SA-01-5* _(extends SSt-01-4)_ The session has reached its turn limit. <<SE-03,SE-03 Backend service>> rejects the contribution and <<SE-01,SE-01 Input client>> presents the session as complete, offering the optional session-evaluation prompt (<<SG-09,SG-09 Collect an optional visitor self-report at session>>). _Outcome:_ Terminate.
 - *[[SA-01-6]]SA-01-6* _(extends SSt-01-1)_ <<SE-01,SE-01 Input client>> opens with a session identifier already in the address after a reload. It fetches the existing session from <<SE-03,SE-03 Backend service>> and resumes from SSt-01-4, skipping the consent decision. _Outcome:_ Alternative-success.
 - *[[SA-01-7]]SA-01-7* _(extends SSt-01-3)_ <<UT-01,UT-01 Participating visitor>> declines to agree to the terms of participation. Unlike retention and projection, this is not an opt-out the session can proceed without — the input surface stays unusable. _Outcome:_ Terminate.
 

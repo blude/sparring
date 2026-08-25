@@ -2,13 +2,6 @@
 
 ## High priority
 
-- [ ] Prototype / Session Evaluation (Important!) — at end of session (visitor
-  runs out of turns), show a dialog offering to rate the session: one or two
-  single-choice questions (5-degree scale, custom labels per option —
-  questions TBC, e.g. "How challenging was this Sparring session?", "How
-  knowledgeable would you rate Sparring regarding digital design?"), plus a
-  final open feedback question ("what stood out to you?"). Rationale: the
-  exhibition is a sneaky opportunity to collect feedback on the prototype.
 - [ ] Fix prompt introspection hiccup
 - [ ] Use session title as the de facto session identifier for exchanges in
   the arena display
@@ -94,6 +87,13 @@ shipped) remain undone and unplanned.
 
 # Done
 
+- [x] Prototype / Session Evaluation — end-of-session dialog offering two
+  single-choice rating questions (5-degree scale, custom labels per option)
+  plus an open feedback field, always skippable. Shown on natural
+  turn-limit completion and on a deliberate "End session" press. Questions
+  live in `EVAL_QUESTIONS`/`EVAL_SCALE_SIZE` (config.php), answers persist
+  to a new `session_evaluations` table (`Store::saveEvaluation()`), no
+  `bin/export.php` wiring yet (deferred, see PR notes).
 - [x] Add ability for visitors to reply to one of Sparring's replies from
   the wall projection using QR code
 - [x] Add QR Code generator

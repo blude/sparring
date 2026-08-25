@@ -19,6 +19,7 @@ $routes = [
     '/api/contribute'       => __DIR__ . '/api/contribute.php',
     '/api/recent-exchanges' => __DIR__ . '/api/recent-exchanges.php',
     '/api/title'            => __DIR__ . '/api/title.php',
+    '/api/evaluate'         => __DIR__ . '/api/evaluate.php',
 ];
 
 require_once __DIR__ . '/../config.php';

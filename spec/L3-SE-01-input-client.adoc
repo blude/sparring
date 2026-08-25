@@ -65,6 +65,12 @@ _Success criteria (qualitative):_ A visitor can find their own alias in the head
 _Derived:_ Yes +
 _Rationale:_ The alias/avatar follows from xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client]'s xref:L3-SE-02-display-client.adoc#G-04[G-04 Distinguish concurrent visitors from one another] (display element design) — the wall now labels each session by a generated alias, so a visitor can recognise their own item on the shared surface only if the input client shows them the same value. The new-session control is a related convenience bundled into the same header for the same visitor. Neither was asked for by a stakeholder; both are a UX layer on top of the required consent gate.
 
+=== [[G-06]]G-06 Offer a light, always-skippable way to react to a finished session
+
+The element shall present a short rating and open-feedback prompt when a session ends, and shall let the visitor leave without answering any part of it. +
+_Success criteria (qualitative):_ Dismissing the prompt with nothing answered is exactly as available as answering it, from the visitor's first look at it. +
+_Satisfies:_ xref:L2-system-design-concept.adoc#SG-09[SG-09 Collect an optional visitor self-report at session]
+
 '''
 
 == Use cases
@@ -107,7 +113,7 @@ _Realises:_ SSc-01
 *Alternative scenarios*
 
 - *[[EX-02-1]]EX-02-1* _(extends <<ST-02-4,ST-02-4>>)_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] reports that the request limit has been reached. <<UI-01,UI-01 Session surface>> states this and re-enables the field. The typed contribution is preserved. _Outcome:_ Resume.
-- *[[EX-02-2]]EX-02-2* _(extends <<ST-02-4,ST-02-4>>)_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] reports that the session has reached its turn limit. <<UI-01,UI-01 Session surface>> presents the session as complete and leaves the field disabled. The history remains readable. _Outcome:_ Terminate.
+- *[[EX-02-2]]EX-02-2* _(extends <<ST-02-4,ST-02-4>>)_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] reports that the session has reached its turn limit. <<UI-01,UI-01 Session surface>> presents the session as complete, leaves the field disabled, and calls <<TF-07,TF-07 Present the session evaluation>>. The history remains readable underneath the prompt. _Outcome:_ Terminate.
 - *[[EX-02-3]]EX-02-3* _(extends <<ST-02-4,ST-02-4>>)_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] reports that no response could be produced. <<UI-01,UI-01 Session surface>> states plainly that the installation cannot respond right now and re-enables the field with the contribution preserved. _Outcome:_ Resume.
 - *[[EX-02-4]]EX-02-4* _(extends <<ST-02-4,ST-02-4>>)_ The request does not complete within the element's own wait bound. The element stops waiting and behaves as in <<EX-02-3,EX-02-3>>. _Outcome:_ Resume.
 - *[[EX-02-5]]EX-02-5* _(extends <<ST-02-4,ST-02-4>>)_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] reports the contribution as flagged (unsuitable). <<UI-01,UI-01 Session surface>> states that the message can't be shown — with wording that varies by coarse category (personal information versus inappropriate content, see <<QR-06,QR-06 Diagnostic detail is available to an operator>>) — and re-enables the field with the contribution preserved, same shape as <<EX-02-1,EX-02-1>>/<<EX-02-3,EX-02-3>>. The session itself is unaffected. _Outcome:_ Resume.
@@ -133,12 +139,13 @@ _Realises:_ SSc-01
 
 _Actors:_ xref:L2-system-design-concept.adoc#UT-01[UT-01 Participating visitor] +
 _Prerequisites:_ <<UC-01,UC-01 Begin a session>> or <<UC-03,UC-03 Resume an interrupted session>> completed — a session, active or complete, is currently shown. +
-_Achieves:_ <<G-05,G-05 Give the visitor a light identity>> +
+_Achieves:_ <<G-05,G-05 Give the visitor a light identity>>, <<G-06,G-06 Offer a light, always-skippable way to react>> +
 _Realises:_ SSc-01
 
 - *[[ST-04-1]]ST-04-1* _(User-interaction)_ xref:L2-system-design-concept.adoc#UT-01[UT-01 Participating visitor] presses "New session" in the header.
 - *[[ST-04-2]]ST-04-2* _(User-interaction)_ The element asks xref:L2-system-design-concept.adoc#UT-01[UT-01 Participating visitor] to confirm, stating that the current session will no longer be shown.
-- *[[ST-04-3]]ST-04-3* _(Activity)_ On confirmation, the element opens the surface with no session identifier in the address, which begins <<UC-01,UC-01 Begin a session>> from <<ST-01-1,ST-01-1>>.
+- *[[ST-04-3]]ST-04-3* _(Function-call)_ On confirmation, the element calls <<TF-07,TF-07 Present the session evaluation>>, which shows the evaluation prompt and returns once xref:L2-system-design-concept.adoc#UT-01[UT-01 Participating visitor] answers or skips it.
+- *[[ST-04-4]]ST-04-4* _(Activity)_ The element opens the surface with no session identifier in the address, which begins <<UC-01,UC-01 Begin a session>> from <<ST-01-1,ST-01-1>>.
 
 *Alternative scenarios*
 
@@ -169,6 +176,7 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 | Status message | string | Plain statement of a limit reached or a failure | <<E-01.6,E-01.6 statusMessage>> | When set
 | Visitor alias | string | The generated nickname, shown in a popover on request | <<TF-05,TF-05 Derive visitor identity>> | Once consent is recorded
 | Visitor avatar | string (emoji) | A small avatar in the header, always visible alongside the alias | <<TF-05,TF-05 Derive visitor identity>> | Once consent is recorded
+| Evaluation prompt | form | A short rating question per configured topic (fixed scale, custom label per point) plus one open-feedback field, all optional | <<TF-07,TF-07 Present the session evaluation>> | Once, at the moment a session ends, on the first ending encountered
 |===
 
 *Actions*
@@ -182,6 +190,7 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 | View own identity | Press the avatar to open a popover showing the alias; dismissed by pressing elsewhere, pressing the avatar again, or Escape | <<UC-01,UC-01 Begin a session>>, <<UC-03,UC-03 Resume an interrupted session>> | Once consent is recorded
 | Start a new session | Button press, with a confirmation step | <<UC-04,UC-04 Start a new session deliberately>> | Always available once a session exists
 | Switch interface language | Press EN or DE; the choice persists across the session and future visits | — | Always available
+| Answer or skip the evaluation prompt | Fill in any subset of the rating questions and the feedback field, then press Send; or press Skip with nothing filled in | <<UC-02,UC-02 Contribute a turn>>, <<UC-04,UC-04 Start a new session deliberately>> | While the evaluation prompt is shown
 |===
 
 *Input fields*
@@ -256,6 +265,13 @@ _Detail level:_ Narrative
 
 Once the first exchange completes (<<UC-02,UC-02 Contribute a turn>>), the element calls <<TO-04,TO-04 Refine a session title>> with the session identifier to request a refined title, and replaces the header's default "Untitled" state with it when one comes back. Deliberately non-blocking and best-effort: it is not a step of <<UC-02,UC-02 Contribute a turn>>'s own sequence, carries no wait bound, and never gates the field or the response the visitor is watching for. Its failure (network, timeout, malformed response) is invisible rather than reported — the header simply stays "Untitled," unlike <<QR-02,QR-02 Every failure produces a statement>>'s failure-statement requirement, which is about the turn itself, not this. No goal relation: like <<TF-04,TF-04 Render the exchange history>>, this is presentation logic layered on a use case that already references the goals.
 
+=== [[TF-07]]TF-07 Present the session evaluation
+
+_Detail level:_ Narrative +
+_Achieves:_ <<G-06,G-06 Offer a light, always-skippable way to react>>
+
+Shown at most once per session — a flag kept in the browser (not <<E-01,E-01 Session view state>>, since it must survive nothing more than a reload of the same tab) guards against a resumed already-complete session showing it again. Every rating question and the open-feedback field are optional; a Skip action and a Send action are both available from the first moment the prompt is shown, and both dismiss it. Send calls <<TO-05,TO-05 Submit a session evaluation>> with whichever fields were filled in (possibly none) and does not wait for the result before dismissing — a failed submission is invisible to the visitor, matching <<TF-06,TF-06 Refine the session title>>'s best-effort treatment of a non-essential background call. Skip calls nothing. Which rating questions are offered, and how many points each scale has, is fixed in code ahead of time — a fixed set authored in code, same as <<TF-02,TF-02 Record the consent decision>>'s opening-prompt identifiers — and this function presents whatever set it's given, deciding none of it itself.
+
 '''
 
 == Technical interfaces (inbound)
@@ -299,6 +315,16 @@ _Error cases:_ Service unavailable. Session unknown. Malformed request. None of 
 _Authoritative spec:_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] element design, xref:L3-SE-03-backend-service.adoc#TI-06[TI-06 Refine a session title].
 
 NOTE: No `Calls → PE-` relation applies. This element reaches no partner element directly, per xref:L2-system-design-concept.adoc#AP-01[AP-01 All logic lives in the backend].
+
+=== [[TO-05]]TO-05 Submit a session evaluation
+
+_Statement:_ This interface records whatever the visitor answered in the evaluation prompt by calling the backend service (xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]). Used once per session, from <<TF-07,TF-07 Present the session evaluation>>'s Send action. +
+_Input:_ Session identifier, zero or more rating answers, optional open-feedback text. +
+_Output:_ None consumed by the caller — <<TF-07,TF-07 Present the session evaluation>> dismisses the prompt without waiting for a result. +
+_Error cases:_ Service unavailable. Session unknown. Malformed request. None of these are shown to the visitor, same treatment as <<TO-04,TO-04 Refine a session title>>'s failure cases. +
+_Authoritative spec:_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] element design, xref:L3-SE-03-backend-service.adoc#TI-07[TI-07 Submit a session evaluation].
+
+NOTE: No `Calls → PE-` relation applies, same reason as <<TO-04,TO-04 Refine a session title>>'s.
 
 '''
 

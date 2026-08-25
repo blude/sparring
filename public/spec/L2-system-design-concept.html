@@ -33,6 +33,7 @@
 <li><a href="#_sg_06_never_present_an_empty_surface">1.6. SG-06 Never present an empty surface</a></li>
 <li><a href="#_sg_07_gate_public_projection_at_the_moment_of_submission_not_after_the_fact">1.7. SG-07 Gate public projection at the moment of submission, not after the fact</a></li>
 <li><a href="#_sg_08_hold_a_pedagogical_position_under_sustained_pressure_or_premature_closure_attempts">1.8. SG-08 Hold a pedagogical position under sustained pressure or premature-closure attempts</a></li>
+<li><a href="#_sg_09_collect_an_optional_visitor_self_report_at_session_end">1.9. SG-09 Collect an optional visitor self-report at session end</a></li>
 </ul>
 </li>
 <li><a href="#_system_architecture">2. System architecture</a>
@@ -198,6 +199,15 @@
 <em>Success criteria (qualitative):</em> A visitor who pressures, argues, or sounds satisfied without addressing the weak point still receives further challenge, not agreement or closure.<br>
 <em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-01">BG-01 Make Sparring&#8217;s friction visible to an audience</a><br>
 <em>Supports:</em> <a href="L1-solution-design-concept.html#BQR-01">BQR-01 Visitors experience challenge, not obstruction</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sg_09_collect_an_optional_visitor_self_report_at_session_end"><a class="anchor" href="#_sg_09_collect_an_optional_visitor_self_report_at_session_end"></a>1.9. <a id="SG-09"></a>SG-09 Collect an optional visitor self-report at session end</h3>
+<div class="paragraph">
+<p>The system shall offer the visitor a short, always-skippable rating and open-feedback prompt when their session ends, and record whatever they choose to answer.<br>
+<em>Success criteria (qualitative):</em> A visitor can leave a rating, leave open feedback, leave both, or leave neither, without any of those choices affecting how the session itself concludes.<br>
+<em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary</a><br>
+<em>Rationale:</em> Same secondary, non-rigorous status as the rest of <a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary</a> — a self-report gathered in passing from an unbriefed visitor, not <a href="L1-solution-design-concept.html#BQR-04">BQR-04 Exhibition material is never mistaken for evaluation</a>'s formal evaluation sessions.</p>
 </div>
 <hr>
 </div>
@@ -595,7 +605,7 @@ the other opt-outs — does end the flow).
 <p><strong><a id="SA-01-4"></a>SA-01-4</strong> <em>(extends SSt-01-7)</em> <a href="#PE-01">PE-01 Language generation API</a> is unavailable or fails after retries. <a href="#SE-03">SE-03 Backend service</a> returns a failure and <a href="#SE-01">SE-01 Input client</a> states that the installation cannot respond. <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
-<p><strong><a id="SA-01-5"></a>SA-01-5</strong> <em>(extends SSt-01-4)</em> The session has reached its turn limit. <a href="#SE-03">SE-03 Backend service</a> rejects the contribution and <a href="#SE-01">SE-01 Input client</a> presents the session as complete. <em>Outcome:</em> Terminate.</p>
+<p><strong><a id="SA-01-5"></a>SA-01-5</strong> <em>(extends SSt-01-4)</em> The session has reached its turn limit. <a href="#SE-03">SE-03 Backend service</a> rejects the contribution and <a href="#SE-01">SE-01 Input client</a> presents the session as complete, offering the optional session-evaluation prompt (<a href="#SG-09">SG-09 Collect an optional visitor self-report at session</a>). <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
 <p><strong><a id="SA-01-6"></a>SA-01-6</strong> <em>(extends SSt-01-1)</em> <a href="#SE-01">SE-01 Input client</a> opens with a session identifier already in the address after a reload. It fetches the existing session from <a href="#SE-03">SE-03 Backend service</a> and resumes from SSt-01-4, skipping the consent decision. <em>Outcome:</em> Alternative-success.</p>

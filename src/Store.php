@@ -85,6 +85,21 @@ final class Store
             )
         SQL);
 
+        // One row per session, at most — a visitor who submits the dialog
+        // twice (e.g. a double-tap) overwrites rather than errors, via
+        // saveEvaluation()'s INSERT OR REPLACE below. ON DELETE CASCADE so
+        // pruneOrphanedSessions()/resetAll() deleting a session (possible
+        // even at turn_count=0 — "End session" is always available and
+        // shows this dialog) never trips the FK constraint.
+        $this->pdo->exec(<<<SQL
+            CREATE TABLE IF NOT EXISTS session_evaluations (
+                session_id  TEXT PRIMARY KEY REFERENCES sessions(id) ON DELETE CASCADE,
+                answers     TEXT NOT NULL,
+                feedback    TEXT,
+                created_at  TEXT NOT NULL
+            )
+        SQL);
+
         $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_sessions_display ON sessions(origin, displayable, last_active_at)');
 
         // Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php):
@@ -213,6 +228,60 @@ final class Store
     {
         $stmt = $this->pdo->prepare('UPDATE sessions SET title = :t WHERE id = :id AND title IS NULL');
         $stmt->execute(['t' => $title, 'id' => $id]);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session evaluation
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Records the end-of-session feedback dialog's answers. Always-skippable
+     * by design (see dojo.js), so an empty submission is possible — that's
+     * treated as nothing to store rather than an empty row, and an unknown
+     * session is likewise a no-op: both return false so the caller (the
+     * evaluate endpoint) can distinguish "nothing written" from "written."
+     * $answers is a flat [questionKey => 1..5] map, already validated by the
+     * caller against config.php's EVAL_QUESTIONS/EVAL_SCALE_SIZE.
+     */
+    public function saveEvaluation(string $sessionId, array $answers, ?string $feedback): bool
+    {
+        if ($answers === [] && ($feedback === null || $feedback === '')) {
+            return false;
+        }
+        if ($this->getSession($sessionId) === null) {
+            return false;
+        }
+
+        $stmt = $this->pdo->prepare(
+            'INSERT OR REPLACE INTO session_evaluations (session_id, answers, feedback, created_at)
+             VALUES (:id, :answers, :feedback, :created_at)'
+        );
+        $stmt->execute([
+            'id' => $sessionId,
+            'answers' => json_encode($answers, JSON_UNESCAPED_SLASHES),
+            'feedback' => $feedback === '' ? null : $feedback,
+            'created_at' => self::now(),
+        ]);
+        return true;
+    }
+
+    /** Read-back for tests and the eventual export follow-up (TODO.md) — the app itself is write-only here. */
+    public function getEvaluation(string $sessionId): ?array
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM session_evaluations WHERE session_id = :id');
+        $stmt->execute(['id' => $sessionId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row === false) {
+            return null;
+        }
+        return [
+            'sessionId' => $row['session_id'],
+            'answers' => json_decode($row['answers'], true),
+            'feedback' => $row['feedback'],
+            'createdAt' => $row['created_at'],
+        ];
     }
 
     /*
@@ -714,7 +783,7 @@ final class Store
         ];
     }
 
-    /** Empties every table (FK-safe order: exchanges before sessions). Returns the counts deleted. */
+    /** Empties every table (FK-safe order: exchanges before sessions — session_evaluations cascades). Returns the counts deleted. */
     public function resetAll(): array
     {
         $counts = $this->getCounts();

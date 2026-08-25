@@ -361,6 +361,71 @@ main {
 }
 #consent-confirm:disabled { opacity: 0.5; }
 
+/* End-of-session feedback dialog — same in-flow dark-card treatment as
+   #retention above (not #playbook's absolute-centered card: two 5-way
+   scales plus a textarea run taller than fits centered on a small phone). */
+#eval-dialog {
+    position: relative;
+    z-index: 11;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #f2f2f2;
+    color-scheme: dark;
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    /* Two 5-way scales plus a textarea run taller than the fixed-viewport
+       page (body is 100dvh, nothing scrolls except #history) has room for
+       below the header — same overflow-y:auto escape hatch #history uses,
+       so Send/Skip stay reachable instead of clipping off-screen. */
+    max-height: 70dvh;
+    overflow-y: auto;
+}
+
+#eval-heading {
+    margin: 0.25rem 0 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #fefefe;
+}
+
+.eval-question { border: none; margin: 0 0 1rem; padding: 0; }
+.eval-question legend { padding: 0 0 0.4rem; font-weight: 600; }
+
+.eval-scale-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin: 0.4rem 0;
+    line-height: 1.35;
+}
+.eval-scale-option input { margin-top: 0.2rem; width: 1.2rem; height: 1.2rem; flex-shrink: 0; }
+
+#eval-feedback-label { display: block; margin: 0.5rem 0 0.4rem; font-weight: 600; }
+
+#eval-feedback {
+    width: 100%;
+    min-height: 4rem;
+    padding: 0.5rem;
+    font: inherit;
+    color: inherit;
+    background: #262626;
+    border: 1px solid #333;
+    border-radius: 0.5rem;
+    resize: vertical;
+}
+
+#eval-actions { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+
+#eval-skip, #eval-submit {
+    flex: 1;
+    padding: 0.65rem;
+    font: inherit;
+    border: none;
+    border-radius: 0.5rem;
+}
+#eval-skip { background: #333; color: #f2f2f2; }
+#eval-submit { background: var(--accent); color: #fff; }
+
 /* QR-reply flow: non-editable quote of the AI response being replied to,
    shown above #composer-row. Never inserted into the textarea (never counted
    against CONTRIBUTION_MAX_CHARS) — see dojo.js's showReplyQuote/hideReplyQuote. */

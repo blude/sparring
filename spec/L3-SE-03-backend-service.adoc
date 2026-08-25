@@ -59,6 +59,12 @@ The element shall reject excess requests, over-length contributions, and over-lo
 _Success criteria (qualitative):_ A rejected request affects only its own session. +
 _Satisfies:_ xref:L2-system-design-concept.adoc#SG-04[SG-04 Run unattended and absorb misuse without operator]
 
+=== [[G-07]]G-07 Capture optional session feedback without gating anything
+
+The element shall record whatever rating and open-feedback a visitor submits at session end, and shall accept a partial or empty submission the same as a complete one. +
+_Success criteria (qualitative):_ A submission carrying no answers at all is accepted and simply stored as nothing to record, not rejected. +
+_Satisfies:_ xref:L2-system-design-concept.adoc#SG-09[SG-09 Collect an optional visitor self-report at session]
+
 '''
 
 == Use cases
@@ -211,6 +217,19 @@ _Detail level:_ Narrative
 
 Called once per session by <<TI-06,TI-06 Refine a session title>>, after the session's first exchange exists. Attempts a short (≤38 character) title via <<TO-02,TO-02 Request a classification>> with a title-generation instruction; on any failure (timeout, malformed response, or any other exception) falls back to the same trim-based derivation <<TF-05,TF-05 Derive a scenario statement>> uses for the scenario statement, just capped at 38 characters instead of <<TF-05,TF-05 Derive a scenario statement>>'s own bound. Either path always produces a usable title — there is no "couldn't generate one" outcome from the caller's point of view. Writes the result to <<E-01.12,E-01.12 title>> once and never recomputes it: called again for a session that already has one, it returns the stored value unchanged rather than repeating the provider call. No goal relation: like <<TF-04,TF-04 Assemble display material>> in xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client], this is presentation logic serving xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client]'s header, not a stated business goal.
 
+=== [[TF-08]]TF-08 Record a session evaluation
+
+_Detail level:_ Stepwise +
+_Achieves:_ <<G-07,G-07 Capture optional session feedback without gating>>
+
+- *[[FS-08-1]]FS-08-1* _(Data-operation)_ Discard any rating answer whose question key isn't one of the configured set, or whose value falls outside the configured scale. A caller sending a stale or tampered question set loses only the parts that don't fit, not the whole submission.
+- *[[FS-08-2]]FS-08-2* _(Data-operation)_ If nothing survives <<FS-08-1,FS-08-1>> and no feedback text was supplied, stop without writing anything.
+- *[[FS-08-3]]FS-08-3* _(Entity-access)_ Otherwise, write the surviving answers and any feedback text to <<E-04,E-04 Session evaluation>>, replacing a prior submission for the same session if one exists.
+
+*Alternative flows*
+
+- *[[FA-08-1]]FA-08-1* _(extends <<FS-08-3,FS-08-3>>)_ The session identifier is unknown. Nothing is written. _Outcome:_ Terminate.
+
 '''
 
 == Technical interfaces (inbound)
@@ -292,6 +311,18 @@ _Error cases:_
 - Session unknown.
 - Malformed request.
 - No exchange yet exists for the session — the caller normally only invokes this after the first exchange completes.
+
+=== [[TI-07]]TI-07 Submit a session evaluation
+
+_Call type:_ Synchronous +
+_Calling elements:_ xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] (xref:L3-SE-01-input-client.adoc#TO-05[TO-05 Submit a session evaluation]) +
+_Input:_ Session identifier (string, required), rating answers (object, optional, may be empty), open-feedback text (string, optional). +
+_Output:_ None. +
+_Action:_ Calls <<TF-08,TF-08 Record a session evaluation>> and returns immediately; the caller doesn't wait on the result either way (xref:L3-SE-01-input-client.adoc#TF-07[TF-07 Present the session evaluation] in xref:L3-SE-01-input-client.adoc[SE-01 Input client]'s own element design). +
+_Error cases:_
+
+- Session unknown.
+- Malformed request.
 
 '''
 
@@ -376,6 +407,21 @@ _Persistence:_ Transient. Reset in place on expiry rather than swept.
 |===
 
 _Purely technical, with no L1 business entity counterpart._
+
+=== [[E-04]]E-04 Session evaluation
+
+_Persistence:_ Persistent
+
+[options="header"]
+|===
+| ID | Attribute | Type | Required | Description
+| [[E-04.1]]E-04.1 | sessionId | string | required | Reference to <<E-01.1,E-01.1 sessionId>>. At most one row per session — a resubmission replaces the prior one rather than adding another.
+| [[E-04.2]]E-04.2 | answers | object | required | Rating value per configured question key, already filtered to the configured set and scale by <<TF-08,TF-08 Record a session evaluation>>. May be empty.
+| [[E-04.3]]E-04.3 | feedback | string | optional | Open-ended text. Absent when none was given.
+| [[E-04.4]]E-04.4 | createdAt | datetime | required | When the submission was recorded.
+|===
+
+_No L1 business entity counterpart — like <<E-03,E-03 Rate limit window>>, this exists to support xref:L2-system-design-concept.adoc#SG-09[SG-09 Collect an optional visitor self-report at session], which is itself deliberately secondary material (xref:L1-solution-design-concept.adoc#BG-04[BG-04 Produce a record of public interactions as secondary]), not elevated to a first-class business record the way <<E-01,E-01 Session>>/<<E-02,E-02 Exchange>> are._
 
 '''
 

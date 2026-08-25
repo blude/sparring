@@ -31,6 +31,7 @@
 <li><a href="#_g_04_decide_what_may_be_stored_and_let_the_visitors_own_choice_decide_what_may_be_projected">1.4. G-04 Decide what may be stored, and let the visitor&#8217;s own choice decide what may be projected</a></li>
 <li><a href="#_g_05_keep_the_display_surface_populated">1.5. G-05 Keep the display surface populated</a></li>
 <li><a href="#_g_06_absorb_load_and_misuse_without_failing">1.6. G-06 Absorb load and misuse without failing</a></li>
+<li><a href="#_g_07_capture_optional_session_feedback_without_gating_anything">1.7. G-07 Capture optional session feedback without gating anything</a></li>
 </ul>
 </li>
 <li><a href="#_use_cases">2. Use cases</a>
@@ -48,6 +49,7 @@
 <li><a href="#_tf_05_derive_a_scenario_statement">4.5. TF-05 Derive a scenario statement</a></li>
 <li><a href="#_tf_06_import_pilot_transcripts">4.6. TF-06 Import pilot transcripts</a></li>
 <li><a href="#_tf_07_refine_a_session_title">4.7. TF-07 Refine a session title</a></li>
+<li><a href="#_tf_08_record_a_session_evaluation">4.8. TF-08 Record a session evaluation</a></li>
 </ul>
 </li>
 <li><a href="#_technical_interfaces_inbound">5. Technical interfaces (inbound)</a>
@@ -58,6 +60,7 @@
 <li><a href="#_ti_04_retrieve_display_material">5.4. TI-04 Retrieve display material</a></li>
 <li><a href="#_ti_05_import_pilot_material">5.5. TI-05 Import pilot material</a></li>
 <li><a href="#_ti_06_refine_a_session_title">5.6. TI-06 Refine a session title</a></li>
+<li><a href="#_ti_07_submit_a_session_evaluation">5.7. TI-07 Submit a session evaluation</a></li>
 </ul>
 </li>
 <li><a href="#_technical_interfaces_outbound">6. Technical interfaces (outbound)</a>
@@ -71,6 +74,7 @@
 <li><a href="#_e_01_session">7.1. E-01 Session</a></li>
 <li><a href="#_e_02_exchange">7.2. E-02 Exchange</a></li>
 <li><a href="#_e_03_rate_limit_window">7.3. E-03 Rate limit window</a></li>
+<li><a href="#_e_04_session_evaluation">7.4. E-04 Session evaluation</a></li>
 </ul>
 </li>
 <li><a href="#_quality_requirements">8. Quality requirements</a>
@@ -171,6 +175,14 @@
 <p>The element shall reject excess requests, over-length contributions, and over-long sessions as expected conditions, and shall continue serving other visitors when it does.<br>
 <em>Success criteria (qualitative):</em> A rejected request affects only its own session.<br>
 <em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-04">SG-04 Run unattended and absorb misuse without operator</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_g_07_capture_optional_session_feedback_without_gating_anything"><a class="anchor" href="#_g_07_capture_optional_session_feedback_without_gating_anything"></a>1.7. <a id="G-07"></a>G-07 Capture optional session feedback without gating anything</h3>
+<div class="paragraph">
+<p>The element shall record whatever rating and open-feedback a visitor submits at session end, and shall accept a partial or empty submission the same as a complete one.<br>
+<em>Success criteria (qualitative):</em> A submission carrying no answers at all is accepted and simply stored as nothing to record, not rejected.<br>
+<em>Satisfies:</em> <a href="L2-system-design-concept.html#SG-09">SG-09 Collect an optional visitor self-report at session</a></p>
 </div>
 <hr>
 </div>
@@ -487,6 +499,36 @@ A second distinction the instruction must also get right, found in testing: stat
 <div class="paragraph">
 <p>Called once per session by <a href="#TI-06">TI-06 Refine a session title</a>, after the session&#8217;s first exchange exists. Attempts a short (≤38 character) title via <a href="#TO-02">TO-02 Request a classification</a> with a title-generation instruction; on any failure (timeout, malformed response, or any other exception) falls back to the same trim-based derivation <a href="#TF-05">TF-05 Derive a scenario statement</a> uses for the scenario statement, just capped at 38 characters instead of <a href="#TF-05">TF-05 Derive a scenario statement</a>'s own bound. Either path always produces a usable title — there is no "couldn&#8217;t generate one" outcome from the caller&#8217;s point of view. Writes the result to <a href="#E-01.12">E-01.12 title</a> once and never recomputes it: called again for a session that already has one, it returns the stored value unchanged rather than repeating the provider call. No goal relation: like <a href="#TF-04">TF-04 Assemble display material</a> in <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>, this is presentation logic serving <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s header, not a stated business goal.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_tf_08_record_a_session_evaluation"><a class="anchor" href="#_tf_08_record_a_session_evaluation"></a>4.8. <a id="TF-08"></a>TF-08 Record a session evaluation</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Stepwise<br>
+<em>Achieves:</em> <a href="#G-07">G-07 Capture optional session feedback without gating</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FS-08-1"></a>FS-08-1</strong> <em>(Data-operation)</em> Discard any rating answer whose question key isn&#8217;t one of the configured set, or whose value falls outside the configured scale. A caller sending a stale or tampered question set loses only the parts that don&#8217;t fit, not the whole submission.</p>
+</li>
+<li>
+<p><strong><a id="FS-08-2"></a>FS-08-2</strong> <em>(Data-operation)</em> If nothing survives <a href="#FS-08-1">FS-08-1</a> and no feedback text was supplied, stop without writing anything.</p>
+</li>
+<li>
+<p><strong><a id="FS-08-3"></a>FS-08-3</strong> <em>(Entity-access)</em> Otherwise, write the surviving answers and any feedback text to <a href="#E-04">E-04 Session evaluation</a>, replacing a prior submission for the same session if one exists.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative flows</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FA-08-1"></a>FA-08-1</strong> <em>(extends <a href="#FS-08-3">FS-08-3</a>)</em> The session identifier is unknown. Nothing is written. <em>Outcome:</em> Terminate.</p>
+</li>
+</ul>
+</div>
 <hr>
 </div>
 </div>
@@ -636,6 +678,27 @@ Unlike the earlier design this superseded, the response&#8217;s condition list i
 </li>
 <li>
 <p>No exchange yet exists for the session — the caller normally only invokes this after the first exchange completes.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ti_07_submit_a_session_evaluation"><a class="anchor" href="#_ti_07_submit_a_session_evaluation"></a>5.7. <a id="TI-07"></a>TI-07 Submit a session evaluation</h3>
+<div class="paragraph">
+<p><em>Call type:</em> Synchronous<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> (<a href="L3-SE-01-input-client.html#TO-05">TO-05 Submit a session evaluation</a>)<br>
+<em>Input:</em> Session identifier (string, required), rating answers (object, optional, may be empty), open-feedback text (string, optional).<br>
+<em>Output:</em> None.<br>
+<em>Action:</em> Calls <a href="#TF-08">TF-08 Record a session evaluation</a> and returns immediately; the caller doesn&#8217;t wait on the result either way (<a href="L3-SE-01-input-client.html#TF-07">TF-07 Present the session evaluation</a> in <a href="L3-SE-01-input-client.html">SE-01 Input client</a>'s own element design).<br>
+<em>Error cases:</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Session unknown.</p>
+</li>
+<li>
+<p>Malformed request.</p>
 </li>
 </ul>
 </div>
@@ -929,6 +992,63 @@ The pair is stored as one record rather than as two turn records. This follows t
 </table>
 <div class="paragraph">
 <p><em>Purely technical, with no L1 business entity counterpart.</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_e_04_session_evaluation"><a class="anchor" href="#_e_04_session_evaluation"></a>7.4. <a id="E-04"></a>E-04 Session evaluation</h3>
+<div class="paragraph">
+<p><em>Persistence:</em> Persistent</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ID</th>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-04.1"></a>E-04.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sessionId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to <a href="#E-01.1">E-01.1 sessionId</a>. At most one row per session — a resubmission replaces the prior one rather than adding another.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-04.2"></a>E-04.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">answers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rating value per configured question key, already filtered to the configured set and scale by <a href="#TF-08">TF-08 Record a session evaluation</a>. May be empty.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-04.3"></a>E-04.3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">feedback</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open-ended text. Absent when none was given.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-04.4"></a>E-04.4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createdAt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">datetime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When the submission was recorded.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em>No L1 business entity counterpart — like <a href="#E-03">E-03 Rate limit window</a>, this exists to support <a href="L2-system-design-concept.html#SG-09">SG-09 Collect an optional visitor self-report at session</a>, which is itself deliberately secondary material (<a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary</a>), not elevated to a first-class business record the way <a href="#E-01">E-01 Session</a>/<a href="#E-02">E-02 Exchange</a> are.</em></p>
 </div>
 <hr>
 </div>

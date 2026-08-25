@@ -70,6 +70,10 @@ window.SparringDojoOutcome = {
     var replyQuoteEl = document.getElementById('reply-quote');
     var replyQuoteTextEl = document.getElementById('reply-quote-text');
     var replyQuoteCancelBtn = document.getElementById('reply-quote-cancel');
+    var evalDialogEl = document.getElementById('eval-dialog');
+    var evalFeedbackEl = document.getElementById('eval-feedback');
+    var evalSkipBtn = document.getElementById('eval-skip');
+    var evalSubmitBtn = document.getElementById('eval-submit');
 
     var sessionId = null;
     var statusTurnEl = null; // the one managed "status" entry in #history, if any (see setHistoryStatus)
@@ -115,13 +119,12 @@ window.SparringDojoOutcome = {
         if (event.key === 'Escape') closePopover();
     });
 
-    // TODO: "End session" should end the session early and show the
-    // feedback/evaluation dialog, not just bounce home. For now it still
-    // navigates back to the home screen — confirmation dialog unchanged.
     newSessionBtn.addEventListener('click', function () {
         if (window.confirm(window.STRINGS.dojo.confirmEndSession)) {
             sessionStorage.removeItem(DRAFT_KEY); // ending session should not leave next session's composer pre-filled
-            window.location.href = '/';
+            showEvalDialog(sessionId, function () {
+                window.location.href = '/';
+            });
         }
     });
 
@@ -343,6 +346,56 @@ window.SparringDojoOutcome = {
         if (typeof turnsRemaining === 'number') {
             composerEl.dataset.turnsRemaining = String(turnsRemaining);
         }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | End-of-session feedback dialog (TODO.md "Session Evaluation")
+    |--------------------------------------------------------------------------
+    |
+    | Always skippable — no field is required. Shown at most once per session
+    | per browser (sessionStorage flag, same idiom as DRAFT_KEY), so resuming
+    | an already-complete session on reload doesn't re-show it. Answers/
+    | feedback POST fire-and-forget to /api/evaluate — a failed request
+    | shouldn't block the visitor from leaving, same as the /api/title call.
+    */
+    function evalShownKey(id) {
+        return 'sparring-eval-shown-' + id;
+    }
+
+    function showEvalDialog(id, onClose) {
+        if (!evalDialogEl || sessionStorage.getItem(evalShownKey(id))) {
+            if (onClose) onClose();
+            return;
+        }
+        sessionStorage.setItem(evalShownKey(id), '1');
+        evalDialogEl.hidden = false;
+        newSessionBtn.disabled = true; // a second "End session" press while this is open would abandon whatever's typed here
+
+        function close() {
+            evalDialogEl.hidden = true;
+            newSessionBtn.disabled = false;
+            evalSkipBtn.removeEventListener('click', onSkip);
+            evalSubmitBtn.removeEventListener('click', onSubmit);
+            if (onClose) onClose();
+        }
+        function onSkip() {
+            close();
+        }
+        function onSubmit() {
+            var answers = {};
+            evalDialogEl.querySelectorAll('fieldset[data-question]').forEach(function (fieldsetEl) {
+                var checked = fieldsetEl.querySelector('input[type="radio"]:checked');
+                if (checked) answers[fieldsetEl.dataset.question] = Number(checked.value);
+            });
+            fetch('/api/evaluate', {
+                method: 'POST',
+                body: JSON.stringify({ sessionId: id, answers: answers, feedback: evalFeedbackEl.value.trim() }),
+            }).catch(function () {});
+            close();
+        }
+        evalSkipBtn.addEventListener('click', onSkip);
+        evalSubmitBtn.addEventListener('click', onSubmit);
     }
 
     /*
@@ -570,6 +623,7 @@ window.SparringDojoOutcome = {
                 }
                 if (data.sessionState === 'complete') {
                     window.SparringSfx.playSequence('sessionEnd');
+                    showEvalDialog(sessionId); // no onClose — finished conversation stays visible
                 } else {
                     setComposerEnabled(true);
                     window.SparringSfx.play('parry');
@@ -580,6 +634,7 @@ window.SparringDojoOutcome = {
                 clearOptimisticTurn();
                 applySessionState('complete');
                 window.SparringSfx.playSequence('sessionEnd');
+                showEvalDialog(sessionId);
                 break;
 
             // Resolved moderation gate: reject-and-edit, session stays open. Every

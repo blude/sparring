@@ -71,6 +71,21 @@ const SESSION_TTL_HOURS = 6;           // undefined in spec; drives "expired" fo
 
 /*
 |--------------------------------------------------------------------------
+| Session evaluation (TF-08, UI-01)
+|--------------------------------------------------------------------------
+|
+| Structure only — the visible question/label text lives in i18n/{locale}.php
+| under 'dojo.eval.q.<key>.*', keyed by these. Text is easily revised later
+| without touching this array; the array is what the dialog and the backend
+| validation both iterate.
+|
+*/
+
+const EVAL_QUESTIONS = ['challenge', 'knowledge'];
+const EVAL_SCALE_SIZE = 5; // 1..5, custom label per option
+
+/*
+|--------------------------------------------------------------------------
 | Rate limiting (TF-03, SC-04)
 |--------------------------------------------------------------------------
 */

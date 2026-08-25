@@ -73,6 +73,24 @@ assert($store->getSession($titleSession['id'])['title'] === 'What is a wicked pr
 
 /*
 |--------------------------------------------------------------------------
+| saveEvaluation: always-skippable end-of-session feedback
+|--------------------------------------------------------------------------
+*/
+
+$evalSession = $store->createSession('live');
+assert($store->getEvaluation($evalSession['id']) === null);
+assert($store->saveEvaluation($evalSession['id'], ['challenge' => 4], 'Sparring pushed back hard.') === true);
+$evaluation = $store->getEvaluation($evalSession['id']);
+assert($evaluation['answers'] === ['challenge' => 4]);
+assert($evaluation['feedback'] === 'Sparring pushed back hard.');
+assert($store->saveEvaluation($evalSession['id'], [], null) === false); // nothing to write is a no-op, not an empty row
+assert($store->getEvaluation($evalSession['id'])['feedback'] === 'Sparring pushed back hard.'); // unchanged by the no-op above
+assert($store->saveEvaluation('does-not-exist', ['challenge' => 3], null) === false); // unknown session, no write
+assert($store->saveEvaluation($evalSession['id'], ['challenge' => 5], 'a resubmit overwrites') === true);
+assert($store->getEvaluation($evalSession['id'])['answers'] === ['challenge' => 5]); // INSERT OR REPLACE, not an error
+
+/*
+|--------------------------------------------------------------------------
 | exchange + turn count
 |--------------------------------------------------------------------------
 */
@@ -152,10 +170,10 @@ assert(count($store->getDisplayableSessions('pilot', 10)) === 1);
 */
 
 $allSessionIds = array_column($store->getAllSessions(), 'id');
-foreach ([$session['id'], $consentOnlySession['id'], $titleSession['id'], $replierSession['id'], $pilotSession['id']] as $id) {
+foreach ([$session['id'], $consentOnlySession['id'], $titleSession['id'], $evalSession['id'], $replierSession['id'], $pilotSession['id']] as $id) {
     assert(in_array($id, $allSessionIds, true));
 }
-assert(count($allSessionIds) === 5); // every session created so far, live and pilot alike
+assert(count($allSessionIds) === 6); // every session created so far, live and pilot alike
 $allExchanges = $store->getAllExchanges();
 assert(count($allExchanges) === 6); // 2 on $session, 1 on $consentOnlySession, 2 on $replierSession, 1 on $pilotSession
 
@@ -196,7 +214,7 @@ assert($b3 === ['allowed' => true, 'remaining' => 4]);
 */
 
 $before = $store->getCounts();
-assert($before['sessions'] === 5); // $session, $consentOnlySession, $titleSession, $replierSession, $pilotSession created above
+assert($before['sessions'] === 6); // $session, $consentOnlySession, $titleSession, $evalSession, $replierSession, $pilotSession created above
 assert($before['exchanges'] === 6); // 2 on $session, 1 on $consentOnlySession, 2 on $replierSession, 1 on $pilotSession
 assert($before['rateLimitWindows'] === 2); // $hash + $boundaryHash above
 $deleted = $store->resetAll();
@@ -218,11 +236,17 @@ $orphan = $store->createSession('live'); // zero exchanges — orphan candidate
 $busy = $store->createSession('live');
 $store->appendExchange($busy['id'], 'a contribution', 'a response');
 
+// A zero-turn session can still carry an evaluation — "End session" is
+// always available and shows the feedback dialog regardless of turn count
+// (UI-01). Pruning it must cascade the evaluation row, not FK-violate.
+$store->saveEvaluation($orphan['id'], [], 'left before typing anything');
+
 assert($store->countOrphanedSessions(999999) === 0); // too recent to count as stale — never touches an in-progress visitor
 assert($store->countOrphanedSessions(-3600) === 1); // cutoff pushed into the future — only the zero-exchange session qualifies
 
 assert($store->pruneOrphanedSessions(-3600) === 1);
 assert($store->getSession($orphan['id']) === null);
+assert($store->getEvaluation($orphan['id']) === null); // cascaded, not orphaned in its own table
 assert($store->getSession($busy['id']) !== null); // has an exchange, never an orphan regardless of age
 
 // --- curriculum search (poor man's RAG ingestion, bin/import_curriculum.php) ---
