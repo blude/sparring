@@ -492,7 +492,7 @@ main {
 #eval-go-to-start { margin-top: 0.5rem; }
 
 #eval-success { padding: 0.5rem 0 0; }
-#eval-success-message { margin: 0 0 0.75rem; }
+#eval-success-message { margin: 0 0 0.75rem; color: #ccc; line-height: 1.35; } /* same text style as #confirm-description */
 
 /* QR-reply flow: non-editable quote of the AI response being replied to,
    shown above #composer-row. Never inserted into the textarea (never counted
