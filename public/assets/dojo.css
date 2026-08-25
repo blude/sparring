@@ -408,7 +408,7 @@ main {
 }
 
 #eval-heading {
-    margin: 0.25rem 0 0.75rem;
+    margin: 0.25rem 0 0.5rem;
     font-size: 1.125rem;
     font-weight: 700;
     color: #fefefe;
@@ -491,7 +491,6 @@ main {
 #eval-submit, #eval-start-new, #confirm-ok { background: var(--accent); color: #fff; }
 #eval-go-to-start { margin-top: 0.5rem; }
 
-#eval-success { padding: 0.5rem 0 0; }
 #eval-success-message { margin: 0 0 0.75rem; color: #ccc; line-height: 1.35; } /* same text style as #confirm-description */
 
 /* QR-reply flow: non-editable quote of the AI response being replied to,
