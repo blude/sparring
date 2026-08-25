@@ -4,6 +4,28 @@ Generated from git history. Grouped by commit date, newest first.
 
 ## 2026-08-25
 
+- `c48e322` fix(i18n): simplify retention messages
+- `28c6a17` fix(css): adjust eval heading margin
+- `a65720c` style(dojo): match #eval-success-message text style to #confirm-description
+- `9ef769d` feat(dojo): custom confirm dialog for "End this session?"
+- `d46f4b5` style(dojo): center #retention and #eval-dialog instead of bottom-anchoring
+- `b905df6` refactor(css): consolidate playbook tape and adjust color
+- `5790948` style(dojo): subtle drop shadow on #retention and #eval-dialog
+- `66ceb06` style(dojo): overlay #retention the same way as #eval-dialog
+- `f3ab915` style(dojo): 0.75rem gap between eval dialog and viewport bottom edge
+- `96194f5` style(dojo): bottom-align the eval dialog overlay
+- `585445e` style(dojo): overlay the eval dialog instead of pushing content
+- `910c7f2` fix(css): adjust success message spacing and alignment
+- `e2cb892` fix(dojo): show the confirmation screen, not a redirect, on a repeat End session
+- `035dc07` fix(dojo): don't lock out the eval dialog on a reload before completing it
+- `6571b43` feat(dojo): Skip also confirms with the two-action screen
+- `7ce35bc` style(dojo): glove-icon rating widget for eval questions
+- `dc2f8b3` style(dojo): match "Go back to start" to the Skip button
+- `9112ceb` fix(dojo): keep the evaluation confirmation on the dojo screen
+- `32c0ba5` fix(dojo): keep evaluation feedback from being lost on submit
+- `2099aae` feat(dojo): add end-of-session evaluation dialog
+- `64a565c` feat(error): add shrug kaomoji to error pages
+- `a129bfb` docs: update CHANGELOG through 1f2b2f6, bump version to 0.17.0
 - `1f2b2f6` build(deploy): add deploy_curriculum.sh script
 
 ## 2026-08-24

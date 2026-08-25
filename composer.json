@@ -2,7 +2,7 @@
     "name": "sparring/exhibition-object",
     "description": "Sparring exhibition object backend (SE-03) — PHP, SQLite, switchable LLM provider",
     "license": "MIT",
-    "version": "0.17.0",
+    "version": "0.18.0",
     "require": {
         "php": ">=8.2",
         "anthropic-ai/sdk": "^0.7",
