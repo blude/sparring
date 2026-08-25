@@ -361,17 +361,18 @@ main {
 }
 #consent-confirm:disabled { opacity: 0.5; }
 
-/* End-of-session feedback dialog — absolute-centered overlay, same pattern
-   as #playbook (anchored to main, position:relative), so it sits over the
-   finished conversation/composer instead of pushing them around. z-index
-   above #retention's 11: the two never show together in practice, but if
-   they ever did, the dialog reporting on a session that's already ending
-   should win. */
+/* End-of-session feedback dialog — absolute overlay anchored to main
+   (position:relative), same base pattern as #playbook, so it sits over the
+   finished conversation/composer instead of pushing them around. Bottom-
+   aligned rather than centered, closer to the composer it's replacing.
+   z-index above #retention's 11: the two never show together in practice,
+   but if they ever did, the dialog reporting on a session that's already
+   ending should win. */
 #eval-dialog {
     position: absolute;
-    top: 50%;
+    bottom: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     z-index: 12;
     width: min(92vw, 360px);
     background: #1a1a1a;
