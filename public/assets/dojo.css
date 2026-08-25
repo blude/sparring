@@ -244,32 +244,28 @@ main {
 
 #playbook-heading { margin: 0; font-size: 1.125rem; font-weight: 700; color: #666; text-align: center; }
 
-#playbook-heading::before {
-    content: "";
-    display: block;
-    width: 3rem;
-    height: 1rem;
-    background: #ccc;
-    position: absolute;
-    left: 1.5rem;
-    top: -0.5rem;
-    opacity: 0.8;
-    transform: rotate(-2deg);
-    border-radius: 1px;
-}
-
+#playbook-heading::before,
 #playbook-heading::after {
     content: "";
     display: block;
     width: 3rem;
     height: 1rem;
-    background: #ccc;
+    background: #ddd;
     position: absolute;
+    opacity: 0.8;
+    border-radius: 1px;
+}
+
+#playbook-heading::before {
+    left: 1.5rem;
+    top: -0.5rem;
+    transform: rotate(-2deg);
+}
+
+#playbook-heading::after {
     right: 1.5rem;
     top: -0.5rem;
-    opacity: 0.8;
     transform: rotate(-1deg);
-    border-radius: 1px;
 }
 
 #playbook-rules {
@@ -389,7 +385,7 @@ main {
     border: 1px solid #333;
     color: #f2f2f2;
     color-scheme: dark;
-    border-radius: 0.75rem;
+    border-radius: 1rem;
     padding: 0.75rem;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25); /* lifts the card off the page it's floating over, same as #retention */
     /* Two 5-way scales plus a textarea can still run taller than fits
