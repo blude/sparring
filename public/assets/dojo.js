@@ -76,6 +76,7 @@ window.SparringDojoOutcome = {
     var evalSkipBtn = document.getElementById('eval-skip');
     var evalSubmitBtn = document.getElementById('eval-submit');
     var evalSuccessEl = document.getElementById('eval-success');
+    var evalSuccessMessageEl = document.getElementById('eval-success-message');
     var evalStartNewBtn = document.getElementById('eval-start-new');
     var evalGoToStartBtn = document.getElementById('eval-go-to-start');
 
@@ -389,15 +390,22 @@ window.SparringDojoOutcome = {
         evalDialogEl.hidden = false;
         newSessionBtn.disabled = true; // a second "End session" press while this is open would abandon whatever's typed here
 
-        function close() {
-            evalDialogEl.hidden = true;
-            newSessionBtn.disabled = false;
+        // Shared by Skip and Submit — both end the form the same way, just
+        // with different copy (and Submit alone has a request in flight).
+        // Neither actually leaves here: one of onStartNew/onGoToStart below
+        // does that, once the visitor picks. That pause is also what gives
+        // Submit's fetch time to land before anything navigates away.
+        function showSuccess(message) {
+            if (message) evalSuccessMessageEl.textContent = message;
+            evalFormEl.hidden = true;
+            evalSuccessEl.hidden = false;
             evalSkipBtn.removeEventListener('click', onSkip);
             evalSubmitBtn.removeEventListener('click', onSubmit);
-            if (onClose) onClose();
+            evalStartNewBtn.addEventListener('click', onStartNew);
+            evalGoToStartBtn.addEventListener('click', onGoToStart);
         }
         function onSkip() {
-            close();
+            showSuccess(window.STRINGS.dojo.evalSkipMessage);
         }
         function onSubmit() {
             var answers = {};
@@ -408,22 +416,13 @@ window.SparringDojoOutcome = {
             // keepalive: true so the request survives if the visitor navigates
             // away right after pressing Send — without it, the browser can
             // abort an in-flight fetch on navigation, silently dropping the
-            // submission (what "Start new session" below now waits out).
+            // submission.
             fetch('/api/evaluate', {
                 method: 'POST',
                 keepalive: true,
                 body: JSON.stringify({ sessionId: id, answers: answers, feedback: evalFeedbackEl.value.trim() }),
             }).catch(function () {});
-
-            // Swap to the success view instead of navigating immediately —
-            // one of the two presses below is what actually leaves, giving
-            // the request above time to land first either way.
-            evalFormEl.hidden = true;
-            evalSuccessEl.hidden = false;
-            evalSkipBtn.removeEventListener('click', onSkip);
-            evalSubmitBtn.removeEventListener('click', onSubmit);
-            evalStartNewBtn.addEventListener('click', onStartNew);
-            evalGoToStartBtn.addEventListener('click', onGoToStart);
+            showSuccess(); // keeps the server-rendered "Feedback received…" copy
         }
         function onStartNew() {
             // Reopens the dojo surface fresh, in place — no session

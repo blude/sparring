@@ -77,6 +77,7 @@ return [
     'dojo.eval.submit' => 'Send feedback',
     'dojo.eval.skip' => 'Skip',
     'dojo.eval.successMessage' => 'Feedback received. Thank you for sparring!',
+    'dojo.eval.skipMessage' => 'Thanks for sparring!',
     'dojo.eval.startNewSession' => 'Start new session',
     'dojo.eval.goToStart' => 'Go back to start',
 
