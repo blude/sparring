@@ -430,6 +430,21 @@ main {
 #eval-success { text-align: center; padding: 0.5rem 0; }
 #eval-success-message { margin: 0 0 0.75rem; }
 
+/* Secondary/subtle — the primary action is staying (Start new session);
+   leaving to the start screen is available but deliberately less prominent. */
+#eval-go-to-start {
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.4rem;
+    background: none;
+    border: none;
+    font: inherit;
+    font-size: 0.85rem;
+    color: #aaa;
+    text-decoration: underline;
+}
+
 /* QR-reply flow: non-editable quote of the AI response being replied to,
    shown above #composer-row. Never inserted into the textarea (never counted
    against CONTRIBUTION_MAX_CHARS) — see dojo.js's showReplyQuote/hideReplyQuote. */

@@ -77,6 +77,7 @@ window.SparringDojoOutcome = {
     var evalSubmitBtn = document.getElementById('eval-submit');
     var evalSuccessEl = document.getElementById('eval-success');
     var evalStartNewBtn = document.getElementById('eval-start-new');
+    var evalGoToStartBtn = document.getElementById('eval-go-to-start');
 
     var sessionId = null;
     var statusTurnEl = null; // the one managed "status" entry in #history, if any (see setHistoryStatus)
@@ -402,19 +403,26 @@ window.SparringDojoOutcome = {
             }).catch(function () {});
 
             // Swap to the success view instead of navigating immediately —
-            // the visitor's own "Start new session" press is what leaves,
-            // giving the request above time to actually land first.
+            // one of the two presses below is what actually leaves, giving
+            // the request above time to land first either way.
             evalFormEl.hidden = true;
             evalSuccessEl.hidden = false;
             evalSkipBtn.removeEventListener('click', onSkip);
             evalSubmitBtn.removeEventListener('click', onSubmit);
             evalStartNewBtn.addEventListener('click', onStartNew);
+            evalGoToStartBtn.addEventListener('click', onGoToStart);
         }
         function onStartNew() {
-            // Session is finished regardless of how the dialog was reached
-            // (turn limit or a deliberate "End session"), so this always
-            // navigates home — unlike Skip, it doesn't defer to onClose.
+            // Reopens the dojo surface fresh, in place — no session
+            // identifier in the address, same as UC-04's own outcome, just
+            // without a round trip through the start screen.
             evalStartNewBtn.removeEventListener('click', onStartNew);
+            evalGoToStartBtn.removeEventListener('click', onGoToStart);
+            window.location.href = '/dojo';
+        }
+        function onGoToStart() {
+            evalStartNewBtn.removeEventListener('click', onStartNew);
+            evalGoToStartBtn.removeEventListener('click', onGoToStart);
             window.location.href = '/';
         }
         evalSkipBtn.addEventListener('click', onSkip);

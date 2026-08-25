@@ -99,14 +99,17 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
       </div>
     </div>
     <?php
-      /* Shown in #eval-form's place after Send — waiting for this explicit
-        "Start new session" press (rather than navigating immediately) is
-        what gives the fire-and-forget POST above time to actually land;
-        an immediate navigate away can abort an in-flight fetch. */
+      /* Shown in #eval-form's place after Send — waiting for one of these
+        two explicit presses (rather than navigating immediately) is what
+        gives the fire-and-forget POST above time to actually land; an
+        immediate navigate away can abort an in-flight fetch. "Start new
+        session" reopens the dojo surface fresh, in place; "Go back to
+        start" is the only one of the two that leaves it. */
     ?>
     <div id="eval-success" hidden>
       <p id="eval-success-message"><?= t('dojo.eval.successMessage') ?></p>
       <button id="eval-start-new" type="button"><?= t('dojo.eval.startNewSession') ?></button>
+      <button id="eval-go-to-start" type="button"><?= t('dojo.eval.goToStart') ?></button>
     </div>
   </div>
 

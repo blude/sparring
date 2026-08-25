@@ -71,6 +71,7 @@ return [
     'dojo.eval.skip' => 'Überspringen',
     'dojo.eval.successMessage' => 'Feedback erhalten. Danke fürs Sparring!',
     'dojo.eval.startNewSession' => 'Neue Sitzung starten',
+    'dojo.eval.goToStart' => 'Zurück zum Start',
 
     'dojo.js.outcomeRateLimited' => 'Zu viele Anfragen — warte einen Moment und versuch es erneut.',
     'dojo.js.outcomeRejected' => 'Diese Nachricht ist leer oder zu lang — bearbeite sie und versuch es erneut.',
