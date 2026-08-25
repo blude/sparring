@@ -71,9 +71,12 @@ window.SparringDojoOutcome = {
     var replyQuoteTextEl = document.getElementById('reply-quote-text');
     var replyQuoteCancelBtn = document.getElementById('reply-quote-cancel');
     var evalDialogEl = document.getElementById('eval-dialog');
+    var evalFormEl = document.getElementById('eval-form');
     var evalFeedbackEl = document.getElementById('eval-feedback');
     var evalSkipBtn = document.getElementById('eval-skip');
     var evalSubmitBtn = document.getElementById('eval-submit');
+    var evalSuccessEl = document.getElementById('eval-success');
+    var evalStartNewBtn = document.getElementById('eval-start-new');
 
     var sessionId = null;
     var statusTurnEl = null; // the one managed "status" entry in #history, if any (see setHistoryStatus)
@@ -388,11 +391,31 @@ window.SparringDojoOutcome = {
                 var checked = fieldsetEl.querySelector('input[type="radio"]:checked');
                 if (checked) answers[fieldsetEl.dataset.question] = Number(checked.value);
             });
+            // keepalive: true so the request survives if the visitor navigates
+            // away right after pressing Send — without it, the browser can
+            // abort an in-flight fetch on navigation, silently dropping the
+            // submission (what "Start new session" below now waits out).
             fetch('/api/evaluate', {
                 method: 'POST',
+                keepalive: true,
                 body: JSON.stringify({ sessionId: id, answers: answers, feedback: evalFeedbackEl.value.trim() }),
             }).catch(function () {});
-            close();
+
+            // Swap to the success view instead of navigating immediately —
+            // the visitor's own "Start new session" press is what leaves,
+            // giving the request above time to actually land first.
+            evalFormEl.hidden = true;
+            evalSuccessEl.hidden = false;
+            evalSkipBtn.removeEventListener('click', onSkip);
+            evalSubmitBtn.removeEventListener('click', onSubmit);
+            evalStartNewBtn.addEventListener('click', onStartNew);
+        }
+        function onStartNew() {
+            // Session is finished regardless of how the dialog was reached
+            // (turn limit or a deliberate "End session"), so this always
+            // navigates home — unlike Skip, it doesn't defer to onClose.
+            evalStartNewBtn.removeEventListener('click', onStartNew);
+            window.location.href = '/';
         }
         evalSkipBtn.addEventListener('click', onSkip);
         evalSubmitBtn.addEventListener('click', onSubmit);

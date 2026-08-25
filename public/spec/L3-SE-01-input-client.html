@@ -556,9 +556,15 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Answer or skip the evaluation prompt</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fill in any subset of the rating questions and the feedback field, then press Send; or press Skip with nothing filled in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fill in any subset of the rating questions and the feedback field, then press Send; or press Skip with nothing filled in. Skip leaves immediately; Send replaces the form with a confirmation message</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-02">UC-02 Contribute a turn</a>, <a href="#UC-04">UC-04 Start a new session deliberately</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">While the evaluation prompt is shown</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Leave the evaluation confirmation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button press</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-02">UC-02 Contribute a turn</a>, <a href="#UC-04">UC-04 Start a new session deliberately</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only after Send, on the confirmation message it produces</p></td>
 </tr>
 </tbody>
 </table>
@@ -716,7 +722,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <em>Achieves:</em> <a href="#G-06">G-06 Offer a light, always-skippable way to react</a></p>
 </div>
 <div class="paragraph">
-<p>Shown at most once per session — a flag kept in the browser (not <a href="#E-01">E-01 Session view state</a>, since it must survive nothing more than a reload of the same tab) guards against a resumed already-complete session showing it again. Every rating question and the open-feedback field are optional; a Skip action and a Send action are both available from the first moment the prompt is shown, and both dismiss it. Send calls <a href="#TO-05">TO-05 Submit a session evaluation</a> with whichever fields were filled in (possibly none) and does not wait for the result before dismissing — a failed submission is invisible to the visitor, matching <a href="#TF-06">TF-06 Refine the session title</a>'s best-effort treatment of a non-essential background call. Skip calls nothing. Which rating questions are offered, and how many points each scale has, is fixed in code ahead of time — a fixed set authored in code, same as <a href="#TF-02">TF-02 Record the consent decision</a>'s opening-prompt identifiers — and this function presents whatever set it&#8217;s given, deciding none of it itself.</p>
+<p>Shown at most once per session — a flag kept in the browser (not <a href="#E-01">E-01 Session view state</a>, since it must survive nothing more than a reload of the same tab) guards against a resumed already-complete session showing it again. Every rating question and the open-feedback field are optional; a Skip action and a Send action are both available from the first moment the prompt is shown. Skip dismisses the prompt immediately and calls nothing. Send calls <a href="#TO-05">TO-05 Submit a session evaluation</a> with whichever fields were filled in (possibly none), without waiting for the result — a failed submission is invisible to the visitor, matching <a href="#TF-06">TF-06 Refine the session title</a>'s best-effort treatment of a non-essential background call — but does not dismiss the prompt itself. Instead it replaces the form with a fixed confirmation message and a "Start new session" action; only pressing that action leaves the surface. This deliberate pause, rather than dismissing immediately, is what gives the background call time to actually reach the network before anything navigates away from under it. Which rating questions are offered, and how many points each scale has, is fixed in code ahead of time — a fixed set authored in code, same as <a href="#TF-02">TF-02 Record the consent decision</a>'s opening-prompt identifiers — and this function presents whatever set it&#8217;s given, deciding none of it itself.</p>
 </div>
 <hr>
 </div>

@@ -76,6 +76,8 @@ return [
     'dojo.eval.feedback.label' => 'What stood out to you?',
     'dojo.eval.submit' => 'Send feedback',
     'dojo.eval.skip' => 'Skip',
+    'dojo.eval.successMessage' => 'Feedback received. Thank you for sparring!',
+    'dojo.eval.startNewSession' => 'Start new session',
 
     'dojo.js.outcomeRateLimited' => 'Too many requests — wait a moment and try again.',
     'dojo.js.outcomeRejected' => 'That message is empty or too long — edit it and try again.',

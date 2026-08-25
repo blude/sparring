@@ -69,6 +69,8 @@ return [
     'dojo.eval.feedback.label' => 'Was ist dir aufgefallen?',
     'dojo.eval.submit' => 'Feedback senden',
     'dojo.eval.skip' => 'Überspringen',
+    'dojo.eval.successMessage' => 'Feedback erhalten. Danke fürs Sparring!',
+    'dojo.eval.startNewSession' => 'Neue Sitzung starten',
 
     'dojo.js.outcomeRateLimited' => 'Zu viele Anfragen — warte einen Moment und versuch es erneut.',
     'dojo.js.outcomeRejected' => 'Diese Nachricht ist leer oder zu lang — bearbeite sie und versuch es erneut.',

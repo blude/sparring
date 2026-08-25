@@ -77,24 +77,36 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
   ?>
   <div id="eval-dialog" hidden>
     <h2 id="eval-heading"><?= t('dojo.eval.heading') ?></h2>
-    <?php foreach (EVAL_QUESTIONS as $q): ?>
-    <fieldset class="eval-question" data-question="<?= $q ?>">
-      <legend><?= t("dojo.eval.q.$q.prompt") ?></legend>
-      <div class="eval-scale">
-        <?php for ($i = 1; $i <= EVAL_SCALE_SIZE; $i++): ?>
-        <label class="eval-scale-option">
-          <input type="radio" name="eval-<?= $q ?>" value="<?= $i ?>">
-          <span><?= t("dojo.eval.q.$q.label.$i") ?></span>
-        </label>
-        <?php endfor; ?>
+    <div id="eval-form">
+      <?php foreach (EVAL_QUESTIONS as $q): ?>
+      <fieldset class="eval-question" data-question="<?= $q ?>">
+        <legend><?= t("dojo.eval.q.$q.prompt") ?></legend>
+        <div class="eval-scale">
+          <?php for ($i = 1; $i <= EVAL_SCALE_SIZE; $i++): ?>
+          <label class="eval-scale-option">
+            <input type="radio" name="eval-<?= $q ?>" value="<?= $i ?>">
+            <span><?= t("dojo.eval.q.$q.label.$i") ?></span>
+          </label>
+          <?php endfor; ?>
+        </div>
+      </fieldset>
+      <?php endforeach; ?>
+      <label id="eval-feedback-label" for="eval-feedback"><?= t('dojo.eval.feedback.label') ?></label>
+      <textarea id="eval-feedback" maxlength="<?= (int) CONTRIBUTION_MAX_CHARS ?>"></textarea>
+      <div id="eval-actions">
+        <button id="eval-skip" type="button"><?= t('dojo.eval.skip') ?></button>
+        <button id="eval-submit" type="button"><?= t('dojo.eval.submit') ?></button>
       </div>
-    </fieldset>
-    <?php endforeach; ?>
-    <label id="eval-feedback-label" for="eval-feedback"><?= t('dojo.eval.feedback.label') ?></label>
-    <textarea id="eval-feedback" maxlength="<?= (int) CONTRIBUTION_MAX_CHARS ?>"></textarea>
-    <div id="eval-actions">
-      <button id="eval-skip" type="button"><?= t('dojo.eval.skip') ?></button>
-      <button id="eval-submit" type="button"><?= t('dojo.eval.submit') ?></button>
+    </div>
+    <?php
+      /* Shown in #eval-form's place after Send — waiting for this explicit
+        "Start new session" press (rather than navigating immediately) is
+        what gives the fire-and-forget POST above time to actually land;
+        an immediate navigate away can abort an in-flight fetch. */
+    ?>
+    <div id="eval-success" hidden>
+      <p id="eval-success-message"><?= t('dojo.eval.successMessage') ?></p>
+      <button id="eval-start-new" type="button"><?= t('dojo.eval.startNewSession') ?></button>
     </div>
   </div>
 
