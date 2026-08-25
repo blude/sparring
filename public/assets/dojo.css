@@ -370,7 +370,7 @@ main {
    ending should win. */
 #eval-dialog {
     position: absolute;
-    bottom: 0;
+    bottom: 0.75rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 12;
