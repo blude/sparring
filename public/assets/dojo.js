@@ -79,6 +79,9 @@ window.SparringDojoOutcome = {
     var evalSuccessMessageEl = document.getElementById('eval-success-message');
     var evalStartNewBtn = document.getElementById('eval-start-new');
     var evalGoToStartBtn = document.getElementById('eval-go-to-start');
+    var confirmDialogEl = document.getElementById('confirm-dialog');
+    var confirmCancelBtn = document.getElementById('confirm-cancel');
+    var confirmOkBtn = document.getElementById('confirm-ok');
 
     var sessionId = null;
     var statusTurnEl = null; // the one managed "status" entry in #history, if any (see setHistoryStatus)
@@ -124,11 +127,38 @@ window.SparringDojoOutcome = {
         if (event.key === 'Escape') closePopover();
     });
 
+    /*
+    |--------------------------------------------------------------------------
+    | Custom confirm dialog ("End this session?") — replaces window.confirm(),
+    | which blocks all further script execution (and every other browser
+    | tool) while open. Same shape as showEvalDialog's own Skip/Submit
+    | wiring: listeners added on open, removed on whichever action fires.
+    |--------------------------------------------------------------------------
+    */
+    function showConfirmDialog(onConfirm) {
+        confirmDialogEl.hidden = false;
+
+        function close() {
+            confirmDialogEl.hidden = true;
+            confirmCancelBtn.removeEventListener('click', onCancel);
+            confirmOkBtn.removeEventListener('click', onOk);
+        }
+        function onCancel() {
+            close();
+        }
+        function onOk() {
+            close();
+            onConfirm();
+        }
+        confirmCancelBtn.addEventListener('click', onCancel);
+        confirmOkBtn.addEventListener('click', onOk);
+    }
+
     newSessionBtn.addEventListener('click', function () {
-        if (window.confirm(window.STRINGS.dojo.confirmEndSession)) {
+        showConfirmDialog(function () {
             sessionStorage.removeItem(DRAFT_KEY); // ending session should not leave next session's composer pre-filled
             showEvalDialog(sessionId);
-        }
+        });
     });
 
     /*

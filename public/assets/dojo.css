@@ -305,31 +305,37 @@ main {
     color: #fefefe;
 }
 
-#retention {
-    /* Same absolute-overlay treatment as #eval-dialog below, for
-       consistency between the two dark "gate" cards — centered, anchored
-       to main (position:relative), same top/left/transform recipe as
-       #playbook. z-index above #playbook (stacks above it wherever the
-       two overlap — ToS is the one that must win), below #eval-dialog's
-       12 (the two never show together in practice, but if they ever did,
-       the dialog reporting on a session that's already ending should win). */
+/* Shared by every dark "gate" card that interrupts the surface — consent,
+   the end-of-session evaluation, and the custom confirm dialog: absolute,
+   centered over main (position:relative), same top/left/transform recipe
+   as #playbook. Deliberately inverted against the page's light theme so
+   these pop — not a prefers-color-scheme response, always dark. Each ID
+   still sets its own z-index (stacking order between them) and
+   border-radius (varies slightly by card). */
+.gate-card {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 11;
     width: min(92vw, 360px);
-    max-height: 70dvh; /* same escape hatch as #eval-dialog below, in case content ever runs long */
+    max-height: 70dvh; /* escape hatch if content ever runs long, on a small phone */
     overflow-y: auto;
-    /* deliberately inverted against the page's light theme so the consent
-       dialog pops — not a prefers-color-scheme response, always dark */
     background: #1a1a1a;
     border: 1px solid #333;
     color: #f2f2f2;
     color-scheme: dark; /* native checkbox rendering matches the dark card */
-    border-radius: 0.75rem;
     padding: 0.75rem;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25); /* lifts the card off the page it's floating over */
+}
+.gate-card[hidden] { display: none; } /* same explicit belt-and-suspenders as #playbook/#reply-quote/#title-card */
+
+#retention {
+    /* z-index above #playbook (stacks above it wherever the two overlap —
+       ToS is the one that must win), below #eval-dialog's 12 and
+       #confirm-dialog's 13 (never shown together in practice, but if they
+       ever were, the more time-sensitive prompt should win). */
+    z-index: 11;
+    border-radius: 0.75rem;
 }
 
 #consent-heading {
@@ -369,33 +375,37 @@ main {
 }
 #consent-confirm:disabled { opacity: 0.5; }
 
-/* End-of-session feedback dialog — absolute overlay anchored to main
-   (position:relative), same centered top/left/transform pattern as
-   #playbook and #retention, so it sits over the finished conversation/
-   composer instead of pushing them around. z-index above #retention's 11:
-   the two never show together in practice, but if they ever did, the
-   dialog reporting on a session that's already ending should win. */
+/* End-of-session feedback dialog — see .gate-card above for the shared
+   overlay treatment. z-index above #retention's 11, below
+   #confirm-dialog's 13: the two never show together in practice, but if
+   they ever did, the dialog reporting on a session that's already ending
+   should win. */
 #eval-dialog {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     z-index: 12;
-    width: min(92vw, 360px);
-    background: #1a1a1a;
-    border: 1px solid #333;
-    color: #f2f2f2;
-    color-scheme: dark;
     border-radius: 1rem;
-    padding: 0.75rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25); /* lifts the card off the page it's floating over, same as #retention */
-    /* Two 5-way scales plus a textarea can still run taller than fits
-       centered on a small phone — overflow-y:auto keeps Send/Skip
-       reachable instead of the card overshooting the viewport. */
-    max-height: 70dvh;
-    overflow-y: auto;
 }
-#eval-dialog[hidden] { display: none; } /* same explicit belt-and-suspenders as #playbook/#reply-quote/#title-card */
+
+/* Custom confirm dialog, replacing window.confirm() for "End this
+   session?" — see .gate-card above for the shared overlay treatment.
+   Highest of the three gate cards: the most time-sensitive prompt, and
+   the one whose own action can open #eval-dialog next. */
+#confirm-dialog {
+    z-index: 13;
+    border-radius: 1rem;
+}
+
+#confirm-heading {
+    margin: 0.25rem 0 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #fefefe;
+}
+
+#confirm-description {
+    margin: 0;
+    color: #ccc;
+    line-height: 1.35;
+}
 
 #eval-heading {
     margin: 0.25rem 0 0.75rem;
@@ -467,9 +477,9 @@ main {
     resize: vertical;
 }
 
-#eval-actions { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+#eval-actions, #confirm-actions { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
 
-#eval-skip, #eval-submit, #eval-start-new, #eval-go-to-start {
+#eval-skip, #eval-submit, #eval-start-new, #eval-go-to-start, #confirm-cancel, #confirm-ok {
     flex: 1;
     width: 100%;
     padding: 0.65rem;
@@ -477,8 +487,8 @@ main {
     border: none;
     border-radius: 0.5rem;
 }
-#eval-skip, #eval-go-to-start { background: #333; color: #f2f2f2; }
-#eval-submit, #eval-start-new { background: var(--accent); color: #fff; }
+#eval-skip, #eval-go-to-start, #confirm-cancel { background: #333; color: #f2f2f2; }
+#eval-submit, #eval-start-new, #confirm-ok { background: var(--accent); color: #fff; }
 #eval-go-to-start { margin-top: 0.5rem; }
 
 #eval-success { padding: 0.5rem 0 0; }

@@ -50,7 +50,7 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
     </div>
   </div>
 
-  <div id="retention" hidden>
+  <div id="retention" class="gate-card" hidden>
     <h2 id="consent-heading"><?= t('dojo.consent.heading') ?></h2>
     <p><?= t('dojo.consent.tosLine') ?></p>
     <label class="consent-row">
@@ -75,7 +75,7 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
       EVAL_QUESTIONS/EVAL_SCALE_SIZE in config.php. Shown by dojo.js on
       natural turn-limit completion and on a deliberate "End session" press. */
   ?>
-  <div id="eval-dialog" hidden>
+  <div id="eval-dialog" class="gate-card" hidden>
     <h2 id="eval-heading"><?= t('dojo.eval.heading') ?></h2>
     <div id="eval-form">
       <?php foreach (EVAL_QUESTIONS as $q): ?>
@@ -120,6 +120,16 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
     </div>
   </div>
 
+  <?php /* Custom confirm, replacing window.confirm() — same gate-card treatment as #retention/#eval-dialog, for a consistent look and to keep the flow scriptable (a native confirm() blocks everything else on the page while open). */ ?>
+  <div id="confirm-dialog" class="gate-card" hidden>
+    <h2 id="confirm-heading"><?= t('dojo.confirm.endSession.heading') ?></h2>
+    <p id="confirm-description"><?= t('dojo.confirm.endSession.description') ?></p>
+    <div id="confirm-actions">
+      <button id="confirm-cancel" type="button"><?= t('dojo.confirm.cancel') ?></button>
+      <button id="confirm-ok" type="button"><?= t('dojo.endSession') ?></button>
+    </div>
+  </div>
+
   <div id="reply-quote" hidden>
     <p id="reply-quote-label"><?= t('dojo.replyQuote.label') ?></p>
     <p id="reply-quote-text"></p>
@@ -160,7 +170,6 @@ window.STRINGS = {
         outcomeFlaggedInappropriate: <?= json_encode(t('dojo.js.outcomeFlaggedInappropriate')) ?>,
         outcomeSessionUnknown: <?= json_encode(t('dojo.js.outcomeSessionUnknown')) ?>,
         outcomeGenerationFailed: <?= json_encode(t('dojo.js.outcomeGenerationFailed')) ?>,
-        confirmEndSession: <?= json_encode(t('dojo.js.confirmEndSession')) ?>,
         sessionComplete: <?= json_encode(t('dojo.js.sessionComplete')) ?>,
         installationUnavailable: <?= json_encode(t('dojo.js.installationUnavailable')) ?>,
         consentFailed: <?= json_encode(t('dojo.js.consentFailed')) ?>,
