@@ -363,6 +363,19 @@ window.SparringDojoOutcome = {
     | feedback POST fire-and-forget to /api/evaluate — a failed request
     | shouldn't block the visitor from leaving, same as the /api/title call.
     */
+    // Glove-rating widgets have no visible text of their own (see dojo.php/
+    // dojo.css) — this is what shows the picked option's label above them.
+    // One listener for every question, delegated on the form and wired
+    // once (not per showEvalDialog call): the widgets exist for the whole
+    // page lifetime, there's nothing to clean up on close.
+    evalFormEl.addEventListener('change', function (event) {
+        var input = event.target;
+        if (input.type !== 'radio') return;
+        var fieldsetEl = input.closest('fieldset.eval-question');
+        var labelEl = fieldsetEl && fieldsetEl.querySelector('.eval-scale-label');
+        if (labelEl) labelEl.textContent = input.dataset.label || '';
+    });
+
     function evalShownKey(id) {
         return 'sparring-eval-shown-' + id;
     }

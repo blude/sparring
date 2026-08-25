@@ -391,14 +391,51 @@ main {
 .eval-question { border: none; margin: 0 0 1rem; padding: 0; }
 .eval-question legend { padding: 0 0 0.4rem; font-weight: 600; }
 
-.eval-scale-option {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    margin: 0.4rem 0;
-    line-height: 1.35;
+/* Reserves one line above the gloves for the selected option's label, so
+   picking a value doesn't shift anything else in the dialog. */
+.eval-scale-label {
+    min-height: 1.2em;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+    color: #ccc;
+    text-align: center;
 }
-.eval-scale-option input { margin-top: 0.2rem; width: 1.2rem; height: 1.2rem; flex-shrink: 0; }
+
+.eval-glove-rating {
+    display: flex;
+    flex-direction: row-reverse; /* DOM is high-to-low; this displays it low-to-high — see dojo.php's note */
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+/* Visually hidden, not display:none — stays in the tab/focus order (native
+   radio semantics, same as any other input here) even though the icon
+   label is what's actually seen. */
+.eval-glove-rating input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.eval-glove-rating label {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background-color: #444; /* unfilled */
+    -webkit-mask-image: url('img/glove.svg');
+    mask-image: url('img/glove.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    cursor: pointer;
+}
+
+.eval-glove-rating input:checked ~ label { background-color: var(--accent); }
 
 #eval-feedback-label { display: block; margin: 0.5rem 0 0.4rem; font-weight: 600; }
 

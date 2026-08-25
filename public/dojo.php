@@ -81,12 +81,19 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
       <?php foreach (EVAL_QUESTIONS as $q): ?>
       <fieldset class="eval-question" data-question="<?= $q ?>">
         <legend><?= t("dojo.eval.q.$q.prompt") ?></legend>
-        <div class="eval-scale">
-          <?php for ($i = 1; $i <= EVAL_SCALE_SIZE; $i++): ?>
-          <label class="eval-scale-option">
-            <input type="radio" name="eval-<?= $q ?>" value="<?= $i ?>">
-            <span><?= t("dojo.eval.q.$q.label.$i") ?></span>
-          </label>
+        <div class="eval-scale-label">&nbsp;</div>
+        <?php /* Glove-rating widget: a star-rating, but with the glove icon
+          (img/glove.svg, same one #submit uses). DOM order runs high-to-low
+          (EVAL_SCALE_SIZE down to 1) on purpose — combined with
+          flex-direction:row-reverse in CSS, the general-sibling selector
+          `input:checked ~ label` fills every glove from 1 up to whichever
+          is checked, displayed left-to-right in ascending order, without
+          any JS beyond updating the label text above. */ ?>
+        <div class="eval-glove-rating">
+          <?php for ($i = EVAL_SCALE_SIZE; $i >= 1; $i--): ?>
+          <?php $label = t("dojo.eval.q.$q.label.$i"); ?>
+          <input type="radio" name="eval-<?= $q ?>" id="eval-<?= $q ?>-<?= $i ?>" value="<?= $i ?>" data-label="<?= htmlspecialchars($label, ENT_QUOTES) ?>">
+          <label for="eval-<?= $q ?>-<?= $i ?>" class="eval-glove" aria-label="<?= htmlspecialchars($label, ENT_QUOTES) ?>"></label>
           <?php endfor; ?>
         </div>
       </fieldset>
