@@ -386,7 +386,6 @@ window.SparringDojoOutcome = {
             if (onClose) onClose();
             return;
         }
-        sessionStorage.setItem(evalShownKey(id), '1');
         evalDialogEl.hidden = false;
         newSessionBtn.disabled = true; // a second "End session" press while this is open would abandon whatever's typed here
 
@@ -395,7 +394,15 @@ window.SparringDojoOutcome = {
         // Neither actually leaves here: one of onStartNew/onGoToStart below
         // does that, once the visitor picks. That pause is also what gives
         // Submit's fetch time to land before anything navigates away.
+        //
+        // The "don't show again" flag is set HERE, on actual completion —
+        // not on open. Setting it on open meant a reload before Skip/Submit
+        // (dialog shown, never finished) left it set anyway: the next "End
+        // session" press would hit the early-return above and silently fall
+        // through to onClose (navigate away) instead of showing the dialog
+        // again, with no way for the visitor to ever answer it.
         function showSuccess(message) {
+            sessionStorage.setItem(evalShownKey(id), '1');
             if (message) evalSuccessMessageEl.textContent = message;
             evalFormEl.hidden = true;
             evalSuccessEl.hidden = false;
