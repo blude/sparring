@@ -7,11 +7,11 @@ stand: 2026-04-19
 
 # Ebenenmodell digitaler Lösungen
 
-**Definition:** Das Ebenenmodell zerlegt eine digitale Lösung in drei konzeptionelle Skalierungsstufen — [[loesungsebene]], [[systemebene]] und [[elementebene]] —, die sich in ihrer Granularität unterscheiden, aber auf jeder Stufe dieselben Entwurfsaspekte (Ziele, Form, Funktion, Qualität, Randbedingungen) bearbeiten.
+**Definition:** Das Ebenenmodell zerlegt eine digitale Lösung in drei konzeptionelle Skalierungsstufen — Lösungsebene, Systemebene und Elementebene —, die sich in ihrer Granularität unterscheiden, aber auf jeder Stufe dieselben Entwurfsaspekte (Ziele, Form, Funktion, Qualität, Randbedingungen) bearbeiten.
 
 ## Erläuterung
 
-Digitale Lösungen sind zu komplex, um sie auf einer einzigen Ebene zu entwerfen. Das Ebenenmodell ist eine konkrete Anwendung des allgemeineren Prinzips der [[abstraktionsebenen]]: Es wählt genau drei Stufen, benennt sie und gibt jeder eine eigene Sprache und Logik.
+Digitale Lösungen sind zu komplex, um sie auf einer einzigen Ebene zu entwerfen. Das Ebenenmodell ist eine konkrete Anwendung des allgemeineren Prinzips der Abstraktionsebenen: Es wählt genau drei Stufen, benennt sie und gibt jeder eine eigene Sprache und Logik.
 
 Die Analogie zur Baukunst liegt nahe: Erst Gebäudeform und Geschosse, dann Grundriss und Fassade, dann einzelne Räume und Installationen. Die Skalen hängen voneinander ab, aber auf jeder Skala wird fokussiert gearbeitet.
 
@@ -21,7 +21,7 @@ Die Ebenen wirken in **drei Richtungen** zusammen:
 
 - **Top-down erzwingt:** Obere Ebenen geben den Rahmen vor. Die Vision auf der Lösungsebene zwingt die Systemebene zu bestimmten Entscheidungen.
 - **Bottom-up schränkt ein:** Untere Ebenen melden Grenzen zurück. Wenn eine technische Zielvorgabe auf der Elementebene nicht erreichbar ist, muss die Systemebene reagieren.
-- **Bottom-up ermöglicht:** Das Wissen über technologische Möglichkeiten auf den unteren Ebenen eröffnet neue strategische Räume auf der Lösungsebene — siehe [[materialkompetenz]].
+- **Bottom-up ermöglicht:** Das Wissen über technologische Möglichkeiten auf den unteren Ebenen eröffnet neue strategische Räume auf der Lösungsebene — siehe Materialkompetenz.
 
 ## Abgrenzung
 
@@ -29,7 +29,7 @@ Die Ebenen wirken in **drei Richtungen** zusammen:
 - Die Ebenen sind **nicht hierarchisch im Sinne von Wichtigkeit** — keine ist "wichtiger" als eine andere. Sie unterscheiden sich im Fokus.
 - Die Ebenen sind **nicht sequenziell abzuarbeiten**. Ein guter Entwurf verhandelt zwischen den Ebenen iterativ.
 - Die Grenze zwischen Entwurf und Realisierung (konkrete Produktauswahl, z. B. "PostgreSQL") gehört **nicht** zum Ebenenmodell. Das Modell beschreibt Entwurf, nicht Umsetzung.
-- Das Ebenenmodell ist **nicht** mit [[abstraktionsebenen]] gleichzusetzen. Abstraktionsebenen sind ein allgemeines Prinzip; das Ebenenmodell ist eine konkrete, für digitale Lösungen gewählte Ausprägung mit genau drei Stufen.
+- Das Ebenenmodell ist **nicht** mit Abstraktionsebenen gleichzusetzen. Abstraktionsebenen sind ein allgemeines Prinzip; das Ebenenmodell ist eine konkrete, für digitale Lösungen gewählte Ausprägung mit genau drei Stufen.
 
 ## Beispiele
 
@@ -53,15 +53,15 @@ Die Ebenen wirken in **drei Richtungen** zusammen:
 
 ## Verwendung im Buch
 
-- [[Kap03]] führt das Ebenenmodell ein (Abschnitt 3.1 Überblick, 3.2 Lösungsebene, 3.3 Systemebene, 3.4 Elementebene, 3.5 Zusammenspiel).
-- [[Kap06]] nimmt die Ebenen als Strukturierungshilfe wieder auf und zeigt ihre rekursive Anwendbarkeit; dort wird auch das allgemeine Prinzip der [[abstraktionsebenen]] eingeführt.
-- [[Teil_II]] ist entlang der Ebenen strukturiert (Muster-Kapitel 10–18 Lösungsebene, 19–21 Systemebene, 22–27 Elementebene).
+- Kap03 führt das Ebenenmodell ein (Abschnitt 3.1 Überblick, 3.2 Lösungsebene, 3.3 Systemebene, 3.4 Elementebene, 3.5 Zusammenspiel).
+- Kap06 nimmt die Ebenen als Strukturierungshilfe wieder auf und zeigt ihre rekursive Anwendbarkeit; dort wird auch das allgemeine Prinzip der Abstraktionsebenen eingeführt.
+- Teil_II ist entlang der Ebenen strukturiert (Muster-Kapitel 10–18 Lösungsebene, 19–21 Systemebene, 22–27 Elementebene).
 
 ## Verwandt
 
-- [[abstraktionsebenen]] — das allgemeine Prinzip, von dem das Ebenenmodell eine spezifische Ausprägung ist
-- [[loesungsebene]] · [[systemebene]] · [[elementebene]]
-- [[ffq-modell]] — die auf jeder Ebene wiederkehrende Struktur Form/Funktion/Qualität
-- [[arbeitsmodell]] — Ziele, Randbedingungen und FFQ zusammen
-- [[materialkompetenz]] — die Voraussetzung für "Bottom-up ermöglicht"
-- [[konsistenzregeln]] — das Prüfinstrument zwischen den Ebenen
+- Abstraktionsebenen — das allgemeine Prinzip, von dem das Ebenenmodell eine spezifische Ausprägung ist
+- Lösungsebene · Systemebene · Elementebene
+- FFQ-Modell — die auf jeder Ebene wiederkehrende Struktur Form/Funktion/Qualität
+- Arbeitsmodell — Ziele, Randbedingungen und FFQ zusammen
+- Materialkompetenz — die Voraussetzung für "Bottom-up ermöglicht"
+- Konsistenzregel — das Prüfinstrument zwischen den Ebenen

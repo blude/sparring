@@ -15,7 +15,7 @@ stand: 2026-05-02
 
 - **Klasse:** Grundgestalt
 - **Ebene:** Systemebene
-- **Aspekt-Bündelung:** Form: [[systemarchitektur]] (topologische Anordnung der Elemente); Funktion: [[system-scenario]] (wie Szenarien bei Knotenausfall, Lastspitzen und Netzwerkpartitionierung laufen)
+- **Aspekt-Bündelung:** Form: Systemarchitektur (topologische Anordnung der Elemente); Funktion: System Scenario (wie Szenarien bei Knotenausfall, Lastspitzen und Netzwerkpartitionierung laufen)
 
 ## Spektrum
 
@@ -37,15 +37,15 @@ stand: 2026-05-02
 
 ## Treibende Forces
 
-- [[souveraenitaet]]: Zieht föderiert oder dezentral — keine Abhängigkeit von einem zentralen Anbieter; Verteilung als Machtverzichtsmechanismus.
-- [[freiheit]]: Zieht dezentrale Architekturen — kein zentraler Gatekeeper, der Optionsräume kontrolliert.
-- [[oekologische-nachhaltigkeit]]: Kann dezentral bevorzugen (lokale Verarbeitung spart Übertragungsenergie); aber auch zentral (optimierte Rechenzentren effizienter als viele kleine Knoten).
-- [[vertrauenswuerdigkeit]]: Zieht föderierte oder dezentrale Architekturen mit Redundanz für Ausfallresilienz; kann aber auch zentral bevorzugen (ein klar verantwortlicher Knoten ist leichter zu sichern und zu auditieren).
-- [[profitorientierung]]: Zieht oft zentrale Architekturen — einfacher, günstiger zu betreiben, einfacher skalierbar; zentrale Kontrolle erleichtert Monetarisierung.
-- [[selbstbestimmung]]: Zieht dezentrale Architekturen — Daten bleiben lokal, kein zentraler Datenspeicher ohne explizite Zustimmung.
-- [[marktbeherrschung]]: Zieht zentrale Architekturen — ein zentraler Kontrollpunkt ermöglicht vollständige Kontrolle über Plattformzugang und Datenflüsse.
-- [[solidaritaet]]: Zieht föderierte oder dezentrale Strukturen — keine asymmetrische Machtkonzentration bei einem Akteur.
-- [[unterhaltung]]: Zieht dezentrale oder föderierte Anordnungen für Multiplayer-Szenarien — verteilte Verarbeitung für niedrige Latenz in Echtzeit-Interaktionen.
+- Souveränität: Zieht föderiert oder dezentral — keine Abhängigkeit von einem zentralen Anbieter; Verteilung als Machtverzichtsmechanismus.
+- Freiheit: Zieht dezentrale Architekturen — kein zentraler Gatekeeper, der Optionsräume kontrolliert.
+- Ökologische Nachhaltigkeit: Kann dezentral bevorzugen (lokale Verarbeitung spart Übertragungsenergie); aber auch zentral (optimierte Rechenzentren effizienter als viele kleine Knoten).
+- Vertrauenswürdigkeit: Zieht föderierte oder dezentrale Architekturen mit Redundanz für Ausfallresilienz; kann aber auch zentral bevorzugen (ein klar verantwortlicher Knoten ist leichter zu sichern und zu auditieren).
+- Profitorientierung: Zieht oft zentrale Architekturen — einfacher, günstiger zu betreiben, einfacher skalierbar; zentrale Kontrolle erleichtert Monetarisierung.
+- Selbstbestimmung: Zieht dezentrale Architekturen — Daten bleiben lokal, kein zentraler Datenspeicher ohne explizite Zustimmung.
+- Marktbeherrschung: Zieht zentrale Architekturen — ein zentraler Kontrollpunkt ermöglicht vollständige Kontrolle über Plattformzugang und Datenflüsse.
+- Solidarität: Zieht föderierte oder dezentrale Strukturen — keine asymmetrische Machtkonzentration bei einem Akteur.
+- Unterhaltung: Zieht dezentrale oder föderierte Anordnungen für Multiplayer-Szenarien — verteilte Verarbeitung für niedrige Latenz in Echtzeit-Interaktionen.
 
 ## Konsequenzen / Propagation nach unten
 
@@ -60,9 +60,9 @@ stand: 2026-05-02
 
 ## Verwandte Strukturmuster
 
-- [[verfuegbarkeitsannahme]]: Online-First passt zu zentraler Anordnung; Offline-First zu dezentraler
-- [[hardware-hoheit]]: Eigene Hardware tendiert zu dezentraler/föderierter Anordnung
-- [[benutzerzugang]]: Dezentrale Systeme haben oft offenere Benutzerzugänge
+- Verfügbarkeitsannahme: Online-First passt zu zentraler Anordnung; Offline-First zu dezentraler
+- Hardware-Hoheit: Eigene Hardware tendiert zu dezentraler/föderierter Anordnung
+- Benutzerzugang: Dezentrale Systeme haben oft offenere Benutzerzugänge
 
 ## Beispiele
 
@@ -74,10 +74,10 @@ stand: 2026-05-02
 
 ## Verwendung im Buch
 
-- [[Kap19]] — Systemarchitektur: Anordnung als Grundgestalt
+- Kap19 — Systemarchitektur: Anordnung als Grundgestalt
 
 ## Verwandt
 
-- [[souveraenitaet]] — treibende Force
-- [[verfuegbarkeitsannahme]] — verwandte Grundgestalt
-- [[systemebene]] — die Ebene dieser Grundgestalt
+- Souveränität — treibende Force
+- Verfügbarkeitsannahme — verwandte Grundgestalt
+- Systemebene — die Ebene dieser Grundgestalt

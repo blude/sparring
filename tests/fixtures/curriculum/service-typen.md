@@ -9,7 +9,7 @@ stand: 2026-05-02
 
 # Servicetypen
 
-> **Hinweis zur Klassifikation (2026-05-02):** Servicetypen werden als *Topologiemuster* (Typ-Topologie) eingeordnet — eine Palette von Serviceformen, die innerhalb der Grundgestalt [[produkt-service]] auf der Service-Seite auftreten können. Vormals als Grundgestalt geführt. Die inhaltliche Ausarbeitung bleibt vollständig gültig.
+> **Hinweis zur Klassifikation (2026-05-02):** Servicetypen werden als *Topologiemuster* (Typ-Topologie) eingeordnet — eine Palette von Serviceformen, die innerhalb der Grundgestalt Produkt ↔ Service auf der Service-Seite auftreten können. Vormals als Grundgestalt geführt. Die inhaltliche Ausarbeitung bleibt vollständig gültig.
 
 **Definition:** Servicetypen beschreiben das Spektrum der strukturellen Grundformen, die ein Service in einer Wertschöpfungsarchitektur annehmen kann — analoger Service, digitaler Service für Menschen, digitaler Service für Maschinen oder hybrider Service — jede mit eigenem Form-Funktion-Bündel und spezifischen Qualitätsanforderungen.
 
@@ -17,11 +17,11 @@ stand: 2026-05-02
 
 - **Klasse:** Grundgestalt
 - **Ebene:** Lösungsebene
-- **Aspekt-Bündelung:** Form: [[wertschoepfungsarchitektur]] → [[ertragsmodell]], [[partner]] (Wertschöpfungsquelle und Betriebscharakter); Funktion: [[geschaeftsprozess]] (Matching, Betrieb, Orchestrierung — je nach Typ grundlegend verschieden)
+- **Aspekt-Bündelung:** Form: Wertschöpfungsarchitektur → Ertragsmodell, Partner (Wertschöpfungsquelle und Betriebscharakter); Funktion: Geschäftsprozess (Matching, Betrieb, Orchestrierung — je nach Typ grundlegend verschieden)
 
 ## Voraussetzung
 
-Diese Grundgestalt setzt die übergeordnete Entscheidung [[produkt-service]] voraus: Erst wenn die Lösung auf der Service-Seite des Spektrums positioniert ist, wird die Wahl des Service-Typs relevant.
+Diese Grundgestalt setzt die übergeordnete Entscheidung Produkt ↔ Service voraus: Erst wenn die Lösung auf der Service-Seite des Spektrums positioniert ist, wird die Wahl des Service-Typs relevant.
 
 ## Spektrum: Die vier Servicetypen
 
@@ -67,12 +67,12 @@ Diese Grundgestalt setzt die übergeordnete Entscheidung [[produkt-service]] vor
 
 ## Treibende Forces
 
-- [[profitorientierung]]: Treibt beim digitalen Service für Menschen in Richtung Abo-Modell (wiederkehrende Erträge, langer Customer-Lifetime-Value). Beim analogen Service: Plattform-Provision als indirektes Ertragsmodell. Beim digitalen Service für Maschinen: API-Zugangsgebühren, nutzungsbasierte Abrechnung.
-- [[usability]]: Zieht beim digitalen Service für Menschen Service-Varianten mit reibungslosem Onboarding — direkter Usability-Vorteil am Einstiegspunkt (kein Installationsaufwand). Beim hybriden Service: nahtlose Übergänge zwischen digitaler und physischer Phase als usability-kritischer Punkt.
-- [[oekologische-nachhaltigkeit]]: Zieht beim digitalen Service für Menschen zentralisierte, energieeffizientere Infrastruktur gegenüber dezentralisierten Produkten. Beim hybriden Service: optimierte Routenplanung (weniger Fahrtwege) als ökologischer Nebeneffekt guter Dispatch-Logik.
-- [[oekonomische-nachhaltigkeit]]: Zieht beim digitalen Service für Menschen Abo-Modelle gegenüber Einmalkäufen, weil wiederkehrende Erträge das Fortbestehen besser absichern. Beim analogen Service: Plattform-Governance als Vertrauensgrundlage für langfristige Marktteilnahme.
-- [[barrierefreiheit]]: Beim digitalen Service für Menschen: Service-Updates können Barrierefreiheits-Fehler zentral beheben, ohne auf Nutzer-Updates zu warten — struktureller Vorteil gegenüber Produkten.
-- [[soziale-nachhaltigkeit]]: Beim analogen Service: faire Vergütung der Leistungserbringer als soziale Nachhaltigkeitsfrage der Plattform-Governance. Beim hybriden Service: Arbeitsbedingungen der Feldkräfte als sozialer Gestaltungsraum.
+- Profitorientierung: Treibt beim digitalen Service für Menschen in Richtung Abo-Modell (wiederkehrende Erträge, langer Customer-Lifetime-Value). Beim analogen Service: Plattform-Provision als indirektes Ertragsmodell. Beim digitalen Service für Maschinen: API-Zugangsgebühren, nutzungsbasierte Abrechnung.
+- Usability: Zieht beim digitalen Service für Menschen Service-Varianten mit reibungslosem Onboarding — direkter Usability-Vorteil am Einstiegspunkt (kein Installationsaufwand). Beim hybriden Service: nahtlose Übergänge zwischen digitaler und physischer Phase als usability-kritischer Punkt.
+- Ökologische Nachhaltigkeit: Zieht beim digitalen Service für Menschen zentralisierte, energieeffizientere Infrastruktur gegenüber dezentralisierten Produkten. Beim hybriden Service: optimierte Routenplanung (weniger Fahrtwege) als ökologischer Nebeneffekt guter Dispatch-Logik.
+- Ökonomische Nachhaltigkeit: Zieht beim digitalen Service für Menschen Abo-Modelle gegenüber Einmalkäufen, weil wiederkehrende Erträge das Fortbestehen besser absichern. Beim analogen Service: Plattform-Governance als Vertrauensgrundlage für langfristige Marktteilnahme.
+- Barrierefreiheit: Beim digitalen Service für Menschen: Service-Updates können Barrierefreiheits-Fehler zentral beheben, ohne auf Nutzer-Updates zu warten — struktureller Vorteil gegenüber Produkten.
+- Soziale Nachhaltigkeit: Beim analogen Service: faire Vergütung der Leistungserbringer als soziale Nachhaltigkeitsfrage der Plattform-Governance. Beim hybriden Service: Arbeitsbedingungen der Feldkräfte als sozialer Gestaltungsraum.
 
 ## Konsequenzen / Propagation nach unten
 
@@ -90,11 +90,11 @@ Diese Grundgestalt setzt die übergeordnete Entscheidung [[produkt-service]] vor
 
 ## Verwandte Strukturmuster
 
-- [[produkt-service]]: Die übergeordnete Grundgestalt — Servicetypen konkretisieren die Service-Seite dieses Spektrums.
-- [[produkt-service-hybrid]]: Wenn ein Service einen Produktanteil bekommt, entsteht eine eigene Grundgestalt jenseits der reinen Servicetypen.
-- [[digitales-oekosystem]]: Wenn mehrere Service-Typen in einer mehrseitigen Plattform zusammenkommen, entsteht ein Ökosystem — eigene Grundgestalt mit Netzwerkeffekten.
-- [[build-vs-rely]]: Beim digitalen Service für Menschen und digitalen Service für Maschinen ist die Entscheidung zwischen eigenem Betrieb und Cloud-Infrastruktur unmittelbar verknüpft.
-- [[ui-modalitaet]]: Beim analogen Service und hybriden Service stellt sich die Modalitätsfrage für die Feldkraft-App und das Koordinations-Interface.
+- Produkt ↔ Service: Die übergeordnete Grundgestalt — Servicetypen konkretisieren die Service-Seite dieses Spektrums.
+- Produkt-Service-Hybrid: Wenn ein Service einen Produktanteil bekommt, entsteht eine eigene Grundgestalt jenseits der reinen Servicetypen.
+- Digitales Ökosystem: Wenn mehrere Service-Typen in einer mehrseitigen Plattform zusammenkommen, entsteht ein Ökosystem — eigene Grundgestalt mit Netzwerkeffekten.
+- Build vs. Rely (Entwicklung): Beim digitalen Service für Menschen und digitalen Service für Maschinen ist die Entscheidung zwischen eigenem Betrieb und Cloud-Infrastruktur unmittelbar verknüpft.
+- UI-Modalität: Beim analogen Service und hybriden Service stellt sich die Modalitätsfrage für die Feldkraft-App und das Koordinations-Interface.
 
 ## Beispiele
 
@@ -108,16 +108,16 @@ Diese Grundgestalt setzt die übergeordnete Entscheidung [[produkt-service]] vor
 
 ## Verwendung im Buch
 
-- [[Kap12#12.3]] — alle vier Servicetypen werden als eigenständige R-Muster ausgearbeitet
-- [[Kap12#12.1]] — Produkt-Service-Grundentscheidung als übergeordnete Einordnung
-- [[Kap15]] — Ertragsmodell (Abo, Provision, nutzungsbasiert) als Folgeentscheidung
-- [[Kap17]] — Geschäftsprozesse als Folgeentscheidung (je Typ fundamental verschieden)
-- [[Kap19]] — Systemarchitektur als Folgeentscheidung
+- Kap12#12.3 — alle vier Servicetypen werden als eigenständige R-Muster ausgearbeitet
+- Kap12#12.1 — Produkt-Service-Grundentscheidung als übergeordnete Einordnung
+- Kap15 — Ertragsmodell (Abo, Provision, nutzungsbasiert) als Folgeentscheidung
+- Kap17 — Geschäftsprozesse als Folgeentscheidung (je Typ fundamental verschieden)
+- Kap19 — Systemarchitektur als Folgeentscheidung
 
 ## Verwandt
 
-- [[grundgestalt]] — die Musterklasse dieser Seite
-- [[mustermodell]] — das übergreifende Klassifikationsschema
-- [[praegend-und-offen]] — Propagationseigenschaft der Optionen auf diesem Spektrum
-- [[produkt-service]] — die übergeordnete Grundgestalt
-- [[wertschoepfungsarchitektur]] — der Lösungsebene-Baustein, den Servicetypen prägen
+- Grundgestalt — die Musterklasse dieser Seite
+- Mustermodell — das übergreifende Klassifikationsschema
+- Prägend und offen — Propagationseigenschaft der Optionen auf diesem Spektrum
+- Produkt ↔ Service — die übergeordnete Grundgestalt
+- Wertschöpfungsarchitektur — der Lösungsebene-Baustein, den Servicetypen prägen

@@ -18,7 +18,7 @@ stand: 2026-05-02
 - **Klasse:** Aspektmuster (vormals: Grundgestalt)
 - **Ebene:** Lösungsebene
 - **Klassifikationsbegründung:** Das Muster bündelt Form (temporäre Sammelstruktur mit Add/Remove-Semantik) und Funktion (Zweiphasiger Ablauf: Sammeln → Atomar verarbeiten) untrennbar. Wer die Arbeitskorb-Form wählt, kauft zwingend die Zweiphasigkeit ein — es gibt keinen Arbeitskorb ohne Commit-Semantik. Das unterscheidet ihn von einer bloßen Aspekt-Topologie der Listenstruktur.
-- **Aspekt-Bündelung:** Form: [[informationsarchitektur]] (temporäre Korb-Entität, Session-Kontext); Funktion: [[geschaeftsprozess]] (Sammeln → Abschicken als Prozesscharakter)
+- **Aspekt-Bündelung:** Form: Informationsarchitektur (temporäre Korb-Entität, Session-Kontext); Funktion: Geschäftsprozess (Sammeln → Abschicken als Prozesscharakter)
 
 ## Spektrum
 
@@ -34,9 +34,9 @@ Das Muster hat zwei charakteristische Ausprägungen:
 
 ## Treibende Forces
 
-- [[profitorientierung]]: Zieht den persistenten Arbeitskorb stark — ein gespeicherter Korb erhöht die Rückkehrrate und damit die Konversionsrate. "Dein Warenkorb wartet noch auf dich" ist ein bewährtes Retargeting-Instrument.
-- [[usability]]: Der Arbeitskorb erhöht Usability stark — der Benutzer kann in Ruhe sammeln, ohne jeden Schritt sofort zu finalisieren. Fehler sind leicht korrigierbar, bevor die Transaktion abläuft.
-- [[oekonomische-nachhaltigkeit]]: Atomare Transaktionen sind langfristig wartungsärmer als verteilte Schritte. Ein Fehler bei der Verarbeitung betrifft nur einen klar definierten Moment — nicht einen verteilten Zustand.
+- Profitorientierung: Zieht den persistenten Arbeitskorb stark — ein gespeicherter Korb erhöht die Rückkehrrate und damit die Konversionsrate. "Dein Warenkorb wartet noch auf dich" ist ein bewährtes Retargeting-Instrument.
+- Usability: Der Arbeitskorb erhöht Usability stark — der Benutzer kann in Ruhe sammeln, ohne jeden Schritt sofort zu finalisieren. Fehler sind leicht korrigierbar, bevor die Transaktion abläuft.
+- Ökonomische Nachhaltigkeit: Atomare Transaktionen sind langfristig wartungsärmer als verteilte Schritte. Ein Fehler bei der Verarbeitung betrifft nur einen klar definierten Moment — nicht einen verteilten Zustand.
 
 ## Konsequenzen / Propagation nach unten
 
@@ -54,9 +54,9 @@ Das Muster hat zwei charakteristische Ausprägungen:
 
 ## Verwandte Strukturmuster
 
-- [[flow-prozess]]: Der Checkout nach dem Arbeitskorb ist oft als Flow-Prozess gestaltet — die sequenzielle Schrittfolge nach dem Commit. Arbeitskorb und Flow-Prozess sind häufige Partner.
-- [[prozess-steuerung]]: Der Sammelschritt ist manuell (Benutzer entscheidet, was hinein kommt). Der Verarbeitungsschritt nach dem Commit ist häufig systemgeführt oder automatisch.
-- [[akteure-im-prozess]]: Typischerweise Solo-Prozess während der Sammelphase. Die Verarbeitung kann Multi-Akteur-Prozesse anstoßen (z.B. Lager, Versand).
+- Flow-Prozess: Der Checkout nach dem Arbeitskorb ist oft als Flow-Prozess gestaltet — die sequenzielle Schrittfolge nach dem Commit. Arbeitskorb und Flow-Prozess sind häufige Partner.
+- Prozess-Steuerung: Der Sammelschritt ist manuell (Benutzer entscheidet, was hinein kommt). Der Verarbeitungsschritt nach dem Commit ist häufig systemgeführt oder automatisch.
+- Akteure im Prozess: Typischerweise Solo-Prozess während der Sammelphase. Die Verarbeitung kann Multi-Akteur-Prozesse anstoßen (z.B. Lager, Versand).
 
 ## Beispiele
 
@@ -68,12 +68,12 @@ Das Muster hat zwei charakteristische Ausprägungen:
 
 ## Verwendung im Buch
 
-- [[Kap17#17.6.1]] — Arbeitskorb als erstes konkretes Prozessmuster
+- Kap17#17.6.1 — Arbeitskorb als erstes konkretes Prozessmuster
 
 ## Verwandt
 
-- [[geschaeftsprozess]] — der Baustein der Lösungsebene, den dieses Muster konkretisiert
-- [[flow-prozess]] — häufiger Nachfolgeprozess nach dem Commit
-- [[prozess-steuerung]] — Sammelphase ist manuell, Verarbeitungsphase ist systemgeführt oder automatisch
-- [[akteure-im-prozess]] — Sammelphase typischerweise Solo
-- [[grundgestalt]] — die Musterklasse
+- Geschäftsprozess — der Baustein der Lösungsebene, den dieses Muster konkretisiert
+- Flow-Prozess — häufiger Nachfolgeprozess nach dem Commit
+- Prozess-Steuerung — Sammelphase ist manuell, Verarbeitungsphase ist systemgeführt oder automatisch
+- Akteure im Prozess — Sammelphase typischerweise Solo
+- Grundgestalt — die Musterklasse

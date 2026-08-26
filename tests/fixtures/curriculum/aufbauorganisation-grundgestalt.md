@@ -9,7 +9,7 @@ stand: 2026-05-02
 
 # Aufbauorganisation-Grundgestalt
 
-> **Namenskonvention:** Diese Seite trägt den Suffix `-grundgestalt`, weil [[aufbauorganisation]] als Begriffsseite bereits existiert.
+> **Namenskonvention:** Diese Seite trägt den Suffix `-grundgestalt`, weil Aufbauorganisation als Begriffsseite bereits existiert.
 
 **Definition:** Aufbauorganisation-Grundgestalt ist die Grundgestalt der Lösungsebene, die entscheidet, wer die wesentliche Wertschöpfung der Lösung erbringt — die eigene Organisation souverän, ein Netzwerk von Partnern oder eine bewusste Hybridstruktur mit klar geregelter Aufteilung.
 
@@ -17,7 +17,7 @@ stand: 2026-05-02
 
 - **Klasse:** Grundgestalt
 - **Ebene:** Lösungsebene
-- **Aspekt-Bündelung:** Form: [[wertschoepfungsarchitektur]] / [[aufbauorganisation]] (wer ist strukturell involviert); Funktion: [[geschaeftsprozess]] (wie und durch wen werden Prozesse ausgeführt)
+- **Aspekt-Bündelung:** Form: Wertschöpfungsarchitektur / Aufbauorganisation (wer ist strukturell involviert); Funktion: Geschäftsprozess (wie und durch wen werden Prozesse ausgeführt)
 
 ## Spektrum
 
@@ -27,7 +27,7 @@ stand: 2026-05-02
 | **Hybrid** | Eigene Organisation erbringt Kernleistungen, Partner erbringen Ergänzungsleistungen — klare Aufteilung | NoteMate mit Cloud-Infrastruktur-Partner; Heiner mit Logistikdienstleister |
 | **Partnerorientiert** | Die eigene Organisation koordiniert, Partner erbringen die wesentliche Wertschöpfung | Ökosystem-Plattform (Amazon), Franchise-Modell, Kooperative |
 
-**Offene Antwort (souverän):** Maximale Kontrolle, maximaler Aufwand. Keine externen Abhängigkeiten — aber auch keine Skalierungseffekte durch Partner. Systemarchitektur ist "Build" (→ [[entwicklung-grundgestalt]]).
+**Offene Antwort (souverän):** Maximale Kontrolle, maximaler Aufwand. Keine externen Abhängigkeiten — aber auch keine Skalierungseffekte durch Partner. Systemarchitektur ist "Build" (→ Entwicklung (Grundgestalt)).
 
 **Prägende Antwort (hybrid):** Partner werden zu strukturellen Bausteinen der Lösung. Die Grenze zwischen "eigener Leistung" und "Partner-Leistung" muss explizit geregelt sein. Erzwingt Vertrags-, Schnittstellen- und Governance-Architektur.
 
@@ -41,29 +41,29 @@ stand: 2026-05-02
 
 ## Treibende Forces
 
-- [[souveraenitaet]]: Zieht souveräne Aufbauorganisation — keine wesentliche Abhängigkeit von einzelnen externen Partnern, die kritische Wertschöpfung kontrollieren.
-- [[oekonomische-nachhaltigkeit]]: Kann beide Pole ziehen: Eigenleistung für langfristige Stabilität und Kernkompetenz-Aufbau, Partner für Kosteneffizienz in nicht-differenzierenden Bereichen.
-- [[profitorientierung]]: Zieht Hybrid und partnerorientiert — Skalierung durch Partner ohne proportionale Fixkostenerhöhung verbessert das Ertragsprofil.
-- [[solidaritaet]]: Zieht kooperative und genossenschaftliche Strukturen — Wertschöpfung wird gemeinschaftlich erbracht und geteilt statt extrahiert.
-- [[soziale-nachhaltigkeit]]: Zieht hybride und kooperative Strukturen — faire Wertverteilung in der Wertschöpfungskette als Entwurfsziel; Arbeitsbedingungen der Leistungserbringer als Gestaltungsraum.
-- [[freiheit]]: Steht in Spannung zu partnerorientierter Aufbauorganisation mit asymmetrischer Machtverteilung — Freiheit bevorzugt symmetrische oder souveräne Strukturen.
-- [[marktbeherrschung]]: Zieht partnerorientierte Aufbauorganisation mit asymmetrischer Machtverteilung — der Plattformbetreiber koordiniert, Partner erbringen Leistung unter den Bedingungen des Betreibers.
+- Souveränität: Zieht souveräne Aufbauorganisation — keine wesentliche Abhängigkeit von einzelnen externen Partnern, die kritische Wertschöpfung kontrollieren.
+- Ökonomische Nachhaltigkeit: Kann beide Pole ziehen: Eigenleistung für langfristige Stabilität und Kernkompetenz-Aufbau, Partner für Kosteneffizienz in nicht-differenzierenden Bereichen.
+- Profitorientierung: Zieht Hybrid und partnerorientiert — Skalierung durch Partner ohne proportionale Fixkostenerhöhung verbessert das Ertragsprofil.
+- Solidarität: Zieht kooperative und genossenschaftliche Strukturen — Wertschöpfung wird gemeinschaftlich erbracht und geteilt statt extrahiert.
+- Soziale Nachhaltigkeit: Zieht hybride und kooperative Strukturen — faire Wertverteilung in der Wertschöpfungskette als Entwurfsziel; Arbeitsbedingungen der Leistungserbringer als Gestaltungsraum.
+- Freiheit: Steht in Spannung zu partnerorientierter Aufbauorganisation mit asymmetrischer Machtverteilung — Freiheit bevorzugt symmetrische oder souveräne Strukturen.
+- Marktbeherrschung: Zieht partnerorientierte Aufbauorganisation mit asymmetrischer Machtverteilung — der Plattformbetreiber koordiniert, Partner erbringen Leistung unter den Bedingungen des Betreibers.
 
 ## Konsequenzen / Propagation nach unten
 
 **Systemebene:**
-- Souverän → Build-Orientierung ([[entwicklung-grundgestalt]]: Eigenentwicklung)
+- Souverän → Build-Orientierung (Entwicklung (Grundgestalt): Eigenentwicklung)
 - Hybrid → gemischte Build/Rely-Entscheidungen; technische Schnittstellen zu Partnersystemen
 - Partnerorientiert → API-First-Architektur, Onboarding-Infrastruktur, mandantenfähige Systeme
 
 **Lösungsebene:**
-- Partnerorientiert ist eng verknüpft mit indirektem Wertversprechen ([[wertversprechen-charakter]])
+- Partnerorientiert ist eng verknüpft mit indirektem Wertversprechen (Wertversprechen-Charakter)
 
 ## Verwandte Strukturmuster
 
-- [[entwicklung-grundgestalt]]: Aufbauorganisation prägt die Build/Rely-Entscheidung auf Systemebene direkt
-- [[wertversprechen-charakter]]: Partnerorientiert → häufig indirektes Wertversprechen
-- [[digitales-oekosystem]]: Partnerorientierte Aufbauorganisation auf Plattform-Ebene
+- Entwicklung (Grundgestalt): Aufbauorganisation prägt die Build/Rely-Entscheidung auf Systemebene direkt
+- Wertversprechen-Charakter: Partnerorientiert → häufig indirektes Wertversprechen
+- Digitales Ökosystem: Partnerorientierte Aufbauorganisation auf Plattform-Ebene
 
 ## Beispiele
 
@@ -75,13 +75,13 @@ stand: 2026-05-02
 
 ## Verwendung im Buch
 
-- [[Kap12]] — Aufbauorganisation als Baustein der Wertschöpfungsarchitektur
-- [[Kap14]] — Aufbauorganisation und Partner als vertieftes Kapitel
+- Kap12 — Aufbauorganisation als Baustein der Wertschöpfungsarchitektur
+- Kap14 — Aufbauorganisation und Partner als vertieftes Kapitel
 
 ## Verwandt
 
-- [[aufbauorganisation]] — der Baustein (Begriff)
-- [[partner]] — die externen Organisationen in der Partnerstruktur
-- [[entwicklung-grundgestalt]] — eng verwandt auf Systemebene (Build/Rely)
-- [[wertversprechen-charakter]] — strukturell verbunden mit Partnerorientierung
-- [[loesungsebene]] — die Ebene dieser Grundgestalt
+- Aufbauorganisation — der Baustein (Begriff)
+- Partner — die externen Organisationen in der Partnerstruktur
+- Entwicklung (Grundgestalt) — eng verwandt auf Systemebene (Build/Rely)
+- Wertversprechen-Charakter — strukturell verbunden mit Partnerorientierung
+- Lösungsebene — die Ebene dieser Grundgestalt

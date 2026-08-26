@@ -7,11 +7,11 @@ stand: 2026-04-19
 
 # Konsistenzregel
 
-**Definition:** Konsistenzregeln sind Vorhersagen der Theorie des [[ebenenmodell]]s darüber, wie ein stimmiger Entwurf einer digitalen Lösung aufgebaut sein muss. Sie unterteilen sich in Haftungsregeln innerhalb einer Ebene und Konkretisierungsregeln zwischen den Ebenen.
+**Definition:** Konsistenzregeln sind Vorhersagen der Theorie des Ebenenmodell digitaler Lösungens darüber, wie ein stimmiger Entwurf einer digitalen Lösung aufgebaut sein muss. Sie unterteilen sich in Haftungsregeln innerhalb einer Ebene und Konkretisierungsregeln zwischen den Ebenen.
 
 ## Erläuterung
 
-Das Ebenenmodell zusammen mit dem [[arbeitsmodell]] (FFQ, Ziele, Randbedingungen) ist nicht nur ein Ordnungsschema, sondern eine **Theorie der Gestalt digitaler Lösungen**. Die Gestalt einer Lösung wird durch den Entwurf festgehalten — deshalb beziehen sich die Aussagen der Theorie auf genau diesen Entwurf. Aus jeder Theorie lassen sich Vorhersagen ableiten; im vorliegenden Fall Vorhersagen darüber, wie ein stimmiger Entwurf einer digitalen Lösung strukturiert sein muss und was in ihm zusammengehören muss. Diese Vorhersagen nennen wir Konsistenzregeln.
+Das Ebenenmodell zusammen mit dem Arbeitsmodell (FFQ, Ziele, Randbedingungen) ist nicht nur ein Ordnungsschema, sondern eine **Theorie der Gestalt digitaler Lösungen**. Die Gestalt einer Lösung wird durch den Entwurf festgehalten — deshalb beziehen sich die Aussagen der Theorie auf genau diesen Entwurf. Aus jeder Theorie lassen sich Vorhersagen ableiten; im vorliegenden Fall Vorhersagen darüber, wie ein stimmiger Entwurf einer digitalen Lösung strukturiert sein muss und was in ihm zusammengehören muss. Diese Vorhersagen nennen wir Konsistenzregeln.
 
 Konsistenzregeln sind keine Konventionen, die man hätte anders wählen können. Sie sind **strukturelle Konsequenzen** aus dem, was das Modell behauptet. Wenn eine Funktion nach dem Modell an einer Form haften muss, dann ist ein Geschäftsprozess ohne Akteur im Sinne der Theorie undenkbar — nicht verboten, sondern *unvollständig gedacht*.
 
@@ -45,7 +45,7 @@ Konkretisierungsregeln wirken in **drei Richtungen**, die für das Entwerfen gle
 
 - **Top-down erzwingt:** Obere Ebenen geben den Rahmen vor.
 - **Bottom-up schränkt ein:** Untere Ebenen melden zurück, wenn etwas nicht konkretisierbar ist.
-- **Bottom-up ermöglicht:** Das Wissen über technologische Möglichkeiten auf den unteren Ebenen eröffnet neue strategische Räume auf der Lösungsebene (siehe [[materialkompetenz]]).
+- **Bottom-up ermöglicht:** Das Wissen über technologische Möglichkeiten auf den unteren Ebenen eröffnet neue strategische Räume auf der Lösungsebene (siehe Materialkompetenz).
 
 ## Abgrenzung
 
@@ -57,13 +57,13 @@ Konkretisierungsregeln wirken in **drei Richtungen**, die für das Entwerfen gle
 
 ## Verwendung im Buch
 
-- [[Kap03#3.1]] führt die Theorienatur des Modells und die Unterscheidung Haftung / Konkretisierung als Versprechen ein (Lernziele LZ3.1-6, LZ3.1-7).
-- [[Kap03#3.2]] · [[Kap03#3.3]] · [[Kap03#3.4]] schließen jeweils mit den Haftungsregeln der betreffenden Ebene.
-- [[Kap03#3.5]] entfaltet die Konkretisierungsregeln zwischen den Ebenen, verbunden mit den drei Wirkungsrichtungen.
+- Kap03#3.1 führt die Theorienatur des Modells und die Unterscheidung Haftung / Konkretisierung als Versprechen ein (Lernziele LZ3.1-6, LZ3.1-7).
+- Kap03#3.2 · Kap03#3.3 · Kap03#3.4 schließen jeweils mit den Haftungsregeln der betreffenden Ebene.
+- Kap03#3.5 entfaltet die Konkretisierungsregeln zwischen den Ebenen, verbunden mit den drei Wirkungsrichtungen.
 
 ## Verwandt
 
-- [[ebenenmodell]] · [[arbeitsmodell]] · [[ffq-modell]] — das theoretische Fundament
-- [[loesungsebene]] · [[systemebene]] · [[elementebene]]
-- [[materialkompetenz]] — Voraussetzung für "Bottom-up ermöglicht"
-- [[ziel]] · [[randbedingung]] · [[qualitaet]] — Aspekte, auf die Konsistenzregeln wirken
+- Ebenenmodell digitaler Lösungen · Arbeitsmodell · FFQ-Modell — das theoretische Fundament
+- Lösungsebene · Systemebene · Elementebene
+- Materialkompetenz — Voraussetzung für "Bottom-up ermöglicht"
+- Ziel · Randbedingung · Qualität — Aspekte, auf die Konsistenzregeln wirken

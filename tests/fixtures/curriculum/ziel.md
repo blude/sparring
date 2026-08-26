@@ -7,19 +7,19 @@ stand: 2026-04-19
 
 # Ziel
 
-**Definition:** Ein Ziel ist ein angestrebter Zustand, den der Entwurf einer digitalen Lösung erreichen soll. Ziele existieren auf jeder Ebene des [[ebenenmodell]]s in einer ebenenspezifischen Ausprägung und leiten sich in einer klaren Kaskade voneinander ab.
+**Definition:** Ein Ziel ist ein angestrebter Zustand, den der Entwurf einer digitalen Lösung erreichen soll. Ziele existieren auf jeder Ebene des Ebenenmodell digitaler Lösungens in einer ebenenspezifischen Ausprägung und leiten sich in einer klaren Kaskade voneinander ab.
 
 ## Erläuterung
 
-Ziele sind der erste Baustein des [[arbeitsmodell]]s: Ohne Ziele kein Maß, ohne Maß kein Entwurf. Sie beantworten die Frage "Was wollen wir erreichen?" — konsequent zu trennen vom "Wie erreichen wir das?", das dann in Form, Funktion und Qualität (FFQ) konkretisiert wird.
+Ziele sind der erste Baustein des Arbeitsmodells: Ohne Ziele kein Maß, ohne Maß kein Entwurf. Sie beantworten die Frage "Was wollen wir erreichen?" — konsequent zu trennen vom "Wie erreichen wir das?", das dann in Form, Funktion und Qualität (FFQ) konkretisiert wird.
 
 Das Besondere im Ebenenmodell ist: Ziele existieren nicht nur auf einer Ebene, sondern auf allen drei — und zwar in *ebenenspezifischen Ausprägungen* mit eigener Sprache und eigener Granularität. Die Ziele einer oberen Ebene werden auf der darunterliegenden Ebene konkretisiert; die Ziele einer unteren Ebene können Ziele oberhalb einschränken oder ermöglichen.
 
 **Die Kaskade (strikt):**
 
-Vision → [[loesungsziel]] → [[systemziel]] → [[elementziel]]
+Vision → Lösungsziel → Systemziel → Elementziel
 
-Die [[vision]] wirkt nicht direkt auf die Systemebene durch. Sie wird zunächst in Lösungsziele übersetzt; erst diese werden zu Systemzielen konkretisiert, und diese wiederum zu Elementzielen. Damit ist der Ableitungspfad immer nachvollziehbar, und es entsteht kein Durcheinander zwischen strategischer Absicht und technischer Spezifikation.
+Die Vision wirkt nicht direkt auf die Systemebene durch. Sie wird zunächst in Lösungsziele übersetzt; erst diese werden zu Systemzielen konkretisiert, und diese wiederum zu Elementzielen. Damit ist der Ableitungspfad immer nachvollziehbar, und es entsteht kein Durcheinander zwischen strategischer Absicht und technischer Spezifikation.
 
 ## Zwei Sprachregister
 
@@ -39,12 +39,12 @@ Der Grund für diese Zweiteilung ist pragmatisch: "Lösungsziel" klingt im Flie�
 
 ## Verwendung im Buch
 
-- [[Kap03]] führt Ziele auf jeder der drei Ebenen ein.
-- [[Kap03#3.5]] zeigt die Kaskadenlogik und die drei Richtungen (top-down erzwingt, bottom-up schränkt ein, bottom-up ermöglicht).
+- Kap03 führt Ziele auf jeder der drei Ebenen ein.
+- Kap03#3.5 zeigt die Kaskadenlogik und die drei Richtungen (top-down erzwingt, bottom-up schränkt ein, bottom-up ermöglicht).
 
 ## Verwandt
 
-- [[vision]] — Sonderkonstrukt auf der Lösungsebene
-- [[loesungsziel]] · [[systemziel]] · [[elementziel]] — die drei ebenenspezifischen Varianten
-- [[arbeitsmodell]] — Ziele sind Teil des Arbeitsmodells auf jeder Ebene
-- [[randbedingung]] · [[qualitaet]] — klar abzugrenzen von Zielen
+- Vision — Sonderkonstrukt auf der Lösungsebene
+- Lösungsziel · Systemziel · Elementziel — die drei ebenenspezifischen Varianten
+- Arbeitsmodell — Ziele sind Teil des Arbeitsmodells auf jeder Ebene
+- Randbedingung · Qualität — klar abzugrenzen von Zielen

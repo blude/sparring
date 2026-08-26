@@ -7,17 +7,17 @@ stand: 2026-04-26
 
 # Datenschutz
 
-**Definition:** Die Behandlung personenbezogener Daten nach rechtlichen Vorgaben wie der DSGVO. Auf der [[elementebene]] heißt das: Welche [[entitaet|Entitäten]] enthalten personenbezogene Attribute, wie lange werden sie gespeichert, an wen gehen sie weiter?
+**Definition:** Die Behandlung personenbezogener Daten nach rechtlichen Vorgaben wie der DSGVO. Auf der Elementebene heißt das: Welche Entitäten enthalten personenbezogene Attribute, wie lange werden sie gespeichert, an wen gehen sie weiter?
 
 ## Erläuterung
 
-Datenschutz ist ein Querschnittsthema, das auf jeder Ebene des [[ebenenmodell|Ebenenmodells]] anders greift:
+Datenschutz ist ein Querschnittsthema, das auf jeder Ebene des Ebenenmodells anders greift:
 
-- **[[loesungsebene|Lösungsebene]]:** Datenschutz als Qualitätsanforderung an die [[wertschoepfungsarchitektur]] — welche Daten werden überhaupt gesammelt, und warum?
-- **[[systemebene|Systemebene]]:** Auslegung der [[systemarchitektur]] — Verschlüsselung, Datensparsamkeit, Löschbarkeit als Entwurfsentscheidungen.
-- **[[elementebene|Elementebene]]:** Datenschutz-Eigenschaften der [[entitaet|Entitäten]] — welche Attribute sind personenbezogen, wie lange bleiben sie gespeichert, wer bekommt sie?
+- **Lösungsebene:** Datenschutz als Qualitätsanforderung an die Wertschöpfungsarchitektur — welche Daten werden überhaupt gesammelt, und warum?
+- **Systemebene:** Auslegung der Systemarchitektur — Verschlüsselung, Datensparsamkeit, Löschbarkeit als Entwurfsentscheidungen.
+- **Elementebene:** Datenschutz-Eigenschaften der Entitäten — welche Attribute sind personenbezogen, wie lange bleiben sie gespeichert, wer bekommt sie?
 
-Auf der Elementebene ist Datenschutz eine **externe Randbedingung** (vgl. [[Kap03#3.4.5]]): Die DSGVO ist nicht verhandelbar — sie setzt verbindliche Grenzen für die Gestaltung der Entitäten.
+Auf der Elementebene ist Datenschutz eine **externe Randbedingung** (vgl. Kap03#3.4.5): Die DSGVO ist nicht verhandelbar — sie setzt verbindliche Grenzen für die Gestaltung der Entitäten.
 
 Konkrete Prüffragen auf der Elementebene:
 - Welche Entitäten enthalten personenbezogene Attribute?
@@ -43,14 +43,14 @@ Personenbezogene Attribute: Benutzer-ID, Geräteliste. Datenschutz: End-to-End-V
 
 ## Verwendung im Buch
 
-- [[Kap03#3.4.5]] führt Datenschutz als externe Randbedingung auf der Elementebene ein.
+- Kap03#3.4.5 führt Datenschutz als externe Randbedingung auf der Elementebene ein.
 - Datenschutz auf der Lösungsebene: Qualitätsanforderung an die Wertschöpfungsarchitektur.
 - Datenschutz auf der Systemebene: Architekturentscheidungen (Verschlüsselung, Datensparsamkeit, Löschbarkeit).
 
 ## Verwandt
 
-- [[entitaet]] — der primäre Anker für Datenschutz auf der Elementebene
-- [[qualitaetsanforderung]] — formale Anforderung, die aus Datenschutzvorgaben abgeleitet wird
-- [[wertschoepfungsarchitektur]] — Datenschutz als Qualitätsanforderung auf der Lösungsebene
-- [[systemarchitektur]] — Datenschutz als Architekturentscheidung auf der Systemebene
-- [[elementebene]] — die Ebene, auf der Datenschutz als Entitäts-Eigenschaft greift
+- Entität — der primäre Anker für Datenschutz auf der Elementebene
+- Qualitätsanforderung — formale Anforderung, die aus Datenschutzvorgaben abgeleitet wird
+- Wertschöpfungsarchitektur — Datenschutz als Qualitätsanforderung auf der Lösungsebene
+- Systemarchitektur — Datenschutz als Architekturentscheidung auf der Systemebene
+- Elementebene — die Ebene, auf der Datenschutz als Entitäts-Eigenschaft greift

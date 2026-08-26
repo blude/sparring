@@ -17,7 +17,7 @@ stand: 2026-05-02
 
 - **Klasse:** Aspektmuster (vormals: Grundgestalt)
 - **Ebene:** Lösungsebene
-- **Aspekt-Bündelung:** Form: [[systemarchitektur]] (Concurrency-Infrastruktur, Load-Balancer, Ressourcenpools); Funktion: [[geschaeftsprozess]] (Instanziierungscharakter — seriell vs. kapazitätsbegrenzt vs. elastisch)
+- **Aspekt-Bündelung:** Form: Systemarchitektur (Concurrency-Infrastruktur, Load-Balancer, Ressourcenpools); Funktion: Geschäftsprozess (Instanziierungscharakter — seriell vs. kapazitätsbegrenzt vs. elastisch)
 
 ## Spektrum
 
@@ -35,10 +35,10 @@ Das Spektrum läuft von streng seriell über kapazitätsbegrenzt bis unbegrenzt 
 
 ## Treibende Forces
 
-- [[profitorientierung]]: Zieht offen-gleichzeitige Prozesse für öffentliche Services, weil unbegrenzte Parallelität unbegrenztes Wachstum ermöglicht. Skalierbarkeit ist ein direkter Profithebel im B2C-Bereich.
-- [[oekologische-nachhaltigkeit]]: Steht in Spannung zu offen-gleichzeitigen Prozessen — elastische Cloud-Infrastruktur verbraucht bei Lastspitzen viel Energie. Batch-Architekturen (serialisiert, zeitgesteuert) können energieeffizienter sein als permanente Hochverfügbarkeit.
-- [[oekonomische-nachhaltigkeit]]: Zieht definiert-gleichzeitige Lösungen, weil planbare Kapazität planbare Betriebskosten bedeutet. Offen-gleichzeitige Architekturen haben schwer kalkulierbare Cloud-Kosten bei Lastspitzen.
-- [[usability]]: Offen-gleichzeitige Systeme müssen Wartezeiten und Degradationen bei hoher Last vermeiden — das ist eine direkte Usability-Anforderung. Warteschlangen-Feedback ("Sie sind #48 in der Queue") ist notwendig, wenn Limits erreicht werden.
+- Profitorientierung: Zieht offen-gleichzeitige Prozesse für öffentliche Services, weil unbegrenzte Parallelität unbegrenztes Wachstum ermöglicht. Skalierbarkeit ist ein direkter Profithebel im B2C-Bereich.
+- Ökologische Nachhaltigkeit: Steht in Spannung zu offen-gleichzeitigen Prozessen — elastische Cloud-Infrastruktur verbraucht bei Lastspitzen viel Energie. Batch-Architekturen (serialisiert, zeitgesteuert) können energieeffizienter sein als permanente Hochverfügbarkeit.
+- Ökonomische Nachhaltigkeit: Zieht definiert-gleichzeitige Lösungen, weil planbare Kapazität planbare Betriebskosten bedeutet. Offen-gleichzeitige Architekturen haben schwer kalkulierbare Cloud-Kosten bei Lastspitzen.
+- Usability: Offen-gleichzeitige Systeme müssen Wartezeiten und Degradationen bei hoher Last vermeiden — das ist eine direkte Usability-Anforderung. Warteschlangen-Feedback ("Sie sind #48 in der Queue") ist notwendig, wenn Limits erreicht werden.
 
 ## Konsequenzen / Propagation nach unten
 
@@ -53,9 +53,9 @@ Das Spektrum läuft von streng seriell über kapazitätsbegrenzt bis unbegrenzt 
 
 ## Verwandte Strukturmuster
 
-- [[prozess-haeufigkeit]]: Prozesse, die sehr häufig laufen (wiederkehrend, Dauerprozess), werden oft offen-gleichzeitig designed. Einmalige Lifecycle-Prozesse können serialisiert werden.
-- [[prozess-steuerung]]: Automatische Prozesse sind oft offen-gleichzeitig oder definiert-gleichzeitig. Menschgeführte Prozesse tendieren zur Serialisierung (ein Mensch entscheidet einmal).
-- [[medialitaet]]: Volldigitale Prozesse können offen-gleichzeitig sein. Analoge Prozesse sind praktisch immer serialisiert — physische Ressourcen (Techniker, Maschinen) begrenzen die Parallelität.
+- Prozess-Häufigkeit: Prozesse, die sehr häufig laufen (wiederkehrend, Dauerprozess), werden oft offen-gleichzeitig designed. Einmalige Lifecycle-Prozesse können serialisiert werden.
+- Prozess-Steuerung: Automatische Prozesse sind oft offen-gleichzeitig oder definiert-gleichzeitig. Menschgeführte Prozesse tendieren zur Serialisierung (ein Mensch entscheidet einmal).
+- Medialität: Volldigitale Prozesse können offen-gleichzeitig sein. Analoge Prozesse sind praktisch immer serialisiert — physische Ressourcen (Techniker, Maschinen) begrenzen die Parallelität.
 
 ## Beispiele
 
@@ -67,12 +67,12 @@ Das Spektrum läuft von streng seriell über kapazitätsbegrenzt bis unbegrenzt 
 
 ## Verwendung im Buch
 
-- [[Kap17#17.4]] — Parallelität als vierte Dimension der Geschäftsprozess-Muster
+- Kap17#17.4 — Parallelität als vierte Dimension der Geschäftsprozess-Muster
 
 ## Verwandt
 
-- [[geschaeftsprozess]] — der Baustein der Lösungsebene, den diese Grundgestalt prägt
-- [[prozess-haeufigkeit]] — Häufigkeit und Parallelität bestimmen gemeinsam die Infrastrukturanforderungen
-- [[prozess-steuerung]] — Steuerungscharakter beeinflusst, welche Parallelitätsvariante sinnvoll ist
-- [[medialitaet]] — Medialität begrenzt die mögliche Parallelität
-- [[grundgestalt]] — die Musterklasse
+- Geschäftsprozess — der Baustein der Lösungsebene, den diese Grundgestalt prägt
+- Prozess-Häufigkeit — Häufigkeit und Parallelität bestimmen gemeinsam die Infrastrukturanforderungen
+- Prozess-Steuerung — Steuerungscharakter beeinflusst, welche Parallelitätsvariante sinnvoll ist
+- Medialität — Medialität begrenzt die mögliche Parallelität
+- Grundgestalt — die Musterklasse
