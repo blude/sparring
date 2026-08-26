@@ -37,18 +37,3 @@ Akteure sind an die Wertschöpfungsarchitektur gebunden (Haftungsregel 3 der Lö
 **Greengineers:**
 - Technischer Akteur: Die Entscheidungs-Engine agiert eigenständig — sie liest Strompreise und Wetterdaten, berechnet die optimale Heizstrategie und sendet Steuerungsbefehle. Kein Mensch ist in der Hauptlinie dieses Prozesses beteiligt.
 - Menschlicher Akteur: Hausbesitzer (setzt Präferenzen, prüft Ersparnisse im Portal)
-
-## Verwendung im Buch
-
-- Kap03#3.2.3 führt Akteure im Kontext der Geschäftsprozesse ein.
-- Kap03#3.2.6 Regel 3: Geschäftsprozesse verwenden nur Akteure der Wertschöpfungsarchitektur.
-- Kap15 vertieft Akteure als eigenes Teil-II-Muster auf der Lösungsebene.
-
-## Verwandt
-
-- Lösungsebene — die Heimatebene des Begriffs
-- Geschäftsprozess — der Ort, an dem Akteure handeln
-- Stakeholder — Oberbegriff; Akteur ist eine handelnde Stakeholder-Rolle
-- Benutzertyp — Konkretisierung menschlicher Akteure auf der Systemebene
-- Aufbauorganisation — liefert die internen menschlichen Akteure
-- Digitales Element — liefert die technischen Akteure

@@ -33,19 +33,3 @@ Bei Lösungen mit mehreren Kundengruppen — wie Greengineers — gibt es mehrer
 **Familie Heiner:** „Bio-Produkte aus vertrautem Anbau — am nächsten Tag geliefert zu dir nach Hause. Frischer und praktischer als zum Hof zu fahren."
 
 **Greengineers (Hausbesitzer):** „Ihre Heizung optimiert sich selbst — Sie zahlen weniger Nebenkosten, Ihr Komfort bleibt, und Sie unterstützen die Energiewende." Daneben ein separates Wertversprechen für den Netzbetreiber: „Wir bieten dezentralisierte Lastverschiebung an."
-
-## Verwendung im Buch
-
-- Kap03#3.2.3 führt das Wertversprechen als Funktionsaspekt der Lösungsebene ein.
-- Kap03#3.2.4 klärt, dass Wertversprechen keine eigene Q-Dimension im Entwurfsmodell hat.
-- Kap03#3.2.6 Regeln 2 und 4: Wertversprechen orientieren sich am Kundenkontext; jeder Geschäftsprozess trägt zu einem Wertversprechen bei.
-- Kap07#7.3 behandelt die Formulierungstechnik für Wertversprechen.
-- Kap04 betrachtet das Wertversprechen aus perspektivischer Sicht (Mensch, Wirtschaft, Technik).
-
-## Verwandt
-
-- Lösungsebene — die Heimatebene des Begriffs
-- Lösungsziel — komplementäre Auftraggebendenperspektive
-- Geschäftsprozess — erbringt das Wertversprechen durch konkrete Abläufe
-- Kundenkontext — pro Kundengruppe ein Wertversprechen
-- Qualität — die Einlösung des Wertversprechens zeigt sich in der Prozessqualität

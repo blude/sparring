@@ -72,16 +72,3 @@ stand: 2026-05-02
 **Familie Heiner** (hybrid bis souverän): Bestellung, Ernte, Verpackung souverän. Lieferlogistik durch externen Dienstleister (Partner). Finanzdienstleistungen durch Bank/Payment-Anbieter. Die Kern-Wertschöpfung (Bio-Produkte, persönliche Beziehung) bleibt souverän.
 
 **Greengineers** (partnerorientiert): Greengineers koordiniert — Installateure sind Partner, Energieversorger sind Partner, Gerätehersteller sind Partner. Die eigene Organisation erbringt Plattform-Betrieb, Datenanalyse und Koordination. Die Wertschöpfung am Haus entsteht durch das Partnernetz.
-
-## Verwendung im Buch
-
-- Kap12 — Aufbauorganisation als Baustein der Wertschöpfungsarchitektur
-- Kap14 — Aufbauorganisation und Partner als vertieftes Kapitel
-
-## Verwandt
-
-- Aufbauorganisation — der Baustein (Begriff)
-- Partner — die externen Organisationen in der Partnerstruktur
-- Entwicklung (Grundgestalt) — eng verwandt auf Systemebene (Build/Rely)
-- Wertversprechen-Charakter — strukturell verbunden mit Partnerorientierung
-- Lösungsebene — die Ebene dieser Grundgestalt

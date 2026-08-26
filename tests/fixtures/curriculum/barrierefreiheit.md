@@ -52,22 +52,3 @@ Der Online-Shop fällt seit 2025 unter das BFSG — bestimmte Anforderungen sind
 **NoteMate:** Für eine Notiz-App für Studierende ist Barrierefreiheit eine relevante Force — ein nicht unerheblicher Anteil der Nutzerschaft hat Lese- oder motorische Einschränkungen. Sprachbasierte Notizeingabe als Ergänzung zur Texteingabe wäre eine barrierefreie Erweiterung der UI-Modalität.
 
 **Greengineers:** Komplexeste Barrierefreiheits-Anforderung: Der Homeserver ist ein physisches Gerät mit Einrichtungsinterface. Sind die Energie-Dashboards für farbenblinde Nutzer lesbar (Ampelfarben rot/grün sind problematisch)?
-
-## Verwendung im Buch
-
-- Kap03#3.4.4 führt Barrierefreiheit als Qualitätsmerkmal des User Interfaces ein.
-- Kap03#3.4.5 behandelt die gesetzlichen Vorgaben (WCAG 2.1, ADA, BFSG) als externe Randbedingung.
-- Kap44 vertieft Barrierefreiheit im Kontext der Entwurfspraxis.
-
-## Verwandt
-
-- Inklusion — die Force, die Barrierefreiheit als letzten Zweck begründet
-- User Interface — der primäre Anker für Barrierefreiheit als Qualität
-- Usability · User Experience — benachbarte Qualitätsdimensionen
-- Benutzertyp — Barrierefreiheit erweitert, welche Benutzertypen ein Element nutzen können
-- Qualitätsanforderung — Barrierefreiheits-Anforderungen als formale Qualitätsanforderungen
-- Randbedingung — gesetzliche Barrierefreiheitsvorgaben (BFSG, WCAG, ADA) als Randbedingung
-- Elementebene — die Ebene, auf der Barrierefreiheit als Eigenschaft verortet ist
-- UI-Modalität — das Strukturmuster, das Barrierefreiheits-Anforderungen am stärksten prägt
-- Soziale Nachhaltigkeit — Barrierefreiheit als Beitrag zur sozialen Nachhaltigkeit
-- Force — zur strikten Definition des Letzte-Zweck-Kriteriums

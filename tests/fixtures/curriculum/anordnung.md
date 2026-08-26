@@ -71,13 +71,3 @@ stand: 2026-05-02
 **Familie Heiner** (zentral): Shop-Server zentral. Keine Notwendigkeit für Verteilung — Skalierungsanforderungen gering.
 
 **Greengineers** (föderiert): Homeserver lokal (dezentrale Verarbeitung) + Cloud-Plattform zentral (Aggregation, Optimierung). Klassisches föderiertes Muster: Verarbeitung nah am Gerät, Intelligenz in der Cloud.
-
-## Verwendung im Buch
-
-- Kap19 — Systemarchitektur: Anordnung als Grundgestalt
-
-## Verwandt
-
-- Souveränität — treibende Force
-- Verfügbarkeitsannahme — verwandte Grundgestalt
-- Systemebene — die Ebene dieser Grundgestalt

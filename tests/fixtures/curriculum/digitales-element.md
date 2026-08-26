@@ -35,16 +35,3 @@ Die Differenzierung in Hardware, Software und andere Objekte gehört also auf di
 **Familie Heiner:** Drei Digitale Elemente — der Online-Shop (Kunden bestellen hier), die Warenwirtschaft (interne Verwaltung von Bestand und Bestellungen), die Fahrer-App (Logistik mit aktuellen Routen und Tracking). Dazu möglicherweise Lieferkörbe mit QR-Code als physische Objekte mit digitaler Anbindung.
 
 **Greengineers:** Mehrere Digitale Elemente — die Steuerungsplattform (für Algorithmen und Entscheidungslogik), das Hausbesitzer-Portal (für Kunden), die Geräte-Anbindung (Schnittstelle zu Wärmepumpen und Smart-Home-Geräten). Dazu Hardware: ein Homeserver mit lokaler Intelligenz in den Wohnhäusern.
-
-## Verwendung im Buch
-
-- Kap03#3.2.2 führt Digitale Elemente als vierten Baustein der Wertschöpfungsarchitektur ein.
-- Kap03#3.3 zeigt, wie Digitale Elemente der Lösungsebene auf der Systemebene zur Systemarchitektur konkretisiert werden.
-- Kap17 (Teil II) vertieft das Muster „Digitale Elemente" auf der Lösungsebene.
-
-## Verwandt
-
-- Wertschöpfungsarchitektur — der übergeordnete Baustein
-- Systemebene — entfaltet die technische Struktur der Digitalen Elemente
-- Lösungsebene — Heimat des Begriffs „Digitales Element" auf der strategischen Ebene
-- Informationsarchitektur · Ertragsmodell — benachbarte Bausteine der Wertschöpfungsarchitektur

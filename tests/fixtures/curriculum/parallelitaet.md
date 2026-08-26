@@ -64,15 +64,3 @@ Das Spektrum läuft von streng seriell über kapazitätsbegrenzt bis unbegrenzt 
 **Familie Heiner:** Der Online-Shop muss offen-gleichzeitig sein — ein viraler Moment oder ein Award könnte Traffic-Spitzen erzeugen. Die Backend-Abrechnung läuft definiert-gleichzeitig: ein Abrechnungslauf pro Nacht, kein paralleles Starten möglich, weil Doppelabrechnung verhindert werden muss.
 
 **Greengineers:** Fernwartungs-Sessions für Techniker sind definiert-gleichzeitig: Die Plattform unterstützt maximal N gleichzeitige Sessions aus Kosten- und Kapazitätsgründen. Der Energy-Dispatch-Service ist offen-gleichzeitig konzipiert — alle Kunden-Haushalte werden gleichzeitig abgefragt.
-
-## Verwendung im Buch
-
-- Kap17#17.4 — Parallelität als vierte Dimension der Geschäftsprozess-Muster
-
-## Verwandt
-
-- Geschäftsprozess — der Baustein der Lösungsebene, den diese Grundgestalt prägt
-- Prozess-Häufigkeit — Häufigkeit und Parallelität bestimmen gemeinsam die Infrastrukturanforderungen
-- Prozess-Steuerung — Steuerungscharakter beeinflusst, welche Parallelitätsvariante sinnvoll ist
-- Medialität — Medialität begrenzt die mögliche Parallelität
-- Grundgestalt — die Musterklasse

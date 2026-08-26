@@ -41,18 +41,3 @@ Die Wertschöpfungsarchitektur umfasst nicht nur digitale Aspekte: Aufbauorganis
 **Familie Heiner:** Hybride Wertschöpfungsarchitektur — Kundenkontext Bio-affine Haushalte im 30-km-Radius, Aufbauorganisation Familie plus evtl. Shop-Admin, Partner Logistik- und Zahlungsanbieter, drei digitale Elemente (Online-Shop, Warenwirtschaft, Fahrer-App), Informationsarchitektur mit Produktkatalog, Bestellungen und Lagerbestand.
 
 **Greengineers:** Ökosystemische Wertschöpfungsarchitektur — dreiseitige Partnerstruktur (Wärmepumpenhersteller, Smart-Home-Anbieter, Stromanbieter), komplexe Informationsarchitektur (Gerätedaten, Prognosen, Nutzerpräferenzen), dreiseitiges Ertragsmodell.
-
-## Verwendung im Buch
-
-- Kap03#3.2.2 führt die Wertschöpfungsarchitektur und ihre sechs Bausteine ein.
-- Kap03#3.2.6 zeigt die Haftungsregeln innerhalb der Lösungsebene.
-- Kap03#3.2.7 durchspielt die Wertschöpfungsarchitektur an den drei Fallstudien.
-- Teil II, Kapitel 10–18: Muster der Lösungsebene, die sich auf die Bausteine der Wertschöpfungsarchitektur beziehen.
-
-## Verwandt
-
-- Lösungsebene — die Ebene, auf der die Wertschöpfungsarchitektur verortet ist
-- Arbeitsmodell · FFQ-Modell — das Schema, in das die Wertschöpfungsarchitektur eingebettet ist
-- Kundenkontext · Aufbauorganisation · Partner · Digitales Element · Informationsarchitektur · Ertragsmodell — die sechs Bausteine
-- Wertversprechen · Geschäftsprozess — die Funktion, die zur Form gehört
-- Systemebene — konkretisiert die digitalen Elemente der Wertschöpfungsarchitektur

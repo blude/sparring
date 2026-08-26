@@ -65,15 +65,3 @@ Das Muster hat zwei charakteristische Ausprägungen:
 **Familie Heiner:** Das klassischste Beispiel: Der Einkaufskorb im Online-Shop. Kunde legt Produkte hinein, ändert Mengen, nimmt eins heraus. Erst beim Klick auf "Jetzt bestellen" wird die gesamte Bestellung als eine Transaktion verarbeitet. Scheitert die Zahlung, bleibt der Korb unverändert erhalten.
 
 **Greengineers:** Ein Installationstechniker konfiguriert mehrere Geräte in einer Planungsansicht. Er fügt Geräte hinzu, verändert Parameter, entfernt eines wieder. Erst nach vollständiger Planung sendet er die gesamte Konfiguration atomar an die Cloud — Teilübertragungen würden inkonsistente Zustände erzeugen.
-
-## Verwendung im Buch
-
-- Kap17#17.6.1 — Arbeitskorb als erstes konkretes Prozessmuster
-
-## Verwandt
-
-- Geschäftsprozess — der Baustein der Lösungsebene, den dieses Muster konkretisiert
-- Flow-Prozess — häufiger Nachfolgeprozess nach dem Commit
-- Prozess-Steuerung — Sammelphase ist manuell, Verarbeitungsphase ist systemgeführt oder automatisch
-- Akteure im Prozess — Sammelphase typischerweise Solo
-- Grundgestalt — die Musterklasse

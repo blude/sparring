@@ -105,19 +105,3 @@ Diese Grundgestalt setzt die übergeordnete Entscheidung Produkt ↔ Service vor
 **Greengineers** — Digitaler Service für Maschinen: Die Energieaustausch-Plattform bietet APIs für andere Systeme (Hausautomation, Energieunternehmen). Stabilität, Latenz und Rate Limiting sind die zentralen Qualitätsanforderungen — kein Nutzer klickt hier, ein System fragt ab.
 
 **NoteMate** — Digitaler Service für Menschen (Ausbaustufe): Wenn NoteMate zu einem SaaS-Tool wird, muss es Hochverfügbarkeit zusagen. 99,9% Verfügbarkeit bedeutet maximal 45 Minuten Ausfallzeit pro Monat — eine echte Betriebsverpflichtung.
-
-## Verwendung im Buch
-
-- Kap12#12.3 — alle vier Servicetypen werden als eigenständige R-Muster ausgearbeitet
-- Kap12#12.1 — Produkt-Service-Grundentscheidung als übergeordnete Einordnung
-- Kap15 — Ertragsmodell (Abo, Provision, nutzungsbasiert) als Folgeentscheidung
-- Kap17 — Geschäftsprozesse als Folgeentscheidung (je Typ fundamental verschieden)
-- Kap19 — Systemarchitektur als Folgeentscheidung
-
-## Verwandt
-
-- Grundgestalt — die Musterklasse dieser Seite
-- Mustermodell — das übergreifende Klassifikationsschema
-- Prägend und offen — Propagationseigenschaft der Optionen auf diesem Spektrum
-- Produkt ↔ Service — die übergeordnete Grundgestalt
-- Wertschöpfungsarchitektur — der Lösungsebene-Baustein, den Servicetypen prägen

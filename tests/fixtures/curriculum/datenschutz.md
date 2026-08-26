@@ -40,17 +40,3 @@ Die Lieferadresse enthält personenbezogene Attribute (Name, Straße, PLZ, Ort).
 
 **NoteMate — Entität Benutzerkonto:**
 Personenbezogene Attribute: Benutzer-ID, Geräteliste. Datenschutz: End-to-End-Verschlüsselung; Notizen dürfen auch für NoteMate nicht lesbar sein.
-
-## Verwendung im Buch
-
-- Kap03#3.4.5 führt Datenschutz als externe Randbedingung auf der Elementebene ein.
-- Datenschutz auf der Lösungsebene: Qualitätsanforderung an die Wertschöpfungsarchitektur.
-- Datenschutz auf der Systemebene: Architekturentscheidungen (Verschlüsselung, Datensparsamkeit, Löschbarkeit).
-
-## Verwandt
-
-- Entität — der primäre Anker für Datenschutz auf der Elementebene
-- Qualitätsanforderung — formale Anforderung, die aus Datenschutzvorgaben abgeleitet wird
-- Wertschöpfungsarchitektur — Datenschutz als Qualitätsanforderung auf der Lösungsebene
-- Systemarchitektur — Datenschutz als Architekturentscheidung auf der Systemebene
-- Elementebene — die Ebene, auf der Datenschutz als Entitäts-Eigenschaft greift
