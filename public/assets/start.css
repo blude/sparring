@@ -104,7 +104,10 @@ body {
     background: #d32f2f;
     text-decoration: none;
     color: #fff;
+    transition: filter 0.15s ease;
 }
+#start-btn:hover { filter: brightness(1.1); }
+#start-btn:active { filter: brightness(0.85); }
 .learn-more {
     margin: 0;
     font-size: 0.875rem;
