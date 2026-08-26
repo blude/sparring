@@ -136,10 +136,10 @@ window.SparringDojoOutcome = {
     |--------------------------------------------------------------------------
     */
     function showConfirmDialog(onConfirm) {
-        confirmDialogEl.hidden = false;
+        fadeInGate(confirmDialogEl);
 
         function close() {
-            confirmDialogEl.hidden = true;
+            fadeOutGate(confirmDialogEl);
             confirmCancelBtn.removeEventListener('click', onCancel);
             confirmOkBtn.removeEventListener('click', onOk);
         }
@@ -416,7 +416,7 @@ window.SparringDojoOutcome = {
             window.location.href = '/'; // defensive only — the markup should always be there
             return;
         }
-        evalDialogEl.hidden = false;
+        fadeInGate(evalDialogEl);
         newSessionBtn.disabled = true; // a second "End session" press while this is open would abandon whatever's typed here
 
         // Shared by Skip and Submit — both end the form the same way, just
@@ -534,7 +534,7 @@ window.SparringDojoOutcome = {
             .then(function (data) {
                 sessionId = data.sessionId;
                 setUrlSessionId(sessionId);
-                retentionEl.hidden = false; // ST-01-3: decision presented, field stays disabled
+                fadeInGate(retentionEl); // ST-01-3: decision presented, field stays disabled
                 showPlaybook(); // brand-new session, no turns yet
                 // QR-reply flow: shown before consent too — gives the visitor
                 // context for what they're walking into. Never shown on a
@@ -544,6 +544,27 @@ window.SparringDojoOutcome = {
             .catch(function () {
                 setHistoryStatus(window.STRINGS.dojo.installationUnavailable, false);
             });
+    }
+
+    // Fades a .gate-card dialog in (0 -> 1 opacity per its own CSS) — shared
+    // by #retention, #eval-dialog and #confirm-dialog. Same choreography as
+    // showPlaybook/hidePlaybook below, generalized since all three gate-cards
+    // fade identically.
+    function fadeInGate(el) {
+        el.classList.add('fading'); // start at 0 opacity while still [hidden]
+        el.hidden = false;
+        void el.offsetWidth; // commit the 0-opacity state before animating away from it
+        requestAnimationFrame(function () {
+            el.classList.remove('fading'); // fades 0 -> 1
+        });
+    }
+
+    // Fades a .gate-card dialog out, then [hidden]s it once the fade finishes
+    // (matches the 300ms transition in dojo.css).
+    function fadeOutGate(el) {
+        if (el.hidden) return; // already hidden
+        el.classList.add('fading'); // fades 1 -> 0
+        setTimeout(function () { el.hidden = true; }, 300);
     }
 
     // Fades #playbook in (0 -> 0.8 opacity per its own CSS). Only ever called
@@ -614,7 +635,7 @@ window.SparringDojoOutcome = {
                 return res.json();
             })
             .then(function (data) {
-                retentionEl.hidden = true;
+                fadeOutGate(retentionEl);
                 revealIdentity(sessionId); // consent just recorded — first point alias/avatar may be shown
                 applySessionState(data.sessionState, data.turnsRemaining);
                 updateDebugPanel({ sessionId: sessionId, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
