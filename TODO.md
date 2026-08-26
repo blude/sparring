@@ -3,7 +3,7 @@
 ## High priority
 
 - [ ] Fix prompt introspection hiccup
-- [ ] Use session title as the de facto session identifier for exchanges in
+- [x] Use session title as the de facto session identifier for exchanges in
   the arena display
 
 ## Medium priority
@@ -22,7 +22,7 @@
 - [ ] Initial Scenario Setup: if first visitor message starts with "Sparring
   Scenario:", Sparring's immediate response should be a simple
   acknowledgment of the scenario (companion to the display-side item above)
-- [ ] Display AI-generated session summaries (Haiku, possibly)
+- [x] Display AI-generated session summaries (Haiku, possibly)
 - [ ] Add realistic content to Credits page (partially done)
 - [ ] Curriculum retrieval: narrow/restructure hub-like pages in
   `data/curriculum/` (e.g. `loesungsebene.md`,
