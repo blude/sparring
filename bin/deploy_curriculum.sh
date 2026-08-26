@@ -20,7 +20,7 @@ if [[ ! -f bin/deploy.env ]]; then
 fi
 source bin/deploy.env
 
-RSYNC_FLAGS=(-rlptDz --delete)
+RSYNC_FLAGS=(-rlptDz --delete --exclude=.git)
 DRY_RUN=false
 if [[ "${1:-}" == "--dry-run" ]]; then
     DRY_RUN=true
