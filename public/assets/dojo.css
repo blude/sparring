@@ -9,6 +9,7 @@
 button { transition: filter 0.15s ease; }
 button:not(:disabled):hover { filter: brightness(1.1); }
 button:not(:disabled):active { filter: brightness(0.85); }
+button, textarea { -webkit-tap-highlight-color: transparent; } /* suppress mobile Safari/Chrome's tap-flash */
 
 /* QR-03: reachable one-handed on a small phone, retention decision answerable
    without scrolling. Everything else here is a placeholder — refined later. */

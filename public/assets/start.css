@@ -105,6 +105,7 @@ body {
     text-decoration: none;
     color: #fff;
     transition: filter 0.15s ease;
+    -webkit-tap-highlight-color: transparent; /* suppress mobile Safari/Chrome's tap-flash */
 }
 #start-btn:hover { filter: brightness(1.1); }
 #start-btn:active { filter: brightness(0.85); }
