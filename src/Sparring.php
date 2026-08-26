@@ -356,6 +356,7 @@ final class Sparring
             $items[] = [
                 'sessionId' => $session['id'],
                 'scenario' => $session['scenario'] ?? '',
+                'title' => $session['title'] ?? null, // may not exist yet (TF-07 runs after turn 1) — client falls back to scenario
                 'visitorContribution' => $exchange['visitorContribution'],
                 'sparringResponse' => $exchange['sparringResponse'],
                 'origin' => $session['origin'],

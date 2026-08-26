@@ -13,7 +13,7 @@ require __DIR__ . '/../config.php';
 require __DIR__ . '/../src/Store.php';
 require __DIR__ . '/../src/scenario.php';
 
-/** @return array{ok: bool, reason?: string, exchanges?: list<array{contribution: string, response: string}>, scenarioSourceText?: string} */
+/** @return array{ok: bool, reason?: string, exchanges?: list<array{contribution: string, response: string}>, scenarioSourceText?: string, title?: ?string} */
 function validate_transcript(mixed $data): array
 {
     if (!is_array($data) || !isset($data['exchanges']) || !is_array($data['exchanges']) || $data['exchanges'] === []) {
@@ -37,7 +37,22 @@ function validate_transcript(mixed $data): array
         ? trim($data['scenario_source_text'])
         : $exchanges[0]['contribution'];
 
-    return ['ok' => true, 'exchanges' => $exchanges, 'scenarioSourceText' => $scenarioSourceText];
+    // Title is optional — most transcripts rely on the arena's scenario
+    // fallback (TF-05) — but when supplied it must be a non-empty string.
+    // Capped at TITLE_MAX_CHARS the same way TF-07's own LLM/fallback path
+    // truncates, so a pilot title can't break the arena's layout assumptions.
+    $title = null;
+    if (isset($data['title'])) {
+        if (!is_string($data['title']) || trim($data['title']) === '') {
+            return ['ok' => false, 'reason' => "'title' must be a non-empty string when present"];
+        }
+        $title = trim($data['title']);
+        if (mb_strlen($title) > TITLE_MAX_CHARS) {
+            $title = mb_substr($title, 0, TITLE_MAX_CHARS - 1) . '…';
+        }
+    }
+
+    return ['ok' => true, 'exchanges' => $exchanges, 'scenarioSourceText' => $scenarioSourceText, 'title' => $title];
 }
 
 function import_directory(Store $store, string $dir): array
@@ -74,6 +89,9 @@ function import_directory(Store $store, string $dir): array
         }
         $scenario = derive_scenario_statement($result['scenarioSourceText']);
         $store->setScenario($session['id'], $scenario, 'first-contribution');
+        if ($result['title'] !== null) {
+            $store->setTitle($session['id'], $result['title']);
+        }
         $store->setDisplayable($session['id'], true);
         $store->setConsent($session['id'], true);
 

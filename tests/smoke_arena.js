@@ -24,7 +24,7 @@ eval(source.slice(0, iifeStart));
 const diff = window.SparringArenaDiff.diff;
 
 function item(id, overrides) {
-    return Object.assign({ sessionId: id, scenario: 's', visitorContribution: 'v', sparringResponse: 'r', exchangeId: 1, replyCount: 0 }, overrides || {});
+    return Object.assign({ sessionId: id, scenario: 's', title: null, visitorContribution: 'v', sparringResponse: 'r', exchangeId: 1, replyCount: 0 }, overrides || {});
 }
 
 /*
@@ -79,6 +79,18 @@ result = diff(displayed, [item('a', { exchangeId: 2 })]);
 assert.strictEqual(result.toAdd.length, 0);
 assert.strictEqual(result.toUpdate.length, 1);
 assert.strictEqual(result.toUpdate[0].exchangeId, 2);
+assert.strictEqual(result.toRemove.length, 0);
+
+/*
+|--------------------------------------------------------------------------
+| title arrives async (TF-07 runs after turn 1): null -> string is an update
+|--------------------------------------------------------------------------
+*/
+
+result = diff(displayed, [item('a', { title: 'A refined title' })]);
+assert.strictEqual(result.toAdd.length, 0);
+assert.strictEqual(result.toUpdate.length, 1);
+assert.strictEqual(result.toUpdate[0].title, 'A refined title');
 assert.strictEqual(result.toRemove.length, 0);
 
 /*

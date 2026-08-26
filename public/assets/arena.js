@@ -26,6 +26,7 @@ window.SparringArenaDiff = {
             if (!existing) {
                 toAdd.push(item);
             } else if (existing.scenario !== item.scenario
+                || existing.title !== item.title
                 || existing.visitorContribution !== item.visitorContribution
                 || existing.sparringResponse !== item.sparringResponse
                 || existing.exchangeId !== item.exchangeId
@@ -178,9 +179,12 @@ window.SparringArenaDiff = {
         el.className = 'exchange' + (window.isJuicyOn('displayEntrance') ? ' entering' : '');
         el.dataset.sessionId = item.sessionId;
 
-        var scenario = document.createElement('div');
-        scenario.className = 'scenario';
-        scenario.textContent = item.scenario;
+        // Title is the AI-generated header (TF-07); it's fired off async after
+        // turn 1 and pilot transcripts may not supply one, so fall back to the
+        // cruder trim-derived scenario line until/unless a title exists.
+        var title = document.createElement('div');
+        title.className = 'title';
+        title.textContent = item.title || item.scenario;
 
         var visitorName = document.createElement('div');
         visitorName.className = 'visitor-name';
@@ -221,7 +225,7 @@ window.SparringArenaDiff = {
         response.append(responseText, replyQr, replyCount);
         renderReply(el, replyQr, replyCount, item);
 
-        el.append(scenario, contribution, response);
+        el.append(title, contribution, response);
 
         if (DEBUG) {
             var debugTag = document.createElement('span');
@@ -247,7 +251,7 @@ window.SparringArenaDiff = {
     function updateItem(item) {
         var el = wall.querySelector('[data-session-id="' + item.sessionId + '"]');
         if (!el) { addItem(item); return; }
-        el.querySelector('.scenario').textContent = item.scenario;
+        el.querySelector('.title').textContent = item.title || item.scenario;
         el.querySelector('.contribution-text').textContent = trim(item.visitorContribution, TRIM_CHARS);
         el.querySelector('.response-text').textContent = trim(item.sparringResponse, TRIM_CHARS);
         renderReply(el, el.querySelector('.reply-qr'), el.querySelector('.reply-count'), item);

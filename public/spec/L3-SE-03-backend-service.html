@@ -440,7 +440,7 @@ A second distinction the instruction must also get right, found in testing: stat
 <p><strong><a id="FS-04-4"></a>FS-04-4</strong> <em>(Entity-access)</em> For each selected session, read its most recent exchange from <a href="#E-02">E-02 Exchange</a> (<a href="#E-02.3">E-02.3 visitorContribution</a>, <a href="#E-02.4">E-02.4 sparringResponse</a>). Which exchange to select is an open decision (<a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> <a href="L3-SE-02-display-client.html#TBC-04">TBC-04 Which exchange pair per session.</a>); it is made here and changing it does not affect <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a>.</p>
 </li>
 <li>
-<p><strong><a id="FS-04-5"></a>FS-04-5</strong> <em>(Data-operation)</em> Build each item from the session&#8217;s scenario (<a href="#E-01.5">E-01.5 scenario</a>), the exchange pair, the origin (<a href="#E-01.4">E-01.4 origin</a>), and a recency position. Return the ordered list.</p>
+<p><strong><a id="FS-04-5"></a>FS-04-5</strong> <em>(Data-operation)</em> Build each item from the session&#8217;s scenario (<a href="#E-01.5">E-01.5 scenario</a>), its refined title if one exists yet (<a href="#E-01.12">E-01.12 title</a>; <code>null</code> otherwise — <a href="#TF-07">TF-07 Refine a session title</a> runs asynchronously, so this item is not blocked on it), the exchange pair, the origin (<a href="#E-01.4">E-01.4 origin</a>), and a recency position. Return the ordered list.</p>
 </li>
 </ul>
 </div>
@@ -476,6 +476,9 @@ A second distinction the instruction must also get right, found in testing: stat
 <p><strong><a id="FS-06-4"></a>FS-06-4</strong> <em>(Function-call)</em> Call <a href="#TF-05">TF-05 Derive a scenario statement</a> for each session to derive its scenario statement.</p>
 </li>
 <li>
+<p><strong><a id="FS-06-4a"></a>FS-06-4a</strong> <em>(Entity-access)</em> If the transcript supplies a title, write it to <a href="#E-01.12">E-01.12 title</a> (same length bound as <a href="#TF-07">TF-07 Refine a session title</a>'s own output). Optional — a transcript that omits it leaves the field unset, same as any session whose title hasn&#8217;t been generated yet, and <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> falls back to the scenario line in that case.</p>
+</li>
+<li>
 <p><strong><a id="FS-06-5"></a>FS-06-5</strong> <em>(Data-operation)</em> Return per-transcript outcomes.</p>
 </li>
 </ul>
@@ -497,7 +500,7 @@ A second distinction the instruction must also get right, found in testing: stat
 <p><em>Detail level:</em> Narrative</p>
 </div>
 <div class="paragraph">
-<p>Called once per session by <a href="#TI-06">TI-06 Refine a session title</a>, after the session&#8217;s first exchange exists. Attempts a short (≤38 character) title via <a href="#TO-02">TO-02 Request a classification</a> with a title-generation instruction; on any failure (timeout, malformed response, or any other exception) falls back to the same trim-based derivation <a href="#TF-05">TF-05 Derive a scenario statement</a> uses for the scenario statement, just capped at 38 characters instead of <a href="#TF-05">TF-05 Derive a scenario statement</a>'s own bound. Either path always produces a usable title — there is no "couldn&#8217;t generate one" outcome from the caller&#8217;s point of view. Writes the result to <a href="#E-01.12">E-01.12 title</a> once and never recomputes it: called again for a session that already has one, it returns the stored value unchanged rather than repeating the provider call. No goal relation: like <a href="#TF-04">TF-04 Assemble display material</a> in <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>, this is presentation logic serving <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s header, not a stated business goal.</p>
+<p>Called once per session by <a href="#TI-06">TI-06 Refine a session title</a>, after the session&#8217;s first exchange exists. Attempts a short (≤38 character) title via <a href="#TO-02">TO-02 Request a classification</a> with a title-generation instruction; on any failure (timeout, malformed response, or any other exception) falls back to the same trim-based derivation <a href="#TF-05">TF-05 Derive a scenario statement</a> uses for the scenario statement, just capped at 38 characters instead of <a href="#TF-05">TF-05 Derive a scenario statement</a>'s own bound. Either path always produces a usable title — there is no "couldn&#8217;t generate one" outcome from the caller&#8217;s point of view. Writes the result to <a href="#E-01.12">E-01.12 title</a> once and never recomputes it: called again for a session that already has one, it returns the stored value unchanged rather than repeating the provider call. Two consumers read the result: <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>'s own header (its original purpose), and, once written, <a href="#TF-04">TF-04 Assemble display material</a> picks it up for <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a>'s title line — the latter is read-only here; this function has no SE-02-specific behavior, it just happens to be read by both. No goal relation: this is presentation logic, not a stated business goal.</p>
 </div>
 </div>
 <div class="sect2">
@@ -629,7 +632,7 @@ Unlike the earlier design this superseded, the response&#8217;s condition list i
 <p><em>Call type:</em> Synchronous<br>
 <em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> (<a href="L3-SE-02-display-client.html#TO-01">TO-01 Retrieve display material</a>)<br>
 <em>Input:</em> None.<br>
-<em>Output:</em> An ordered list of items, each carrying a session identifier, scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total session count and a total exchange count (both integers) — every session and exchange ever recorded, live and pilot, not scoped to the items returned.<br>
+<em>Output:</em> An ordered list of items, each carrying a session identifier, scenario statement, an optional refined title (<code>null</code> when none exists yet), one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total session count and a total exchange count (both integers) — every session and exchange ever recorded, live and pilot, not scoped to the items returned.<br>
 <em>Action:</em> Calls <a href="#TF-04">TF-04 Assemble display material</a> for the item list, and separately counts all rows in <a href="#E-01">E-01 Session</a> and <a href="#E-02">E-02 Exchange</a> for the two totals — plain totals, not scoped to the sessions <a href="#TF-04">TF-04 Assemble display material</a> selects and not a selection or ordering decision, so they stay outside that function&#8217;s policy. Returns all three immediately.<br>
 <em>Error cases:</em> None specific to this interface. An empty list is a valid response and occurs only when no pilot material has been imported.</p>
 </div>

@@ -115,6 +115,29 @@ $withExplicitScenario = validate_transcript([
 ]);
 assert($withExplicitScenario['scenarioSourceText'] === 'an explicit scenario'); // explicit field wins, trimmed
 
+// title is optional — omitted entirely stays null, no error
+assert($valid['title'] === null);
+
+// present and short: trimmed, kept as-is
+$withTitle = validate_transcript([
+    'exchanges' => [['contribution' => 'a', 'response' => 'b']],
+    'title' => '  A short title  ',
+]);
+assert($withTitle['ok'] === true);
+assert($withTitle['title'] === 'A short title');
+
+// present and blank after trim: rejected, same as a blank contribution/response
+assert(validate_transcript(['exchanges' => [['contribution' => 'a', 'response' => 'b']], 'title' => '   '])['ok'] === false);
+
+// too long: capped at TITLE_MAX_CHARS, same truncation TF-07 itself uses
+$longTitle = validate_transcript([
+    'exchanges' => [['contribution' => 'a', 'response' => 'b']],
+    'title' => str_repeat('x', TITLE_MAX_CHARS + 10),
+]);
+assert($longTitle['ok'] === true);
+assert(mb_strlen($longTitle['title']) === TITLE_MAX_CHARS);
+assert(str_ends_with($longTitle['title'], '…'));
+
 // --- bin/import_curriculum.php::parse_curriculum_file() ---
 $importCurriculumSource = file_get_contents(__DIR__ . '/../bin/import_curriculum.php');
 $start = strpos($importCurriculumSource, 'function parse_curriculum_file');

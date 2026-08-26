@@ -180,7 +180,7 @@ body {
     .exchange.updating { animation: none; }
 }
 
-.exchange .scenario {
+.exchange .title {
     font-size: 0.85rem;
     color: var(--scenario-color);
     margin-bottom: 0.4rem;

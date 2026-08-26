@@ -85,7 +85,7 @@ _Realises:_ <<UC-01,UC-01 An observer reads the projection>>
 
 The whole projected area. No controls, no cursor, no navigation, no scroll. The surface is a fixed viewport whose contents change over time.
 
-*Baseline composition (agreed, build against this).* <<TBC-01,TBC-01 Treatment of prominence and recency.>> currently adopts a 3-column masonry arrangement: each session is placed once into whichever column has the least rendered height (not the fewest items), and stays there for its lifetime. Every item has the same shape: a scenario line, then a visitor contribution, then the Sparring response. One exchange pair per session, so each session contributes exactly one item.
+*Baseline composition (agreed, build against this).* <<TBC-01,TBC-01 Treatment of prominence and recency.>> currently adopts a 3-column masonry arrangement: each session is placed once into whichever column has the least rendered height (not the fewest items), and stays there for its lifetime. Every item has the same shape: a title line (the refined title, falling back to the scenario line — <<E-01.7,E-01.7 title>>/<<E-01.2,E-01.2 scenario>>), then a visitor contribution, then the Sparring response. One exchange pair per session, so each session contributes exactly one item.
 
 Two properties of this baseline are settled and should not be revisited without a reason:
 
@@ -99,7 +99,7 @@ A header above the wall carries the logo, a live clock, and a total session/exch
 [options="header"]
 |===
 | Item | Type | Displayed | Source | Conditions
-| Scenario line | string | What the session is about, giving an isolated exchange its context | <<E-01.2,E-01.2 scenario>> | Per item, always
+| Title line | string | What the session is about, giving an isolated exchange its context — the AI-refined session title (xref:L3-SE-03-backend-service.adoc#TF-07[TF-07 Refine a session title]) when one exists, falling back to the cruder scenario line until it does | <<E-01.7,E-01.7 title>>, falling back to <<E-01.2,E-01.2 scenario>> | Per item, always
 | Visitor alias | string | A generated nickname distinguishing this item's session from others (<<G-04,G-04 Distinguish concurrent visitors from one another>>) | Derived from <<E-01.1,E-01.1 sessionId>> | Per item, always
 | Visitor contribution | string | The visitor's turn | <<E-01.3,E-01.3 visitorContribution>> | Per item, always
 | Sparring response | string | The reply to that turn | <<E-01.4,E-01.4 sparringResponse>> | Per item, always
@@ -198,7 +198,7 @@ None. No element calls this one. It is a leaf that only reads.
 
 _Statement:_ This interface obtains the set of sessions currently eligible for projection by calling the backend service (xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]). Used on every polling cycle. +
 _Input:_ None. The element requests current material and does not parameterise the request, so that item selection remains a backend decision and this element carries no policy. +
-_Output:_ An ordered list of items, each carrying a session identifier, a scenario statement, one visitor contribution, one Sparring response, an origin value, and a recency marker; alongside the list, a total session count (integer, <<E-02.1,E-02.1 sessionCount>>) and a total exchange count (integer, <<E-02.2,E-02.2 exchangeCount>>). +
+_Output:_ An ordered list of items, each carrying a session identifier, a scenario statement, an optional refined title, one visitor contribution, one Sparring response, an origin value, and a recency marker; alongside the list, a total session count (integer, <<E-02.1,E-02.1 sessionCount>>) and a total exchange count (integer, <<E-02.2,E-02.2 exchangeCount>>). +
 _Error cases:_ Service unavailable. Malformed or unexpected response shape. +
 _Authoritative spec:_ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] element design, xref:L3-SE-03-backend-service.adoc#TI-04[TI-04 Retrieve display material].
 
@@ -222,6 +222,7 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session], x
 | [[E-01.4]]E-01.4 | sparringResponse | string | required | The reply to that turn, as supplied.
 | [[E-01.5]]E-01.5 | recencyRank | integer | required | Position in the ordering supplied by xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]. Not computed here.
 | [[E-01.6]]E-01.6 | origin | enum | required | `pilot` or `live`. Not rendered on the normal surface (retained for <<TBC-06,TBC-06 Whether pilot-origin items are visually>>); shown per item only behind the debug flag (<<QR-07,QR-07 Diagnostic tag is available to an operator>>).
+| [[E-01.7]]E-01.7 | title | string | optional | The AI-refined session title (xref:L3-SE-03-backend-service.adoc#TF-07[TF-07 Refine a session title]), generated asynchronously after a session's first turn. Absent (`null`) until that completes, and for pilot-origin sessions whose transcript supplied none — the title line falls back to <<E-01.2,E-01.2 scenario>> whenever this is absent.
 |===
 
 NOTE: The element derives no ordering, performs no selection, and stores nothing beyond the current cycle. Every decision about what appears is made by xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service].
