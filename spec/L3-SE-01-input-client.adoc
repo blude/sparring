@@ -169,7 +169,7 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 | Item | Type | Displayed | Source | Conditions
 | Consent notice | string | What happens to the session, what each of the three decisions means, and which one is required | Static | Until the decision is recorded
 | Exchange history | array | Visitor contributions and Sparring responses in order, visually distinguished by speaker | <<E-01.4,E-01.4 exchanges>> | Once at least one exchange exists
-| Session title | string | A short (≤38 character) title summarising the session | <<TF-06,TF-06 Refine the session title>> | "Untitled" from session start; replaced once <<TF-06,TF-06 Refine the session title>> resolves, after the first exchange completes
+| Session title | string | A short title summarising the session (brevity asked for in the prompt, no fixed length) | <<TF-06,TF-06 Refine the session title>> | "Untitled" from session start; replaced once <<TF-06,TF-06 Refine the session title>> resolves, after the first exchange completes
 | In-progress state | boolean | That a response is being produced | <<E-01.5,E-01.5 submissionOutstanding>> | While a submission is outstanding
 | Remaining turns | integer | How many contributions remain in the session | <<E-01.3,E-01.3 turnsRemaining>> | Always, once the session is open
 | Character allowance | integer | Characters remaining for the current contribution | <<TF-04,TF-04 Render the exchange history>> | While the field holds content

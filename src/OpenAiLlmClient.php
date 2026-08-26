@@ -189,10 +189,7 @@ final class OpenAiLlmClient extends AbstractLlmClient
         $text = self::extractText($decoded);
         $data = $text !== null ? json_decode($text, true) : null;
         if (is_array($data) && isset($data['title']) && is_string($data['title']) && trim($data['title']) !== '') {
-            $title = trim($data['title']);
-            return mb_strlen($title) > TITLE_MAX_CHARS
-                ? mb_substr($title, 0, TITLE_MAX_CHARS - 1) . '…'
-                : $title;
+            return trim($data['title']);
         }
 
         throw new RuntimeException('title response missing a valid title');

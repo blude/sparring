@@ -39,17 +39,12 @@ function validate_transcript(mixed $data): array
 
     // Title is optional — most transcripts rely on the arena's scenario
     // fallback (TF-05) — but when supplied it must be a non-empty string.
-    // Capped at TITLE_MAX_CHARS the same way TF-07's own LLM/fallback path
-    // truncates, so a pilot title can't break the arena's layout assumptions.
     $title = null;
     if (isset($data['title'])) {
         if (!is_string($data['title']) || trim($data['title']) === '') {
             return ['ok' => false, 'reason' => "'title' must be a non-empty string when present"];
         }
         $title = trim($data['title']);
-        if (mb_strlen($title) > TITLE_MAX_CHARS) {
-            $title = mb_substr($title, 0, TITLE_MAX_CHARS - 1) . '…';
-        }
     }
 
     return ['ok' => true, 'exchanges' => $exchanges, 'scenarioSourceText' => $scenarioSourceText, 'title' => $title];

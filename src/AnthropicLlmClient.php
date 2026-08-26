@@ -228,9 +228,10 @@ final class AnthropicLlmClient extends AbstractLlmClient
     */
 
     /**
-     * Generates a short (TITLE_MAX_CHARS) header title from a session's first
-     * contribution. Called once, out of band from generateResponse()/classify()
-     * — see Sparring::generateAndStoreTitle(). Single attempt, no retry: the
+     * Generates a short header title from a session's first contribution —
+     * brevity is asked for in the prompt, not enforced here. Called once, out
+     * of band from generateResponse()/classify() — see
+     * Sparring::generateAndStoreTitle(). Single attempt, no retry: the
      * caller falls back to a trim-based title on any failure, so retrying here
      * would just delay that fallback for no benefit.
      */
@@ -264,14 +265,7 @@ final class AnthropicLlmClient extends AbstractLlmClient
             if ($block->type === 'text') {
                 $data = json_decode($block->text, true);
                 if (is_array($data) && isset($data['title']) && is_string($data['title']) && trim($data['title']) !== '') {
-                    $title = trim($data['title']);
-                    // json_schema mode constrains shape reliably (why the
-                    // classification enum never comes back malformed), not
-                    // string length — clamp defensively rather than trust
-                    // the model honored the prompt's 38-char ask.
-                    return mb_strlen($title) > TITLE_MAX_CHARS
-                        ? mb_substr($title, 0, TITLE_MAX_CHARS - 1) . '…'
-                        : $title;
+                    return trim($data['title']);
                 }
                 break;
             }

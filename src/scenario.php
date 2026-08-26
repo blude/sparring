@@ -8,10 +8,10 @@ declare(strict_types=1);
  * call, written once to E-01.5 and never recomputed (that recompute-per-render
  * mistake would multiply provider cost by the polling rate).
  */
-function derive_scenario_statement(string $contribution, int $maxChars = SCENARIO_MAX_CHARS): string
+function derive_scenario_statement(string $contribution, ?int $maxChars = SCENARIO_MAX_CHARS): string
 {
     $trimmed = trim(preg_replace('/\s+/', ' ', $contribution) ?? $contribution);
-    if (mb_strlen($trimmed) <= $maxChars) {
+    if ($maxChars === null || mb_strlen($trimmed) <= $maxChars) {
         return $trimmed;
     }
     return mb_substr($trimmed, 0, $maxChars - 1) . '…';

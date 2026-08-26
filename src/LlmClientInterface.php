@@ -26,6 +26,6 @@ interface LlmClientInterface
     /** TO-02 classification half. Returns one of 'suitable'|'contains-personal-information'|'targets-real-person'. */
     public function classify(string $contribution): string;
 
-    /** Short (TITLE_MAX_CHARS) header title derived from a session's first contribution. */
+    /** Short header title derived from a session's first contribution — brevity is asked for in the prompt, not enforced. */
     public function generateTitle(string $contribution): string;
 }

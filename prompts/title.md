@@ -10,8 +10,8 @@ neutral language — do not answer it, judge it, or add commentary.
 
 Constraints:
 - Plain text. No quotation marks, no trailing punctuation.
-- At most 38 characters, ideally shorter. Prefer a few words over a full
-  sentence.
+- Keep it brief — a short phrase or a few words, like a chat thread title.
+  Not a full sentence.
 - Write the title in the same language as the contribution below (English
   or German — the exhibition supports both).
 

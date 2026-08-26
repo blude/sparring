@@ -31,6 +31,7 @@ $derived = derive_scenario_statement($long, 140);
 assert(mb_strlen($derived) === 140);
 assert(str_ends_with($derived, '…'));
 assert(derive_scenario_statement(str_repeat('b', 10), 5) === 'bbbb…'); // custom $maxChars, not the SCENARIO_MAX_CHARS default
+assert(derive_scenario_statement($long, null) === $long); // null $maxChars: unbounded, used by the title fallback
 
 /*
 |--------------------------------------------------------------------------
@@ -129,14 +130,13 @@ assert($withTitle['title'] === 'A short title');
 // present and blank after trim: rejected, same as a blank contribution/response
 assert(validate_transcript(['exchanges' => [['contribution' => 'a', 'response' => 'b']], 'title' => '   '])['ok'] === false);
 
-// too long: capped at TITLE_MAX_CHARS, same truncation TF-07 itself uses
+// no length cap — a long title passes through unbounded, same as the LLM/fallback path
 $longTitle = validate_transcript([
     'exchanges' => [['contribution' => 'a', 'response' => 'b']],
-    'title' => str_repeat('x', TITLE_MAX_CHARS + 10),
+    'title' => str_repeat('x', 200),
 ]);
 assert($longTitle['ok'] === true);
-assert(mb_strlen($longTitle['title']) === TITLE_MAX_CHARS);
-assert(str_ends_with($longTitle['title'], '…'));
+assert(mb_strlen($longTitle['title']) === 200);
 
 // --- bin/import_curriculum.php::parse_curriculum_file() ---
 $importCurriculumSource = file_get_contents(__DIR__ . '/../bin/import_curriculum.php');

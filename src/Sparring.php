@@ -238,7 +238,7 @@ final class Sparring
      * Two-branch, not null-on-failure: the LLM call is tried once; any
      * failure (timeout, malformed response, ...) falls back to the same
      * trim-based derivation TF-05 already uses for `scenario`
-     * (derive_scenario_statement), just capped at TITLE_MAX_CHARS instead of
+     * (derive_scenario_statement), just unbounded instead of capped at
      * SCENARIO_MAX_CHARS. Either path always produces a usable title.
      */
     public function generateAndStoreTitle(string $sessionId): string
@@ -264,7 +264,7 @@ final class Sparring
         try {
             $title = $this->llm->generateTitle($firstContribution);
         } catch (Throwable) {
-            $title = derive_scenario_statement($firstContribution, TITLE_MAX_CHARS);
+            $title = derive_scenario_statement($firstContribution, null);
         }
 
         $this->store->setTitle($sessionId, $title);

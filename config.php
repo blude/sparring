@@ -112,7 +112,6 @@ const DISPLAY_POLL_INTERVAL_SECONDS = 4;
 const DISPLAY_ITEM_LIMIT = 4;
 const DISPLAY_COLUMNS = 2; // masonry layout, TBC-01: 2x2 target at assumed 1920x1080, more room per item
 const SCENARIO_MAX_CHARS = 140; // TF-05: trim-based scenario statement length
-const TITLE_MAX_CHARS = 38;     // header title generated from the first contribution, LLM or trim-fallback
 
 /*
 |--------------------------------------------------------------------------
