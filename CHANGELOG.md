@@ -2,8 +2,19 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-08-26
+
+- `97f5267` feat(ui): disable tap-highlight on buttons and textareas
+- `92079b3` refactor(css): use rem units in footer padding
+- `4acc1dd` feat(dojo): fade gate-card dialogs in/out
+- `7802711` docs(TODO): tick off completed tasks
+- `63b587c` feat(ui): add hover/active states to buttons
+- `80e31fb` feat(title): drop hard char cap, rely on prompt for brevity
+- `f5749e0` feat(arena): show AI-generated title as session label, scenario fallback
+
 ## 2026-08-25
 
+- `815c90d` refactor(css): uniform border-radius for dialogs and interstitials
 - `c48e322` fix(i18n): simplify retention messages
 - `28c6a17` fix(css): adjust eval heading margin
 - `a65720c` style(dojo): match #eval-success-message text style to #confirm-description
