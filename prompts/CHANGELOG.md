@@ -4,6 +4,10 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: `<edge_cases>` meta-question answer reworked — open by grounding
+  Sparring's name in martial arts and build the bridge to argumentative
+  debate together, instead of going straight to the practice-fight
+  analogy. "how it maps to design work" narrowed to "design argumentation".
 - prompt: `<voice>` adds a block on varying how Popov pulls for a
   response, not always with a trailing "?" — embedded question as fact,
   imperative, trailing off, invite correction, modal softening.
