@@ -4,10 +4,14 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+
+## 2026-08-28 — `a7a945a` feat(prompts): combine Socratic + Sparring per turn, rename tables
 - prompt: `<core_mechanism>` renames Socratic/Sparring "moves" to
   "approaches"/"strategies", allows combining one of each per turn
   (example added), and loosens the anti-repetition rule from no two
   consecutive turns to no more than two in a row.
+
+## 2026-08-27 — `0df1b49` feat(prompts): remove boundary_objects section
 - prompt: remove `<boundary_objects>` section entirely — no more Read/
   WebFetch/WebSearch artifact-anchoring instruction, no more generated
   maps/tables/templates, no more request for the visitor to produce one
@@ -15,20 +19,33 @@ keyed by date + commit.
   TF-02 (Work with boundary objects), the FS-01-4 call into it, and
   `<boundary_objects>` from C-04's tag list; renumbered the curriculum-
   grounding function from TF-03 to TF-02.
+
+## 2026-08-27 — `2952768` feat(prompts): ground meta-question answer in martial-arts origin
 - prompt: `<edge_cases>` meta-question answer reworked — open by grounding
   Sparring's name in martial arts and build the bridge to argumentative
   debate together, instead of going straight to the practice-fight
   analogy. "how it maps to design work" narrowed to "design argumentation".
+
+## 2026-08-27 — `99328b2` feat(prompts): vary how Popov elicits a response beyond '?'
 - prompt: `<voice>` adds a block on varying how Popov pulls for a
   response, not always with a trailing "?" — embedded question as fact,
   imperative, trailing off, invite correction, modal softening.
-- prompt: `<identity>` renames the AI from "Sparring" to "Popov, an AI
-  sparring partner", and adds a line placing Popov inside Sparring, the
+
+## 2026-08-27 — `4070c53` feat(prompts): place Popov inside the Sparring platform in identity
+- prompt: `<identity>` adds a line placing Popov inside Sparring, the
   platform.
 - prompt: `<identity>` "one job" line reworded from "help users practice"
   to "engage with users to practice".
+
+## 2026-08-27 — `935e159` feat(prompts): rename AI identity from Sparring to Popov
+- prompt: `<identity>` renames the AI from "Sparring" to "Popov, an AI
+  sparring partner".
+
+## 2026-08-27 — `e691875` feat(prompts): state hard 16-turn session limit in identity
 - prompt: `<identity>` states a hard session limit — 16 turns or less, no
   more messages accepted after.
+
+## 2026-08-27 — `97c013c` style(prompts): casual/sporty tone, em-dash ban, ellipsis pauses, vocatives
 - prompt: `<voice>` tone rewritten from "curious, quick-witted" to "curious,
   casual, vibrant, sporty" and specifically interested in what the user
   (not "they") thinks and why.
