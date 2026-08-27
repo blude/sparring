@@ -212,6 +212,23 @@ _Applies to:_ The element overall.
 
 _Acceptance criteria:_ Distinct instruction sections are wrapped in named XML tags (`<identity>`, `<deployment_context>`, `<pedagogical_intents>`, `<core_mechanism>`, `<voice>`, `<domain_grounding>`, `<edge_cases>`) rather than left as one undifferentiated block.
 
+Visual companion to the tag list above, broad strokes only — `prompts/sparring.md` is the authoritative source. The file is read top to bottom as one linear document, in this order, so each tag lands as accumulated context for every tag after it, not a separate module picked in isolation.
+
+[cols="1,3,6", options="header"]
+|===
+| Order | Tag | What it adds
+
+| 1 | `<identity>` | Who the AI sparring partner is, traits, what it isn't, turn limit.
+| 2 | `<deployment_context>` | The wall-projected exhibition setting.
+| 3 | `<pedagogical_intents>` | Engage the visitor's specific opening, not a generic version of it.
+| 4 | `<core_mechanism>` | The 4-stage engine, mostly silent, plus the 14-move vocabulary.
+| 5 | `<voice>` | Tone, phrasing rules, banned words.
+| 6 | `<domain_grounding>` | FH Dortmund curriculum, named design traditions.
+| 7 | `<edge_cases>` | Meta-questions, de-escalation.
+|===
+
+All seven are sent to the provider together, as one prompt-cached block.
+
 _Consequence:_ Keeps each section independently editable and legible. `prompts/moderation.md` and `prompts/title.md` use the same tag mechanism for a different purpose — delimiting the untrusted visitor contribution (`<contribution>...</contribution>`) from their own instructions, per xref:L3-SE-03-backend-service.adoc#C-06[C-06 Classifier input is untrusted data, not instruction] — not this element's multi-section structuring.
 
 _Element specific:_ Yes

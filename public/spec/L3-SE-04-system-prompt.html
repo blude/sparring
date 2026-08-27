@@ -423,6 +423,63 @@
 <p><em>Acceptance criteria:</em> Distinct instruction sections are wrapped in named XML tags (<code>&lt;identity&gt;</code>, <code>&lt;deployment_context&gt;</code>, <code>&lt;pedagogical_intents&gt;</code>, <code>&lt;core_mechanism&gt;</code>, <code>&lt;voice&gt;</code>, <code>&lt;domain_grounding&gt;</code>, <code>&lt;edge_cases&gt;</code>) rather than left as one undifferentiated block.</p>
 </div>
 <div class="paragraph">
+<p>Visual companion to the tag list above, broad strokes only — <code>prompts/sparring.md</code> is the authoritative source. The file is read top to bottom as one linear document, in this order, so each tag lands as accumulated context for every tag after it, not a separate module picked in isolation.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 30%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Order</th>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">What it adds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;identity&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Who the AI sparring partner is, traits, what it isn&#8217;t, turn limit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;deployment_context&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The wall-projected exhibition setting.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;pedagogical_intents&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Engage the visitor&#8217;s specific opening, not a generic version of it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;core_mechanism&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The 4-stage engine, mostly silent, plus the 14-move vocabulary.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;voice&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tone, phrasing rules, banned words.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;domain_grounding&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FH Dortmund curriculum, named design traditions.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;edge_cases&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meta-questions, de-escalation.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>All seven are sent to the provider together, as one prompt-cached block.</p>
+</div>
+<div class="paragraph">
 <p><em>Consequence:</em> Keeps each section independently editable and legible. <code>prompts/moderation.md</code> and <code>prompts/title.md</code> use the same tag mechanism for a different purpose — delimiting the untrusted visitor contribution (<code>&lt;contribution&gt;&#8230;&#8203;&lt;/contribution&gt;</code>) from their own instructions, per <a href="L3-SE-03-backend-service.html#C-06">C-06 Classifier input is untrusted data, not instruction</a> — not this element&#8217;s multi-section structuring.</p>
 </div>
 <div class="paragraph">
