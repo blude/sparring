@@ -51,12 +51,15 @@ body {
 .gloves-layer {
     position: absolute;
     display: block;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 .gloves-layer--honeycomb {
     left: 16px;
     top: 13.5px;
     width: 74px;
     height: 85px;
+    background-image: url('img/honeycomb.webp');
 }
 .gloves-layer--l,
 .gloves-layer--r {
@@ -83,6 +86,7 @@ body {
     top: 2px;
     width: 58.5px;
     height: 73.5px;
+    background-image: url('img/glove-l.webp');
 }
 .gloves-layer--r {
     left: 49.5px;
@@ -90,6 +94,7 @@ body {
     width: 62.5px;
     height: 75.5px;
     z-index: 1;
+    background-image: url('img/glove-r.webp');
 }
 /* logo: real "Sparring" / "スパーリング" text stays in the DOM for a11y/SEO,
    visually replaced by the exported logotype PNG — typography is a deliberate

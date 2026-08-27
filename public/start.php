@@ -13,9 +13,9 @@
 <div class="content">
   <div class="branding">
     <div class="gloves-box" role="img" aria-label="Boxing Gloves">
-      <img class="gloves-layer gloves-layer--honeycomb" src="assets/img/honeycomb.webp" alt="">
-      <img class="gloves-layer gloves-layer--l" src="assets/img/glove-l.webp" alt="">
-      <img class="gloves-layer gloves-layer--r" src="assets/img/glove-r.webp" alt="">
+      <div class="gloves-layer gloves-layer--honeycomb"></div>
+      <div class="gloves-layer gloves-layer--l"></div>
+      <div class="gloves-layer gloves-layer--r"></div>
     </div>
     <div class="logo">
       <h1 class="wordmark">Sparring</h1>
