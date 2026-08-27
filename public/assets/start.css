@@ -58,6 +58,26 @@ body {
     width: 74px;
     height: 85px;
 }
+.gloves-layer--l,
+.gloves-layer--r {
+    /* Subtle independent float — different duration + negative delay so the
+       two gloves drift out of phase instead of bobbing in lockstep. */
+    animation: gloves-float 2.6s ease-in-out infinite alternate;
+}
+.gloves-layer--r {
+    animation-duration: 3.1s;
+    animation-delay: -1.4s;
+}
+@keyframes gloves-float {
+    from { transform: translateY(-2px); }
+    to { transform: translateY(2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .gloves-layer--l,
+    .gloves-layer--r {
+        animation: none;
+    }
+}
 .gloves-layer--l {
     left: 1px;
     top: 2px;
