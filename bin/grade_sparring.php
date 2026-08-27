@@ -200,10 +200,14 @@ function judgeTranscript(Client $client, string $rubric, array $moveKeys, array 
 }
 
 /**
- * Adjacent-turn move repetition, computed on the judge's labels — checked
- * here in plain code rather than asked of the judge holistically, per
- * rubric.md item 5: classifying into the closed 14-item vocabulary is far
- * more stable than a holistic "was there variety?" judgment.
+ * Move repetition beyond two in a row, computed on the judge's labels —
+ * checked here in plain code rather than asked of the judge holistically,
+ * per rubric.md item 5: classifying into the closed 14-item vocabulary is
+ * far more stable than a holistic "was there variety?" judgment. Matches
+ * spec/L3-SE-04-system-prompt.adoc's QR-01 — two in a row is allowed
+ * (prompts/sparring.md's own worked example combines one Socratic
+ * approach with one Sparring strategy on the same turn), only a third
+ * consecutive turn on the same entry is a violation.
  */
 function moveVarietyFinding(array $moveLabels): array
 {
@@ -212,22 +216,22 @@ function moveVarietyFinding(array $moveLabels): array
         $byTurn[$entry['turn']] = $entry['move'];
     }
     ksort($byTurn);
-    $repeats = [];
-    $prevTurn = null;
-    $prevMove = null;
+    $violations = [];
+    $runTurns = [];
+    $runMove = null;
     foreach ($byTurn as $turn => $move) {
-        if ($prevMove !== null && $move === $prevMove) {
-            $repeats[] = "{$prevTurn}→{$turn}: {$move}";
+        $runTurns = $move === $runMove ? [...$runTurns, $turn] : [$turn];
+        $runMove = $move;
+        if (count($runTurns) === 3) {
+            $violations[] = implode('→', $runTurns) . ": {$move}";
         }
-        $prevTurn = $turn;
-        $prevMove = $move;
     }
     return [
-        'text' => 'no repeated Socratic/Sparring move on adjacent turns',
-        'passed' => $repeats === [],
-        'evidence' => $repeats === []
+        'text' => 'no move repeated more than twice in a row',
+        'passed' => $violations === [],
+        'evidence' => $violations === []
             ? 'labels: ' . implode(', ', array_map(fn($t, $m) => "{$t}:{$m}", array_keys($byTurn), $byTurn))
-            : 'repeated on ' . implode('; ', $repeats),
+            : 'repeated three+ in a row on ' . implode('; ', $violations),
     ];
 }
 
