@@ -472,7 +472,7 @@ function webAppTags(): string
 {
     $favicon = fasset('favicon.ico');
     $manifest = '/app.webmanifest';
-    $appleIcon = fasset('apple-touch-icon.png');
+    $appleIcon = fasset('img/apple-touch-icon.png');
     $themeColor = '#d32f2f';
     return <<<HTML
 <link rel="icon" type="image/x-icon" href="$favicon">
