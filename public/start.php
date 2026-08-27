@@ -12,8 +12,10 @@
 <p class="presented-by"><?= t('start.presentedBy') ?></p>
 <div class="content">
   <div class="branding">
-    <div class="gloves-box">
-      <img class="gloves" src="assets/img/sparring-gloves.webp" alt="Boxing Gloves" width="112" height="112">
+    <div class="gloves-box" role="img" aria-label="Boxing Gloves">
+      <img class="gloves-layer gloves-layer--honeycomb" src="assets/img/honeycomb.webp" alt="">
+      <img class="gloves-layer gloves-layer--l" src="assets/img/glove-l.webp" alt="">
+      <img class="gloves-layer gloves-layer--r" src="assets/img/glove-r.webp" alt="">
     </div>
     <div class="logo">
       <h1 class="wordmark">Sparring</h1>

@@ -38,17 +38,38 @@ body {
     align-items: center;
     gap: 0.5rem;
 }
+/* Logo built from 3 layered exports (honeycomb behind, gloves on top) instead
+   of one flattened image. Offsets/sizes below are the honeycomb/glove-l/
+   glove-r source layers' exact positions on their shared 224x224 artboard,
+   scaled 0.5x to the 112px display box — keeps the layers pixel-aligned to
+   how the original flattened sparring-gloves.webp composited them. */
 .gloves-box {
+    position: relative;
     width: 112px;
-    height: 113px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.gloves {
-    display: block;
-    width: 113px;
     height: 112px;
+}
+.gloves-layer {
+    position: absolute;
+    display: block;
+}
+.gloves-layer--honeycomb {
+    left: 16px;
+    top: 13.5px;
+    width: 74px;
+    height: 85px;
+}
+.gloves-layer--l {
+    left: 1px;
+    top: 2px;
+    width: 58.5px;
+    height: 73.5px;
+}
+.gloves-layer--r {
+    left: 49.5px;
+    top: 35.5px;
+    width: 62.5px;
+    height: 75.5px;
+    z-index: 1;
 }
 /* logo: real "Sparring" / "スパーリング" text stays in the DOM for a11y/SEO,
    visually replaced by the exported logotype PNG — typography is a deliberate
