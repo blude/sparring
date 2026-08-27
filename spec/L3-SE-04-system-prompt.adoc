@@ -126,17 +126,17 @@ _Persistence:_ Persistent (static content, source-controlled)
 | [[E-01.4]]E-01.4 | whatItDoes | string | required | One-line description of the move's effect.
 |===
 
-_14 moves total — 8 Socratic (assumption surface, counter-example, scope probe, evidence demand, reframe, consistency check, completion demand, scope reduction) and 6 Sparring (bait and switch, early feint, small win, stun the opponent, tangential swerve, fill the blanks). Full descriptions live in `prompts/sparring.md`'s own move tables, not reproduced here. Closed reference list, with no L1 business-entity counterpart. Canonical machine-readable copy at `evals/sparring/scenarios/socratic-moves.json`, consumed by `bin/grade_sparring.php`'s adjacent-repetition check (see <<QR-01,QR-01 No adjacent-turn move repetition>>) — a change here must be mirrored there._
+_14 moves total — 8 Socratic (assumption surface, counter-example, scope probe, evidence demand, reframe, consistency check, completion demand, scope reduction) and 6 Sparring (bait and switch, early feint, small win, stun the opponent, tangential swerve, fill the blanks). Full descriptions live in `prompts/sparring.md`'s own move tables, not reproduced here. Closed reference list, with no L1 business-entity counterpart. Canonical machine-readable copy at `evals/sparring/scenarios/socratic-moves.json`, consumed by `bin/grade_sparring.php`'s adjacent-repetition check (see <<QR-01,QR-01 No move repeated more than twice in a row>>) — a change here must be mirrored there._
 
 '''
 
 == Quality requirements
 
-=== [[QR-01]]QR-01 No adjacent-turn move repetition _(Usability)_
+=== [[QR-01]]QR-01 No move repeated more than twice in a row _(Usability)_
 
 _Applies to:_ <<TF-01,TF-01 Run the pedagogical engine each turn>>
 
-_Acceptance criteria:_ The same entry from <<E-01,E-01 Move vocabulary>> is never deployed on two consecutive visitor-facing turns within a session. Verified externally by `evals/sparring/scenarios/socratic-moves.json` and `bin/grade_sparring.php`'s adjacent-repetition check, not by this element itself.
+_Acceptance criteria:_ The same entry from <<E-01,E-01 Move vocabulary>> is never deployed on three consecutive visitor-facing turns within a session — at most two in a row. Verified externally by `evals/sparring/scenarios/socratic-moves.json` and `bin/grade_sparring.php`'s adjacent-repetition check, not by this element itself.
 
 _Supports:_ xref:L2-system-design-concept.adoc#SG-08[SG-08 Hold a pedagogical position under sustained]
 

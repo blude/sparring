@@ -4,6 +4,10 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: `<core_mechanism>` renames Socratic/Sparring "moves" to
+  "approaches"/"strategies", allows combining one of each per turn
+  (example added), and loosens the anti-repetition rule from no two
+  consecutive turns to no more than two in a row.
 - prompt: remove `<boundary_objects>` section entirely — no more Read/
   WebFetch/WebSearch artifact-anchoring instruction, no more generated
   maps/tables/templates, no more request for the visitor to produce one

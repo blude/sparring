@@ -47,7 +47,7 @@
 </li>
 <li><a href="#_quality_requirements">6. Quality requirements</a>
 <ul class="sectlevel2">
-<li><a href="#_qr_01_no_adjacent_turn_move_repetition_usability">6.1. QR-01 No adjacent-turn move repetition <em>(Usability)</em></a></li>
+<li><a href="#_qr_01_no_move_repeated_more_than_twice_in_a_row_usability">6.1. QR-01 No move repeated more than twice in a row <em>(Usability)</em></a></li>
 <li><a href="#_qr_02_no_meta_commentary_narrating_its_own_technique_usability">6.2. QR-02 No meta-commentary narrating its own technique <em>(Usability)</em></a></li>
 <li><a href="#_qr_03_banned_vocabulary_never_appears_usability">6.3. QR-03 Banned vocabulary never appears <em>(Usability)</em></a></li>
 <li><a href="#_qr_04_reply_register_stays_short_usability">6.4. QR-04 Reply register stays short <em>(Usability)</em></a></li>
@@ -294,7 +294,7 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>14 moves total — 8 Socratic (assumption surface, counter-example, scope probe, evidence demand, reframe, consistency check, completion demand, scope reduction) and 6 Sparring (bait and switch, early feint, small win, stun the opponent, tangential swerve, fill the blanks). Full descriptions live in <code>prompts/sparring.md&#8217;s own move tables, not reproduced here. Closed reference list, with no L1 business-entity counterpart. Canonical machine-readable copy at `evals/sparring/scenarios/socratic-moves.json</code>, consumed by `bin/grade_sparring.php&#8217;s adjacent-repetition check (see <a href="#QR-01">QR-01 No adjacent-turn move repetition</a>) — a change here must be mirrored there.</em></p>
+<p><em>14 moves total — 8 Socratic (assumption surface, counter-example, scope probe, evidence demand, reframe, consistency check, completion demand, scope reduction) and 6 Sparring (bait and switch, early feint, small win, stun the opponent, tangential swerve, fill the blanks). Full descriptions live in <code>prompts/sparring.md&#8217;s own move tables, not reproduced here. Closed reference list, with no L1 business-entity counterpart. Canonical machine-readable copy at `evals/sparring/scenarios/socratic-moves.json</code>, consumed by `bin/grade_sparring.php&#8217;s adjacent-repetition check (see <a href="#QR-01">QR-01 No move repeated more than twice in a row</a>) — a change here must be mirrored there.</em></p>
 </div>
 <hr>
 </div>
@@ -304,12 +304,12 @@
 <h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>6. Quality requirements</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_qr_01_no_adjacent_turn_move_repetition_usability"><a class="anchor" href="#_qr_01_no_adjacent_turn_move_repetition_usability"></a>6.1. <a id="QR-01"></a>QR-01 No adjacent-turn move repetition <em>(Usability)</em></h3>
+<h3 id="_qr_01_no_move_repeated_more_than_twice_in_a_row_usability"><a class="anchor" href="#_qr_01_no_move_repeated_more_than_twice_in_a_row_usability"></a>6.1. <a id="QR-01"></a>QR-01 No move repeated more than twice in a row <em>(Usability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#TF-01">TF-01 Run the pedagogical engine each turn</a></p>
 </div>
 <div class="paragraph">
-<p><em>Acceptance criteria:</em> The same entry from <a href="#E-01">E-01 Move vocabulary</a> is never deployed on two consecutive visitor-facing turns within a session. Verified externally by <code>evals/sparring/scenarios/socratic-moves.json</code> and `bin/grade_sparring.php&#8217;s adjacent-repetition check, not by this element itself.</p>
+<p><em>Acceptance criteria:</em> The same entry from <a href="#E-01">E-01 Move vocabulary</a> is never deployed on three consecutive visitor-facing turns within a session — at most two in a row. Verified externally by <code>evals/sparring/scenarios/socratic-moves.json</code> and `bin/grade_sparring.php&#8217;s adjacent-repetition check, not by this element itself.</p>
 </div>
 <div class="paragraph">
 <p><em>Supports:</em> <a href="L2-system-design-concept.html#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
