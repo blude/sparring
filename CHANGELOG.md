@@ -4,6 +4,16 @@ Generated from git history. Grouped by commit date, newest first.
 
 ## 2026-08-27
 
+- `cb8610b` chore(assets): move favicon.ico into assets/img
+- `3aa29c4` perf(assets): optimize share-image jpgs
+- `928a641` feat(seo): declare a second og:image, add width/height to both
+- `abd1ce5` chore(assets): use share-image-sq.jpg for og:image
+- `059511e` chore(assets): replace share-image.png with share-image.jpg
+- `e4fc294` refactor(assets): move apple-touch-icon.png into assets/img/
+- `aec7242` fix(assets): update webmanifest icon paths for moved apple-touch-icon
+- `9848f91` refactor(assets): serve apple-touch-icon.png via fasset()
+- `d421367` chore(assets): update apple-touch-icon image
+- `b047777` chore(assets): update apple-touch-icon image
 - `b2de822` refactor(ui): load gloves layers as CSS background-images
 - `2ae855e` feat(ui): float the gloves layers independently
 - `d3879ad` feat(ui): build gloves logo from layered images instead of one flattened asset
