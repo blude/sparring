@@ -412,7 +412,7 @@ function ogTags(string $path, string $title, string $description): string
 {
     $site_name = SITE_NAME; // heredoc interpolates variables, not bare constants
     $url = SITE_URL . $path;
-    $image = fasset('img/share-image.jpg'); // heredoc interpolates variables, not bare constants
+    $image = fasset('img/share-image-sq.jpg'); // heredoc interpolates variables, not bare constants
     return <<<HTML
 <meta name="description" content="$description">
 <meta property="og:type" content="website">
