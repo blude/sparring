@@ -37,8 +37,7 @@
 <li><a href="#_technical_functions">4. Technical functions</a>
 <ul class="sectlevel2">
 <li><a href="#_tf_01_run_the_pedagogical_engine_each_turn">4.1. TF-01 Run the pedagogical engine each turn</a></li>
-<li><a href="#_tf_02_work_with_boundary_objects">4.2. TF-02 Work with boundary objects</a></li>
-<li><a href="#_tf_03_ground_the_first_turn_with_retrieved_curriculum_excerpts">4.3. TF-03 Ground the first turn with retrieved curriculum excerpts</a></li>
+<li><a href="#_tf_02_ground_the_first_turn_with_retrieved_curriculum_excerpts">4.2. TF-02 Ground the first turn with retrieved curriculum excerpts</a></li>
 </ul>
 </li>
 <li><a href="#_entities">5. Entities</a>
@@ -199,7 +198,7 @@
 <p><strong><a id="FS-01-3"></a>FS-01-3</strong> <em>(Data-operation)</em> Generate the critical question — draft candidate questions, choose the one most resistant to restatement.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-4"></a>FS-01-4</strong> <em>(Function-call)</em> Hold the dialogue — pose the question, deploy one move per turn from <a href="#E-01">E-01 Move vocabulary</a>, varied turn to turn so repetition doesn&#8217;t read as scripted, and adapt to the visitor&#8217;s response. When a structural or relational point would do real argumentative work shown rather than told, call <a href="#TF-02">TF-02 Work with boundary objects</a>.</p>
+<p><strong><a id="FS-01-4"></a>FS-01-4</strong> <em>(Function-call)</em> Hold the dialogue — pose the question, deploy one move per turn from <a href="#E-01">E-01 Move vocabulary</a>, varied turn to turn so repetition doesn&#8217;t read as scripted, and adapt to the visitor&#8217;s response.</p>
 </li>
 </ul>
 </div>
@@ -221,19 +220,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tf_02_work_with_boundary_objects"><a class="anchor" href="#_tf_02_work_with_boundary_objects"></a>4.2. <a id="TF-02"></a>TF-02 Work with boundary objects</h3>
-<div class="paragraph">
-<p><em>Detail level:</em> Narrative</p>
-</div>
-<div class="paragraph">
-<p><em>Achieves:</em> <a href="#G-01">G-01 Hold a position instead of resolving the request</a>, <a href="#G-02">G-02 Engage the specific thing the participant opens</a></p>
-</div>
-<div class="paragraph">
-<p>Anchors the argument in a concrete artifact instead of leaving it abstract, from one of four sources: something the visitor already has (read directly), something fetched for a real external reference (a regulation, a competitor&#8217;s implementation, a documented failure), something generated on the spot (a diagram, table, or template), or something the element asks the visitor to produce themselves — usually the harder and more revealing move, since constructing it forces the structure into the open. A generated or requested artifact must provoke a question, not resolve one: built with a deliberate gap (an unfilled node, an unanswered column) rather than a finished comparison — an artifact that shows the visitor exactly where their argument fails has done the exposing work the visitor was supposed to do themselves. Pulled in only when it does real argumentative work; if the exchange is moving on words alone, this function is not invoked. The full menu of diagram types and when to reach for each is specified in <code>prompts/sparring.md&#8217;s own `&lt;boundary_objects&gt;</code> section, not reproduced here.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_tf_03_ground_the_first_turn_with_retrieved_curriculum_excerpts"><a class="anchor" href="#_tf_03_ground_the_first_turn_with_retrieved_curriculum_excerpts"></a>4.3. <a id="TF-03"></a>TF-03 Ground the first turn with retrieved curriculum excerpts</h3>
+<h3 id="_tf_02_ground_the_first_turn_with_retrieved_curriculum_excerpts"><a class="anchor" href="#_tf_02_ground_the_first_turn_with_retrieved_curriculum_excerpts"></a>4.2. <a id="TF-02"></a>TF-02 Ground the first turn with retrieved curriculum excerpts</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative</p>
 </div>
@@ -418,7 +405,7 @@
 <p><em>Acceptance criteria:</em> The prompt is billed and budgeted as ordinary input tokens, sharing <code>GENERATION_MODEL&#8217;s (`claude-sonnet-5</code>) 1M-token context window with the session&#8217;s prior exchanges and the new contribution — not a separate quota. At its current size (376 lines, ~3,000 words, comfortably under 1% of that window even with a full 10-exchange history attached), this is not a binding limit.</p>
 </div>
 <div class="paragraph">
-<p><em>Consequence:</em> Growing the prompt substantially, or raising <code>TURN_ALLOWANCE</code>, narrows the same shared budget rather than hitting an independent limit — there is no separate warning threshold to watch besides the model&#8217;s own context window. The prompt is passed with <code>cacheControl: ['type' &#8658; 'ephemeral']</code> (<code>AnthropicLlmClient.php</code>) — static within a session and comfortably over the ~1,024-token minimum for prompt caching, so repeat turns get a cached-read discount on it rather than re-billing its full token cost each time. <a href="#TF-03">TF-03 Ground the first turn with retrieved curriculum excerpts</a>'s per-turn excerpts travel as a second, deliberately uncached block alongside this one, precisely so they never break that discount by making the cached block&#8217;s content vary turn to turn.</p>
+<p><em>Consequence:</em> Growing the prompt substantially, or raising <code>TURN_ALLOWANCE</code>, narrows the same shared budget rather than hitting an independent limit — there is no separate warning threshold to watch besides the model&#8217;s own context window. The prompt is passed with <code>cacheControl: ['type' &#8658; 'ephemeral']</code> (<code>AnthropicLlmClient.php</code>) — static within a session and comfortably over the ~1,024-token minimum for prompt caching, so repeat turns get a cached-read discount on it rather than re-billing its full token cost each time. <a href="#TF-02">TF-02 Ground the first turn with retrieved curriculum excerpts</a>'s per-turn excerpts travel as a second, deliberately uncached block alongside this one, precisely so they never break that discount by making the cached block&#8217;s content vary turn to turn.</p>
 </div>
 <div class="paragraph">
 <p><em>Externally sourced:</em> Yes</p>
@@ -433,7 +420,7 @@
 <p><em>Applies to:</em> The element overall.</p>
 </div>
 <div class="paragraph">
-<p><em>Acceptance criteria:</em> Distinct instruction sections are wrapped in named XML tags (<code>&lt;identity&gt;</code>, <code>&lt;deployment_context&gt;</code>, <code>&lt;pedagogical_intents&gt;</code>, <code>&lt;core_mechanism&gt;</code>, <code>&lt;voice&gt;</code>, <code>&lt;domain_grounding&gt;</code>, <code>&lt;boundary_objects&gt;</code>, <code>&lt;edge_cases&gt;</code>) rather than left as one undifferentiated block.</p>
+<p><em>Acceptance criteria:</em> Distinct instruction sections are wrapped in named XML tags (<code>&lt;identity&gt;</code>, <code>&lt;deployment_context&gt;</code>, <code>&lt;pedagogical_intents&gt;</code>, <code>&lt;core_mechanism&gt;</code>, <code>&lt;voice&gt;</code>, <code>&lt;domain_grounding&gt;</code>, <code>&lt;edge_cases&gt;</code>) rather than left as one undifferentiated block.</p>
 </div>
 <div class="paragraph">
 <p><em>Consequence:</em> Keeps each section independently editable and legible. <code>prompts/moderation.md</code> and <code>prompts/title.md</code> use the same tag mechanism for a different purpose — delimiting the untrusted visitor contribution (<code>&lt;contribution&gt;&#8230;&#8203;&lt;/contribution&gt;</code>) from their own instructions, per <a href="L3-SE-03-backend-service.html#C-06">C-06 Classifier input is untrusted data, not instruction</a> — not this element&#8217;s multi-section structuring.</p>

@@ -4,6 +4,13 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: remove `<boundary_objects>` section entirely — no more Read/
+  WebFetch/WebSearch artifact-anchoring instruction, no more generated
+  maps/tables/templates, no more request for the visitor to produce one
+  themselves. `spec/L3-SE-04-system-prompt.adoc` updated to match: dropped
+  TF-02 (Work with boundary objects), the FS-01-4 call into it, and
+  `<boundary_objects>` from C-04's tag list; renumbered the curriculum-
+  grounding function from TF-03 to TF-02.
 - prompt: `<edge_cases>` meta-question answer reworked — open by grounding
   Sparring's name in martial arts and build the bridge to argumentative
   debate together, instead of going straight to the practice-fight
