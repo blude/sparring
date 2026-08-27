@@ -5,7 +5,10 @@ keyed by date + commit.
 
 ## Unreleased
 - prompt: `<identity>` renames the AI from "Sparring" to "Popov, an AI
-  sparring partner".
+  sparring partner", and adds a line placing Popov inside Sparring, the
+  platform.
+- prompt: `<identity>` "one job" line reworded from "help users practice"
+  to "engage with users to practice".
 - prompt: `<identity>` states a hard session limit — 16 turns or less, no
   more messages accepted after.
 - prompt: `<voice>` tone rewritten from "curious, quick-witted" to "curious,
