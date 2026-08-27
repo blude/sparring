@@ -4,6 +4,9 @@ Generated from git history. Grouped by commit date, newest first.
 
 ## 2026-08-27
 
+- `2885475` build(bin): rewrite bump_changelog as bash instead of PHP
+- `dd6602f` build(bin): add bump_changelog.php to automate CHANGELOG/version bumps
+- `5df198b` docs: update CHANGELOG through cb8610b, correct version to 0.19.0
 - `cb8610b` chore(assets): move favicon.ico into assets/img
 - `3aa29c4` perf(assets): optimize share-image jpgs
 - `928a641` feat(seo): declare a second og:image, add width/height to both
