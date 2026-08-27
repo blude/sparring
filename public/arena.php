@@ -8,7 +8,7 @@ declare(strict_types=1);
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
 <title><?= t('arena.title') ?></title>
 <link rel="stylesheet" href="<?= fasset('arena.css') ?>">
-<link rel="icon" type="image/x-icon" href="<?= fasset('favicon.ico') ?>">
+<link rel="icon" type="image/x-icon" href="<?= fasset('img/favicon.ico') ?>">
 <link rel="manifest" href="/arena.webmanifest">
 <link rel="apple-touch-icon" href="<?= fasset('img/apple-touch-icon.png') ?>">
 <meta name="mobile-web-app-capable" content="yes">
