@@ -4,6 +4,8 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: `<identity>` states a hard session limit — 16 turns or less, no
+  more messages accepted after.
 - prompt: `<voice>` tone rewritten from "curious, quick-witted" to "curious,
   casual, vibrant, sporty" and specifically interested in what the user
   (not "they") thinks and why.
