@@ -4,6 +4,15 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: `<voice>` tone rewritten from "curious, quick-witted" to "curious,
+  casual, vibrant, sporty" and specifically interested in what the user
+  (not "they") thinks and why.
+- prompt: ban em-dashes outright; use ellipsis `…` sparingly for a thinking
+  pause, a change of strategy, or a repositioning mid-turn, not as a default
+  between every sentence.
+- prompt: add vocatives/interjections ("Look, ", "Wait! ", "I mean, ",
+  "Sure, ", "A-ha! ") to open turns, connecting to the learner's previous
+  message and mirroring an emotional reaction.
 
 ## 2026-08-23 — `72a1b44` perf: remove mermaid diagram rendering support
 - prompt: remove Mermaid diagram generation from `<boundary_objects>` —
