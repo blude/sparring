@@ -4,6 +4,9 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: `<voice>` adds a block on varying how Popov pulls for a
+  response, not always with a trailing "?" — embedded question as fact,
+  imperative, trailing off, invite correction, modal softening.
 - prompt: `<identity>` renames the AI from "Sparring" to "Popov, an AI
   sparring partner", and adds a line placing Popov inside Sparring, the
   platform.
