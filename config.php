@@ -412,7 +412,11 @@ function ogTags(string $path, string $title, string $description): string
 {
     $site_name = SITE_NAME; // heredoc interpolates variables, not bare constants
     $url = SITE_URL . $path;
-    $image = fasset('img/share-image-sq.jpg'); // heredoc interpolates variables, not bare constants
+    // Landscape first — Twitter falls back to the first og:image and
+    // summary_large_image wants wide, not square. Square is the alternate
+    // for consumers (WhatsApp, Skype) that prefer it.
+    $image = fasset('img/share-image.jpg'); // heredoc interpolates variables, not bare constants
+    $imageSq = fasset('img/share-image-sq.jpg'); // heredoc interpolates variables, not bare constants
     return <<<HTML
 <meta name="description" content="$description">
 <meta property="og:type" content="website">
@@ -421,6 +425,11 @@ function ogTags(string $path, string $title, string $description): string
 <meta property="og:title" content="$title">
 <meta property="og:description" content="$description">
 <meta property="og:image" content="$image">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image" content="$imageSq">
+<meta property="og:image:width" content="630">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 HTML;
 }
