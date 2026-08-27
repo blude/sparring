@@ -2,8 +2,20 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-08-27
+
+- `b2de822` refactor(ui): load gloves layers as CSS background-images
+- `2ae855e` feat(ui): float the gloves layers independently
+- `d3879ad` feat(ui): build gloves logo from layered images instead of one flattened asset
+- `68ed254` fix(ui): align gloves image width to 112px (square)
+- `db175df` feat(ui): replace start-screen gloves illustration with new webp
+
 ## 2026-08-26
 
+- `f967bba` fix(bin): exclude .git from curriculum rsync
+- `1c024cc` chore(fixtures): drop Verwandt/Verwendung im Buch sections
+- `9d59e05` chore(fixtures): remove [[wikilinks]] from curriculum fixtures
+- `5122858` docs: update CHANGELOG through 97f5267, bump version to 0.19.0
 - `97f5267` feat(ui): disable tap-highlight on buttons and textareas
 - `92079b3` refactor(css): use rem units in footer padding
 - `4acc1dd` feat(dojo): fade gate-card dialogs in/out
