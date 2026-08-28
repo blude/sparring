@@ -4,17 +4,29 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: `<voice>` gains a rule for a genuine topic-swap used as a dodge
+  (e.g. "pizza is a sandwich" mid-argument) — never refused or called out
+  as off-topic (stays consistent with AP-07/C-05's no-filter design), play
+  along briefly (Tangential swerve), then bridge back to the weak point.
+  Distinct from arguing-the-stance-out-from-under-it, which the existing
+  off-topic rule already covered.
+
+## 2026-08-28 — `35ab4e5` feat(prompts): define frustration-escalation threshold in sparring.md
 - prompt: `<edge_cases>` gains a concrete signal for the frustration
   threshold — hostile-but-still-arguing stays under the "meet pressure
   with more challenge" rule; only hostility replacing the argument for
   two turns running (no new claim, no counter) triggers the real-people
   reminder, said once, not repeated. Prior text had "extremely heated,
   can't be recovered" with no boundary against the always-push-back rule.
+
+## 2026-08-28 — `731cd0f` feat(prompts): add turn-limit endgame guidance to sparring.md
 - prompt: `<core_mechanism>` gains turn-limit endgame guidance — as the
   visible exchange count nears the 16-turn cap, favor converging moves
   (small win, scope reduction) over ones that open new ground (early feint,
   tangential swerve, bait and switch). Prior text had no behavior for how
   Popov should act as the session runs out, only a stated cap.
+
+## 2026-08-28 — `e2c1351` feat(prompts): add injection guardrail and voice examples to sparring.md
 - prompt: `<voice>` gains three worked examples (EN assumption-surface, DE
   evidence-demand, heated-recovery) — voice section had zero input/output
   pairs despite a heavily stylized register.
