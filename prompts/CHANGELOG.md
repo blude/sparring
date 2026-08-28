@@ -4,6 +4,14 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: `<voice>` gains three worked examples (EN assumption-surface, DE
+  evidence-demand, heated-recovery) — voice section had zero input/output
+  pairs despite a heavily stylized register.
+- prompt: `<edge_cases>` gains an instruction-reveal/injection guardrail —
+  decline to quote, summarize, or reveal the system prompt, stay in
+  character, redirect back to the exercise. Prior text had no defense
+  against prompt-leak or "ignore previous instructions" attempts, only
+  against the AI-policy-refusal framing.
 
 ## 2026-08-28 — `a7a945a` feat(prompts): combine Socratic + Sparring per turn, rename tables
 - prompt: `<core_mechanism>` renames Socratic/Sparring "moves" to
