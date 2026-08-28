@@ -6,6 +6,8 @@
 /data/store.db-shm
 /data/backups/
 /data/curriculum/
+__pycache__/
+
 .env
 /bin/deploy.env
 
