@@ -33,8 +33,8 @@
 <hr class="divider">
 <footer>
     <div><?= localeSwitcher(); ?></div>
-    <p><?= t('start.footer.craft', ['{year}' => date('Y')]) ?></p>
-    <p><?= t('start.footer.legal') ?></p>
+    <p><?= t('start.footer.craft') ?></p>
+    <p><?= t('start.footer.legal', ['{year}' => date('Y')]) ?></p>
 </footer>
 <?= sillyBanner() ?>
 </body>

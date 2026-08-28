@@ -24,8 +24,8 @@ return [
     'start.copy.punchline' => 'Bereite deine schärfsten Argumente vor, teile deine härtesten Schläge aus und sei bereit, wohlmeinende Konter einzustecken!',
     'start.cta' => 'Neue Sitzung starten',
     'start.learnMore' => 'Erfahre mehr über die <a href="/philosophy">Philosophie von Sparring</a>.',
-    'start.footer.craft' => '&copy; {year} &middot; Craft mit #DigitalMaterial &middot; <a href="/credits">Credits</a>',
-    'start.footer.legal' => '<a href="/terms">AGB</a> &middot; <a href="/privacy">Datenschutz</a> &middot; <a href="/privacy#cookies">Cookies</a> &middot; 🏳️‍⚧️',
+    'start.footer.craft' => 'Craft mit #DigitalMaterial &middot; <a href="/credits">Credits</a>',
+    'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">AGB</a> &middot; <a href="/privacy">Datenschutz</a> &middot; <a href="/privacy#cookies">Cookies</a> &middot; 🏳️‍⚧️',
 
     // --- dojo.php (SE-01) + dojo.js ---
     'dojo.title' => 'Dojo — Sparring',

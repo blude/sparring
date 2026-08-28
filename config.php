@@ -325,8 +325,8 @@ function pageFooter(): string
     // block (copied from start.css) rather than inline styles here, so
     // both pages render the switcher identically.
     $switcher = localeSwitcher();
-    $craft = t('start.footer.craft', ['{year}' => date('Y')]);
-    $legal = t('start.footer.legal');
+    $craft = t('start.footer.craft');
+    $legal = t('start.footer.legal', ['{year}' => date('Y')]);
     return <<<HTML
         <footer>
         $switcher
