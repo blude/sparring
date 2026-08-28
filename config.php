@@ -124,7 +124,7 @@ const SCENARIO_MAX_CHARS = 140; // TF-05: trim-based scenario statement length
 
 const STORE_DB_PATH = __DIR__ . '/data/store.db';
 const PILOT_DATA_DIR = __DIR__ . '/data/pilot';
-const CURRICULUM_DATA_DIR = __DIR__ . '/data/curriculum'; // gitignored — poor man's RAG source markdown, bin/import_curriculum.php
+const CURRICULUM_DATA_DIR = __DIR__ . '/data/curriculum/digitaldesign-wiki'; // gitignored — poor man's RAG source markdown (flat *.md), bin/import_curriculum.php
 
 /*
 |--------------------------------------------------------------------------
