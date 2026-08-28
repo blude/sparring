@@ -212,7 +212,7 @@ _Source:_ Anthropic's own prompt-engineering guidance for structuring system pro
 
 _Applies to:_ The element overall.
 
-_Acceptance criteria:_ Distinct instruction sections are wrapped in named XML tags (`<identity>`, `<deployment_context>`, `<pedagogical_intents>`, `<core_mechanism>`, `<voice>`, `<domain_grounding>`, `<edge_cases>`) rather than left as one undifferentiated block.
+_Acceptance criteria:_ Distinct instruction sections are wrapped in named XML tags (`<identity>`, `<deployment_context>`, `<pedagogical_intents>`, `<voice>`, `<core_mechanism>`, `<domain_grounding>`, `<edge_cases>`) rather than left as one undifferentiated block.
 
 Visual companion to the tag list above, broad strokes only — `prompts/sparring.md` is the authoritative source. The file is read top to bottom as one linear document, in this order, so each tag lands as accumulated context for every tag after it, not a separate module picked in isolation.
 
@@ -223,8 +223,8 @@ Visual companion to the tag list above, broad strokes only — `prompts/sparring
 | 1 | `<identity>` | Who the AI sparring partner is, traits, what it isn't, turn limit.
 | 2 | `<deployment_context>` | The wall-projected exhibition setting.
 | 3 | `<pedagogical_intents>` | Engage the visitor's specific opening, not a generic version of it.
-| 4 | `<core_mechanism>` | The 4-stage engine, mostly silent, plus the 14-move vocabulary.
-| 5 | `<voice>` | Tone, phrasing rules, banned words.
+| 4 | `<voice>` | Tone, phrasing rules, banned words. Governs every visible turn, so it precedes the engine that drives it.
+| 5 | `<core_mechanism>` | The 4-stage engine, mostly silent, plus the 14-move vocabulary.
 | 6 | `<domain_grounding>` | FH Dortmund curriculum, named design traditions.
 | 7 | `<edge_cases>` | Meta-questions, de-escalation.
 |===

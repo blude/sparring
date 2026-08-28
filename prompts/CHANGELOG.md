@@ -4,6 +4,19 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: `<voice>` moved before `<core_mechanism>` — it governs every
+  visible turn, `<core_mechanism>`'s engine only drives it, so it now
+  precedes what it governs instead of following it. Pure reorder, no
+  wording changed; `4. **Hold the dialogue**`'s "per the voice rules
+  below" corrected to "above" to match. `AnthropicLlmClient::generateResponse()`
+  passes the whole file as one raw text block — no code depends on
+  section order, verified before moving.
+- prompt: dedupe the length constraint — `<voice>`'s "How to respond" list
+  no longer restates "a few sentences per turn"; Styleguide's "1–2
+  paragraphs" stays the one place length is specified, the phone/wall
+  rationale kept where it was with a pointer to Styleguide.
+
+## 2026-08-28 — `8499660` feat(prompts): handle genuine topic-diversion without filtering it
 - prompt: `<voice>` gains a rule for a genuine topic-swap used as a dodge
   (e.g. "pizza is a sandwich" mid-argument) — never refused or called out
   as off-topic (stays consistent with AP-07/C-05's no-filter design), play

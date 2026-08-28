@@ -428,7 +428,7 @@
 <p><em>Applies to:</em> The element overall.</p>
 </div>
 <div class="paragraph">
-<p><em>Acceptance criteria:</em> Distinct instruction sections are wrapped in named XML tags (<code>&lt;identity&gt;</code>, <code>&lt;deployment_context&gt;</code>, <code>&lt;pedagogical_intents&gt;</code>, <code>&lt;core_mechanism&gt;</code>, <code>&lt;voice&gt;</code>, <code>&lt;domain_grounding&gt;</code>, <code>&lt;edge_cases&gt;</code>) rather than left as one undifferentiated block.</p>
+<p><em>Acceptance criteria:</em> Distinct instruction sections are wrapped in named XML tags (<code>&lt;identity&gt;</code>, <code>&lt;deployment_context&gt;</code>, <code>&lt;pedagogical_intents&gt;</code>, <code>&lt;voice&gt;</code>, <code>&lt;core_mechanism&gt;</code>, <code>&lt;domain_grounding&gt;</code>, <code>&lt;edge_cases&gt;</code>) rather than left as one undifferentiated block.</p>
 </div>
 <div class="paragraph">
 <p>Visual companion to the tag list above, broad strokes only — <code>prompts/sparring.md</code> is the authoritative source. The file is read top to bottom as one linear document, in this order, so each tag lands as accumulated context for every tag after it, not a separate module picked in isolation.</p>
@@ -464,13 +464,13 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;core_mechanism&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The 4-stage engine, mostly silent, plus the 14-move vocabulary.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;voice&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tone, phrasing rules, banned words. Governs every visible turn, so it precedes the engine that drives it.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;voice&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Tone, phrasing rules, banned words.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;core_mechanism&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The 4-stage engine, mostly silent, plus the 14-move vocabulary.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
