@@ -2,8 +2,31 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-08-28
+
+- `980d6a6` docs(prompts): backfill changelog heading for v9 prompt changes
+- `b2cec80` refactor(prompts): move <voice> before <core_mechanism>, dedupe length rule
+- `8499660` feat(prompts): handle genuine topic-diversion without filtering it
+- `35ab4e5` feat(prompts): define frustration-escalation threshold in sparring.md
+- `731cd0f` feat(prompts): add turn-limit endgame guidance to sparring.md
+- `e2c1351` feat(prompts): add injection guardrail and voice examples to sparring.md
+- `9274778` docs(prompts): backfill changelog headings for v8 prompt changes
+- `fc30020` fix(bin): allow two in a row in grade_sparring's repetition check
+- `a7a945a` feat(prompts): combine Socratic + Sparring per turn, rename tables
+- `48ec92d` docs(spec): table of SE-04's sections in file read-order
+- `ca681d6` docs(spec): drop drifting line/word count from C-03
+
 ## 2026-08-27
 
+- `0df1b49` feat(prompts): remove boundary_objects section
+- `2952768` feat(prompts): ground meta-question answer in martial-arts origin
+- `99328b2` feat(prompts): vary how Popov elicits a response beyond '?'
+- `4070c53` feat(prompts): place Popov inside the Sparring platform in identity
+- `935e159` feat(prompts): rename AI identity from Sparring to Popov
+- `e691875` feat(prompts): state hard 16-turn session limit in identity
+- `97c013c` style(prompts): casual/sporty tone, em-dash ban, ellipsis pauses, vocatives
+- `375626b` fix(config): correct favicon path in webAppTags()
+- `cf97abf` docs: update CHANGELOG through 2885475
 - `2885475` build(bin): rewrite bump_changelog as bash instead of PHP
 - `dd6602f` build(bin): add bump_changelog.php to automate CHANGELOG/version bumps
 - `5df198b` docs: update CHANGELOG through cb8610b, correct version to 0.19.0
