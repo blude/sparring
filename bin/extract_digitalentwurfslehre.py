@@ -15,8 +15,11 @@ Why the heuristics look the way they do (from probing the actual file):
     (some prose subheads are 15pt) so a few may mis-level — acceptable for RAG.
   - Size 12 lines are stray bullet glyphs / footnote-ref digits, not text.
   - Size 8 lines are preformatted blocks (an ASCII table, a template) -> fenced.
-  - The table of contents (pp. ~2-10) is pure dot-leader lines ("...."); any
+  - Some editions' tables of contents are pure dot-leader lines ("...."); any
     line with 4+ consecutive dots is a TOC artifact and dropped everywhere.
+    This manuscript's TOC (pp. ~2-10) has NO leaders — its chapter entries are
+    styled byte-identically to the real chapter headings, so nothing but the
+    page range separates them. Drop that span with --skip 2-10.
   - The author left HTML-comment placeholders ("<!-- ... -->") in the text;
     stripped. Text is HTML-unescaped ("&amp;" -> "&").
 
@@ -25,6 +28,7 @@ Needs:  pip install pymupdf tiktoken
 Usage:
   python bin/extract_digitalentwurfslehre.py                 # full book
   python bin/extract_digitalentwurfslehre.py --pages 12-60   # subset, to eyeball
+  python bin/extract_digitalentwurfslehre.py --skip 2-10     # full book minus TOC
   python bin/extract_digitalentwurfslehre.py --src PATH --out DIR
 """
 import argparse
@@ -353,6 +357,7 @@ def selftest():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pages", help="1-based inclusive range, e.g. 12-60")
+    ap.add_argument("--skip", help="1-based inclusive range to drop, e.g. 2-10 (TOC)")
     ap.add_argument("--src", type=Path, default=SRC, help="source PDF")
     ap.add_argument("--out", type=Path, default=OUT_DIR, help="output directory")
     ap.add_argument("--selftest", action="store_true")
@@ -370,6 +375,13 @@ def main():
         rng = range(a - 1, b)
     else:
         rng = range(doc.page_count)
+
+    # --skip drops a contiguous 1-based page span (the front-matter TOC has no
+    # dot-leaders in this manuscript, so it can't be filtered by content).
+    if args.skip:
+        a, b = (int(x) for x in args.skip.split("-"))
+        skip = set(range(a - 1, b))
+        rng = [p for p in rng if p not in skip]
 
     items = coalesce_code(list(parse_pages(doc, rng)))
     md = build_markdown(items)
