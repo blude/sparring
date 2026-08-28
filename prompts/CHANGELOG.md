@@ -4,6 +4,8 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+
+## 2026-08-28 — `b2cec80` refactor(prompts): move <voice> before <core_mechanism>, dedupe length rule
 - prompt: `<voice>` moved before `<core_mechanism>` — it governs every
   visible turn, `<core_mechanism>`'s engine only drives it, so it now
   precedes what it governs instead of following it. Pure reorder, no
