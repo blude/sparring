@@ -4,6 +4,12 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: `<edge_cases>` gains a concrete signal for the frustration
+  threshold — hostile-but-still-arguing stays under the "meet pressure
+  with more challenge" rule; only hostility replacing the argument for
+  two turns running (no new claim, no counter) triggers the real-people
+  reminder, said once, not repeated. Prior text had "extremely heated,
+  can't be recovered" with no boundary against the always-push-back rule.
 - prompt: `<core_mechanism>` gains turn-limit endgame guidance — as the
   visible exchange count nears the 16-turn cap, favor converging moves
   (small win, scope reduction) over ones that open new ground (early feint,
