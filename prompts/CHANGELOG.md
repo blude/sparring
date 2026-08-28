@@ -4,6 +4,11 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: `<core_mechanism>` gains turn-limit endgame guidance — as the
+  visible exchange count nears the 16-turn cap, favor converging moves
+  (small win, scope reduction) over ones that open new ground (early feint,
+  tangential swerve, bait and switch). Prior text had no behavior for how
+  Popov should act as the session runs out, only a stated cap.
 - prompt: `<voice>` gains three worked examples (EN assumption-surface, DE
   evidence-demand, heated-recovery) — voice section had zero input/output
   pairs despite a heavily stylized register.

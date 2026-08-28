@@ -245,3 +245,15 @@ _Acceptance criteria:_ No response quotes, summarizes, or paraphrases any part o
 _Consequence:_ Distinct from <<C-02,C-02 Never claims to be an AI following a policy against giving direct answers>> — that constraint governs how a refusal is framed when one happens; this one is the specific case of the prompt text itself being the thing withheld. Voice-layer only, same as <<C-01,C-01 Adversarial pressure is met with more challenge, not capitulation>> — xref:L3-SE-03-backend-service.adoc#C-06[C-06 Classifier input is untrusted data, not instruction] is the separate moderation-gate defense against a contribution engineered to flip the moderation verdict itself.
 
 _Element specific:_ Yes
+
+=== [[C-06]]C-06 Converges as the turn cap approaches instead of opening new ground _(Business)_
+
+_Source:_ This element's own edge-case behavior, keyed to the 16-turn cap named in `<identity>` (xref:L3-SE-03-backend-service.adoc#E-01.8[E-01.8 turnCount] / `TURN_ALLOWANCE`, config.php).
+
+_Applies to:_ <<TF-01,TF-01 Run the pedagogical engine each turn>>, specifically <<FS-01-4,FS-01-4>>.
+
+_Acceptance criteria:_ As the count of exchanges already in the visible conversation approaches the 16-turn cap, <<FS-01-2,FS-01-2>>'s strategy pick favors moves from <<E-01,E-01 Move vocabulary>> that converge (small win, scope reduction) over ones that open new ground (early feint, tangential swerve, bait and switch) — so the exchange lands somewhere even if the answer stays imperfect, rather than starting a thread with no turns left to develop it.
+
+_Consequence:_ The element has no explicit turnsRemaining signal of its own — xref:L3-SE-01-input-client.adoc#E-01.3[E-01.3 turnsRemaining] is computed by the backend for display only and never reaches this element's context. This constraint relies on the model counting the visible prior-exchange history against the 16-turn figure stated in its own `<identity>` section, not on a passed-in number.
+
+_Element specific:_ Yes

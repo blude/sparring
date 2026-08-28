@@ -60,6 +60,7 @@
 <li><a href="#_c_03_the_prompt_shares_the_models_context_window_no_length_cap_of_its_own_technical">7.3. C-03 The prompt shares the model&#8217;s context window; no length cap of its own <em>(Technical)</em></a></li>
 <li><a href="#_c_04_structured_with_xml_tags_matching_provider_convention_technical">7.4. C-04 Structured with XML tags, matching provider convention <em>(Technical)</em></a></li>
 <li><a href="#_c_05_never_reveals_quotes_or_paraphrases_its_own_system_prompt_security">7.5. C-05 Never reveals, quotes, or paraphrases its own system prompt <em>(Security)</em></a></li>
+<li><a href="#_c_06_converges_as_the_turn_cap_approaches_instead_of_opening_new_ground_business">7.6. C-06 Converges as the turn cap approaches instead of opening new ground <em>(Business)</em></a></li>
 </ul>
 </li>
 </ul>
@@ -503,6 +504,24 @@
 </div>
 <div class="paragraph">
 <p><em>Consequence:</em> Distinct from <a href="#C-02">C-02 Never claims to be an AI following a policy against giving direct answers</a> — that constraint governs how a refusal is framed when one happens; this one is the specific case of the prompt text itself being the thing withheld. Voice-layer only, same as <a href="#C-01">C-01 Adversarial pressure is met with more challenge, not capitulation</a> — <a href="L3-SE-03-backend-service.html#C-06">C-06 Classifier input is untrusted data, not instruction</a> is the separate moderation-gate defense against a contribution engineered to flip the moderation verdict itself.</p>
+</div>
+<div class="paragraph">
+<p><em>Element specific:</em> Yes</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_c_06_converges_as_the_turn_cap_approaches_instead_of_opening_new_ground_business"><a class="anchor" href="#_c_06_converges_as_the_turn_cap_approaches_instead_of_opening_new_ground_business"></a>7.6. <a id="C-06"></a>C-06 Converges as the turn cap approaches instead of opening new ground <em>(Business)</em></h3>
+<div class="paragraph">
+<p><em>Source:</em> This element&#8217;s own edge-case behavior, keyed to the 16-turn cap named in <code>&lt;identity&gt;</code> (<a href="L3-SE-03-backend-service.html#E-01.8">E-01.8 turnCount</a> / <code>TURN_ALLOWANCE</code>, config.php).</p>
+</div>
+<div class="paragraph">
+<p><em>Applies to:</em> <a href="#TF-01">TF-01 Run the pedagogical engine each turn</a>, specifically <a href="#FS-01-4">FS-01-4</a>.</p>
+</div>
+<div class="paragraph">
+<p><em>Acceptance criteria:</em> As the count of exchanges already in the visible conversation approaches the 16-turn cap, <a href="#FS-01-2">FS-01-2</a>'s strategy pick favors moves from <a href="#E-01">E-01 Move vocabulary</a> that converge (small win, scope reduction) over ones that open new ground (early feint, tangential swerve, bait and switch) — so the exchange lands somewhere even if the answer stays imperfect, rather than starting a thread with no turns left to develop it.</p>
+</div>
+<div class="paragraph">
+<p><em>Consequence:</em> The element has no explicit turnsRemaining signal of its own — <a href="L3-SE-01-input-client.html#E-01.3">E-01.3 turnsRemaining</a> is computed by the backend for display only and never reaches this element&#8217;s context. This constraint relies on the model counting the visible prior-exchange history against the 16-turn figure stated in its own <code>&lt;identity&gt;</code> section, not on a passed-in number.</p>
 </div>
 <div class="paragraph">
 <p><em>Element specific:</em> Yes</p>
