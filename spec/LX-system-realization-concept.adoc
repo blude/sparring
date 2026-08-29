@@ -1,6 +1,6 @@
 = System Realization Concept
 Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
-v.1.0, 2026-06-19
+v.1.1, 2026-08-29
 :toc: left
 :toclevels: 3
 :icons: font
@@ -106,6 +106,58 @@ process, not a separate service; `prompts/sparring.md` (`SE-04`) is
 supplied as content on the outbound call, not a component with its own
 network edge. No websocket/SSE connection — the wall polls
 `/api/recent-exchanges` on an interval instead.
+
+== What shapes a Sparring response
+
+Companion to the two diagrams above: not what talks to what, but how the
+main content blocks — the system prompt, the curriculum, moderation, the
+session title, and the eval suite — each contribute to the response a
+visitor reads on the `/dojo` screen.
+
+[source,mermaid]
+----
+flowchart TB
+  curriculum[("Curriculum corpus<br/>data/curriculum/ — FH Dortmund Digital Design")]
+  prompt["System prompt — SE-04<br/>prompts/sparring.md<br/>pedagogical engine + static domain_grounding"]
+  rag["Turn-1 retrieval — SE-04 TF-02<br/>poor-man's RAG over the corpus"]
+  moderation["Moderation — SE-03 TF-02<br/>prompts/moderation.md"]
+  eval["Evaluation suite<br/>evals/sparring/ — simulated visitors, graded pass rates"]
+  contribution(["Visitor contribution"])
+  response(["Sparring response<br/>on the /dojo screen"])
+  title["Session title — SE-03 TF-07<br/>prompts/title.md"]
+
+  contribution --> moderation -->|suitable input only| response
+  curriculum -.->|distilled by hand into| prompt
+  curriculum --> rag -->|domain knowledge, first turn| response
+  prompt -->|holds the position, picks the move| response
+  eval -->|measures, drives edits| prompt
+  response --> title
+----
+
+Reading it, by the three edges that carry the value:
+
+* *Curriculum → domain knowledge.* The `data/curriculum/` corpus reaches a
+  response two ways: distilled by hand into the system prompt's static
+  `<domain_grounding>` section (present every turn), and retrieved live by
+  `SE-04` `TF-02` on the visitor's first real turn, which adds excerpts
+  specific to what they opened with. Ingest is `bin/import_curriculum.php`;
+  the corpus itself is a personal knowledge base, kept out of version
+  control.
+* *Evaluation → a better system prompt.* `evals/sparring/` runs simulated
+  multi-turn visitors against the exact generation payload production sends
+  and grades the transcripts against a rubric. The pass rates are the
+  feedback signal for editing `prompts/sparring.md` — the only loop that
+  systematically improves the prompt rather than spot-checking it.
+* *Everything → better sparring.* Moderation keeps unsuitable input off the
+  wall without ending the session; the system prompt holds the position and
+  varies the Socratic move; curriculum grounds the challenge in real design
+  theory; the title (generated out of band after turn 1) labels the session.
+  The response on the `/dojo` screen is where all of them land.
+
+NOTE: `bin/import_curriculum.php` and `evals/sparring/` are operator
+tooling, deliberately unmodeled — same treatment as `bin/*.php` in the
+diagram above and xref:L3-SE-03-backend-service.adoc#C-04[C-04] — shown here
+only because they terminate on artifacts the runtime path reads.
 
 == Technology stack
 
