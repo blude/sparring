@@ -11,6 +11,7 @@
 <body>
 <?= pageHeader() ?>
 <h1><?= t('philosophy.heading') ?></h1>
+<p><img src="<?= fasset('img/philosophy-1.jpg') ?>" alt="<?= t('philosophy.imageAlt') ?>" class="content-image"></p>
 <h2><?= t('philosophy.subheading') ?></h2>
 <p><?= t('philosophy.body') ?></p>
 <?= pageFooter() ?>

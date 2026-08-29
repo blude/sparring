@@ -123,6 +123,7 @@ return [
     'philosophy.heading' => 'Die Philosophie von Sparring',
     'philosophy.subheading' => 'Wie Sparring funktioniert',
     'philosophy.body' => 'Sparring ist eine interaktive Erfahrung, bei der du dich auf eine simulierte Sparring-Sitzung mit einem im Digital Design versierten KI-Partner einlässt. Der Partner reagiert in Echtzeit auf deine Argumente und ermöglicht so eine dynamische, ansprechende intellektuelle Übung. Er nutzt einen maßgeschneiderten System-Prompt, um Argumente zu erkennen, mögliche Gegenargumente zu erzeugen und passende Antworten zurückzugeben — so entsteht eine realistische, herausfordernde Sparring-Umgebung.',
+    'philosophy.imageAlt' => 'Eine Person in Boxhaltung, die einem schattenhaften Gegner gegenübersteht.',
 
     // --- privacy.php / terms.php ---
     // ponytail: machine-translated (Claude), not reviewed by a native

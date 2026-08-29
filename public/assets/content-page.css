@@ -38,3 +38,12 @@ footer a { color: #666; }
 }
 .locale-switcher a, .locale-switcher span { color: #888; text-decoration: none; padding: 0.5rem 0.75rem; }
 .locale-switcher .locale-current { color: #222; background: #fff; border-radius: 999px; font-weight: 700; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); }
+
+.content-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1rem auto;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

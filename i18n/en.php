@@ -133,6 +133,7 @@ return [
     'philosophy.heading' => "Sparring's Philosophy",
     'philosophy.subheading' => 'How Sparring Works',
     'philosophy.body' => 'Sparring is an interactive experience that lets you engage in a simulated sparring session with an AI partner skilled in Digital Design. The partner responds to your arguments in real time, providing a dynamic, engaging intellectual practice. It uses a tailor-made system prompt to identify arguments, generate candidate counter-arguments, and return appropriate responses — creating a realistic, challenging sparring environment.',
+    'philosophy.imageAlt' => 'A person in a boxing stance, facing a shadowy opponent.',
 
     // --- privacy.php ---
     'privacy.title' => 'Privacy Policy — Sparring',
