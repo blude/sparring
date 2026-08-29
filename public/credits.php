@@ -27,12 +27,14 @@
 <li><a href="https://github.com/KilledByAPixel/ZzFX">ZzFX</a> by Frank Force</li>
 <li><a href="https://github.com/kazuhikoarase/qrcode-generator">qrcode-generator</a> by Kazuhiko Arase</li>
 <li><a href="https://github.com/hans-thiessen/Rethink-Sans/">RethinkSans</a> by Rethink</li>
+<li><a href="https://fonts.google.com/specimen/Darumadrop+One">Darumadrop One</a> and <a href="https://www.1001fonts.com/mochi-boom-demo-font.html">Mochi Boom</a>, used in the Sparring logo</li>
 <li><a href="https://pictogrammers.com/library/mdi/">Material Design Icons</a> by the Pictogrammers group</li>
 <li><a href="https://easyengine.io/">EasyEngine</a></li>
 <li><a href="https://www.sqlite.org/">SQLite</a></li>
 <li><a href="https://figma.com/">Figma</a></li>
 <li><a href="https://github.com/anthropics/claude-api">Claude API</a> and Claude Code</li>
 </ul>
+<p><?= t('credits.ack.material') ?></p>
 <?= pageFooter() ?>
 <?= sillyBanner() ?>
 </body>

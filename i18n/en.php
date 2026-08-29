@@ -126,6 +126,7 @@ return [
     'credits.author.contact' => '<strong>Contact:</strong> For inquiries, please contact <a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Inquiry">sarah.puppinpratti001@stud.fh-dortmund.de</a>',
     'credits.ack.heading' => 'Acknowledgements',
     'credits.ack.intro' => 'Sparring uses the following open-source libraries and technologies:',
+    'credits.ack.material' => 'Parts of Sparring&rsquo;s teaching material are based on work originally written by Kim Lauenroth.',
 
     // --- philosophy.php ---
     'philosophy.title' => 'Philosophy — Sparring',
