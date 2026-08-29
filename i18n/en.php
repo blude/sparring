@@ -129,10 +129,10 @@ return [
 
     // --- philosophy.php ---
     'philosophy.title' => 'Philosophy — Sparring',
-    'philosophy.ogDescription' => 'How Sparring works: an AI partner that challenges your thinking through dialectic sparring in Digital Design.',
+    'philosophy.ogDescription' => 'How Sparring works: an AI partner that argues back instead of answering, in Digital Design.',
     'philosophy.heading' => "Sparring's Philosophy",
-    'philosophy.subheading' => 'How Sparring Works',
-    'philosophy.body' => 'Sparring is an interactive experience that lets you engage in a simulated sparring session with an AI partner skilled in Digital Design. The partner responds to your arguments in real time, providing a dynamic, engaging intellectual practice. It uses a tailor-made system prompt to identify arguments, generate candidate counter-arguments, and return appropriate responses — creating a realistic, challenging sparring environment.',
+    'philosophy.subheading' => 'How Sparring works',
+    'philosophy.body' => 'Sparring lets you argue with an AI partner that knows Digital Design. You make a point, it pushes back in real time, and the exchange keeps going as long as you do. Behind it is a custom system prompt that reads your argument, works out where it is weak, and answers with a counter-argument meant to test it rather than agree with it.',
     'philosophy.imageAlt' => 'A person in a boxing stance, facing a shadowy opponent.',
 
     // --- privacy.php ---
