@@ -1,25 +1,68 @@
 = Sparring — Design Documentation
 Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
-v.1.0, 2026-06-19
+v.1.1, 2026-08-29
 :toc: left
 :toclevels: 3
 :icons: font
 :sectanchors:
 :sectnums:
 
-Four-level design framework (L0–L3) plus glossary and realization concept.
-See `CLAUDE.md` for the framework note.
+== What Sparring is
 
-== Main Sections
+Sparring is a thesis exhibition object. A QR code on the wall opens a plain
+text field on the visitor's own phone; whatever they type goes to an AI that
+argues back instead of answering. Both sides of the exchange project onto a
+wall behind them, so a room full of people watches one visitor get pushed to
+reason through their own argument. It runs for three days at Superraum in
+Dortmund, built as part of a master's thesis at FH Dortmund. The AI's subject
+is Digital Design education — it plays a motivated sparring partner, not a
+helpful chatbot.
 
-* xref:L1-solution-design-concept.adoc[L1 — Solution Design Concept] — business goals, value proposition, business processes. No L0 sits above it.
-* xref:L2-system-design-concept.adoc[L2 — System Design Concept] — system goals, architecture, elements, scenarios.
-* xref:L3-SE-01-input-client.adoc[L3 — Input Client (SE-01)] — the visitor-facing input surface.
-* xref:L3-SE-02-display-client.adoc[L3 — Display Client (SE-02)] — the projection surface.
-* xref:L3-SE-03-backend-service.adoc[L3 — Backend Service (SE-03)] — the stateful backend.
-* xref:L3-SE-04-system-prompt.adoc[L3 — System Prompt (SE-04)] — the instruction set governing every Sparring response.
+These documents are the design record: not how the code is written, but what
+the installation has to be true and why.
 
-== Extra
+== How to read this
 
-* xref:LX-system-realization-concept.adoc[LX — System Realization Concept] — deployment/infrastructure detail.
-* xref:glossary.adoc[Glossary] — ID prefix reference.
+The documentation follows a four-level framework. Each level answers a
+narrower question than the one above it, and every item carries an ID
+(`BG-01`, `SE-03`, `TF-02`, …) so a decision at one level can be traced to
+the need it satisfies one level up.
+
+[cols="1,4"]
+|===
+| L1 — Solution | *Why* build it. Business goals, the value it creates, the processes around it. Non-technical.
+| L2 — System | The installation as *one system*. System goals, architecture, the elements it decomposes into, end-to-end scenarios.
+| L3 — Element | *One document per element.* The detailed behaviour, interfaces, and constraints of each piece L2 named.
+| LX — Realization | The *deployment reality* — server sizing, PHP version, SSL, diagrams at implementation detail. Sits outside the four levels.
+|===
+
+There is no L0. The framework defines a Digital Design Brief above L1, but
+none was produced for this project, so the record starts at L1 and its
+constraints trace to nothing above them.
+
+[source,mermaid]
+----
+flowchart TB
+  L1["L1 Solution<br/>BG-01 Make Sparring's friction visible to an audience"]
+  L2["L2 System<br/>SG-02 Make turn-taking readable from across the room"]
+  L3["L3 Element — SE-02 Display Client<br/>UC-01, TF-01, QR-03 …"]
+  L1 -->|satisfied by| L2 -->|satisfied by| L3
+----
+
+*Suggested path:* read L1 for the point of the thing, skim L2's architecture
+section for the shape of the system, then dive into whichever L3 element you
+care about.
+
+== The four levels
+
+* xref:L1-solution-design-concept.adoc[L1 — Solution Design Concept] — the future press release, business goals, and the value proposition behind arguing with an AI in public. Start here.
+* xref:L2-system-design-concept.adoc[L2 — System Design Concept] — system goals, the architecture diagram, the split into three software elements and one system prompt, and the scenarios that run across them.
+* xref:L3-SE-01-input-client.adoc[L3 — Input Client (SE-01)] — the visitor's phone screen: consent, the chat UI, alias and avatar, how a turn is submitted.
+* xref:L3-SE-02-display-client.adoc[L3 — Display Client (SE-02)] — the projected wall: how recent exchanges are polled and laid out so they stay legible across the room.
+* xref:L3-SE-03-backend-service.adoc[L3 — Backend Service (SE-03)] — the one stateful service: the turn pipeline (gate, moderate, generate, persist), rate limiting, session policy, and the single outbound call to the language API.
+* xref:L3-SE-04-system-prompt.adoc[L3 — System Prompt (SE-04)] — the instruction set that governs every Sparring reply. Content with no runtime interface of its own, modeled as a first-class element anyway.
+
+== Beyond the four levels
+
+* xref:LX-system-realization-concept.adoc[LX — System Realization Concept] — deployment and infrastructure detail, plus implementation-level diagrams: what talks to what, what each element is built from, and what shapes a response the visitor reads.
+* xref:glossary.adoc[Glossary] — what every ID prefix means, level by level.

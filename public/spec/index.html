@@ -17,63 +17,130 @@
 <div class="details">
 <span id="author" class="author">Sarah Puppin Pratti</span><br>
 <span id="email" class="email"><a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de">sarah.puppinpratti001@stud.fh-dortmund.de</a></span><br>
-<span id="revnumber">version 1.0,</span>
-<span id="revdate">2026-06-19</span>
+<span id="revnumber">version 1.1,</span>
+<span id="revdate">2026-08-29</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_main_sections">1. Main Sections</a></li>
-<li><a href="#_extra">2. Extra</a></li>
+<li><a href="#_what_sparring_is">1. What Sparring is</a></li>
+<li><a href="#_how_to_read_this">2. How to read this</a></li>
+<li><a href="#_the_four_levels">3. The four levels</a></li>
+<li><a href="#_beyond_the_four_levels">4. Beyond the four levels</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="_what_sparring_is"><a class="anchor" href="#_what_sparring_is"></a>1. What Sparring is</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Four-level design framework (L0–L3) plus glossary and realization concept.
-See <code>CLAUDE.md</code> for the framework note.</p>
+<p>Sparring is a thesis exhibition object. A QR code on the wall opens a plain
+text field on the visitor&#8217;s own phone; whatever they type goes to an AI that
+argues back instead of answering. Both sides of the exchange project onto a
+wall behind them, so a room full of people watches one visitor get pushed to
+reason through their own argument. It runs for three days at Superraum in
+Dortmund, built as part of a master&#8217;s thesis at FH Dortmund. The AI&#8217;s subject
+is Digital Design education — it plays a motivated sparring partner, not a
+helpful chatbot.</p>
+</div>
+<div class="paragraph">
+<p>These documents are the design record: not how the code is written, but what
+the installation has to be true and why.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_main_sections"><a class="anchor" href="#_main_sections"></a>1. Main Sections</h2>
+<h2 id="_how_to_read_this"><a class="anchor" href="#_how_to_read_this"></a>2. How to read this</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The documentation follows a four-level framework. Each level answers a
+narrower question than the one above it, and every item carries an ID
+(<code>BG-01</code>, <code>SE-03</code>, <code>TF-02</code>, …) so a decision at one level can be traced to
+the need it satisfies one level up.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">L1 — Solution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Why</strong> build it. Business goals, the value it creates, the processes around it. Non-technical.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">L2 — System</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The installation as <strong>one system</strong>. System goals, architecture, the elements it decomposes into, end-to-end scenarios.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">L3 — Element</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>One document per element.</strong> The detailed behaviour, interfaces, and constraints of each piece L2 named.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LX — Realization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>deployment reality</strong> — server sizing, PHP version, SSL, diagrams at implementation detail. Sits outside the four levels.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>There is no L0. The framework defines a Digital Design Brief above L1, but
+none was produced for this project, so the record starts at L1 and its
+constraints trace to nothing above them.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-mermaid" data-lang="mermaid">flowchart TB
+  L1["L1 Solution&lt;br/&gt;BG-01 Make Sparring's friction visible to an audience"]
+  L2["L2 System&lt;br/&gt;SG-02 Make turn-taking readable from across the room"]
+  L3["L3 Element — SE-02 Display Client&lt;br/&gt;UC-01, TF-01, QR-03 …"]
+  L1 --&gt;|satisfied by| L2 --&gt;|satisfied by| L3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Suggested path:</strong> read L1 for the point of the thing, skim L2&#8217;s architecture
+section for the shape of the system, then dive into whichever L3 element you
+care about.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_four_levels"><a class="anchor" href="#_the_four_levels"></a>3. The four levels</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="L1-solution-design-concept.html">L1 — Solution Design Concept</a> — business goals, value proposition, business processes. No L0 sits above it.</p>
+<p><a href="L1-solution-design-concept.html">L1 — Solution Design Concept</a> — the future press release, business goals, and the value proposition behind arguing with an AI in public. Start here.</p>
 </li>
 <li>
-<p><a href="L2-system-design-concept.html">L2 — System Design Concept</a> — system goals, architecture, elements, scenarios.</p>
+<p><a href="L2-system-design-concept.html">L2 — System Design Concept</a> — system goals, the architecture diagram, the split into three software elements and one system prompt, and the scenarios that run across them.</p>
 </li>
 <li>
-<p><a href="L3-SE-01-input-client.html">L3 — Input Client (SE-01)</a> — the visitor-facing input surface.</p>
+<p><a href="L3-SE-01-input-client.html">L3 — Input Client (SE-01)</a> — the visitor&#8217;s phone screen: consent, the chat UI, alias and avatar, how a turn is submitted.</p>
 </li>
 <li>
-<p><a href="L3-SE-02-display-client.html">L3 — Display Client (SE-02)</a> — the projection surface.</p>
+<p><a href="L3-SE-02-display-client.html">L3 — Display Client (SE-02)</a> — the projected wall: how recent exchanges are polled and laid out so they stay legible across the room.</p>
 </li>
 <li>
-<p><a href="L3-SE-03-backend-service.html">L3 — Backend Service (SE-03)</a> — the stateful backend.</p>
+<p><a href="L3-SE-03-backend-service.html">L3 — Backend Service (SE-03)</a> — the one stateful service: the turn pipeline (gate, moderate, generate, persist), rate limiting, session policy, and the single outbound call to the language API.</p>
 </li>
 <li>
-<p><a href="L3-SE-04-system-prompt.html">L3 — System Prompt (SE-04)</a> — the instruction set governing every Sparring response.</p>
+<p><a href="L3-SE-04-system-prompt.html">L3 — System Prompt (SE-04)</a> — the instruction set that governs every Sparring reply. Content with no runtime interface of its own, modeled as a first-class element anyway.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_extra"><a class="anchor" href="#_extra"></a>2. Extra</h2>
+<h2 id="_beyond_the_four_levels"><a class="anchor" href="#_beyond_the_four_levels"></a>4. Beyond the four levels</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="LX-system-realization-concept.html">LX — System Realization Concept</a> — deployment/infrastructure detail.</p>
+<p><a href="LX-system-realization-concept.html">LX — System Realization Concept</a> — deployment and infrastructure detail, plus implementation-level diagrams: what talks to what, what each element is built from, and what shapes a response the visitor reads.</p>
 </li>
 <li>
-<p><a href="glossary.html">Glossary</a> — ID prefix reference.</p>
+<p><a href="glossary.html">Glossary</a> — what every ID prefix means, level by level.</p>
 </li>
 </ul>
 </div>
