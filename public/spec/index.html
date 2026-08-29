@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="author" content="Sarah Puppin Pratti">
-<title>Sparring — Design Documentation</title>
+<title>Sparring: Design Documentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Sparring — Design Documentation</h1>
+<h1>Sparring: Design Documentation</h1>
 <div class="details">
 <span id="author" class="author">Sarah Puppin Pratti</span><br>
 <span id="email" class="email"><a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de">sarah.puppinpratti001@stud.fh-dortmund.de</a></span><br>
@@ -35,18 +35,18 @@
 <h2 id="_what_sparring_is"><a class="anchor" href="#_what_sparring_is"></a>1. What Sparring is</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Sparring is a thesis exhibition object. A QR code on the wall opens a plain
-text field on the visitor&#8217;s own phone; whatever they type goes to an AI that
-argues back instead of answering. Both sides of the exchange project onto a
-wall behind them, so a room full of people watches one visitor get pushed to
-reason through their own argument. It runs for three days at Superraum in
-Dortmund, built as part of a master&#8217;s thesis at FH Dortmund. The AI&#8217;s subject
-is Digital Design education — it plays a motivated sparring partner, not a
-helpful chatbot.</p>
+<p>Sparring is an exhibition object built for a master&#8217;s thesis at FH Dortmund. A
+QR code on the wall opens a plain text field on the visitor&#8217;s phone. Whatever
+they type goes to an AI that argues back instead of answering, and both sides
+of the exchange show up on a wall behind them, so a room full of people
+watches one visitor get pushed to reason through their own argument. It runs
+for three days at Superraum in Dortmund. The subject is Digital Design
+education, and the AI plays a motivated sparring partner rather than a helpful
+chatbot.</p>
 </div>
 <div class="paragraph">
-<p>These documents are the design record: not how the code is written, but what
-the installation has to be true and why.</p>
+<p>These documents are the design record. They describe what has to be true about
+the installation and why, not how the code is written.</p>
 </div>
 </div>
 </div>
@@ -54,10 +54,10 @@ the installation has to be true and why.</p>
 <h2 id="_how_to_read_this"><a class="anchor" href="#_how_to_read_this"></a>2. How to read this</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The documentation follows a four-level framework. Each level answers a
-narrower question than the one above it, and every item carries an ID
-(<code>BG-01</code>, <code>SE-03</code>, <code>TF-02</code>, …) so a decision at one level can be traced to
-the need it satisfies one level up.</p>
+<p>The documentation follows a four-level framework. Each level answers a narrower
+question than the one above it, and every item carries an ID (<code>BG-01</code>,
+<code>SE-03</code>, <code>TF-02</code>) so a decision at one level traces back to the need it
+satisfies one level up.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -66,20 +66,20 @@ the need it satisfies one level up.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">L1 — Solution</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Why</strong> build it. Business goals, the value it creates, the processes around it. Non-technical.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">L1: Solution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Why build it. Business goals, the value it creates, the processes around it. Non-technical.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">L2 — System</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The installation as <strong>one system</strong>. System goals, architecture, the elements it decomposes into, end-to-end scenarios.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">L2: System</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The installation as one system. System goals, architecture, the elements it breaks into, and scenarios that run end to end.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">L3 — Element</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>One document per element.</strong> The detailed behaviour, interfaces, and constraints of each piece L2 named.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">L3: Element</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One document per element. The behaviour, interfaces, and constraints of each piece L2 named.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">LX — Realization</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>deployment reality</strong> — server sizing, PHP version, SSL, diagrams at implementation detail. Sits outside the four levels.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LX: Realization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The deployment reality: server sizing, PHP version, SSL, and diagrams at implementation detail. It sits outside the four levels.</p></td>
 </tr>
 </tbody>
 </table>
@@ -93,14 +93,14 @@ constraints trace to nothing above them.</p>
 <pre class="highlight"><code class="language-mermaid" data-lang="mermaid">flowchart TB
   L1["L1 Solution&lt;br/&gt;BG-01 Make Sparring's friction visible to an audience"]
   L2["L2 System&lt;br/&gt;SG-02 Make turn-taking readable from across the room"]
-  L3["L3 Element — SE-02 Display Client&lt;br/&gt;UC-01, TF-01, QR-03 …"]
+  L3["L3 Element, SE-02 Display Client&lt;br/&gt;UC-01, TF-01, QR-03"]
   L1 --&gt;|satisfied by| L2 --&gt;|satisfied by| L3</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>Suggested path:</strong> read L1 for the point of the thing, skim L2&#8217;s architecture
-section for the shape of the system, then dive into whichever L3 element you
-care about.</p>
+<p><strong>Suggested path:</strong> read L1 for why the installation exists, skim L2&#8217;s
+architecture section for the shape of the system, then read whichever L3
+element you care about.</p>
 </div>
 </div>
 </div>
@@ -110,22 +110,22 @@ care about.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="L1-solution-design-concept.html">L1 — Solution Design Concept</a> — the future press release, business goals, and the value proposition behind arguing with an AI in public. Start here.</p>
+<p><a href="L1-solution-design-concept.html">L1: Solution Design Concept</a> holds the future press release, the business goals, and the value proposition behind arguing with an AI in public. Start here.</p>
 </li>
 <li>
-<p><a href="L2-system-design-concept.html">L2 — System Design Concept</a> — system goals, the architecture diagram, the split into three software elements and one system prompt, and the scenarios that run across them.</p>
+<p><a href="L2-system-design-concept.html">L2: System Design Concept</a> covers the system goals, the architecture diagram, the split into three software elements plus one system prompt, and the scenarios that run across them.</p>
 </li>
 <li>
-<p><a href="L3-SE-01-input-client.html">L3 — Input Client (SE-01)</a> — the visitor&#8217;s phone screen: consent, the chat UI, alias and avatar, how a turn is submitted.</p>
+<p><a href="L3-SE-01-input-client.html">L3: Input Client (SE-01)</a> is the visitor&#8217;s phone screen: consent, the chat UI, alias and avatar, and how a turn is submitted.</p>
 </li>
 <li>
-<p><a href="L3-SE-02-display-client.html">L3 — Display Client (SE-02)</a> — the projected wall: how recent exchanges are polled and laid out so they stay legible across the room.</p>
+<p><a href="L3-SE-02-display-client.html">L3: Display Client (SE-02)</a> is the projected wall: how recent exchanges are polled and laid out so they stay legible across the room.</p>
 </li>
 <li>
-<p><a href="L3-SE-03-backend-service.html">L3 — Backend Service (SE-03)</a> — the one stateful service: the turn pipeline (gate, moderate, generate, persist), rate limiting, session policy, and the single outbound call to the language API.</p>
+<p><a href="L3-SE-03-backend-service.html">L3: Backend Service (SE-03)</a> is the one stateful service: the turn pipeline (gate, moderate, generate, persist), rate limiting, session policy, and the single outbound call to the language API.</p>
 </li>
 <li>
-<p><a href="L3-SE-04-system-prompt.html">L3 — System Prompt (SE-04)</a> — the instruction set that governs every Sparring reply. Content with no runtime interface of its own, modeled as a first-class element anyway.</p>
+<p><a href="L3-SE-04-system-prompt.html">L3: System Prompt (SE-04)</a> is the instruction set behind every Sparring reply. It has no runtime interface of its own but is modeled as a first-class element anyway.</p>
 </li>
 </ul>
 </div>
@@ -137,10 +137,10 @@ care about.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="LX-system-realization-concept.html">LX — System Realization Concept</a> — deployment and infrastructure detail, plus implementation-level diagrams: what talks to what, what each element is built from, and what shapes a response the visitor reads.</p>
+<p><a href="LX-system-realization-concept.html">LX: System Realization Concept</a> collects the deployment and infrastructure detail, plus implementation-level diagrams: what talks to what, what each element is built from, and what shapes a response the visitor reads.</p>
 </li>
 <li>
-<p><a href="glossary.html">Glossary</a> — what every ID prefix means, level by level.</p>
+<p><a href="glossary.html">Glossary</a> lists what every ID prefix means, level by level.</p>
 </li>
 </ul>
 </div>
