@@ -44,6 +44,6 @@ footer a { color: #666; }
     max-width: 100%;
     height: auto;
     margin: 1rem auto;
-    border-radius: 1rem;
+    border-radius: 1.25rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
