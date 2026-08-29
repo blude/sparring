@@ -42,7 +42,7 @@ constraints trace to nothing above them.
 
 [source,mermaid]
 ----
-flowchart TB
+flowchart LR
   L1["L1 Solution<br/>BG-01 Make Sparring's friction visible to an audience"]
   L2["L2 System<br/>SG-02 Make turn-taking readable from across the room"]
   L3["L3 Element, SE-02 Display Client<br/>UC-01, TF-01, QR-03"]
