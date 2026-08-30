@@ -20,7 +20,7 @@ xref:index.adoc[Index] / *Solution Design Concept*
 
 === Future Press Release
 
-*Dortmund, October 2026. Sparring goes public at Superraum.*
+*Dortmund, September 2026. Sparring goes public at Superraum.*
 
 For three days at Superraum, visitors to the Sparring exhibition did not simply read about an AI that refuses to hand over answers. They argued with one. A QR code on the wall opened a plain text field on their own phone; whatever they typed went to a projected wall behind them, alongside the AI's reply, where everyone in the room could watch the exchange unfold.
 
