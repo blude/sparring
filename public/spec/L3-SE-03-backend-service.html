@@ -479,6 +479,9 @@ A second distinction the instruction must also get right, found in testing: stat
 <p><strong><a id="FS-06-4a"></a>FS-06-4a</strong> <em>(Entity-access)</em> If the transcript supplies a title, write it to <a href="#E-01.12">E-01.12 title</a> as-is (no length bound, same as <a href="#TF-07">TF-07 Refine a session title</a>'s own output). Optional — a transcript that omits it leaves the field unset, same as any session whose title hasn&#8217;t been generated yet, and <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> falls back to the scenario line in that case.</p>
 </li>
 <li>
+<p><strong><a id="FS-06-4b"></a>FS-06-4b</strong> <em>(Entity-access)</em> If the transcript supplies a <code>reply_to</code> naming another seed in the same import, link this session&#8217;s first exchange to that seed&#8217;s most recent exchange and increment its <a href="#E-02.7">E-02.7 replyCount</a>, exactly as a visitor opening a session from that exchange&#8217;s QR code would. Optional — a transcript that omits it imports as a standalone session. Seeds are read in two passes (plain seeds first, <code>reply_to</code> seeds second) so the link resolves regardless of file order; a <code>reply_to</code> seed may not itself be a reply target.</p>
+</li>
+<li>
 <p><strong><a id="FS-06-5"></a>FS-06-5</strong> <em>(Data-operation)</em> Return per-transcript outcomes.</p>
 </li>
 </ul>
@@ -490,6 +493,9 @@ A second distinction the instruction must also get right, found in testing: stat
 <ul>
 <li>
 <p><strong><a id="FA-06-1"></a>FA-06-1</strong> <em>(extends <a href="#FS-06-1">FS-06-1</a>)</em> A transcript is malformed. It is recorded as rejected and the import continues with the remainder. <em>Outcome:</em> Resume.</p>
+</li>
+<li>
+<p><strong><a id="FA-06-2"></a>FA-06-2</strong> <em>(extends <a href="#FS-06-4b">FS-06-4b</a>)</em> A transcript&#8217;s <code>reply_to</code> names no plain seed in the import (unknown name, or it points at another <code>reply_to</code> seed). The transcript is recorded as rejected rather than imported without its link, and the import continues with the remainder. <em>Outcome:</em> Resume.</p>
 </li>
 </ul>
 </div>
@@ -931,6 +937,13 @@ Call behaviour is specified on the calling function steps (<a href="#TF-01">TF-0
 <td class="tableblock halign-left valign-top"><p class="tableblock">datetime</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">When the exchange completed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-02.7"></a>E-02.7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">replyCount</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many sessions have opened in reply to this exchange. Defaults to zero, incremented by a pilot seed&#8217;s <code>reply_to</code> link (see <a href="#FS-06-4b">FS-06-4b</a>) or a visitor opening a session from this exchange. Only a session&#8217;s first turn counts as a reply, so the increment is exactly-once; the exchange being replied to may sit at any <a href="#E-02.5">E-02.5 position</a>.</p></td>
 </tr>
 </tbody>
 </table>

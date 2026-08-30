@@ -206,11 +206,13 @@ _Achieves:_ <<G-03,G-03 Persist every interaction with its origin fixed at>>, <<
 - *[[FS-06-3]]FS-06-3* _(Entity-access)_ Write each exchange to <<E-02,E-02 Exchange>> in transcript order.
 - *[[FS-06-4]]FS-06-4* _(Function-call)_ Call <<TF-05,TF-05 Derive a scenario statement>> for each session to derive its scenario statement.
 - *[[FS-06-4a]]FS-06-4a* _(Entity-access)_ If the transcript supplies a title, write it to <<E-01.12,E-01.12 title>> as-is (no length bound, same as <<TF-07,TF-07 Refine a session title>>'s own output). Optional — a transcript that omits it leaves the field unset, same as any session whose title hasn't been generated yet, and xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] falls back to the scenario line in that case.
+- *[[FS-06-4b]]FS-06-4b* _(Entity-access)_ If the transcript supplies a `reply_to` naming another seed in the same import, link this session's first exchange to that seed's most recent exchange and increment its <<E-02.7,E-02.7 replyCount>>, exactly as a visitor opening a session from that exchange's QR code would. Optional — a transcript that omits it imports as a standalone session. Seeds are read in two passes (plain seeds first, `reply_to` seeds second) so the link resolves regardless of file order; a `reply_to` seed may not itself be a reply target.
 - *[[FS-06-5]]FS-06-5* _(Data-operation)_ Return per-transcript outcomes.
 
 *Alternative flows*
 
 - *[[FA-06-1]]FA-06-1* _(extends <<FS-06-1,FS-06-1>>)_ A transcript is malformed. It is recorded as rejected and the import continues with the remainder. _Outcome:_ Resume.
+- *[[FA-06-2]]FA-06-2* _(extends <<FS-06-4b,FS-06-4b>>)_ A transcript's `reply_to` names no plain seed in the import (unknown name, or it points at another `reply_to` seed). The transcript is recorded as rejected rather than imported without its link, and the import continues with the remainder. _Outcome:_ Resume.
 
 === [[TF-07]]TF-07 Refine a session title
 
@@ -391,6 +393,7 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange]
 | [[E-02.4]]E-02.4 | sparringResponse | string | required | The reply produced for that turn.
 | [[E-02.5]]E-02.5 | position | integer | required | Position within the session, from one.
 | [[E-02.6]]E-02.6 | createdAt | datetime | required | When the exchange completed.
+| [[E-02.7]]E-02.7 | replyCount | integer | required | How many sessions have opened in reply to this exchange. Defaults to zero, incremented by a pilot seed's `reply_to` link (see <<FS-06-4b,FS-06-4b>>) or a visitor opening a session from this exchange. Only a session's first turn counts as a reply, so the increment is exactly-once; the exchange being replied to may sit at any <<E-02.5,E-02.5 position>>.
 |===
 
 NOTE: The pair is stored as one record rather than as two turn records. This follows the display unit (xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange]) and removes the possibility of a stored contribution with no response, which is the state a failed generation would otherwise leave behind.

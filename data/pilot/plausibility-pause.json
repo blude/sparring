@@ -1,0 +1,15 @@
+{
+  "title": "Whether the pause before a plausible answer can be taught",
+  "reply_to": "wicked-problem",
+  "scenario_source_text": "You asked what a curriculum has to teach differently if the danger is a plausible answer arriving too early. I think the answer is you teach the pause — deliberately not acting on the first plausible draft. But I'm not sure a pause can be taught.",
+  "exchanges": [
+    {
+      "contribution": "You asked what a curriculum has to teach differently if the danger is a plausible answer arriving too early. I think the answer is you teach the pause — deliberately not acting on the first plausible draft. But I'm not sure a pause can be taught.",
+      "response": "Say more about 'can't be taught'. When you personally learned to distrust a too-easy answer, what did it — a person, a failure, a habit you were made to repeat? Name the mechanism, then we can ask whether a curriculum can reproduce it."
+    },
+    {
+      "contribution": "Honestly it was shipping something that tested well in the room and then failed with real users. The gap between plausible and right stopped being abstract.",
+      "response": "So your teacher was a consequence you couldn't argue away. What is the closest a studio course can get to that consequence without waiting for a real product to fail?"
+    }
+  ]
+}

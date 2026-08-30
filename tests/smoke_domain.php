@@ -138,6 +138,21 @@ $longTitle = validate_transcript([
 assert($longTitle['ok'] === true);
 assert(mb_strlen($longTitle['title']) === 200);
 
+// reply_to is optional — omitted stays null
+assert($valid['replyTo'] === null);
+
+// present and valid: trimmed, kept as the target seed's stem
+$withReplyTo = validate_transcript([
+    'exchanges' => [['contribution' => 'a', 'response' => 'b']],
+    'reply_to' => '  wicked-problem  ',
+]);
+assert($withReplyTo['ok'] === true);
+assert($withReplyTo['replyTo'] === 'wicked-problem');
+
+// present and junk: rejected, same as a blank title
+assert(validate_transcript(['exchanges' => [['contribution' => 'a', 'response' => 'b']], 'reply_to' => '   '])['ok'] === false);
+assert(validate_transcript(['exchanges' => [['contribution' => 'a', 'response' => 'b']], 'reply_to' => 42])['ok'] === false);
+
 // --- bin/import_curriculum.php::parse_curriculum_file() ---
 $importCurriculumSource = file_get_contents(__DIR__ . '/../bin/import_curriculum.php');
 $start = strpos($importCurriculumSource, 'function parse_curriculum_file');
