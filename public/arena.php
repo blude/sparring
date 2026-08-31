@@ -13,7 +13,6 @@ declare(strict_types=1);
 <link rel="apple-touch-icon" href="<?= fasset('img/apple-touch-icon.png') ?>">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="theme-color" content="#d32f2f">
 </head>
 <body>
