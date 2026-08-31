@@ -1,18 +1,18 @@
 {
-  "title": "What design students still learn once agentic AI runs the process",
-  "scenario_source_text": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+  "title": "Was Designstudierende noch lernen, wenn agentische KI den Prozess steuert",
+  "scenario_source_text": "Wenn agentische KI einen ganzen Designprozess von Anfang bis Ende ausführen kann, was bleibt einem Digital-Design-Studierenden dann noch zu lernen?",
   "exchanges": [
     {
-      "contribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
-      "response": "Execute how well, though? Walk me through one step of 'a whole design process' — say, defining the problem — and tell me what the agent needs from a human to do that step at all."
+      "contribution": "Wenn agentische KI einen ganzen Designprozess von Anfang bis Ende ausführen kann, was bleibt einem Digital-Design-Studierenden dann noch zu lernen?",
+      "response": "Ausführen, ja, aber wie gut? Geh mit mir einen Schritt eines 'ganzen Designprozesses' durch, sagen wir das Definieren des Problems, und sag mir, was der Agent von einem Menschen braucht, um diesen Schritt überhaupt zu machen."
     },
     {
-      "contribution": "It needs someone to tell it what problem to solve, what the constraints are, what counts as success.",
-      "response": "So the agent needs a framing before it can act. Who used to do that framing, and what did they have to know to do it well?"
+      "contribution": "Er braucht jemanden, der ihm sagt, welches Problem zu lösen ist, was die Randbedingungen sind, was als Erfolg zählt.",
+      "response": "Der Agent braucht also eine Rahmung, bevor er handeln kann. Wer hat diese Rahmung früher gemacht, und was mussten diese Leute wissen, um sie gut zu machen?"
     },
     {
-      "contribution": "A designer, and they'd need to understand the users, the business, the technical limits — basically judgment built from experience.",
-      "response": "If judgment is the scarce thing now, not execution, what does that imply your curriculum should spend its scarcest resource — instructor time — teaching?"
+      "contribution": "Ein Designer, und der müsste die Nutzer verstehen, das Geschäft, die technischen Grenzen. Im Grunde Urteilsvermögen, das aus Erfahrung gewachsen ist.",
+      "response": "Wenn jetzt das Urteilsvermögen das Knappe ist und nicht die Ausführung: Was sollte dein Curriculum mit seiner knappsten Ressource, der Zeit der Lehrenden, vermitteln?"
     }
   ]
 }

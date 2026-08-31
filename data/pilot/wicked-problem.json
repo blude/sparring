@@ -1,22 +1,22 @@
 {
-  "title": "Wicked problems and teaching design when AI drafts in seconds",
-  "scenario_source_text": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+  "title": "Wicked Problems und die Designlehre, wenn KI in Sekunden Entwürfe liefert",
+  "scenario_source_text": "Ich will durchdenken, warum 'Wicked Problems' wichtig sind für die Art, wie wir Digital Design lehren, jetzt wo KI in Sekunden Lösungen entwerfen kann.",
   "exchanges": [
     {
-      "contribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
-      "response": "Before I take that as given: what makes a problem 'wicked' rather than just hard? Give me one property that a fast AI draft doesn't actually remove."
+      "contribution": "Ich will durchdenken, warum 'Wicked Problems' wichtig sind für die Art, wie wir Digital Design lehren, jetzt wo KI in Sekunden Lösungen entwerfen kann.",
+      "response": "Bevor ich das so hinnehme: Was macht ein Problem 'wicked' und nicht bloß schwierig? Nenn mir eine Eigenschaft, die ein schneller KI-Entwurf nicht wirklich beseitigt."
     },
     {
-      "contribution": "I guess... there's no single correct answer, so speed doesn't help you find 'the' solution because there isn't one.",
-      "response": "Good, hold that. If there's no single correct answer, what is the AI's fast draft actually a draft OF? What is it optimizing toward if not correctness?"
+      "contribution": "Vermutlich... es gibt keine einzige richtige Antwort. Tempo hilft dir also nicht, 'die' Lösung zu finden, weil es keine gibt.",
+      "response": "Gut, halt das fest. Wenn es keine einzige richtige Antwort gibt: Wovon ist der schnelle KI-Entwurf dann überhaupt ein Entwurf? Worauf optimiert er, wenn nicht auf Richtigkeit?"
     },
     {
-      "contribution": "Maybe it's optimizing for something that looks plausible, based on patterns in its training data, not for what's actually right for this specific context.",
-      "response": "So the risk isn't that the draft is slow to arrive at truth. What is the risk, then, if plausibility and rightness-for-context can come apart?"
+      "contribution": "Vielleicht optimiert er auf etwas, das plausibel aussieht, nach den Mustern in seinen Trainingsdaten, und nicht auf das, was für diesen konkreten Kontext richtig ist.",
+      "response": "Das Risiko ist also nicht, dass der Entwurf langsam zur Wahrheit kommt. Was ist dann das Risiko, wenn Plausibilität und Richtigkeit für den Kontext auseinanderfallen können?"
     },
     {
-      "contribution": "The risk is that a designer stops interrogating the context because a plausible-looking answer already showed up, and that's a harder habit to catch than a wrong answer would be.",
-      "response": "That's the sharper claim. Now: what would a curriculum have to teach differently if the danger is a plausible answer arriving too early, rather than a correct answer arriving too late?"
+      "contribution": "Das Risiko ist, dass ein Designer aufhört, den Kontext zu hinterfragen, weil schon eine plausibel wirkende Antwort da ist. Und diese Gewohnheit ist schwerer zu bemerken als eine falsche Antwort.",
+      "response": "Das ist die schärfere These. Und jetzt: Was müsste ein Curriculum anders vermitteln, wenn die Gefahr eine zu früh eintreffende plausible Antwort ist und nicht eine zu spät eintreffende richtige?"
     }
   ]
 }

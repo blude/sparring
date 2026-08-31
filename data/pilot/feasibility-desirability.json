@@ -1,18 +1,18 @@
 {
-  "title": "Telling 'not feasible' apart from 'not desirable'",
-  "scenario_source_text": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+  "title": "'Nicht machbar' von 'nicht wünschenswert' unterscheiden",
+  "scenario_source_text": "Mein Team sagt ständig, eine Idee sei 'nicht machbar', obwohl sie meiner Meinung nach eigentlich meinen, sie sei nicht wünschenswert. Wie erkenne ich den Unterschied, bevor wir eine gute Idee aus dem falschen Grund verwerfen?",
   "exchanges": [
     {
-      "contribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
-      "response": "Before I hand you a test: what would change about your next move if it turned out to be infeasible, versus what would change if it turned out to be undesirable?"
+      "contribution": "Mein Team sagt ständig, eine Idee sei 'nicht machbar', obwohl sie meiner Meinung nach eigentlich meinen, sie sei nicht wünschenswert. Wie erkenne ich den Unterschied, bevor wir eine gute Idee aus dem falschen Grund verwerfen?",
+      "response": "Bevor ich dir einen Test gebe: Was würde sich an deinem nächsten Schritt ändern, wenn die Idee nicht machbar wäre, und was, wenn sie nicht wünschenswert wäre?"
     },
     {
-      "contribution": "If it's infeasible I'd need more time or a different technical approach. If it's undesirable I'd need to change the idea itself, or drop it.",
-      "response": "So they point to different next actions. Given that, whose objection are you actually hearing — an engineer's or someone closer to the user?"
+      "contribution": "Wenn sie nicht machbar ist, bräuchte ich mehr Zeit oder einen anderen technischen Ansatz. Wenn sie nicht wünschenswert ist, müsste ich die Idee selbst ändern oder sie fallen lassen.",
+      "response": "Sie führen also zu unterschiedlichen nächsten Schritten. Wessen Einwand hörst du da eigentlich: den aus dem Engineering oder den von jemandem, der näher an den Nutzern sitzt?"
     },
     {
-      "contribution": "Mostly engineers, actually. Which is strange if the real objection is about desirability.",
-      "response": "That's worth sitting with. Why would an engineer reach for 'not feasible' to voice a desirability concern, rather than just saying 'I don't think users want this'?"
+      "contribution": "Eigentlich meistens aus dem Engineering. Was komisch ist, wenn es beim echten Einwand um Wünschenswertheit geht.",
+      "response": "Da lohnt sich ein Moment Nachdenken. Warum greift jemand aus dem Engineering zu 'nicht machbar', wenn es ihm eigentlich um die Wünschenswertheit geht, statt einfach zu sagen: 'Ich glaube nicht, dass Nutzer das wollen'?"
     }
   ]
 }

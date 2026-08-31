@@ -1,15 +1,15 @@
 {
-  "title": "Whether the pause before a plausible answer can be taught",
+  "title": "Ob sich die Pause vor einer plausiblen Antwort lehren lässt",
   "reply_to": "wicked-problem",
-  "scenario_source_text": "You asked what a curriculum has to teach differently if the danger is a plausible answer arriving too early. I think the answer is you teach the pause — deliberately not acting on the first plausible draft. But I'm not sure a pause can be taught.",
+  "scenario_source_text": "Du hast gefragt, was ein Curriculum anders vermitteln muss, wenn die Gefahr eine zu früh eintreffende plausible Antwort ist. Ich glaube, die Antwort ist: Man lehrt die Pause, also bewusst nicht auf den ersten plausiblen Entwurf zu reagieren. Aber ich bin nicht sicher, ob sich eine Pause lehren lässt.",
   "exchanges": [
     {
-      "contribution": "You asked what a curriculum has to teach differently if the danger is a plausible answer arriving too early. I think the answer is you teach the pause — deliberately not acting on the first plausible draft. But I'm not sure a pause can be taught.",
-      "response": "Say more about 'can't be taught'. When you personally learned to distrust a too-easy answer, what did it — a person, a failure, a habit you were made to repeat? Name the mechanism, then we can ask whether a curriculum can reproduce it."
+      "contribution": "Du hast gefragt, was ein Curriculum anders vermitteln muss, wenn die Gefahr eine zu früh eintreffende plausible Antwort ist. Ich glaube, die Antwort ist: Man lehrt die Pause, also bewusst nicht auf den ersten plausiblen Entwurf zu reagieren. Aber ich bin nicht sicher, ob sich eine Pause lehren lässt.",
+      "response": "Sag mehr zu 'lässt sich nicht lehren'. Als du selbst gelernt hast, einer zu einfachen Antwort zu misstrauen: Was hat das bewirkt? Ein Mensch, ein Scheitern, eine Gewohnheit, die man dich wiederholen ließ? Benenn den Mechanismus, dann können wir fragen, ob ein Curriculum ihn reproduzieren kann."
     },
     {
-      "contribution": "Honestly it was shipping something that tested well in the room and then failed with real users. The gap between plausible and right stopped being abstract.",
-      "response": "So your teacher was a consequence you couldn't argue away. What is the closest a studio course can get to that consequence without waiting for a real product to fail?"
+      "contribution": "Ehrlich gesagt war es, etwas auszuliefern, das in der Testrunde gut lief und dann bei echten Nutzern gescheitert ist. Der Abstand zwischen plausibel und richtig war plötzlich nicht mehr abstrakt.",
+      "response": "Was dich gelehrt hat, war also eine Konsequenz, die du nicht wegdiskutieren konntest. Wie nah kann ein Studio-Kurs an diese Konsequenz herankommen, ohne zu warten, bis ein echtes Produkt scheitert?"
     }
   ]
 }
