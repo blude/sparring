@@ -4,7 +4,7 @@
     "start_url": "/arena",
     "display": "standalone",
     "orientation": "landscape",
-    "background_color": "#f7f7f7",
+    "background_color": "#ffffff",
     "theme_color": "#d32f2f",
     "icons": [
         { "src": "/assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
