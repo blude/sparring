@@ -14,11 +14,13 @@
 //
 // Usage:
 //   node docs/spec-network/force.gen.mjs [seed] [--by-type]
+// Writes force.landscape.<stamp>.svg and force.portrait.<stamp>.svg.
 
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { nodes, edges, crossLevel, degree, TIERS, TIER_RANK } from "./graph.mjs";
+import { STAMP } from "../stamp.mjs";
 
 const OUT_DIR = dirname(fileURLToPath(import.meta.url));
 const seed = Number(process.argv.find((a) => /^\d+$/.test(a))) || 20260901;
@@ -327,7 +329,7 @@ function render(orient) {
 
 for (const orient of ["landscape", "portrait"]) {
   const svg = render(orient);
-  const file = `force.${orient}.svg`;
+  const file = `force.${orient}.${STAMP}.svg`;
   writeFileSync(join(OUT_DIR, file), svg);
   console.log(
     `${file.padEnd(34)} ${N} points, ${EDGE_IX.length} edges, colour=${

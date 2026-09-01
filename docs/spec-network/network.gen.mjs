@@ -3,8 +3,8 @@
 // Reads the requirement graph from ./graph.mjs (see there for what counts
 // as a node / an edge) and emits two print-ready A3 SVGs (vector,
 // selectable text, no raster, no browser, no deps):
-//   - network.landscape.svg  (A3 landscape, blocks flow wider)
-//   - network.portrait.svg   (A3 portrait, blocks flow narrower)
+//   - network.landscape.<stamp>.svg  (A3 landscape, blocks flow wider)
+//   - network.portrait.<stamp>.svg   (A3 portrait, blocks flow narrower)
 //
 // Labels are the bare ID, per request.
 //
@@ -19,6 +19,7 @@ import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { FILES, TIERS, nodes, edges, crossLevel } from "./graph.mjs";
+import { STAMP } from "../stamp.mjs";
 
 const OUT_DIR = dirname(fileURLToPath(import.meta.url));
 
@@ -224,7 +225,7 @@ function render(orient) {
 
 for (const orient of ["landscape", "portrait"]) {
   const svg = render(orient);
-  const file = `network.${orient}.svg`;
+  const file = `network.${orient}.${STAMP}.svg`;
   writeFileSync(join(OUT_DIR, file), svg);
   console.log(
     `${file.padEnd(28)} ${nodes.size} nodes, ${edges.length} edges (${crossLevel} cross-level)`,

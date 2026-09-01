@@ -3,12 +3,13 @@
 Print-ready A3 SVGs about the Sparring project, plus the scripts that build
 them. Everything here is vector, has selectable/editable text, uses no
 browser and no npm dependencies (Node's stdlib + the `git` binary only), and
-is **deterministic** — re-running a generator with the same inputs produces a
-byte-identical file, so the SVGs are committed alongside their source.
+is **deterministic** — same inputs and same seed produce byte-identical
+drawing content.
 
 ```
 docs/
   features.md                     feature inventory (prose, hand-maintained)
+  stamp.mjs                       shared filename timestamp (see Filenames)
   feature-cloud/                   word clouds of the feature inventory
   spec-network/                   traceability network of the spec/ requirements
   commit-punchcard/               commit activity by weekday × hour
@@ -17,11 +18,20 @@ docs/
 `spec/` (the AsciiDoc design docs) is the input for `spec-network/`; it is
 not part of this folder.
 
+## Filenames
+
+Every generator stamps its output: `<base>.<UTC YYYYMMDD-HHMMSS>.svg`
+(from `docs/stamp.mjs`). Each run archives a new file instead of
+overwriting the last render, so several dated versions can sit side by side
+in git. Old ones are **not** auto-deleted — prune by hand when you don't
+need them. Examples below use `<stamp>` for the timestamp part.
+
 ---
 
 ## feature-cloud/ — feature inventory word clouds
 
-`cloud.gen.mjs` → `words.svg`, `titles.svg`
+`cloud.gen.mjs` → `words.{portrait,landscape}.<stamp>.svg`,
+`titles.{portrait,landscape}.<stamp>.svg`
 
 Two Archimedean-spiral word clouds built from the 197 feature titles that
 also live in `docs/features.md` (the list is inlined in the script, not read
@@ -29,8 +39,8 @@ from the file):
 
 | File | What |
 |---|---|
-| `words.svg` | titles split into terms, sized by how often each term recurs (top ~150) |
-| `titles.svg` | each title kept whole, shorter/punchier ones sized larger |
+| `words.*` | titles split into terms, sized by how often each term recurs (top ~150) |
+| `titles.*` | each title kept whole, shorter/punchier ones sized larger |
 
 **Usage**
 
@@ -41,16 +51,10 @@ node docs/feature-cloud/cloud.gen.mjs [seed] [--landscape]
 - `seed` — integer, default `2`. Layout is deterministic per seed; try a few
   and keep whichever composes best (`node docs/feature-cloud/cloud.gen.mjs 7`).
 - `--landscape` — render landscape instead of the default A3 portrait
-  (297×420 mm). Note: both orientations write the **same** filenames, so a
-  landscape run overwrites the portrait SVGs — only one orientation can be
-  committed at a time. The committed files are portrait.
+  (297×420 mm). Orientation is in the filename, so both can coexist.
 - Text width is estimated from a rough per-glyph table (no font metrics
   headless); collision padding absorbs the error. Font stack is `SF Pro Text`
   with a sans-serif fallback.
-
-> The currently committed `words.svg` / `titles.svg` were rendered by an
-> earlier state of the script; regenerating now produces a different (still
-> valid) layout. Re-commit deliberately if you regenerate.
 
 ---
 
@@ -79,8 +83,8 @@ wrong (node count out of band, no cross-level edges, known edges missing).
 
 ### `network.gen.mjs` — block layout
 
-`node docs/spec-network/network.gen.mjs` → `network.landscape.svg`,
-`network.portrait.svg`
+`node docs/spec-network/network.gen.mjs` →
+`network.{landscape,portrait}.<stamp>.svg`
 
 Shelf-packed blocks, one per `(document, prefix)` pair, ordered L1 → L2 → L3.
 Node labels are the bare ID. Landscape and portrait are two different
@@ -94,7 +98,7 @@ node docs/spec-network/force.gen.mjs [seed] [--by-type]
 ```
 
 Physics simulation (Fruchterman–Reingold: O(n²) repulsion + per-edge springs
-+ degree-weighted gravity) → `force.landscape.svg`, `force.portrait.svg`.
++ degree-weighted gravity) → `force.{landscape,portrait}.<stamp>.svg`.
 
 - Every ID is a point; every trace link an edge.
 - Point radius grows with degree (connection count).
@@ -116,7 +120,7 @@ colour-blind legibility.
 
 ## commit-punchcard/ — commit activity
 
-`punchcard.gen.mjs` → `punchcard.svg`
+`punchcard.gen.mjs` → `punchcard.<stamp>.svg`
 
 `node docs/commit-punchcard/punchcard.gen.mjs`
 
@@ -139,8 +143,9 @@ node docs/spec-network/force.gen.mjs
 node docs/commit-punchcard/punchcard.gen.mjs
 ```
 
-Run from the repo root. Each script writes its SVG(s) next to itself and
-prints a one-line summary. `git diff` afterwards shows exactly what changed.
+Each script writes its SVG(s) next to itself (a fresh `<stamp>` per run) and
+prints a one-line summary naming the files it wrote. Delete the superseded
+dated files you don't want to keep, then commit.
 
 ## Editing in Illustrator
 

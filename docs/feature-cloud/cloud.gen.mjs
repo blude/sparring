@@ -11,9 +11,10 @@
 //   (default is A3 portrait, 297×420mm — it packs the long title strings
 //    tighter than landscape does)
 //
-// Layout is deterministic for a given seed, so re-running produces a
-// byte-identical file (good for committing). Try a few seeds and keep the
-// one that composes best:  node docs/feature-cloud/cloud.gen.mjs 7
+// Writes {words,titles}.{portrait,landscape}.<stamp>.svg — the orientation
+// and a UTC YYYYMMDD-HHMMSS stamp are in the name, so runs don't overwrite
+// each other. Layout is deterministic for a given seed. Try a few seeds and
+// keep the one that composes best:  node docs/feature-cloud/cloud.gen.mjs 7
 //
 // Text width is estimated from a rough per-glyph advance table (no font
 // metrics engine available headless); collision padding absorbs the error.
@@ -24,6 +25,7 @@
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { STAMP } from "../stamp.mjs";
 
 const OUT_DIR = dirname(fileURLToPath(import.meta.url));
 
@@ -305,13 +307,13 @@ const TITLE_LIST = TITLES
 
 const jobs = [
   {
-    name: "words.svg",
+    name: "words",
     list: WORD_LIST,
     unit: "terms",
     opts: { minFs: 17, maxFs: portrait ? 118 : 104, gamma: 0.72, pad: 10 },
   },
   {
-    name: "titles.svg",
+    name: "titles",
     list: TITLE_LIST,
     unit: "titles",
     opts: { minFs: 9, maxFs: portrait ? 22 : 22, gamma: 1.0, pad: 5 },
@@ -321,13 +323,16 @@ const jobs = [
 for (const job of jobs) {
   const { placed, skipped } = layout(job.list, {
     W, H, margin, aRatio: job.unit === "titles" ? aRatio * 1.12 : aRatio,
-    rand: rng(seed + job.name.length), ...job.opts,
+    // salt keeps the two clouds' layouts distinct and stable regardless of
+    // the output filename (was job.name.length back when name held ".svg")
+    rand: rng(seed + (job.unit === "titles" ? 10 : 9)), ...job.opts,
   });
   const meta = { shown: placed.length, total: job.list.length, unit: job.unit };
   const out = svg(placed, meta, { W, H, mmW, mmH, margin });
-  writeFileSync(join(OUT_DIR, job.name), out);
+  const file = `${job.name}.${portrait ? "portrait" : "landscape"}.${STAMP}.svg`;
+  writeFileSync(join(OUT_DIR, file), out);
   const pct = Math.round((placed.length / job.list.length) * 100);
-  console.log(`${job.name.padEnd(26)} ${placed.length}/${job.list.length} placed (${pct}%)  ${mmW}×${mmH}mm  seed ${seed}`);
+  console.log(`${file}  ${placed.length}/${job.list.length} placed (${pct}%)  ${mmW}×${mmH}mm  seed ${seed}`);
   if (skipped.length && job.unit === "terms" && pct < 88) {
     console.warn(`  low placement — try another seed. skipped: ${skipped.slice(0, 8).join(", ")}…`);
   }
