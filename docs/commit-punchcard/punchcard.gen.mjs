@@ -9,14 +9,14 @@
 // the git binary. Text uses a plain Helvetica/Arial stack so it stays
 // editable and correctly placed in Illustrator.
 //
-// Usage:  node docs/commit-punchcard.gen.mjs
+// Usage:  node docs/commit-punchcard/punchcard.gen.mjs
 
 import { execSync } from "node:child_process";
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-const OUT = join(dirname(fileURLToPath(import.meta.url)), "commit-punchcard.svg");
+const OUT = join(dirname(fileURLToPath(import.meta.url)), "punchcard.svg");
 
 // ---------------------------------------------------------------------------
 // data: weekday (1=Mon .. 7=Sun) x hour (0..23) commit counts, by author date
@@ -114,4 +114,4 @@ for (let d = 1; d <= 7; d++) {
 
 out.push("</svg>\n");
 writeFileSync(OUT, out.join("\n"));
-console.log(`commit-punchcard.svg  ${total} commits, ${first} – ${last}, max ${maxC}/h`);
+console.log(`punchcard.svg  ${total} commits, ${first} – ${last}, max ${maxC}/h`);

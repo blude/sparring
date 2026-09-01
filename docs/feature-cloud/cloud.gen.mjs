@@ -7,13 +7,13 @@
 //   - titles: each title kept whole, short punchy ones sized bigger
 //
 // Usage:
-//   node docs/feature-cloud.gen.mjs [seed] [--landscape]
+//   node docs/feature-cloud/cloud.gen.mjs [seed] [--landscape]
 //   (default is A3 portrait, 297×420mm — it packs the long title strings
 //    tighter than landscape does)
 //
 // Layout is deterministic for a given seed, so re-running produces a
 // byte-identical file (good for committing). Try a few seeds and keep the
-// one that composes best:  node docs/feature-cloud.gen.mjs 7
+// one that composes best:  node docs/feature-cloud/cloud.gen.mjs 7
 //
 // Text width is estimated from a rough per-glyph advance table (no font
 // metrics engine available headless); collision padding absorbs the error.
@@ -305,13 +305,13 @@ const TITLE_LIST = TITLES
 
 const jobs = [
   {
-    name: "feature-cloud.words.svg",
+    name: "words.svg",
     list: WORD_LIST,
     unit: "terms",
     opts: { minFs: 17, maxFs: portrait ? 118 : 104, gamma: 0.72, pad: 10 },
   },
   {
-    name: "feature-cloud.titles.svg",
+    name: "titles.svg",
     list: TITLE_LIST,
     unit: "titles",
     opts: { minFs: 9, maxFs: portrait ? 22 : 22, gamma: 1.0, pad: 5 },

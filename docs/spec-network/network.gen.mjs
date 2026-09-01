@@ -1,10 +1,10 @@
 // Static network-diagram generator for the Sparring spec requirements.
 //
-// Reads the requirement graph from ./spec-graph.mjs (see there for what
-// counts as a node / an edge) and emits two print-ready A3 SVGs (vector,
+// Reads the requirement graph from ./graph.mjs (see there for what counts
+// as a node / an edge) and emits two print-ready A3 SVGs (vector,
 // selectable text, no raster, no browser, no deps):
-//   - docs/spec-network.landscape.svg  (A3 landscape, blocks flow wider)
-//   - docs/spec-network.portrait.svg   (A3 portrait, blocks flow narrower)
+//   - network.landscape.svg  (A3 landscape, blocks flow wider)
+//   - network.portrait.svg   (A3 portrait, blocks flow narrower)
 //
 // Labels are the bare ID, per request.
 //
@@ -13,12 +13,12 @@
 // (good for committing). No font-metrics engine headless, so node width is
 // derived from the ID string length with generous padding.
 //
-// Usage:  node docs/spec-network.gen.mjs
+// Usage:  node docs/spec-network/network.gen.mjs
 
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { FILES, TIERS, nodes, edges, crossLevel } from "./spec-graph.mjs";
+import { FILES, TIERS, nodes, edges, crossLevel } from "./graph.mjs";
 
 const OUT_DIR = dirname(fileURLToPath(import.meta.url));
 
@@ -224,7 +224,7 @@ function render(orient) {
 
 for (const orient of ["landscape", "portrait"]) {
   const svg = render(orient);
-  const file = `spec-network.${orient}.svg`;
+  const file = `network.${orient}.svg`;
   writeFileSync(join(OUT_DIR, file), svg);
   console.log(
     `${file.padEnd(28)} ${nodes.size} nodes, ${edges.length} edges (${crossLevel} cross-level)`,

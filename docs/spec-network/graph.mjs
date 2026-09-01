@@ -2,7 +2,7 @@
 //
 // Reads the six AsciiDoc design docs in spec/ and exports the requirement
 // network as { nodes, edges, crossLevel } plus the config tables. Both
-// docs/spec-network*.gen.mjs consume this so the graph is parsed one way.
+// network.gen.mjs and force.gen.mjs consume this so the graph is parsed one way.
 //
 // Nodes: every top-level requirement/element ID (BG-, SG-, G-, TF-, QR-, ...).
 // Excluded, because they are not requirements in their own right:
@@ -20,7 +20,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-const SPEC_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "spec");
+const SPEC_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "spec");
 
 // ---------------------------------------------------------------------------
 // which files, in which design level

@@ -1,6 +1,6 @@
 // Force-directed render of the Sparring spec requirement network.
 //
-// Same graph as docs/spec-network.gen.mjs (parsed once in ./spec-graph.mjs),
+// Same graph as ./network.gen.mjs (parsed once in ./graph.mjs),
 // drawn as a physics simulation instead of a shelf of blocks:
 //   - every requirement ID is a point
 //   - every typed trace link is an edge
@@ -13,19 +13,19 @@
 // byte-identical file (good for committing). No deps, no browser.
 //
 // Usage:
-//   node docs/spec-network-force.gen.mjs [seed] [--by-type]
+//   node docs/spec-network/force.gen.mjs [seed] [--by-type]
 
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { nodes, edges, crossLevel, degree, TIERS, TIER_RANK } from "./spec-graph.mjs";
+import { nodes, edges, crossLevel, degree, TIERS, TIER_RANK } from "./graph.mjs";
 
 const OUT_DIR = dirname(fileURLToPath(import.meta.url));
 const seed = Number(process.argv.find((a) => /^\d+$/.test(a))) || 20260901;
 const BY_TYPE = process.argv.includes("--by-type");
 
 // ---------------------------------------------------------------------------
-// deterministic RNG (mulberry32) — same one feature-cloud.gen.mjs uses
+// deterministic RNG (mulberry32) — same one feature-cloud/cloud.gen.mjs uses
 // ---------------------------------------------------------------------------
 function rng(s) {
   let a = s >>> 0;
@@ -327,7 +327,7 @@ function render(orient) {
 
 for (const orient of ["landscape", "portrait"]) {
   const svg = render(orient);
-  const file = `spec-network-force.${orient}.svg`;
+  const file = `force.${orient}.svg`;
   writeFileSync(join(OUT_DIR, file), svg);
   console.log(
     `${file.padEnd(34)} ${N} points, ${EDGE_IX.length} edges, colour=${
