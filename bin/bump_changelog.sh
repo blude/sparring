@@ -57,7 +57,11 @@ insert_after() {
     mv "$CHANGELOG.tmp" "$CHANGELOG"
 }
 
-for date in "${date_order[@]}"; do
+# Oldest date first: each new `## date` heading is inserted directly below
+# the intro line, so processing oldest→newest leaves the newest on top and
+# keeps the file's "newest first" order even when a run spans several days.
+for (( i = ${#date_order[@]} - 1; i >= 0; i-- )); do
+    date="${date_order[$i]}"
     entries="${date_lines[$date]}"
     heading="## $date"
     if grep -qxF "$heading" "$CHANGELOG"; then
