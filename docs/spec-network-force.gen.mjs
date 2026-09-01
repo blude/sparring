@@ -41,7 +41,11 @@ function rng(s) {
 // ---------------------------------------------------------------------------
 // colour
 // ---------------------------------------------------------------------------
-const LEVEL_COLOR = { 1: "#2f6f9f", 2: "#7b4bb0", 3: "#c0632f" }; // L1 / L2 / L3
+// L1 carries the Sparring brand red (#d32f2f, the wordmark colour — see
+// public/assets/arena.css --brand-red); L2 and L3 are pushed well away from
+// it and from each other on the wheel — deep teal (~180°) and violet
+// (~255°). Red/green is skipped on purpose (colour-blind ambiguity).
+const LEVEL_COLOR = { 1: "#d32f2f", 2: "#0f8b8b", 3: "#6b4fc9" }; // L1 / L2 / L3
 const LEVEL_NAME = { 1: "L1 Lösung", 2: "L2 System", 3: "L3 Element" };
 
 // One hue per prefix, evenly spaced round the wheel, in TIERS order.

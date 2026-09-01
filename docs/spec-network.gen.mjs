@@ -25,8 +25,12 @@ const OUT_DIR = dirname(fileURLToPath(import.meta.url));
 // ---------------------------------------------------------------------------
 // layout: per-prefix blocks, shelf-packed into the page
 // ---------------------------------------------------------------------------
-const LEVEL_TINT = { 1: "#eef3f6", 2: "#f1eef6", 3: "#f6f1ee" };
-const LEVEL_EDGE = { 1: "#5b7c8d", 2: "#6b5b8d", 3: "#8d6b5b" };
+// L1 carries the Sparring brand red (#d32f2f, the wordmark colour — see
+// public/assets/arena.css --brand-red); L2 and L3 are pushed well away from
+// it and from each other on the wheel — deep teal (~180°) and violet
+// (~255°). Red/green is skipped on purpose (colour-blind ambiguity).
+const LEVEL_TINT = { 1: "#fbe9e9", 2: "#e2f2f2", 3: "#eeeafb" };
+const LEVEL_EDGE = { 1: "#c0504a", 2: "#2f8080", 3: "#6a5fbf" };
 const NODE_FILL = "#ffffff";
 const NODE_STROKE = "#3a3530";
 const INK = "#262219";
