@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="420mm"
+     viewBox="0 0 1122 1587" font-family="'SF Pro Text', sans-serif"
+     font-weight="700" text-anchor="middle">
+  <rect width="1122" height="1587" fill="#ffffff"/>
+  <g stroke="#262219" stroke-opacity="0.05" fill="none">
+    <circle cx="561" cy="793.5" r="80.14285714285714" />
+    <circle cx="561" cy="793.5" r="160.28571428571428" />
+    <circle cx="561" cy="793.5" r="240.42857142857142" />
+    <circle cx="561" cy="793.5" r="320.57142857142856" />
+    <circle cx="561" cy="793.5" r="400.71428571428567" />
+    <circle cx="561" cy="793.5" r="480.85714285714283" />
+    <circle cx="561" cy="793.5" r="561" />
+  </g>
+  <g>
+  <text x="561.0" y="801.0" font-size="22.0" fill="#d32f2f">Scan-to-spar entry</text>
+  <text x="559.1" y="826.0" font-size="22.0" fill="#d32f2f">Single scrolling surface</text>
+  <text x="550.3" y="774.2" font-size="22.0" fill="#d32f2f">Turn submission</text>
+  <text x="571.0" y="851.4" font-size="22.0" fill="#d32f2f">Live character allowance</text>
+  <text x="543.6" y="748.6" font-size="22.0" fill="#d32f2f">Remaining-turns indicator</text>
+  <text x="573.5" y="876.4" font-size="22.0" fill="#d32f2f">"Sparring is thinking…" status</text>
+  <text x="557.3" y="723.5" font-size="22.0" fill="#d32f2f">Draft persistence</text>
+  <text x="579.0" y="903.0" font-size="22.0" fill="#d32f2f">Playbook card</text>
+  <text x="538.4" y="697.3" font-size="22.0" fill="#d32f2f">Text-only rendering</text>
+  <text x="553.2" y="672.2" font-size="22.0" fill="#d32f2f">Composer disclaimer</text>
+  <text x="579.7" y="928.7" font-size="22.0" fill="#d32f2f">Named persona ("Popov")</text>
+  <text x="568.2" y="953.7" font-size="22.0" fill="#d32f2f">14-move vocabulary</text>
+  <text x="535.1" y="646.3" font-size="22.0" fill="#986a1a">Move variation</text>
+  <text x="556.8" y="621.1" font-size="22.0" fill="#986a1a">Refuses premature closure</text>
+  <text x="596.5" y="978.7" font-size="22.0" fill="#986a1a">Engages the specific opening</text>
+  <text x="575.0" y="1004.0" font-size="22.0" fill="#986a1a">Convergence near the turn cap</text>
+  <text x="526.3" y="595.5" font-size="22.0" fill="#986a1a">Deliberate fallibility</text>
+  <text x="566.3" y="1029.3" font-size="22.0" fill="#986a1a">Reply-language matching</text>
+  <text x="543.8" y="570.4" font-size="22.0" fill="#986a1a">Design-tradition grounding</text>
+  <text x="763.3" y="775.2" font-size="22.0" fill="#986a1a">Short register</text>
+  <text x="596.1" y="1054.7" font-size="22.0" fill="#986a1a">Meta-question handling</text>
+  <text x="550.4" y="545.0" font-size="22.0" fill="#986a1a">Tangential-swerve dodge</text>
+  <text x="563.9" y="1079.9" font-size="22.0" fill="#986a1a">Single central turn function</text>
+  <text x="515.8" y="519.4" font-size="22.0" fill="#986a1a">Cheap-reject gate order</text>
+  <text x="597.7" y="1105.9" font-size="22.0" fill="#986a1a">Prior exchanges as context</text>
+  <text x="354.4" y="903.2" font-size="22.0" fill="#986a1a">Bounded generation</text>
+  <text x="716.7" y="646.9" font-size="22.0" fill="#986a1a">Retry policy</text>
+  <text x="524.8" y="493.6" font-size="22.0" fill="#986a1a">Grouped failure condition</text>
+  <text x="329.6" y="774.5" font-size="22.0" fill="#986a1a">Two-stage check</text>
+  <text x="752.5" y="711.7" font-size="22.0" fill="#986a1a">Fails closed</text>
+  <text x="319.8" y="800.4" font-size="22.0" fill="#986a1a">No off-topic filter</text>
+  <text x="581.5" y="1131.0" font-size="22.0" fill="#986a1a">Coarse visitor-facing hint</text>
+  <text x="810.2" y="902.1" font-size="22.0" fill="#986a1a">Per-origin rate limit</text>
+  <text x="309.6" y="723.5" font-size="22.0" fill="#986a1a">Hashed origin only</text>
+  <text x="534.2" y="468.5" font-size="22.0" fill="#986a1a">In-place window reset</text>
+  <text x="774.4" y="671.9" font-size="22.0" fill="#986a1a">Session TTL</text>
+  <text x="595.0" y="1156.7" font-size="22.0" fill="#986a1a">Limits enforced on every path</text>
+  <text x="526.7" y="443.1" font-size="22.0" fill="#986a1a">Orphaned-session pruning</text>
+  <text x="821.5" y="804.0" font-size="22.0" fill="#986a1a">Polling, not push</text>
+  <text x="579.3" y="1182.1" font-size="22.0" fill="#986a1a">Reconcile diff (no flicker)</text>
+  <text x="815.6" y="739.1" font-size="22.0" fill="#986a1a">Masonry layout</text>
+  <text x="542.0" y="418.0" font-size="22.0" fill="#986a1a">Exchange pair as the unit</text>
+  <text x="274.4" y="849.3" font-size="22.0" fill="#986a1a">Uniform item shape</text>
+  <text x="255.8" y="695.9" font-size="22.0" fill="#986a1a">Fit-to-space truncation</text>
+  <text x="322.6" y="646.7" font-size="22.0" fill="#986a1a">Recency eviction</text>
+  <text x="274.5" y="935.4" font-size="22.0" fill="#986a1a">Never-empty surface</text>
+  <text x="591.5" y="1207.5" font-size="22.0" fill="#986a1a">Backend outage is invisible</text>
+  <text x="788.0" y="835.7" font-size="22.0" fill="#986a1a">Header</text>
+  <text x="830.9" y="596.1" font-size="22.0" fill="#262219">Entry / update motion</text>
+  <text x="277.8" y="974.9" font-size="22.0" fill="#262219">No sound on the wall</text>
+  <text x="244.9" y="875.7" font-size="22.0" fill="#262219">Generated nickname</text>
+  <text x="520.7" y="392.7" font-size="22.0" fill="#262219">Generated avatar emoji</text>
+  <text x="334.1" y="1054.8" font-size="22.0" fill="#262219">Gated on consent</text>
+  <text x="828.4" y="953.7" font-size="22.0" fill="#262219">Identity popover</text>
+  <text x="871.4" y="621.6" font-size="22.0" fill="#262219">Session id in the URL</text>
+  <text x="560.4" y="367.6" font-size="22.0" fill="#262219">Resume after interruption</text>
+  <text x="907.1" y="861.1" font-size="22.0" fill="#262219">Unknown / expired id</text>
+  <text x="616.1" y="1233.0" font-size="22.0" fill="#262219">Guessable-resistant ids</text>
+  <text x="850.5" y="516.6" font-size="22.0" fill="#262219">No preselected checkbox</text>
+  <text x="532.5" y="342.2" font-size="22.0" fill="#262219">Answerable without scrolling</text>
+  <text x="240.7" y="618.0" font-size="22.0" fill="#262219">Projection ≠ retention</text>
+  <text x="591.3" y="1258.4" font-size="22.0" fill="#262219">No device-side consent copy</text>
+  <text x="894.1" y="928.7" font-size="22.0" fill="#262219">Consented-only export</text>
+  <text x="888.6" y="562.4" font-size="22.0" fill="#262219">Opening-prompt QR codes</text>
+  <text x="602.8" y="1283.8" font-size="22.0" fill="#262219">Reply-to-the-wall QR codes</text>
+  <text x="286.2" y="1029.0" font-size="22.0" fill="#262219">Reply-quote card</text>
+  <text x="517.7" y="316.4" font-size="22.0" fill="#262219">Reply counters on the wall</text>
+  <text x="880.8" y="1029.0" font-size="22.0" fill="#262219">AI-refined session title</text>
+  <text x="853.3" y="481.3" font-size="22.0" fill="#262219">Best-effort, non-blocking</text>
+  <text x="247.8" y="749.0" font-size="22.0" fill="#262219">Two consumers</text>
+  <text x="606.5" y="1309.5" font-size="22.0" fill="#262219">Used as the de-facto session…</text>
+  <text x="503.9" y="291.2" font-size="22.0" fill="#262219">Derivation source recorded</text>
+  <text x="526.8" y="265.9" font-size="22.0" fill="#262219">End-of-session feedback prompt</text>
+  <text x="224.4" y="1000.1" font-size="22.0" fill="#262219">Always fully skippable</text>
+  <text x="236.5" y="591.6" font-size="22.0" fill="#262219">Glove-rating widget</text>
+  <text x="261.1" y="1107.7" font-size="22.0" fill="#262219">Fire-and-forget submit</text>
+  <text x="619.2" y="1334.7" font-size="22.0" fill="#262219">Server-side answer filtering</text>
+  <text x="224.8" y="1081.6" font-size="22.0" fill="#262219">Static domain grounding</text>
+  <text x="257.3" y="563.3" font-size="22.0" fill="#262219">Turn-1 retrieval</text>
+  <text x="596.7" y="1359.8" font-size="22.0" fill="#262219">Vocabulary-restricted matching</text>
+  <text x="876.1" y="1056.7" font-size="22.0" fill="#262219">Degrades to nothing</text>
+  <text x="856.6" y="980.7" font-size="22.0" fill="#262219">FTS5 index</text>
+  <text x="864.1" y="449.5" font-size="22.0" fill="#262219">General free-text search</text>
+  <text x="242.3" y="1133.9" font-size="22.0" fill="#262219">Known gaps documented</text>
+  <text x="867.4" y="423.5" font-size="22.0" fill="#262219">Procedural sound effects</text>
+  <text x="240.6" y="1182.5" font-size="22.0" fill="#262219">Display entrance animation</text>
+  <text x="833.2" y="392.8" font-size="22.0" fill="#262219">Reduced-motion respect</text>
+  <text x="244.1" y="535.8" font-size="22.0" fill="#262219">Compositor-only</text>
+  <text x="930.6" y="835.8" font-size="22.0" fill="#262219">sfx-debug.php</text>
+  <text x="928.5" y="712.6" font-size="22.0" fill="#262219">Two UI locales</text>
+  <text x="278.0" y="1232.8" font-size="22.0" fill="#262219">First-visit language match</text>
+  <text x="521.5" y="240.6" font-size="22.0" fill="#262219">Explicit EN/DE switcher</text>
+  <text x="615.4" y="1385.1" font-size="22.0" fill="#262219">AI reply language is separate</text>
+  <text x="228.0" y="505.3" font-size="22.0" fill="#262219">German pilot seeds</text>
+  <text x="539.6" y="215.4" font-size="22.0" fill="#262219">Catalogue-parity + fallback</text>
+  <text x="889.1" y="364.5" font-size="22.0" fill="#262219">SE-01 web app manifest</text>
+  <text x="847.4" y="313.1" font-size="22.0" fill="#262219">SE-02 web app manifest</text>
+  <text x="237.6" y="468.4" font-size="22.0" fill="#262219">Arena touch lockdown</text>
+  <text x="616.2" y="1410.4" font-size="22.0" fill="#262219">iOS status-bar / splash tuning</text>
+  <text x="871.2" y="1082.8" font-size="22.0" fill="#262219">Cache-busting</text>
+  <text x="515.6" y="190.3" font-size="22.0" fill="#262219">Structured transcript import</text>
+  <text x="245.4" y="1260.7" font-size="22.0" fill="#262219">Per-transcript validation</text>
+  <text x="910.7" y="1131.5" font-size="22.0" fill="#262219">Origin fixed at creation</text>
+  <text x="894.2" y="1182.5" font-size="22.0" fill="#262219">Optional transcript title</text>
+  <text x="210.9" y="442.0" font-size="22.0" fill="#262219">Optional reply_to link</text>
+  <text x="920.1" y="646.6" font-size="22.0" fill="#262219">bin/export.php</text>
+  <text x="244.0" y="413.8" font-size="22.0" fill="#262219">bin/backup_db.php</text>
+  <text x="279.2" y="367.6" font-size="22.0" fill="#262219">bin/reset_db.php</text>
+  <text x="600.9" y="1435.6" font-size="22.0" fill="#262219">bin/import_curriculum.php…</text>
+  <text x="950.1" y="764.7" font-size="22.0" fill="#262219">bin/deploy.sh</text>
+  <text x="275.9" y="1207.5" font-size="22.0" fill="#262219">Provider dispatch</text>
+  <text x="883.6" y="1208.5" font-size="22.0" fill="#262219">Per-role models</text>
+  <text x="955.8" y="674.6" font-size="22.0" fill="#262219">Prompt caching</text>
+  <text x="240.0" y="1291.8" font-size="22.0" fill="#262219">Extended thinking disabled</text>
+  <text x="919.0" y="1238.1" font-size="22.0" fill="#262219">Pure helper functions</text>
+  <text x="883.8" y="338.7" font-size="22.0" fill="#262219">All logic server-side</text>
+  <text x="515.6" y="164.9" font-size="22.0" fill="#262219">Prompt-injection defence</text>
+  <text x="287.5" y="1319.9" font-size="22.0" fill="#262219">Docroot separation</text>
+  <text x="880.8" y="281.7" font-size="22.0" fill="#262219">Router 404 / 500 page</text>
+  <text x="927.8" y="1157.0" font-size="22.0" fill="#262219">Six scenarios</text>
+  <text x="616.4" y="1460.8" font-size="22.0" fill="#262219">3 reps + pass-rate reporting</text>
+  <text x="211.1" y="337.8" font-size="22.0" fill="#262219">Mechanical grading</text>
+  <text x="912.2" y="1263.5" font-size="22.0" fill="#262219">LLM-judge grading</text>
+  <text x="775.4" y="240.4" font-size="22.0" fill="#262219">Baseline arm</text>
+  <text x="497.9" y="139.2" font-size="22.0" fill="#262219">bin/summarize_sparring.php</text>
+  <text x="154.9" y="907.2" font-size="22.0" fill="#262219">PHP suites</text>
+  <text x="311.8" y="1345.8" font-size="22.0" fill="#262219">Node suites</text>
+  <text x="617.5" y="1486.3" font-size="22.0" fill="#262219">Committed curriculum fixtures</text>
+  <text x="176.4" y="774.9" font-size="22.0" fill="#262219">php -l</text>
+  <text x="497.6" y="113.8" font-size="22.0" fill="#262219">Conventional Commits hook</text>
+  <text x="269.2" y="1391.7" font-size="22.0" fill="#262219">Four-level framework</text>
+  <text x="863.7" y="212.3" font-size="22.0" fill="#262219">AsciiDoc → HTML build</text>
+  <text x="603.8" y="1511.6" font-size="22.0" fill="#262219">Deliberate non-modelling</text>
+  <text x="204.6" y="312.4" font-size="22.0" fill="#262219">Prompt changelog</text>
+  <text x="904.6" y="1292.9" font-size="22.0" fill="#262219">Landing page (/)</text>
+  <text x="504.9" y="88.2" font-size="22.0" fill="#262219">Playful start + display design</text>
+  <text x="850.3" y="164.4" font-size="19.8" fill="#262219">Philosophy page (/philosophy)</text>
+  <text x="264.4" y="1417.1" font-size="22.0" fill="#262219">Credits page (/credits)</text>
+  <text x="212.1" y="231.6" font-size="22.0" fill="#262219">Privacy &amp; Terms pages</text>
+  <text x="281.5" y="1443.2" font-size="22.0" fill="#262219">Shared page chrome</text>
+  <text x="864.0" y="134.6" font-size="22.0" fill="#262219">Open Graph / Twitter Card</text>
+  <text x="190.3" y="280.0" font-size="22.0" fill="#262219">Custom typography</text>
+  <text x="246.3" y="1468.3" font-size="22.0" fill="#8a8375">Theme colour + favicon +…</text>
+  <text x="852.4" y="106.5" font-size="22.0" fill="#8a8375">ASCII-art source banner</text>
+  <text x="260.5" y="1513.8" font-size="19.8" fill="#8a8375">Custom in-page confirm dialog</text>
+  <text x="213.9" y="1157.3" font-size="19.8" fill="#8a8375">Runs unattended for days</text>
+  <text x="237.4" y="824.4" font-size="19.8" fill="#8a8375">The friction is the exhibit</text>
+  <text x="238.8" y="671.2" font-size="19.8" fill="#8a8375">Legible from across the room</text>
+  <text x="880.3" y="185.2" font-size="17.1" fill="#8a8375">Four-stage reasoning engine, run…</text>
+  <text x="887.2" y="538.1" font-size="17.1" fill="#8a8375">Sustained-hostility de-escalation</text>
+  <text x="243.8" y="1490.7" font-size="17.1" fill="#8a8375">No partial exchange ever stored</text>
+  <text x="861.3" y="78.1" font-size="17.1" fill="#8a8375">Auto-restart, no in-memory state</text>
+  <text x="221.5" y="389.7" font-size="14.9" fill="#8a8375">Turn rejected, session continues</text>
+  <text x="235.3" y="1367.1" font-size="14.9" fill="#8a8375">Adversarial-vs-target distinction</text>
+  <text x="913.2" y="1001.1" font-size="14.9" fill="#8a8375">Classifier input treated as data</text>
+  <text x="914.8" y="1107.3" font-size="14.9" fill="#8a8375">Same derivation on both clients</text>
+  <text x="231.9" y="207.7" font-size="12.8" fill="#8a8375">Context line above each exchange</text>
+  <text x="211.6" y="165.5" font-size="12.8" fill="#8a8375">Answered at most once per session</text>
+  <text x="916.0" y="1507.7" font-size="14.9" fill="#8a8375">Global + per-effect kill switches</text>
+  <text x="872.7" y="257.9" font-size="12.8" fill="#8a8375">Shipped then reverted: Mermaid…</text>
+  <text x="934.7" y="1315.4" font-size="12.8" fill="#8a8375">No service worker / offline shell</text>
+  <text x="931.4" y="1333.0" font-size="12.8" fill="#8a8375">No administrative interface, by…</text>
+  <text x="196.0" y="183.3" font-size="12.8" fill="#8a8375">bin/prune_orphaned_sessions.php</text>
+  <text x="922.0" y="1430.3" font-size="12.8" fill="#8a8375">OpenAI-compatible / local models</text>
+  <text x="186.4" y="255.7" font-size="12.8" fill="#8a8375">Credential never leaves the host</text>
+  <text x="877.7" y="878.9" font-size="10.7" fill="#8a8375">QR SVGs built element-by-element</text>
+  <text x="928.3" y="1351.7" font-size="12.8" fill="#8a8375">Trailing-slash canonicalisation</text>
+  <text x="262.5" y="951.4" font-size="10.7" fill="#8a8375">Wall never clears on backend loss</text>
+  <text x="930.4" y="1367.6" font-size="10.4" fill="#8a8375">Adversarial pressure met with more…</text>
+  <text x="933.9" y="1382.7" font-size="12.4" fill="#8a8375">Gate at submission, not at display</text>
+  <text x="928.5" y="1400.1" font-size="10.4" fill="#8a8375">Three independent decisions, made…</text>
+  <text x="927.5" y="1414.2" font-size="10.4" fill="#8a8375">Decline-to-participate ends the flow</text>
+  <text x="915.0" y="1445.5" font-size="10.4" fill="#8a8375">Nothing identifying reaches the wall</text>
+  <text x="911.1" y="1459.1" font-size="10.4" fill="#8a8375">Separate session_evaluations table</text>
+  <text x="187.9" y="148.4" font-size="10.4" fill="#8a8375">Punch animation + particle burst on…</text>
+  <text x="197.4" y="134.4" font-size="10.4" fill="#8a8375">Text-only rendering on both clients</text>
+  <text x="204.0" y="114.7" font-size="10.4" fill="#8a8375">?debug=1 panel on /dojo and /arena</text>
+  <text x="936.6" y="1474.7" font-size="10.4" fill="#8a8375">Cheap extra fields always returned</text>
+  <text x="200.8" y="100.7" font-size="10.4" fill="#8a8375">Multi-turn simulated-visitor harness</text>
+  <text x="203.2" y="85.8" font-size="10.4" fill="#8a8375">Programmatic move-repetition check</text>
+  <text x="934.6" y="1488.2" font-size="10.4" fill="#8a8375">The system prompt is modelled as a…</text>
+  <text x="811.8" y="688.8" font-size="8.7" fill="#8a8375">Everything is expendable and capped</text>
+  <text x="916.1" y="1521.8" font-size="10.0" fill="#8a8375">Holds a position instead of answering</text>
+  <text x="192.7" y="71.1" font-size="8.4" fill="#8a8375">Banned vocabulary + no meta-commentary</text>
+  <text x="957.8" y="780.3" font-size="8.4" fill="#8a8375">Never claims to be "an AI following a…</text>
+  <text x="220.7" y="482.0" font-size="8.4" fill="#8a8375">Never reveals/quotes/paraphrases its…</text>
+  <text x="958.1" y="237.8" font-size="8.4" fill="#8a8375">Generic error on infrastructure fault</text>
+  </g>
+  <text x="62" y="1547" text-anchor="start"
+        font-size="15" font-weight="400" fill="#8a8375">Sparring — feature inventory · 187 of 197 titles · スパーリング</text>
+</svg>
