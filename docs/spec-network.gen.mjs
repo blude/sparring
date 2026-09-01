@@ -204,13 +204,13 @@ function render(orient) {
   const ly = pageH - LEGEND_H + 14;
   out.push(
     `<text x="${PAGE_MARGIN}" y="${ly}" font-size="11" fill="${INK}">` +
-      `Sparring spec requirement network — ${nodes.size} nodes, ${edges.length} trace edges ` +
-      `(${crossLevel} cross-level). Edges: Satisfies / Realises / Refines / Achieves / Supports / Applies to / Implements.` +
+      `Sparring Anforderungsnetz — ${nodes.size} Knoten, ${edges.length} Traceability-Kanten ` +
+      `(${crossLevel} ebenenübergreifend). Kanten: Satisfies / Realises / Refines / Achieves / Supports / Applies to / Implements.` +
       `</text>`,
   );
   out.push(
     `<text x="${PAGE_MARGIN}" y="${ly + 16}" font-size="11" fill="#6b6459">` +
-      `Arrow points to the item traced up to. Card tint = design level (L1 solution / L2 system / L3 element). Labels are IDs only.` +
+      `Pfeil zeigt auf das nachverfolgte übergeordnete Element. Kartenfarbe = Entwurfsebene (L1 Lösung / L2 System / L3 Element). Beschriftungen nur IDs.` +
       `</text>`,
   );
 

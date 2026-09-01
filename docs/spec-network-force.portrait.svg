@@ -528,17 +528,17 @@
 <text x="246.9" y="1061.2">G-01</text>
 <text x="346.6" y="279.4">E-01 (SE-03)</text>
 </g>
-<text x="64" y="1468" font-size="10" fill="#6b6459">unconnected — no typed trace link (16):</text>
+<text x="64" y="1468" font-size="10" fill="#6b6459">ohne Verknüpfung — keine typisierte Traceability-Beziehung (16):</text>
 <text x="64" y="1484" font-size="9" fill="#8a8375">BE-03 (L1),  BC-03 (L1),  G-04 (SE-01),  TF-06 (SE-01),  TO-01 (SE-01),  TO-02 (SE-01)</text>
 <text x="64" y="1498" font-size="9" fill="#8a8375">TO-03 (SE-01),  TO-04 (SE-01),  TO-05 (SE-01),  TF-07 (SE-03),  TI-06 (SE-03),  TI-07 (SE-03)</text>
 <text x="64" y="1512" font-size="9" fill="#8a8375">E-04 (SE-03),  G-04 (SE-04),  E-01 (SE-04),  C-04 (SE-04)</text>
-<text x="64" y="1554" font-size="11" fill="#262219">Sparring spec requirement network — 191 points, 319 trace edges (94 cross-level). Point size = number of connections; labels shown for degree ≥ 6.</text>
+<text x="64" y="1554" font-size="11" fill="#262219">Sparring Anforderungsnetz — 191 Punkte, 319 Traceability-Kanten (94 ebenenübergreifend). Punktgröße = Anzahl der Verbindungen; Beschriftung ab Grad ≥ 6.</text>
 <g font-size="11" fill="#262219">
 <circle cx="69" cy="1566" r="5" fill="#2f6f9f"/>
-<text x="79" y="1570">L1 solution</text>
-<circle cx="170.2" cy="1566" r="5" fill="#7b4bb0"/>
-<text x="180.2" y="1570">L2 system</text>
-<circle cx="257" cy="1566" r="5" fill="#c0632f"/>
-<text x="267" y="1570">L3 element</text>
+<text x="79" y="1570">L1 Lösung</text>
+<circle cx="155.8" cy="1566" r="5" fill="#7b4bb0"/>
+<text x="165.8" y="1570">L2 System</text>
+<circle cx="242.60000000000002" cy="1566" r="5" fill="#c0632f"/>
+<text x="252.60000000000002" y="1570">L3 Element</text>
 </g>
 </svg>

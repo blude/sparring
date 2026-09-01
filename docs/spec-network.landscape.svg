@@ -790,6 +790,6 @@
 <text x="104" y="589.7" font-size="9" text-anchor="middle" fill="#262219">C-05</text>
 <rect x="129" y="578" width="40" height="17" rx="3" fill="#ffffff" stroke="#3a3530" stroke-width="0.9"/>
 <text x="149" y="589.7" font-size="9" text-anchor="middle" fill="#262219">C-06</text>
-<text x="30" y="634" font-size="11" fill="#262219">Sparring spec requirement network — 191 nodes, 319 trace edges (94 cross-level). Edges: Satisfies / Realises / Refines / Achieves / Supports / Applies to / Implements.</text>
-<text x="30" y="650" font-size="11" fill="#6b6459">Arrow points to the item traced up to. Card tint = design level (L1 solution / L2 system / L3 element). Labels are IDs only.</text>
+<text x="30" y="634" font-size="11" fill="#262219">Sparring Anforderungsnetz — 191 Knoten, 319 Traceability-Kanten (94 ebenenübergreifend). Kanten: Satisfies / Realises / Refines / Achieves / Supports / Applies to / Implements.</text>
+<text x="30" y="650" font-size="11" fill="#6b6459">Pfeil zeigt auf das nachverfolgte übergeordnete Element. Kartenfarbe = Entwurfsebene (L1 Lösung / L2 System / L3 Element). Beschriftungen nur IDs.</text>
 </svg>

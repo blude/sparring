@@ -42,7 +42,7 @@ function rng(s) {
 // colour
 // ---------------------------------------------------------------------------
 const LEVEL_COLOR = { 1: "#2f6f9f", 2: "#7b4bb0", 3: "#c0632f" }; // L1 / L2 / L3
-const LEVEL_NAME = { 1: "L1 solution", 2: "L2 system", 3: "L3 element" };
+const LEVEL_NAME = { 1: "L1 Lösung", 2: "L2 System", 3: "L3 Element" };
 
 // One hue per prefix, evenly spaced round the wheel, in TIERS order.
 function typeColor(prefix) {
@@ -266,7 +266,7 @@ function render(orient) {
     const names = ORPHANS.map((n) => `${n.id} (${n.key})`);
     const perLine = 6;
     out.push(
-      `<text x="${PAD}" y="${H - 132}" font-size="10" fill="#6b6459">unconnected — no typed trace link (${ORPHANS.length}):</text>`,
+      `<text x="${PAD}" y="${H - 132}" font-size="10" fill="#6b6459">ohne Verknüpfung — keine typisierte Traceability-Beziehung (${ORPHANS.length}):</text>`,
     );
     for (let j = 0; j < names.length; j += perLine) {
       out.push(
@@ -285,8 +285,8 @@ function render(orient) {
   const lyRow = H - 30;
   out.push(
     `<text x="${PAD}" y="${H - 46}" font-size="11" fill="#262219">` +
-      `Sparring spec requirement network — ${nodes.size} points, ${EDGE_IX.length} trace edges ` +
-      `(${crossLevel} cross-level). Point size = number of connections; labels shown for degree ≥ ${LABEL_MIN_DEG}.` +
+      `Sparring Anforderungsnetz — ${nodes.size} Punkte, ${EDGE_IX.length} Traceability-Kanten ` +
+      `(${crossLevel} ebenenübergreifend). Punktgröße = Anzahl der Verbindungen; Beschriftung ab Grad ≥ ${LABEL_MIN_DEG}.` +
       `</text>`,
   );
   out.push(`<g font-size="11" fill="#262219">`);
