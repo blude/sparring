@@ -2,8 +2,64 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-09-01
+
+- `7c5ba9d` feat(docs): timestamp generated diagram filenames
+- `4a0ad8e` docs(diagrams): add docs/README.md documenting the generators
+- `c04b5a0` chore(docs): group diagram files into per-artifact folders
+- `cb9cdc7` docs(diagrams): rebuild commit punchcard as portrait, hours vertical
+- `1f56420` fix(diagrams): drop paint-order text halo, use backing rects
+- `67b7182` style(diagrams): recolour spec network by Sparring brand red
+- `072ed96` docs(diagrams): translate spec network supporting text to German
+- `5bac8f8` feat(docs): add force-directed spec network diagram
+- `2e8bd0f` refactor(docs): extract shared spec-graph parser
+- `d95ae53` feat(docs): add portrait feature-inventory word clouds
+- `566659f` feat(docs): add spec requirement network diagram
+- `05176db` docs: add feature inventory and commit-punchcard chart
+- `80205d5` feat(docs): add landscape feature-inventory word clouds
+
+## 2026-08-31
+
+- `d425885` fix(meta): remove obsolete property
+- `94b0847` feat(arena): tune iOS PWA status bar and splash background
+- `4bfbcc9` feat(pilot): translate pilot seeds to German
+- `aaaa3de` style(arena): nudge reply count slightly and tweak border add bg color border to better separate it from nearby bubble
+- `34cf63a` feat(pilot): support reply_to link in pilot seeds
+
+## 2026-08-30
+
+- `723e7b5` feat(bin): add DDP Foundation Level handbook extractor
+- `1672f9a` refactor(bin): extract shared PDF machinery to bin/inc/curriculum_pdf.py
+- `2145e43` chore(assets): update share image with cleaner design
+- `71a5f8d` refactor(config): drop square share image from ogTags
+- `079be26` build(spec): rebuild L1 press release HTML
+- `4551a7e` docs(spec): rewrite Future Press Release for plainer prose
+- `04a3507` docs(spec): update Press Release date
+- `6cb7b95` docs(spec): add line breaks to improve legibility
+
+## 2026-08-29
+
+- `1ba5ee4` docs(spec): change direction of diagram to LR
+- `4ef1217` docs(credits): use Dr. Kim Lauenroth in acknowledgements
+- `844963d` docs(credits): acknowledge Kim Lauenroth source material and logo fonts
+- `36a098f` docs(i18n): humanize the philosophy page copy
+- `fa526f7` docs(spec): humanize the index copy
+- `f9c773c` docs(spec): make the index a readable entry point, not a link list
+- `e5d5e85` docs(spec): add "What shapes a Sparring response" diagram to LX
+- `1a68d08` style(content): increase border-radius of philosophy image
+- `2e11b29` fix(img): update aspect ratio of philosophy image
+- `e7e0a48` feat(content): add image to philosophy page
+- `0e9c457` feat(pilot): add LLM-optimized titles to pilot transcripts
+
 ## 2026-08-28
 
+- `fae0562` fix(curriculum): point CURRICULUM_DATA_DIR at digitaldesign-wiki subdir
+- `5ff3a9a` feat(curriculum): add --skip page-range flag to Digitalentwurfslehre extractor
+- `6693b28` chore: ignore __pycache__ anywhere, not just repo root
+- `c950988` feat(curriculum): add Digitalentwurfslehre PDF extraction script
+- `4c40bd1` style: fix indentation
+- `4edc91c` style(footer): move copyright year onto legal-links line
+- `167e9c2` docs: update CHANGELOG through 980d6a6
 - `980d6a6` docs(prompts): backfill changelog heading for v9 prompt changes
 - `b2cec80` refactor(prompts): move <voice> before <core_mechanism>, dedupe length rule
 - `8499660` feat(prompts): handle genuine topic-diversion without filtering it
