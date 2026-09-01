@@ -496,7 +496,39 @@
 <circle cx="340.5" cy="201.2" r="4.7" fill="#6b4fc9" fill-opacity="0.9" stroke="#ffffff" stroke-width="0.8"/>
 <circle cx="1059.3" cy="807.8" r="4.7" fill="#6b4fc9" fill-opacity="0.9" stroke="#ffffff" stroke-width="0.8"/>
 <circle cx="1013.8" cy="857.7" r="4.7" fill="#6b4fc9" fill-opacity="0.9" stroke="#ffffff" stroke-width="0.8"/>
-<g font-size="10" font-weight="600" fill="#1c1a15" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">
+<g fill="#ffffff" fill-opacity="0.82">
+<rect x="685.1" y="344.7" width="32.0" height="13" rx="2"/>
+<rect x="822.5" y="415.0" width="32.0" height="13" rx="2"/>
+<rect x="674.7" y="391.5" width="32.0" height="13" rx="2"/>
+<rect x="511.8" y="389.9" width="32.0" height="13" rx="2"/>
+<rect x="821.3" y="651.1" width="32.0" height="13" rx="2"/>
+<rect x="343.9" y="651.6" width="70.2" height="13" rx="2"/>
+<rect x="909.6" y="784.5" width="70.2" height="13" rx="2"/>
+<rect x="747.2" y="470.1" width="32.0" height="13" rx="2"/>
+<rect x="900.4" y="411.0" width="32.0" height="13" rx="2"/>
+<rect x="765.2" y="232.2" width="38.1" height="13" rx="2"/>
+<rect x="905.8" y="263.0" width="70.2" height="13" rx="2"/>
+<rect x="587.8" y="479.8" width="38.1" height="13" rx="2"/>
+<rect x="793.6" y="495.3" width="32.0" height="13" rx="2"/>
+<rect x="1375.8" y="488.7" width="70.2" height="13" rx="2"/>
+<rect x="715.9" y="404.5" width="32.0" height="13" rx="2"/>
+<rect x="719.8" y="542.4" width="38.1" height="13" rx="2"/>
+<rect x="533.3" y="450.1" width="32.0" height="13" rx="2"/>
+<rect x="947.9" y="491.8" width="32.0" height="13" rx="2"/>
+<rect x="760.3" y="441.0" width="32.0" height="13" rx="2"/>
+<rect x="580.8" y="158.2" width="64.1" height="13" rx="2"/>
+<rect x="491.0" y="185.2" width="32.0" height="13" rx="2"/>
+<rect x="629.0" y="431.7" width="32.0" height="13" rx="2"/>
+<rect x="646.9" y="305.9" width="38.1" height="13" rx="2"/>
+<rect x="402.1" y="434.5" width="32.0" height="13" rx="2"/>
+<rect x="791.1" y="301.8" width="32.0" height="13" rx="2"/>
+<rect x="594.1" y="465.3" width="38.1" height="13" rx="2"/>
+<rect x="904.3" y="583.1" width="38.1" height="13" rx="2"/>
+<rect x="1545.2" y="316.9" width="32.0" height="13" rx="2"/>
+<rect x="373.7" y="598.5" width="25.9" height="13" rx="2"/>
+<rect x="690.0" y="153.8" width="64.1" height="13" rx="2"/>
+</g>
+<g font-size="10" font-weight="600" fill="#1c1a15">
 <text x="687.1" y="353.7">SE-03</text>
 <text x="824.5" y="424.0">SE-02</text>
 <text x="676.7" y="400.5">PE-01</text>

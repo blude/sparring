@@ -182,6 +182,14 @@ function esc(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+// rough advance width for a 10px/600 label (no font metrics headless); the
+// backing rect only has to roughly cover, so a per-char estimate is enough
+function labelWidth(s) {
+  let w = 0;
+  for (const c of s) w += c === " " ? 3 : "-.()".includes(c) ? 3.6 : 6.1;
+  return w;
+}
+
 function render(orient) {
   const W = orient === "landscape" ? 1600 : 1000;
   const H = orient === "landscape" ? 1000 : 1600;
@@ -235,31 +243,43 @@ function render(orient) {
     );
   }
 
-  // floating labels for the well-connected points: white halo so they read
-  // over the edges, a small box-based declutter, and the document key added
-  // when the same bare ID is labelled twice (e.g. SE-01 vs SE-02 UI-01)
+  // floating labels for the well-connected points, with the document key
+  // added when the same bare ID is labelled twice (e.g. SE-01 vs SE-02
+  // UI-01). Readability over the edges is a plain white backing rect, not a
+  // text stroke / paint-order halo — Illustrator renders that as a blobby
+  // outline and it keeps the text editable.
   const labelled = NODE_LIST.map((n, i) => ({ n, i }))
     .filter(({ n }) => degree.get(n.nid) >= LABEL_MIN_DEG)
     .sort((a, b) => degree.get(b.n.nid) - degree.get(a.n.nid)); // big nodes first
   const idCount = new Map();
   for (const { n } of labelled) idCount.set(n.id, (idCount.get(n.id) || 0) + 1);
-  const placed = []; // {x, y} of labels already emitted
-  out.push(
-    `<g font-size="10" font-weight="600" fill="#1c1a15" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">`,
-  );
+
+  const placed = []; // computed {text, x, y, w}
   for (const { n, i } of labelled) {
     const text = idCount.get(n.id) > 1 ? `${n.id} (${n.key})` : n.id;
     const r = radiusOf(n.nid);
     const tx = px(i) + r + 4;
     let ty = py(i) + 3.5;
-    // nudge vertically until it clears earlier labels at a similar x
     for (let guard = 0; guard < 12; guard++) {
       const hit = placed.some((p) => Math.abs(p.x - tx) < 70 && Math.abs(p.y - ty) < 12);
       if (!hit) break;
       ty += 12;
     }
-    placed.push({ x: tx, y: ty });
-    out.push(`<text x="${tx.toFixed(1)}" y="${ty.toFixed(1)}">${esc(text)}</text>`);
+    placed.push({ text, x: tx, y: ty, w: labelWidth(text) });
+  }
+  // backing rects under everything, then the editable text on top
+  out.push(`<g fill="#ffffff" fill-opacity="0.82">`);
+  for (const p of placed) {
+    out.push(
+      `<rect x="${(p.x - 2).toFixed(1)}" y="${(p.y - 9).toFixed(1)}" width="${(p.w + 4).toFixed(
+        1,
+      )}" height="13" rx="2"/>`,
+    );
+  }
+  out.push(`</g>`);
+  out.push(`<g font-size="10" font-weight="600" fill="#1c1a15">`);
+  for (const p of placed) {
+    out.push(`<text x="${p.x.toFixed(1)}" y="${p.y.toFixed(1)}">${esc(p.text)}</text>`);
   }
   out.push(`</g>`);
 
