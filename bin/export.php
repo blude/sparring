@@ -141,6 +141,7 @@ if ($markdown) {
         $session = $sessionsById[$sid] ?? null;
         $lines = ["# Session {$sid}", ''];
         if ($session !== null) {
+            $lines[] = '- title: ' . ($session['title'] ?? '(none)');
             $lines[] = "- origin: {$session['origin']}";
             $lines[] = '- scenario: ' . ($session['scenario'] ?? '(none)');
             $lines[] = "- created: {$session['createdAt']}";
