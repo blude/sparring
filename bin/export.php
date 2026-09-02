@@ -22,8 +22,9 @@ declare(strict_types=1);
  *               schema.
  *   --csv       Flat exchange rows (id, sessionId, visitorContribution,
  *               sparringResponse, position, createdAt), one per line.
- *   --markdown  One human-readable transcript per session (heading +
- *               metadata + turns), sessions separated by a rule.
+ *   --markdown  One human-readable transcript per session (YAML frontmatter
+ *               of session properties + heading + turns); each session's
+ *               frontmatter fence doubles as the between-session rule.
  *
  * Usage: php bin/export.php [--consented-only] [output-path]
  *        php bin/export.php --jsonl|--csv|--markdown [--session=<id>] [--consented-only] [output-path]
@@ -139,14 +140,21 @@ if ($markdown) {
     $docs = [];
     foreach ($bySession as $sid => $exchanges) {
         $session = $sessionsById[$sid] ?? null;
-        $lines = ["# Session {$sid}", ''];
+        $lines = [];
         if ($session !== null) {
-            $lines[] = '- title: ' . ($session['title'] ?? '(none)');
-            $lines[] = "- origin: {$session['origin']}";
-            $lines[] = '- scenario: ' . ($session['scenario'] ?? '(none)');
-            $lines[] = "- created: {$session['createdAt']}";
+            // Session properties as YAML frontmatter. Each value is JSON-encoded,
+            // which is valid YAML for scalars (strings quoted, bool/null/int bare)
+            // and safely handles colons/quotes/newlines in free-text fields like
+            // scenario — no YAML extension needed.
+            $lines[] = '---';
+            foreach ($session as $key => $value) {
+                $lines[] = $key . ': ' . json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            }
+            $lines[] = '---';
             $lines[] = '';
         }
+        $lines[] = "# Session {$sid}";
+        $lines[] = '';
         foreach ($exchanges as $e) {
             $lines[] = "**Visitor:** {$e['visitorContribution']}";
             $lines[] = '';
@@ -155,7 +163,9 @@ if ($markdown) {
         }
         $docs[] = implode("\n", $lines);
     }
-    $out = implode("\n---\n\n", $docs);
+    // Each doc opens with its own `---` frontmatter fence, which doubles as the
+    // between-session rule — no extra separator needed.
+    $out = implode("\n", $docs);
     $writeOut($out, $outputPath, sprintf("exported %d session(s) to %s\n", count($docs), $outputPath ?? ''));
     exit;
 }
