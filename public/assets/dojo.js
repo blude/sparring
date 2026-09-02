@@ -567,9 +567,11 @@ window.SparringDojoOutcome = {
         setTimeout(function () { el.hidden = true; }, 300);
     }
 
-    // Fades #playbook in (0 -> 0.8 opacity per its own CSS). Only ever called
-    // for a new/empty session — see createSession and resumeSession below.
+    // Fades #playbook in (0 -> 0.8 opacity per its own CSS). Called for a
+    // new/empty session (createSession/resumeSession) and again on composer
+    // blur while the session is still empty (see the blur handler below).
     function showPlaybook() {
+        if (!playbookEl.hidden) return; // already up — don't re-trigger the fade
         playbookEl.classList.add('fading'); // start at 0 opacity while still [hidden]
         playbookEl.hidden = false;
         void playbookEl.offsetWidth; // commit the 0-opacity state before animating away from it
@@ -660,7 +662,7 @@ window.SparringDojoOutcome = {
     |--------------------------------------------------------------------------
     */
     function submitContribution(text) {
-        hidePlaybook(); // first sent message auto-dismisses the Playbook card
+        hidePlaybook(); // no-op for a typed turn (focus already dismissed it); still covers auto-sent openers that never touch the field
         // No instant raw-text placeholder here (that was setSessionTitle's old job) —
         // #session-title stays "Untitled" until /api/title resolves to a real title
         // (LLM or its trim-fallback), fired once turn 1 succeeds (see 'ok' case below).
@@ -776,6 +778,18 @@ window.SparringDojoOutcome = {
         updateCharRemaining();
         submitEl.disabled = fieldEl.disabled || fieldEl.value.trim() === '';
         sessionStorage.setItem(DRAFT_KEY, fieldEl.value);
+    });
+
+    // Playbook gets out of the way the instant the visitor engages the
+    // composer, and comes back on blur only while the session is still empty
+    // (no turns sent yet). A blur triggered by the composer being disabled
+    // mid-send is ignored — fieldEl.disabled guards that.
+    function sessionHasTurns() {
+        return historyEl.querySelector('.turn.visitor, .turn.sparring') !== null;
+    }
+    fieldEl.addEventListener('focus', hidePlaybook);
+    fieldEl.addEventListener('blur', function () {
+        if (!fieldEl.disabled && !sessionHasTurns()) showPlaybook();
     });
 
     // Enter sends; Shift+Enter or Option/Alt+Enter inserts a line break
