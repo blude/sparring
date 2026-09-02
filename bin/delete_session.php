@@ -18,11 +18,12 @@ if (php_sapi_name() !== 'cli') {
     exit("this script runs on the host only\n");
 }
 
+$usage =
+    "Usage: php bin/delete_session.php <session-id> --dry-run\n" .
+    "       php bin/delete_session.php <session-id> --confirm   (-y is an alias)\n";
+
 if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
-    exit(
-        "Usage: php bin/delete_session.php <session-id> --dry-run\n" .
-        "       php bin/delete_session.php <session-id> --confirm   (-y is an alias)\n"
-    );
+    exit($usage);
 }
 
 $dryRun = in_array('--dry-run', $argv, true);
@@ -40,7 +41,7 @@ foreach (array_slice($argv, 1) as $arg) {
 }
 
 if ($sessionId === null) {
-    fwrite(STDERR, "usage: php bin/delete_session.php <session-id> --dry-run|--confirm\n");
+    fwrite(STDERR, $usage);
     exit(1);
 }
 
