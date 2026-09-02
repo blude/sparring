@@ -81,6 +81,9 @@ php bin/reset_db.php --confirm  # empty sessions/exchanges/rate-limit tables
 
 php bin/prune_orphaned_sessions.php --dry-run  # count sessions with zero exchanges, inactive 24h+
 php bin/prune_orphaned_sessions.php --confirm  # delete them (never touches a session with any exchange)
+
+php bin/delete_session.php <id> --dry-run  # report what would be deleted for one session
+php bin/delete_session.php <id> --confirm  # delete that session + its exchanges + its evaluation
 ```
 
 On prod, run any `bin/*.php` script through `ee shell <site> --command='php bin/...'`

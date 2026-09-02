@@ -497,6 +497,8 @@ PHP backend. **SE-04** = the system prompt (`prompts/sparring.md`). Spec IDs
   guarded.
 - **`bin/prune_orphaned_sessions.php`** — Targeted delete of zero-exchange
   stale sessions; `--dry-run` / `--confirm` guarded.
+- **`bin/delete_session.php`** — Delete one session by id, cascading its
+  exchanges and evaluation row; `--dry-run` / `--confirm` guarded.
 - **`bin/import_curriculum.php` / `clear_curriculum.php` / `probe_curriculum.php`**
   — Curriculum FTS5 ingest, clear, and retrieval probe.
 - **`bin/deploy.sh`** — rsync + SSH to the EasyEngine prod site, then

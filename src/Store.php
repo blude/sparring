@@ -834,6 +834,38 @@ final class Store
         return $stmt->rowCount();
     }
 
+    /**
+     * Deletes one session and everything under it: its exchanges (plain FK,
+     * no ON DELETE CASCADE, so removed explicitly) and its evaluation row
+     * (session_evaluations cascades on its own). Returns null if no session
+     * has that id, else the counts removed. bin/delete_session.php.
+     */
+    public function deleteSession(string $id): ?array
+    {
+        if ($this->getSession($id) === null) {
+            return null;
+        }
+
+        $this->pdo->beginTransaction();
+        try {
+            $countStmt = $this->pdo->prepare('SELECT COUNT(*) FROM exchanges WHERE session_id = :id');
+            $countStmt->execute(['id' => $id]);
+            $exchangeCount = (int) $countStmt->fetchColumn();
+
+            $delExchanges = $this->pdo->prepare('DELETE FROM exchanges WHERE session_id = :id');
+            $delExchanges->execute(['id' => $id]);
+            $delSession = $this->pdo->prepare('DELETE FROM sessions WHERE id = :id');
+            $delSession->execute(['id' => $id]);
+
+            $this->pdo->commit();
+        } catch (Throwable $e) {
+            $this->pdo->rollBack();
+            throw $e;
+        }
+
+        return ['exchanges' => $exchangeCount];
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Helpers

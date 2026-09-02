@@ -249,6 +249,28 @@ assert($store->getSession($orphan['id']) === null);
 assert($store->getEvaluation($orphan['id']) === null); // cascaded, not orphaned in its own table
 assert($store->getSession($busy['id']) !== null); // has an exchange, never an orphan regardless of age
 
+/*
+|--------------------------------------------------------------------------
+| maintenance: delete one session by id (bin/delete_session.php)
+|--------------------------------------------------------------------------
+*/
+
+assert($store->deleteSession('no-such-session') === null); // unknown id — nothing to do
+
+$doomed = $store->createSession('live');
+$store->appendExchange($doomed['id'], 'first', 'reply one');
+$store->appendExchange($doomed['id'], 'second', 'reply two');
+$store->saveEvaluation($doomed['id'], ['challenge' => 3], 'done'); // must cascade, not FK-violate
+$bystander = $store->createSession('live');
+$store->appendExchange($bystander['id'], 'keep me', 'still here');
+
+assert($store->deleteSession($doomed['id']) === ['exchanges' => 2]);
+assert($store->getSession($doomed['id']) === null);
+assert($store->getEvaluation($doomed['id']) === null); // cascaded, not orphaned in its own table
+assert($store->getExchanges($doomed['id']) === []);
+assert($store->getSession($bystander['id']) !== null); // untouched
+assert(count($store->getExchanges($bystander['id'])) === 1);
+
 // --- curriculum search (poor man's RAG ingestion, bin/import_curriculum.php) ---
 assert($store->getCurriculumChunkCount() === 0);
 
