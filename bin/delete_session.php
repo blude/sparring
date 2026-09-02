@@ -7,7 +7,7 @@ declare(strict_types=1);
  * --dry-run always wins and only reports what would go.
  *
  * Usage: php bin/delete_session.php <session-id> --dry-run
- *        php bin/delete_session.php <session-id> --confirm
+ *        php bin/delete_session.php <session-id> --confirm   (-y is an alias)
  */
 
 require __DIR__ . '/../config.php';
@@ -21,17 +21,19 @@ if (php_sapi_name() !== 'cli') {
 if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
     exit(
         "Usage: php bin/delete_session.php <session-id> --dry-run\n" .
-        "       php bin/delete_session.php <session-id> --confirm\n"
+        "       php bin/delete_session.php <session-id> --confirm   (-y is an alias)\n"
     );
 }
 
 $dryRun = in_array('--dry-run', $argv, true);
-$confirmed = in_array('--confirm', $argv, true);
+// -y is a short alias for --confirm
+$confirmed = in_array('--confirm', $argv, true) || in_array('-y', $argv, true);
 
 // session id is the first positional (non-flag) arg after the script name
+// (any leading dash is a flag — covers --confirm, --dry-run, -y, -h)
 $sessionId = null;
 foreach (array_slice($argv, 1) as $arg) {
-    if (!str_starts_with($arg, '--')) {
+    if (!str_starts_with($arg, '-')) {
         $sessionId = $arg;
         break;
     }

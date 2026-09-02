@@ -9,7 +9,7 @@ declare(strict_types=1);
  * --dry-run always wins and only reports the count.
  *
  * Usage: php bin/prune_orphaned_sessions.php [hours] --dry-run
- *        php bin/prune_orphaned_sessions.php [hours] --confirm
+ *        php bin/prune_orphaned_sessions.php [hours] --confirm   (-y is an alias)
  *        (hours defaults to 24)
  */
 
@@ -24,13 +24,14 @@ if (php_sapi_name() !== 'cli') {
 if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
     exit(
         "Usage: php bin/prune_orphaned_sessions.php [hours] --dry-run\n" .
-        "       php bin/prune_orphaned_sessions.php [hours] --confirm\n" .
+        "       php bin/prune_orphaned_sessions.php [hours] --confirm   (-y is an alias)\n" .
         "       (hours defaults to 24)\n"
     );
 }
 
 $dryRun = in_array('--dry-run', $argv, true);
-$confirmed = in_array('--confirm', $argv, true);
+// -y is a short alias for --confirm
+$confirmed = in_array('--confirm', $argv, true) || in_array('-y', $argv, true);
 
 $hoursArg = $argv[1] ?? null;
 $hours = ($hoursArg !== null && ctype_digit($hoursArg)) ? (int) $hoursArg : 24;
