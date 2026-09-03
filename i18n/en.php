@@ -85,18 +85,18 @@ return [
     'dojo.eval.startNewSession' => 'Start new session',
     'dojo.eval.goToStart' => 'Go back to start',
 
-    'dojo.js.outcomeRateLimited' => 'Too many requests — wait a moment and try again.',
-    'dojo.js.outcomeRejected' => 'That message is empty or too long — edit it and try again.',
-    'dojo.js.outcomeFlaggedGeneric' => "That message can't be shown here — edit it and try again.",
-    'dojo.js.outcomeFlaggedPersonalInfo' => "That message includes personal information and can't be shown here — edit it and try again.",
-    'dojo.js.outcomeFlaggedInappropriate' => "That message isn't appropriate for this exhibition — edit it and try again.",
-    'dojo.js.outcomeSessionUnknown' => 'This session is no longer available — reload to start a new one.',
-    'dojo.js.outcomeGenerationFailed' => 'The installation cannot respond right now — try again.',
-    'dojo.js.sessionComplete' => 'This session has reached its limit — thanks for sparring.',
+    'dojo.js.outcomeRateLimited' => 'Too many requests. Wait a moment, then try again.',
+    'dojo.js.outcomeRejected' => 'That message is empty or too long. Edit it and try again.',
+    'dojo.js.outcomeFlaggedGeneric' => "That message can't be shown here. Edit it and try again.",
+    'dojo.js.outcomeFlaggedPersonalInfo' => "That message includes personal information, so it can't be shown here. Edit it and try again.",
+    'dojo.js.outcomeFlaggedInappropriate' => "That message isn't appropriate for this exhibition. Edit it and try again.",
+    'dojo.js.outcomeSessionUnknown' => 'This session is no longer available. Reload to start a new one.',
+    'dojo.js.outcomeGenerationFailed' => "The installation can't respond right now. Try again.",
+    'dojo.js.sessionComplete' => 'This session has reached its limit. Thanks for sparring.',
     'dojo.js.turnLimitExtend' => 'Extend session',
     'dojo.js.turnLimitFeedback' => 'Send feedback',
-    'dojo.js.installationUnavailable' => 'The installation is not accepting sessions right now — reload to retry.',
-    'dojo.js.consentFailed' => 'Could not record that choice — try again.',
+    'dojo.js.installationUnavailable' => "The installation isn't accepting sessions right now. Reload to retry.",
+    'dojo.js.consentFailed' => "Couldn't record that choice. Try again.",
     // Cycled while waiting for a response (dojo.js) — walks up the list on
     // an interval, wrapping back to index 0. Order matters; keep in sync
     // with i18n/de.php's dojo.js.thinking.* set.
