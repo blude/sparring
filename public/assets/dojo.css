@@ -116,7 +116,7 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 0.6875rem; /* 11px */
+    font-size: 0.75rem; /* 12px */
     font-weight: 500;
     color: rgba(255, 255, 255, 0.55);
 }
@@ -126,7 +126,7 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 0.875rem;
+    font-size: 1rem; /* 16px */
     font-weight: 500;
     color: rgba(255, 255, 255, 0.7); /* placeholder "Untitled" shade on the brand-red bar */
 }
@@ -226,6 +226,7 @@ main {
 
 #history {
     flex: 1;
+    font-size: 1.125rem; /* base for the chat bubbles; descendants with their own size still win */
     min-height: 0; /* without this, flex:1 can't shrink #history below its
                       content, so <main> overflows the keyboard-shortened
                       --vvh <body> and iOS reveal-scrolls the whole page */
@@ -246,6 +247,12 @@ main {
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 4.75rem);
             mask-image: linear-gradient(to bottom, transparent 0, #000 4.75rem);
     padding-bottom: 1rem; /* subtle space for avoiding overlap with the composer scrim */
+    /* <main>'s padding-right would hold this scroll box — and so its
+       scrollbar — inset from the physical edge. Cancel it with a negative
+       margin, then restore the content inset with matching padding, so the
+       scrollbar sits flush right while the bubbles stay where they were. */
+    margin-right: calc(-1 * max(0.75rem, env(safe-area-inset-right)));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
 }
 
 #history .turn { padding: 0.5rem 0.75rem; border-radius: 0.875rem; max-width: 90%; line-height: 1.3; }
