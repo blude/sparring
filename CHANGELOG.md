@@ -2,8 +2,25 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-09-03
+
+- `04d4b18` feat(dojo): restyle end-session button as transparent icon + "Finish" label
+- `bfc3d6a` fix(dojo): skip end-of-session dialogs when nothing was sent
+- `e8fd5e1` docs: engineering note on the dojo layout vs. the iOS software keyboard
+- `2aeae37` fix(dojo): re-pin history to the latest message when the iOS keyboard opens
+- `21d79d6` fix(dojo): keep composer and top bar in place with the iOS keyboard
+- `233e03d` fix(dojo): lock document scroll so only #history scrolls
+- `34a2f98` refactor(bin): single usage string in delete_session.php
+- `6c04700` feat(bin): accept -y as alias for --confirm in destructive scripts
+- `e2d8e9d` feat(bin): add delete_session.php to remove one session by id
+- `60fd08e` feat(export): render session properties as YAML frontmatter in markdown
+- `10fcb0a` feat(export): show session title in markdown transcript header
+- `4ebea8a` feat(dojo): dismiss Playbook on composer focus, restore on blur
+
 ## 2026-09-01
 
+- `f7aea4a` docs: update CHANGELOG through 7c5ba9d, version to 0.24.0
+- `e196007` fix(bin): order multi-day CHANGELOG updates newest-first
 - `7c5ba9d` feat(docs): timestamp generated diagram filenames
 - `4a0ad8e` docs(diagrams): add docs/README.md documenting the generators
 - `c04b5a0` chore(docs): group diagram files into per-artifact folders
