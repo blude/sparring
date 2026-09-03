@@ -618,9 +618,9 @@ window.SparringDojoOutcome = {
         setTimeout(function () { el.hidden = true; }, 300);
     }
 
-    // Fades #playbook in (0 -> 0.8 opacity per its own CSS). Called for a
-    // new/empty session (createSession/resumeSession) and again on composer
-    // blur while the session is still empty (see the blur handler below).
+    // Fades #playbook in (0 -> 0.8 opacity per its own CSS). Called once for a
+    // new/empty session (createSession/resumeSession); dismissed for good on
+    // the first composer focus and never brought back.
     function showPlaybook() {
         if (!playbookEl.hidden) return; // already up — don't re-trigger the fade
         playbookEl.classList.add('fading'); // start at 0 opacity while still [hidden]
@@ -834,17 +834,14 @@ window.SparringDojoOutcome = {
         sessionStorage.setItem(DRAFT_KEY, fieldEl.value);
     });
 
-    // Playbook gets out of the way the instant the visitor engages the
-    // composer, and comes back on blur only while the session is still empty
-    // (no turns sent yet). A blur triggered by the composer being disabled
-    // mid-send is ignored — fieldEl.disabled guards that.
     function sessionHasTurns() {
         return historyEl.querySelector('.turn.visitor, .turn.sparring') !== null;
     }
+
+    // Playbook gets out of the way the instant the visitor engages the
+    // composer and stays gone — blurring the field without sending doesn't
+    // bring it back.
     fieldEl.addEventListener('focus', hidePlaybook);
-    fieldEl.addEventListener('blur', function () {
-        if (!fieldEl.disabled && !sessionHasTurns()) showPlaybook();
-    });
 
     // Enter sends; Shift+Enter or Option/Alt+Enter inserts a line break
     // (textarea default already does the line break, so only Enter alone
