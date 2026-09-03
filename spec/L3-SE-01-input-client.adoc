@@ -103,7 +103,7 @@ _Prerequisites:_ <<UC-01,UC-01 Begin a session>> completed, or <<UC-03,UC-03 Res
 _Achieves:_ <<G-01,G-01 Reach a working input surface with nothing but a scan>>, <<G-03,G-03 Make waiting and failure legible>> +
 _Realises:_ SSc-01
 
-- *[[ST-02-1]]ST-02-1* _(User-interaction)_ xref:L2-system-design-concept.adoc#UT-01[UT-01 Participating visitor] enters a contribution in <<UI-01,UI-01 Session surface>>'s input field. The remaining character allowance is shown as they type.
+- *[[ST-02-1]]ST-02-1* _(User-interaction)_ xref:L2-system-design-concept.adoc#UT-01[UT-01 Participating visitor] enters a contribution in <<UI-01,UI-01 Session surface>>'s input field. How much of the character allowance is used is shown as they type, and a warning is conveyed as the limit is approached.
 - *[[ST-02-2]]ST-02-2* _(User-interaction)_ xref:L2-system-design-concept.adoc#UT-01[UT-01 Participating visitor] submits.
 - *[[ST-02-3]]ST-02-3* _(Activity)_ The element disables the input field and shows the in-progress state.
 - *[[ST-02-4]]ST-02-4* _(Function-call)_ The element calls <<TF-03,TF-03 Submit a contribution>> with the session identifier and the contribution. <<TF-03,TF-03 Submit a contribution>> submits it and returns the completed exchange.
@@ -172,7 +172,7 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 | Session title | string | A short title summarising the session (brevity asked for in the prompt, no fixed length) | <<TF-06,TF-06 Refine the session title>> | "Untitled" from session start; replaced once <<TF-06,TF-06 Refine the session title>> resolves, after the first exchange completes
 | In-progress state | boolean | That a response is being produced | <<E-01.5,E-01.5 submissionOutstanding>> | While a submission is outstanding
 | Remaining turns | integer | How many contributions remain in the session | <<E-01.3,E-01.3 turnsRemaining>> | Always, once the session is open
-| Character allowance | integer | Characters remaining for the current contribution | <<TF-04,TF-04 Render the exchange history>> | While the field holds content
+| Character allowance | integer | How much of the length limit the current contribution uses, with a warning state as the limit is approached | <<TF-04,TF-04 Render the exchange history>> | While the field holds content
 | Status message | string | Plain statement of a limit reached or a failure | <<E-01.6,E-01.6 statusMessage>> | When set
 | Visitor alias | string | The generated nickname, shown in the header directly above the session title in smaller, dimmer type | <<TF-05,TF-05 Derive visitor identity>> | Once consent is recorded
 | Visitor avatar | string (emoji) | A small avatar in the header, always visible alongside the alias | <<TF-05,TF-05 Derive visitor identity>> | Once consent is recorded

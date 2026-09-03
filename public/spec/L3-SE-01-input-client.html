@@ -278,7 +278,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="ST-02-1"></a>ST-02-1</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> enters a contribution in <a href="#UI-01">UI-01 Session surface</a>'s input field. The remaining character allowance is shown as they type.</p>
+<p><strong><a id="ST-02-1"></a>ST-02-1</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> enters a contribution in <a href="#UI-01">UI-01 Session surface</a>'s input field. How much of the character allowance is used is shown as they type, and a warning is conveyed as the limit is approached.</p>
 </li>
 <li>
 <p><strong><a id="ST-02-2"></a>ST-02-2</strong> <em>(User-interaction)</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a> submits.</p>
@@ -467,7 +467,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Character allowance</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Characters remaining for the current contribution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How much of the length limit the current contribution uses, with a warning state as the limit is approached</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-04">TF-04 Render the exchange history</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">While the field holds content</p></td>
 </tr>
@@ -481,7 +481,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Visitor alias</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The generated nickname, shown in a popover on request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The generated nickname, shown in the header directly above the session title in smaller, dimmer type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-05">TF-05 Derive visitor identity</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Once consent is recorded</p></td>
 </tr>
@@ -544,12 +544,6 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <td class="tableblock halign-left valign-top"><p class="tableblock">Button press</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-01">UC-01 Begin a session</a>, <a href="#UC-02">UC-02 Contribute a turn</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Only alongside a failure status message</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">View own identity</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Press the avatar to open a popover showing the alias; dismissed by pressing elsewhere, pressing the avatar again, or Escape</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-01">UC-01 Begin a session</a>, <a href="#UC-03">UC-03 Resume an interrupted session</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Once consent is recorded</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Start a new session</p></td>
