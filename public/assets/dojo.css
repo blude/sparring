@@ -172,13 +172,17 @@ main {
     width: 2.5rem; /* 40px */
     height: 2.5rem;
     display: flex;
-    align-items: center;
+    align-items: flex-end;   /* sit the glyph low in the disc */
     justify-content: center;
     border-radius: 50%;
     border: none;
-    background: none;
-    font-size: 1.3125rem; /* 21px */
-    line-height: 1;
+    overflow: hidden;        /* oversized emoji is clipped by the round edge */
+    /* Light rosé disc so the avatar reads as a container, not a bare emoji —
+       translucent pink over the brand-red bar lands as a soft lighter tint. */
+    background: rgba(255, 228, 236, 0.22);
+    font-size: 1.875rem;     /* 30px — overflows the 40px disc, clips top & sides */
+    line-height: 0.7;        /* short line box + flex-end: glyph spills past the
+                                bottom edge and gets clipped there too */
     padding: 0;
     cursor: pointer;
 }
