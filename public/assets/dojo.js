@@ -827,7 +827,13 @@ window.SparringDojoOutcome = {
     if (vv) {
         var publishViewportHeight = function () {
             if (vv.scale > 1) return; // ignore pinch-zoom (kept for a11y, see dojo.css)
+            // Shrinking --vvh shrinks #history's height, which pushes its
+            // "bottom" further down while scrollTop stays put — so a history
+            // that was pinned to the latest message ends up scrolled short of
+            // it when the keyboard opens. Re-pin if it was at the bottom.
+            var wasAtBottom = historyEl.scrollHeight - historyEl.scrollTop - historyEl.clientHeight < 40;
             document.documentElement.style.setProperty('--vvh', vv.height + 'px');
+            if (wasAtBottom) historyEl.scrollTop = historyEl.scrollHeight;
         };
         vv.addEventListener('resize', publishViewportHeight);
         publishViewportHeight();
