@@ -17,11 +17,15 @@ body {
     margin: 2rem auto;
     padding: 0 1rem;
     touch-action: manipulation;
+    /* Break long words at the narrow 40rem measure — per-locale via <html lang>.
+       -webkit- prefix still required for Safari/iOS. */
+    -webkit-hyphens: auto;
+    hyphens: auto;
     background:
         radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
         #fff;
 }
-h1, h2, h3, h4, h5, h6 { font-family: 'RethinkSans', system-ui, sans-serif; line-height: 1.125; }
+h1, h2, h3, h4, h5, h6 { font-family: 'RethinkSans', system-ui, sans-serif; line-height: 1.125; -webkit-hyphens: none; hyphens: none; }
 a { color: #d32f2f; }
 a:visited { color: #7b5940; }
 footer {
