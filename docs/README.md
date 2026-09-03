@@ -9,6 +9,8 @@ drawing content.
 ```
 docs/
   features.md                     feature inventory (prose, hand-maintained)
+  ios-keyboard-viewport.md        engineering note: the dojo layout vs. the
+                                  iOS software keyboard (prose, hand-maintained)
   stamp.mjs                       shared filename timestamp (see Filenames)
   feature-cloud/                   word clouds of the feature inventory
   spec-network/                   traceability network of the spec/ requirements
