@@ -40,6 +40,7 @@ return [
     'dojo.avatarPopoverPrefix' => 'You are ',
     'dojo.untitled' => 'Untitled',
     'dojo.endSession' => 'End session',
+    'dojo.finish' => 'Finish',
     'dojo.confirm.endSession.heading' => 'End this session?',
     'dojo.confirm.endSession.description' => 'Your current session will no longer be shown.',
     'dojo.confirm.cancel' => 'Cancel',

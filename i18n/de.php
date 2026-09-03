@@ -33,6 +33,7 @@ return [
     'dojo.avatarPopoverPrefix' => 'Du bist ',
     'dojo.untitled' => 'Unbenannt',
     'dojo.endSession' => 'Sitzung beenden',
+    'dojo.finish' => 'Aufhören',
     'dojo.confirm.endSession.heading' => 'Diese Sitzung beenden?',
     'dojo.confirm.endSession.description' => 'Deine aktuelle Sitzung wird nicht mehr angezeigt.',
     'dojo.confirm.cancel' => 'Abbrechen',

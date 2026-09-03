@@ -27,7 +27,7 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
       <div id="session-title"><?= t('dojo.untitled') ?></div>
     </div>
     <div id="top-bar-trailing">
-      <button id="new-session-btn" type="button"><?= t('dojo.endSession') ?></button>
+      <button id="new-session-btn" type="button"><span class="icon" aria-hidden="true"></span><?= t('dojo.finish') ?></button>
     </div>
   </header>
 

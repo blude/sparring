@@ -164,14 +164,30 @@ main {
 }
 
 #new-session-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem; /* 6px between icon and label */
     padding: 0.625rem 0.875rem; /* 10px/14px */
     font: inherit;
     font-size: 0.875rem; /* 14px */
     font-weight: 500;
     color: #111;
-    background: #f7f7f7;
-    border: 1px solid #ccc;
+    background: transparent;
+    border: none;
     border-radius: 0.5rem; /* 8px */
+    cursor: pointer;
+    transition: background-color 0.12s ease;
+}
+#new-session-btn:hover { background: #f0f0ee; }
+#new-session-btn:active { background: #e4e4e0; }
+/* Icon as a CSS mask so it inherits the button's color via currentColor
+   (same pattern as #submit .icon further down). */
+#new-session-btn .icon {
+    width: 1.125rem; /* 18px */
+    height: 1.125rem;
+    background-color: currentColor;
+    -webkit-mask: url('img/run-fast.svg') no-repeat center / contain;
+    mask: url('img/run-fast.svg') no-repeat center / contain;
 }
 
 #debug-panel {
