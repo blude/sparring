@@ -34,7 +34,7 @@ if ($session === null || $sparring->isExpired($session)) {
 echo json_encode([
     'sessionId' => $session['id'],
     'sessionState' => $sparring->sessionStateFor($session),
-    'turnsRemaining' => TURN_ALLOWANCE - $session['turnCount'],
+    'turnsRemaining' => $sparring->effectiveAllowance($session) - $session['turnCount'], // base + any SA-01-8 extension
     'retentionDecided' => $session['consentGranted'] !== null,
     'origin' => $session['origin'], // debug mode (?debug=1) only consumer
     'exchanges' => array_map(

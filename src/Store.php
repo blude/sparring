@@ -44,14 +44,15 @@ final class Store
                 tos_agreed          INTEGER,
                 projection_consent  INTEGER,
                 turn_count          INTEGER NOT NULL DEFAULT 0,
+                bonus_turns         INTEGER NOT NULL DEFAULT 0,
                 last_active_at      TEXT NOT NULL
             )
         SQL);
 
-        // Guard for a store.db created before tos_agreed/projection_consent/title
-        // existed — SQLite has no "ADD COLUMN IF NOT EXISTS" on the versions this targets.
+        // Guard for a store.db created before tos_agreed/projection_consent/title/
+        // bonus_turns existed — SQLite has no "ADD COLUMN IF NOT EXISTS" on the versions this targets.
         $existing = array_column($this->pdo->query('PRAGMA table_info(sessions)')->fetchAll(PDO::FETCH_ASSOC), 'name');
-        foreach (['tos_agreed' => 'INTEGER', 'projection_consent' => 'INTEGER', 'title' => 'TEXT'] as $column => $type) {
+        foreach (['tos_agreed' => 'INTEGER', 'projection_consent' => 'INTEGER', 'title' => 'TEXT', 'bonus_turns' => 'INTEGER NOT NULL DEFAULT 0'] as $column => $type) {
             if (!in_array($column, $existing, true)) {
                 $this->pdo->exec("ALTER TABLE sessions ADD COLUMN $column $type");
             }
@@ -198,6 +199,20 @@ final class Store
             'displayable' => (int) $projectionGranted,
             'id' => $id,
         ]);
+    }
+
+    /**
+     * SA-01-8: lift the session's turn ceiling by $by more exchanges. Additive —
+     * repeated calls stack (see Sparring::effectiveAllowance). Touches
+     * last_active_at so extending also keeps an otherwise-idle session from
+     * ageing out mid-decision.
+     */
+    public function extendSession(string $id, int $by): void
+    {
+        $stmt = $this->pdo->prepare(
+            'UPDATE sessions SET bonus_turns = bonus_turns + :by, last_active_at = :now WHERE id = :id'
+        );
+        $stmt->execute(['by' => $by, 'now' => self::now(), 'id' => $id]);
     }
 
     /** TF-01 FS-01-6: withholds a session from projection. Never set back to true (AP-05-adjacent, one-way). */
@@ -909,6 +924,7 @@ final class Store
             'tosAgreed' => $row['tos_agreed'] === null ? null : (bool) $row['tos_agreed'],
             'projectionConsent' => $row['projection_consent'] === null ? null : (bool) $row['projection_consent'],
             'turnCount' => (int) $row['turn_count'],
+            'bonusTurns' => (int) $row['bonus_turns'],
             'lastActiveAt' => $row['last_active_at'],
         ];
     }

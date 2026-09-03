@@ -41,10 +41,21 @@ final class Sparring
         if ($session['tosAgreed'] === null) {
             return 'awaiting-decision';
         }
-        if ($session['turnCount'] >= TURN_ALLOWANCE) {
+        if ($session['turnCount'] >= $this->effectiveAllowance($session)) {
             return 'complete';
         }
         return 'open';
+    }
+
+    /**
+     * The session's turn ceiling: the base TURN_ALLOWANCE plus whatever extra
+     * the visitor was granted at the limit via extendSession() (SA-01-8).
+     * Tolerates a session array with no bonusTurns key so sessionStateFor()'s
+     * pure array-literal checks in tests need no schema-shaped fixtures.
+     */
+    public function effectiveAllowance(array $session): int
+    {
+        return TURN_ALLOWANCE + ($session['bonusTurns'] ?? 0);
     }
 
     /*
@@ -93,8 +104,8 @@ final class Sparring
             return ['status' => 'session-unknown'];
         }
 
-        // FS-01-3: turn allowance.
-        if ($session['turnCount'] >= TURN_ALLOWANCE) {
+        // FS-01-3: turn allowance (base plus any SA-01-8 extension).
+        if ($session['turnCount'] >= $this->effectiveAllowance($session)) {
             return ['status' => 'turn-limit', 'rateLimitRemaining' => $rateLimit['remaining']];
         }
 
@@ -187,10 +198,36 @@ final class Sparring
         return [
             'status' => 'ok',
             'exchange' => $exchange,
-            'turnsRemaining' => TURN_ALLOWANCE - $updated['turnCount'],
+            'turnsRemaining' => $this->effectiveAllowance($updated) - $updated['turnCount'],
             'sessionState' => $this->sessionStateFor($updated),
             'rateLimitRemaining' => $rateLimit['remaining'],
             'generationMs' => $generationMs,
+        ];
+    }
+
+    /**
+     * SA-01-8: at the turn limit the visitor chose to keep going rather than
+     * end the session. Lifts the ceiling by another TURN_ALLOWANCE and reports
+     * the reopened state. No rate limiting and no generation here — one bounded
+     * UPDATE, nothing a client can't already do by starting a fresh session.
+     *
+     * # ponytail: unmetered. A visitor could spam this, but what it lifts is a
+     * ceiling on turns-that-cost-an-LLM-call, and those calls stay rate- and
+     * size-limited by processTurn. Add a per-session extension cap here if it
+     * is ever actually abused.
+     */
+    public function extendSession(string $sessionId): array
+    {
+        $session = $this->store->getSession($sessionId);
+        if ($session === null || $this->isExpired($session)) {
+            return ['status' => 'session-unknown'];
+        }
+        $this->store->extendSession($sessionId, TURN_ALLOWANCE);
+        $updated = $this->store->getSession($sessionId);
+        return [
+            'status' => 'ok',
+            'turnsRemaining' => $this->effectiveAllowance($updated) - $updated['turnCount'],
+            'sessionState' => $this->sessionStateFor($updated),
         ];
     }
 

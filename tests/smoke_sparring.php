@@ -208,6 +208,32 @@ withOrigin('10.0.0.8', function () use ($store, $sparring) {
     assert($store->getSession($session['id'])['turnCount'] === TURN_ALLOWANCE); // not incremented further
 });
 
+// SA-01-8: a completed session can be extended past its allowance, which
+// reopens it for another TURN_ALLOWANCE worth of turns. Additive, unmetered.
+withOrigin('10.0.0.10', function () use ($store, $sparring) {
+    $session = $store->createSession('live');
+    $store->recordConsentDecision($session['id'], true, false, false); // past 'awaiting-decision' so state reads open/complete
+    for ($i = 0; $i < TURN_ALLOWANCE; $i++) {
+        $store->appendExchange($session['id'], "turn $i", 'a response');
+    }
+    assert($sparring->sessionStateFor($store->getSession($session['id'])) === 'complete');
+
+    $ext = $sparring->extendSession($session['id']);
+    assert($ext['status'] === 'ok');
+    assert($ext['sessionState'] === 'open');
+    assert($ext['turnsRemaining'] === TURN_ALLOWANCE); // full fresh allowance
+    assert($sparring->sessionStateFor($store->getSession($session['id'])) === 'open'); // ceiling lifted
+
+    $result = $sparring->processTurn($session['id'], 'one more, now allowed');
+    assert($result['status'] === 'ok'); // the gate lets a turn through again
+
+    // Extending again stacks: each call lifts the ceiling by another allowance.
+    $ext2 = $sparring->extendSession($session['id']);
+    assert($ext2['turnsRemaining'] === TURN_ALLOWANCE * 2 - 1); // 2 extensions, 1 turn spent
+
+    assert($sparring->extendSession('DOESNOTEXIST')['status'] === 'session-unknown');
+});
+
 // FS-01-1: rate limit exhausted, well within TURN_ALLOWANCE. processTurn checks
 // the rate gate before turn count unconditionally, so this fires regardless of
 // how the two constants compare.

@@ -17,6 +17,7 @@ $routes = [
     '/api/session'          => __DIR__ . '/api/session.php',
     '/api/session-state'    => __DIR__ . '/api/session-state.php',
     '/api/contribute'       => __DIR__ . '/api/contribute.php',
+    '/api/extend-session'   => __DIR__ . '/api/extend-session.php',
     '/api/recent-exchanges' => __DIR__ . '/api/recent-exchanges.php',
     '/api/title'            => __DIR__ . '/api/title.php',
     '/api/evaluate'         => __DIR__ . '/api/evaluate.php',
