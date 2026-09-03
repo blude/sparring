@@ -446,8 +446,8 @@ window.SparringDojoOutcome = {
         feedbackBtn.type = 'button';
         feedbackBtn.className = 'endchoice-feedback';
         feedbackBtn.textContent = window.STRINGS.dojo.turnLimitFeedback;
+        actionsEl.appendChild(feedbackBtn); // primary, on top
         actionsEl.appendChild(extendBtn);
-        actionsEl.appendChild(feedbackBtn);
 
         endChoiceEl.appendChild(copyEl);
         endChoiceEl.appendChild(actionsEl);
@@ -674,6 +674,9 @@ window.SparringDojoOutcome = {
         retentionEl.hidden = data.sessionState !== 'awaiting-decision'; // EX-03-2: still shown if consent was never recorded
         if (data.sessionState !== 'awaiting-decision') revealIdentity(id); // consent already recorded
         applySessionState(data.sessionState, data.turnsRemaining);
+        // Reloading a limit-ended session gets the same inline choice as hitting
+        // the limit live (SA-01-8) — applySessionState only disables the field.
+        if (data.sessionState === 'complete') showTurnLimitChoice();
         updateDebugPanel({ sessionId: id, origin: data.origin, sessionState: data.sessionState, turnsRemaining: data.turnsRemaining });
     }
 
