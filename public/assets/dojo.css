@@ -182,8 +182,8 @@ main {
        translucent pink over the brand-red bar lands as a soft lighter tint. */
     background: rgba(255, 228, 236, 0.22);
     font-size: 1.875rem;     /* 30px — overflows the 40px disc, clips top & sides */
-    line-height: 0.7;        /* short line box + flex-end: glyph spills past the
-                                bottom edge and gets clipped there too */
+    line-height: normal;     /* browser default line box; flex-end + overflow
+                                still clip the oversized glyph top & sides */
     padding: 0;
     cursor: pointer;
 }
