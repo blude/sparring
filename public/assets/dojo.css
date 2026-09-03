@@ -750,6 +750,7 @@ main {
     gap: 2px;
     width: 80px;
     height: 15px;
+    transform: skewX(-15deg);          /* slight forward slant */
 }
 #char-progress span {
     flex: 1 1 0;
@@ -760,10 +761,10 @@ main {
 #char-progress span.filled { background: #d32f2f; }       /* red */
 
 @keyframes char-progress-bump {
-    0%, 100% { transform: translateX(0); }
-    25%  { transform: translateX(-2px); }
-    50%  { transform: translateX(2px); }
-    75%  { transform: translateX(-1px); }
+    0%, 100% { transform: skewX(-15deg) translateX(0) translateY(0); }
+    25%  { transform: skewX(-15deg) translateX(-2px) translateY(1px); }
+    50%  { transform: skewX(-15deg) translateX(2px) translateY(-1px); }
+    75%  { transform: skewX(-15deg) translateX(-1px) translateY(1px); }
 }
 #char-progress.bumping { animation: char-progress-bump 200ms ease; }
 
