@@ -403,6 +403,10 @@ window.SparringDojoCharProgress = {
                     void charProgressEl.offsetWidth; // restart the shake if retriggered mid-flight
                     charProgressEl.classList.add('bumping');
                 }
+                // Cue for every newly-lit bar. One play per update tick (like
+                // the shake), not per bar — a multi-bar paste is one "charge".
+                // play() self-checks isJuicyOn('sound').
+                window.SparringSfx.play('charge');
             }
             prevFilled = filled;
         }

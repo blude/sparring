@@ -20,6 +20,8 @@ window.SparringSfx = (function () {
         punch: [2.2, , 226, , .05, .19, 4, 1.4, 50, , , , .03, .3, 9.1, .3, .12, .53, .09], // tuned via sfx-debug.php + official designer
         parry: [2.2, , 760, .02, .03, .01, 4, 2.2, , , , , , .9, 7.5, , .19, .79, .02, .2, -1166], // tuned via sfx-debug.php + official designer
         fumble: [1.8, 0, 261.6256, .01, .2, .12, 5, .5, -3, 3, , 10, , .5, , .01, .1, .5, .03], // tuned via sfx-debug.php + official designer
+        // Cue for the char bar lighting a new segment as you type, see dojo.js.
+        charge: [.3, , 70, .03, .05, .09, , 3.5, 9, 37, , , , , 12, .5, , .62, .09, , 434],
     };
 
     // Multi-note sequences (arpeggios) — an array of zzfx parameter arrays,

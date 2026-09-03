@@ -33,6 +33,7 @@ exported array below to confirm it sounds right here, then copy it into
   <button type="button" data-preset="punch">Load punch</button>
   <button type="button" data-preset="parry">Load parry</button>
   <button type="button" data-preset="fumble">Load fumble</button>
+  <button type="button" data-preset="charge">Load charge</button>
 </div>
 
 <label>Parameter array
