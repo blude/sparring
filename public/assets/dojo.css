@@ -76,6 +76,11 @@ main {
     justify-content: space-between;
     gap: 1rem;
     position: relative;
+    background: var(--accent); /* sparring brand red — same source as the wordmark */
+    /* inset-aware: background reaches the edges, content stays clear of the
+       notch/rounded corners. viewport-fit=cover (dojo.php meta) makes env() non-zero. */
+    padding: max(0.5rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right))
+             0.5rem max(0.75rem, env(safe-area-inset-left));
 }
 
 #top-bar-leading {
@@ -95,9 +100,9 @@ main {
     white-space: nowrap;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #999; /* placeholder "Untitled" shade; setSessionTitle/refineSessionTitle darken once real */
+    color: rgba(255, 255, 255, 0.7); /* placeholder "Untitled" shade on the brand-red bar */
 }
-#session-title.set { color: #222; }
+#session-title.set { color: #fff; }
 
 /* Shimmers only while /api/title is actually in flight (dojo.js adds/removes
    'title-pending' around that fetch) — not for the whole "Untitled" span,
@@ -143,7 +148,7 @@ main {
     justify-content: center;
     border-radius: 50%;
     border: none;
-    background: #eaeae7;
+    background: rgba(0, 0, 0, 0.25); /* dark circle on the brand-red bar */
     font-size: 1.3125rem; /* 21px */
     line-height: 1;
     padding: 0;
@@ -171,15 +176,15 @@ main {
     font: inherit;
     font-size: 0.875rem; /* 14px */
     font-weight: 500;
-    color: #111;
-    background: transparent;
+    color: #fff;
+    background: rgba(255, 255, 255, 0); /* not `transparent` — keyword hazes through black mid-fade, see #composer::before */
     border: none;
     border-radius: 0.5rem; /* 8px */
     cursor: pointer;
     transition: background-color 0.12s ease;
 }
-#new-session-btn:hover { background: #f0f0ee; }
-#new-session-btn:active { background: #e4e4e0; }
+#new-session-btn:hover { background: rgba(255, 255, 255, 0.18); }
+#new-session-btn:active { background: rgba(255, 255, 255, 0.28); }
 /* Icon as a CSS mask so it inherits the button's color via currentColor
    (same pattern as #submit .icon further down). */
 #new-session-btn .icon {
