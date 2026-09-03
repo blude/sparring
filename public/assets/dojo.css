@@ -26,8 +26,15 @@ button, textarea { -webkit-tap-highlight-color: transparent; } /* suppress mobil
 }
 * { box-sizing: border-box; }
 
+/* The chat surface fills the viewport and never scrolls as a whole —
+   #history is the only scroll region. Without this, a swipe anywhere
+   outside #history rubber-band-scrolls the whole document on mobile:
+   the composer rides up and the body background shows below it. */
+html, body { overflow: hidden; }
+
 body {
     margin: 0;
+    overscroll-behavior: none;
     /* Figma specifies Helvetica Neue throughout this screen; system-ui
        resolves to San Francisco on Apple devices, a visibly different
        typeface. Helvetica Neue is a standard iOS/macOS system font, so
@@ -175,6 +182,7 @@ main {
 #history {
     flex: 1;
     overflow-y: auto;
+    overscroll-behavior-y: contain; /* reaching top/bottom doesn't bounce-scroll anything behind it */
     display: flex;
     flex-direction: column;
     gap: 0.75rem;

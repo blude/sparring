@@ -12,7 +12,7 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
 <html lang="<?= resolve_locale() ?>">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <title><?= t('dojo.title') ?></title>
 <?= ogTags('/dojo', t('dojo.title'), t('dojo.ogDescription')) ?>
 <link rel="stylesheet" href="<?= fasset('dojo.css') ?>">
