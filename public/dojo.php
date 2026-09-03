@@ -178,7 +178,6 @@ window.STRINGS = {
         installationUnavailable: <?= json_encode(t('dojo.js.installationUnavailable')) ?>,
         consentFailed: <?= json_encode(t('dojo.js.consentFailed')) ?>,
         thinkingStatuses: <?= json_encode(array_map(fn($i) => t("dojo.js.thinking.$i"), range(0, 6))) ?>,
-        charsRemaining: <?= json_encode(t('dojo.js.charsRemaining')) ?>,
         replyQuoteLabel: <?= json_encode(t('dojo.replyQuote.label')) ?>,
         evalSkipMessage: <?= json_encode(t('dojo.eval.skipMessage')) ?>
     }

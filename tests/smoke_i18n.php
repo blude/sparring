@@ -33,7 +33,7 @@ assert(resolve_locale() === 'en'); // memoized — second call is the same, not 
 
 // --- t(): lookup, English fallback, and {param} substitution ---
 assert(t('common.back') === 'Back'); // CLI locale is 'en', so this is also the fallback path
-assert(t('dojo.js.charsRemaining', ['{n}' => 3]) === '3 characters left');
+assert(t('arena.js.replyCount', ['{n}' => 3]) === '3 replies');
 
 // --- catalog parity: every English key has a German counterpart, and vice versa ---
 $en = require __DIR__ . '/../i18n/en.php';

@@ -106,7 +106,6 @@ return [
     'dojo.js.thinking.4' => 'Sizing you up…',
     'dojo.js.thinking.5' => 'Circling…',
     'dojo.js.thinking.6' => 'Finding an opening…',
-    'dojo.js.charsRemaining' => '{n} characters left',
 
     // --- arena.php (SE-02) ---
     'arena.title' => 'Arena — Sparring',

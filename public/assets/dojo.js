@@ -336,7 +336,7 @@ window.SparringDojoOutcome = {
     }
 
     function updateCharRemaining() {
-        charRemainingEl.textContent = window.STRINGS.dojo.charsRemaining.replace('{n}', String(MAX_CHARS - fieldEl.value.length));
+        charRemainingEl.textContent = String(MAX_CHARS - fieldEl.value.length);
         autoGrowField();
     }
 

@@ -96,7 +96,6 @@ return [
     'dojo.js.thinking.4' => 'Beäugt dich…',
     'dojo.js.thinking.5' => 'Umkreist…',
     'dojo.js.thinking.6' => 'Sucht eine Lücke…',
-    'dojo.js.charsRemaining' => 'Noch {n} Zeichen', // German word order: count doesn't lead the sentence like the English "N characters left"
 
     // --- arena.php (SE-02) ---
     'arena.title' => 'Arena — Sparring',
