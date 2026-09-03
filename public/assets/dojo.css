@@ -50,9 +50,7 @@ body {
        composer out above the keyboard instead of behind it. */
     height: var(--vvh, 100dvh);
     touch-action: manipulation; /* suppress double-tap-to-zoom, keep pinch-zoom for accessibility */
-    background:
-        radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
-        #fff;
+    background: var(--accent);
 }
 
 a { color: var(--accent); }
@@ -60,14 +58,13 @@ a:visited { color: var(--link-visited); }
 
 
 main {
-    position: relative; /* anchors #playbook (position:absolute) to this box */
     display: flex;
     flex-direction: column;
     height: 100%;
-    gap: 0.5rem;
-    /* inset-aware padding needs viewport-fit=cover on dojo.php's meta to be non-zero */
-    padding: max(0.75rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right))
-             max(0.75rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
+    /* No padding here: #top-bar must reach the viewport's top and side edges
+       so its brand-red background bleeds to them. The safe-area insets that
+       used to live here now sit on #top-bar (as content padding) and on
+       #surface (which holds everything below the bar). */
 }
 
 #top-bar {
@@ -81,6 +78,23 @@ main {
        notch/rounded corners. viewport-fit=cover (dojo.php meta) makes env() non-zero. */
     padding: max(0.5rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right))
              0.5rem max(0.75rem, env(safe-area-inset-left));
+}
+
+#surface {
+    position: relative; /* anchors #playbook / .gate-card (was on <main>) */
+    flex: 1;
+    min-height: 0; /* let #history shrink below its content under the keyboard-shortened --vvh */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem max(0.75rem, env(safe-area-inset-right))
+             max(0.75rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
+    /* the dotted-white backdrop the body used to carry — body is now solid
+       brand red so iOS Safari tints the address bar to match (it samples the
+       page background colour, not <meta name="theme-color">). */
+    background:
+        radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
+        #fff;
 }
 
 #top-bar-leading {
@@ -284,7 +298,7 @@ main {
 #playbook {
     /* absolute (not fixed) — fixed rubber-bands separately from the page
        during iOS overscroll, visibly detaching from the rest of the UI.
-       Anchored to main instead of the viewport, so it scrolls with it. */
+       Anchored to #surface instead of the viewport, so it scrolls with it. */
     position: absolute;
     top: 50%;
     left: 50%;

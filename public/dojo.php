@@ -31,6 +31,11 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
     </div>
   </header>
 
+  <?php /* #surface: holds everything below the top bar and carries the
+    safe-area padding + dotted backdrop that <main> used to. Lets #top-bar
+    itself run edge-to-edge so its brand-red background reaches the viewport. */ ?>
+  <div id="surface">
+
   <div id="history" aria-live="polite"></div>
 
   <?php
@@ -148,6 +153,8 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
       <div id="char-remaining"></div>
     </div>
   </form>
+
+  </div><!-- #surface -->
 </main>
 <div id="title-card" hidden aria-hidden="true">
   <span class="title-card__line title-card__line--slide"><?= t('dojo.titleCard.line1') ?></span>
