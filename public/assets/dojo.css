@@ -77,10 +77,10 @@ main {
     gap: 1rem;
     position: relative;
     background: var(--accent); /* sparring brand red — same source as the wordmark */
-    /* inset-aware: background reaches the edges, content stays clear of the
-       notch/rounded corners. viewport-fit=cover (dojo.php meta) makes env() non-zero. */
-    padding: max(0.5rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right))
-             0.5rem max(0.75rem, env(safe-area-inset-left));
+    /* Rounded red card inset from the edges — <main>'s padding already clears
+       the notch/safe-areas, so plain padding here. */
+    padding: 0.5rem 0.75rem;
+    border-radius: 1.25rem; /* 20px */
 }
 
 #top-bar-leading {
