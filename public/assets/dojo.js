@@ -808,6 +808,36 @@ window.SparringDojoOutcome = {
         submitContribution(text);
     });
 
+    // iOS software-keyboard handling. iOS Safari does not shrink 100dvh (or
+    // innerHeight, or the CSS layout viewport) when the keyboard opens — only
+    // window.visualViewport.height reflects the space above it. Two parts,
+    // verified together in the iOS Simulator:
+    //   1. Publish --vvh = visualViewport.height so <body> (height:
+    //      var(--vvh, 100dvh) in dojo.css) shrinks to the visible band and
+    //      the flex column keeps #top-bar / #history / composer inside it.
+    //   2. iOS still reveal-scrolls the whole document to lift the focused
+    //      composer above the keyboard, which drags #top-bar off the top.
+    //      Snap the page back to 0 — it never legitimately scrolls (html/body
+    //      overflow:hidden, #history is the only scroller, and element scroll
+    //      events don't reach window), so this only ever undoes iOS's shove.
+    // Chrome Android already gets a real resize from interactive-widget=
+    // resizes-content in the meta. No visualViewport (older engines) — the
+    // CSS 100dvh fallback stands. Technique: github.com/mattpilott/ios-chat.
+    var vv = window.visualViewport;
+    if (vv) {
+        var publishViewportHeight = function () {
+            if (vv.scale > 1) return; // ignore pinch-zoom (kept for a11y, see dojo.css)
+            document.documentElement.style.setProperty('--vvh', vv.height + 'px');
+        };
+        vv.addEventListener('resize', publishViewportHeight);
+        publishViewportHeight();
+
+        window.addEventListener('scroll', function () {
+            if (vv.scale > 1) return; // don't fight a pinch-zoom pan
+            if (window.scrollX || window.scrollY) window.scrollTo(0, 0);
+        }, { passive: true });
+    }
+
     fieldEl.value = sessionStorage.getItem(DRAFT_KEY) || ''; // restore draft lost on reload (composer disabled until session resolves)
     updateCharRemaining();
     establishSession();
