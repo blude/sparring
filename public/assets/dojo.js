@@ -417,6 +417,73 @@ window.SparringDojoOutcome = {
         return 'sparring-eval-shown-' + id;
     }
 
+    // SA-01-8: when the turn limit is hit we don't drop the visitor straight
+    // into the feedback dialog — an inline block in #history offers a choice
+    // first: keep going (lift the ceiling, server-side) or go to feedback.
+    // The deliberate "Finish" button (see newSessionBtn) is unaffected — it
+    // still goes straight to showEvalDialog.
+    var endChoiceEl = null; // the one inline end-of-session choice block, if shown
+
+    function showTurnLimitChoice() {
+        if (endChoiceEl) return; // already shown — don't stack a second one
+        setHistoryStatus(null); // drop the "…reached its limit" status line — this block carries that copy itself
+
+        endChoiceEl = document.createElement('div');
+        endChoiceEl.className = 'turn turn--endchoice';
+        endChoiceEl.setAttribute('role', 'group');
+
+        var copyEl = document.createElement('p');
+        copyEl.className = 'endchoice-copy';
+        copyEl.textContent = window.STRINGS.dojo.sessionComplete;
+
+        var actionsEl = document.createElement('div');
+        actionsEl.className = 'endchoice-actions';
+        var extendBtn = document.createElement('button');
+        extendBtn.type = 'button';
+        extendBtn.className = 'endchoice-extend';
+        extendBtn.textContent = window.STRINGS.dojo.turnLimitExtend;
+        var feedbackBtn = document.createElement('button');
+        feedbackBtn.type = 'button';
+        feedbackBtn.className = 'endchoice-feedback';
+        feedbackBtn.textContent = window.STRINGS.dojo.turnLimitFeedback;
+        actionsEl.appendChild(extendBtn);
+        actionsEl.appendChild(feedbackBtn);
+
+        endChoiceEl.appendChild(copyEl);
+        endChoiceEl.appendChild(actionsEl);
+        historyEl.appendChild(endChoiceEl);
+        historyEl.scrollTop = historyEl.scrollHeight;
+
+        function removeBlock() {
+            if (endChoiceEl) { endChoiceEl.remove(); endChoiceEl = null; }
+        }
+
+        feedbackBtn.addEventListener('click', function () {
+            removeBlock();
+            showEvalDialog(sessionId);
+        });
+
+        extendBtn.addEventListener('click', function () {
+            extendBtn.disabled = true;
+            feedbackBtn.disabled = true;
+            fetch('/api/extend-session', {
+                method: 'POST',
+                body: JSON.stringify({ sessionId: sessionId }),
+            })
+                .then(function (res) { return res.ok ? res.json() : Promise.reject(); })
+                .then(function (data) {
+                    removeBlock();
+                    applySessionState('open', data.turnsRemaining); // re-enables the composer
+                    window.SparringSfx.play('parry');
+                })
+                .catch(function () {
+                    extendBtn.disabled = false;
+                    feedbackBtn.disabled = false;
+                    setHistoryStatus(window.STRINGS.dojo.outcomeGenerationFailed, false);
+                });
+        });
+    }
+
     function showEvalDialog(id) {
         if (!evalDialogEl) {
             window.location.href = '/'; // defensive only — the markup should always be there
@@ -744,7 +811,7 @@ window.SparringDojoOutcome = {
                 }
                 if (data.sessionState === 'complete') {
                     window.SparringSfx.playSequence('sessionEnd');
-                    showEvalDialog(sessionId); // finished conversation stays visible underneath
+                    showTurnLimitChoice(); // SA-01-8: inline extend-or-feedback, not the dialog straight away
                 } else {
                     setComposerEnabled(true);
                     window.SparringSfx.play('parry');
@@ -755,7 +822,7 @@ window.SparringDojoOutcome = {
                 clearOptimisticTurn();
                 applySessionState('complete');
                 window.SparringSfx.playSequence('sessionEnd');
-                showEvalDialog(sessionId);
+                showTurnLimitChoice(); // SA-01-8: inline extend-or-feedback, not the dialog straight away
                 break;
 
             // Resolved moderation gate: reject-and-edit, session stays open. Every

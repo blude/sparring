@@ -240,6 +240,31 @@ main {
     animation: shimmer 1.6s linear infinite;
 }
 
+/* SA-01-8: inline extend-or-feedback block shown at the turn limit instead
+   of the feedback dialog. Not a speech bubble (same reasoning as
+   .turn--status above); full width, its own copy line plus a two-button row.
+   Buttons borrow the eval/confirm dialog's button language. */
+#history .turn--endchoice {
+    align-self: stretch;
+    background: none;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+#history .endchoice-copy { margin: 0; color: #a33; }
+#history .endchoice-actions { display: flex; gap: 0.5rem; }
+#history .endchoice-actions button {
+    flex: 1;
+    padding: 0.65rem;
+    font: inherit;
+    border: none;
+    border-radius: 0.5rem;
+}
+#history .endchoice-extend { background: var(--accent); color: #fff; }
+#history .endchoice-feedback { background: #333; color: #f2f2f2; }
+#history .endchoice-actions button:disabled { opacity: 0.5; }
+
 @keyframes shimmer {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }

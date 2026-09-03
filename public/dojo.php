@@ -171,6 +171,8 @@ window.STRINGS = {
         outcomeSessionUnknown: <?= json_encode(t('dojo.js.outcomeSessionUnknown')) ?>,
         outcomeGenerationFailed: <?= json_encode(t('dojo.js.outcomeGenerationFailed')) ?>,
         sessionComplete: <?= json_encode(t('dojo.js.sessionComplete')) ?>,
+        turnLimitExtend: <?= json_encode(t('dojo.js.turnLimitExtend')) ?>,
+        turnLimitFeedback: <?= json_encode(t('dojo.js.turnLimitFeedback')) ?>,
         installationUnavailable: <?= json_encode(t('dojo.js.installationUnavailable')) ?>,
         consentFailed: <?= json_encode(t('dojo.js.consentFailed')) ?>,
         thinkingStatuses: <?= json_encode(array_map(fn($i) => t("dojo.js.thinking.$i"), range(0, 6))) ?>,

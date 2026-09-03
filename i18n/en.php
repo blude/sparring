@@ -93,6 +93,8 @@ return [
     'dojo.js.outcomeSessionUnknown' => 'This session is no longer available — reload to start a new one.',
     'dojo.js.outcomeGenerationFailed' => 'The installation cannot respond right now — try again.',
     'dojo.js.sessionComplete' => 'This session has reached its limit — thanks for sparring.',
+    'dojo.js.turnLimitExtend' => 'Extend session',
+    'dojo.js.turnLimitFeedback' => 'Send feedback',
     'dojo.js.installationUnavailable' => 'The installation is not accepting sessions right now — reload to retry.',
     'dojo.js.consentFailed' => 'Could not record that choice — try again.',
     // Cycled while waiting for a response (dojo.js) — walks up the list on

@@ -86,6 +86,8 @@ return [
     'dojo.js.outcomeSessionUnknown' => 'Diese Sitzung ist nicht mehr verfügbar — lade die Seite neu, um eine neue zu starten.',
     'dojo.js.outcomeGenerationFailed' => 'Die Installation kann gerade nicht antworten — versuch es erneut.',
     'dojo.js.sessionComplete' => 'Diese Sitzung hat ihr Limit erreicht — danke fürs Sparring.',
+    'dojo.js.turnLimitExtend' => 'Sitzung verlängern',
+    'dojo.js.turnLimitFeedback' => 'Feedback geben',
     'dojo.js.installationUnavailable' => 'Die Installation nimmt gerade keine Sitzungen an — lade die Seite neu, um es erneut zu versuchen.',
     'dojo.js.consentFailed' => 'Diese Auswahl konnte nicht gespeichert werden — versuch es erneut.',
     'dojo.js.thinking.0' => 'Sparring läuft…',
