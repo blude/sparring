@@ -365,34 +365,47 @@ window.SparringDojoCharProgress = {
     var prevFilled = 0;
 
     // HOT_AT: once this many bars are lit (>=80% of the limit used) the lit
-    // bars pulse (CSS, .hot class below) — the "running out of room" warning.
+    // bars pulse (CSS, .pulsing class) — the "running out of room" warning.
     var HOT_AT = Math.ceil(CHAR_SEGMENTS * 0.8);
 
     function updateCharProgress(animate) {
         var len = fieldEl.value.length;
         var filled = window.SparringDojoCharProgress.fillCount(len, MAX_CHARS, CHAR_SEGMENTS);
-
-        for (var i = 0; i < CHAR_SEGMENTS; i++) {
-            charSegments[i].classList.toggle('filled', i < filled);
-        }
-        charProgressEl.classList.toggle('hot', filled >= HOT_AT);
         charProgressEl.setAttribute('aria-valuenow', String(len));
 
-        // Juice only when real typing lit new bars — never on submit-clear,
-        // draft-restore, or a rejected-submission text restore (all pass
-        // animate=false). One particle burst per newly-lit bar; one shake.
-        if (animate && filled > prevFilled) {
-            for (var j = prevFilled; j < filled; j++) {
-                var r = charSegments[j].getBoundingClientRect();
-                window.SparringParticles.burst(r.left + r.width / 2, r.top + r.height / 2, 'charProgress');
+        // Segment fill / pulse only change when the lit count changes — a
+        // keystroke that doesn't cross a boundary just updates aria + autogrow.
+        if (filled !== prevFilled) {
+            for (var i = 0; i < CHAR_SEGMENTS; i++) {
+                charSegments[i].classList.toggle('filled', i < filled);
+                charSegments[i].classList.remove('pulsing');
             }
-            if (window.isJuicyOn('charProgress')) {
-                charProgressEl.classList.remove('bumping');
-                void charProgressEl.offsetWidth; // restart the animation if retriggered mid-flight
-                charProgressEl.classList.add('bumping');
+            // Re-add .pulsing to every lit bar after one reflow, so a bar lit
+            // after the warning already engaged shares the others' animation
+            // phase instead of starting its own timeline (out-of-sync pulse).
+            if (filled >= HOT_AT) {
+                void charProgressEl.offsetWidth;
+                for (var p = 0; p < filled; p++) {
+                    charSegments[p].classList.add('pulsing');
+                }
             }
+
+            // Juice only when real typing lit new bars — never on submit-clear,
+            // draft-restore, or a rejected-submission text restore (all pass
+            // animate=false). One particle burst per newly-lit bar; one shake.
+            if (animate && filled > prevFilled) {
+                for (var j = prevFilled; j < filled; j++) {
+                    var r = charSegments[j].getBoundingClientRect();
+                    window.SparringParticles.burst(r.left + r.width / 2, r.top + r.height / 2, 'charProgress');
+                }
+                if (window.isJuicyOn('charProgress')) {
+                    charProgressEl.classList.remove('bumping');
+                    void charProgressEl.offsetWidth; // restart the shake if retriggered mid-flight
+                    charProgressEl.classList.add('bumping');
+                }
+            }
+            prevFilled = filled;
         }
-        prevFilled = filled;
 
         autoGrowField();
     }

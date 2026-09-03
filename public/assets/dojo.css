@@ -766,14 +766,15 @@ main {
 }
 #char-progress.bumping { animation: char-progress-bump 200ms ease; }
 
-/* >=80% used: lit segments pulse. On the segments, not #char-progress, so
-   it never collides with the container's one-shot .bumping shake. All
-   .filled segments get the class in the same frame, so they pulse in sync. */
+/* >=80% used: lit segments pulse (.pulsing added by dojo.js). On the
+   segments, not #char-progress, so it never collides with the container's
+   one-shot .bumping shake. dojo.js re-adds the class to every lit segment
+   on each change so they share one animation phase. */
 @keyframes char-progress-pulse {
     0%, 100% { opacity: 1; }
     50%      { opacity: 0.4; }
 }
-#char-progress.hot span.filled { animation: char-progress-pulse 900ms ease-in-out infinite; }
+#char-progress span.pulsing { animation: char-progress-pulse 900ms ease-in-out infinite; }
 
 #submit {
     flex-shrink: 0;
@@ -941,7 +942,7 @@ main {
     #submit.punching,
     #composer.wiggling,
     #char-progress.bumping,
-    #char-progress.hot span.filled {
+    #char-progress span.pulsing {
         animation: none;
     }
     #char-progress span {
