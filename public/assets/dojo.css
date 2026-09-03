@@ -75,13 +75,25 @@ main {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    position: relative;
+    /* Lifted out of flow so #history's scroll box runs full height *behind*
+       the bar — messages slide under it as you scroll up, rather than being
+       clipped at a hard edge below it. Offsets match <main>'s padding so the
+       bar sits exactly where it did as a flow child. */
+    position: absolute;
+    top: max(0.75rem, env(safe-area-inset-top));
+    left: max(0.75rem, env(safe-area-inset-left));
+    right: max(0.75rem, env(safe-area-inset-right));
+    z-index: 2;
     background: var(--accent); /* sparring brand red — same source as the wordmark */
     /* Rounded red card inset from the edges — <main>'s padding already clears
        the notch/safe-areas, so plain padding here. */
-    padding: 0.75rem;
+    padding: 0.625rem 0.75rem;
     border-radius: 0.875rem; /* 14px */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+    /* Feathered, mostly-downward cast — same layered stack as #composer-row,
+       so the two bars that frame the history share one shadow language. */
+    box-shadow: 0 27px 8px rgba(0, 0, 0, 0), 0 17px 7px rgba(0, 0, 0, 0.02),
+                0 10px 6px rgba(0, 0, 0, 0.04), 0 4px 4px rgba(0, 0, 0, 0.06),
+                0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 #top-bar-leading {
@@ -222,7 +234,17 @@ main {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    padding-top: 1rem; /* subtle padding relative to the top bar */
+    /* #top-bar is position:absolute now, so #history spans from <main>'s top.
+       padding-top clears the bar; the mask fades content out as it slides
+       behind the bar instead of a hard slice at the bar's lower edge.
+       ponytail: 4.75rem is a fixed guess at bar height (~2 text lines + its
+       0.75rem padding, plus breathing room). If the alias/title ever wrap to
+       more lines, have dojo.js publish --topbar-h from #top-bar.offsetHeight
+       (same place it sets --vvh) and swap both values for
+       calc(var(--topbar-h) + 0.75rem). */
+    padding-top: 4.75rem;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 4.75rem);
+            mask-image: linear-gradient(to bottom, transparent 0, #000 4.75rem);
     padding-bottom: 1rem; /* subtle space for avoiding overlap with the composer scrim */
 }
 
