@@ -738,7 +738,42 @@ main {
 
 #composer-footer { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.875rem; color: #666; }
 #composer-disclaimer { margin: 0; }
-#char-remaining { flex-shrink: 0; }
+/* Segmented char-progress bar (replaces the old remaining-char number).
+   ~80x15px, 10 segments built by dojo.js. Segments fill red (matching the
+   particle burst palette in particles.js); the lit segments pulse once
+   >=80% of the limit is used — the "running out of room" warning. */
+#char-progress {
+    flex-shrink: 0;
+    align-self: center;
+    display: flex;
+    gap: 2px;
+    width: 80px;
+    height: 15px;
+}
+#char-progress span {
+    flex: 1 1 0;
+    background: #d9d9d9;               /* light gray — empty */
+    border-radius: 1px;
+    transition: background-color 120ms ease;
+}
+#char-progress span.filled { background: #d32f2f; }       /* red */
+
+@keyframes char-progress-bump {
+    0%, 100% { transform: translateX(0); }
+    25%  { transform: translateX(-2px); }
+    50%  { transform: translateX(2px); }
+    75%  { transform: translateX(-1px); }
+}
+#char-progress.bumping { animation: char-progress-bump 200ms ease; }
+
+/* >=80% used: lit segments pulse. On the segments, not #char-progress, so
+   it never collides with the container's one-shot .bumping shake. All
+   .filled segments get the class in the same frame, so they pulse in sync. */
+@keyframes char-progress-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+}
+#char-progress.hot span.filled { animation: char-progress-pulse 900ms ease-in-out infinite; }
 
 #submit {
     flex-shrink: 0;
@@ -904,8 +939,13 @@ main {
 
 @media (prefers-reduced-motion: reduce) {
     #submit.punching,
-    #composer.wiggling {
+    #composer.wiggling,
+    #char-progress.bumping,
+    #char-progress.hot span.filled {
         animation: none;
+    }
+    #char-progress span {
+        transition: none; /* color still changes, just not eased */
     }
     #composer-row {
         transition: none;

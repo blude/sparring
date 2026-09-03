@@ -1,11 +1,15 @@
 'use strict';
 
 /**
- * Smoke check: window.SparringDojoOutcome.resolveOutcome()'s pure
- * status/moderationReason -> {message, restoreText, enableComposer, wiggle,
- * sound} decision table (public/assets/dojo.js) — the message-selection
- * logic behind handleContributionResult's switch, minus 'ok'/'turn-limit'
- * (those don't select from a table, see the function's own doc comment).
+ * Smoke check: two pure helpers dojo.js assigns to `window` above its main
+ * IIFE (public/assets/dojo.js):
+ *   - SparringDojoOutcome.resolveOutcome()'s status/moderationReason ->
+ *     {message, restoreText, enableComposer, wiggle, sound} decision table —
+ *     the message-selection logic behind handleContributionResult's switch,
+ *     minus 'ok'/'turn-limit' (those don't select from a table, see the
+ *     function's own doc comment).
+ *   - SparringDojoCharProgress.fillCount() — how many composer progress-bar
+ *     segments are lit for a given field length / limit.
  * Doesn't exercise the rest of dojo.js — that's all DOM/fetch orchestration,
  * out of scope for a Node script, same boundary smoke_sfx.js draws.
  * Run: node tests/smoke_dojo.js
@@ -39,6 +43,7 @@ const iifeStart = source.indexOf('(function () {');
 assert(iifeStart > 0, 'dojo.js main IIFE marker not found — did its shape change?');
 eval(source.slice(0, iifeStart));
 const resolveOutcome = window.SparringDojoOutcome.resolveOutcome;
+const fillCount = window.SparringDojoCharProgress.fillCount;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,5 +96,18 @@ for (const outcome of [genericFlag, personalInfo, targetsReal, blockedTerm]) {
     assert.strictEqual(outcome.wiggle, true);
     assert.strictEqual(outcome.sound, 'fumble');
 }
+
+/*
+|--------------------------------------------------------------------------
+| char-progress: length -> lit-segment count (ceil, clamped)
+|--------------------------------------------------------------------------
+*/
+
+assert.strictEqual(fillCount(0, 600, 10), 0, 'empty -> 0 bars');
+assert.strictEqual(fillCount(1, 600, 10), 1, 'first char -> bar 1 (ceil)');
+assert.strictEqual(fillCount(60, 600, 10), 1, '60 chars -> bar 1');
+assert.strictEqual(fillCount(61, 600, 10), 2, '61 chars -> bar 2');
+assert.strictEqual(fillCount(600, 600, 10), 10, 'at limit -> all 10');
+assert.strictEqual(fillCount(999, 600, 10), 10, 'over limit -> clamped to 10');
 
 console.log('smoke_dojo: ok');

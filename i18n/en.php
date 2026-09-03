@@ -59,6 +59,7 @@ return [
     'dojo.composer.placeholder' => "What's on your mind?",
     'dojo.composer.sendAriaLabel' => 'Send',
     'dojo.composer.disclaimer' => 'Sparring is AI and can make mistakes',
+    'dojo.composer.charProgressAria' => 'Characters used',
     'dojo.titleCard.line1' => 'READY?',
     'dojo.titleCard.line2' => 'GET SET',
     'dojo.titleCard.line3' => 'SPAR!',

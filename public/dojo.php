@@ -147,7 +147,11 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
     </div>
     <div id="composer-footer">
       <p id="composer-disclaimer"><?= t('dojo.composer.disclaimer') ?></p>
-      <div id="char-remaining"></div>
+      <?php /* Segmented fill bar replacing the old remaining-char number:
+        the 10 segments and aria-valuemax/valuenow are set by dojo.js. The
+        count is intentionally not shown visually — screen readers get it
+        via the progressbar role. */ ?>
+      <div id="char-progress" role="progressbar" aria-valuemin="0" aria-label="<?= t('dojo.composer.charProgressAria') ?>"></div>
     </div>
   </form>
 </main>
@@ -187,6 +191,7 @@ window.JUICY = {
     punch: <?= JUICY_PUNCH ? 'true' : 'false' ?>,
     titleCard: <?= JUICY_TITLE_CARD ? 'true' : 'false' ?>,
     wiggle: <?= JUICY_WIGGLE ? 'true' : 'false' ?>,
+    charProgress: <?= JUICY_CHAR_PROGRESS ? 'true' : 'false' ?>,
     sound: <?= JUICY_SOUND ? 'true' : 'false' ?>
 };
 </script>

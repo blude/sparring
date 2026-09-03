@@ -140,6 +140,7 @@ const JUICY_ENABLED = true;
 const JUICY_PUNCH = true;
 const JUICY_TITLE_CARD = true;
 const JUICY_WIGGLE = true;
+const JUICY_CHAR_PROGRESS = true; // composer bar: per-segment particle burst + shake
 const JUICY_SOUND = true;
 const JUICY_DISPLAY_ENTRANCE = true;
 

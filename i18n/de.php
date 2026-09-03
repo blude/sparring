@@ -52,6 +52,7 @@ return [
     'dojo.composer.placeholder' => 'Was beschäftigt dich?',
     'dojo.composer.sendAriaLabel' => 'Senden',
     'dojo.composer.disclaimer' => 'Sparring ist KI und kann Fehler machen',
+    'dojo.composer.charProgressAria' => 'Verwendete Zeichen',
     'dojo.titleCard.line1' => 'BEREIT?',
     'dojo.titleCard.line2' => 'FERTIG',
     'dojo.titleCard.line3' => 'SPARR!',

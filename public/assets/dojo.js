@@ -44,10 +44,26 @@ window.SparringDojoOutcome = {
     },
 };
 
+/**
+ * Pure helper for the composer's segmented char-progress bar: how many of
+ * `segments` bars are lit for a field of `len` chars against a `max`-char
+ * limit. ceil so the very first typed char lights bar 1 (the bar feels
+ * responsive), Math.min so an over-limit paste can't light more bars than
+ * exist. No DOM — unit-tested in tests/smoke_dojo.js.
+ */
+window.SparringDojoCharProgress = {
+    fillCount: function (len, max, segments) {
+        if (len <= 0) return 0;
+        return Math.min(segments, Math.ceil((len / max) * segments));
+    },
+};
+
 (function () {
     'use strict';
 
     var MAX_CHARS = window.CONTRIBUTION_MAX_CHARS || 600;
+    // Composer char-progress bar: MAX_CHARS mapped onto this many segments.
+    var CHAR_SEGMENTS = 10;
     var WAIT_MS = window.SE01_WAIT_BOUND_MS || 25000;
     var DEBUG = new URLSearchParams(window.location.search).get('debug') === '1';
     // Draft persistence: sessionStorage only (temporary, tab-scoped) so an
@@ -60,7 +76,7 @@ window.SparringDojoOutcome = {
     var composerEl = document.getElementById('composer');
     var fieldEl = document.getElementById('contribution');
     var submitEl = document.getElementById('submit');
-    var charRemainingEl = document.getElementById('char-remaining');
+    var charProgressEl = document.getElementById('char-progress');
     var sessionTitleEl = document.getElementById('session-title');
     var avatarBtn = document.getElementById('avatar-btn');
     var avatarAliasEl = document.getElementById('avatar-alias');
@@ -335,8 +351,49 @@ window.SparringDojoOutcome = {
         composerEl.classList.add('wiggling');
     }
 
-    function updateCharRemaining() {
-        charRemainingEl.textContent = String(MAX_CHARS - fieldEl.value.length);
+    // Build the progress-bar segments once (script is `defer`, so #char-progress
+    // is already parsed). aria-valuemax tracks MAX_CHARS so the one config knob
+    // stays the single source. prevFilled lets updateCharProgress tell a real
+    // keystroke that lit a new bar (juice) from a reset/restore (no juice).
+    var charSegments = [];
+    for (var s = 0; s < CHAR_SEGMENTS; s++) {
+        var segEl = document.createElement('span');
+        charProgressEl.appendChild(segEl);
+        charSegments.push(segEl);
+    }
+    charProgressEl.setAttribute('aria-valuemax', String(MAX_CHARS));
+    var prevFilled = 0;
+
+    // HOT_AT: once this many bars are lit (>=80% of the limit used) the lit
+    // bars pulse (CSS, .hot class below) — the "running out of room" warning.
+    var HOT_AT = Math.ceil(CHAR_SEGMENTS * 0.8);
+
+    function updateCharProgress(animate) {
+        var len = fieldEl.value.length;
+        var filled = window.SparringDojoCharProgress.fillCount(len, MAX_CHARS, CHAR_SEGMENTS);
+
+        for (var i = 0; i < CHAR_SEGMENTS; i++) {
+            charSegments[i].classList.toggle('filled', i < filled);
+        }
+        charProgressEl.classList.toggle('hot', filled >= HOT_AT);
+        charProgressEl.setAttribute('aria-valuenow', String(len));
+
+        // Juice only when real typing lit new bars — never on submit-clear,
+        // draft-restore, or a rejected-submission text restore (all pass
+        // animate=false). One particle burst per newly-lit bar; one shake.
+        if (animate && filled > prevFilled) {
+            for (var j = prevFilled; j < filled; j++) {
+                var r = charSegments[j].getBoundingClientRect();
+                window.SparringParticles.burst(r.left + r.width / 2, r.top + r.height / 2, 'charProgress');
+            }
+            if (window.isJuicyOn('charProgress')) {
+                charProgressEl.classList.remove('bumping');
+                void charProgressEl.offsetWidth; // restart the animation if retriggered mid-flight
+                charProgressEl.classList.add('bumping');
+            }
+        }
+        prevFilled = filled;
+
         autoGrowField();
     }
 
@@ -733,7 +790,7 @@ window.SparringDojoOutcome = {
         if (pendingReplyQuote) replyQuoteEl.hidden = true;
         fieldEl.value = ''; // cached in `text`/submittedText below, restored on failure
         sessionStorage.removeItem(DRAFT_KEY); // sent — draft below restores it again on failure
-        updateCharRemaining();
+        updateCharProgress(false); // field just cleared — sync the bar, no juice
         setHistoryStatus(nextThinkingStatus(), true); // in-progress state, shown synchronously (QR-01: within 300ms)
 
         var controller = new AbortController();
@@ -825,11 +882,11 @@ window.SparringDojoOutcome = {
             }
         }
         if (fieldEl.value) sessionStorage.setItem(DRAFT_KEY, fieldEl.value); // re-persist text restored on failure branches above
-        updateCharRemaining();
+        updateCharProgress(false); // text restored after a rejected submit — no celebratory burst
     }
 
     fieldEl.addEventListener('input', function () {
-        updateCharRemaining();
+        updateCharProgress(true);
         submitEl.disabled = fieldEl.disabled || fieldEl.value.trim() === '';
         sessionStorage.setItem(DRAFT_KEY, fieldEl.value);
     });
@@ -896,6 +953,6 @@ window.SparringDojoOutcome = {
     }
 
     fieldEl.value = sessionStorage.getItem(DRAFT_KEY) || ''; // restore draft lost on reload (composer disabled until session resolves)
-    updateCharRemaining();
+    updateCharProgress(false); // initial draft length — fill the bar, don't fire 10 bursts on load
     establishSession();
 })();
