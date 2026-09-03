@@ -174,7 +174,7 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 | Remaining turns | integer | How many contributions remain in the session | <<E-01.3,E-01.3 turnsRemaining>> | Always, once the session is open
 | Character allowance | integer | Characters remaining for the current contribution | <<TF-04,TF-04 Render the exchange history>> | While the field holds content
 | Status message | string | Plain statement of a limit reached or a failure | <<E-01.6,E-01.6 statusMessage>> | When set
-| Visitor alias | string | The generated nickname, shown in a popover on request | <<TF-05,TF-05 Derive visitor identity>> | Once consent is recorded
+| Visitor alias | string | The generated nickname, shown in the header directly above the session title in smaller, dimmer type | <<TF-05,TF-05 Derive visitor identity>> | Once consent is recorded
 | Visitor avatar | string (emoji) | A small avatar in the header, always visible alongside the alias | <<TF-05,TF-05 Derive visitor identity>> | Once consent is recorded
 | Evaluation prompt | form | A short rating question per configured topic (fixed scale, custom label per point) plus one open-feedback field, all optional | <<TF-07,TF-07 Present the session evaluation>> | Once, at the moment a session ends, on the first ending encountered
 | Turn-limit choice | block | A statement that the turn limit is reached, with an action to extend the session and an action to go to feedback | <<TF-08,TF-08 Present the turn-limit choice>> | When xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] reports the session complete at its turn limit, until one action is taken
@@ -188,7 +188,6 @@ A single scrolling surface. The exchange history occupies the upper region, the 
 | Record consent decisions | Three checkboxes, none preselected — agreement to take part, retention, projection — plus one Confirm action, enabled only once the participation checkbox is checked | <<UC-01,UC-01 Begin a session>> | Before the session is open
 | Submit contribution | Button press, and keyboard submit on devices with a physical keyboard | <<UC-02,UC-02 Contribute a turn>> | Enabled only when the field holds content, the session is open, and no submission is outstanding
 | Retry | Button press | <<UC-01,UC-01 Begin a session>>, <<UC-02,UC-02 Contribute a turn>> | Only alongside a failure status message
-| View own identity | Press the avatar to open a popover showing the alias; dismissed by pressing elsewhere, pressing the avatar again, or Escape | <<UC-01,UC-01 Begin a session>>, <<UC-03,UC-03 Resume an interrupted session>> | Once consent is recorded
 | Start a new session | Button press, with a confirmation step | <<UC-04,UC-04 Start a new session deliberately>> | Always available once a session exists
 | Switch interface language | Press EN or DE; the choice persists across the session and future visits | — | Always available
 | Answer or skip the evaluation prompt | Fill in any subset of the rating questions and the feedback field, then press Send; or press Skip regardless of what's filled in. Either replaces the form with a confirmation message — Skip's is a plain thanks, Send's confirms feedback was received | <<UC-02,UC-02 Contribute a turn>>, <<UC-04,UC-04 Start a new session deliberately>> | While the evaluation prompt is shown

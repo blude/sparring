@@ -30,7 +30,6 @@ return [
     // --- dojo.php (SE-01) + dojo.js ---
     'dojo.title' => 'Dojo — Sparring',
     'dojo.ogDescription' => 'Streite live mit einem KI-Sparringpartner über Digital Design.',
-    'dojo.avatarPopoverPrefix' => 'Du bist ',
     'dojo.untitled' => 'Unbenannt',
     'dojo.endSession' => 'Sitzung beenden',
     'dojo.finish' => 'Aufhören',

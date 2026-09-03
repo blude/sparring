@@ -37,7 +37,6 @@ return [
     // --- dojo.php (SE-01) + dojo.js ---
     'dojo.title' => 'Dojo — Sparring',
     'dojo.ogDescription' => 'Argue with an AI sparring partner about Digital Design, live.',
-    'dojo.avatarPopoverPrefix' => 'You are ',
     'dojo.untitled' => 'Untitled',
     'dojo.endSession' => 'End session',
     'dojo.finish' => 'Finish',

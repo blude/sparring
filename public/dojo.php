@@ -22,9 +22,11 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
 <main>
   <header id="top-bar">
     <div id="top-bar-leading">
-      <button id="avatar-btn" type="button" aria-haspopup="true" aria-expanded="false" hidden></button>
-      <div id="avatar-popover" hidden role="dialog"><?= t('dojo.avatarPopoverPrefix') ?><strong id="avatar-alias"></strong></div>
-      <div id="session-title"><?= t('dojo.untitled') ?></div>
+      <button id="avatar-btn" type="button" hidden></button>
+      <div id="session-title-group">
+        <div id="avatar-alias" hidden></div>
+        <div id="session-title"><?= t('dojo.untitled') ?></div>
+      </div>
     </div>
     <div id="top-bar-trailing">
       <button id="new-session-btn" type="button"><span class="icon" aria-hidden="true"></span><?= t('dojo.finish') ?></button>

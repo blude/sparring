@@ -63,7 +63,6 @@ window.SparringDojoOutcome = {
     var charRemainingEl = document.getElementById('char-remaining');
     var sessionTitleEl = document.getElementById('session-title');
     var avatarBtn = document.getElementById('avatar-btn');
-    var avatarPopover = document.getElementById('avatar-popover');
     var avatarAliasEl = document.getElementById('avatar-alias');
     var newSessionBtn = document.getElementById('new-session-btn');
     var titleCardEl = document.getElementById('title-card');
@@ -103,29 +102,8 @@ window.SparringDojoOutcome = {
         avatarBtn.textContent = window.SparringIdentity.avatar(id);
         avatarAliasEl.textContent = window.SparringIdentity.alias(id);
         avatarBtn.hidden = false;
+        avatarAliasEl.hidden = false; // sits above #session-title, always visible once consent is recorded
     }
-
-    function closePopover() {
-        avatarPopover.hidden = true;
-        avatarBtn.setAttribute('aria-expanded', 'false');
-    }
-
-    avatarBtn.addEventListener('click', function (event) {
-        event.stopPropagation();
-        var opening = avatarPopover.hidden;
-        avatarPopover.hidden = !opening;
-        avatarBtn.setAttribute('aria-expanded', String(opening));
-    });
-
-    document.addEventListener('click', function (event) {
-        if (!avatarPopover.hidden && !avatarPopover.contains(event.target) && event.target !== avatarBtn) {
-            closePopover();
-        }
-    });
-
-    document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') closePopover();
-    });
 
     /*
     |--------------------------------------------------------------------------
