@@ -761,12 +761,13 @@ main {
 #char-progress span.filled { background: #d32f2f; }       /* red */
 
 @keyframes char-progress-bump {
-    0%, 100% { transform: skewX(-15deg) translateX(0) translateY(0); }
-    25%  { transform: skewX(-15deg) translateX(-2px) translateY(1px); }
-    50%  { transform: skewX(-15deg) translateX(2px) translateY(-1px); }
-    75%  { transform: skewX(-15deg) translateX(-1px) translateY(1px); }
+    0%, 100% { transform: skewX(-15deg) translateX(0) translateY(0) scale(1); }
+    20%  { transform: skewX(-15deg) translateX(-5px) translateY(2px) scale(1.15); }
+    40%  { transform: skewX(-15deg) translateX(5px) translateY(-2px) scale(1.1); }
+    60%  { transform: skewX(-15deg) translateX(-3px) translateY(2px) scale(1.05); }
+    80%  { transform: skewX(-15deg) translateX(2px) translateY(-1px) scale(1.02); }
 }
-#char-progress.bumping { animation: char-progress-bump 200ms ease; }
+#char-progress.bumping { animation: char-progress-bump 280ms ease; }
 
 /* >=80% used: lit segments pulse (.pulsing added by dojo.js). On the
    segments, not #char-progress, so it never collides with the container's
