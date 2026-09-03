@@ -50,6 +50,7 @@
 <li><a href="#_tf_06_import_pilot_transcripts">4.6. TF-06 Import pilot transcripts</a></li>
 <li><a href="#_tf_07_refine_a_session_title">4.7. TF-07 Refine a session title</a></li>
 <li><a href="#_tf_08_record_a_session_evaluation">4.8. TF-08 Record a session evaluation</a></li>
+<li><a href="#_tf_09_extend_a_sessions_turn_allowance">4.9. TF-09 Extend a session&#8217;s turn allowance</a></li>
 </ul>
 </li>
 <li><a href="#_technical_interfaces_inbound">5. Technical interfaces (inbound)</a>
@@ -61,6 +62,7 @@
 <li><a href="#_ti_05_import_pilot_material">5.5. TI-05 Import pilot material</a></li>
 <li><a href="#_ti_06_refine_a_session_title">5.6. TI-06 Refine a session title</a></li>
 <li><a href="#_ti_07_submit_a_session_evaluation">5.7. TI-07 Submit a session evaluation</a></li>
+<li><a href="#_ti_08_extend_a_session">5.8. TI-08 Extend a session</a></li>
 </ul>
 </li>
 <li><a href="#_technical_interfaces_outbound">6. Technical interfaces (outbound)</a>
@@ -311,7 +313,7 @@ suitability is the last cheap check before one is made.
 <p><strong><a id="FS-01-2"></a>FS-01-2</strong> <em>(Entity-access)</em> Read the session from <a href="#E-01">E-01 Session</a> by its identifier (<a href="#E-01.1">E-01.1 sessionId</a>). If absent or expired, return a session-unknown condition and stop.</p>
 </li>
 <li>
-<p><strong><a id="FS-01-3"></a>FS-01-3</strong> <em>(Data-operation)</em> Compare <a href="#E-01.8">E-01.8 turnCount</a> (turnCount) against the session turn allowance. If the allowance is exhausted, return a turn-limit condition and stop.</p>
+<p><strong><a id="FS-01-3"></a>FS-01-3</strong> <em>(Data-operation)</em> Compare <a href="#E-01.8">E-01.8 turnCount</a> (turnCount) against the session&#8217;s effective turn allowance — the base <code>TURN_ALLOWANCE</code> plus <a href="#E-01.13">E-01.13 bonusTurns</a> (bonusTurns), which <a href="#TF-09">TF-09 Extend a session&#8217;s turn allowance</a> raises. If the allowance is exhausted, return a turn-limit condition and stop.</p>
 </li>
 <li>
 <p><strong><a id="FS-01-4"></a>FS-01-4</strong> <em>(Data-operation)</em> Trim the contribution and check it against the length bound. If it is empty or over-length, return a rejected condition and stop. No provider call has been made at this point, which matters because this is the cheapest rejection path and the one most likely to fire.</p>
@@ -538,6 +540,39 @@ A second distinction the instruction must also get right, found in testing: stat
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_tf_09_extend_a_sessions_turn_allowance"><a class="anchor" href="#_tf_09_extend_a_sessions_turn_allowance"></a>4.9. <a id="TF-09"></a>TF-09 Extend a session&#8217;s turn allowance</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Stepwise<br>
+<em>Achieves:</em> <a href="#G-02">G-02 Keep a session usable across interruption</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FS-09-1"></a>FS-09-1</strong> <em>(Entity-access)</em> Resolve the session from <a href="#E-01">E-01 Session</a>. If it is unknown or expired, stop without writing anything.</p>
+</li>
+<li>
+<p><strong><a id="FS-09-2"></a>FS-09-2</strong> <em>(Entity-access)</em> Add one base <code>TURN_ALLOWANCE</code> to <a href="#E-01.13">E-01.13 bonusTurns</a> (bonusTurns) and refresh <a href="#E-01.9">E-01.9 lastActiveAt</a> (lastActiveAt) in the same write. The effective ceiling <a href="#FS-01-3">FS-01-3</a> checks rises by that amount; <a href="#E-01.8">E-01.8 turnCount</a> is untouched, so prior exchanges keep their positions.</p>
+</li>
+<li>
+<p><strong><a id="FS-09-3"></a>FS-09-3</strong> <em>(Data-operation)</em> Return the reopened session state and the new remaining count.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>No request-rate limit or generation cost attaches to this function — it is one bounded write. It is deliberately not capped per session: what it lifts is a ceiling on turns that each already cost a rate- and size-limited provider call (<a href="#TF-01">TF-01 Process a visitor turn</a>), and a visitor wanting more turns can already start a fresh session.</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative flows</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a id="FA-09-1"></a>FA-09-1</strong> <em>(extends <a href="#FS-09-1">FS-09-1</a>)</em> The session identifier is unknown or expired. Nothing is written. <em>Outcome:</em> Terminate.</p>
+</li>
+</ul>
+</div>
 <hr>
 </div>
 </div>
@@ -711,6 +746,27 @@ Unlike the earlier design this superseded, the response&#8217;s condition list i
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_ti_08_extend_a_session"><a class="anchor" href="#_ti_08_extend_a_session"></a>5.8. <a id="TI-08"></a>TI-08 Extend a session</h3>
+<div class="paragraph">
+<p><em>Call type:</em> Synchronous<br>
+<em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a> (<a href="L3-SE-01-input-client.html#TO-06">TO-06 Extend a session</a>)<br>
+<em>Input:</em> Session identifier (string, required).<br>
+<em>Output:</em> Session state (enum), remaining turn allowance (integer).<br>
+<em>Action:</em> Calls <a href="#TF-09">TF-09 Extend a session&#8217;s turn allowance</a> and returns its result. Returns immediately — no provider call.<br>
+<em>Error cases:</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Session unknown or expired.</p>
+</li>
+<li>
+<p>Malformed request.</p>
+</li>
+</ul>
+</div>
 <hr>
 </div>
 </div>
@@ -836,7 +892,7 @@ Call behaviour is specified on the calling function steps (<a href="#TF-01">TF-0
 <td class="tableblock halign-left valign-top"><p class="tableblock">turnCount</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exchanges completed. Compared against the turn allowance.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exchanges completed. Compared against the effective turn allowance — the base <code>TURN_ALLOWANCE</code> plus <a href="#E-01.13">E-01.13 bonusTurns</a> (bonusTurns).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.9"></a>E-01.9</p></td>
@@ -865,6 +921,13 @@ Call behaviour is specified on the calling function steps (<a href="#TF-01">TF-0
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">optional</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Short header title (no fixed length — brevity is a prompt instruction, not an enforced bound), refined once from the first contribution and never recomputed (<a href="#TF-07">TF-07 Refine a session title</a>). Absent until refined.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.13"></a>E-01.13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bonusTurns</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extra turns granted at the limit through <a href="#TI-08">TI-08 Extend a session</a>, added to the base <code>TURN_ALLOWANCE</code> to form the effective ceiling <a href="#E-01.8">E-01.8 turnCount</a> is compared against. Defaults 0; each extension adds one more <code>TURN_ALLOWANCE</code>. Never reduced.</p></td>
 </tr>
 </tbody>
 </table>

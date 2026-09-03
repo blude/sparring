@@ -136,7 +136,7 @@ suitability is the last cheap check before one is made.
 
 - *[[FS-01-1]]FS-01-1* _(Function-call)_ Call <<TF-03,TF-03 Enforce request limits>> with the request origin. If it reports the limit reached, return that condition and stop.
 - *[[FS-01-2]]FS-01-2* _(Entity-access)_ Read the session from <<E-01,E-01 Session>> by its identifier (<<E-01.1,E-01.1 sessionId>>). If absent or expired, return a session-unknown condition and stop.
-- *[[FS-01-3]]FS-01-3* _(Data-operation)_ Compare <<E-01.8,E-01.8 turnCount>> (turnCount) against the session turn allowance. If the allowance is exhausted, return a turn-limit condition and stop.
+- *[[FS-01-3]]FS-01-3* _(Data-operation)_ Compare <<E-01.8,E-01.8 turnCount>> (turnCount) against the session's effective turn allowance — the base `TURN_ALLOWANCE` plus <<E-01.13,E-01.13 bonusTurns>> (bonusTurns), which <<TF-09,TF-09 Extend a session's turn allowance>> raises. If the allowance is exhausted, return a turn-limit condition and stop.
 - *[[FS-01-4]]FS-01-4* _(Data-operation)_ Trim the contribution and check it against the length bound. If it is empty or over-length, return a rejected condition and stop. No provider call has been made at this point, which matters because this is the cheapest rejection path and the one most likely to fire.
 - *[[FS-01-5]]FS-01-5* _(Function-call)_ Call <<TF-02,TF-02 Assess a contribution for projection suitability>> with the contribution. <<TF-02,TF-02 Assess a contribution for projection suitability>> returns a suitability outcome.
 - *[[FS-01-6]]FS-01-6* _(Data-operation)_ If <<TF-02,TF-02 Assess a contribution for projection suitability>> reported the contribution unsuitable, return a content-flagged condition and stop. Nothing is written to <<E-01,E-01 Session>> or <<E-02,E-02 Exchange>>, and no provider call for a response is made — this is the same cheap-rejection reasoning as <<FS-01-4,FS-01-4>>, just one check later. The session itself is not altered; only this turn is rejected.
@@ -233,6 +233,21 @@ _Achieves:_ <<G-07,G-07 Capture optional session feedback without gating>>
 
 - *[[FA-08-1]]FA-08-1* _(extends <<FS-08-3,FS-08-3>>)_ The session identifier is unknown. Nothing is written. _Outcome:_ Terminate.
 
+=== [[TF-09]]TF-09 Extend a session's turn allowance
+
+_Detail level:_ Stepwise +
+_Achieves:_ <<G-02,G-02 Keep a session usable across interruption>>
+
+- *[[FS-09-1]]FS-09-1* _(Entity-access)_ Resolve the session from <<E-01,E-01 Session>>. If it is unknown or expired, stop without writing anything.
+- *[[FS-09-2]]FS-09-2* _(Entity-access)_ Add one base `TURN_ALLOWANCE` to <<E-01.13,E-01.13 bonusTurns>> (bonusTurns) and refresh <<E-01.9,E-01.9 lastActiveAt>> (lastActiveAt) in the same write. The effective ceiling <<FS-01-3,FS-01-3>> checks rises by that amount; <<E-01.8,E-01.8 turnCount>> is untouched, so prior exchanges keep their positions.
+- *[[FS-09-3]]FS-09-3* _(Data-operation)_ Return the reopened session state and the new remaining count.
+
+No request-rate limit or generation cost attaches to this function — it is one bounded write. It is deliberately not capped per session: what it lifts is a ceiling on turns that each already cost a rate- and size-limited provider call (<<TF-01,TF-01 Process a visitor turn>>), and a visitor wanting more turns can already start a fresh session.
+
+*Alternative flows*
+
+- *[[FA-09-1]]FA-09-1* _(extends <<FS-09-1,FS-09-1>>)_ The session identifier is unknown or expired. Nothing is written. _Outcome:_ Terminate.
+
 '''
 
 == Technical interfaces (inbound)
@@ -327,6 +342,18 @@ _Error cases:_
 - Session unknown.
 - Malformed request.
 
+=== [[TI-08]]TI-08 Extend a session
+
+_Call type:_ Synchronous +
+_Calling elements:_ xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] (xref:L3-SE-01-input-client.adoc#TO-06[TO-06 Extend a session]) +
+_Input:_ Session identifier (string, required). +
+_Output:_ Session state (enum), remaining turn allowance (integer). +
+_Action:_ Calls <<TF-09,TF-09 Extend a session's turn allowance>> and returns its result. Returns immediately — no provider call. +
+_Error cases:_
+
+- Session unknown or expired.
+- Malformed request.
+
 '''
 
 == Technical interfaces (outbound)
@@ -370,11 +397,12 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session]
 | [[E-01.5]]E-01.5 | scenario | string | optional | The context line shown with the exchange. Absent until the first exchange exists.
 | [[E-01.6]]E-01.6 | displayable | boolean | required | Whether the session may appear on the projection. Defaults false; set directly from <<E-01.11,E-01.11 projectionConsent>> (projectionConsent) when the consent decision is recorded — not by moderation. Nothing unsuitable can reach <<E-02,E-02 Exchange>> in the first place (<<G-04,G-04 Decide what may be stored, and let the visitor's own>>/xref:L2-system-design-concept.adoc#AP-05[AP-05 Moderation gates storage, not a per-session display]), so there is no separate moderation-driven display flag to maintain. Independent of <<E-01.7,E-01.7 consentGranted>>.
 | [[E-01.7]]E-01.7 | consentGranted | boolean | optional | Whether the participant agreed to retention. Absent until the decision is recorded. Independent of <<E-01.6,E-01.6 displayable>> (xref:L2-system-design-concept.adoc#SQR-06[SQR-06 Public projection is governed separately from retention]).
-| [[E-01.8]]E-01.8 | turnCount | integer | required | Exchanges completed. Compared against the turn allowance.
+| [[E-01.8]]E-01.8 | turnCount | integer | required | Exchanges completed. Compared against the effective turn allowance — the base `TURN_ALLOWANCE` plus <<E-01.13,E-01.13 bonusTurns>> (bonusTurns).
 | [[E-01.9]]E-01.9 | lastActiveAt | datetime | required | Time of the most recent exchange. Drives display ordering and expiry.
 | [[E-01.10]]E-01.10 | tosAgreed | boolean | optional | Whether the participant agreed to the terms of participation. Absent until recorded; once recorded it is always true — a decline is rejected at <<TI-01,TI-01 Open a session>> before it becomes a stored value (unlike <<E-01.7,E-01.7 consentGranted>> and <<E-01.11,E-01.11 projectionConsent>>, which legitimately store `false`).
 | [[E-01.11]]E-01.11 | projectionConsent | boolean | optional | Whether the participant agreed to projection. Absent until the decision is recorded. Drives <<E-01.6,E-01.6 displayable>> directly. Independent of <<E-01.7,E-01.7 consentGranted>> — a session may be retained and not projected, or projected and not retained.
 | [[E-01.12]]E-01.12 | title | string | optional | Short header title (no fixed length — brevity is a prompt instruction, not an enforced bound), refined once from the first contribution and never recomputed (<<TF-07,TF-07 Refine a session title>>). Absent until refined.
+| [[E-01.13]]E-01.13 | bonusTurns | integer | required | Extra turns granted at the limit through <<TI-08,TI-08 Extend a session>>, added to the base `TURN_ALLOWANCE` to form the effective ceiling <<E-01.8,E-01.8 turnCount>> is compared against. Defaults 0; each extension adds one more `TURN_ALLOWANCE`. Never reduced.
 |===
 
 _E-01.6, <<E-01.7,E-01.7 consentGranted>>, and <<E-01.11,E-01.11 projectionConsent>> govern three separate things: whether the public surface may currently show this session, whether it may be kept after the exhibition, and the visitor's own projection choice — the first is now derived from the third, the second stays fully independent of both. <<E-01.10,E-01.10 tosAgreed>> is different in kind from the other two consent fields: it gates participation itself rather than a data-processing purpose, which is why it is never stored as a decline (see L1 xref:L1-solution-design-concept.adoc#BC-02[BC-02 Public user-generated content is subject to data], L2 xref:L2-system-design-concept.adoc#SC-05[SC-05 Retention requires consent; projection requires])._

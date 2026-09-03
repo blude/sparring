@@ -331,7 +331,8 @@ list for these: <<SA-01-1,SA-01-1>> (declining retention/projection is an
 opt-out, not a branch in the call chain), <<SA-01-5,SA-01-5>> (turn limit
 reached), <<SA-01-6,SA-01-6>> (reload resumes an existing session, skipping
 consent), <<SA-01-7,SA-01-7>> (declining the terms themselves, which — unlike
-the other opt-outs — does end the flow).
+the other opt-outs — does end the flow), <<SA-01-8,SA-01-8>> (extending at the
+turn limit instead of ending).
 
 - *SSt-01-1* <<UT-01,UT-01 Participating visitor>> scans the code and <<SE-01,SE-01 Input client>> opens without a session identifier. _(Performed by: <<UT-01,UT-01 Participating visitor>>; Affects: <<SE-01,SE-01 Input client>>)_
 - *SSt-01-2* <<SE-01,SE-01 Input client>> requests a new session from <<SE-03,SE-03 Backend service>> and receives an identifier, which it places in the address. _(Performed by: <<SE-01,SE-01 Input client>>; Affects: <<SE-03,SE-03 Backend service>>)_
@@ -351,9 +352,10 @@ the other opt-outs — does end the flow).
 - *[[SA-01-2]]SA-01-2* _(extends SSt-01-5)_ The request exceeds the rate or size limit. <<SE-03,SE-03 Backend service>> rejects it and <<SE-01,SE-01 Input client>> tells <<UT-01,UT-01 Participating visitor>> plainly. The session remains usable. _Outcome:_ Resume.
 - *[[SA-01-3]]SA-01-3* _(extends SSt-01-6)_ The contribution is assessed as unsuitable for projection. <<SE-03,SE-03 Backend service>> rejects the turn and returns that condition to <<SE-01,SE-01 Input client>>, which tells <<UT-01,UT-01 Participating visitor>> to edit and resubmit. Nothing is stored, no turn is consumed, and the session is otherwise unaffected. _Outcome:_ Resume.
 - *[[SA-01-4]]SA-01-4* _(extends SSt-01-7)_ <<PE-01,PE-01 Language generation API>> is unavailable or fails after retries. <<SE-03,SE-03 Backend service>> returns a failure and <<SE-01,SE-01 Input client>> states that the installation cannot respond. _Outcome:_ Terminate.
-- *[[SA-01-5]]SA-01-5* _(extends SSt-01-4)_ The session has reached its turn limit. <<SE-03,SE-03 Backend service>> rejects the contribution and <<SE-01,SE-01 Input client>> presents the session as complete, offering the optional session-evaluation prompt (<<SG-09,SG-09 Collect an optional visitor self-report at session>>). _Outcome:_ Terminate.
+- *[[SA-01-5]]SA-01-5* _(extends SSt-01-4)_ The session has reached its turn limit. <<SE-03,SE-03 Backend service>> rejects the contribution and <<SE-01,SE-01 Input client>> presents the session as complete, offering the visitor a choice: extend the session (<<SA-01-8,SA-01-8>>) or go to the optional session-evaluation prompt (<<SG-09,SG-09 Collect an optional visitor self-report at session>>). _Outcome:_ Terminate.
 - *[[SA-01-6]]SA-01-6* _(extends SSt-01-1)_ <<SE-01,SE-01 Input client>> opens with a session identifier already in the address after a reload. It fetches the existing session from <<SE-03,SE-03 Backend service>> and resumes from SSt-01-4, skipping the consent decision. _Outcome:_ Alternative-success.
 - *[[SA-01-7]]SA-01-7* _(extends SSt-01-3)_ <<UT-01,UT-01 Participating visitor>> declines to agree to the terms of participation. Unlike retention and projection, this is not an opt-out the session can proceed without — the input surface stays unusable. _Outcome:_ Terminate.
+- *[[SA-01-8]]SA-01-8* _(extends <<SA-01-5,SA-01-5>>)_ At the turn limit <<UT-01,UT-01 Participating visitor>> chooses to keep going rather than end. <<SE-03,SE-03 Backend service>> lifts the session's turn ceiling by another allowance and <<SE-01,SE-01 Input client>> re-enables the input surface. The choice is offered again each time the raised ceiling is reached. _Outcome:_ Resume.
 
 === SSc-02 — The projection presents current material
 
@@ -405,7 +407,7 @@ _Supports:_ xref:L1-solution-design-concept.adoc#BQR-01[BQR-01 Visitors experien
 === [[SQR-04]]SQR-04 Credentials and quota are protected from the public _(Security)_
 
 _Applies to:_ <<SE-03,SE-03 Backend service>> +
-_Acceptance criteria:_ The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window (10 requests / 60 seconds — `RATE_LIMIT_MAX_REQUESTS`, `RATE_LIMIT_WINDOW_SECONDS`, config.php). Contribution length is bounded (600 characters — `CONTRIBUTION_MAX_CHARS`). Session length is bounded (16 exchanges — `TURN_ALLOWANCE`). +
+_Acceptance criteria:_ The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window (10 requests / 60 seconds — `RATE_LIMIT_MAX_REQUESTS`, `RATE_LIMIT_WINDOW_SECONDS`, config.php). Contribution length is bounded (600 characters — `CONTRIBUTION_MAX_CHARS`). Session length is bounded per allowance (16 exchanges — `TURN_ALLOWANCE`); at the limit the visitor may extend for another allowance (<<SA-01-8,SA-01-8>>), each extension a fresh bounded segment rather than an unbounded session. +
 _Externally sourced:_ Yes (provider terms and cost exposure rather than a business quality requirement)
 
 === [[SQR-05]]SQR-05 Origin is fixed at creation and never inferred _(Data-integrity)_

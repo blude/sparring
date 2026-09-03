@@ -545,7 +545,8 @@ list for these: <a href="#SA-01-1">SA-01-1</a> (declining retention/projection i
 opt-out, not a branch in the call chain), <a href="#SA-01-5">SA-01-5</a> (turn limit
 reached), <a href="#SA-01-6">SA-01-6</a> (reload resumes an existing session, skipping
 consent), <a href="#SA-01-7">SA-01-7</a> (declining the terms themselves, which — unlike
-the other opt-outs — does end the flow).
+the other opt-outs — does end the flow), <a href="#SA-01-8">SA-01-8</a> (extending at the
+turn limit instead of ending).
 </td>
 </tr>
 </table>
@@ -605,13 +606,16 @@ the other opt-outs — does end the flow).
 <p><strong><a id="SA-01-4"></a>SA-01-4</strong> <em>(extends SSt-01-7)</em> <a href="#PE-01">PE-01 Language generation API</a> is unavailable or fails after retries. <a href="#SE-03">SE-03 Backend service</a> returns a failure and <a href="#SE-01">SE-01 Input client</a> states that the installation cannot respond. <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
-<p><strong><a id="SA-01-5"></a>SA-01-5</strong> <em>(extends SSt-01-4)</em> The session has reached its turn limit. <a href="#SE-03">SE-03 Backend service</a> rejects the contribution and <a href="#SE-01">SE-01 Input client</a> presents the session as complete, offering the optional session-evaluation prompt (<a href="#SG-09">SG-09 Collect an optional visitor self-report at session</a>). <em>Outcome:</em> Terminate.</p>
+<p><strong><a id="SA-01-5"></a>SA-01-5</strong> <em>(extends SSt-01-4)</em> The session has reached its turn limit. <a href="#SE-03">SE-03 Backend service</a> rejects the contribution and <a href="#SE-01">SE-01 Input client</a> presents the session as complete, offering the visitor a choice: extend the session (<a href="#SA-01-8">SA-01-8</a>) or go to the optional session-evaluation prompt (<a href="#SG-09">SG-09 Collect an optional visitor self-report at session</a>). <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
 <p><strong><a id="SA-01-6"></a>SA-01-6</strong> <em>(extends SSt-01-1)</em> <a href="#SE-01">SE-01 Input client</a> opens with a session identifier already in the address after a reload. It fetches the existing session from <a href="#SE-03">SE-03 Backend service</a> and resumes from SSt-01-4, skipping the consent decision. <em>Outcome:</em> Alternative-success.</p>
 </li>
 <li>
 <p><strong><a id="SA-01-7"></a>SA-01-7</strong> <em>(extends SSt-01-3)</em> <a href="#UT-01">UT-01 Participating visitor</a> declines to agree to the terms of participation. Unlike retention and projection, this is not an opt-out the session can proceed without — the input surface stays unusable. <em>Outcome:</em> Terminate.</p>
+</li>
+<li>
+<p><strong><a id="SA-01-8"></a>SA-01-8</strong> <em>(extends <a href="#SA-01-5">SA-01-5</a>)</em> At the turn limit <a href="#UT-01">UT-01 Participating visitor</a> chooses to keep going rather than end. <a href="#SE-03">SE-03 Backend service</a> lifts the session&#8217;s turn ceiling by another allowance and <a href="#SE-01">SE-01 Input client</a> re-enables the input surface. The choice is offered again each time the raised ceiling is reached. <em>Outcome:</em> Resume.</p>
 </li>
 </ul>
 </div>
@@ -695,7 +699,7 @@ the other opt-outs — does end the flow).
 <h3 id="_sqr_04_credentials_and_quota_are_protected_from_the_public_security"><a class="anchor" href="#_sqr_04_credentials_and_quota_are_protected_from_the_public_security"></a>5.4. <a id="SQR-04"></a>SQR-04 Credentials and quota are protected from the public <em>(Security)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
-<em>Acceptance criteria:</em> The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window (10 requests / 60 seconds — <code>RATE_LIMIT_MAX_REQUESTS</code>, <code>RATE_LIMIT_WINDOW_SECONDS</code>, config.php). Contribution length is bounded (600 characters — <code>CONTRIBUTION_MAX_CHARS</code>). Session length is bounded (16 exchanges — <code>TURN_ALLOWANCE</code>).<br>
+<em>Acceptance criteria:</em> The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window (10 requests / 60 seconds — <code>RATE_LIMIT_MAX_REQUESTS</code>, <code>RATE_LIMIT_WINDOW_SECONDS</code>, config.php). Contribution length is bounded (600 characters — <code>CONTRIBUTION_MAX_CHARS</code>). Session length is bounded per allowance (16 exchanges — <code>TURN_ALLOWANCE</code>); at the limit the visitor may extend for another allowance (<a href="#SA-01-8">SA-01-8</a>), each extension a fresh bounded segment rather than an unbounded session.<br>
 <em>Externally sourced:</em> Yes (provider terms and cost exposure rather than a business quality requirement)</p>
 </div>
 </div>

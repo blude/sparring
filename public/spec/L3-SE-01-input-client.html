@@ -55,6 +55,7 @@
 <li><a href="#_tf_05_derive_visitor_identity">4.5. TF-05 Derive visitor identity</a></li>
 <li><a href="#_tf_06_refine_the_session_title">4.6. TF-06 Refine the session title</a></li>
 <li><a href="#_tf_07_present_the_session_evaluation">4.7. TF-07 Present the session evaluation</a></li>
+<li><a href="#_tf_08_present_the_turn_limit_choice">4.8. TF-08 Present the turn-limit choice</a></li>
 </ul>
 </li>
 <li><a href="#_technical_interfaces_inbound">5. Technical interfaces (inbound)</a></li>
@@ -65,6 +66,7 @@
 <li><a href="#_to_03_retrieve_a_session">6.3. TO-03 Retrieve a session</a></li>
 <li><a href="#_to_04_refine_a_session_title">6.4. TO-04 Refine a session title</a></li>
 <li><a href="#_to_05_submit_a_session_evaluation">6.5. TO-05 Submit a session evaluation</a></li>
+<li><a href="#_to_06_extend_a_session">6.6. TO-06 Extend a session</a></li>
 </ul>
 </li>
 <li><a href="#_entities">7. Entities</a>
@@ -304,7 +306,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <p><strong><a id="EX-02-1"></a>EX-02-1</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports that the request limit has been reached. <a href="#UI-01">UI-01 Session surface</a> states this and re-enables the field. The typed contribution is preserved. <em>Outcome:</em> Resume.</p>
 </li>
 <li>
-<p><strong><a id="EX-02-2"></a>EX-02-2</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports that the session has reached its turn limit. <a href="#UI-01">UI-01 Session surface</a> presents the session as complete, leaves the field disabled, and calls <a href="#TF-07">TF-07 Present the session evaluation</a>. The history remains readable underneath the prompt. <em>Outcome:</em> Terminate.</p>
+<p><strong><a id="EX-02-2"></a>EX-02-2</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports that the session has reached its turn limit. <a href="#UI-01">UI-01 Session surface</a> presents the session as complete, leaves the field disabled, and calls <a href="#TF-08">TF-08 Present the turn-limit choice</a> — an inline choice to extend the session or go to the evaluation prompt, rather than the prompt straight away. The history remains readable underneath it. <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
 <p><strong><a id="EX-02-3"></a>EX-02-3</strong> <em>(extends <a href="#ST-02-4">ST-02-4</a>)</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports that no response could be produced. <a href="#UI-01">UI-01 Session surface</a> states plainly that the installation cannot respond right now and re-enables the field with the contribution preserved. <em>Outcome:</em> Resume.</p>
@@ -497,6 +499,13 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-07">TF-07 Present the session evaluation</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Once, at the moment a session ends, on the first ending encountered</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Turn-limit choice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">block</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A statement that the turn limit is reached, with an action to extend the session and an action to go to feedback</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TF-08">TF-08 Present the turn-limit choice</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports the session complete at its turn limit, until one action is taken</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -565,6 +574,12 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <td class="tableblock halign-left valign-top"><p class="tableblock">"Start new session" reopens the surface fresh, in place; "Go back to start" leaves it</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-02">UC-02 Contribute a turn</a>, <a href="#UC-04">UC-04 Start a new session deliberately</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Only after Send, on the confirmation message it produces</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extend or go to feedback at the turn limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Press Extend to continue the session with a fresh turn allowance; press Go to feedback to open the evaluation prompt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UC-02">UC-02 Contribute a turn</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">While the turn-limit choice is shown</p></td>
 </tr>
 </tbody>
 </table>
@@ -722,7 +737,17 @@ This is the authoritative behavior for unsuitable content — an earlier version
 <em>Achieves:</em> <a href="#G-06">G-06 Offer a light, always-skippable way to react</a></p>
 </div>
 <div class="paragraph">
-<p>The rating/feedback form itself is answered at most once per session — a flag kept in the browser (not <a href="#E-01">E-01 Session view state</a>, since it must survive nothing more than a reload of the same tab), set once Skip or Send actually completes it, not merely on being shown. <a href="#UC-04">UC-04 Start a new session deliberately</a> calls this function on every "End session" press regardless, so a later press after the flag is set skips straight to the same confirmation — with the plain-thanks copy, as if Skip had just been pressed — rather than asking again or leaving unannounced. Every rating question and the open-feedback field are optional; a Skip action and a Send action are both available from the first moment the prompt is shown, and neither dismisses the prompt itself — both replace the form with a fixed confirmation message and two actions, differing only in which message and in what happens first. Skip calls nothing and shows a plain thanks. Send calls <a href="#TO-05">TO-05 Submit a session evaluation</a> first, with whichever fields were filled in (possibly none), without waiting for the result — a failed submission is invisible to the visitor, matching <a href="#TF-06">TF-06 Refine the session title</a>'s best-effort treatment of a non-essential background call — then shows a confirmation that feedback was received. Either way, the confirmation carries the same two actions: "Start new session," which reopens <a href="#UI-01">UI-01 Session surface</a> with no session identifier in the address (the same outcome <a href="#UC-04">UC-04 Start a new session deliberately</a> reaches, without a round trip through the start screen), and "Go back to start," which leaves it, styled the same as the form&#8217;s own Skip action. This deliberate pause before either action, rather than dismissing immediately, is what gives Send&#8217;s background call time to actually reach the network before anything navigates away from under it. Which rating questions are offered, and how many points each scale has, is fixed in code ahead of time — a fixed set authored in code, same as <a href="#TF-02">TF-02 Record the consent decision</a>'s opening-prompt identifiers — and this function presents whatever set it&#8217;s given, deciding none of it itself.</p>
+<p>The rating/feedback form itself is answered at most once per session — a flag kept in the browser (not <a href="#E-01">E-01 Session view state</a>, since it must survive nothing more than a reload of the same tab), set once Skip or Send actually completes it, not merely on being shown. <a href="#UC-04">UC-04 Start a new session deliberately</a> calls this function on every "End session" press regardless, so a later press after the flag is set skips straight to the same confirmation — with the plain-thanks copy, as if Skip had just been pressed — rather than asking again or leaving unannounced. Every rating question and the open-feedback field are optional; a Skip action and a Send action are both available from the first moment the prompt is shown, and neither dismisses the prompt itself — both replace the form with a fixed confirmation message and two actions, differing only in which message and in what happens first. Skip calls nothing and shows a plain thanks. Send calls <a href="#TO-05">TO-05 Submit a session evaluation</a> first, with whichever fields were filled in (possibly none), without waiting for the result — a failed submission is invisible to the visitor, matching <a href="#TF-06">TF-06 Refine the session title</a>'s best-effort treatment of a non-essential background call — then shows a confirmation that feedback was received. Either way, the confirmation carries the same two actions: "Start new session," which reopens <a href="#UI-01">UI-01 Session surface</a> with no session identifier in the address (the same outcome <a href="#UC-04">UC-04 Start a new session deliberately</a> reaches, without a round trip through the start screen), and "Go back to start," which leaves it, styled the same as the form&#8217;s own Skip action. This deliberate pause before either action, rather than dismissing immediately, is what gives Send&#8217;s background call time to actually reach the network before anything navigates away from under it. Which rating questions are offered, and how many points each scale has, is fixed in code ahead of time — a fixed set authored in code, same as <a href="#TF-02">TF-02 Record the consent decision</a>'s opening-prompt identifiers — and this function presents whatever set it&#8217;s given, deciding none of it itself. It is reached two ways: directly from <a href="#UC-04">UC-04 Start a new session deliberately</a>'s "End session" press, and by way of <a href="#TF-08">TF-08 Present the turn-limit choice</a> when the visitor picks feedback over extending at the turn limit.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tf_08_present_the_turn_limit_choice"><a class="anchor" href="#_tf_08_present_the_turn_limit_choice"></a>4.8. <a id="TF-08"></a>TF-08 Present the turn-limit choice</h3>
+<div class="paragraph">
+<p><em>Detail level:</em> Narrative<br>
+<em>Achieves:</em> <a href="#G-02">G-02 Hold the visitor&#8217;s place through interruption</a></p>
+</div>
+<div class="paragraph">
+<p>When <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> reports a session complete at its turn limit (<a href="#EX-02-2">EX-02-2</a>), the element does not open <a href="#TF-07">TF-07 Present the session evaluation</a> straight away. It places an inline block as the last item in the exchange history — a plain statement that the limit is reached, and two actions: extend the session, or go to feedback. The field stays disabled while the block is shown; the deliberate "End session" control in the header is unaffected and still routes to <a href="#TF-07">TF-07 Present the session evaluation</a>. Extend calls <a href="#TO-06">TO-06 Extend a session</a>; on success the block is removed, the field re-enabled from the returned remaining count, and the session continues in place — the block reappears the next time the raised limit is reached. A failed extend leaves the block in place with a plain retry statement, matching <a href="#QR-02">QR-02 Every failure produces a statement</a>. Go to feedback removes the block and calls <a href="#TF-07">TF-07 Present the session evaluation</a>, the same prompt <a href="#UC-04">UC-04 Start a new session deliberately</a> reaches. No new session-view-state attribute: the block is transient DOM, rebuilt from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s reported state on any reload.</p>
 </div>
 <hr>
 </div>
@@ -800,6 +825,28 @@ No <code>Calls → PE-</code> relation applies. This element reaches no partner 
 <em>Output:</em> None consumed by the caller — <a href="#TF-07">TF-07 Present the session evaluation</a> dismisses the prompt without waiting for a result.<br>
 <em>Error cases:</em> Service unavailable. Session unknown. Malformed request. None of these are shown to the visitor, same treatment as <a href="#TO-04">TO-04 Refine a session title</a>'s failure cases.<br>
 <em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-07">TI-07 Submit a session evaluation</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+No <code>Calls → PE-</code> relation applies, same reason as <a href="#TO-04">TO-04 Refine a session title</a>'s.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_to_06_extend_a_session"><a class="anchor" href="#_to_06_extend_a_session"></a>6.6. <a id="TO-06"></a>TO-06 Extend a session</h3>
+<div class="paragraph">
+<p><em>Statement:</em> This interface asks the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>) to lift a completed session&#8217;s turn limit by another allowance. Used from <a href="#TF-08">TF-08 Present the turn-limit choice</a>'s extend action.<br>
+<em>Input:</em> Session identifier.<br>
+<em>Output:</em> Session state, remaining turn count.<br>
+<em>Error cases:</em> Service unavailable. Session unknown or expired. Malformed request. A failure is shown as a plain retry statement on the choice block (<a href="#TF-08">TF-08 Present the turn-limit choice</a>), not silently, since the visitor is waiting on the result of their press.<br>
+<em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-08">TI-08 Extend a session</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
