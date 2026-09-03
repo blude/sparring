@@ -129,6 +129,7 @@ main {
     font-size: 1rem; /* 16px */
     font-weight: 500;
     color: rgba(255, 255, 255, 0.7); /* placeholder "Untitled" shade on the brand-red bar */
+    padding-bottom: 0.125rem; /* nudge the baseline down so the title lines up with the avatar/alias beside it */
 }
 #session-title.set { color: #fff; }
 
