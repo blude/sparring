@@ -155,8 +155,14 @@ window.SparringDojoOutcome = {
     }
 
     newSessionBtn.addEventListener('click', function () {
+        sessionStorage.removeItem(DRAFT_KEY); // ending session should not leave next session's composer pre-filled
+        // Nothing said yet — no session worth confirming the end of, and
+        // nothing to evaluate. Skip both dialogs and go straight to the start.
+        if (!sessionHasTurns()) {
+            window.location.href = '/';
+            return;
+        }
         showConfirmDialog(function () {
-            sessionStorage.removeItem(DRAFT_KEY); // ending session should not leave next session's composer pre-filled
             showEvalDialog(sessionId);
         });
     });
