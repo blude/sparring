@@ -11,9 +11,10 @@
 <body>
 <?= pageHeader() ?>
 <h1><?= t('philosophy.heading') ?></h1>
-<p><img src="<?= fasset('img/philosophy-1.jpg') ?>" alt="<?= t('philosophy.imageAlt') ?>" class="content-image"></p>
+<p><img src="<?= fasset('img/philosophy-gloves.png') ?>" alt="<?= t('philosophy.glovesImageAlt') ?>" class="content-image"></p>
 <h2><?= t('philosophy.subheading') ?></h2>
 <p><?= t('philosophy.body') ?></p>
+<p><img src="<?= fasset('img/philosophy-building.png') ?>" alt="<?= t('philosophy.buildingImageAlt') ?>" class="content-image"></p>
 <?= pageFooter() ?>
 <?= sillyBanner() ?>
 </body>

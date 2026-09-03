@@ -137,7 +137,8 @@ return [
     'philosophy.heading' => "Sparring's Philosophy",
     'philosophy.subheading' => 'How Sparring works',
     'philosophy.body' => 'Sparring lets you argue with an AI partner that knows Digital Design. You make a point, it pushes back in real time, and the exchange keeps going as long as you do. Behind it is a custom system prompt that reads your argument, works out where it is weak, and answers with a counter-argument meant to test it rather than agree with it.',
-    'philosophy.imageAlt' => 'A person in a boxing stance, facing a shadowy opponent.',
+    'philosophy.glovesImageAlt' => 'Boxing gloves lying on the ground.',
+    'philosophy.buildingImageAlt' => 'A facade in Dortmund.',
 
     // --- privacy.php ---
     'privacy.title' => 'Privacy Policy — Sparring',
