@@ -5,6 +5,15 @@ keyed by date + commit.
 
 ## Unreleased
 
+## 2026-09-04 — `8266451` feat(prompts): deflect questions about who built Popov
+- prompt: `<edge_cases>` gains a rule for "who built you / who's behind
+  Sparring" — never give the full name, hold any name back, first ask what
+  knowing the creator would do for them, then turn it to what authorship of
+  a design rests on and what it means to be a designer. The deflection is
+  the whole behavior: no name yielded even under repeated asking. Prior
+  text named the creator in `<identity>` with no guidance on disclosing it
+  when asked directly.
+
 ## 2026-08-28 — `b2cec80` refactor(prompts): move <voice> before <core_mechanism>, dedupe length rule
 - prompt: `<voice>` moved before `<core_mechanism>` — it governs every
   visible turn, `<core_mechanism>`'s engine only drives it, so it now
