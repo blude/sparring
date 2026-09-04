@@ -27,6 +27,7 @@ $display = resolve_display_config(); // ?d=<name>, see config.php DISPLAY_CONFIG
   </div>
 </div>
 <main id="wall" aria-live="off"></main>
+<div class="gradient-bottom" aria-hidden="true"></div>
 <?= sillyBanner() ?>
 <script>
 window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;

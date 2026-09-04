@@ -80,6 +80,18 @@ body {
     background: url('img/arena-gradient-top.webp') no-repeat center / cover;
 }
 
+/* fade any content that overflows the last visible row out at the bottom edge */
+.gradient-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 2; /* above #wall (z-index: 1) */
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+}
+
 .header {
     position: relative; /* stack above .gradient-top (positioned elements paint last) */
     z-index: 1;
