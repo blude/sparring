@@ -25,9 +25,14 @@ declare(strict_types=1);
  *   --markdown  One human-readable transcript per session (YAML frontmatter
  *               of session properties + heading + turns); each session's
  *               frontmatter fence doubles as the between-session rule.
+ *   --index     One scannable line per session, fields joined by " - ".
+ *               Default columns: id, date, title, exchanges. Override with
+ *               --columns=<csv> from: id date datetime title exchanges
+ *               origin turns lastactive displayable.
  *
  * Usage: php bin/export.php [--consented-only] [output-path]
  *        php bin/export.php --jsonl|--csv|--markdown [--session=<id>] [--consented-only] [output-path]
+ *        php bin/export.php --index [--columns=<csv>] [--consented-only] [output-path]
  */
 
 require __DIR__ . '/../config.php';
@@ -41,8 +46,51 @@ if (php_sapi_name() !== 'cli') {
 if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
     exit(
         "Usage: php bin/export.php [--consented-only] [output-path]\n" .
-        "       php bin/export.php --jsonl|--csv|--markdown [--session=<id>] [--consented-only] [output-path]\n"
+        "       php bin/export.php --jsonl|--csv|--markdown [--session=<id>] [--consented-only] [output-path]\n" .
+        "       php bin/export.php --index [--columns=<csv>] [--consented-only] [output-path]\n"
     );
+}
+
+/**
+ * --index mode's row builder, pulled out so it's unit-testable
+ * (tests/smoke_domain.php). $exchangeCounts maps session id -> exchange
+ * count. $columnsCsv is the raw --columns= value (null = the default set).
+ * Throws InvalidArgumentException naming the bad key on an unknown column.
+ */
+function render_session_index(array $sessions, array $exchangeCounts, ?string $columnsCsv): string
+{
+    $available = [
+        'id'          => fn(array $s) => $s['id'],
+        'date'        => fn(array $s) => substr($s['createdAt'], 0, 10),
+        'datetime'    => fn(array $s) => $s['createdAt'],
+        'title'       => fn(array $s) => $s['title'] ?? '(untitled)',
+        'exchanges'   => function (array $s) use ($exchangeCounts) {
+            $n = $exchangeCounts[$s['id']] ?? 0;
+            return $n . ' exchange' . ($n === 1 ? '' : 's');
+        },
+        'origin'      => fn(array $s) => $s['origin'],
+        'turns'       => fn(array $s) => (string) $s['turnCount'],
+        'lastactive'  => fn(array $s) => $s['lastActiveAt'],
+        'displayable' => fn(array $s) => $s['displayable'] ? 'yes' : 'no',
+    ];
+
+    $columns = $columnsCsv === null || $columnsCsv === ''
+        ? ['id', 'date', 'title', 'exchanges']
+        : array_map('trim', explode(',', $columnsCsv));
+
+    foreach ($columns as $col) {
+        if (!isset($available[$col])) {
+            throw new InvalidArgumentException(
+                "unknown --columns key '{$col}' — valid: " . implode(' ', array_keys($available))
+            );
+        }
+    }
+
+    $lines = array_map(
+        fn(array $s) => implode(' - ', array_map(fn(string $col) => $available[$col]($s), $columns)),
+        $sessions
+    );
+    return implode("\n", $lines) . ($lines === [] ? '' : "\n");
 }
 
 $store = new Store(STORE_DB_PATH);
@@ -50,11 +98,16 @@ $store = new Store(STORE_DB_PATH);
 $jsonl = in_array('--jsonl', $argv, true);
 $csv = in_array('--csv', $argv, true);
 $markdown = in_array('--markdown', $argv, true);
+$index = in_array('--index', $argv, true);
 $consentedOnly = in_array('--consented-only', $argv, true);
 $sessionId = null;
+$columnsCsv = null;
 foreach ($argv as $arg) {
     if (str_starts_with($arg, '--session=')) {
         $sessionId = substr($arg, strlen('--session='));
+    }
+    if (str_starts_with($arg, '--columns=')) {
+        $columnsCsv = substr($arg, strlen('--columns='));
     }
 }
 // output path is the first positional (non-flag) arg after the script name
@@ -167,6 +220,26 @@ if ($markdown) {
     // between-session rule — no extra separator needed.
     $out = implode("\n", $docs);
     $writeOut($out, $outputPath, sprintf("exported %d session(s) to %s\n", count($docs), $outputPath ?? ''));
+    exit;
+}
+
+if ($index) {
+    $sessions = $allSessions ?? $store->getAllSessions();
+    if ($consentedIds !== null) {
+        $sessions = array_values(array_filter($sessions, fn(array $s) => in_array($s['id'], $consentedIds, true)));
+    }
+    // One pass over all exchanges to count per session — cheaper than a query per row.
+    $exchangeCounts = [];
+    foreach ($store->getAllExchanges() as $e) {
+        $exchangeCounts[$e['sessionId']] = ($exchangeCounts[$e['sessionId']] ?? 0) + 1;
+    }
+    try {
+        $out = render_session_index($sessions, $exchangeCounts, $columnsCsv);
+    } catch (InvalidArgumentException $e) {
+        fwrite(STDERR, $e->getMessage() . "\n");
+        exit(1);
+    }
+    $writeOut($out, $outputPath, sprintf("listed %d session(s) to %s\n", count($sessions), $outputPath ?? ''));
     exit;
 }
 

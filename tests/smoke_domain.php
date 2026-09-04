@@ -5,8 +5,9 @@ declare(strict_types=1);
  * Self-check for the small pure helpers that don't warrant their own file:
  * derive_scenario_statement() (src/scenario.php), resolve_opening_message()
  * and resolve_display_config() (config.php), AbstractLlmClient's stripDelimiterTag(),
- * bin/import_pilot.php's validate_transcript(), and
- * bin/import_curriculum.php's parse_curriculum_file().
+ * bin/import_pilot.php's validate_transcript(),
+ * bin/import_curriculum.php's parse_curriculum_file(), and
+ * bin/export.php's render_session_index().
  * No DB, no network. Store::hydrateExchange/hydrateSession aren't repeated
  * here — smoke_store.php's round-trip assertions already exercise their
  * output shape on every getSession()/getExchanges() call.
@@ -224,5 +225,58 @@ assert($stub === ['ok' => false, 'reason' => 'stub page (typ: stub) — redirect
 // typ: konzept (or any non-stub value) -> not rejected, front matter still stripped as usual
 $nonStub = parse_curriculum_file('/some/dir/x.md', "---\nname: X\ntyp: konzept\n---\n# X\n\nBody.\n");
 assert($nonStub['ok'] === true);
+
+/*
+|--------------------------------------------------------------------------
+| bin/export.php::render_session_index() — --index mode row builder
+|--------------------------------------------------------------------------
+*/
+
+// Same trick as validate_transcript above: export.php's top-level `require`
+// + CLI guard would run on a whole-file require, so eval just this one
+// function's definition, bounded by the `$store = new Store` that follows it.
+$exportSource = file_get_contents(__DIR__ . '/../bin/export.php');
+$start = strpos($exportSource, 'function render_session_index');
+$end = strpos($exportSource, '$store = new Store(STORE_DB_PATH);');
+assert($start !== false && $end !== false && $end > $start, 'bin/export.php: render_session_index / $store markers not found — did its shape change?');
+eval(substr($exportSource, $start, $end - $start));
+
+$sess = [
+    ['id' => 'AAAA1111', 'createdAt' => '2026-08-22T09:15:00Z', 'title' => 'Creator inquiry', 'origin' => 'live', 'turnCount' => 3, 'lastActiveAt' => '2026-08-22T09:40:00Z', 'displayable' => true],
+    ['id' => 'BBBB2222', 'createdAt' => '2026-08-23T11:00:00Z', 'title' => null, 'origin' => 'pilot', 'turnCount' => 1, 'lastActiveAt' => '2026-08-23T11:05:00Z', 'displayable' => false],
+];
+$counts = ['AAAA1111' => 3, 'BBBB2222' => 1];
+
+// default columns: id - date - title - N exchanges
+assert(render_session_index($sess, $counts, null) ===
+    "AAAA1111 - 2026-08-22 - Creator inquiry - 3 exchanges\n" .
+    "BBBB2222 - 2026-08-23 - (untitled) - 1 exchange\n"); // null title -> (untitled); singular "exchange" at 1
+
+// empty --columns= is treated as "use the default set", same as null
+assert(render_session_index($sess, $counts, '') === render_session_index($sess, $counts, null));
+
+// custom column set, whitespace around keys tolerated
+assert(render_session_index($sess, $counts, 'origin, displayable , turns') ===
+    "live - yes - 3\n" .
+    "pilot - no - 1\n");
+
+// datetime column is the full timestamp, date is just the day
+assert(render_session_index([$sess[0]], $counts, 'datetime') === "2026-08-22T09:15:00Z\n");
+
+// a session with no exchanges recorded -> count 0, plural
+assert(render_session_index([['id' => 'CCCC3333', 'createdAt' => '2026-08-24T00:00:00Z', 'title' => 't']], [], 'exchanges') === "0 exchanges\n");
+
+// no sessions -> empty string, not a lone newline
+assert(render_session_index([], $counts, null) === '');
+
+// unknown column key -> InvalidArgumentException naming the bad key
+$threw = false;
+try {
+    render_session_index($sess, $counts, 'id,bogus');
+} catch (InvalidArgumentException $e) {
+    $threw = true;
+    assert(str_contains($e->getMessage(), "'bogus'"));
+}
+assert($threw, 'render_session_index should reject an unknown --columns key');
 
 echo "smoke_domain: ok\n";
