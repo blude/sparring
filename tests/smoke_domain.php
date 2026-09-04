@@ -4,7 +4,7 @@ declare(strict_types=1);
 /**
  * Self-check for the small pure helpers that don't warrant their own file:
  * derive_scenario_statement() (src/scenario.php), resolve_opening_message()
- * (config.php), AbstractLlmClient's stripDelimiterTag(),
+ * and resolve_display_config() (config.php), AbstractLlmClient's stripDelimiterTag(),
  * bin/import_pilot.php's validate_transcript(), and
  * bin/import_curriculum.php's parse_curriculum_file().
  * No DB, no network. Store::hydrateExchange/hydrateSession aren't repeated
@@ -43,6 +43,22 @@ assert(resolve_opening_message('1') === 'Sparring Scenario: Some decisions can n
 assert(resolve_opening_message('99') === null);
 assert(resolve_opening_message(null) === null);
 assert(resolve_opening_message('') === null);
+
+/*
+|--------------------------------------------------------------------------
+| resolve_display_config() — ?d= whitelist lookup with default fallback
+|--------------------------------------------------------------------------
+*/
+
+$_GET['d'] = 'dev';
+assert(resolve_display_config() === ['name' => 'dev'] + DISPLAY_CONFIGS['dev']);
+$_GET['d'] = 'venue';
+assert(resolve_display_config()['itemLimit'] === 12);
+$_GET['d'] = 'bogus'; // unknown name -> default
+assert(resolve_display_config()['name'] === DISPLAY_CONFIG_DEFAULT);
+unset($_GET['d']); // absent -> default
+assert(resolve_display_config()['name'] === DISPLAY_CONFIG_DEFAULT);
+assert(isset(DISPLAY_CONFIGS[DISPLAY_CONFIG_DEFAULT])); // default must name a real config
 
 /*
 |--------------------------------------------------------------------------

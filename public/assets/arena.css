@@ -140,6 +140,18 @@ body {
     gap: 1.5rem;
 }
 
+/*
+ * Per-display overrides, keyed by the body class arena.php emits from
+ * ?d=<name> (config.php DISPLAY_CONFIGS). The rules above are the landscape
+ * baseline (?d=dev). venue is a 1296x2304 portrait panel fitting 12
+ * exchanges — font-size / gap / padding tuning goes here once it's been
+ * seen on the real screen; column count comes from the config, not CSS.
+ * stadium (beamer) is unresolved.
+ */
+body.display-venue {
+    /* ponytail: no portrait tuning yet — add after first run on the panel */
+}
+
 .exchange {
     display: flex;
     flex-direction: column;

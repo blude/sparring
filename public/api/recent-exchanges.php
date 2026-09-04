@@ -23,9 +23,10 @@ $store = new Store(STORE_DB_PATH);
 $sparring = new Sparring($store);
 
 $counts = $store->getCounts();
+$display = resolve_display_config(); // ?d=<name> — item count is a display policy, so it's honoured here too
 
 echo json_encode([
-    'items' => $sparring->assembleDisplayMaterial(),
+    'items' => $sparring->assembleDisplayMaterial($display['itemLimit']),
     'sessionCount' => $counts['sessions'],
     'exchangeCount' => $counts['exchanges'],
 ], JSON_UNESCAPED_SLASHES);

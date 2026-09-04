@@ -376,7 +376,7 @@ final class Sparring
      * TF-04: assembles the ordered items the projection renders. Every decision
      * about what appears on the wall is made here, so SE-02 carries no policy (its C-02).
      */
-    public function assembleDisplayMaterial(int $limit = DISPLAY_ITEM_LIMIT): array
+    public function assembleDisplayMaterial(int $limit): array
     {
         $sessions = $this->store->getDisplayableSessions('live', $limit);
         if (count($sessions) < $limit) {

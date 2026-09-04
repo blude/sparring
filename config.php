@@ -108,10 +108,32 @@ const SE01_WAIT_BOUND_SECONDS = 25;    // SE-01's bound, kept above the one abov
 |--------------------------------------------------------------------------
 */
 
-const DISPLAY_POLL_INTERVAL_SECONDS = 4;
-const DISPLAY_ITEM_LIMIT = 4;
-const DISPLAY_COLUMNS = 2; // masonry layout, TBC-01: 2x2 target at assumed 1920x1080, more room per item
+const DISPLAY_POLL_INTERVAL_SECONDS = 4; // global — not per-display
 const SCENARIO_MAX_CHARS = 140; // TF-05: trim-based scenario statement length
+
+/*
+ * Per-display configs, one per physical screen at the venue. Selected with
+ * ?d=<name> on /arena; the default needs no query string. `columns` is the
+ * masonry column count (SE-02 DISPLAY_COLUMNS), `itemLimit` is how many
+ * exchanges are shown and fetched (Store::getDisplayableSessions bound).
+ */
+const DISPLAY_CONFIG_DEFAULT = 'venue';
+const DISPLAY_CONFIGS = [
+    'dev'     => ['columns' => 2, 'itemLimit' => 4],   // LG monitor, comfortable landscape resolution
+    'venue'   => ['columns' => 2, 'itemLimit' => 12],  // LG monitor rotated 90 degrees — 1296x2304 portrait, OS-rotated
+    // ponytail: beamer resolution TBC — dev's numbers until the real panel is measured
+    'stadium' => ['columns' => 2, 'itemLimit' => 4],
+];
+
+// Request-scoped: reads ?d=, falls back to the default for an absent or
+// unknown name. Returns the config plus its resolved 'name' (always a
+// whitelisted key), so callers can emit it as a CSS hook without re-checking.
+function resolve_display_config(): array
+{
+    $name = is_string($_GET['d'] ?? null) ? $_GET['d'] : '';
+    $name = isset(DISPLAY_CONFIGS[$name]) ? $name : DISPLAY_CONFIG_DEFAULT;
+    return ['name' => $name] + DISPLAY_CONFIGS[$name];
+}
 
 /*
 |--------------------------------------------------------------------------

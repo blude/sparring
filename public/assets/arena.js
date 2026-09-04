@@ -49,6 +49,13 @@ window.SparringArenaDiff = {
 
     var POLL_MS = window.POLL_INTERVAL_MS || 4000;
     var DEBUG = new URLSearchParams(window.location.search).get('debug') === '1';
+    // Forward ?d=<display config> onto the feed request: the item limit is a
+    // display policy resolved server-side (config.php), so the API needs the
+    // same param the page was loaded with.
+    var DISPLAY_QS = (function () {
+        var d = new URLSearchParams(window.location.search).get('d');
+        return d ? '?d=' + encodeURIComponent(d) : '';
+    })();
     var TRIM_CHARS = 500; // TF-03: estimate for a ~900px column, 2 items tall, at 1920px; TBC-05 pending real HE-02 tuning
     var COLUMN_COUNT = window.DISPLAY_COLUMNS || 3;
     var MAX_PER_COLUMN = Math.ceil((window.DISPLAY_ITEM_LIMIT || 9) / COLUMN_COUNT); // QR-06: bounds worst-case column height
@@ -132,7 +139,7 @@ window.SparringArenaDiff = {
         var controller = new AbortController();
         var timeout = setTimeout(function () { controller.abort(); }, Math.max(POLL_MS - 500, 1000));
 
-        fetch('/api/recent-exchanges', { signal: controller.signal })
+        fetch('/api/recent-exchanges' + DISPLAY_QS, { signal: controller.signal })
             .then(function (res) {
                 clearTimeout(timeout);
                 if (!res.ok) return null; // FA-01-1: keep current material, no action taken

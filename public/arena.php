@@ -1,5 +1,7 @@
 <?php
 declare(strict_types=1);
+
+$display = resolve_display_config(); // ?d=<name>, see config.php DISPLAY_CONFIGS
 ?>
 <!doctype html>
 <html lang="<?= resolve_locale() ?>">
@@ -15,7 +17,7 @@ declare(strict_types=1);
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#d32f2f">
 </head>
-<body>
+<body class="display-<?= $display['name'] ?>">
 <div class="gradient-top" aria-hidden="true"></div>
 <div class="header">
   <div id="logo"><h1 class="wordmark">Sparring</h1></div>
@@ -28,8 +30,8 @@ declare(strict_types=1);
 <?= sillyBanner() ?>
 <script>
 window.POLL_INTERVAL_MS = <?= (int) (DISPLAY_POLL_INTERVAL_SECONDS * 1000) ?>;
-window.DISPLAY_COLUMNS = <?= (int) DISPLAY_COLUMNS ?>;
-window.DISPLAY_ITEM_LIMIT = <?= (int) DISPLAY_ITEM_LIMIT ?>;
+window.DISPLAY_COLUMNS = <?= (int) $display['columns'] ?>;
+window.DISPLAY_ITEM_LIMIT = <?= (int) $display['itemLimit'] ?>;
 window.LOCALE = <?= json_encode(resolve_locale()) ?>;
 window.REPLY_COUNT_LABEL = <?= json_encode(t('arena.js.replyCount')) ?>;
 window.STATS_LABEL = <?= json_encode(t('arena.js.stats')) ?>;
