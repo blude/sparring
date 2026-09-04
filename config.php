@@ -189,7 +189,10 @@ const JUICY_DISPLAY_ENTRANCE = true;
 const OPENING_MESSAGE_PREFIX = 'Sparring Scenario: ';
 
 const OPENING_PROMPTS = [
-    1 => 'Some decisions can never fully be "solved" — only managed.',
+    1 => 'Was ist Digital Design?',
+    2 => 'Familie Heiner betreibt einen Bio-Bauernhof, tut sich aber online schwer. Ein eigener Shop bedeutet Aufwand, den sie lieber in Bildung und Gemeinschaft stecken. Lieber erreichen sie Kunden dort, wo diese sind, etwa in Chatbots wie Gemini, ChatGPT oder Claude. Bringt die Auslagerung der operativen Aufgaben an KI-Agenten mehr Risiken oder Vorteile?',
+    3 => 'Greengineers will, dass der gemeinsame Agent Solarüberschuss künftig automatisch verkauft, ohne Zustimmung der Hausbesitzer. Das macht ihn zu einem eigenständigen Marktakteur mit echter finanzieller Verantwortung, schneller als die Freigabeprozesse der drei Partner mithalten. Verschiebt autonomer Handel die tatsächliche Entscheidungsmacht innerhalb des Konsortiums? Hat die bestehende Aufbauorganisation über drei getrennte Firmen hinweg überhaupt einen Platz für diese Entscheidung?',
+    4 => 'NoteMate wollte klein und ablenkungsfrei bleiben. Für KI-Schreibhilfe fehlt dem Dreierteam aber die Kraft, ein eigenes Modell zu bauen, also läuft künftig die API eines fremden Anbieters mit, durch die Firma, die Nutzer nie beauftragt haben und niemand von NoteMate kontrolliert. Dient das noch dem, wofür NoteMate gedacht war, nämlich Denken ohne Ablenkung zu ermöglichen? Oder macht es die App leise zu einer dünnen Hülle um die KI eines anderen, während der eigentliche Daseinszweck von innen ausgehöhlt wird?',
     // add one entry per QR code before the exhibition
 ];
 

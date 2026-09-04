@@ -40,7 +40,7 @@ assert(derive_scenario_statement($long, null) === $long); // null $maxChars: unb
 |--------------------------------------------------------------------------
 */
 
-assert(resolve_opening_message('1') === 'Sparring Scenario: Some decisions can never fully be "solved" — only managed.');
+assert(resolve_opening_message('1') === 'Sparring Scenario: Was ist Digital Design?');
 assert(resolve_opening_message('99') === null);
 assert(resolve_opening_message(null) === null);
 assert(resolve_opening_message('') === null);
