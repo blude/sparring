@@ -121,8 +121,8 @@ const DISPLAY_CONFIG_DEFAULT = 'venue';
 const DISPLAY_CONFIGS = [
     'dev'     => ['columns' => 2, 'itemLimit' => 4],   // LG monitor, comfortable landscape resolution
     'venue'   => ['columns' => 2, 'itemLimit' => 12],  // LG monitor rotated 90 degrees — 1296x2304 portrait, OS-rotated
-    // ponytail: beamer resolution TBC — dev's numbers until the real panel is measured
-    'stadium' => ['columns' => 2, 'itemLimit' => 4],
+    // ponytail: beamer resolution TBC — column count is still a guess, itemLimit set per request
+    'stadium' => ['columns' => 2, 'itemLimit' => 16],
 ];
 
 // Request-scoped: reads ?d=, falls back to the default for an absent or
