@@ -183,7 +183,7 @@ _Achieves:_ <<G-05,G-05 Keep the display surface populated>>, <<G-04,G-04 Decide
 
 Produces the ordered items the projection renders. Every decision about what appears on the wall is made here, so that xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] carries no policy (xref:L3-SE-02-display-client.adoc#C-02[C-02 This element holds no selection or ordering policy] of that element).
 
-- *[[FS-04-1]]FS-04-1* _(Entity-access)_ Read live-origin sessions from <<E-01,E-01 Session>> where <<E-01.6,E-01.6 displayable>> (displayable) is true and at least one exchange exists, ordered by <<E-01.9,E-01.9 lastActiveAt>> (lastActiveAt) descending, up to the item limit.
+- *[[FS-04-1]]FS-04-1* _(Entity-access)_ Read live-origin sessions from <<E-01,E-01 Session>> where <<E-01.6,E-01.6 displayable>> (displayable) is true and at least one exchange exists, ordered by <<E-01.9,E-01.9 lastActiveAt>> (lastActiveAt) descending, up to the item limit. The item limit is passed in by the caller (<<TI-04,TI-04 Retrieve display material>>, resolved from the requesting display profile; a default applies when none is given) — this function does not read it from configuration itself.
 - *[[FS-04-2]]FS-04-2* _(Data-operation)_ If fewer items were found than the limit, continue at <<FS-04-3,FS-04-3>>. Otherwise continue at <<FS-04-4,FS-04-4>>.
 - *[[FS-04-3]]FS-04-3* _(Entity-access)_ Read pilot-origin sessions from <<E-01,E-01 Session>> under the same eligibility conditions, ordered by <<E-01.9,E-01.9 lastActiveAt>> descending, and append until the limit is reached.
 - *[[FS-04-4]]FS-04-4* _(Entity-access)_ For each selected session, read its most recent exchange from <<E-02,E-02 Exchange>> (<<E-02.3,E-02.3 visitorContribution>>, <<E-02.4,E-02.4 sparringResponse>>). Which exchange to select is an open decision (xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] xref:L3-SE-02-display-client.adoc#TBC-04[TBC-04 Which exchange pair per session.]); it is made here and changing it does not affect xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client].
@@ -298,12 +298,12 @@ _Error cases:_
 
 _Call type:_ Synchronous +
 _Calling elements:_ xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] (xref:L3-SE-02-display-client.adoc#TO-01[TO-01 Retrieve display material]) +
-_Input:_ None. +
+_Input:_ An optional display-profile identifier (string; absent or unrecognised means the default profile). See xref:L3-SE-02-display-client.adoc#C-03[SE-02 C-03 display profiles]. +
 _Output:_ An ordered list of items, each carrying a session identifier, scenario statement, an optional refined title (`null` when none exists yet), one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total session count and a total exchange count (both integers) — every session and exchange ever recorded, live and pilot, not scoped to the items returned. +
-_Action:_ Calls <<TF-04,TF-04 Assemble display material>> for the item list, and separately counts all rows in <<E-01,E-01 Session>> and <<E-02,E-02 Exchange>> for the two totals — plain totals, not scoped to the sessions <<TF-04,TF-04 Assemble display material>> selects and not a selection or ordering decision, so they stay outside that function's policy. Returns all three immediately. +
+_Action:_ Resolves the display-profile identifier to that profile's item count, calls <<TF-04,TF-04 Assemble display material>> with it for the item list, and separately counts all rows in <<E-01,E-01 Session>> and <<E-02,E-02 Exchange>> for the two totals — plain totals, not scoped to the sessions <<TF-04,TF-04 Assemble display material>> selects and not a selection or ordering decision, so they stay outside that function's policy. Returns all three immediately. +
 _Error cases:_ None specific to this interface. An empty list is a valid response and occurs only when no pilot material has been imported.
 
-_This interface takes no parameters by design. Item count, ordering, exchange selection, and pilot fallback are all decided in <<TF-04,TF-04 Assemble display material>>, so that a change to any of them requires no change in xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] and no coordination between the two._
+_The one parameter this interface takes is the display-profile identifier, and it maps only to how many items are requested — a property of which physical screen is asking (xref:L3-SE-02-display-client.adoc#C-03[SE-02 C-03]). Ordering, exchange selection, and pilot fallback stay entirely in <<TF-04,TF-04 Assemble display material>>, unparameterised, so a change to any of them still needs no change in xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] and no coordination between the two. The profile-to-count mapping lives here, not in the client, which keeps xref:L3-SE-02-display-client.adoc#C-02[SE-02's no-policy constraint] intact._
 
 === [[TI-05]]TI-05 Import pilot material
 

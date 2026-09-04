@@ -430,7 +430,7 @@ A second distinction the instruction must also get right, found in testing: stat
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="FS-04-1"></a>FS-04-1</strong> <em>(Entity-access)</em> Read live-origin sessions from <a href="#E-01">E-01 Session</a> where <a href="#E-01.6">E-01.6 displayable</a> (displayable) is true and at least one exchange exists, ordered by <a href="#E-01.9">E-01.9 lastActiveAt</a> (lastActiveAt) descending, up to the item limit.</p>
+<p><strong><a id="FS-04-1"></a>FS-04-1</strong> <em>(Entity-access)</em> Read live-origin sessions from <a href="#E-01">E-01 Session</a> where <a href="#E-01.6">E-01.6 displayable</a> (displayable) is true and at least one exchange exists, ordered by <a href="#E-01.9">E-01.9 lastActiveAt</a> (lastActiveAt) descending, up to the item limit. The item limit is passed in by the caller (<a href="#TI-04">TI-04 Retrieve display material</a>, resolved from the requesting display profile; a default applies when none is given) — this function does not read it from configuration itself.</p>
 </li>
 <li>
 <p><strong><a id="FS-04-2"></a>FS-04-2</strong> <em>(Data-operation)</em> If fewer items were found than the limit, continue at <a href="#FS-04-3">FS-04-3</a>. Otherwise continue at <a href="#FS-04-4">FS-04-4</a>.</p>
@@ -672,13 +672,13 @@ Unlike the earlier design this superseded, the response&#8217;s condition list i
 <div class="paragraph">
 <p><em>Call type:</em> Synchronous<br>
 <em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> (<a href="L3-SE-02-display-client.html#TO-01">TO-01 Retrieve display material</a>)<br>
-<em>Input:</em> None.<br>
+<em>Input:</em> An optional display-profile identifier (string; absent or unrecognised means the default profile). See <a href="L3-SE-02-display-client.html#C-03">SE-02 C-03 display profiles</a>.<br>
 <em>Output:</em> An ordered list of items, each carrying a session identifier, scenario statement, an optional refined title (<code>null</code> when none exists yet), one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total session count and a total exchange count (both integers) — every session and exchange ever recorded, live and pilot, not scoped to the items returned.<br>
-<em>Action:</em> Calls <a href="#TF-04">TF-04 Assemble display material</a> for the item list, and separately counts all rows in <a href="#E-01">E-01 Session</a> and <a href="#E-02">E-02 Exchange</a> for the two totals — plain totals, not scoped to the sessions <a href="#TF-04">TF-04 Assemble display material</a> selects and not a selection or ordering decision, so they stay outside that function&#8217;s policy. Returns all three immediately.<br>
+<em>Action:</em> Resolves the display-profile identifier to that profile&#8217;s item count, calls <a href="#TF-04">TF-04 Assemble display material</a> with it for the item list, and separately counts all rows in <a href="#E-01">E-01 Session</a> and <a href="#E-02">E-02 Exchange</a> for the two totals — plain totals, not scoped to the sessions <a href="#TF-04">TF-04 Assemble display material</a> selects and not a selection or ordering decision, so they stay outside that function&#8217;s policy. Returns all three immediately.<br>
 <em>Error cases:</em> None specific to this interface. An empty list is a valid response and occurs only when no pilot material has been imported.</p>
 </div>
 <div class="paragraph">
-<p><em>This interface takes no parameters by design. Item count, ordering, exchange selection, and pilot fallback are all decided in <a href="#TF-04">TF-04 Assemble display material</a>, so that a change to any of them requires no change in <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> and no coordination between the two.</em></p>
+<p><em>The one parameter this interface takes is the display-profile identifier, and it maps only to how many items are requested — a property of which physical screen is asking (<a href="L3-SE-02-display-client.html#C-03">SE-02 C-03</a>). Ordering, exchange selection, and pilot fallback stay entirely in <a href="#TF-04">TF-04 Assemble display material</a>, unparameterised, so a change to any of them still needs no change in <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> and no coordination between the two. The profile-to-count mapping lives here, not in the client, which keeps <a href="L3-SE-02-display-client.html#C-02">SE-02&#8217;s no-policy constraint</a> intact.</em></p>
 </div>
 </div>
 <div class="sect2">

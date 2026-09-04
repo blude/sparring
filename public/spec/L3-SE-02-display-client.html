@@ -78,7 +78,7 @@
 <ul class="sectlevel2">
 <li><a href="#_c_01_layout_treatment_is_an_open_decision_organisational">9.1. C-01 Layout treatment is an open decision <em>(Organisational)</em></a></li>
 <li><a href="#_c_02_this_element_holds_no_selection_or_ordering_policy_technical">9.2. C-02 This element holds no selection or ordering policy <em>(Technical)</em></a></li>
-<li><a href="#_c_03_single_fixed_target_resolution_technical">9.3. C-03 Single fixed target resolution <em>(Technical)</em></a></li>
+<li><a href="#_c_03_fixed_target_resolution_one_of_a_set_of_named_display_profiles_technical">9.3. C-03 Fixed target resolution, one of a set of named display profiles <em>(Technical)</em></a></li>
 <li><a href="#_c_04_no_build_step_technical">9.4. C-04 No build step <em>(Technical)</em></a></li>
 <li><a href="#_c_05_may_deploy_as_an_installed_web_app_on_ipad_instead_of_a_projector_technical">9.5. C-05 May deploy as an installed web app on iPad instead of a projector <em>(Technical)</em></a></li>
 </ul>
@@ -213,7 +213,7 @@
 <p>The whole projected area. No controls, no cursor, no navigation, no scroll. The surface is a fixed viewport whose contents change over time.</p>
 </div>
 <div class="paragraph">
-<p><strong>Baseline composition (agreed, build against this).</strong> <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> currently adopts a 3-column masonry arrangement: each session is placed once into whichever column has the least rendered height (not the fewest items), and stays there for its lifetime. Every item has the same shape: a title line (the refined title, falling back to the scenario line — <a href="#E-01.7">E-01.7 title</a>/<a href="#E-01.2">E-01.2 scenario</a>), then a visitor contribution, then the Sparring response. One exchange pair per session, so each session contributes exactly one item.</p>
+<p><strong>Baseline composition (agreed, build against this).</strong> <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> currently adopts a masonry arrangement (column count per display profile — see <a href="#C-03">C-03 Fixed target resolution, one of a set of named display profiles</a>): each session is placed once into whichever column holds the fewest items, ties broken by least rendered height, and stays there for its lifetime. Every item has the same shape: a title line (the refined title, falling back to the scenario line — <a href="#E-01.7">E-01.7 title</a>/<a href="#E-01.2">E-01.2 scenario</a>), then a visitor contribution, then the Sparring response. One exchange pair per session, so each session contributes exactly one item.</p>
 </div>
 <div class="paragraph">
 <p>Two properties of this baseline are settled and should not be revisited without a reason:</p>
@@ -224,7 +224,7 @@
 <p><strong>The exchange pair is the unit.</strong> A single turn shown alone conveys nothing about friction. The pair is the smallest thing that shows the mechanism.</p>
 </li>
 <li>
-<p><strong>Every item has the same shape.</strong> A design that renders the newest session differently from the rest requires two layouts, two truncation rules, and a decision about what happens when the newest session is unusually long. Uniformity removes all three. This is about shared <em>template and truncation rule</em>, not shared rendered height — height already varied with content length under the single-column baseline, and still does under masonry; that variance is what the column-balancing works with, not a departure from uniformity.</p>
+<p><strong>Every item has the same shape.</strong> A design that renders the newest session differently from the rest requires two layouts, two truncation rules, and a decision about what happens when the newest session is unusually long. Uniformity removes all three. This is about shared <em>template and truncation rule</em>, not shared rendered height — height already varied with content length under the single-column baseline, and still does under masonry; that variance is what breaks ties between columns holding the same number of items, not a departure from uniformity.</p>
 </li>
 </ul>
 </div>
@@ -336,9 +336,9 @@
 <p><em>Hybrid.</em> A large primary region plus a thin strip of recent items. Retains both properties at the cost of more layout work.</p>
 </li>
 <li>
-<p><em>Masonry (adopted, shipped).</em> <code>DISPLAY_COLUMNS</code> columns (2, config.php), each item placed once into the shortest-by-height column and never moved. Every item stays equally readable (no gradient, no cycling), and height-based placement gives a natural sense of accumulation without a timer. Weakness: strict global recency ordering is lost — a session&#8217;s column position no longer says "newer than everything below it," only "newer than what&#8217;s below it in its own column." Chosen for now because it needs no dwell-time rule (<a href="#TBC-03">TBC-03 Dwell time, if any.</a>) and no live-session interrupt rule (<a href="#TBC-02">TBC-02 Whether a live session interrupts.</a>), unlike rotation/hybrid.</p>
+<p><em>Masonry (adopted, shipped).</em> <code>DISPLAY_COLUMNS</code> columns (per display profile, config.php), each item placed once into the column holding the fewest items — ties broken by least rendered height — and never moved. Balancing by count first, height only as the tiebreaker: pure height-based placement skews badly whenever the number of items on the wall is below the columns' combined capacity and item heights vary, piling short items into one column and leaving the rest sparse. Every item stays equally readable (no gradient, no cycling), and filling the columns evenly gives a natural sense of accumulation without a timer. Weakness: strict global recency ordering is lost — a session&#8217;s column position no longer says "newer than everything below it," only "newer than what&#8217;s below it in its own column." Chosen for now because it needs no dwell-time rule (<a href="#TBC-03">TBC-03 Dwell time, if any.</a>) and no live-session interrupt rule (<a href="#TBC-02">TBC-02 Whether a live session interrupts.</a>), unlike rotation/hybrid.</p>
 <div class="paragraph">
-<p>Masonry has its own version of "does everyone get seen," distinct from <a href="#TBC-02">TBC-02 Whether a live session interrupts.</a>: with <code>DISPLAY_ITEM_LIMIT</code> items shown and selection by most-recent-activity (<code>Store::getDisplayableSessions</code>, <code>ORDER BY last_active_at DESC</code>), a session that goes quiet is <em>excluded</em>, not merely delayed — it can drop off the wall entirely if enough other sessions stay more active. Accepted as intentional: recency-eviction gives visitors a reason to keep engaging rather than submitting once and disengaging, which fits a piece about friction. Not revisited unless pilot observation shows visitors feeling unfairly dropped rather than prompted to continue.</p>
+<p>Masonry has its own version of "does everyone get seen," distinct from <a href="#TBC-02">TBC-02 Whether a live session interrupts.</a>: with the display profile&#8217;s item limit and selection by most-recent-activity (<code>Store::getDisplayableSessions</code>, <code>ORDER BY last_active_at DESC</code>), a session that goes quiet is <em>excluded</em>, not merely delayed — it can drop off the wall entirely if enough other sessions stay more active. Accepted as intentional: recency-eviction gives visitors a reason to keep engaging rather than submitting once and disengaging, which fits a piece about friction. Not revisited unless pilot observation shows visitors feeling unfairly dropped rather than prompted to continue.</p>
 </div>
 </li>
 </ul>
@@ -463,7 +463,7 @@
 <h3 id="_to_01_retrieve_display_material"><a class="anchor" href="#_to_01_retrieve_display_material"></a>6.1. <a id="TO-01"></a>TO-01 Retrieve display material</h3>
 <div class="paragraph">
 <p><em>Statement:</em> This interface obtains the set of sessions currently eligible for projection by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used on every polling cycle.<br>
-<em>Input:</em> None. The element requests current material and does not parameterise the request, so that item selection remains a backend decision and this element carries no policy.<br>
+<em>Input:</em> The display-profile identifier the element was loaded with (<code>?d=&lt;name&gt;</code> on the address; absent means the default profile), forwarded verbatim. This names <em>which physical screen</em> the request is for — it is not a selection, ordering, or prominence parameter. The profile-to-item-count mapping is resolved entirely in <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> (<a href="L3-SE-03-backend-service.html#TI-04">TI-04 Retrieve display material</a>), so item selection remains a backend decision and this element still carries no policy (<a href="#C-02">C-02 This element holds no selection or ordering policy</a>).<br>
 <em>Output:</em> An ordered list of items, each carrying a session identifier, a scenario statement, an optional refined title, one visitor contribution, one Sparring response, an origin value, and a recency marker; alongside the list, a total session count (integer, <a href="#E-02.1">E-02.1 sessionCount</a>) and a total exchange count (integer, <a href="#E-02.2">E-02.2 exchangeCount</a>).<br>
 <em>Error cases:</em> Service unavailable. Malformed or unexpected response shape.<br>
 <em>Authoritative spec:</em> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> element design, <a href="L3-SE-03-backend-service.html#TI-04">TI-04 Retrieve display material</a>.</p>
@@ -702,7 +702,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <p><em>Source:</em> <a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a>.<br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>, <a href="#TF-03">TF-03 Fit an item to the available space</a>, <a href="#TF-04">TF-04 Render the surface</a>.<br>
 <em>Acceptance criteria:</em> The baseline in section 3 is implemented first. <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> through <a href="#TBC-06">TBC-06 Whether pilot-origin items are visually</a> are resolved against real pilot transcripts on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> before opening.<br>
-<em>Consequence:</em> Rules out encoding a specific prominence treatment into <a href="#TO-01">TO-01 Retrieve display material</a>'s request or into <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s response shape. The interface must serve any of the three candidates without change.<br>
+<em>Consequence:</em> Rules out encoding a specific prominence treatment into <a href="#TO-01">TO-01 Retrieve display material</a>'s request or into <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s response shape. The interface must serve any of the three candidates without change. (The display-profile identifier <a href="#TO-01">TO-01 Retrieve display material</a> does carry is a screen id, not a prominence choice — see <a href="#C-03">C-03 Fixed target resolution, one of a set of named display profiles</a>.)<br>
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a></p>
 </div>
 </div>
@@ -717,12 +717,55 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect2">
-<h3 id="_c_03_single_fixed_target_resolution_technical"><a class="anchor" href="#_c_03_single_fixed_target_resolution_technical"></a>9.3. <a id="C-03"></a>C-03 Single fixed target resolution <em>(Technical)</em></h3>
+<h3 id="_c_03_fixed_target_resolution_one_of_a_set_of_named_display_profiles_technical"><a class="anchor" href="#_c_03_fixed_target_resolution_one_of_a_set_of_named_display_profiles_technical"></a>9.3. <a id="C-03"></a>C-03 Fixed target resolution, one of a set of named display profiles <em>(Technical)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>.<br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>.<br>
-<em>Acceptance criteria:</em> Renders correctly at the projection&#8217;s native resolution. No responsive behaviour below or above it.<br>
-<em>Consequence:</em> Rules out responsive layout work. Requires the projection resolution to be confirmed before <a href="#UI-01">UI-01 Projection surface</a> is finalised, which is a dependency on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> procurement being settled. Working assumption for now: 1920×1080 — not yet a confirmed <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> sign-off, but enough to build and tune the masonry treatment (<a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a>) against.<br>
+<em>Acceptance criteria:</em> The element renders against one of a small set of named <em>display profiles</em>, each targeting a single fixed resolution with no responsive behaviour within it. The active profile is chosen at run time by an address parameter (<code>?d=&lt;name&gt;</code>), defaulting to the exhibition profile when the parameter is absent or unrecognised. A profile fixes three things: the resolution it targets, the masonry column count (<code>DISPLAY_COLUMNS</code>), and the number of items the element requests from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> (see <a href="#TO-01">TO-01 Retrieve display material</a>). The profiles defined so far:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Profile</th>
+<th class="tableblock halign-left valign-top">Screen</th>
+<th class="tableblock halign-left valign-top">Resolution</th>
+<th class="tableblock halign-left valign-top">Columns</th>
+<th class="tableblock halign-left valign-top">Items</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dev</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development on a desktop monitor, landscape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">comfortable landscape (~1920×1080)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>venue</code> (default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The exhibition screen — an LG monitor mounted portrait (rotated 90°); the OS presents it already rotated, so the surface needs no rotation of its own</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1296×2304</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stadium</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A beamer — resolution not yet settled (<a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a>); carries the <code>dev</code> column count as a placeholder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TBC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em>Consequence:</em> Rules out responsive layout work — each profile is still a single fixed viewport under the no-responsive-behaviour rule; the profile set just replaces the earlier assumption of exactly one. <code>stadium&#8217;s resolution stays a dependency on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> being settled. Per-profile visual tuning (font size, spacing on the portrait `venue</code> surface) is done against the real screen, keyed off a profile marker on the surface.<br>
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a></p>
 </div>
 </div>
@@ -742,7 +785,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <p><em>Source:</em> TODO.md.<br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>.<br>
 <em>Acceptance criteria:</em> A web app manifest (<code>display: standalone</code>, <code>orientation: landscape</code>, home-screen icon) lets the element be added to an iPad home screen and opened without browser chrome; pinch-zoom, text selection, and touch callout are disabled so a stray touch on the (now touchscreen) surface can&#8217;t disrupt an unattended display.<br>
-<em>Consequence:</em> Does not relax <a href="#C-03">C-03 Single fixed target resolution</a> — the iPad renders at its own fixed viewport under the same no-responsive-behaviour rule, it just isn&#8217;t necessarily 1920×1080.<br>
+<em>Consequence:</em> Does not relax <a href="#C-03">C-03 Fixed target resolution, one of a set of named display profiles</a> — the iPad renders at its own fixed viewport under the same no-responsive-behaviour rule, as another fixed profile would.<br>
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a></p>
 </div>
 </div>
