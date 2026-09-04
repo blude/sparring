@@ -2,10 +2,11 @@
 
 /**
  * Smoke check: window.SparringArenaDiff.diff()'s pure add/update/remove
- * decision (public/assets/arena.js) — the diffing logic behind reconcile(),
- * pulled out so it's checkable without a DOM. Doesn't exercise the rest of
- * arena.js (poll/render/masonry placement) — that's all DOM/fetch, out of
- * scope for a Node script, same boundary smoke_sfx.js draws.
+ * decision and window.SparringArenaMasonry.pick()'s column choice
+ * (public/assets/arena.js) — the DOM-free logic behind reconcile() and
+ * pickColumn(), pulled out so it's checkable without a browser. Doesn't
+ * exercise the rest of arena.js (poll/render) — that's all DOM/fetch, out
+ * of scope for a Node script, same boundary smoke_sfx.js draws.
  * Run: node tests/smoke_arena.js
  */
 
@@ -22,6 +23,7 @@ const iifeStart = source.indexOf('(function () {');
 assert(iifeStart > 0, 'arena.js main IIFE marker not found — did its shape change?');
 eval(source.slice(0, iifeStart));
 const diff = window.SparringArenaDiff.diff;
+const pick = window.SparringArenaMasonry.pick;
 
 function item(id, overrides) {
     return Object.assign({ sessionId: id, scenario: 's', title: null, visitorContribution: 'v', sparringResponse: 'r', exchangeId: 1, replyCount: 0 }, overrides || {});
@@ -123,5 +125,43 @@ assert.strictEqual(result.toUpdate.length, 1);
 assert.strictEqual(result.toUpdate[0].sessionId, 'changed');
 assert.deepStrictEqual(result.toRemove, ['gone']);
 assert.strictEqual(result.next.size, 3); // kept + changed + new — gone dropped
+
+/*
+|--------------------------------------------------------------------------
+| SparringArenaMasonry.pick(): count-balanced, shortest-height tiebreak
+|--------------------------------------------------------------------------
+*/
+
+// empty columns, all same count: shortest (all 0) -> first column
+assert.strictEqual(pick([0, 0], [0, 0], 6), 0);
+
+// col 0 has one item, col 1 empty: fewer-items wins even though col 1 could be shorter anyway
+assert.strictEqual(pick([1, 0], [400, 0], 6), 1);
+
+// the regression this guards: col 0 short but already has more items -> col 1 still gets it
+assert.strictEqual(pick([3, 1], [300, 900], 6), 1);
+
+// equal counts -> shortest by height breaks the tie
+assert.strictEqual(pick([2, 2], [900, 400], 6), 1);
+assert.strictEqual(pick([2, 2], [400, 900], 6), 0);
+
+// 8 items dealt one at a time into 2 columns lands 4/4, not lopsided
+let cols2 = [0, 0];
+let h2 = [0, 0];
+for (let n = 0; n < 8; n++) {
+    const c = pick(cols2, h2, 6);
+    cols2[c]++;
+    h2[c] += 100; // uniform item height keeps this about the count logic
+}
+assert.deepStrictEqual(cols2, [4, 4]);
+
+// cap respected: a full column is skipped even when it's shortest
+assert.strictEqual(pick([6, 2], [10, 900], 6), 1);
+
+// every column at cap: fall back to column 0 rather than returning null
+assert.strictEqual(pick([6, 6], [500, 400], 6), 0);
+
+// 3 columns, uneven start: the one lone empty column wins
+assert.strictEqual(pick([2, 0, 2], [800, 0, 100], 6), 1);
 
 console.log('smoke_arena: ok');

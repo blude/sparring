@@ -44,6 +44,34 @@ window.SparringArenaDiff = {
     },
 };
 
+/**
+ * Masonry column choice for the next item, pulled out of pickColumn() below so
+ * it's unit-testable without a browser (tests/smoke_arena.js). `counts` and
+ * `heights` are per-column, `maxPerColumn` is the QR-06 cap.
+ *
+ * Count-balanced first, shortest-by-height as the tiebreaker: fill the columns
+ * with the fewest items, and among those pick the shortest. Height alone
+ * (the earlier rule) only balances once every column is near full — with
+ * fewer items than capacity and uneven item heights it piles short items
+ * into one column and leaves the rest sparse.
+ */
+window.SparringArenaMasonry = {
+    pick: function (counts, heights, maxPerColumn) {
+        var eligible = counts
+            .map(function (_c, i) { return i; })
+            .filter(function (i) { return counts[i] < maxPerColumn; });
+        if (eligible.length === 0) return 0; // cap hit everywhere: never leave an item unplaced
+
+        var minCount = Math.min.apply(null, eligible.map(function (i) { return counts[i]; }));
+        var best = null;
+        eligible.forEach(function (i) {
+            if (counts[i] !== minCount) return;
+            if (best === null || heights[i] < heights[best]) best = i;
+        });
+        return best;
+    },
+};
+
 (function () {
     'use strict';
 
@@ -95,16 +123,13 @@ window.SparringArenaDiff = {
         return cols;
     }
 
-    // Masonry placement: shortest-by-rendered-height among columns under the
-    // cap, not shortest-by-count — that's what lets items balance by actual
-    // content weight instead of forcing equal rows.
+    // Masonry placement: fill the columns holding the fewest items, and among
+    // those take the shortest by rendered height. See SparringArenaMasonry.pick
+    // above for why count-balance has to come before height.
     function pickColumn() {
-        var best = null;
-        columns.forEach(function (col) {
-            if (col.children.length >= MAX_PER_COLUMN) return;
-            if (!best || col.offsetHeight < best.offsetHeight) best = col;
-        });
-        return best || columns[0]; // cap only bites if LIMIT/COLUMNS accounting is off; never leave an item unplaced
+        var counts = columns.map(function (col) { return col.children.length; });
+        var heights = columns.map(function (col) { return col.offsetHeight; });
+        return columns[window.SparringArenaMasonry.pick(counts, heights, MAX_PER_COLUMN)];
     }
 
     function trim(text, n) {
