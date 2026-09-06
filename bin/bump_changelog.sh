@@ -4,10 +4,13 @@ set -euo pipefail
 # Appends commits since the last "docs: update CHANGELOG through <hash>"
 # commit to CHANGELOG.md (grouped under `## YYYY-MM-DD` headings, newest
 # first, merging into today's heading if it's already the first one), then
-# sets composer.json's version to 0.<N>.0 where N is the resulting count of
-# date headings — one 0.1 per distinct day of work, recomputed from the file
-# every run so version drift can't accumulate silently (see CHANGELOG.md
-# 2026-08-27 entries for how it drifted before this script existed).
+# sets composer.json's version to <MAJOR>.<N>.0 where N is the count of date
+# headings dated strictly after RELEASE_DATE — one 0.1 per distinct day of
+# work since the current release. Recomputed from the file every run so
+# version drift can't accumulate silently (see CHANGELOG.md 2026-08-27
+# entries for how it drifted before this script existed). MAJOR and
+# RELEASE_DATE are fixed below and updated by hand at each release milestone,
+# which resets N to 0 (see the `v*` git tags).
 #
 # Leaves the commit itself to the caller — this only edits the two files.
 #
@@ -71,8 +74,18 @@ for (( i = ${#date_order[@]} - 1; i >= 0; i-- )); do
     fi
 done
 
-heading_count=$(grep -cE '^## [0-9]{4}-[0-9]{2}-[0-9]{2}$' "$CHANGELOG")
-new_version="0.${heading_count}.0"
+# Both bumped by hand at each release milestone; the `v*` git tags are the
+# record. RELEASE_DATE is the day MAJOR shipped — the minor counts CHANGELOG
+# date headings *after* it, so it resets to 0 on a new release.
+MAJOR=1
+RELEASE_DATE=2026-09-04
+# ISO dates sort lexically, so a plain string `>` compares them correctly.
+# One awk pass keeps this BSD-awk-safe and can't trip pipefail on no match.
+heading_count=$(awk -v r="$RELEASE_DATE" '
+    /^## [0-9]{4}-[0-9]{2}-[0-9]{2}$/ { if ($2 > r) n++ }
+    END { print n + 0 }
+' "$CHANGELOG")
+new_version="${MAJOR}.${heading_count}.0"
 
 awk -v v="$new_version" '{ sub(/"version": *"[^"]*"/, "\"version\": \"" v "\""); print }' "$COMPOSER" > "$COMPOSER.tmp"
 mv "$COMPOSER.tmp" "$COMPOSER"
