@@ -25,6 +25,9 @@ declare(strict_types=1);
  *   --markdown  One human-readable transcript per session (YAML frontmatter
  *               of session properties + heading + turns); each session's
  *               frontmatter fence doubles as the between-session rule.
+ *               If output-path is a directory (exists, or ends with "/"),
+ *               writes one <createdAt-date>-<id>.md per session into it
+ *               instead of a single concatenated document.
  *   --index     One scannable line per session, fields joined by " - ".
  *               Default columns: id, date, title, exchanges. Override with
  *               --columns=<csv> from: id date datetime title exchanges
@@ -214,8 +217,26 @@ if ($markdown) {
             $lines[] = "**Sparring:** {$e['sparringResponse']}";
             $lines[] = '';
         }
-        $docs[] = implode("\n", $lines);
+        $docs[$sid] = implode("\n", $lines);
     }
+
+    // A directory output-path (an existing dir, or a path ending in "/") splits
+    // the export into one file per session — <createdAt-date>-<id>.md — so the
+    // files sort chronologically in a listing. Anything else keeps the single
+    // concatenated document.
+    $splitDir = $outputPath !== null && (is_dir($outputPath) || str_ends_with($outputPath, '/'));
+    if ($splitDir) {
+        if (!is_dir($outputPath)) {
+            mkdir($outputPath, 0777, true);
+        }
+        foreach ($docs as $sid => $doc) {
+            $date = isset($sessionsById[$sid]) ? substr($sessionsById[$sid]['createdAt'], 0, 10) : 'nodate';
+            file_put_contents(rtrim($outputPath, '/') . "/{$date}-{$sid}.md", $doc . "\n");
+        }
+        fwrite(STDERR, sprintf("exported %d session(s) to %s\n", count($docs), $outputPath));
+        exit;
+    }
+
     // Each doc opens with its own `---` frontmatter fence, which doubles as the
     // between-session rule — no extra separator needed.
     $out = implode("\n", $docs);
