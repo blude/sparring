@@ -2,8 +2,63 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-09-06
+
+- `e2bb56e` build(deps): sync composer.lock content-hash with composer.json
+- `b6b7e3d` docs(export): note the --markdown dir target in README
+- `876ff6d` feat(export): split --markdown into one file per session on a dir target
+- `884fc56` fix(arena): make bottom scrim theme-aware
+- `3de8b13` build(bump-changelog): version as <MAJOR>.<days-since-release>.0
+- `0ba3dae` chore(release): 1.0.0
+
+## 2026-09-04
+
+- `f2a1bac` feat(config): add opening sparring scenarios
+- `2722c9d` style(arena): widen reply-qr to 4rem
+- `38625a1` feat(arena): fade overflow at bottom viewport edge with a white scrim
+- `d0b398d` feat(export): --index mode, one scannable line per session
+- `791eadb` docs(spec): model ?d= display profiles and count-first masonry
+- `fb6cbb3` docs(spec): rebuild SE-04 html to match source
+- `015e5cc` fix(arena): keep masonry columns count-balanced, not height-only
+- `3409996` feat(arena): show 16 exchanges in the stadium display config
+- `1acb525` feat(arena): named display configs via ?d=
+- `b59b2b3` style(dojo): punch up the char-progress bump
+- `f21739b` style(dojo): slant the char-progress bar with skewX
+- `d9cbb8d` feat(dojo): play a charge sfx as the char-progress bar fills
+- `58c9a3d` style(i18n): replace em dashes in dojo.js strings with sentence breaks
+- `c96c2e1` style(css): enable hyphenation on content pages
+- `c6de806` style(css): decrease line-height from headings
+- `e37a2fb` style(dojo): lift avatar-alias color to match session-title shade
+- `ff55b7d` docs(prompts): log authorship-deflection edge case, bump to 0.26.0
+- `8266451` feat(prompts): deflect questions about who built Popov
+- `2c71683` style(dojo): normalize avatar-btn line-height to browser default
+- `79f3e60` style(dojo): pad session-title bottom to align with avatar row
+- `ded964b` fix(dojo): keep the char-progress pulse in phase across all lit bars
+
 ## 2026-09-03
 
+- `e171f18` docs(spec): reword SE-01 character-allowance display for the progress bar
+- `b75acf3` feat(dojo): replace composer char counter with a segmented progress bar
+- `2067397` style(dojo): rosé avatar disc, larger bottom-clipped emoji
+- `5fed0ce` fix(dojo): keep the playbook dismissed once the composer is engaged
+- `67174c8` style(dojo): enlarge header/history type, flush history scrollbar right
+- `9b88139` feat(dojo): show bare number in composer char counter
+- `9e06c07` feat(dojo): let history scroll behind the top bar
+- `db1d9b2` feat(dojo): show visitor alias above the session title, drop the popover
+- `f063a36` style(dojo): add subtle drop shadow to top-bar
+- `cfedf70` style(dojo): tighten top-bar padding, adjust corner radii
+- `7b2b813` style(dojo): remove dark circle background from avatar button
+- `633ef77` style(dojo): stack the turn-limit choice, feedback as primary
+- `201ab5c` feat(dojo): show the turn-limit choice when resuming a completed session
+- `fd01325` feat(philosophy): replace stance photo with gloves and building images
+- `24a192c` style(dojo): inset the red top bar with rounded corners
+- `234a295` Revert "feat(dojo): edge-to-edge top bar, red iOS status/address bar"
+- `fa033c1` feat(dojo): edge-to-edge top bar, red iOS status/address bar
+- `31f9846` feat(dojo): brand-red top bar with light controls
+- `56b124e` docs(spec): model session extension at the turn limit
+- `715d788` feat(dojo): inline extend-or-feedback choice at the turn limit
+- `d59bd86` feat(sparring): extend a session past the turn allowance
+- `40aa3e1` docs: update CHANGELOG through 04d4b18
 - `04d4b18` feat(dojo): restyle end-session button as transparent icon + "Finish" label
 - `bfc3d6a` fix(dojo): skip end-of-session dialogs when nothing was sent
 - `e8fd5e1` docs: engineering note on the dojo layout vs. the iOS software keyboard
