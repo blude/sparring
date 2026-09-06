@@ -68,7 +68,14 @@ works immediately off the pilot seed; the input client needs
 
 ```sh
 php bin/export.php dump.json    # full raw store dump; omit the arg to print to stdout
+php bin/export.php --markdown out.md         # one concatenated transcript document
+php bin/export.php --markdown transcripts/   # dir target: one <date>-<id>.md per session
 ```
+
+A directory output-path for `--markdown` (an existing directory, or a path
+ending in `/`) splits the export into one file per session instead of a
+single document. See `bin/export.php`'s header for the other formats
+(`--jsonl`, `--csv`, `--index`) and flags (`--session=`, `--consented-only`).
 
 ## Database maintenance
 
