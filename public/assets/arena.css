@@ -16,6 +16,7 @@
     --accent-bubble-text: color-mix(in srgb, var(--brand-red) 70%, black);  /* darkened, visitor bubble text */
 
     --bg: #fff;
+    --bg-fade: rgba(255, 255, 255, 0); /* zero-alpha --bg for the .gradient-bottom scrim; rgba(), not `transparent` (haze) */
     --fg: #111;
     --border: #ddd;
     --scenario-color: #666;
@@ -31,6 +32,7 @@
         --accent-bubble-text: color-mix(in srgb, var(--brand-red) 25%, white); /* lightened, visitor bubble text */
 
         --bg: #111;
+        --bg-fade: rgba(17, 17, 17, 0);
         --fg: #f2f2f2;
         --border: #333;
         --scenario-color: #999;
@@ -89,7 +91,7 @@ body {
     height: 60px;
     z-index: 2; /* above #wall (z-index: 1) */
     pointer-events: none;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+    background: linear-gradient(to bottom, var(--bg-fade), var(--bg));
 }
 
 .header {
