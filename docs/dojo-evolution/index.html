@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dojo screen — UI evolution</title>
+<style>
+:root{--bg:#f6f6f4;--fg:#1b1b1a;--mut:#6b6b68;--line:#dcdcd8;--card:#fff}
+@media(prefers-color-scheme:dark){:root{--bg:#141414;--fg:#e9e9e6;--mut:#9a9a96;--line:#2c2c2c;--card:#1c1c1c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{padding:28px 24px 8px}
+h1{margin:0 0 4px;font-size:20px}
+p.lede{margin:0;color:var(--mut);max-width:70ch}
+.wrap{overflow-x:auto;padding:16px 24px 48px}
+table{border-collapse:collapse;min-width:100%}
+th,td{border:1px solid var(--line);vertical-align:top;padding:10px}
+thead th{position:sticky;top:0;background:var(--bg);text-align:left;min-width:230px}
+thead th .h{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--mut)}
+thead th .d{font-size:12px;color:var(--mut)}
+tbody th{position:sticky;left:0;background:var(--bg);text-align:left;white-space:nowrap;font-weight:600}
+td{background:var(--card);text-align:center}
+td.empty{background:transparent;color:var(--mut);font-size:12px}
+img{width:230px;height:auto;border-radius:6px;border:1px solid var(--line);display:block}
+a{color:inherit}
+figcaption{display:none}
+</style></head><body>
+<header>
+<h1>Dojo screen — UI evolution</h1>
+<p class="lede">SE-01 visitor phone UI at five milestones, rendered in the iPhone&nbsp;17 iOS Simulator with mocked API data so every state is fully populated. Columns are commits, oldest left. Click a shot for full resolution.</p>
+</header>
+<div class="wrap"><table><thead><tr><th>state</th>
+<th><div>raw</div><div class="h">c4010c3</div><div class="d">2026-08-06</div><div class="d">Raw wireframe — history log + composer, no header, barely any CSS</div></th>
+<th><div>juicy</div><div class="h">092a292</div><div class="d">2026-08-12</div><div class="d">Juice added — visitor identity, glove/arrow icons, sound, the SPAR! title card</div></th>
+<th><div>figma</div><div class="h">bc20c98</div><div class="d">2026-08-13</div><div class="d">First Figma-designed screen — Playbook card, styled composer, send glove</div></th>
+<th><div>verdict</div><div class="h">2099aae</div><div class="d">2026-08-25</div><div class="d">Feedback UI — evaluation dialog, End-session confirm, gate-card fades</div></th>
+<th><div>latest</div><div class="h">12b5382</div><div class="d">2026-09-06</div><div class="d">Brand-red inset top bar, alias over title, segmented slanted char-progress bar</div></th>
+</tr></thead><tbody>
+<tr><th>Landing / empty session</th><td><a href="01-raw/landing.png"><img loading="lazy" src="01-raw/thumbs/landing.png" alt="01-raw — Landing / empty session"></a></td><td><a href="02-juicy/landing.png"><img loading="lazy" src="02-juicy/thumbs/landing.png" alt="02-juicy — Landing / empty session"></a></td><td><a href="03-figma/landing.png"><img loading="lazy" src="03-figma/thumbs/landing.png" alt="03-figma — Landing / empty session"></a></td><td><a href="04-verdict/landing.png"><img loading="lazy" src="04-verdict/thumbs/landing.png" alt="04-verdict — Landing / empty session"></a></td><td><a href="05-latest/landing.png"><img loading="lazy" src="05-latest/thumbs/landing.png" alt="05-latest — Landing / empty session"></a></td></tr>
+<tr><th>Consent gate</th><td><a href="01-raw/consent-gate.png"><img loading="lazy" src="01-raw/thumbs/consent-gate.png" alt="01-raw — Consent gate"></a></td><td><a href="02-juicy/consent-gate.png"><img loading="lazy" src="02-juicy/thumbs/consent-gate.png" alt="02-juicy — Consent gate"></a></td><td><a href="03-figma/consent-gate.png"><img loading="lazy" src="03-figma/thumbs/consent-gate.png" alt="03-figma — Consent gate"></a></td><td><a href="04-verdict/consent-gate.png"><img loading="lazy" src="04-verdict/thumbs/consent-gate.png" alt="04-verdict — Consent gate"></a></td><td><a href="05-latest/consent-gate.png"><img loading="lazy" src="05-latest/thumbs/consent-gate.png" alt="05-latest — Consent gate"></a></td></tr>
+<tr><th>Active chat</th><td><a href="01-raw/active-chat.png"><img loading="lazy" src="01-raw/thumbs/active-chat.png" alt="01-raw — Active chat"></a></td><td><a href="02-juicy/active-chat.png"><img loading="lazy" src="02-juicy/thumbs/active-chat.png" alt="02-juicy — Active chat"></a></td><td><a href="03-figma/active-chat.png"><img loading="lazy" src="03-figma/thumbs/active-chat.png" alt="03-figma — Active chat"></a></td><td><a href="04-verdict/active-chat.png"><img loading="lazy" src="04-verdict/thumbs/active-chat.png" alt="04-verdict — Active chat"></a></td><td><a href="05-latest/active-chat.png"><img loading="lazy" src="05-latest/thumbs/active-chat.png" alt="05-latest — Active chat"></a></td></tr>
+<tr><th>Waiting for a reply</th><td><a href="01-raw/thinking.png"><img loading="lazy" src="01-raw/thumbs/thinking.png" alt="01-raw — Waiting for a reply"></a></td><td><a href="02-juicy/thinking.png"><img loading="lazy" src="02-juicy/thumbs/thinking.png" alt="02-juicy — Waiting for a reply"></a></td><td><a href="03-figma/thinking.png"><img loading="lazy" src="03-figma/thumbs/thinking.png" alt="03-figma — Waiting for a reply"></a></td><td><a href="04-verdict/thinking.png"><img loading="lazy" src="04-verdict/thumbs/thinking.png" alt="04-verdict — Waiting for a reply"></a></td><td><a href="05-latest/thinking.png"><img loading="lazy" src="05-latest/thumbs/thinking.png" alt="05-latest — Waiting for a reply"></a></td></tr>
+<tr><th>SPAR! title card (interstitial)</th><td class="empty">n/a</td><td><a href="02-juicy/title-card.png"><img loading="lazy" src="02-juicy/thumbs/title-card.png" alt="02-juicy — SPAR! title card (interstitial)"></a></td><td class="empty">n/a</td><td class="empty">n/a</td><td><a href="05-latest/title-card.png"><img loading="lazy" src="05-latest/thumbs/title-card.png" alt="05-latest — SPAR! title card (interstitial)"></a></td></tr>
+<tr><th>Reply-quote chip</th><td class="empty">n/a</td><td class="empty">n/a</td><td class="empty">n/a</td><td><a href="04-verdict/reply-quote.png"><img loading="lazy" src="04-verdict/thumbs/reply-quote.png" alt="04-verdict — Reply-quote chip"></a></td><td><a href="05-latest/reply-quote.png"><img loading="lazy" src="05-latest/thumbs/reply-quote.png" alt="05-latest — Reply-quote chip"></a></td></tr>
+<tr><th>Rejected message</th><td class="empty">n/a</td><td class="empty">n/a</td><td><a href="03-figma/rejected.png"><img loading="lazy" src="03-figma/thumbs/rejected.png" alt="03-figma — Rejected message"></a></td><td><a href="04-verdict/rejected.png"><img loading="lazy" src="04-verdict/thumbs/rejected.png" alt="04-verdict — Rejected message"></a></td><td><a href="05-latest/rejected.png"><img loading="lazy" src="05-latest/thumbs/rejected.png" alt="05-latest — Rejected message"></a></td></tr>
+<tr><th>End-session confirm dialog</th><td class="empty">n/a</td><td class="empty">n/a</td><td class="empty">n/a</td><td class="empty">n/a</td><td><a href="05-latest/confirm.png"><img loading="lazy" src="05-latest/thumbs/confirm.png" alt="05-latest — End-session confirm dialog"></a></td></tr>
+<tr><th>Evaluation dialog</th><td class="empty">n/a</td><td class="empty">n/a</td><td class="empty">n/a</td><td><a href="04-verdict/eval.png"><img loading="lazy" src="04-verdict/thumbs/eval.png" alt="04-verdict — Evaluation dialog"></a></td><td><a href="05-latest/eval.png"><img loading="lazy" src="05-latest/thumbs/eval.png" alt="05-latest — Evaluation dialog"></a></td></tr>
+<tr><th>Evaluation — thanks screen</th><td class="empty">n/a</td><td class="empty">n/a</td><td class="empty">n/a</td><td class="empty">n/a</td><td><a href="05-latest/eval-success.png"><img loading="lazy" src="05-latest/thumbs/eval-success.png" alt="05-latest — Evaluation — thanks screen"></a></td></tr>
+<tr><th>Turn limit reached</th><td class="empty">n/a</td><td class="empty">n/a</td><td class="empty">n/a</td><td class="empty">n/a</td><td><a href="05-latest/turn-limit.png"><img loading="lazy" src="05-latest/thumbs/turn-limit.png" alt="05-latest — Turn limit reached"></a></td></tr>
+<tr><th>Debug panel (?debug=1)</th><td class="empty">n/a</td><td class="empty">n/a</td><td class="empty">n/a</td><td class="empty">n/a</td><td><a href="05-latest/debug.png"><img loading="lazy" src="05-latest/thumbs/debug.png" alt="05-latest — Debug panel (?debug=1)"></a></td></tr>
+</tbody></table></div></body></html>
