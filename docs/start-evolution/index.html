@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Start screen — UI evolution</title>
+<style>
+:root{--bg:#f6f6f4;--fg:#1b1b1a;--mut:#6b6b68;--line:#dcdcd8;--card:#fff}
+@media(prefers-color-scheme:dark){:root{--bg:#141414;--fg:#e9e9e6;--mut:#9a9a96;--line:#2c2c2c;--card:#1c1c1c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{padding:28px 24px 8px}
+h1{margin:0 0 4px;font-size:20px}
+p.lede{margin:0;color:var(--mut);max-width:70ch}
+.wrap{overflow-x:auto;padding:16px 24px 48px}
+table{border-collapse:collapse;min-width:100%}
+th,td{border:1px solid var(--line);vertical-align:top;padding:10px}
+thead th{position:sticky;top:0;background:var(--bg);text-align:left;min-width:230px}
+thead th .h{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--mut)}
+thead th .d{font-size:12px;color:var(--mut)}
+tbody th{position:sticky;left:0;background:var(--bg);text-align:left;white-space:nowrap;font-weight:600}
+td{background:var(--card);text-align:center}
+td.empty{background:transparent;color:var(--mut);font-size:12px}
+img{width:230px;height:auto;border-radius:6px;border:1px solid var(--line);display:block}
+a{color:inherit}
+</style></head><body>
+<header>
+<h1>Start screen — UI evolution</h1>
+<p class="lede">Route "/" at five milestones, rendered in the iPhone&nbsp;17 iOS Simulator. The start screen is fully static (no JS, no API) — nothing mocked. Columns are commits, oldest left; rows are language. Click a shot for full resolution.</p>
+</header>
+<div class="wrap"><table><thead><tr><th>language</th>
+<th><div>first</div><div class="h">fe221dd</div><div class="d">2026-08-07</div><div class="d">First landing screen — inline-styled, red italic wordmark, plain button, Credits link</div></th>
+<th><div>figma</div><div class="h">90c248c</div><div class="d">2026-08-13</div><div class="d">UI-1 Figma mockup — gloves illustration, gradient wash, dotted ground, red CTA, philosophy link</div></th>
+<th><div>alpha</div><div class="h">b9fe76b</div><div class="d">2026-08-18</div><div class="d">Presented-by strip, ALPHA PREVIEW label, legal footer; gradient dropped</div></th>
+<th><div>i18n</div><div class="h">afd18da</div><div class="d">2026-08-20</div><div class="d">German translations wired in; EN/DE switcher top-left</div></th>
+<th><div>latest</div><div class="h">11e0814</div><div class="d">2026-09-07</div><div class="d">Reworked glossy gloves + bubble wordmark, EN/DE pill moved into the footer</div></th>
+</tr></thead><tbody>
+<tr><th>English</th><td><a href="01-first/en.png"><img loading="lazy" src="01-first/thumbs/en.png" alt="01-first English"></a></td><td><a href="02-figma/en.png"><img loading="lazy" src="02-figma/thumbs/en.png" alt="02-figma English"></a></td><td><a href="03-alpha/en.png"><img loading="lazy" src="03-alpha/thumbs/en.png" alt="03-alpha English"></a></td><td><a href="04-i18n/en.png"><img loading="lazy" src="04-i18n/thumbs/en.png" alt="04-i18n English"></a></td><td><a href="05-latest/en.png"><img loading="lazy" src="05-latest/thumbs/en.png" alt="05-latest English"></a></td></tr>
+<tr><th>Deutsch</th><td class="empty">n/a</td><td class="empty">n/a</td><td class="empty">n/a</td><td><a href="04-i18n/de.png"><img loading="lazy" src="04-i18n/thumbs/de.png" alt="04-i18n Deutsch"></a></td><td><a href="05-latest/de.png"><img loading="lazy" src="05-latest/thumbs/de.png" alt="05-latest Deutsch"></a></td></tr>
+</tbody></table></div></body></html>
