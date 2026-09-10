@@ -77,6 +77,16 @@ in AsciiDoc and built to `public/spec/` with `bin/build_spec.sh`.
   — a content-supplying element with no runtime interface of its own.
   Behavioral edits to the prompt should be checked against it too.
 
+## docs/adr — architecture decisions
+Numbered Nygard-lightweight records of implementation-level technical
+decisions (stack, tooling, reversible engineering calls) in `docs/adr/`,
+indexed by `docs/adr/README.md`. Distinct from `spec/`: the spec records
+what must be true about the installation and why; an ADR records how the
+code is built. Some ADRs cite a spec `AP-` principle they follow from.
+- New non-trivial technical decision → add an ADR (next free number,
+  never renumber; a reversed decision gets a new ADR that supersedes the
+  old one). Behavioral/product decisions → `spec/`.
+
 ## prompts/sparring.md
 Editing this file: log it in `prompts/CHANGELOG.md` under `## Unreleased`.
 On commit, move that entry under a new dated/commit-hash heading.
