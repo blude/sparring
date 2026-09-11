@@ -114,7 +114,7 @@
 <p><strong>Element:</strong> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a><br>
 <strong>Element profile:</strong> Backend service / API<br>
 <strong>Parent:</strong> System Design Concept<br>
-<strong>Status:</strong> Draft</p>
+<strong>Status:</strong> Stable — no open TBCs remaining</p>
 </div>
 <div class="paragraph">
 <p><strong>Sections that apply.</strong> Goals, use cases, both technical interface sections, technical functions, entities, quality requirements, and constraints. User interfaces do not apply: this element has no human-facing surface. Its only human actor is <a href="L2-system-design-concept.html#UT-03">UT-03 Operator</a>, who reaches it through the operator interface (<a href="#TI-05">TI-05 Import pilot material</a>) rather than through a UI.</p>
@@ -439,7 +439,7 @@ A second distinction the instruction must also get right, found in testing: stat
 <p><strong><a id="FS-04-3"></a>FS-04-3</strong> <em>(Entity-access)</em> Read pilot-origin sessions from <a href="#E-01">E-01 Session</a> under the same eligibility conditions, ordered by <a href="#E-01.9">E-01.9 lastActiveAt</a> descending, and append until the limit is reached.</p>
 </li>
 <li>
-<p><strong><a id="FS-04-4"></a>FS-04-4</strong> <em>(Entity-access)</em> For each selected session, read its most recent exchange from <a href="#E-02">E-02 Exchange</a> (<a href="#E-02.3">E-02.3 visitorContribution</a>, <a href="#E-02.4">E-02.4 sparringResponse</a>). Which exchange to select is an open decision (<a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> <a href="L3-SE-02-display-client.html#TBC-04">TBC-04 Which exchange pair per session.</a>); it is made here and changing it does not affect <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a>.</p>
+<p><strong><a id="FS-04-4"></a>FS-04-4</strong> <em>(Entity-access)</em> For each selected session, read its most recent exchange from <a href="#E-02">E-02 Exchange</a> (<a href="#E-02.3">E-02.3 visitorContribution</a>, <a href="#E-02.4">E-02.4 sparringResponse</a>). Which exchange to select was an open decision (<a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> <a href="L3-SE-02-display-client.html#TBC-04">TBC-04 Which exchange pair per session.</a>, resolved), made here; changing it would not affect <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a>.</p>
 </li>
 <li>
 <p><strong><a id="FS-04-5"></a>FS-04-5</strong> <em>(Data-operation)</em> Build each item from the session&#8217;s scenario (<a href="#E-01.5">E-01.5 scenario</a>), its refined title if one exists yet (<a href="#E-01.12">E-01.12 title</a>; <code>null</code> otherwise — <a href="#TF-07">TF-07 Refine a session title</a> runs asynchronously, so this item is not blocked on it), the exchange pair, the origin (<a href="#E-01.4">E-01.4 origin</a>), and a recency position. Return the ordered list.</p>
@@ -1247,7 +1247,7 @@ The pair is stored as one record rather than as two turn records. This follows t
 <p><em>Source:</em> <a href="L2-system-design-concept.html#SC-04">SC-04 Generation is rate-limited and metered by the provider</a>.<br>
 <em>Applies to:</em> <a href="#TF-03">TF-03 Enforce request limits</a>, <a href="#TF-01">TF-01 Process a visitor turn</a>.<br>
 <em>Acceptance criteria:</em> The request rate threshold in <a href="#TF-03">TF-03 Enforce request limits</a> is set below the provider&#8217;s limit, so that visitors meet this element&#8217;s limit rather than the provider&#8217;s.<br>
-<em>Consequence:</em> Rules out unthrottled forwarding. Sets an upper bound on concurrent visitors, TBC once the threshold is chosen.<br>
+<em>Consequence:</em> Rules out unthrottled forwarding. Sets an upper bound on concurrent visitors: 10 requests per 60-second window per origin (<a href="#TF-03">TF-03 Enforce request limits</a>).<br>
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-04">SC-04 Generation is rate-limited and metered by the provider</a></p>
 </div>
 </div>
