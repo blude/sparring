@@ -10,7 +10,7 @@ v.1.0, 2026-06-19
 *Element:* xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] +
 *Element profile:* User-facing frontend (presentation only, no input) +
 *Parent:* System Design Concept +
-*Status:* Draft — 2 open TBCs remaining (EX-01-3 sustained-failure threshold, `stadium` profile resolution)
+*Status:* Draft — 1 open TBC remaining (`stadium` profile resolution)
 
 *Layout treatment is TO BE REFINED (xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]).* This document specifies a baseline complete enough to build against, and marks each open decision explicitly.
 
@@ -72,7 +72,7 @@ xref:L2-system-design-concept.adoc#UT-02[UT-02 Observing visitor] performs no ac
 
 - *[[EX-01-1]]EX-01-1* _(extends <<ST-01-1,ST-01-1>>)_ Retrieval fails. The element retains what it is currently showing and retries on the next interval. Nothing on the surface indicates the failure, because an error message on a gallery wall is worse than slightly stale content. _Outcome:_ Resume.
 - *[[EX-01-2]]EX-01-2* _(extends <<ST-01-2,ST-01-2>>)_ The retrieved material is identical to what is shown. The element does nothing. _Outcome:_ Terminate.
-- *[[EX-01-3]]EX-01-3* _(extends <<ST-01-1,ST-01-1>>)_ Retrieval has failed continuously for a sustained period. The element continues showing its last material indefinitely rather than clearing. The threshold at which this becomes distinguishable from normal operation is TBC. _Outcome:_ Resume.
+- *[[EX-01-3]]EX-01-3* _(extends <<ST-01-1,ST-01-1>>)_ Retrieval has failed continuously for a sustained period. The element continues showing its last material indefinitely rather than clearing. _Resolved: no threshold, no action._ The projector was never actually run at the exhibition (connectivity issues on-site), so this path never got exercised in practice. No threshold or operator alert was built, and none is judged worth building speculatively — a silent, indefinitely-stale wall is not a critical failure (the piece's actual interaction is on the visitor's own phone, xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client]; the wall is a bonus surface). Revisit only if a future exhibition actually runs the projection and this becomes a real operational problem. _Outcome:_ Resume.
 
 '''
 
