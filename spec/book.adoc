@@ -3,7 +3,7 @@ Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
 v1.1, 2026-09-10
 :doctype: book
 :toc:
-:toclevels: 3
+:toclevels: 4
 :sectnums:
 :sectnumlevels: 2
 :icons: font
