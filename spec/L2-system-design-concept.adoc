@@ -272,7 +272,7 @@ _Integration detail (authentication, request format, error taxonomy, retry polic
 
 == System scenarios
 
-=== SSc-01 — A visitor conducts a Sparring session
+=== SSc-01 A visitor conducts a Sparring session
 
 _Detail level:_ Detailed +
 _Achieves:_ <<SG-01,SG-01 Start a session from a personal device with no>>, <<SG-03,SG-03 Survive interruption of the visitor's session>>, <<SG-05,SG-05 Record every interaction with its origin fixed at>>, <<SG-07,SG-07 Gate public projection at the moment of submission>> +
@@ -357,7 +357,7 @@ turn limit instead of ending).
 - *[[SA-01-7]]SA-01-7* _(extends SSt-01-3)_ <<UT-01,UT-01 Participating visitor>> declines to agree to the terms of participation. Unlike retention and projection, this is not an opt-out the session can proceed without — the input surface stays unusable. _Outcome:_ Terminate.
 - *[[SA-01-8]]SA-01-8* _(extends <<SA-01-5,SA-01-5>>)_ At the turn limit <<UT-01,UT-01 Participating visitor>> chooses to keep going rather than end. <<SE-03,SE-03 Backend service>> lifts the session's turn ceiling by another allowance and <<SE-01,SE-01 Input client>> re-enables the input surface. The choice is offered again each time the raised ceiling is reached. _Outcome:_ Resume.
 
-=== SSc-02 — The projection presents current material
+=== SSc-02 The projection presents current material
 
 _Detail level:_ Narrative +
 _Achieves:_ <<SG-02,SG-02 Make turn-taking readable from across the room>>, <<SG-06,SG-06 Never present an empty surface>> +
@@ -370,7 +370,7 @@ _Realises:_ xref:L1-solution-design-concept.adoc#BP-02[BP-02 Recent sessions are
 - *[[SA-02-1]]SA-02-1* _(extends the assembly step)_ Fewer eligible live sessions exist than the projection can show. <<SE-03,SE-03 Backend service>> fills the remainder with pilot-origin material, ordered by recency within its own group. _Outcome:_ Alternative-success.
 - *[[SA-02-2]]SA-02-2* _(extends the request step)_ <<SE-02,SE-02 Display client>> cannot reach <<SE-03,SE-03 Backend service>>. It continues to display the last material it successfully retrieved rather than clearing the surface, and retries on the next interval. _Outcome:_ Resume.
 
-=== SSc-03 — The operator seeds pilot material
+=== SSc-03 The operator seeds pilot material
 
 _Detail level:_ Narrative +
 _Achieves:_ <<SG-05,SG-05 Record every interaction with its origin fixed at>>, <<SG-06,SG-06 Never present an empty surface>>
