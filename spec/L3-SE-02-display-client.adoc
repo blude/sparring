@@ -118,9 +118,9 @@ A header above the wall carries the logo, a live clock, and a total session/exch
 
 _Source:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]
 
-Each is deliberately deferred until real pilot transcripts can be seen on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] at exhibition viewing distance. None of them changes the interface xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] provides, so they can be resolved after the rest of the system works.
+Each was deliberately deferred until real pilot transcripts could be seen on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] at exhibition viewing distance. None of them changed the interface xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] provides, so they were resolved after the rest of the system worked. The exhibition has since run; five of six are resolved below. <<TBC-04,TBC-04 Which exchange pair per session.>> remains open.
 
-*[[TBC-01]]TBC-01 Treatment of prominence and recency.* Four candidates now exist; masonry is adopted as a working default, the other three remain open:
+*[[TBC-01]]TBC-01 Treatment of prominence and recency.* _Resolved: masonry._ Four candidates were considered; masonry shipped as the baseline and ran unchanged through the exhibition (`venue` display profile — 2 columns, 12-item limit, `config.php`). No pilot observation surfaced a reason to reconsider. The other three, for the record:
 
 - _Size gradient._ Newest item largest, older items progressively smaller and dimmer. Conveys accumulation well. Weakness: older items become texture rather than content, so most of the surface is not actually readable.
 - _Rotation._ One or two items at full size, cycling on a timer, with an indicator of how many others exist. Every item gets a turn at being readable. Weakness: loses the sense of accumulation, and requires a live-session priority rule so that a visitor who has just contributed sees their own exchange rather than waiting for the cycle.
@@ -129,15 +129,15 @@ Each is deliberately deferred until real pilot transcripts can be seen on xref:L
 +
 Masonry has its own version of "does everyone get seen," distinct from <<TBC-02,TBC-02 Whether a live session interrupts.>>: with the display profile's item limit and selection by most-recent-activity (`Store::getDisplayableSessions`, `ORDER BY last_active_at DESC`), a session that goes quiet is _excluded_, not merely delayed — it can drop off the wall entirely if enough other sessions stay more active. Accepted as intentional: recency-eviction gives visitors a reason to keep engaging rather than submitting once and disengaging, which fits a piece about friction. Not revisited unless pilot observation shows visitors feeling unfairly dropped rather than prompted to continue.
 
-*[[TBC-02]]TBC-02 Whether a live session interrupts.* Only applicable if <<TBC-01,TBC-01 Treatment of prominence and recency.>> resolves to rotation or hybrid. If a visitor's exchange does not appear promptly on the wall, the connection between typing and projection is lost, and that connection is much of what makes the piece an installation rather than a screen. Under the size-gradient baseline this is automatic and needs no rule. Under masonry, the analogous question is resolved above, not by this TBC.
+*[[TBC-02]]TBC-02 Whether a live session interrupts.* _Resolved: not applicable._ Only applicable if <<TBC-01,TBC-01 Treatment of prominence and recency.>> resolved to rotation or hybrid. It resolved to masonry instead, where the analogous question is answered above — no live-session interrupt rule was ever needed or built.
 
-*[[TBC-03]]TBC-03 Dwell time, if any.* A fixed interval will feel wrong in both directions: too long for a short exchange, too short for a dense one. Scaling to content length is the obvious alternative. Not decidable without real transcripts.
+*[[TBC-03]]TBC-03 Dwell time, if any.* _Resolved: not applicable._ Moot for the same reason as <<TBC-02,TBC-02 Whether a live session interrupts.>>: masonry items never rotate, so there is nothing to dwell on. No dwell-time constant exists in `config.php`.
 
-*[[TBC-04]]TBC-04 Which exchange pair per session.* xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] currently supplies the most recent, on the reasoning that friction has usually built by then. The most demonstrative pair may be the second or third. To be checked against pilot material. This is a change to xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#TF-04[TF-04 Assemble display material] if revised, not to this element.
+*[[TBC-04]]TBC-04 Which exchange pair per session.* _Still open._ xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] still supplies the most recent, unchecked against pilot material. A related but distinct item is open in `TODO.md`: suppressing a session's first exchange from the wall when it is only the opening scenario prompt (no friction to show yet) — not decided or built either. This is a change to xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#TF-04[TF-04 Assemble display material] if revised, not to this element.
 
-*[[TBC-05]]TBC-05 Item count and truncation.* How many items fit, and how a long contribution is trimmed. Begin with a fixed item count plus a character bound, and only measure rendered height if that proves inadequate. See <<TF-03,TF-03 Fit an item to the available space>>.
+*[[TBC-05]]TBC-05 Item count and truncation.* _Resolved: character bound._ Fixed item count per display profile (`itemLimit`, `config.php`) plus a per-side character bound shipped and ran for the full exhibition. Rendered-height measurement was never needed.
 
-*[[TBC-06]]TBC-06 Whether pilot-origin items are visually distinguishable.* They carry an origin value and could be marked. Leaving them unmarked keeps the surface uniform; marking them is more honest to an observer who assumes everything shown is live. Not urgent, but a decision rather than an oversight.
+*[[TBC-06]]TBC-06 Whether pilot-origin items are visually distinguishable.* _Resolved: left unmarked._ Origin stays off the normal surface, visible only behind the operator debug flag (`arena.js`, <<QR-07,QR-07 Diagnostic tag is available to an operator>>) — the "keep the surface uniform" option above.
 
 '''
 
@@ -303,7 +303,7 @@ _Rationale:_ Mirrors xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client
 
 _Source:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]. +
 _Applies to:_ <<UI-01,UI-01 Projection surface>>, <<TF-03,TF-03 Fit an item to the available space>>, <<TF-04,TF-04 Render the surface>>. +
-_Acceptance criteria:_ The baseline in section 3 is implemented first. <<TBC-01,TBC-01 Treatment of prominence and recency.>> through <<TBC-06,TBC-06 Whether pilot-origin items are visually>> are resolved against real pilot transcripts on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] before opening. +
+_Acceptance criteria:_ The baseline in section 3 was implemented first, then run at the exhibition on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup]. <<TBC-01,TBC-01 Treatment of prominence and recency.>>, <<TBC-02,TBC-02 Whether a live session interrupts.>>, <<TBC-03,TBC-03 Dwell time, if any.>>, <<TBC-05,TBC-05 Item count and truncation.>>, and <<TBC-06,TBC-06 Whether pilot-origin items are visually>> are resolved. <<TBC-04,TBC-04 Which exchange pair per session.>> remains open — not yet checked against pilot material. +
 _Consequence:_ Rules out encoding a specific prominence treatment into <<TO-01,TO-01 Retrieve display material>>'s request or into xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s response shape. The interface must serve any of the three candidates without change. (The display-profile identifier <<TO-01,TO-01 Retrieve display material>> does carry is a screen id, not a prominence choice — see <<C-03,C-03 Fixed target resolution, one of a set of named display profiles>>.) +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]
 
