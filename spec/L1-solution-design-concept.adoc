@@ -9,7 +9,7 @@ v.1.0, 2026-06-19
 
 *Solution:* Sparring Exhibition Object +
 *Venue:* Superraum, Dortmund +
-*Status:* Draft +
+*Status:* Stable — no open TBCs remaining +
 *Scope note:* Deliberately thin. This level exists to record _why_ the installation is being built and what it must be true from a non-technical perspective. No Digital Design Brief sits above it, so business constraints carry no `Refines → BRC-` relation. Those relations are omitted rather than pointed at IDs that do not exist.
 
 xref:index.adoc[Index] / *Solution Design Concept*
@@ -293,7 +293,7 @@ The projected layout was marked TO BE REFINED and decided against real pilot tra
 
 _Applies to:_ <<BP-02,BP-02 Recent sessions are shown to the room>>.
 
-_Acceptance criteria:_ Resolved, except one remaining item — see xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision] and its refinement xref:L3-SE-02-display-client.adoc#TBC-04[SE-02 TBC-04 Which exchange pair per session.].
+_Acceptance criteria:_ Resolved — see xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision].
 
 '''
 

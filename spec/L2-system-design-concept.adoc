@@ -9,7 +9,7 @@ v.1.0, 2026-06-19
 
 *System:* Sparring Exhibition Object +
 *Parent:* Solution Design Concept +
-*Status:* Draft +
+*Status:* Stable — no open TBCs remaining +
 *Scope note:* Deployment architecture (droplet sizing, web server configuration, SSL config, backup scheduling) belongs in a separate System Realization Concept and is deliberately absent here.
 
 xref:index.adoc[Index] / xref:L1-solution-design-concept.adoc[Solution Design Concept] / *System Design Concept*
@@ -27,7 +27,7 @@ _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-02[BG-02 Give visitors dire
 === [[SG-02]]SG-02 Make turn-taking readable from across the room
 
 The system shall present recent exchanges on a projected surface at a size and pacing that allows a standing observer to read a complete visitor contribution and its Sparring reply. +
-_Success criteria (qualitative):_ A complete exchange is legible at typical viewing distance in the exhibition space. Exact typography and layout: resolved (masonry, run unchanged through the exhibition — xref:L3-SE-02-display-client.adoc#TBC-01[SE-02 TBC-01]), except xref:L3-SE-02-display-client.adoc#TBC-04[SE-02 TBC-04 Which exchange pair per session.], which remains open. +
+_Success criteria (qualitative):_ A complete exchange is legible at typical viewing distance in the exhibition space. Exact typography and layout: resolved (masonry, run unchanged through the exhibition — xref:L3-SE-02-display-client.adoc#TBC-01[SE-02 TBC-01]). +
 _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-01[BG-01 Make Sparring's friction visible to an audience]
 
 === [[SG-03]]SG-03 Survive interruption of the visitor's session
@@ -477,8 +477,8 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BC-02[BC-02 Public user-generate
 
 _Source:_ xref:L1-solution-design-concept.adoc#BC-04[BC-04 Display design is not yet settled]. +
 _Applies to:_ <<SE-02,SE-02 Display client>> +
-_Acceptance criteria:_ Resolved against real pilot transcripts on <<HE-02,HE-02 Projection setup>> in the exhibition space, except xref:L3-SE-02-display-client.adoc#TBC-04[SE-02 TBC-04 Which exchange pair per session.], which remains open. +
-_Consequence:_ <<SE-02,SE-02 Display client>>'s element design specifies a baseline, now built and run through the exhibition; xref:L3-SE-02-display-client.adoc#TBC-04[SE-02 TBC-04 Which exchange pair per session.] is the one item still open. <<SE-03,SE-03 Backend service>>'s display interface must not encode assumptions specific to one layout. +
+_Acceptance criteria:_ Resolved against real pilot transcripts on <<HE-02,HE-02 Projection setup>> in the exhibition space. +
+_Consequence:_ <<SE-02,SE-02 Display client>>'s element design specifies a baseline, now built and run through the exhibition. <<SE-03,SE-03 Backend service>>'s display interface must not encode assumptions specific to one layout. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BC-04[BC-04 Display design is not yet settled]
 
 '''
