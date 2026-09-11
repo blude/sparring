@@ -10,7 +10,7 @@ v.1.0, 2026-06-19
 *Element:* xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] +
 *Element profile:* User-facing frontend (presentation only, no input) +
 *Parent:* System Design Concept +
-*Status:* Draft — 1 open TBC remaining (`stadium` profile resolution)
+*Status:* Stable — no open TBCs remaining
 
 *Layout treatment is TO BE REFINED (xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]).* This document specifies a baseline complete enough to build against, and marks each open decision explicitly.
 
@@ -326,10 +326,10 @@ _Acceptance criteria:_ The element renders against one of a small set of named _
 | Profile | Screen | Resolution | Columns | Items
 | `dev` | Development on a desktop monitor, landscape | comfortable landscape (~1920×1080) | 2 | 4
 | `venue` (default) | The exhibition screen — an LG monitor mounted portrait (rotated 90°); the OS presents it already rotated, so the surface needs no rotation of its own | 1296×2304 | 2 | 12
-| `stadium` | A beamer — resolution not yet settled (xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup]); carries the `dev` column count as a placeholder | TBC | 2 | 16
+| `stadium` | A beamer — never used; `venue` ran the exhibition instead (on-site connectivity issues took the projector out of use entirely). Resolution and column count stay unsettled placeholders. | _(unsettled placeholder)_ | 2 | 16
 |===
 
-_Consequence:_ Rules out responsive layout work — each profile is still a single fixed viewport under the no-responsive-behaviour rule; the profile set just replaces the earlier assumption of exactly one. `stadium`'s resolution stays a dependency on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] being settled. Per-profile visual tuning (font size, spacing on the portrait `venue` surface) is done against the real screen, keyed off a profile marker on the surface. +
+_Consequence:_ Rules out responsive layout work — each profile is still a single fixed viewport under the no-responsive-behaviour rule; the profile set just replaces the earlier assumption of exactly one. `stadium` was never run and stays a placeholder deliberately — not worth settling a resolution for a beamer that may never be used again; resolve it against the real hardware if and when a future exhibition actually uses one, same as `venue` was. Per-profile visual tuning (font size, spacing on the portrait `venue` surface) is done against the real screen, keyed off a profile marker on the surface. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]
 
 === [[C-04]]C-04 No build step _(Technical)_

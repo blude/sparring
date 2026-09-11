@@ -121,7 +121,9 @@ const DISPLAY_CONFIG_DEFAULT = 'venue';
 const DISPLAY_CONFIGS = [
     'dev'     => ['columns' => 2, 'itemLimit' => 4],   // LG monitor, comfortable landscape resolution
     'venue'   => ['columns' => 2, 'itemLimit' => 12],  // LG monitor rotated 90 degrees — 1296x2304 portrait, OS-rotated
-    // ponytail: beamer resolution TBC — column count is still a guess, itemLimit set per request
+    // ponytail: never used (venue ran the exhibition instead), left as an unsettled
+    // placeholder — resolve column count/resolution against real hardware if a
+    // future exhibition actually uses a beamer
     'stadium' => ['columns' => 2, 'itemLimit' => 16],
 ];
 
