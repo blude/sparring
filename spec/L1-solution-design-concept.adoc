@@ -289,11 +289,11 @@ _Acceptance criteria (qualitative):_ No routine task requires a person in the ro
 
 === [[BC-04]]BC-04 Display design is not yet settled _(Organisational)_
 
-The projected layout is marked TO BE REFINED and will be decided against real pilot transcripts on the actual projector.
+The projected layout was marked TO BE REFINED and decided against real pilot transcripts on the actual projector.
 
 _Applies to:_ <<BP-02,BP-02 Recent sessions are shown to the room>>.
 
-_Acceptance criteria:_ TBC.
+_Acceptance criteria:_ Resolved, except one remaining item — see xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision] and its refinement xref:L3-SE-02-display-client.adoc#TBC-04[SE-02 TBC-04 Which exchange pair per session.].
 
 '''
 

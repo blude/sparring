@@ -27,7 +27,7 @@ _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-02[BG-02 Give visitors dire
 === [[SG-02]]SG-02 Make turn-taking readable from across the room
 
 The system shall present recent exchanges on a projected surface at a size and pacing that allows a standing observer to read a complete visitor contribution and its Sparring reply. +
-_Success criteria (qualitative):_ A complete exchange is legible at typical viewing distance in the exhibition space. Exact typography and layout: TBC. +
+_Success criteria (qualitative):_ A complete exchange is legible at typical viewing distance in the exhibition space. Exact typography and layout: resolved (masonry, run unchanged through the exhibition — xref:L3-SE-02-display-client.adoc#TBC-01[SE-02 TBC-01]), except xref:L3-SE-02-display-client.adoc#TBC-04[SE-02 TBC-04 Which exchange pair per session.], which remains open. +
 _Satisfies:_ xref:L1-solution-design-concept.adoc#BG-01[BG-01 Make Sparring's friction visible to an audience]
 
 === [[SG-03]]SG-03 Survive interruption of the visitor's session
@@ -462,7 +462,7 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BC-01[BC-01 Build effort must no
 _Source:_ <<PE-01,PE-01 Language generation API>> provider terms. +
 _Applies to:_ <<SE-03,SE-03 Backend service>> +
 _Acceptance criteria:_ <<SE-03,SE-03 Backend service>> handles provider rate-limit and quota responses as expected conditions rather than faults, and its own limits are set below the provider's. +
-_Consequence:_ Rules out unthrottled request forwarding. Sets an upper bound on concurrent visitors, which is TBC. +
+_Consequence:_ Rules out unthrottled request forwarding. Sets an upper bound on concurrent visitors: 10 requests per 60-second window per origin (`RATE_LIMIT_MAX_REQUESTS`/`RATE_LIMIT_WINDOW_SECONDS`, config.php). +
 _Externally sourced:_ Yes
 
 === [[SC-05]]SC-05 Retention requires consent; projection requires consent, and only ever carries content that already passed suitability _(Legal-regulatory)_
@@ -477,8 +477,8 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BC-02[BC-02 Public user-generate
 
 _Source:_ xref:L1-solution-design-concept.adoc#BC-04[BC-04 Display design is not yet settled]. +
 _Applies to:_ <<SE-02,SE-02 Display client>> +
-_Acceptance criteria:_ TBC. To be resolved against real pilot transcripts on <<HE-02,HE-02 Projection setup>> in the exhibition space. +
-_Consequence:_ <<SE-02,SE-02 Display client>>'s element design specifies a baseline sufficient to build against and marks the layout treatment as TBC. <<SE-03,SE-03 Backend service>>'s display interface must not encode assumptions specific to one layout. +
+_Acceptance criteria:_ Resolved against real pilot transcripts on <<HE-02,HE-02 Projection setup>> in the exhibition space, except xref:L3-SE-02-display-client.adoc#TBC-04[SE-02 TBC-04 Which exchange pair per session.], which remains open. +
+_Consequence:_ <<SE-02,SE-02 Display client>>'s element design specifies a baseline, now built and run through the exhibition; xref:L3-SE-02-display-client.adoc#TBC-04[SE-02 TBC-04 Which exchange pair per session.] is the one item still open. <<SE-03,SE-03 Backend service>>'s display interface must not encode assumptions specific to one layout. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BC-04[BC-04 Display design is not yet settled]
 
 '''
