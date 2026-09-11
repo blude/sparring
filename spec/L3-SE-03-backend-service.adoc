@@ -10,7 +10,7 @@ v.1.0, 2026-06-19
 *Element:* xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] +
 *Element profile:* Backend service / API +
 *Parent:* System Design Concept +
-*Status:* Draft
+*Status:* Stable — no open TBCs remaining
 
 *Sections that apply.* Goals, use cases, both technical interface sections, technical functions, entities, quality requirements, and constraints. User interfaces do not apply: this element has no human-facing surface. Its only human actor is xref:L2-system-design-concept.adoc#UT-03[UT-03 Operator], who reaches it through the operator interface (<<TI-05,TI-05 Import pilot material>>) rather than through a UI.
 
@@ -543,7 +543,7 @@ _Implements:_ xref:L2-system-design-concept.adoc#SC-01[SC-01 PHP with a file-bac
 _Source:_ xref:L2-system-design-concept.adoc#SC-04[SC-04 Generation is rate-limited and metered by the provider]. +
 _Applies to:_ <<TF-03,TF-03 Enforce request limits>>, <<TF-01,TF-01 Process a visitor turn>>. +
 _Acceptance criteria:_ The request rate threshold in <<TF-03,TF-03 Enforce request limits>> is set below the provider's limit, so that visitors meet this element's limit rather than the provider's. +
-_Consequence:_ Rules out unthrottled forwarding. Sets an upper bound on concurrent visitors, TBC once the threshold is chosen. +
+_Consequence:_ Rules out unthrottled forwarding. Sets an upper bound on concurrent visitors: 10 requests per 60-second window per origin (<<TF-03,TF-03 Enforce request limits>>). +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-04[SC-04 Generation is rate-limited and metered by the provider]
 
 === [[C-03]]C-03 The operator path is not publicly reachable _(Security)_
