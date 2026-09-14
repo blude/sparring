@@ -46,7 +46,13 @@
 
 html, body {
     margin: 0;
-    height: 100vh;
+    /* 100vh resolves to Safari's large/toolbar-hidden viewport on iPad —
+       taller than what's actually visible with the tab/URL bar showing.
+       That grows body past the real viewport and pushes .gradient-bottom
+       off-screen, where overflow:hidden clips it (QR-06 static-display bug).
+       100dvh tracks the currently-visible viewport instead. No keyboard is
+       involved here (unlike dojo.css's --vvh case), so dvh alone is enough. */
+    height: 100dvh;
     width: 100vw;
     overflow: hidden;
     /* subtle dot-grid texture, matching start.css/dojo.css's background */
