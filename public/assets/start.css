@@ -118,6 +118,17 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
     .glove-bounce.bouncing { animation: none; }
+    .particle-burst { display: none; }
+}
+/* particles.js appends this canvas to <body> expecting a fixed full-viewport
+   overlay (see dojo.css's own copy of this rule) — without it the canvas
+   sits in normal document flow after the footer, off-screen. */
+.particle-burst {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 20; /* above .gate-card's 10 */
 }
 /* logo: real "Sparring" / "スパーリング" text stays in the DOM for a11y/SEO,
    visually replaced by the exported logotype PNG — typography is a deliberate
