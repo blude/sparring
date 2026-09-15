@@ -34,7 +34,7 @@ return [
     'start.footer.craft' => 'Craft with #DigitalMaterial &middot; <a href="/credits">Credits</a>',
     'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/privacy#cookies">Cookies</a> &middot; 🏳️‍⚧️',
     'start.egg.title' => 'Glove check!',
-    'start.egg.body' => 'You found the secret training montage. Five hits and you\'re already warmed up — imagine what you\'ll do in the dojo.',
+    'start.egg.body' => 'Five hits, one second. Save the rest for the dojo.',
     'start.egg.dismiss' => 'Got it',
 
     // --- dojo.php (SE-01) + dojo.js ---
