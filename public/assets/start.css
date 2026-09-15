@@ -104,6 +104,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 .glove-bounce[data-glove="l"] { background-image: url('img/glove-l.webp'); }
 .glove-bounce[data-glove="r"] { background-image: url('img/glove-r.webp'); }
