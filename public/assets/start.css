@@ -253,8 +253,24 @@ footer a { color: #666; }
     border-radius: 1.25rem;
     z-index: 10;
     text-align: left; /* body is text-align:center for the marketing copy above it; dojo's gate-cards never need this override since dojo's body isn't centered */
+    opacity: 1;
+    transition: opacity 300ms ease; /* same fade recipe as dojo.css's .gate-card, driven by the same .fading toggle */
 }
 .gate-card[hidden] { display: none; }
+.gate-card.fading { opacity: 0; }
+/* Spring scale-in on show, layered on top of the opacity fade — plays once
+   via a JS-added class (see start.js's showEggDialog), not looping. */
+.gate-card.bouncing-in {
+    animation: egg-dialog-in 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes egg-dialog-in {
+    0% { transform: translate(-50%, -50%) scale(0.7); }
+    60% { transform: translate(-50%, -50%) scale(1.05); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .gate-card.bouncing-in { animation: none; }
+}
 #egg-heading { margin: 0.25rem 0 0.5rem; font-size: 1.125rem; font-weight: 700; color: #fefefe; }
 #egg-description { margin: 0; line-height: 1.35; color: #ccc; }
 #egg-actions { margin-top: 0.75rem; } /* same spacing as dojo's #confirm-actions/#eval-actions */

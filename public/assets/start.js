@@ -34,6 +34,25 @@ window.SparringStartTaps = {
     var dismissBtn = document.getElementById('egg-dismiss');
     var tapTimestamps = [];
 
+    // Same fadeInGate/fadeOutGate choreography as dojo.js's gate-cards
+    // (opacity 0->1/1->0 via .fading, 300ms — see dojo.css's .gate-card
+    // transition), plus a one-shot spring scale-in on show only.
+    function showEggDialog() {
+        dialog.classList.add('fading');
+        dialog.hidden = false;
+        void dialog.offsetWidth; // commit the 0-opacity state before animating away from it
+        dialog.classList.add('bouncing-in');
+        requestAnimationFrame(function () {
+            dialog.classList.remove('fading');
+        });
+    }
+
+    function hideEggDialog() {
+        dialog.classList.remove('bouncing-in');
+        dialog.classList.add('fading');
+        setTimeout(function () { dialog.hidden = true; }, 300);
+    }
+
     gloves.forEach(function (glove) {
         glove.addEventListener('click', function (event) {
             window.SparringSfx.unlock(); // first tap of the session: user gesture AudioContext needs on iOS Safari
@@ -50,12 +69,10 @@ window.SparringStartTaps = {
             var result = window.SparringStartTaps.recordTap(tapTimestamps, Date.now());
             tapTimestamps = result.timestamps;
             if (result.triggered) {
-                dialog.hidden = false;
+                showEggDialog();
             }
         });
     });
 
-    dismissBtn.addEventListener('click', function () {
-        dialog.hidden = true;
-    });
+    dismissBtn.addEventListener('click', hideEggDialog);
 })();
