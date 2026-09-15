@@ -28,7 +28,7 @@ return [
     'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">AGB</a> &middot; <a href="/privacy">Datenschutz</a> &middot; <a href="/privacy#cookies">Cookies</a> &middot; 🏳️‍⚧️',
     'start.egg.title' => 'Handschuh-Check!',
     'start.egg.body' => 'Fünf Treffer, eine Sekunde. Heb dir den Rest fürs Dojo auf.',
-    'start.egg.dismiss' => 'Verstanden',
+    'start.egg.dismiss' => 'Wir sehen uns im Dojo',
 
     // --- dojo.php (SE-01) + dojo.js ---
     'dojo.title' => 'Dojo — Sparring',

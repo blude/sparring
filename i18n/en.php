@@ -35,7 +35,7 @@ return [
     'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/privacy#cookies">Cookies</a> &middot; 🏳️‍⚧️',
     'start.egg.title' => 'Glove check!',
     'start.egg.body' => 'Five hits, one second. Save the rest for the dojo.',
-    'start.egg.dismiss' => 'Got it',
+    'start.egg.dismiss' => 'See you in the dojo',
 
     // --- dojo.php (SE-01) + dojo.js ---
     'dojo.title' => 'Dojo — Sparring',
