@@ -248,15 +248,15 @@ footer a { color: #666; }
     border: 1px solid #333;
     color: #f2f2f2;
     color-scheme: dark;
-    padding: 1.25rem;
+    padding: 0.75rem;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
     border-radius: 1.25rem;
     z-index: 10;
     text-align: left; /* body is text-align:center for the marketing copy above it; dojo's gate-cards never need this override since dojo's body isn't centered */
 }
 .gate-card[hidden] { display: none; }
-#egg-heading { margin: 0 0 0.5rem; font-size: 1.125rem; font-weight: 700; color: #fefefe; }
-#egg-description { margin: 0 0 1rem; line-height: 1.4; color: #ccc; }
+#egg-heading { margin: 0.25rem 0 0.5rem; font-size: 1.125rem; font-weight: 700; color: #fefefe; }
+#egg-description { margin: 0; line-height: 1.35; color: #ccc; }
 #egg-actions { margin-top: 0.75rem; } /* same spacing as dojo's #confirm-actions/#eval-actions */
 #egg-dismiss {
     width: 100%;
