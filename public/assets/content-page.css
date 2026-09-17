@@ -21,7 +21,7 @@ a:visited { color: #7b5940; }
 header { text-align: center; }
 footer {
     margin-top: 2rem;
-    padding: 1rem 0 0;
+    padding: 2rem 0 0;
     border-top: 1px solid rgba(0,0,0,0.1);
     font-size: 0.8125rem;
     color: #666;
