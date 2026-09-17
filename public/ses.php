@@ -64,7 +64,7 @@ $scenarios = array_filter(
   <li class="scenario-card">
     <div class="scenario-card-row">
       <h2><?= htmlspecialchars($title, ENT_QUOTES) ?></h2>
-      <a class="start-btn" href="/dojo?o=<?= urlencode($id) ?>">Start sparring</a>
+      <a class="start-btn" href="/dojo?o=<?= urlencode($id) ?>">Start</a>
     </div>
     <details>
       <summary>Description</summary>
