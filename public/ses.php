@@ -27,7 +27,8 @@ $scenarios = array_filter(
     background: #fff;
 }
 .scenario-card h2 { margin: 0 0 0.375rem; font-size: 1.125rem; }
-.scenario-card p { margin: 0 0 0.875rem; font-size: 0.9375rem; color: #444; }
+.scenario-card summary { font-size: 0.9375rem; color: #444; cursor: pointer; }
+.scenario-card p { margin: 0.5rem 0 0.875rem; font-size: 0.9375rem; color: #444; }
 .scenario-card .start-btn {
     display: inline-block;
     padding: 0.625rem 1.25rem;
@@ -48,7 +49,10 @@ $scenarios = array_filter(
 <?php [$title, $blurb] = explode('. ', $prompt, 2); ?>
   <li class="scenario-card">
     <h2><?= htmlspecialchars($title, ENT_QUOTES) ?></h2>
-    <p><?= htmlspecialchars($blurb, ENT_QUOTES) ?></p>
+    <details>
+      <summary>Description</summary>
+      <p><?= htmlspecialchars($blurb, ENT_QUOTES) ?></p>
+    </details>
     <a class="start-btn" href="/dojo?o=<?= urlencode($id) ?>">Start sparring</a>
   </li>
 <?php endforeach; ?>
