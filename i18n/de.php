@@ -148,6 +148,9 @@ return [
     'privacy.cookies.p1' => 'Diese Seite verwendet ein einziges Cookie, das deine gewählte Sprache für bis zu ein Jahr speichert, damit sie nicht bei jedem Besuch erneut ausgewählt werden muss. Es werden keine Tracking-, Analyse- oder Werbe-Cookies eingesetzt.',
     'privacy.contact' => 'Bei Fragen zu dieser Erklärung oder deinen Daten wende dich an Sarah Puppin Pratti (<a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Privacy%20Policy">sarah.puppinpratti001@stud.fh-dortmund.de</a>).',
 
+    'ses.title' => 'Bewertungsszenarien — Sparring',
+    'ses.heading' => 'Bewertungsszenarien',
+
     'terms.title' => 'Nutzungsbedingungen — Sparring',
     'terms.ogDescription' => 'Nutzungsbedingungen für das Ausstellungsstück Sparring.',
     'terms.heading' => 'Nutzungsbedingungen',

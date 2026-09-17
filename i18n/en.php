@@ -155,6 +155,10 @@ return [
     'privacy.cookies.p1' => 'This site uses one cookie, storing your chosen language for up to a year, so it does not have to be re-selected on every visit. No tracking, analytics, or advertising cookies are used.',
     'privacy.contact' => 'For questions about this policy or your data, contact Sarah Puppin Pratti (<a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Privacy%20Policy">sarah.puppinpratti001@stud.fh-dortmund.de</a>).',
 
+    // --- ses.php ---
+    'ses.title' => 'Evaluation Scenarios — Sparring',
+    'ses.heading' => 'Evaluation Scenarios',
+
     // --- terms.php ---
     'terms.title' => 'Terms of Service — Sparring',
     'terms.ogDescription' => 'Terms of Service for the Sparring exhibition piece.',
