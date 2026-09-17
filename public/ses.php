@@ -19,11 +19,9 @@ $scenarios = array_filter(
 <link rel="stylesheet" href="<?= fasset('content-page.css') ?>">
 <?= webAppTags() ?>
 <style>
-/* Logo/heading/footer centered like start.php, scoped to this page only —
-   the other content pages (privacy/terms/credits/philosophy) keep
-   pageHeader()/pageFooter() left-aligned. */
-header, h1, footer { text-align: center; }
-footer .locale-switcher { margin-left: auto; margin-right: auto; }
+/* Header/footer are centered site-wide via content-page.css; this page's
+   own <h1> heading follows suit. */
+h1 { text-align: center; }
 .scenario-list {
     list-style: none;
     margin: 1.5rem 0;

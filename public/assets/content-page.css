@@ -18,12 +18,14 @@ body {
 h1, h2, h3, h4, h5, h6 { line-height: 1.125; -webkit-hyphens: none; hyphens: none; }
 a { color: #d32f2f; }
 a:visited { color: #7b5940; }
+header { text-align: center; }
 footer {
     margin-top: 2rem;
     padding: 1rem 0 0;
     border-top: 1px solid rgba(0,0,0,0.1);
     font-size: 0.8125rem;
     color: #666;
+    text-align: center;
 }
 footer p { margin: 0 0 1rem; }
 footer a { color: #666; }
@@ -39,7 +41,7 @@ footer a { color: #666; }
     border: 1px solid #ddd;
     border-radius: 999px;
     padding: 0.125rem;
-    margin: 0 0 1rem;
+    margin: 0 auto 1rem;
     background: #f0f0f0;
 }
 .locale-switcher a, .locale-switcher span { color: #888; text-decoration: none; padding: 0.5rem 0.75rem; }
