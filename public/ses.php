@@ -42,15 +42,14 @@ $scenarios = array_filter(
     font-size: 0.875rem;
     font-weight: 600;
     border-radius: 0.5rem;
-    border: 1.5px solid #d32f2f;
-    background: transparent;
+    background: rgba(211, 47, 47, 0.1);
     color: #d32f2f;
     text-decoration: none;
     transition: background 0.15s ease;
     -webkit-tap-highlight-color: transparent;
 }
-.scenario-card .start-btn:hover { background: rgba(211, 47, 47, 0.08); }
-.scenario-card .start-btn:active { background: rgba(211, 47, 47, 0.16); }
+.scenario-card .start-btn:hover { background: rgba(211, 47, 47, 0.16); }
+.scenario-card .start-btn:active { background: rgba(211, 47, 47, 0.24); }
 </style>
 </head>
 <body>
