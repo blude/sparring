@@ -32,7 +32,7 @@ return [
     'start.cta' => 'Start a new session',
     'start.learnMore' => 'Learn more about <a href="/philosophy">Sparring&rsquo;s philosophy</a>.',
     'start.footer.craft' => 'Craft with #DigitalMaterial &middot; <a href="/credits">Credits</a>',
-    'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/privacy#cookies">Cookies</a> &middot; 🏳️‍⚧️',
+    'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a> &middot; 🏳️‍⚧️',
     'start.egg.title' => 'Glove check!',
     'start.egg.body' => 'One, two, three… five hits. Whew! Warming yourself up, eh? Let\'s see if you can flex those design muscles too, champ.',
     'start.egg.dismiss' => 'See you in the dojo',

@@ -25,7 +25,7 @@ return [
     'start.cta' => 'Neue Sitzung starten',
     'start.learnMore' => 'Erfahre mehr über die <a href="/philosophy">Philosophie von Sparring</a>.',
     'start.footer.craft' => 'Craft mit #DigitalMaterial &middot; <a href="/credits">Credits</a>',
-    'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">AGB</a> &middot; <a href="/privacy">Datenschutz</a> &middot; <a href="/privacy#cookies">Cookies</a> &middot; 🏳️‍⚧️',
+    'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">AGB</a> &middot; <a href="/privacy">Datenschutz</a> &middot; 🏳️‍⚧️',
     'start.egg.title' => 'Handschuh-Check!',
     'start.egg.body' => 'Eins, zwei, drei… fünf Treffer. Puh! Wärmst du dich schon mal auf? Mal sehen, ob du auch deine Design-Muskeln spielen lassen kannst, Champ.',
     'start.egg.dismiss' => 'Wir sehen uns im Dojo',
