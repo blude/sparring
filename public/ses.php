@@ -29,6 +29,7 @@ h1 { text-align: center; }
     border: 1px solid #ddd;
     border-radius: 1rem;
     background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .scenario-card { padding: 1rem 1.25rem; }
 .scenario-card + .scenario-card { border-top: 1px solid #ddd; }
