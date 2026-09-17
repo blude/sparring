@@ -31,14 +31,18 @@ $scenarios = array_filter(
 .scenario-card p { margin: 0.5rem 0 0.875rem; font-size: 0.9375rem; color: #444; }
 .scenario-card .start-btn {
     display: inline-block;
-    padding: 0.625rem 1.25rem;
-    border-radius: 999px;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
     background: #d32f2f;
     color: #fff;
     text-decoration: none;
-    font-weight: 700;
+    transition: filter 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
 }
-.scenario-card .start-btn:active { background: #a92222; }
+.scenario-card .start-btn:hover { filter: brightness(1.1); }
+.scenario-card .start-btn:active { filter: brightness(0.85); }
 </style>
 </head>
 <body>
