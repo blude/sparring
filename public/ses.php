@@ -39,6 +39,7 @@ h1 { text-align: center; }
     gap: 1rem;
     list-style: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 .scenario-card summary::-webkit-details-marker { display: none; }
 .scenario-card .chevron {
