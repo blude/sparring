@@ -38,7 +38,17 @@ $scenarios = array_filter(
     cursor: pointer;
 }
 .scenario-card summary::-webkit-details-marker { display: none; }
-.scenario-card h2 { margin: 0; font-size: 1.125rem; min-width: 0; }
+.scenario-card .chevron {
+    flex-shrink: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid #888;
+    border-bottom: 2px solid #888;
+    transform: rotate(-45deg);
+    transition: transform 0.15s ease;
+}
+.scenario-card details[open] .chevron { transform: rotate(45deg); }
+.scenario-card h2 { flex: 1; margin: 0; font-size: 1.125rem; min-width: 0; }
 .scenario-card p { margin: 0.5rem 0 0; font-size: 0.9375rem; color: #444; }
 .scenario-card .start-btn {
     display: inline-block;
@@ -66,6 +76,7 @@ $scenarios = array_filter(
   <li class="scenario-card">
     <details>
       <summary>
+        <span class="chevron" aria-hidden="true"></span>
         <h2><?= htmlspecialchars($title, ENT_QUOTES) ?></h2>
         <a class="start-btn" href="/dojo?o=<?= urlencode($id) ?>">Start</a>
       </summary>
