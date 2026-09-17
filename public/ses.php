@@ -19,13 +19,16 @@ $scenarios = array_filter(
 <link rel="stylesheet" href="<?= fasset('content-page.css') ?>">
 <?= webAppTags() ?>
 <style>
-.scenario-list { list-style: none; margin: 1.5rem 0; padding: 0; display: grid; gap: 0.75rem; }
-.scenario-card {
-    padding: 1rem 1.25rem;
+.scenario-list {
+    list-style: none;
+    margin: 1.5rem 0;
+    padding: 0;
     border: 1px solid #ddd;
     border-radius: 1rem;
     background: #fff;
 }
+.scenario-card { padding: 1rem 1.25rem; }
+.scenario-card + .scenario-card { border-top: 1px solid #ddd; }
 .scenario-card-row {
     display: flex;
     align-items: center;
