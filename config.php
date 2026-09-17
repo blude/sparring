@@ -210,6 +210,20 @@ function resolve_opening_message(?string $id): ?string
     return OPENING_MESSAGE_PREFIX . OPENING_PROMPTS[$id];
 }
 
+// Exact match against the whitelist above — used to exempt a curated opener
+// from CONTRIBUTION_MAX_CHARS (Sparring::processTurn) without letting a
+// visitor bypass that cap by merely prefixing their own text with
+// OPENING_MESSAGE_PREFIX.
+function is_curated_opening_message(string $contribution): bool
+{
+    foreach (OPENING_PROMPTS as $prompt) {
+        if ($contribution === OPENING_MESSAGE_PREFIX . $prompt) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Locale (i18n)
