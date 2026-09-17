@@ -21,18 +21,19 @@ $scenarios = array_filter(
 <style>
 .scenario-list { list-style: none; margin: 1.5rem 0; padding: 0; display: grid; gap: 0.75rem; }
 .scenario-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
     padding: 1rem 1.25rem;
     border: 1px solid #ddd;
     border-radius: 1rem;
     background: #fff;
 }
-.scenario-card-info { min-width: 0; }
-.scenario-card h2 { margin: 0 0 0.375rem; font-size: 1.125rem; }
-.scenario-card summary { font-size: 0.9375rem; color: #444; cursor: pointer; }
+.scenario-card-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.scenario-card h2 { margin: 0; font-size: 1.125rem; min-width: 0; }
+.scenario-card summary { margin-top: 0.5rem; font-size: 0.9375rem; color: #444; cursor: pointer; }
 .scenario-card p { margin: 0.5rem 0 0.875rem; font-size: 0.9375rem; color: #444; }
 .scenario-card .start-btn {
     display: inline-block;
@@ -58,14 +59,14 @@ $scenarios = array_filter(
 <?php foreach ($scenarios as $id => $prompt): ?>
 <?php [$title, $blurb] = explode('. ', $prompt, 2); ?>
   <li class="scenario-card">
-    <div class="scenario-card-info">
+    <div class="scenario-card-row">
       <h2><?= htmlspecialchars($title, ENT_QUOTES) ?></h2>
-      <details>
-        <summary>Description</summary>
-        <p><?= htmlspecialchars($blurb, ENT_QUOTES) ?></p>
-      </details>
+      <a class="start-btn" href="/dojo?o=<?= urlencode($id) ?>">Start sparring</a>
     </div>
-    <a class="start-btn" href="/dojo?o=<?= urlencode($id) ?>">Start sparring</a>
+    <details>
+      <summary>Description</summary>
+      <p><?= htmlspecialchars($blurb, ENT_QUOTES) ?></p>
+    </details>
   </li>
 <?php endforeach; ?>
 </ul>
