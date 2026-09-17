@@ -1,16 +1,6 @@
 /* Shared styles for the plain content pages (philosophy/privacy/terms/credits) —
    was a byte-identical inline <style> block duplicated in all four. */
 
-/* Same self-hosted face dojo.css uses (only the ExtraBold Italic weight is
-   shipped — headings on these pages inherit that look). */
-@font-face {
-    font-family: 'RethinkSans';
-    src: url('fonts/RethinkSans-ExtraBoldItalic.woff2') format('woff2');
-    font-weight: 800;
-    font-style: italic;
-    font-display: swap;
-}
-
 body {
     font: 16px/1.5 system-ui, sans-serif;
     max-width: 40rem;
@@ -25,7 +15,7 @@ body {
         radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
         #fff;
 }
-h1, h2, h3, h4, h5, h6 { font-family: 'RethinkSans', system-ui, sans-serif; line-height: 1.125; -webkit-hyphens: none; hyphens: none; }
+h1, h2, h3, h4, h5, h6 { line-height: 1.125; -webkit-hyphens: none; hyphens: none; }
 a { color: #d32f2f; }
 a:visited { color: #7b5940; }
 footer {
