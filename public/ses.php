@@ -29,15 +29,17 @@ $scenarios = array_filter(
 }
 .scenario-card { padding: 1rem 1.25rem; }
 .scenario-card + .scenario-card { border-top: 1px solid #ddd; }
-.scenario-card-row {
+.scenario-card summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    list-style: none;
+    cursor: pointer;
 }
+.scenario-card summary::-webkit-details-marker { display: none; }
 .scenario-card h2 { margin: 0; font-size: 1.125rem; min-width: 0; }
-.scenario-card summary { margin-top: 0.5rem; font-size: 0.9375rem; color: #444; cursor: pointer; }
-.scenario-card p { margin: 0.5rem 0 0.875rem; font-size: 0.9375rem; color: #444; }
+.scenario-card p { margin: 0.5rem 0 0; font-size: 0.9375rem; color: #444; }
 .scenario-card .start-btn {
     display: inline-block;
     flex-shrink: 0;
@@ -62,12 +64,11 @@ $scenarios = array_filter(
 <?php foreach ($scenarios as $id => $prompt): ?>
 <?php [$title, $blurb] = explode('. ', $prompt, 2); ?>
   <li class="scenario-card">
-    <div class="scenario-card-row">
-      <h2><?= htmlspecialchars($title, ENT_QUOTES) ?></h2>
-      <a class="start-btn" href="/dojo?o=<?= urlencode($id) ?>">Start</a>
-    </div>
     <details>
-      <summary>Description</summary>
+      <summary>
+        <h2><?= htmlspecialchars($title, ENT_QUOTES) ?></h2>
+        <a class="start-btn" href="/dojo?o=<?= urlencode($id) ?>">Start</a>
+      </summary>
       <p><?= htmlspecialchars($blurb, ENT_QUOTES) ?></p>
     </details>
   </li>
