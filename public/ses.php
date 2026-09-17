@@ -15,7 +15,7 @@ $scenarios = array_filter(
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Choose a scenario — Sparring</title>
+<title>Evaluation Scenarios — Sparring</title>
 <link rel="stylesheet" href="<?= fasset('content-page.css') ?>">
 <?= webAppTags() ?>
 <style>
@@ -72,7 +72,7 @@ h1 { text-align: center; }
 </head>
 <body>
 <?= pageHeader() ?>
-<h1>Choose a scenario</h1>
+<h1>Evaluation Scenarios</h1>
 <ul class="scenario-list">
 <?php foreach ($scenarios as $id => $prompt): ?>
 <?php [$title, $blurb] = explode('. ', $prompt, 2); ?>
