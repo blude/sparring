@@ -172,6 +172,10 @@ body.display-venue {
     /* ponytail: no portrait tuning yet — add after first run on the panel */
 }
 
+body.display-stadium .exchange .reply-qr {
+    width: 6rem; /* beamer viewing distance — 4rem baseline too small to scan (QR-06) */
+}
+
 .exchange {
     display: flex;
     flex-direction: column;
