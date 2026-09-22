@@ -93,7 +93,7 @@
 <p><strong>Element:</strong> <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a><br>
 <strong>Element profile:</strong> User-facing frontend (presentation only, no input)<br>
 <strong>Parent:</strong> System Design Concept<br>
-<strong>Status:</strong> Draft.</p>
+<strong>Status:</strong> Stable — no open TBCs remaining</p>
 </div>
 <div class="paragraph">
 <p><strong>Layout treatment is TO BE REFINED (<a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a>).</strong> This document specifies a baseline complete enough to build against, and marks each open decision explicitly.</p>
@@ -192,7 +192,7 @@
 <p><strong><a id="EX-01-2"></a>EX-01-2</strong> <em>(extends <a href="#ST-01-2">ST-01-2</a>)</em> The retrieved material is identical to what is shown. The element does nothing. <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
-<p><strong><a id="EX-01-3"></a>EX-01-3</strong> <em>(extends <a href="#ST-01-1">ST-01-1</a>)</em> Retrieval has failed continuously for a sustained period. The element continues showing its last material indefinitely rather than clearing. The threshold at which this becomes distinguishable from normal operation is TBC. <em>Outcome:</em> Resume.</p>
+<p><strong><a id="EX-01-3"></a>EX-01-3</strong> <em>(extends <a href="#ST-01-1">ST-01-1</a>)</em> Retrieval has failed continuously for a sustained period. The element continues showing its last material indefinitely rather than clearing. <em>Resolved: no threshold, no action.</em> The projector was never actually run at the exhibition (connectivity issues on-site), so this path never got exercised in practice. No threshold or operator alert was built, and none is judged worth building speculatively — a silent, indefinitely-stale wall is not a critical failure (the piece&#8217;s actual interaction is on the visitor&#8217;s own phone, <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>; the wall is a bonus surface). Revisit only if a future exhibition actually runs the projection and this becomes a real operational problem. <em>Outcome:</em> Resume.</p>
 </li>
 </ul>
 </div>
@@ -319,10 +319,10 @@
 <p><em>Source:</em> <a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a></p>
 </div>
 <div class="paragraph">
-<p>Each is deliberately deferred until real pilot transcripts can be seen on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> at exhibition viewing distance. None of them changes the interface <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> provides, so they can be resolved after the rest of the system works.</p>
+<p>Each was deliberately deferred until real pilot transcripts could be seen on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> at exhibition viewing distance. None of them changed the interface <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> provides, so they were resolved after the rest of the system worked. The exhibition has since run; all six are resolved below.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-01"></a>TBC-01 Treatment of prominence and recency.</strong> Four candidates now exist; masonry is adopted as a working default, the other three remain open:</p>
+<p><strong><a id="TBC-01"></a>TBC-01 Treatment of prominence and recency.</strong> <em>Resolved: masonry.</em> Four candidates were considered; masonry shipped as the baseline and ran unchanged through the exhibition (<code>venue</code> display profile — 2 columns, 12-item limit, <code>config.php</code>). No pilot observation surfaced a reason to reconsider. The other three, for the record:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -344,19 +344,19 @@
 </ul>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-02"></a>TBC-02 Whether a live session interrupts.</strong> Only applicable if <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> resolves to rotation or hybrid. If a visitor&#8217;s exchange does not appear promptly on the wall, the connection between typing and projection is lost, and that connection is much of what makes the piece an installation rather than a screen. Under the size-gradient baseline this is automatic and needs no rule. Under masonry, the analogous question is resolved above, not by this TBC.</p>
+<p><strong><a id="TBC-02"></a>TBC-02 Whether a live session interrupts.</strong> <em>Resolved: not applicable.</em> Only applicable if <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> resolved to rotation or hybrid. It resolved to masonry instead, where the analogous question is answered above — no live-session interrupt rule was ever needed or built.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-03"></a>TBC-03 Dwell time, if any.</strong> A fixed interval will feel wrong in both directions: too long for a short exchange, too short for a dense one. Scaling to content length is the obvious alternative. Not decidable without real transcripts.</p>
+<p><strong><a id="TBC-03"></a>TBC-03 Dwell time, if any.</strong> <em>Resolved: not applicable.</em> Moot for the same reason as <a href="#TBC-02">TBC-02 Whether a live session interrupts.</a>: masonry items never rotate, so there is nothing to dwell on. No dwell-time constant exists in <code>config.php</code>.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-04"></a>TBC-04 Which exchange pair per session.</strong> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> currently supplies the most recent, on the reasoning that friction has usually built by then. The most demonstrative pair may be the second or third. To be checked against pilot material. This is a change to <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s <a href="L3-SE-03-backend-service.html#TF-04">TF-04 Assemble display material</a> if revised, not to this element.</p>
+<p><strong><a id="TBC-04"></a>TBC-04 Which exchange pair per session.</strong> <em>Resolved: most recent, unchanged.</em> Checked against the exhibition&#8217;s live data (49 sessions): most sessions never exceed one or two exchanges, so there is usually no alternative pair to choose from; in the sessions that ran three or more, Sparring&#8217;s pushback consistently sharpened with each turn rather than peaking early, so the most recent pair stayed the more demonstrative one. <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> keeps supplying it unchanged. (A related but distinct item stays open in <code>TODO.md</code>: suppressing a session&#8217;s first exchange from the wall when it is only the opening scenario prompt — a display-omission question, not a which-pair question, and doesn&#8217;t block this.)</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-05"></a>TBC-05 Item count and truncation.</strong> How many items fit, and how a long contribution is trimmed. Begin with a fixed item count plus a character bound, and only measure rendered height if that proves inadequate. See <a href="#TF-03">TF-03 Fit an item to the available space</a>.</p>
+<p><strong><a id="TBC-05"></a>TBC-05 Item count and truncation.</strong> <em>Resolved: character bound.</em> Fixed item count per display profile (<code>itemLimit</code>, <code>config.php</code>) plus a per-side character bound shipped and ran for the full exhibition. Rendered-height measurement was never needed.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-06"></a>TBC-06 Whether pilot-origin items are visually distinguishable.</strong> They carry an origin value and could be marked. Leaving them unmarked keeps the surface uniform; marking them is more honest to an observer who assumes everything shown is live. Not urgent, but a decision rather than an oversight.</p>
+<p><strong><a id="TBC-06"></a>TBC-06 Whether pilot-origin items are visually distinguishable.</strong> <em>Resolved: left unmarked.</em> Origin stays off the normal surface, visible only behind the operator debug flag (<code>arena.js</code>, <a href="#QR-07">QR-07 Diagnostic tag is available to an operator</a>) — the "keep the surface uniform" option above.</p>
 </div>
 <hr>
 </div>
@@ -701,7 +701,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 <div class="paragraph">
 <p><em>Source:</em> <a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a>.<br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>, <a href="#TF-03">TF-03 Fit an item to the available space</a>, <a href="#TF-04">TF-04 Render the surface</a>.<br>
-<em>Acceptance criteria:</em> The baseline in section 3 is implemented first. <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> through <a href="#TBC-06">TBC-06 Whether pilot-origin items are visually</a> are resolved against real pilot transcripts on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> before opening.<br>
+<em>Acceptance criteria:</em> The baseline in section 3 was implemented first, then run at the exhibition on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a>. <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> through <a href="#TBC-06">TBC-06 Whether pilot-origin items are visually</a> are all resolved.<br>
 <em>Consequence:</em> Rules out encoding a specific prominence treatment into <a href="#TO-01">TO-01 Retrieve display material</a>'s request or into <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s response shape. The interface must serve any of the three candidates without change. (The display-profile identifier <a href="#TO-01">TO-01 Retrieve display material</a> does carry is a screen id, not a prominence choice — see <a href="#C-03">C-03 Fixed target resolution, one of a set of named display profiles</a>.)<br>
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a></p>
 </div>
@@ -757,15 +757,15 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>stadium</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A beamer — resolution not yet settled (<a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a>); carries the <code>dev</code> column count as a placeholder</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TBC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A beamer — never used; <code>venue</code> ran the exhibition instead (on-site connectivity issues took the projector out of use entirely). Resolution and column count stay unsettled placeholders.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(unsettled placeholder)</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>Consequence:</em> Rules out responsive layout work — each profile is still a single fixed viewport under the no-responsive-behaviour rule; the profile set just replaces the earlier assumption of exactly one. <code>stadium&#8217;s resolution stays a dependency on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> being settled. Per-profile visual tuning (font size, spacing on the portrait `venue</code> surface) is done against the real screen, keyed off a profile marker on the surface.<br>
+<p><em>Consequence:</em> Rules out responsive layout work — each profile is still a single fixed viewport under the no-responsive-behaviour rule; the profile set just replaces the earlier assumption of exactly one. <code>stadium</code> was never run and stays a placeholder deliberately — not worth settling a resolution for a beamer that may never be used again; resolve it against the real hardware if and when a future exhibition actually uses one, same as <code>venue</code> was. Per-profile visual tuning (font size, spacing on the portrait <code>venue</code> surface) is done against the real screen, keyed off a profile marker on the surface.<br>
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a></p>
 </div>
 </div>

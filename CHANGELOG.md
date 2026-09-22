@@ -2,8 +2,83 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-09-17
+
+- `3d2278b` style(ses): add subtle shadow to scenario list
+- `f62e6fa` style(ses): suppress tap highlight on the summary row
+- `fe4c87d` feat(ses): i18n the page title and heading
+- `de54607` style(content-pages): increase footer padding-top to 2rem
+- `6df27ac` style(ses): rename heading/title to "Evaluation Scenarios"
+- `3b35ce0` style(content-pages): center header and footer site-wide
+- `065488c` style(ses): center logo, heading and footer like start.php
+- `b29ac6f` feat(ses): add a chevron before the title
+- `34ee2e7` feat(ses): tapping the title toggles the description
+- `798daf3` style(ses): shorten button label to "Start"
+- `a086d09` style(ses): merge scenario cards into one list with dividers
+- `5363c9c` style(ses): swap Start button border for a light red fill
+- `879757c` style(ses): ghost-style the Start sparring button
+- `11e6fd0` style(ses): move description below the title/button row
+- `834662d` style(ses): right-align Start button, centered against card content
+- `1fbf842` style(content-pages): drop RethinkSans from headings, use default font
+- `7236e3e` style(public): match scenario Start button to start.php's #start-btn
+- `1d443f6` feat(public): make scenario description collapsible
+- `1e0e70b` fix(public): use explicit Start sparring button on scenario cards
+- `3abff4f` feat(public): add scenario picker page for ses2-ses4
+- `cf75449` style(config): remove comma from ses4 scenario
+- `4a13130` feat(config): add opening prompts for sparring evaluation scenarios
+- `aba3e67` refactor(config): change existing OPENING_PROMPTS keys to string type
+- `6c72662` docs(spec): note curated-opener exemption from contribution char cap
+- `9066ea2` fix(sparring): exempt curated QR openers from contribution char cap
+- `f692406` fix(start): remove cookies link from footer
+
+## 2026-09-15
+
+- `d56e4a7` fix(start): update egg dialog message
+- `6c6be9d` fix(start): update egg dialog dismiss label
+- `7ffde29` fix(start): suppress mobile tap highlight on gloves
+- `8580a56` feat(start): bounce+fade in egg dialog, fade out on dismiss
+- `eefb12d` fix(start): tighten egg dialog copy
+- `048899a` fix(start): match egg-dialog spacing to dojo's gate-card exactly
+- `20324e8` fix(start): left-align egg-dialog copy, full-width centered dismiss
+- `4e80187` fix(start): position particle-burst canvas as fixed overlay
+- `639ce9d` feat(start): add glove tap easter egg
+
+## 2026-09-14
+
+- `c11d761` fix(arena): use 100dvh instead of 100vh for viewport height
+
+## 2026-09-11
+
+- `126b8cf` docs(spec): rebuild HTML for status/TBC changes
+- `167cd00` docs(spec): resolve stadium profile TBC, mark SE-02 stable
+- `7096bee` docs(spec): resolve SE-02 EX-01-3, no threshold needed
+- `944c0ff` docs(spec): mark L1/L2 status stable, layout decision fully closed
+- `48910d6` docs(spec): resolve SE-02 TBC-04 against real exhibition data
+- `ed17576` docs(spec): propagate SE-02 TBC resolutions and resolve SC-04 concurrency
+- `0ebdeaf` docs(spec): resolve SE-03 concurrency TBC, mark status stable
+- `ae6bde4` docs(spec): resolve 5 of 6 SE-02 layout TBCs post-exhibition
+- `0b32f04` docs(spec): mark SE-04 status stable, no open TBCs
+- `a74924c` docs(spec): rebuild specs
+- `1fb8495` fix(spec): exclude book.adoc from HTML build
+- `27fd11b` docs(spec): move Business goals one level up
+- `7e83509` docs(spec): add fourth level in toc this is done so certain deeply nested elements are shown
+- `bb129c4` docs(spec): remove extraneous em-dashes
+- `3b0a646` docs(spec): reduce sectnumlevels a lot of sub items in the table of contents already have an ID and number. adding section numbers only made that more confusing.
+- `eb8e471` feat(spec): add PDF book build target
+- `85d1514` docs(spec): remove stray chapter number
+
+## 2026-09-10
+
+- `0c4fd2e` docs(adr): start ADR log with 14 back-filled decisions
+
+## 2026-09-07
+
+- `e7a4ad0` docs: add start screen UI-evolution screenshot gallery
+- `11e0814` docs: add dojo screen UI-evolution screenshot gallery
+
 ## 2026-09-06
 
+- `12b5382` docs: update CHANGELOG through e2bb56e
 - `e2bb56e` build(deps): sync composer.lock content-hash with composer.json
 - `b6b7e3d` docs(export): note the --markdown dir target in README
 - `876ff6d` feat(export): split --markdown into one file per session on a dir target
@@ -217,6 +292,7 @@ Generated from git history. Grouped by commit date, newest first.
 
 ## 2026-08-24
 
+- `1e954cb` Store: note the exchange-pair-per-row schema decision and its scope bet (#1)
 - `68cdcda` build(spec): share one stylesheet instead of embedding it per page
 - `0355d13` build(spec): drop Asciidoctor's default footer
 - `976b1e0` docs(spec): add gate-logic flowchart to TF-01

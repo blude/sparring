@@ -14,3 +14,6 @@ __pycache__/
 /workspace-local/
 
 /evals/sparring/sparring-workspace/
+# Combined book PDF — built on demand by bin/build_spec_pdf.sh, not committed
+# (the HTML edition in the same dir IS committed).
+/public/spec/*.pdf

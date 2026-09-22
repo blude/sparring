@@ -9,7 +9,7 @@ v.1.0, 2026-06-19
 
 *Solution:* Sparring Exhibition Object +
 *Venue:* Superraum, Dortmund +
-*Status:* Draft +
+*Status:* Stable — no open TBCs remaining +
 *Scope note:* Deliberately thin. This level exists to record _why_ the installation is being built and what it must be true from a non-technical perspective. No Digital Design Brief sits above it, so business constraints carry no `Refines → BRC-` relation. Those relations are omitted rather than pointed at IDs that do not exist.
 
 xref:index.adoc[Index] / *Solution Design Concept*
@@ -36,9 +36,9 @@ A few visitors spent the session trying to argue the system out of its position 
 
 The recorded sessions now sit next to the thesis evaluation as a separate, lighter set of material. It is not a controlled study. It is a public record of what happens when the friction meets people who were not expecting it.
 
-=== Business goals
+== Business goals
 
-==== [[BG-01]]BG-01 Make Sparring's friction visible to an audience, not just to its user
+=== [[BG-01]]BG-01 Make Sparring's friction visible to an audience, not just to its user
 
 The installation shall put the exchange between learner and Sparring partner on a shared surface, so that the pedagogical mechanism is observable by people who are not the participant.
 
@@ -46,19 +46,19 @@ _Success criteria (qualitative):_ A bystander who reads one projected exchange c
 
 _Rationale:_ Legibility is a primary claim of the thesis. Until now it has only been evidenced through participant self-report after the fact.
 
-==== [[BG-02]]BG-02 Give visitors direct, unassisted first-hand experience of being sparred with
+=== [[BG-02]]BG-02 Give visitors direct, unassisted first-hand experience of being sparred with
 
 Any visitor shall be able to start and complete a session using only their own device, without registration, or staff assistance.
 
 _Success criteria (qualitative):_ A visitor with no prior context reaches their first Sparring response without asking anyone how the piece works.
 
-==== [[BG-03]]BG-03 Run unattended through exhibition hours
+=== [[BG-03]]BG-03 Run unattended through exhibition hours
 
 The installation shall remain available and populated without an operator present, and shall degrade visibly rather than silently when something fails.
 
 _Success criteria (quantitative):_ Available for the full duration of published opening hours across the exhibition period, with no manual intervention required to restore the projected display.
 
-==== [[BG-04]]BG-04 Produce a record of public interactions as secondary material
+=== [[BG-04]]BG-04 Produce a record of public interactions as secondary material
 
 Interactions shall be captured in a form that can be reviewed after the exhibition, clearly separated from the formal evaluation sessions.
 
@@ -289,11 +289,11 @@ _Acceptance criteria (qualitative):_ No routine task requires a person in the ro
 
 === [[BC-04]]BC-04 Display design is not yet settled _(Organisational)_
 
-The projected layout is marked TO BE REFINED and will be decided against real pilot transcripts on the actual projector.
+The projected layout was marked TO BE REFINED and decided against real pilot transcripts on the actual projector.
 
 _Applies to:_ <<BP-02,BP-02 Recent sessions are shown to the room>>.
 
-_Acceptance criteria:_ TBC.
+_Acceptance criteria:_ Resolved — see xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision].
 
 '''
 

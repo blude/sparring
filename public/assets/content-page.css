@@ -1,16 +1,6 @@
 /* Shared styles for the plain content pages (philosophy/privacy/terms/credits) —
    was a byte-identical inline <style> block duplicated in all four. */
 
-/* Same self-hosted face dojo.css uses (only the ExtraBold Italic weight is
-   shipped — headings on these pages inherit that look). */
-@font-face {
-    font-family: 'RethinkSans';
-    src: url('fonts/RethinkSans-ExtraBoldItalic.woff2') format('woff2');
-    font-weight: 800;
-    font-style: italic;
-    font-display: swap;
-}
-
 body {
     font: 16px/1.5 system-ui, sans-serif;
     max-width: 40rem;
@@ -25,15 +15,17 @@ body {
         radial-gradient(circle, rgba(0,0,0,0.04) 2px, transparent 2px) 0 0/16px 16px,
         #fff;
 }
-h1, h2, h3, h4, h5, h6 { font-family: 'RethinkSans', system-ui, sans-serif; line-height: 1.125; -webkit-hyphens: none; hyphens: none; }
+h1, h2, h3, h4, h5, h6 { line-height: 1.125; -webkit-hyphens: none; hyphens: none; }
 a { color: #d32f2f; }
 a:visited { color: #7b5940; }
+header { text-align: center; }
 footer {
     margin-top: 2rem;
-    padding: 1rem 0 0;
+    padding: 2rem 0 0;
     border-top: 1px solid rgba(0,0,0,0.1);
     font-size: 0.8125rem;
     color: #666;
+    text-align: center;
 }
 footer p { margin: 0 0 1rem; }
 footer a { color: #666; }
@@ -49,7 +41,7 @@ footer a { color: #666; }
     border: 1px solid #ddd;
     border-radius: 999px;
     padding: 0.125rem;
-    margin: 0 0 1rem;
+    margin: 0 auto 1rem;
     background: #f0f0f0;
 }
 .locale-switcher a, .locale-switcher span { color: #888; text-decoration: none; padding: 0.5rem 0.75rem; }

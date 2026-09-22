@@ -86,9 +86,9 @@
 </li>
 <li><a href="#_system_scenarios">4. System scenarios</a>
 <ul class="sectlevel2">
-<li><a href="#_ssc_01_a_visitor_conducts_a_sparring_session">4.1. SSc-01 — A visitor conducts a Sparring session</a></li>
-<li><a href="#_ssc_02_the_projection_presents_current_material">4.2. SSc-02 — The projection presents current material</a></li>
-<li><a href="#_ssc_03_the_operator_seeds_pilot_material">4.3. SSc-03 — The operator seeds pilot material</a></li>
+<li><a href="#_ssc_01_a_visitor_conducts_a_sparring_session">4.1. SSc-01 A visitor conducts a Sparring session</a></li>
+<li><a href="#_ssc_02_the_projection_presents_current_material">4.2. SSc-02 The projection presents current material</a></li>
+<li><a href="#_ssc_03_the_operator_seeds_pilot_material">4.3. SSc-03 The operator seeds pilot material</a></li>
 </ul>
 </li>
 <li><a href="#_quality_requirements">5. Quality requirements</a>
@@ -121,7 +121,7 @@
 <div class="paragraph">
 <p><strong>System:</strong> Sparring Exhibition Object<br>
 <strong>Parent:</strong> Solution Design Concept<br>
-<strong>Status:</strong> Draft<br>
+<strong>Status:</strong> Stable — no open TBCs remaining<br>
 <strong>Scope note:</strong> Deployment architecture (droplet sizing, web server configuration, SSL config, backup scheduling) belongs in a separate System Realization Concept and is deliberately absent here.</p>
 </div>
 <div class="paragraph">
@@ -145,7 +145,7 @@
 <h3 id="_sg_02_make_turn_taking_readable_from_across_the_room"><a class="anchor" href="#_sg_02_make_turn_taking_readable_from_across_the_room"></a>1.2. <a id="SG-02"></a>SG-02 Make turn-taking readable from across the room</h3>
 <div class="paragraph">
 <p>The system shall present recent exchanges on a projected surface at a size and pacing that allows a standing observer to read a complete visitor contribution and its Sparring reply.<br>
-<em>Success criteria (qualitative):</em> A complete exchange is legible at typical viewing distance in the exhibition space. Exact typography and layout: TBC.<br>
+<em>Success criteria (qualitative):</em> A complete exchange is legible at typical viewing distance in the exhibition space. Exact typography and layout: resolved (masonry, run unchanged through the exhibition — <a href="L3-SE-02-display-client.html#TBC-01">SE-02 TBC-01</a>).<br>
 <em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-01">BG-01 Make Sparring&#8217;s friction visible to an audience</a></p>
 </div>
 </div>
@@ -478,7 +478,7 @@ Dashed link marks the system boundary. Detailed interaction sequences are in sec
 <h2 id="_system_scenarios"><a class="anchor" href="#_system_scenarios"></a>4. System scenarios</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ssc_01_a_visitor_conducts_a_sparring_session"><a class="anchor" href="#_ssc_01_a_visitor_conducts_a_sparring_session"></a>4.1. SSc-01 — A visitor conducts a Sparring session</h3>
+<h3 id="_ssc_01_a_visitor_conducts_a_sparring_session"><a class="anchor" href="#_ssc_01_a_visitor_conducts_a_sparring_session"></a>4.1. SSc-01 A visitor conducts a Sparring session</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Detailed<br>
 <em>Achieves:</em> <a href="#SG-01">SG-01 Start a session from a personal device with no</a>, <a href="#SG-03">SG-03 Survive interruption of the visitor&#8217;s session</a>, <a href="#SG-05">SG-05 Record every interaction with its origin fixed at</a>, <a href="#SG-07">SG-07 Gate public projection at the moment of submission</a><br>
@@ -621,7 +621,7 @@ turn limit instead of ending).
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ssc_02_the_projection_presents_current_material"><a class="anchor" href="#_ssc_02_the_projection_presents_current_material"></a>4.2. SSc-02 — The projection presents current material</h3>
+<h3 id="_ssc_02_the_projection_presents_current_material"><a class="anchor" href="#_ssc_02_the_projection_presents_current_material"></a>4.2. SSc-02 The projection presents current material</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#SG-02">SG-02 Make turn-taking readable from across the room</a>, <a href="#SG-06">SG-06 Never present an empty surface</a><br>
@@ -645,7 +645,7 @@ turn limit instead of ending).
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ssc_03_the_operator_seeds_pilot_material"><a class="anchor" href="#_ssc_03_the_operator_seeds_pilot_material"></a>4.3. SSc-03 — The operator seeds pilot material</h3>
+<h3 id="_ssc_03_the_operator_seeds_pilot_material"><a class="anchor" href="#_ssc_03_the_operator_seeds_pilot_material"></a>4.3. SSc-03 The operator seeds pilot material</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#SG-05">SG-05 Record every interaction with its origin fixed at</a>, <a href="#SG-06">SG-06 Never present an empty surface</a></p>
@@ -699,7 +699,7 @@ turn limit instead of ending).
 <h3 id="_sqr_04_credentials_and_quota_are_protected_from_the_public_security"><a class="anchor" href="#_sqr_04_credentials_and_quota_are_protected_from_the_public_security"></a>5.4. <a id="SQR-04"></a>SQR-04 Credentials and quota are protected from the public <em>(Security)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
-<em>Acceptance criteria:</em> The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window (10 requests / 60 seconds — <code>RATE_LIMIT_MAX_REQUESTS</code>, <code>RATE_LIMIT_WINDOW_SECONDS</code>, config.php). Contribution length is bounded (600 characters — <code>CONTRIBUTION_MAX_CHARS</code>). Session length is bounded per allowance (16 exchanges — <code>TURN_ALLOWANCE</code>); at the limit the visitor may extend for another allowance (<a href="#SA-01-8">SA-01-8</a>), each extension a fresh bounded segment rather than an unbounded session.<br>
+<em>Acceptance criteria:</em> The provider credential is never transmitted to any client. Request volume is limited per origin over a rolling window (10 requests / 60 seconds — <code>RATE_LIMIT_MAX_REQUESTS</code>, <code>RATE_LIMIT_WINDOW_SECONDS</code>, config.php). Contribution length is bounded (600 characters — <code>CONTRIBUTION_MAX_CHARS</code>), except a curated opening prompt (<code>OPENING_PROMPTS</code>, config.php), which is vetted copy rather than visitor-typed text and so is exempt. Session length is bounded per allowance (16 exchanges — <code>TURN_ALLOWANCE</code>); at the limit the visitor may extend for another allowance (<a href="#SA-01-8">SA-01-8</a>), each extension a fresh bounded segment rather than an unbounded session.<br>
 <em>Externally sourced:</em> Yes (provider terms and cost exposure rather than a business quality requirement)</p>
 </div>
 </div>
@@ -770,7 +770,7 @@ turn limit instead of ending).
 <p><em>Source:</em> <a href="#PE-01">PE-01 Language generation API</a> provider terms.<br>
 <em>Applies to:</em> <a href="#SE-03">SE-03 Backend service</a><br>
 <em>Acceptance criteria:</em> <a href="#SE-03">SE-03 Backend service</a> handles provider rate-limit and quota responses as expected conditions rather than faults, and its own limits are set below the provider&#8217;s.<br>
-<em>Consequence:</em> Rules out unthrottled request forwarding. Sets an upper bound on concurrent visitors, which is TBC.<br>
+<em>Consequence:</em> Rules out unthrottled request forwarding. Sets an upper bound on concurrent visitors: 10 requests per 60-second window per origin (<code>RATE_LIMIT_MAX_REQUESTS</code>/<code>RATE_LIMIT_WINDOW_SECONDS</code>, config.php).<br>
 <em>Externally sourced:</em> Yes</p>
 </div>
 </div>
@@ -789,8 +789,8 @@ turn limit instead of ending).
 <div class="paragraph">
 <p><em>Source:</em> <a href="L1-solution-design-concept.html#BC-04">BC-04 Display design is not yet settled</a>.<br>
 <em>Applies to:</em> <a href="#SE-02">SE-02 Display client</a><br>
-<em>Acceptance criteria:</em> TBC. To be resolved against real pilot transcripts on <a href="#HE-02">HE-02 Projection setup</a> in the exhibition space.<br>
-<em>Consequence:</em> <a href="#SE-02">SE-02 Display client</a>'s element design specifies a baseline sufficient to build against and marks the layout treatment as TBC. <a href="#SE-03">SE-03 Backend service</a>'s display interface must not encode assumptions specific to one layout.<br>
+<em>Acceptance criteria:</em> Resolved against real pilot transcripts on <a href="#HE-02">HE-02 Projection setup</a> in the exhibition space.<br>
+<em>Consequence:</em> <a href="#SE-02">SE-02 Display client</a>'s element design specifies a baseline, now built and run through the exhibition. <a href="#SE-03">SE-03 Backend service</a>'s display interface must not encode assumptions specific to one layout.<br>
 <em>Refines:</em> <a href="L1-solution-design-concept.html#BC-04">BC-04 Display design is not yet settled</a></p>
 </div>
 <hr>

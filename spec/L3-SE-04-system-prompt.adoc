@@ -10,7 +10,7 @@ v.1.0, 2026-06-19
 *Element:* xref:L2-system-design-concept.adoc#SE-04[SE-04 System prompt] +
 *Element profile:* Other — behavioral specification, no runtime interface +
 *Parent:* System Design Concept +
-*Status:* Draft
+*Status:* Stable — no open TBCs remaining
 
 *Sections that apply.* Goals, technical functions, entities, quality requirements, and constraints. Use cases and user interfaces do not apply: no human actor reaches this element directly — its content is delivered as an input parameter on xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s own outbound call (xref:L3-SE-03-backend-service.adoc#TO-01[TO-01 Request a Sparring response] in that element's design), never through interfaces of its own.
 

@@ -450,6 +450,11 @@ main {
 }
 .gate-card[hidden] { display: none; } /* same explicit belt-and-suspenders as #playbook/#reply-quote/#title-card */
 .gate-card.fading { opacity: 0; }
+/* Global `a`/`a:visited` (line 58) are tuned for the light page background and
+   fail contrast against this card's #1a1a1a — lighten both for the ToS/Privacy
+   links in #retention's consent copy. */
+.gate-card a { color: #ff6b6b; }
+.gate-card a:visited { color: #c99a75; }
 
 #retention {
     /* z-index above #playbook (stacks above it wherever the two overlap —

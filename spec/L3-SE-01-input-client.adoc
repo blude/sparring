@@ -369,7 +369,7 @@ IMPORTANT: The device holds no consent record. The decision is sent to xref:L2-s
 
 '''
 
-== 8. Quality requirements
+== Quality requirements
 
 === [[QR-01]]QR-01 The in-progress state appears immediately _(Performance)_
 

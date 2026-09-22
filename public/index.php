@@ -8,6 +8,7 @@ declare(strict_types=1);
 $routes = [
     '/'                     => __DIR__ . '/start.php',
     '/dojo'                 => __DIR__ . '/dojo.php',
+    '/ses'                  => __DIR__ . '/ses.php',
     '/arena'                => __DIR__ . '/arena.php',
     '/credits'              => __DIR__ . '/credits.php',
     '/philosophy'           => __DIR__ . '/philosophy.php',
