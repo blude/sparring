@@ -1,0 +1,81 @@
+# Runs the same checks a contributor (or agent) runs locally, so a pushed
+# branch can't go green by skipping them. No real LLM calls: prompt quality
+# stays in evals/sparring/, run by hand (see its README).
+name: CI
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2' # composer.json's floor
+          extensions: pdo_sqlite, sqlite3
+          tools: composer
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: composer install --no-interaction --no-progress
+      - name: php -l (the project's only lint, per CLAUDE.md)
+        run: git ls-files -z '*.php' | xargs -0 -n1 php -l > /dev/null
+      - run: tests/run.sh
+
+  spec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      # Pinned to the version that built the committed public/spec/*.html,
+      # so the drift check below compares content, not generator output.
+      - run: gem install asciidoctor -v 2.0.26 --no-document
+      # Clear the generated pages first: build_spec.sh only overwrites, so a
+      # page whose .adoc source was deleted would otherwise go unnoticed.
+      - run: rm -f public/spec/*.html && bin/build_spec.sh
+      - name: public/spec is up to date with spec/
+        run: |
+          if [ -n "$(git status --porcelain public/spec)" ]; then
+            git status --short public/spec
+            echo "::error::public/spec/ is stale: run bin/build_spec.sh and commit the result"
+            exit 1
+          fi
+
+  commits:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Conventional Commits (.githooks/commit-msg on each PR commit)
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          # The base branch's copy of the hook, not the PR's: a PR could
+          # otherwise loosen the hook and pass its own check.
+          git show "$BASE:.githooks/commit-msg" > "$RUNNER_TEMP/commit-msg"
+          status=0
+          for sha in $(git rev-list --no-merges "$BASE..$HEAD"); do
+            git log -1 --format=%B "$sha" > "$RUNNER_TEMP/msg"
+            sh "$RUNNER_TEMP/commit-msg" "$RUNNER_TEMP/msg" || status=1
+          done
+          exit $status
+      - name: prompts/sparring.md changes carry a prompts/CHANGELOG.md entry
+        env:
+          RANGE: ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}
+        run: |
+          # Same rule as .githooks/pre-commit: an added, non-blank line.
+          if git diff --name-only "$RANGE" | grep -qx 'prompts/sparring.md' \
+             && ! git diff "$RANGE" -- prompts/CHANGELOG.md | grep '^+' | grep -v '^+++ ' \
+                  | sed 's/^+//' | grep -q '[^[:space:]]'; then
+            echo "::error::prompts/sparring.md changed without a prompts/CHANGELOG.md entry"
+            exit 1
+          fi

@@ -30,16 +30,33 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   matching — and `Store::searchCurriculumConcepts()`'s vocabulary-restricted
   turn-1 auto-grounding lookup, against `tests/fixtures/curriculum/`,
   verbatim excerpts of the real, gitignored `data/curriculum/` corpus, kept
-  small and committed so this stays reproducible on a fresh checkout). JS
+  small and committed so this stays reproducible on a fresh checkout),
+  `php tests/smoke_i18n.php` (`config.php`'s locale resolution, `t()`, and
+  `i18n/en.php`/`i18n/de.php` catalog parity). JS
   (Node only to run the
   check, not a project dependency): `node tests/smoke_juicy.js`
   (`public/assets/juicy.js`), `node tests/smoke_identity.js`
   (alias/avatar seed in `public/assets/identity.js`), `node tests/smoke_dojo.js`
   (`handleContributionResult`'s outcome table in `public/assets/dojo.js`),
   `node tests/smoke_arena.js` (the wall's add/update/remove diff in
-  `public/assets/arena.js`), and `node tests/smoke_sfx.js` (note-duration/
-  chord-detection logic in `public/assets/sfx.js`).
+  `public/assets/arena.js`), `node tests/smoke_sfx.js` (note-duration/
+  chord-detection logic in `public/assets/sfx.js`), and
+  `node tests/smoke_start.js` (the glove easter egg's tap-window helper in
+  `public/assets/start.js`). New `tests/smoke_*` files are picked up by
+  `tests/run.sh` automatically; add a line here too.
 - No linter configured — check changed files with `php -l <file>`.
+- CI (`.github/workflows/ci.yml`, ADR 0016) re-runs `php -l` on every PHP
+  file, `tests/run.sh`, a `public/spec/` drift check (rebuilt with
+  Asciidoctor 2.0.26, must match what's committed), and, on PRs, the two
+  git hooks below over every commit. Keep it green before pushing.
+- Claude Code on the web: `.claude/hooks/session-start.sh` wires
+  `core.hooksPath` at session start, then runs `composer install` in the
+  background (async), so tests and hooks work in a fresh container. If
+  `tests/run.sh` fails on a missing `vendor/autoload.php` in the first
+  seconds of a session, the install is still running: wait and re-run,
+  don't install by hand. `.claude/settings.json` pre-allows
+  the test/lint commands and denies `bin/deploy*.sh` and the destructive
+  `bin/` data scripts (reset/delete/prune) for agents.
 - `tests/run.sh` is plumbing only — it never calls a real LLM. Conversational/
   pedagogical quality of `prompts/sparring.md` itself is covered separately by
   `evals/sparring/` (multi-turn simulated-visitor eval suite, real Anthropic
@@ -51,6 +68,8 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   build ci revert`, imperative subject, one logical change per commit. A
   `.githooks/commit-msg` hook enforces this — `composer install` wires
   `core.hooksPath` to it automatically (see README Setup).
+  `.githooks/pre-commit` blocks a commit that stages `prompts/sparring.md`
+  without `prompts/CHANGELOG.md` (see the last section).
 - `bin/*.php` CLI scripts: CLI-only guard (`php_sapi_name() !== 'cli'`),
   `require config.php` + relevant `src/*.php`, plain positional `$argv[1]`
   or `in_array('--flag', $argv, true)` — no `getopt()`, no CLI arg library.
