@@ -24,8 +24,9 @@ prose in `CLAUDE.md`.
   file and `tests/run.sh` (PHP 8.2, the `composer.json` floor; Node 22).
   It also rebuilds `spec/` with a pinned Asciidoctor (2.0.26, the version
   that built the committed HTML) and fails if `public/spec/` changes. On
-  PRs it replays `.githooks/commit-msg` over each commit and checks the
-  prompt-changelog rule over the whole diff. No real LLM calls:
+  PRs it replays the base branch's `.githooks/commit-msg` (so a PR can't
+  loosen its own check) over each commit and checks the prompt-changelog
+  rule over the whole diff. No real LLM calls:
   `evals/sparring/` stays manual.
 - **Git hook:** `.githooks/pre-commit` enforces the prompt-changelog rule
   locally, same POSIX-sh/no-deps shape as `commit-msg`.
