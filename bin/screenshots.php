@@ -159,8 +159,13 @@ $server = proc_open(
 register_shutdown_function(static function () use ($server, $tmpDir): void {
     proc_terminate($server);
     proc_close($server);
-    foreach (glob("$tmpDir/*") ?: [] as $f) {
-        @unlink($f);
+    // Recursive: each Chrome shot leaves a whole profile directory in here.
+    $entries = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($tmpDir, FilesystemIterator::SKIP_DOTS),
+        RecursiveIteratorIterator::CHILD_FIRST
+    );
+    foreach ($entries as $entry) {
+        $entry->isDir() && !$entry->isLink() ? @rmdir($entry->getPathname()) : @unlink($entry->getPathname());
     }
     @rmdir($tmpDir);
 });
@@ -185,6 +190,8 @@ $shots = [
     ['ses', '/ses', PHONE],
     ['philosophy', '/philosophy', PHONE],
     ['credits', '/credits', PHONE],
+    ['privacy', '/privacy', PHONE],
+    ['terms', '/terms', PHONE],
     ['start-de', '/?lang=de', PHONE],
     ['arena', '/arena', WALL],
 ];
@@ -243,7 +250,11 @@ if ($useSimulator) {
 
 foreach ($shots as [$name, $path, $viewport]) {
     $png = "$outDir/$name.png";
-    [$code, $out] = $capture($base . $path, $viewport, $png);
+    // Explicit language on every shot: ?lang= sets a year-long locale cookie,
+    // which Simulator Safari keeps between shots and runs (Chrome gets a
+    // fresh profile per shot), and the device language would decide otherwise.
+    $url = $base . $path . (str_contains($path, 'lang=') ? '' : (str_contains($path, '?') ? '&' : '?') . 'lang=en');
+    [$code, $out] = $capture($url, $viewport, $png);
     if ($code !== 0 || !is_file($png) || filesize($png) === 0) {
         fail("capturing $path failed (exit $code):\n$out");
     }
