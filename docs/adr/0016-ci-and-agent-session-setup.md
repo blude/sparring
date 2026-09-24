@@ -30,8 +30,9 @@ prose in `CLAUDE.md`.
 - **Git hook:** `.githooks/pre-commit` enforces the prompt-changelog rule
   locally, same POSIX-sh/no-deps shape as `commit-msg`.
 - **Agent sessions:** `.claude/settings.json` is committed with a
-  SessionStart hook that runs `composer install` and wires
-  `core.hooksPath`, but only when `CLAUDE_CODE_REMOTE=true`; local
+  SessionStart hook that wires `core.hooksPath`, then runs
+  `composer install` asynchronously so the session isn't held up by it,
+  but only when `CLAUDE_CODE_REMOTE=true`; local
   checkouts are set up per README. It also has a permission allowlist for
   the test and lint commands and a denylist for `bin/deploy*.sh` and the
   destructive `bin/` data scripts.
@@ -46,6 +47,10 @@ prose in `CLAUDE.md`.
   the rebuilt output in the same change.
 - A whitespace-only prompt fix needs `git commit --no-verify` locally and
   would still be flagged by CI; the fix is a one-line changelog entry.
+- The async install races the session's first steps: `tests/run.sh`
+  fails on the missing autoloader for the first ~15 seconds of a cold
+  session. Accepted for faster startup; `CLAUDE.md` tells agents to wait
+  and re-run.
 - The permission denylist only guards agent tool calls. It isn't a
   security boundary: deploy credentials in `bin/deploy.env` stay the real
   gate.
