@@ -4,8 +4,15 @@ declare(strict_types=1);
 /**
  * M0 self-check: create DB, write a session + exchange, read back, verify
  * turn count and origin round-trip, verify rate limiting and display query.
- * Run: php tests/smoke_store.php
+ * Run: php -d zend.assertions=1 tests/smoke_store.php
  */
+
+// assert() is compiled out under zend.assertions=-1 (production php.ini):
+// refuse to run rather than pass without checking anything.
+if (ini_get('zend.assertions') !== '1') {
+    fwrite(STDERR, basename(__FILE__) . ": needs php -d zend.assertions=1 (tests/run.sh sets it)\n");
+    exit(1);
+}
 
 require __DIR__ . '/../src/Store.php';
 

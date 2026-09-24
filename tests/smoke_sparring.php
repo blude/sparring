@@ -7,8 +7,15 @@ declare(strict_types=1);
  * allowance, length, moderation, generation) — plus the pure
  * sessionStateFor()/isExpired() helpers. Uses a fake LlmClientInterface,
  * no network, no real API key. Real Store on a tmp SQLite path.
- * Run: php tests/smoke_sparring.php
+ * Run: php -d zend.assertions=1 tests/smoke_sparring.php
  */
+
+// assert() is compiled out under zend.assertions=-1 (production php.ini):
+// refuse to run rather than pass without checking anything.
+if (ini_get('zend.assertions') !== '1') {
+    fwrite(STDERR, basename(__FILE__) . ": needs php -d zend.assertions=1 (tests/run.sh sets it)\n");
+    exit(1);
+}
 
 require __DIR__ . '/../config.php';
 require __DIR__ . '/../src/Store.php';

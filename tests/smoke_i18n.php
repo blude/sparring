@@ -7,8 +7,15 @@ declare(strict_types=1);
  * fallback/param substitution, and catalog parity between i18n/en.php and
  * i18n/de.php (a missing translation should fail this test, not surface at
  * runtime on an unattended exhibition wall).
- * Run: php tests/smoke_i18n.php
+ * Run: php -d zend.assertions=1 tests/smoke_i18n.php
  */
+
+// assert() is compiled out under zend.assertions=-1 (production php.ini):
+// refuse to run rather than pass without checking anything.
+if (ini_get('zend.assertions') !== '1') {
+    fwrite(STDERR, basename(__FILE__) . ": needs php -d zend.assertions=1 (tests/run.sh sets it)\n");
+    exit(1);
+}
 
 require __DIR__ . '/../config.php';
 

@@ -7,6 +7,13 @@ declare(strict_types=1);
  * Run: php tests/smoke_llm_client.php
  */
 
+// assert() is compiled out under zend.assertions=-1 (production php.ini):
+// refuse to run rather than pass without checking anything.
+if (ini_get('zend.assertions') !== '1') {
+    fwrite(STDERR, basename(__FILE__) . ": needs php -d zend.assertions=1 (tests/run.sh sets it)\n");
+    exit(1);
+}
+
 require __DIR__ . '/../config.php';
 require __DIR__ . '/../src/LlmClientInterface.php';
 require __DIR__ . '/../src/AnthropicLlmClient.php';
