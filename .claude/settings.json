@@ -8,6 +8,7 @@
       "Bash(node tests/smoke_*)",
       "Bash(php -l *)",
       "Bash(bin/build_spec.sh)",
+      "Bash(php bin/screenshots.php*)",
       "Bash(git status*)",
       "Bash(git diff*)",
       "Bash(git log*)",
