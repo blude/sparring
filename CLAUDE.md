@@ -101,9 +101,17 @@ pre-renders the Mermaid blocks via `npx` mermaid-cli, see
   Behavioral edits to the prompt should be checked against it too.
 
 ## Versioning
-`VERSION` holds the app version, written by `bin/bump_changelog.sh` (see its
-header for the scheme). Not `composer.json`'s `version` field: Composer
-hashes that into `composer.lock`, so every bump would leave the lock stale.
+The git tag is the app version: `vMAJOR.MINOR.0` (the 1.0.0 release is
+tagged `v1`), one minor per day of work, computed by
+`bin/bump_changelog.sh`, which prints the tag to put on its own
+`docs: update CHANGELOG through <hash>` commit. No file holds the version;
+don't add a `version` field to `composer.json` (Composer hashes it into
+`composer.lock`, so every bump would leave the lock stale). Current version:
+`git describe --tags --match 'v[0-9]*'`. Which version introduced a commit:
+`git tag --contains <sha> --list 'v[0-9]*'` (in a shallow clone, as in
+Claude Code on the web, `git fetch --unshallow --tags` first, or both come
+up empty). `sparring-vN` tags are a
+separate series numbering `prompts/sparring.md` versions.
 
 ## docs/adr — architecture decisions
 Numbered Nygard-lightweight records of implementation-level technical

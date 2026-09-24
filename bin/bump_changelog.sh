@@ -4,24 +4,28 @@ set -euo pipefail
 # Appends commits since the last "docs: update CHANGELOG through <hash>"
 # commit to CHANGELOG.md (grouped under `## YYYY-MM-DD` headings, newest
 # first, merging into today's heading if it's already the first one), then
-# writes <MAJOR>.<N>.0 to VERSION, where N is the count of date
-# headings dated strictly after RELEASE_DATE — one 0.1 per distinct day of
-# work since the current release. Recomputed from the file every run so
-# version drift can't accumulate silently (see CHANGELOG.md 2026-08-27
-# entries for how it drifted before this script existed). MAJOR and
-# RELEASE_DATE are fixed below and updated by hand at each release milestone,
-# which resets N to 0 (see the `v*` git tags). VERSION, not composer.json's
-# "version" field: Composer hashes that field into composer.lock's
-# content-hash, so every bump used to leave the lock file stale.
+# prints the version to tag that commit with: v<MAJOR>.<N>.0, where N is the
+# count of date headings dated strictly after RELEASE_DATE — one 0.1 per
+# distinct day of work since the current release. Recomputed from the file
+# every run so version drift can't accumulate silently (see CHANGELOG.md
+# 2026-08-27 entries for how it drifted before this script existed). MAJOR
+# and RELEASE_DATE are fixed below and updated by hand at each release
+# milestone, which resets N to 0.
 #
-# Leaves the commit itself to the caller — this only edits the two files.
+# The git tag is the only record of the version: no file holds it, so
+# nothing can fall out of sync with it (composer.json's "version" field,
+# the old home, also left composer.lock stale on every bump, since Composer
+# hashes it). `git describe --tags --match 'v[0-9]*'` gives the current
+# version; `git tag --contains <sha>` which version introduced a commit.
+# `sparring-v*` tags are a separate series, for the prompt.
+#
+# Leaves the commit and the tag to the caller — this only edits CHANGELOG.md.
 #
 # Usage: bin/bump_changelog.sh
 
 cd "$(dirname "$0")/.."
 
 CHANGELOG=CHANGELOG.md
-VERSION_FILE=VERSION
 
 # Find the hash the last bump commit updated through, from its own message.
 last_subject=$(git log -1 --grep='^docs: update CHANGELOG through ' --format='%s')
@@ -76,8 +80,7 @@ for (( i = ${#date_order[@]} - 1; i >= 0; i-- )); do
     fi
 done
 
-# Both bumped by hand at each release milestone; the `v*` git tags are the
-# record. RELEASE_DATE is the day MAJOR shipped — the minor counts CHANGELOG
+# Both bumped by hand at each release milestone. RELEASE_DATE is the day MAJOR shipped — the minor counts CHANGELOG
 # date headings *after* it, so it resets to 0 on a new release.
 MAJOR=1
 RELEASE_DATE=2026-09-04
@@ -89,8 +92,16 @@ heading_count=$(awk -v r="$RELEASE_DATE" '
 ' "$CHANGELOG")
 new_version="${MAJOR}.${heading_count}.0"
 
-echo "$new_version" > "$VERSION_FILE"
+tag="v$new_version"
 
 head_hash=$(git rev-parse --short HEAD)
-echo "CHANGELOG.md updated through $head_hash, version set to $new_version ($heading_count date headings)."
-echo "Review the diff, then commit as: docs: update CHANGELOG through $head_hash"
+echo "CHANGELOG.md updated through $head_hash, version is $new_version ($heading_count date headings)."
+echo "Review the diff, then:"
+echo "  git commit -am 'docs: update CHANGELOG through $head_hash'"
+if git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then
+    # Same day as the last bump: the minor didn't move, so the existing tag
+    # has to move up to the new commit instead.
+    echo "  git tag -fa $tag -m $tag && git push -f origin $tag   # $tag already exists, moves it"
+else
+    echo "  git tag -a $tag -m $tag && git push origin $tag"
+fi
