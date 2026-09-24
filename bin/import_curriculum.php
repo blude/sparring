@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * "Poor man's RAG" ingestion. Syncs data/curriculum/*.md into the
+ * "Poor woman's RAG" ingestion. Syncs data/curriculum/*.md into the
  * curriculum_chunks FTS5 table so Store::searchCurriculum() (general
  * free-text search) and Store::searchCurriculumConcepts() (vocabulary-
  * restricted turn-1 auto-grounding, see Sparring::processTurn and

@@ -320,7 +320,7 @@ Generated from git history. Grouped by commit date, newest first.
 ## 2026-08-23
 
 - `72a1b44` perf: remove mermaid diagram rendering support
-- `75f00bf` Add curriculum FTS5 ingestion + search (poor man's RAG, step 1)
+- `75f00bf` Add curriculum FTS5 ingestion + search (poor woman's RAG, step 1)
 - `a2f6c73` fix: fasset() to load open graph img
 
 ## 2026-08-22

@@ -278,7 +278,7 @@ assert($store->getExchanges($doomed['id']) === []);
 assert($store->getSession($bystander['id']) !== null); // untouched
 assert(count($store->getExchanges($bystander['id'])) === 1);
 
-// --- curriculum search (poor man's RAG ingestion, bin/import_curriculum.php) ---
+// --- curriculum search (poor woman's RAG ingestion, bin/import_curriculum.php) ---
 assert($store->getCurriculumChunkCount() === 0);
 
 $replaceCounts = $store->replaceCurriculumChunks([

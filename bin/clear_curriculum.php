@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * Empties curriculum_chunks (poor man's RAG ingestion, see
+ * Empties curriculum_chunks (poor woman's RAG ingestion, see
  * bin/import_curriculum.php) without touching data/curriculum/*.md or any
  * other table — the corpus is a disk-derived cache (see Store.php's comment
  * above replaceCurriculumChunks()), so clearing it is always safe to undo by

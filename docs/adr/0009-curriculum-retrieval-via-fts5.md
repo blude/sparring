@@ -2,7 +2,7 @@
 
 - **Status:** Accepted
 - **Date:** 2026-08-23 (back-filled 2026-09-10)
-- **References:** commit `75f00bf` "Add curriculum FTS5 ingestion + search (poor man's RAG, step 1)"; `CLAUDE.md` "Test"; `src/Store.php` `searchCurriculum()` / `searchCurriculumConcepts()`; `tests/smoke_curriculum_retrieval.php`; `TODO.md` "Curriculum retrieval"
+- **References:** commit `75f00bf` "Add curriculum FTS5 ingestion + search (poor woman's RAG, step 1)"; `CLAUDE.md` "Test"; `src/Store.php` `searchCurriculum()` / `searchCurriculumConcepts()`; `tests/smoke_curriculum_retrieval.php`; `TODO.md` "Curriculum retrieval"
 
 ## Context
 
@@ -20,7 +20,7 @@ Ranking is title-weighted BM25 with stopword filtering and prefix
 matching. `searchCurriculumConcepts()` does a vocabulary-restricted lookup
 for the turn-1 auto-grounding path. Ingestion is `bin/import_curriculum.php`
 syncing an FTS table from disk; `bin/probe_curriculum.php` prints what a
-query would surface. Described in-repo as "poor man's RAG".
+query would surface. Described in-repo as "poor woman's RAG".
 
 ## Consequences
 

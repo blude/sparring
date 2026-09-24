@@ -372,7 +372,7 @@ PHP backend. **SE-04** = the system prompt (`prompts/sparring.md`). Spec IDs
   row per session, resubmission replaces. Deliberately not elevated to a
   first-class record (`E-04`).
 
-## 15. Curriculum grounding ("poor man's RAG")
+## 15. Curriculum grounding ("poor woman's RAG")
 
 - **Static domain grounding** — A hand-distilled `<domain_grounding>` section
   in the system prompt, present every turn (`LX` — "what shapes a response").

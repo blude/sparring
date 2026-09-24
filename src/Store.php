@@ -112,7 +112,7 @@ final class Store
 
         $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_sessions_display ON sessions(origin, displayable, last_active_at)');
 
-        // Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php):
+        // Curriculum search (poor woman's RAG ingestion, bin/import_curriculum.php):
         // requires FTS5, compiled into the sqlite3 lib PHP links against — verified
         // present in this environment; if a deploy target lacks it, this throws at
         // Store construction rather than silently degrading search.
@@ -499,7 +499,7 @@ final class Store
 
     /*
     |--------------------------------------------------------------------------
-    | Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php)
+    | Curriculum search (poor woman's RAG ingestion, bin/import_curriculum.php)
     |--------------------------------------------------------------------------
     |
     | Disk-derived cache, not visitor data: deliberately kept out of getCounts()/
