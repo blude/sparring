@@ -11,28 +11,38 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   (the trailing `public/index.php` is the router script — pretty URLs like
   `/input` need it, real files still serve directly). Also runs under
   Laravel Valet (`valet park`/`link`), which routes the same way natively.
+  `LLM_PROVIDER=fake` runs it offline with no key (canned `(fake)` replies,
+  markers for the failure paths): use it to check UI or API changes end to
+  end without real calls. See README "Switch LLM provider".
 - Test: assert-based smoke scripts, no framework. `tests/run.sh` runs all of
   them (PHP then Node, each its own process — see the script's own comment on
-  why), stops on first failure. Individually — PHP: `php tests/smoke_store.php`
-  (`Store`), `php tests/smoke_llm_client.php` (provider dispatch +
+  why), stops on first failure. Individually — PHP needs
+  `php -d zend.assertions=1 tests/<file>` (production php.ini compiles
+  `assert()` out; each PHP script refuses to run without it):
+  `smoke_store.php`
+  (`Store`), `smoke_llm_client.php` (provider dispatch, `FakeLlmClient`'s markers, +
   `OpenAiLlmClient`/`AnthropicLlmClient`'s pure response/failure-classification
   helpers, and each's `buildSystemMessages()`/`buildSystemBlocks()` — how
   turn-1 curriculum grounding does/doesn't get attached without disturbing
-  the cached sparring-prompt block), `php tests/smoke_sparring.php`
+  the cached sparring-prompt block), `smoke_sparring.php`
   (`Sparring::processTurn`'s gates, `sessionStateFor`/`isExpired`,
   `RateLimiter::resolveClientOrigin`, and turn-1-only curriculum grounding),
-  `php tests/smoke_domain.php`
+  `smoke_domain.php`
   (`derive_scenario_statement`, `AbstractLlmClient::stripDelimiterTag`,
   `bin/import_pilot.php::validate_transcript`,
   `bin/import_curriculum.php::parse_curriculum_file`),
-  `php tests/smoke_curriculum_retrieval.php` (`Store::searchCurriculum()`
+  `smoke_curriculum_retrieval.php` (`Store::searchCurriculum()`
   retrieval quality — stopword filtering, title-weighted BM25, prefix
   matching — and `Store::searchCurriculumConcepts()`'s vocabulary-restricted
   turn-1 auto-grounding lookup, against `tests/fixtures/curriculum/`,
   verbatim excerpts of the real, gitignored `data/curriculum/` corpus, kept
   small and committed so this stays reproducible on a fresh checkout),
-  `php tests/smoke_i18n.php` (`config.php`'s locale resolution, `t()`, and
-  `i18n/en.php`/`i18n/de.php` catalog parity). JS
+  `smoke_i18n.php` (`config.php`'s locale resolution, `t()`, and
+  `i18n/en.php`/`i18n/de.php` catalog parity), `smoke_http.php` (end to end:
+  the real app under `php -S` with `LLM_PROVIDER=fake` and a throwaway
+  `STORE_DB_PATH`, driven over HTTP through the pages and the session/contribute/
+  title/session-state/recent-exchanges calls, including each contribute
+  error path). JS
   (Node only to run the
   check, not a project dependency): `node tests/smoke_juicy.js`
   (`public/assets/juicy.js`), `node tests/smoke_identity.js`
