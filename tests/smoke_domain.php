@@ -11,8 +11,15 @@ declare(strict_types=1);
  * No DB, no network. Store::hydrateExchange/hydrateSession aren't repeated
  * here — smoke_store.php's round-trip assertions already exercise their
  * output shape on every getSession()/getExchanges() call.
- * Run: php tests/smoke_domain.php
+ * Run: php -d zend.assertions=1 tests/smoke_domain.php
  */
+
+// assert() is compiled out under zend.assertions=-1 (production php.ini):
+// refuse to run rather than pass without checking anything.
+if (ini_get('zend.assertions') !== '1') {
+    fwrite(STDERR, basename(__FILE__) . ": needs php -d zend.assertions=1 (tests/run.sh sets it)\n");
+    exit(1);
+}
 
 require __DIR__ . '/../config.php';
 require __DIR__ . '/../src/scenario.php';

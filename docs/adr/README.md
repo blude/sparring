@@ -51,5 +51,6 @@ Their "Date" is the original decision date where it could be recovered.
 | [0014](0014-ios-keyboard-viewport-fix.md) | iOS keyboard viewport handled with `--vvh` + scroll-lock, not a hand-rolled handler | Accepted |
 | [0015](0015-spec-pdf-book-target.md) | Spec PDF book target pre-renders Mermaid instead of an Asciidoctor plugin | Accepted |
 | [0016](0016-ci-and-agent-session-setup.md) | GitHub Actions CI and a committed Claude Code session setup | Accepted |
+| [0017](0017-fake-llm-provider-and-http-smoke-test.md) | Offline `fake` LLM provider and an end-to-end HTTP smoke test | Accepted |
 
 [nygard]: https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions

@@ -57,12 +57,25 @@ OPENAI_CLASSIFICATION_MODEL=qwen2.5-7b-instruct
 whatever model ID it has loaded, so set these explicitly for local use.
 See `config.php`'s `--- LLM (PE-01) ---` block for every var name/default.
 
+No key at all, for UI work or a demo without network: `LLM_PROVIDER=fake`
+answers every turn with a canned, clearly marked `(fake) ...` reply, instantly
+and for free. Markers in a contribution trigger the failure paths:
+`[fake:personal]` / `[fake:real-person]` (moderation rejects it),
+`[fake:classify-error]` (moderation fails closed), `[fake:generation-error]`
+(502). `FAKE_LLM_DELAY_MS=1500` adds latency to see the waiting states.
+`tests/smoke_http.php` runs the whole app this way. Never for the exhibition.
+
+```sh
+LLM_PROVIDER=fake php -S localhost:8080 -t public public/index.php
+```
+
 Either way, `public/index.php` is the sole front controller — see
 `public/index.php` for the route table. Real static assets (e.g.
 `/assets/dojo.js`) still serve directly; page/endpoint scripts do not —
 `/dojo.php` 404s, only the pretty URL `/dojo` works. The display feed
 works immediately off the pilot seed; the input client needs
-`ANTHROPIC_API_KEY` set and `composer install` run, since it calls the LLM.
+`ANTHROPIC_API_KEY` set and `composer install` run, since it calls the LLM
+(or `LLM_PROVIDER=fake`, see above).
 
 ## Export
 

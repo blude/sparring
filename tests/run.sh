@@ -14,7 +14,7 @@ n=0
 
 run_test() {
     n=$((n + 1))
-    if out=$("$1" "$2" 2>&1); then
+    if out=$("$@" 2>&1); then
         printf '[%d/%d] %s\n' "$n" "$total" "$(printf '%s' "$out" | sed "s/ok\$/$GREEN_CHECK/")"
     else
         printf '[%d/%d] %s\n' "$n" "$total" "$out"
@@ -22,8 +22,10 @@ run_test() {
     fi
 }
 
+# zend.assertions=1: production php.ini (and GitHub's setup-php default)
+# ships -1, which compiles assert() out, so every check would pass unrun.
 for f in tests/smoke_*.php; do
-    run_test php "$f"
+    run_test php -d zend.assertions=1 "$f"
 done
 for f in tests/smoke_*.js; do
     run_test node "$f"
