@@ -4,13 +4,15 @@ set -euo pipefail
 # Appends commits since the last "docs: update CHANGELOG through <hash>"
 # commit to CHANGELOG.md (grouped under `## YYYY-MM-DD` headings, newest
 # first, merging into today's heading if it's already the first one), then
-# sets composer.json's version to <MAJOR>.<N>.0 where N is the count of date
+# writes <MAJOR>.<N>.0 to VERSION, where N is the count of date
 # headings dated strictly after RELEASE_DATE — one 0.1 per distinct day of
 # work since the current release. Recomputed from the file every run so
 # version drift can't accumulate silently (see CHANGELOG.md 2026-08-27
 # entries for how it drifted before this script existed). MAJOR and
 # RELEASE_DATE are fixed below and updated by hand at each release milestone,
-# which resets N to 0 (see the `v*` git tags).
+# which resets N to 0 (see the `v*` git tags). VERSION, not composer.json's
+# "version" field: Composer hashes that field into composer.lock's
+# content-hash, so every bump used to leave the lock file stale.
 #
 # Leaves the commit itself to the caller — this only edits the two files.
 #
@@ -19,7 +21,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 CHANGELOG=CHANGELOG.md
-COMPOSER=composer.json
+VERSION_FILE=VERSION
 
 # Find the hash the last bump commit updated through, from its own message.
 last_subject=$(git log -1 --grep='^docs: update CHANGELOG through ' --format='%s')
@@ -87,8 +89,7 @@ heading_count=$(awk -v r="$RELEASE_DATE" '
 ' "$CHANGELOG")
 new_version="${MAJOR}.${heading_count}.0"
 
-awk -v v="$new_version" '{ sub(/"version": *"[^"]*"/, "\"version\": \"" v "\""); print }' "$COMPOSER" > "$COMPOSER.tmp"
-mv "$COMPOSER.tmp" "$COMPOSER"
+echo "$new_version" > "$VERSION_FILE"
 
 head_hash=$(git rev-parse --short HEAD)
 echo "CHANGELOG.md updated through $head_hash, version set to $new_version ($heading_count date headings)."

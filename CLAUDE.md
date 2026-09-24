@@ -49,9 +49,12 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   file, `tests/run.sh`, a `public/spec/` drift check (rebuilt with
   Asciidoctor 2.0.26, must match what's committed), and, on PRs, the two
   git hooks below over every commit. Keep it green before pushing.
-- Claude Code on the web: `.claude/hooks/session-start.sh` runs
-  `composer install` and wires `core.hooksPath` at session start, so tests
-  and hooks work in a fresh container. `.claude/settings.json` pre-allows
+- Claude Code on the web: `.claude/hooks/session-start.sh` wires
+  `core.hooksPath` at session start, then runs `composer install` in the
+  background (async), so tests and hooks work in a fresh container. If
+  `tests/run.sh` fails on a missing `vendor/autoload.php` in the first
+  seconds of a session, the install is still running: wait and re-run,
+  don't install by hand. `.claude/settings.json` pre-allows
   the test/lint commands and denies `bin/deploy*.sh` and the destructive
   `bin/` data scripts (reset/delete/prune) for agents.
 - `tests/run.sh` is plumbing only — it never calls a real LLM. Conversational/
@@ -96,6 +99,11 @@ pre-renders the Mermaid blocks via `npx` mermaid-cli, see
 - `prompts/sparring.md` is modeled as `SE-04` (`spec/L3-SE-04-system-prompt.adoc`)
   — a content-supplying element with no runtime interface of its own.
   Behavioral edits to the prompt should be checked against it too.
+
+## Versioning
+`VERSION` holds the app version, written by `bin/bump_changelog.sh` (see its
+header for the scheme). Not `composer.json`'s `version` field: Composer
+hashes that into `composer.lock`, so every bump would leave the lock stale.
 
 ## docs/adr — architecture decisions
 Numbered Nygard-lightweight records of implementation-level technical
