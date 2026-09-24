@@ -1,0 +1,74 @@
+# Runs the same checks a contributor (or agent) runs locally, so a pushed
+# branch can't go green by skipping them. No real LLM calls: prompt quality
+# stays in evals/sparring/, run by hand (see its README).
+name: CI
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2' # composer.json's floor
+          extensions: pdo_sqlite, sqlite3
+          tools: composer
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: composer install --no-interaction --no-progress
+      - name: php -l (the project's only lint, per CLAUDE.md)
+        run: git ls-files -z '*.php' | xargs -0 -n1 php -l > /dev/null
+      - run: tests/run.sh
+
+  spec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      # Pinned to the version that built the committed public/spec/*.html,
+      # so the drift check below compares content, not generator output.
+      - run: gem install asciidoctor -v 2.0.26 --no-document
+      - run: bin/build_spec.sh
+      - name: public/spec is up to date with spec/
+        run: |
+          if [ -n "$(git status --porcelain public/spec)" ]; then
+            git status --short public/spec
+            echo "::error::public/spec/ is stale: run bin/build_spec.sh and commit the result"
+            exit 1
+          fi
+
+  commits:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Conventional Commits (.githooks/commit-msg on each PR commit)
+        env:
+          RANGE: ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+        run: |
+          status=0
+          for sha in $(git rev-list --no-merges "$RANGE"); do
+            git log -1 --format=%B "$sha" > "$RUNNER_TEMP/msg"
+            sh .githooks/commit-msg "$RUNNER_TEMP/msg" || status=1
+          done
+          exit $status
+      - name: prompts/sparring.md changes carry a prompts/CHANGELOG.md entry
+        env:
+          RANGE: ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}
+        run: |
+          changed=$(git diff --name-only "$RANGE")
+          if printf '%s\n' "$changed" | grep -qx 'prompts/sparring.md' \
+             && ! printf '%s\n' "$changed" | grep -qx 'prompts/CHANGELOG.md'; then
+            echo "::error::prompts/sparring.md changed without a prompts/CHANGELOG.md entry"
+            exit 1
+          fi
