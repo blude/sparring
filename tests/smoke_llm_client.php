@@ -2,9 +2,10 @@
 declare(strict_types=1);
 
 /**
- * Self-check for provider selection (createLlmClient()) and OpenAiLlmClient's
+ * Self-check for provider selection (createLlmClient()), FakeLlmClient's
+ * marker-driven behavior, and OpenAiLlmClient's
  * pure request/response helpers. No network, no real API key.
- * Run: php tests/smoke_llm_client.php
+ * Run: php -d zend.assertions=1 tests/smoke_llm_client.php
  */
 
 // assert() is compiled out under zend.assertions=-1 (production php.ini):
@@ -40,8 +41,56 @@ assert(createLlmClient() instanceof AnthropicLlmClient);
 putenv(LLM_PROVIDER_ENV . '=openai');
 assert(createLlmClient() instanceof OpenAiLlmClient);
 
+putenv(LLM_PROVIDER_ENV . '=fake');
+assert(createLlmClient() instanceof FakeLlmClient); // loaded lazily by createLlmClient() itself
+
+putenv(LLM_PROVIDER_ENV . '=Fake'); // wrong case: fails loudly, same as any unknown value
+$threw = false;
+try {
+    createLlmClient();
+} catch (RuntimeException) {
+    $threw = true;
+}
+assert($threw);
+
 putenv($savedProvider === false ? LLM_PROVIDER_ENV : LLM_PROVIDER_ENV . '=' . $savedProvider);
 putenv($savedAnthropicKey === false ? ANTHROPIC_API_KEY_ENV : ANTHROPIC_API_KEY_ENV . '=' . $savedAnthropicKey);
+
+/*
+|--------------------------------------------------------------------------
+| FakeLlmClient (LLM_PROVIDER=fake): deterministic, marker-driven
+|--------------------------------------------------------------------------
+*/
+
+$fake = new FakeLlmClient();
+$reply = $fake->generateResponse([], 'Design is   mostly about   aesthetics.');
+assert(str_starts_with($reply, FakeLlmClient::RESPONSE_PREFIX));
+assert(str_contains($reply, 'Turn 1.'));
+assert(str_contains($reply, '"Design is mostly about aesthetics."')); // whitespace collapsed
+assert(str_contains($fake->generateResponse([['visitorContribution' => 'a', 'sparringResponse' => 'b']], 'x'), 'Turn 2.'));
+assert($reply === $fake->generateResponse([], 'Design is   mostly about   aesthetics.')); // deterministic
+
+assert($fake->classify('ordinary contribution') === 'suitable');
+assert($fake->classify('call me [fake:personal]') === 'contains-personal-information');
+assert($fake->classify('[fake:real-person] is wrong') === 'targets-real-person');
+$threw = false;
+try {
+    $fake->classify('[fake:classify-error]');
+} catch (RuntimeException) {
+    $threw = true;
+}
+assert($threw);
+$threw = false;
+try {
+    $fake->generateResponse([], '[fake:generation-error]');
+} catch (GenerationFailedException) {
+    $threw = true;
+}
+assert($threw);
+
+$title = $fake->generateTitle(str_repeat('word ', 20));
+assert(str_starts_with($title, FakeLlmClient::RESPONSE_PREFIX . ' '));
+assert(str_ends_with($title, '...'));
 
 /*
 |--------------------------------------------------------------------------

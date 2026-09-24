@@ -16,7 +16,8 @@ declare(strict_types=1);
 | or 'openai' — the latter is any OpenAI-Chat-Completions-compatible
 | endpoint, so it also covers a local model served through LM Studio
 | (point OPENAI_BASE_URL at it; OPENAI_API_KEY can stay unset). See
-| createLlmClient().
+| createLlmClient(). 'fake' is an offline stand-in for local UI work and
+| tests (see src/FakeLlmClient.php), never for the exhibition.
 |
 */
 
@@ -52,10 +53,18 @@ function createLlmClient(): LlmClientInterface
     return match ($provider) {
         'anthropic' => new AnthropicLlmClient(),
         'openai' => new OpenAiLlmClient(),
+        // Loaded here rather than required by each endpoint like the real
+        // providers: it's dev/test-only, so it stays out of every normal
+        // request, and tests/smoke_sparring.php's own FakeLlmClient never
+        // collides with it.
+        'fake' => (static function (): LlmClientInterface {
+            require_once __DIR__ . '/src/FakeLlmClient.php';
+            return new FakeLlmClient();
+        })(),
         // Unrecognized value (typo, wrong case) fails loudly instead of
         // silently falling back to Anthropic — a typo here would otherwise
         // burn Anthropic credits with no visible sign OpenAI/local wasn't used.
-        default => throw new RuntimeException("Unknown LLM_PROVIDER '$provider' — expected 'anthropic' or 'openai'"),
+        default => throw new RuntimeException("Unknown LLM_PROVIDER '$provider' — expected 'anthropic', 'openai' or 'fake'"),
     };
 }
 
@@ -143,10 +152,13 @@ function resolve_display_config(): array
 |--------------------------------------------------------------------------
 |
 | Outside the served docroot on the real host; project-root-relative here.
+| STORE_DB_PATH (env) points it elsewhere: tests/smoke_http.php runs the app
+| against a throwaway database so it never touches the real one. Real env
+| var only, not .env: the .env loader below runs after this is defined.
 |
 */
 
-const STORE_DB_PATH = __DIR__ . '/data/store.db';
+define('STORE_DB_PATH', getenv('STORE_DB_PATH') ?: __DIR__ . '/data/store.db');
 const PILOT_DATA_DIR = __DIR__ . '/data/pilot';
 const CURRICULUM_DATA_DIR = __DIR__ . '/data/curriculum/digitaldesign-wiki'; // gitignored — poor man's RAG source markdown (flat *.md), bin/import_curriculum.php
 
