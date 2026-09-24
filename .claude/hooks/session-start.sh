@@ -10,13 +10,11 @@ if [ "${CLAUDE_CODE_REMOTE:-}" != "true" ]; then
 fi
 
 cd "$CLAUDE_PROJECT_DIR"
-# Instant, so it runs before going async: git hooks are live even for a
-# commit made in the first seconds of the session.
 git config core.hooksPath .githooks
 
-# Everything below runs in the background while the session starts.
-# Race: tests/run.sh fails on the missing vendor/autoload.php until
-# composer install finishes (~15s on a cold container, near no-op on resume
-# since the container snapshot caches vendor/).
-echo '{"async": true, "asyncTimeout": 300000}'
-composer install --no-interaction --no-progress --quiet
+# Runs async (`"async": true` on this hook in .claude/settings.json), so the
+# session starts without waiting. Race: tests/run.sh fails on the missing
+# vendor/autoload.php until this finishes (~15s on a cold container, near
+# no-op on resume since the container snapshot caches vendor/). Claude Code
+# doesn't enforce a timeout on async hooks, hence the explicit one.
+timeout 300 composer install --no-interaction --no-progress --quiet
