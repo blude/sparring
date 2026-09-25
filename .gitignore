@@ -17,3 +17,6 @@ __pycache__/
 # Combined book PDF — built on demand by bin/build_spec_pdf.sh, not committed
 # (the HTML edition in the same dir IS committed).
 /public/spec/*.pdf
+
+# bin/screenshots.php output (review aid, regenerated on demand)
+/screenshots/

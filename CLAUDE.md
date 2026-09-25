@@ -54,6 +54,10 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   `node tests/smoke_start.js` (the glove easter egg's tap-window helper in
   `public/assets/start.js`). New `tests/smoke_*` files are picked up by
   `tests/run.sh` automatically; add a line here too.
+- Visual changes (CSS, markup, client JS): run `php bin/screenshots.php`
+  and look at the PNGs in `screenshots/` before calling it done. Pages in
+  seeded states, fake LLM, throwaway DB; review aid, not a test (ADR 0018).
+  CI attaches the same set to every PR.
 - No linter configured — check changed files with `php -l <file>`.
 - CI (`.github/workflows/ci.yml`, ADR 0016) re-runs `php -l` on every PHP
   file, `tests/run.sh`, a `public/spec/` drift check (rebuilt with

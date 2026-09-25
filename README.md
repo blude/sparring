@@ -77,6 +77,35 @@ works immediately off the pilot seed; the input client needs
 `ANTHROPIC_API_KEY` set and `composer install` run, since it calls the LLM
 (or `LLM_PROVIDER=fake`, see above).
 
+## Screenshots
+
+`php bin/screenshots.php` captures every visitor-facing page in fixed,
+seeded states (start page, consent step, a session mid-way and one at its
+turn limit, content pages, the German start page, and the wall at 1920x1080)
+into `screenshots/`, with an `index.html` gallery. It runs the app in fake
+mode against a throwaway database, so it needs no API key and never touches
+`data/store.db`. For reviewing visual changes: nothing compares against a
+baseline. CI attaches the same set to every PR as the `screenshots`
+artifact.
+
+It needs **chrome-headless-shell**, not regular Chrome (whose headless mode
+won't render narrower than 500px). One-off install, no project dependency:
+
+```sh
+npx @puppeteer/browsers install chrome-headless-shell@stable
+export CHROME_BIN=<the path it prints>
+php bin/screenshots.php
+```
+
+On a Mac with Xcode, `--simulator` captures the phone pages in Safari in the
+booted iOS Simulator instead, for real iOS rendering (keyboard/viewport
+behaviour included):
+
+```sh
+xcrun simctl boot "iPhone 16" && open -a Simulator
+php bin/screenshots.php --simulator screenshots-ios
+```
+
 ## Export
 
 ```sh
