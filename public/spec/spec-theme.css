@@ -124,20 +124,54 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     border-bottom-color: var(--rule);
 }
 
+/* Small label, not a heading: the entries are the content. */
 #toctitle {
     color: var(--brand-red);
-    font-size: 0.8em;
+    font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
 }
 
 #toc a, #toc a:visited {
-    color: var(--fg);
     text-decoration: none;
 }
 
 #toc a:hover {
     color: var(--brand-red);
+}
+
+/* Hierarchy: bold root entries with air between groups; children smaller,
+   muted, and hung off a thin guide line so each group reads as one block. */
+#toc ul.sectlevel1 > li {
+    margin-top: 0.7rem;
+}
+
+#toc ul.sectlevel1 > li > a {
+    color: var(--fg);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+#toc ul.sectlevel2, #toc ul.sectlevel3 {
+    margin: 0.25rem 0 0 0.2rem;
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--rule);
+}
+
+#toc ul.sectlevel2 li, #toc ul.sectlevel3 li {
+    margin-top: 0.2rem;
+    line-height: 1.35;
+}
+
+#toc ul.sectlevel2 a, #toc ul.sectlevel3 a {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+#toc ul.sectlevel2 > li > a {
+    color: #444;
 }
 
 @media screen and (min-width: 768px) {

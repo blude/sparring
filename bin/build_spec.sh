@@ -17,5 +17,5 @@ fi
 # book.adoc is the PDF-only combined edition (bin/build_spec_pdf.sh) — it
 # isn't meant to render as its own HTML page here.
 shopt -s extglob
-asciidoctor -D public/spec -a docinfo=shared -a webfonts! -a nofooter -a linkcss -a copycss spec/!(book).adoc
+asciidoctor -D public/spec -a docinfo=shared -a webfonts! -a toc-title=Contents -a nofooter -a linkcss -a copycss spec/!(book).adoc
 echo "Built $(ls public/spec/*.html | wc -l | tr -d ' ') files into public/spec/."
