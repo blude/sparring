@@ -355,4 +355,59 @@ dt.hdlist1, .dlist dt {
 
 #footer {
     background: var(--fg);
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Bar spans the page; its links line up with #content by taking the same
+   box stock asciidoctor.css gives #content (width, centering, side padding). */
+.sitemap {
+    max-width: 62.5em;
+    margin: 0 auto;
+    padding: 0 0.9375em;
+    /* Three grouped columns (spec/docinfo-footer.html); auto-fit stacks them
+       on narrow screens without a media query. */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+    gap: 1.25rem 2rem;
+}
+
+/* Same small-caps label as #toctitle, lightened for the dark bar. */
+.sitemap-title {
+    margin: 0 0 0.5rem;
+    color: #999;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.sitemap ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.sitemap li {
+    margin-top: 0.3rem;
+}
+
+.sitemap a, .sitemap a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+.sitemap a:hover, .sitemap a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.sitemap a[aria-current] {
+    color: #fff;
+    background: var(--brand-red);
+    padding: 0.05em 0.35em;
+    /* Pull the pill's padding out so its text stays on the column edge. */
+    margin-left: -0.35em;
+    border-radius: 3px;
 }

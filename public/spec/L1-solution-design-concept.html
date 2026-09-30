@@ -584,6 +584,47 @@ Downward references ("implemented by", "realised by") are not written at this le
 </div>
 </div>
 </div>
+<!-- Sitemap: every spec page, on every page. Our own #footer, since the build
+     passes -a nofooter (the stock one only prints a file mtime, which would
+     make the committed HTML drift between checkouts). Hand-maintained:
+     a new spec/*.adoc page needs a link here too. -->
+<footer id="footer">
+  <nav class="sitemap" aria-label="Spec pages">
+    <div>
+      <p class="sitemap-title">Overview</p>
+      <ul>
+        <li><a href="index.html">Design Documentation</a></li>
+        <li><a href="L1-solution-design-concept.html">L1 Solution Design Concept</a></li>
+        <li><a href="L2-system-design-concept.html">L2 System Design Concept</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Software elements</p>
+      <ul>
+        <li><a href="L3-SE-01-input-client.html">SE-01 Input Client</a></li>
+        <li><a href="L3-SE-02-display-client.html">SE-02 Display Client</a></li>
+        <li><a href="L3-SE-03-backend-service.html">SE-03 Backend Service</a></li>
+        <li><a href="L3-SE-04-system-prompt.html">SE-04 System Prompt</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Additional reference</p>
+      <ul>
+        <li><a href="LX-system-realization-concept.html">LX System Realization Concept</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+  </nav>
+</footer>
+<!-- Mark the sitemap link for this page; a bare /spec/ is index.html. -->
+<script>
+  (function () {
+    var page = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.sitemap a').forEach(function (a) {
+      if (a.getAttribute('href') === page) a.setAttribute('aria-current', 'page');
+    });
+  })();
+</script>
 <!-- Mermaid support for [source,mermaid] code blocks. Asciidoctor has no
      native Mermaid renderer, so this is client-side: turn the generated
      `code.language-mermaid` block into what Mermaid expects and let its
