@@ -5,7 +5,6 @@ v.1.0, 2026-06-19
 :toclevels: 3
 :icons: font
 :sectanchors:
-:sectnums:
 
 xref:index.adoc[Index] / *Glossary*
 
