@@ -68,8 +68,42 @@ h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 {
     padding-bottom: 0.3em;
 }
 
-.sect1 + .sect1 {
+/* Rhythm: one rule per top-level section, then decreasing air per level, so
+   each requirement (h3/h4 + its paragraph) reads as one group when scrolling.
+   The source's `'''` breaks all sit at section ends (or after the breadcrumb),
+   doubling the sect1 border — the border alone does the job. */
+#content hr {
+    display: none;
+}
+
+.sect1 {
     border-top: 1px solid var(--rule);
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+}
+
+.sect1 > h2 {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+}
+
+.sect2, .sect3 {
+    margin-top: 2.5rem;
+}
+
+.sect3 {
+    margin-top: 2rem;
+}
+
+.sect2 > h3, .sect3 > h4 {
+    margin-top: 0;
+    margin-bottom: 0.6rem;
+}
+
+/* Section intro sits closer to its first requirement than to the next. */
+.sectionbody > .paragraph:last-child,
+.sect2 > .paragraph:last-child, .sect3 > .paragraph:last-child {
+    margin-bottom: 0;
 }
 
 /* Short red bar before each top-level section heading. */
