@@ -1309,5 +1309,20 @@ The pair is stored as one record rather than as two turn records. This follows t
   });
   mermaid.initialize({ startOnLoad: true });
 </script>
+<!-- Mark the ToC link for the current #hash. CSS can match the target heading
+     (:target) but not the link pointing at it, so this bridges the two. -->
+<script>
+  function markCurrentTocLink() {
+    document.querySelectorAll('#toc a').forEach(function (a) {
+      if (location.hash && a.hash === location.hash) {
+        a.setAttribute('aria-current', 'location');
+      } else {
+        a.removeAttribute('aria-current');
+      }
+    });
+  }
+  markCurrentTocLink();
+  window.addEventListener('hashchange', markCurrentTocLink);
+</script>
 </body>
 </html>

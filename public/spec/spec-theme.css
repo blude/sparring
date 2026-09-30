@@ -179,6 +179,36 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     text-underline-offset: 0.15em;
 }
 
+/* Current entry, set from the URL hash by spec/docinfo-footer.html.
+   box-decoration-break keeps the pill intact on wrapped entries. */
+#toc ul.sectlevel1 a[aria-current] {
+    color: var(--brand-red);
+    background: color-mix(in srgb, var(--brand-red) 10%, white);
+    border-radius: 4px;
+    padding: 0.1em 0.3em;
+    margin-left: -0.3em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+/* The section a link jumped to: red heading, brief tint so the eye lands on it. */
+h2:target, h3:target, h4:target, h5:target, h6:target {
+    color: var(--brand-red);
+    scroll-margin-top: 1rem;
+    animation: target-flash 1.6s ease-out;
+}
+
+@keyframes target-flash {
+    from { background: color-mix(in srgb, var(--brand-red) 15%, white); }
+    to   { background: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    h2:target, h3:target, h4:target, h5:target, h6:target {
+        animation: none;
+    }
+}
+
 @media screen and (min-width: 768px) {
     body.toc2 #toc.toc2 {
         background: var(--surface);
