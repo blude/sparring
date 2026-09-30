@@ -166,7 +166,7 @@ body {
  * baseline (?d=dev). venue is a 1296x2304 portrait panel fitting 12
  * exchanges — font-size / gap / padding tuning goes here once it's been
  * seen on the real screen; column count comes from the config, not CSS.
- * stadium (beamer) is unresolved.
+ * stadium is the Epson EB-1945W beamer at 1600x900, 6 exchanges.
  */
 body.display-venue {
     /* ponytail: no portrait tuning yet — add after first run on the panel */

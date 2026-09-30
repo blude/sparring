@@ -130,10 +130,9 @@ const DISPLAY_CONFIG_DEFAULT = 'venue';
 const DISPLAY_CONFIGS = [
     'dev'     => ['columns' => 2, 'itemLimit' => 4],   // LG monitor, comfortable landscape resolution
     'venue'   => ['columns' => 2, 'itemLimit' => 12],  // LG monitor rotated 90 degrees — 1296x2304 portrait, OS-rotated
-    // ponytail: never used (venue ran the exhibition instead), left as an unsettled
-    // placeholder — resolve column count/resolution against real hardware if a
-    // future exhibition actually uses a beamer
-    'stadium' => ['columns' => 2, 'itemLimit' => 16],
+    // Epson EB-1945W beamer at 1600x900. Slight overflow at the bottom is intended:
+    // .gradient-bottom fades the clipped items out.
+    'stadium' => ['columns' => 2, 'itemLimit' => 6],
 ];
 
 // Request-scoped: reads ?d=, falls back to the default for an absent or
