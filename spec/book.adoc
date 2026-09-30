@@ -33,22 +33,29 @@ chatbot.
 These documents are the design record. They describe what has to be true about
 the installation and why, not how the code is written.
 
-The documentation follows a four-level framework. Each level answers a narrower
-question than the one above it, and every item carries an ID (`BG-01`,
-`SE-03`, `TF-02`) so a decision at one level traces back to the need it
-satisfies one level up.
+The documentation follows a three-layer framework: Solution, System, and
+Element design. Each layer answers a narrower question than the one above
+it, and every item carries an ID (`BG-01`, `SE-03`, `TF-02`) so a decision at
+one layer traces back to the need it satisfies one layer up. A Digital
+Design Brief sits above the three layers, and a System Realization record
+sits below them.
 
 [cols="1,4"]
 |===
+| L0: Digital Design Brief | A concise, high-level summary of a planned initiative, written for management. Enough to make a Go/No-Go decision without the technical detail. It sits above the three layers.
 | L1: Solution | Why build it. Business goals, the value it creates, the processes around it. Non-technical.
 | L2: System | The installation as one system. System goals, architecture, the elements it breaks into, and scenarios that run end to end.
 | L3: Element | One document per element. The behaviour, interfaces, and constraints of each piece L2 named.
-| LX: Realization | The deployment reality: server sizing, PHP version, SSL, and diagrams at implementation detail. It sits outside the four levels.
+| LX: Realization | The deployment reality: server sizing, PHP version, SSL, and diagrams at implementation detail. It sits below the three layers.
 |===
 
-There is no L0. The framework defines a Digital Design Brief above L1, but
-none was produced for this project, so the record starts at L1 and its
-constraints trace to nothing above them.
+This project has no L0. A Design Brief exists so management can make a
+Go/No-Go call on a significant investment, with stakeholders aligning before
+budget gets committed. Sparring is a one-person thesis prototype with a
+single exhibition run, and its requirements came from the thesis proposal
+itself. There's no approval gate to clear, and no other stakeholder who
+needs to sign off. The record starts at L1, and its constraints trace to
+nothing above them.
 
 [source,mermaid]
 ----

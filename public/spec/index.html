@@ -54,10 +54,12 @@ the installation and why, not how the code is written.</p>
 <h2 id="_how_to_read_this"><a class="anchor" href="#_how_to_read_this"></a>2. How to read this</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The documentation follows a four-level framework. Each level answers a narrower
-question than the one above it, and every item carries an ID (<code>BG-01</code>,
-<code>SE-03</code>, <code>TF-02</code>) so a decision at one level traces back to the need it
-satisfies one level up.</p>
+<p>The documentation follows a three-layer framework: Solution, System, and
+Element design. Each layer answers a narrower question than the one above
+it, and every item carries an ID (<code>BG-01</code>, <code>SE-03</code>, <code>TF-02</code>) so a decision at
+one layer traces back to the need it satisfies one layer up. A Digital
+Design Brief sits above the three layers, and a System Realization record
+sits below them.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -67,7 +69,7 @@ satisfies one level up.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">L0: Digital Design Brief</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The problem, the context, and the constraints that shape the solution. It sits above the four levels.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A concise, high-level summary of a planned initiative, written for management. Enough to make a Go/No-Go decision without the technical detail. It sits above the three layers.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">L1: Solution</p></td>
@@ -83,14 +85,18 @@ satisfies one level up.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LX: Realization</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The deployment reality: server sizing, PHP version, SSL, and diagrams at implementation detail. It sits outside the four levels.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The deployment reality: server sizing, PHP version, SSL, and diagrams at implementation detail. It sits below the three layers.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>This project doesn&#8217;t have an L0. The framework defines a Digital Design Brief above L1, but
-none was produced for this project, so the record starts at L1 and its
-constraints trace to nothing above them.</p>
+<p>This project has no L0. A Design Brief exists so management can make a
+Go/No-Go call on a significant investment, with stakeholders aligning before
+budget gets committed. Sparring is a one-person thesis prototype with a
+single exhibition run, and its requirements came from the thesis proposal
+itself. There&#8217;s no approval gate to clear, and no other stakeholder who
+needs to sign off. The record starts at L1, and its constraints trace to
+nothing above them.</p>
 </div>
 <div class="listingblock">
 <div class="content">
