@@ -381,6 +381,58 @@ NOTE: Call behaviour is specified on the calling function steps (<<TF-01,TF-01 P
 
 == Entities
 
+Visual companion to the entity tables below — what the element stores and
+how it relates. Only identifying and meaning-carrying attributes are shown;
+the tables are the authoritative source.
+
+[source,mermaid]
+----
+erDiagram
+  SESSION ||--o{ EXCHANGE : "contains"
+  SESSION ||--o| SESSION_EVALUATION : "may receive"
+  SESSION {
+    string sessionId PK "E-01.1"
+    enum origin "E-01.4"
+    string scenario "E-01.5"
+    string title "E-01.12"
+    boolean tosAgreed "E-01.10"
+    boolean consentGranted "E-01.7"
+    boolean projectionConsent "E-01.11"
+    boolean displayable "E-01.6"
+    integer turnCount "E-01.8"
+  }
+  EXCHANGE {
+    integer exchangeId PK "E-02.1"
+    string sessionId FK "E-02.2"
+    string visitorContribution "E-02.3"
+    string sparringResponse "E-02.4"
+    integer position "E-02.5"
+    integer replyCount "E-02.7"
+  }
+  SESSION_EVALUATION {
+    string sessionId PK, FK "E-04.1"
+    object answers "E-04.2"
+    string feedback "E-04.3"
+  }
+  RATE_LIMIT_WINDOW {
+    string originHash PK "E-03.1"
+    integer requestCount "E-03.3"
+  }
+  CURRICULUM_EXCERPT {
+    string path PK "E-05.1"
+    string title "E-05.2"
+    string body "E-05.3"
+  }
+----
+
+NOTE: <<E-03,E-03 Rate limit window>> and <<E-05,E-05 Curriculum excerpt>>
+stand alone on purpose. A rate limit window is keyed by a hash of the
+request origin, never by session, so no stored record ties a visitor's
+address to their session (<<QR-10,QR-10 No raw request origin is stored>>).
+Curriculum excerpts are reference content, read during a turn but never
+written by one. <<E-02.7,E-02.7 replyCount>> is a counter only: which
+session replied to an exchange is not stored, so no relation is drawn.
+
 === [[E-01]]E-01 Session
 
 _Persistence:_ Persistent +
@@ -453,6 +505,21 @@ _Persistence:_ Persistent
 |===
 
 _No L1 business entity counterpart — like <<E-03,E-03 Rate limit window>>, this exists to support xref:L2-system-design-concept.adoc#SG-09[SG-09 Collect an optional visitor self-report at session], which is itself deliberately secondary material (xref:L1-solution-design-concept.adoc#BG-04[BG-04 Produce a record of public interactions as secondary]), not elevated to a first-class business record the way <<E-01,E-01 Session>>/<<E-02,E-02 Exchange>> are._
+
+=== [[E-05]]E-05 Curriculum excerpt
+
+_Persistence:_ Persistent. Rebuilt in full by the operator from the `data/curriculum/` corpus; never written by a visitor request.
+
+[options="header"]
+|===
+| ID | Attribute | Type | Required | Description
+| [[E-05.1]]E-05.1 | path | string | required | File name of the corpus page the excerpt comes from. One excerpt per page.
+| [[E-05.2]]E-05.2 | title | string | required | The page's concept name: its first top-level heading, else derived from the file name. The set of titles is the vocabulary a first contribution is matched against, and a title match weighs more than a body match.
+| [[E-05.3]]E-05.3 | body | string | required | The page's text, searchable by keyword. Passed to the model as supplementary context on the visitor's first real turn (xref:L3-SE-04-system-prompt.adoc#TF-02[SE-04 TF-02 Ground the first turn with retrieved curriculum excerpts]), never asserted as fact.
+| [[E-05.4]]E-05.4 | updatedAt | datetime | required | When the excerpt was last imported.
+|===
+
+_No L1 business entity counterpart — like <<E-03,E-03 Rate limit window>>, it supports a function rather than recording anything about a visit. The corpus it is built from is a personal knowledge base kept out of version control; the import tool is operator tooling and stays unmodeled (<<C-04,C-04 No administrative interface, no analytics layer>>)._
 
 '''
 
