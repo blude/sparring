@@ -138,10 +138,6 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     text-decoration: none;
 }
 
-#toc a:hover {
-    color: var(--brand-red);
-}
-
 /* Hierarchy: bold root entries with air between groups; children smaller,
    muted, and hung off a thin guide line so each group reads as one block. */
 #toc ul.sectlevel1 > li {
@@ -172,6 +168,15 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 
 #toc ul.sectlevel2 > li > a {
     color: #444;
+}
+
+/* Must out-rank the per-level colours above (the extra :hover pseudo-class
+   does), or those win and hover shows nothing. */
+#toc ul.sectlevel1 a:hover, #toc ul.sectlevel1 a:focus-visible {
+    color: var(--brand-red);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--brand-red) 40%, transparent);
+    text-underline-offset: 0.15em;
 }
 
 @media screen and (min-width: 768px) {
