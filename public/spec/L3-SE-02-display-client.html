@@ -193,7 +193,7 @@
 <p><strong><a id="EX-01-2"></a>EX-01-2</strong> <em>(extends <a href="#ST-01-2">ST-01-2</a>)</em> The retrieved material is identical to what is shown. The element does nothing. <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
-<p><strong><a id="EX-01-3"></a>EX-01-3</strong> <em>(extends <a href="#ST-01-1">ST-01-1</a>)</em> Retrieval has failed continuously for a sustained period. The element continues showing its last material indefinitely rather than clearing. <em>Resolved: no threshold, no action.</em> The projector was never actually run at the exhibition (connectivity issues on-site), so this path never got exercised in practice. No threshold or operator alert was built, and none is judged worth building speculatively — a silent, indefinitely-stale wall is not a critical failure (the piece&#8217;s actual interaction is on the visitor&#8217;s own phone, <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>; the wall is a bonus surface). Revisit only if a future exhibition actually runs the projection and this becomes a real operational problem. <em>Outcome:</em> Resume.</p>
+<p><strong><a id="EX-01-3"></a>EX-01-3</strong> <em>(extends <a href="#ST-01-1">ST-01-1</a>)</em> Retrieval has failed continuously for a sustained period. The element continues showing its last material indefinitely rather than clearing. <em>Resolved: no threshold, no action.</em> No threshold or operator alert was built, and none is judged worth building speculatively — a silent, indefinitely-stale wall is not a critical failure (the piece&#8217;s actual interaction is on the visitor&#8217;s own phone, <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>; the wall is a bonus surface). Revisit only if this becomes a real operational problem. <em>Outcome:</em> Resume.</p>
 </li>
 </ul>
 </div>
@@ -758,15 +758,15 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>stadium</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A beamer — never used; <code>venue</code> ran the exhibition instead (on-site connectivity issues took the projector out of use entirely). Resolution and column count stay unsettled placeholders.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(unsettled placeholder)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The exhibition beamer, an Epson EB-1945W (<a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a>). Of its offered modes (1080p, 720p, 1600×900 @ 60 Hz), 1600×900 gave the sharpest result, mainly for the QR code, which is also drawn slightly larger on this profile.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1600×900</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>Consequence:</em> Rules out responsive layout work — each profile is still a single fixed viewport under the no-responsive-behaviour rule; the profile set just replaces the earlier assumption of exactly one. <code>stadium</code> was never run and stays a placeholder deliberately — not worth settling a resolution for a beamer that may never be used again; resolve it against the real hardware if and when a future exhibition actually uses one, same as <code>venue</code> was. Per-profile visual tuning (font size, spacing on the portrait <code>venue</code> surface) is done against the real screen, keyed off a profile marker on the surface.<br>
+<p><em>Consequence:</em> Rules out responsive layout work — each profile is still a single fixed viewport under the no-responsive-behaviour rule; the profile set just replaces the earlier assumption of exactly one. <code>stadium</code> was settled against the real beamer at the exhibition: six items is the right number for the surface, so it requests six. The lowest items often run slightly past the bottom edge; this is deliberate. The surface clips them with no scrollbar (<a href="#QR-06">QR-06 Fixed viewport, no scroll, no overflow</a>), and the bottom gradient fades the cut edge out. The larger QR code on this profile (needed for sharpness at 1600×900) can in principle crowd a short item&#8217;s text, but real Sparring responses were rarely short enough for this to happen. Per-profile visual tuning (font size, spacing on the portrait <code>venue</code> surface) is done against the real screen, keyed off a profile marker on the surface.<br>
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a></p>
 </div>
 </div>

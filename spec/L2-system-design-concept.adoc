@@ -246,7 +246,7 @@ _Procurement:_ Supplied by Fachbereich Informatik at FH Dortmund. +
 _Managed by:_ The operator. +
 _Location:_ Fixed in the exhibition space. Throw distance and surface determine legible type size, which is why <<SG-02,SG-02 Make turn-taking readable from across the room>>'s acceptance criteria remain qualitative until tested in place. +
 _Runs:_ <<SE-02,SE-02 Display client>> +
-_Characteristics:_ One projector, one display machine, wired network preferred over wireless for an unattended multi-day run.
+_Characteristics:_ One projector, one display machine, wired network preferred over wireless for an unattended multi-day run. The projector used at the exhibition was an Epson EB-1945W driven at 1600×900 @ 60 Hz (chosen over 1080p and 720p for sharpness, mainly of the QR code); <<SE-02,SE-02 Display client>> renders it as the `stadium` display profile.
 
 ==== [[HE-03]]HE-03 Hosted server
 
