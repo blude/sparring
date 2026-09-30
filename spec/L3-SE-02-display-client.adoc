@@ -212,7 +212,7 @@ NOTE: No `Calls → PE-` relation applies. This element reaches no partner eleme
 _Persistence:_ In-memory. Held only to support reconciliation. Lost on reload and rebuilt on the next cycle, which is acceptable because a reload costs one polling interval. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session], xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange] (partially; a display-only reconciliation cache, not authoritative — see xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#E-01[E-01 Session]/xref:L3-SE-03-backend-service.adoc#E-02[E-02 Exchange])
 
-[options="header"]
+[cols="2,4,2,2,12",options="header"]
 |===
 | ID | Attribute | Type | Required | Description
 | [[E-01.1]]E-01.1 | sessionId | string | required | Identity for matching in <<TF-02,TF-02 Reconcile against what is displayed>>. Opaque to this element.
@@ -231,7 +231,7 @@ NOTE: The element derives no ordering, performs no selection, and stores nothing
 _Persistence:_ In-memory, same lifetime as <<E-01,E-01 Displayed material>> — held only to render the header stats, replaced each polling cycle. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session], xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange] (lifetime totals of each, not the per-item cache <<E-01,E-01 Displayed material>> already is)
 
-[options="header"]
+[cols="2,4,2,2,12",options="header"]
 |===
 | ID | Attribute | Type | Required | Description
 | [[E-02.1]]E-02.1 | sessionCount | integer | required | Total sessions ever created (live and pilot), supplied by xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] alongside <<E-01,E-01 Displayed material>> on the same poll. Not scoped to the sessions shown.

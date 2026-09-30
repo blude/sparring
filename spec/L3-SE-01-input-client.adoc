@@ -353,7 +353,7 @@ NOTE: No `Calls → PE-` relation applies, same reason as <<TO-04,TO-04 Refine a
 _Persistence:_ In-memory. Discarded when the page unloads, and rebuilt from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] on the next load. Nothing is written to device storage. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session] (partially; the authoritative record is xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#E-01[E-01 Session])
 
-[options="header"]
+[cols="2,4,2,2,12",options="header"]
 |===
 | ID | Attribute | Type | Required | Description
 | [[E-01.1]]E-01.1 | sessionId | string | required | Identifier held in the address. Opaque to this element.
