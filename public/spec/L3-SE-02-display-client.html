@@ -805,7 +805,22 @@ The element derives no ordering, performs no selection, and stores nothing beyon
     div.textContent = code.textContent;
     code.closest('pre').replaceWith(div);
   });
-  mermaid.initialize({ startOnLoad: true });
+  // 'base' is the only Mermaid theme that honours themeVariables; these match
+  // public/spec/spec-theme.css instead of Mermaid's default lavender.
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#fbeaea',
+      primaryBorderColor: '#d32f2f',
+      primaryTextColor: '#1a1a1a',
+      lineColor: '#666',
+      edgeLabelBackground: '#f2f2f2',
+      clusterBkg: '#fafafa',
+      clusterBorder: '#d9d9d9',
+      fontFamily: 'system-ui, sans-serif'
+    }
+  });
 </script>
 <!-- Mark the ToC link for the current #hash. CSS can match the target heading
      (:target) but not the link pointing at it, so this bridges the two. -->
@@ -814,6 +829,8 @@ The element derives no ordering, performs no selection, and stores nothing beyon
     document.querySelectorAll('#toc a').forEach(function (a) {
       if (location.hash && a.hash === location.hash) {
         a.setAttribute('aria-current', 'location');
+        // Long L3 ToCs overflow the fixed sidebar; keep the entry in view.
+        a.scrollIntoView({ block: 'nearest' });
       } else {
         a.removeAttribute('aria-current');
       }
