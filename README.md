@@ -81,7 +81,8 @@ works immediately off the pilot seed; the input client needs
 
 `php bin/screenshots.php` captures every visitor-facing page in fixed,
 seeded states (start page, consent step, a session mid-way and one at its
-turn limit, content pages, the German start page, and the wall at 1920x1080)
+turn limit, content pages, the German start page, the wall at 1920x1080, and the
+wall's beamer profile at 1600x900)
 into `screenshots/`, with an `index.html` gallery. It runs the app in fake
 mode against a throwaway database, so it needs no API key and never touches
 `data/store.db`. For reviewing visual changes: nothing compares against a

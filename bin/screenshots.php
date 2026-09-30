@@ -9,7 +9,8 @@ declare(strict_types=1);
  * Runs the real app under `php -S` with LLM_PROVIDER=fake against a
  * throwaway database, seeded directly through Store (so a 16-turn session
  * doesn't trip the rate limiter), then captures each state by URL.
- * Phone pages are 390x844 (at 2x), the wall is 1920x1080. Writes the PNGs
+ * Phone pages are 390x844 (at 2x), the wall is 1920x1080 (plus the stadium
+ * beamer profile at 1600x900). Writes the PNGs
  * plus an index.html gallery into output-dir (default: screenshots/,
  * gitignored).
  *
@@ -42,6 +43,7 @@ $outDir = $positional[0] ?? "$root/screenshots";
 
 const PHONE = [390, 844];
 const WALL = [1920, 1080];
+const BEAMER = [1600, 900]; // stadium profile: Epson EB-1945W as run at the exhibition
 
 function fail(string $message): never
 {
@@ -194,6 +196,7 @@ $shots = [
     ['terms', '/terms', PHONE],
     ['start-de', '/?lang=de', PHONE],
     ['arena', '/arena', WALL],
+    ['arena-stadium', '/arena?d=stadium', BEAMER],
 ];
 if ($useSimulator) {
     $shots = array_values(array_filter($shots, static fn ($s) => $s[2] === PHONE)); // the wall is a projector, not a phone
@@ -271,7 +274,7 @@ $backend = $useSimulator ? 'iOS Simulator' : 'chrome-headless-shell';
 $figures = implode("\n", array_map(
     static fn ($s) => sprintf(
         '<figure class="%s"><img src="%s.png" alt="%s" loading="lazy"><figcaption>%s <code>%s</code></figcaption></figure>',
-        $s[2] === WALL ? 'wall' : 'phone',
+        $s[2] === PHONE ? 'phone' : 'wall',
         $s[0],
         htmlspecialchars($s[0]),
         htmlspecialchars($s[0]),
