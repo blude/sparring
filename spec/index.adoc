@@ -5,7 +5,6 @@ v.1.1, 2026-08-29
 :toclevels: 3
 :icons: font
 :sectanchors:
-:sectnums:
 
 == What Sparring is
 
