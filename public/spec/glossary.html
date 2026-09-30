@@ -270,5 +270,17 @@
   markCurrentTocLink();
   window.addEventListener('hashchange', markCurrentTocLink);
 </script>
+<!-- Tag the `_Key:_` labels (Satisfies, Rationale, ...) that open each line of
+     a requirement so spec-theme.css can set them apart from the body text.
+     CSS alone can't: it can't see the trailing colon, and `em:first-child`
+     ignores text nodes, so it would also catch italic words and notes. -->
+<script>
+  document.querySelectorAll('.paragraph > p > em').forEach(function (em) {
+    if (!/:\s*$/.test(em.textContent)) return;
+    var prev = em.previousSibling;
+    while (prev && prev.nodeType === Node.TEXT_NODE && !prev.textContent.trim()) prev = prev.previousSibling;
+    if (!prev || prev.nodeName === 'BR') em.classList.add('meta-key');
+  });
+</script>
 </body>
 </html>
