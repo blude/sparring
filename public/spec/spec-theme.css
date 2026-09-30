@@ -353,6 +353,12 @@ dt.hdlist1, .dlist dt {
     font-weight: 700;
 }
 
+/* Mermaid appends an invisible, padded tooltip div to <body>; it sits below
+   the footer and leaves a white strip. No diagram here uses click tooltips. */
+.mermaidTooltip {
+    display: none;
+}
+
 #footer {
     background: var(--fg);
     padding-left: 0;
