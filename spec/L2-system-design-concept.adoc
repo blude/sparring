@@ -197,34 +197,38 @@ _Represents:_ xref:L1-solution-design-concept.adoc#VCA-03[VCA-03 Thesis author /
 
 === Software elements
 
-==== [[SE-01]]SE-01 Input client _(Web-application)_
+==== [[SE-01]]SE-01 Input client
 
 The surface a visitor reaches by scanning the code, running in their own mobile browser. +
+_Kind:_ Web application +
 _Key responsibilities:_ Presents the consent decision before any input is possible. Accepts and submits visitor contributions. Displays the session's exchanges to its own participant. Restores an interrupted session from the identifier in the address. Signals that a response is being produced. Reveals a generated visitor alias and avatar once consent is recorded, and lets the visitor deliberately start a new session. +
 _Interacts with:_ <<UT-01,UT-01 Participating visitor>>, <<SE-03,SE-03 Backend service>>, <<HE-01,HE-01 Visitor smartphone>> +
 _Realises:_ xref:L1-solution-design-concept.adoc#VCA-04[VCA-04 The installation] +
 _Satisfies:_ <<SG-01,SG-01 Start a session from a personal device with no>>, <<SG-03,SG-03 Survive interruption of the visitor's session>>
 
-==== [[SE-02]]SE-02 Display client _(Web-application)_
+==== [[SE-02]]SE-02 Display client
 
 The projected surface, running unattended in a browser on the projection machine. +
+_Kind:_ Web application +
 _Key responsibilities:_ Requests current display material at a fixed interval. Renders exchanges with the scenario that gives them context. Gives prominence to recent material and recedes older material. Fits content to the projection without overflow. Labels each item with a generated visitor alias so exchanges from concurrent sessions are distinguishable. +
 _Interacts with:_ <<UT-02,UT-02 Observing visitor>>, <<SE-03,SE-03 Backend service>>, <<HE-02,HE-02 Projection setup>> +
 _Realises:_ xref:L1-solution-design-concept.adoc#VCA-04[VCA-04 The installation] +
 _Satisfies:_ <<SG-02,SG-02 Make turn-taking readable from across the room>>, <<SG-06,SG-06 Never present an empty surface>>
 
-==== [[SE-03]]SE-03 Backend service _(Backend-service)_
+==== [[SE-03]]SE-03 Backend service
 
 The single stateful component. Holds the datastore internally (see <<AP-04,AP-04 One file-backed datastore, held inside the backend>>), so no separate database element is identified. +
+_Kind:_ Backend-service +
 _Key responsibilities:_ Issues and resolves session identifiers. Produces Sparring responses by calling <<PE-01,PE-01 Language generation API>>. Assesses contributions for projection suitability. Enforces request rate, input size, and session length limits. Persists sessions and exchanges with their origin. Assembles the material the projection displays. Accepts pilot material from the operator. +
 _Interacts with:_ <<SE-01,SE-01 Input client>>, <<SE-02,SE-02 Display client>>, <<SE-04,SE-04 System prompt>>, <<PE-01,PE-01 Language generation API>>, <<UT-03,UT-03 Operator>>, <<HE-03,HE-03 Hosted server>> +
 _Realises:_ xref:L1-solution-design-concept.adoc#VCA-04[VCA-04 The installation] +
 _Satisfies:_ <<SG-01,SG-01 Start a session from a personal device with no>>, <<SG-04,SG-04 Run unattended and absorb misuse without operator>>, <<SG-05,SG-05 Record every interaction with its origin fixed at>>, <<SG-06,SG-06 Never present an empty surface>>, <<SG-07,SG-07 Gate public projection at the moment of submission>> +
 _Constrained by:_ <<SC-01,SC-01 PHP with a file-backed store on a single hosted>>, <<SC-04,SC-04 Generation is rate-limited and metered by the provider>>
 
-==== [[SE-04]]SE-04 System prompt _(Other — supplies content, no runtime interface of its own)_
+==== [[SE-04]]SE-04 System prompt
 
 The instruction set that governs every Sparring response — identity, voice, pedagogical mechanism, and domain grounding — supplied as input content to SE-03's outbound call rather than run as a component of its own. +
+_Kind:_ Other (supplies content, no runtime interface of its own) +
 _Key responsibilities:_ Defines the Sparring persona and behavioral rules. Specifies the four-stage reasoning engine run on every turn. Specifies the closed Socratic/Sparring move vocabulary. Grounds responses in the FH Dortmund Digital Design curriculum and named design-theory traditions. Specifies boundary-object handling and edge-case behavior. +
 _Interacts with:_ <<SE-03,SE-03 Backend service>> +
 _Realises:_ xref:L1-solution-design-concept.adoc#VCA-04[VCA-04 The installation] +

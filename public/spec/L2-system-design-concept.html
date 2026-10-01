@@ -65,10 +65,10 @@
 </li>
 <li><a href="#_software_elements">Software elements</a>
 <ul class="sectlevel3">
-<li><a href="#_se_01_input_client_web_application">SE-01 Input client <em>(Web-application)</em></a></li>
-<li><a href="#_se_02_display_client_web_application">SE-02 Display client <em>(Web-application)</em></a></li>
-<li><a href="#_se_03_backend_service_backend_service">SE-03 Backend service <em>(Backend-service)</em></a></li>
-<li><a href="#_se_04_system_prompt_other_supplies_content_no_runtime_interface_of_its_own">SE-04 System prompt <em>(Other — supplies content, no runtime interface of its own)</em></a></li>
+<li><a href="#_se_01_input_client">SE-01 Input client</a></li>
+<li><a href="#_se_02_display_client">SE-02 Display client</a></li>
+<li><a href="#_se_03_backend_service">SE-03 Backend service</a></li>
+<li><a href="#_se_04_system_prompt">SE-04 System prompt</a></li>
 </ul>
 </li>
 <li><a href="#_hardware_elements">Hardware elements</a>
@@ -383,9 +383,10 @@ Dashed link marks the system boundary. Detailed interaction sequences are in sec
 <div class="sect2">
 <h3 id="_software_elements"><a class="anchor" href="#_software_elements"></a>Software elements</h3>
 <div class="sect3">
-<h4 id="_se_01_input_client_web_application"><a class="anchor" href="#_se_01_input_client_web_application"></a><a id="SE-01"></a>SE-01 Input client <em>(Web-application)</em></h4>
+<h4 id="_se_01_input_client"><a class="anchor" href="#_se_01_input_client"></a><a id="SE-01"></a>SE-01 Input client</h4>
 <div class="paragraph">
 <p>The surface a visitor reaches by scanning the code, running in their own mobile browser.<br>
+<em>Kind:</em> Web application<br>
 <em>Key responsibilities:</em> Presents the consent decision before any input is possible. Accepts and submits visitor contributions. Displays the session&#8217;s exchanges to its own participant. Restores an interrupted session from the identifier in the address. Signals that a response is being produced. Reveals a generated visitor alias and avatar once consent is recorded, and lets the visitor deliberately start a new session.<br>
 <em>Interacts with:</em> <a href="#UT-01">UT-01 Participating visitor</a>, <a href="#SE-03">SE-03 Backend service</a>, <a href="#HE-01">HE-01 Visitor smartphone</a><br>
 <em>Realises:</em> <a href="L1-solution-design-concept.html#VCA-04">VCA-04 The installation</a><br>
@@ -393,9 +394,10 @@ Dashed link marks the system boundary. Detailed interaction sequences are in sec
 </div>
 </div>
 <div class="sect3">
-<h4 id="_se_02_display_client_web_application"><a class="anchor" href="#_se_02_display_client_web_application"></a><a id="SE-02"></a>SE-02 Display client <em>(Web-application)</em></h4>
+<h4 id="_se_02_display_client"><a class="anchor" href="#_se_02_display_client"></a><a id="SE-02"></a>SE-02 Display client</h4>
 <div class="paragraph">
 <p>The projected surface, running unattended in a browser on the projection machine.<br>
+<em>Kind:</em> Web application<br>
 <em>Key responsibilities:</em> Requests current display material at a fixed interval. Renders exchanges with the scenario that gives them context. Gives prominence to recent material and recedes older material. Fits content to the projection without overflow. Labels each item with a generated visitor alias so exchanges from concurrent sessions are distinguishable.<br>
 <em>Interacts with:</em> <a href="#UT-02">UT-02 Observing visitor</a>, <a href="#SE-03">SE-03 Backend service</a>, <a href="#HE-02">HE-02 Projection setup</a><br>
 <em>Realises:</em> <a href="L1-solution-design-concept.html#VCA-04">VCA-04 The installation</a><br>
@@ -403,9 +405,10 @@ Dashed link marks the system boundary. Detailed interaction sequences are in sec
 </div>
 </div>
 <div class="sect3">
-<h4 id="_se_03_backend_service_backend_service"><a class="anchor" href="#_se_03_backend_service_backend_service"></a><a id="SE-03"></a>SE-03 Backend service <em>(Backend-service)</em></h4>
+<h4 id="_se_03_backend_service"><a class="anchor" href="#_se_03_backend_service"></a><a id="SE-03"></a>SE-03 Backend service</h4>
 <div class="paragraph">
 <p>The single stateful component. Holds the datastore internally (see <a href="#AP-04">AP-04 One file-backed datastore, held inside the backend</a>), so no separate database element is identified.<br>
+<em>Kind:</em> Backend-service<br>
 <em>Key responsibilities:</em> Issues and resolves session identifiers. Produces Sparring responses by calling <a href="#PE-01">PE-01 Language generation API</a>. Assesses contributions for projection suitability. Enforces request rate, input size, and session length limits. Persists sessions and exchanges with their origin. Assembles the material the projection displays. Accepts pilot material from the operator.<br>
 <em>Interacts with:</em> <a href="#SE-01">SE-01 Input client</a>, <a href="#SE-02">SE-02 Display client</a>, <a href="#SE-04">SE-04 System prompt</a>, <a href="#PE-01">PE-01 Language generation API</a>, <a href="#UT-03">UT-03 Operator</a>, <a href="#HE-03">HE-03 Hosted server</a><br>
 <em>Realises:</em> <a href="L1-solution-design-concept.html#VCA-04">VCA-04 The installation</a><br>
@@ -414,9 +417,10 @@ Dashed link marks the system boundary. Detailed interaction sequences are in sec
 </div>
 </div>
 <div class="sect3">
-<h4 id="_se_04_system_prompt_other_supplies_content_no_runtime_interface_of_its_own"><a class="anchor" href="#_se_04_system_prompt_other_supplies_content_no_runtime_interface_of_its_own"></a><a id="SE-04"></a>SE-04 System prompt <em>(Other — supplies content, no runtime interface of its own)</em></h4>
+<h4 id="_se_04_system_prompt"><a class="anchor" href="#_se_04_system_prompt"></a><a id="SE-04"></a>SE-04 System prompt</h4>
 <div class="paragraph">
 <p>The instruction set that governs every Sparring response — identity, voice, pedagogical mechanism, and domain grounding — supplied as input content to SE-03&#8217;s outbound call rather than run as a component of its own.<br>
+<em>Kind:</em> Other (supplies content, no runtime interface of its own)<br>
 <em>Key responsibilities:</em> Defines the Sparring persona and behavioral rules. Specifies the four-stage reasoning engine run on every turn. Specifies the closed Socratic/Sparring move vocabulary. Grounds responses in the FH Dortmund Digital Design curriculum and named design-theory traditions. Specifies boundary-object handling and edge-case behavior.<br>
 <em>Interacts with:</em> <a href="#SE-03">SE-03 Backend service</a><br>
 <em>Realises:</em> <a href="L1-solution-design-concept.html#VCA-04">VCA-04 The installation</a><br>
