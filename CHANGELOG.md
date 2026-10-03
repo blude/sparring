@@ -2,8 +2,75 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-10-03
+
+- `a11e41d` feat(export): add --evaluation flag to markdown export
+
+## 2026-10-01
+
+- `fe6bc2c` docs(spec): move SE kind to a property in the requirement
+- `2dd2167` docs(spec): remove section numbers from index page
+- `d987c68` docs(spec): note both display profiles ran in TBC-01
+- `78b8477` chore(screenshots): capture stadium wall at beamer resolution
+- `9e75afe` fix(arena): limit stadium profile to 6 exchanges
+- `fe45a81` docs(spec): record Epson EB-1945W beamer as stadium profile
+- `23da31c` fix(spec): hide Mermaid tooltip div that leaves a gap below the footer
+- `af016ad` feat(spec): add sitemap footer to spec pages
+
+## 2026-09-30
+
+- `b82d145` style(spec): widen description column in entity tables
+- `0407308` docs(spec): add SE-03 entity overview diagram and E-05 curriculum excerpt
+- `da3b960` style(spec): replace stray rules with consistent section spacing
+- `8e211fd` style(spec): set requirement field labels apart from body text
+- `95cd4aa` style(spec): put Mermaid, admonitions and anchors on brand
+- `3eefb0c` feat(spec): highlight current ToC entry and target heading
+- `7547ad7` fix(spec): restore ToC link hover state
+- `af0cf4d` docs(spec): tighten ToC hierarchy and rename it to Contents
+- `1431107` docs(spec): restyle HTML spec with sans-serif and brand red
+- `400ba82` docs(spec): remove section numbers for cleaner navigation
+- `357f140` docs(spec): describe framework as three layers with L0/LX outside it
+- `3928c30` docs(spec): add L0 row to level table, rename index section headings
+
+## 2026-09-25
+
+- `0542737` Merge pull request #7 from blude/claude/agentic-coding-improvements-rroob0
+
+## 2026-09-24
+
+- `3e2ed15` docs: say poor woman's RAG instead of poor man's RAG
+- `b192616` fix(bin): clean up screenshot temp dirs and pin each shot's language
+- `4f0683f` docs: document page screenshots in ADR 0018, README and CLAUDE.md
+- `97af74c` ci: attach page screenshots to every PR as an artifact
+- `3b4de7d` feat(bin): screenshot every page in seeded states for review
+- `ea474a1` Merge pull request #6 from blude/claude/agentic-coding-improvements-rroob0
+- `dd699d5` docs: document the fake provider and HTTP smoke test in ADR 0017
+- `8dcca34` test: add an end-to-end HTTP smoke test on the fake provider
+- `84fca25` feat(llm): add an offline fake provider (LLM_PROVIDER=fake)
+- `8c5cd8f` fix(tests): run PHP smoke tests with assertions enabled
+- `abc214f` Merge pull request #5 from blude/claude/agentic-coding-improvements-rroob0
+- `d6ad3e4` build: keep the version in composer.json, refresh the lock on bump
+- `fc6845e` build: make the git tag the only record of the app version
+- `65f1329` fix(ci): close bypasses in the commit, changelog and spec drift checks
+- `a8258ad` fix(claude): make the session-start hook async via settings, not stdout
+- `c7de0d7` build: move app version to VERSION so bumps stop staling composer.lock
+- `9cb530f` chore(claude): run composer install async in the session-start hook
+- `e2cfd0e` docs: record CI and agent session setup in ADR 0016 and CLAUDE.md
+- `f4f844d` ci: run lint, smoke tests, spec drift and commit checks
+- `6f0e460` chore(githooks): block sparring.md commits without a changelog entry
+- `06fb378` chore(claude): add web session-start hook and shared settings
+
+## 2026-09-19
+
+- `d1cc43c` style(arena): widen reply-qr code in stadium view mode
+
+## 2026-09-18
+
+- `0665f5b` style(dojo): lighten gate-card link colors for legibility on dark bg
+
 ## 2026-09-17
 
+- `043354c` docs: update CHANGELOG through 3d2278b
 - `3d2278b` style(ses): add subtle shadow to scenario list
 - `f62e6fa` style(ses): suppress tap highlight on the summary row
 - `fe4c87d` feat(ses): i18n the page title and heading
