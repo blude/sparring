@@ -4,6 +4,10 @@ Generated from git history. Grouped by commit date, newest first.
 
 ## 2026-10-03
 
+- `220aa36` docs(spec): allow study origin and its manual relabeling
+- `dcc4e48` docs: add ADR 0019 and usage notes for study origin
+- `95beb79` feat(store): add study session origin, projected like live
+- `cda6e6f` docs: update CHANGELOG through a11e41d
 - `a11e41d` feat(export): add --evaluation flag to markdown export
 
 ## 2026-10-01
