@@ -258,7 +258,7 @@ _Satisfies:_ <<BG-01,BG-01 Make Sparring's friction visible to an audience>>, <<
 
 _Applies to:_ <<BE-01,BE-01 Sparring session>>
 
-_Acceptance criteria (qualitative):_ Session origin is recorded at creation, not reconstructed afterwards.
+_Acceptance criteria (qualitative):_ Session origin is recorded at creation, not reconstructed afterwards. The one hand edit is the operator marking evaluation-study sessions as such (see SQR-05).
 
 _Satisfies:_ <<BG-04,BG-04 Produce a record of public interactions as secondary>>
 

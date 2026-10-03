@@ -432,7 +432,7 @@ A second distinction the instruction must also get right, found in testing: stat
 <div class="ulist">
 <ul>
 <li>
-<p><strong><a id="FS-04-1"></a>FS-04-1</strong> <em>(Entity-access)</em> Read live-origin sessions from <a href="#E-01">E-01 Session</a> where <a href="#E-01.6">E-01.6 displayable</a> (displayable) is true and at least one exchange exists, ordered by <a href="#E-01.9">E-01.9 lastActiveAt</a> (lastActiveAt) descending, up to the item limit. The item limit is passed in by the caller (<a href="#TI-04">TI-04 Retrieve display material</a>, resolved from the requesting display profile; a default applies when none is given) — this function does not read it from configuration itself.</p>
+<p><strong><a id="FS-04-1"></a>FS-04-1</strong> <em>(Entity-access)</em> Read live- and study-origin sessions from <a href="#E-01">E-01 Session</a> (ranked together) where <a href="#E-01.6">E-01.6 displayable</a> (displayable) is true and at least one exchange exists, ordered by <a href="#E-01.9">E-01.9 lastActiveAt</a> (lastActiveAt) descending, up to the item limit. The item limit is passed in by the caller (<a href="#TI-04">TI-04 Retrieve display material</a>, resolved from the requesting display profile; a default applies when none is given) — this function does not read it from configuration itself.</p>
 </li>
 <li>
 <p><strong><a id="FS-04-2"></a>FS-04-2</strong> <em>(Data-operation)</em> If fewer items were found than the limit, continue at <a href="#FS-04-3">FS-04-3</a>. Otherwise continue at <a href="#FS-04-4">FS-04-4</a>.</p>
@@ -675,7 +675,7 @@ Unlike the earlier design this superseded, the response&#8217;s condition list i
 <p><em>Call type:</em> Synchronous<br>
 <em>Calling elements:</em> <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a> (<a href="L3-SE-02-display-client.html#TO-01">TO-01 Retrieve display material</a>)<br>
 <em>Input:</em> An optional display-profile identifier (string; absent or unrecognised means the default profile). See <a href="L3-SE-02-display-client.html#C-03">SE-02 C-03 display profiles</a>.<br>
-<em>Output:</em> An ordered list of items, each carrying a session identifier, scenario statement, an optional refined title (<code>null</code> when none exists yet), one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total session count and a total exchange count (both integers) — every session and exchange ever recorded, live and pilot, not scoped to the items returned.<br>
+<em>Output:</em> An ordered list of items, each carrying a session identifier, scenario statement, an optional refined title (<code>null</code> when none exists yet), one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total session count and a total exchange count (both integers) — every session and exchange ever recorded, live, study and pilot, not scoped to the items returned.<br>
 <em>Action:</em> Resolves the display-profile identifier to that profile&#8217;s item count, calls <a href="#TF-04">TF-04 Assemble display material</a> with it for the item list, and separately counts all rows in <a href="#E-01">E-01 Session</a> and <a href="#E-02">E-02 Exchange</a> for the two totals — plain totals, not scoped to the sessions <a href="#TF-04">TF-04 Assemble display material</a> selects and not a selection or ordering decision, so they stay outside that function&#8217;s policy. Returns all three immediately.<br>
 <em>Error cases:</em> None specific to this interface. An empty list is a valid response and occurs only when no pilot material has been imported.</p>
 </div>
@@ -929,7 +929,7 @@ session replied to an exchange is not stored, so no relation is drawn.
 <td class="tableblock halign-left valign-top"><p class="tableblock">origin</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">enum</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pilot</code> or <code>live</code>. Written at creation and never modified (<a href="L2-system-design-concept.html#SQR-05">SQR-05 Origin is fixed at creation and never inferred</a>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pilot</code>, <code>live</code> or <code>study</code>. Written at creation (<code>pilot</code> or <code>live</code>) and never modified by the application. The one exception is the operator relabeling a <code>live</code> session <code>study</code> by hand in the store, for a session conducted during the evaluation study (<a href="L2-system-design-concept.html#SQR-05">SQR-05 Origin is fixed at creation and never inferred</a>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.5"></a>E-01.5</p></td>
@@ -1302,7 +1302,7 @@ The pair is stored as one record rather than as two turn records. This follows t
 <h3 id="_qr_06_origin_is_written_once_data_integrity"><a class="anchor" href="#_qr_06_origin_is_written_once_data_integrity"></a><a id="QR-06"></a>QR-06 Origin is written once <em>(Data-integrity)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#E-01">E-01 Session</a>, <a href="#TF-06">TF-06 Import pilot transcripts</a>, <a href="#TI-01">TI-01 Open a session</a><br>
-<em>Acceptance criteria:</em> <a href="#E-01.4">E-01.4 origin</a> is set at creation and no code path updates it. No process infers origin from any other value.<br>
+<em>Acceptance criteria:</em> <a href="#E-01.4">E-01.4 origin</a> is set at creation and no code path updates it; the only later change is the operator&#8217;s manual <code>live</code> to <code>study</code> relabeling. No process infers origin from any other value.<br>
 <em>Supports:</em> <a href="L2-system-design-concept.html#SQR-05">SQR-05 Origin is fixed at creation and never inferred</a></p>
 </div>
 </div>

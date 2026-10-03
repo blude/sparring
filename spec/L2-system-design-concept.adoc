@@ -416,7 +416,7 @@ _Externally sourced:_ Yes (provider terms and cost exposure rather than a busine
 === [[SQR-05]]SQR-05 Origin is fixed at creation and never inferred _(Data-integrity)_
 
 _Applies to:_ <<SE-03,SE-03 Backend service>> +
-_Acceptance criteria (qualitative):_ Every session carries pilot or live from the moment it is created. No process assigns or corrects origin afterwards. Extraction of exhibition material filters on the stored value. +
+_Acceptance criteria (qualitative):_ Every session carries pilot or live from the moment it is created. No application process assigns or corrects origin afterwards; the only later change is the operator marking a live session as study (a session conducted during the evaluation study) by hand in the store. Extraction of exhibition material filters on the stored value. +
 _Supports:_ xref:L1-solution-design-concept.adoc#BQR-04[BQR-04 Exhibition material is never mistaken for evaluation]
 
 === [[SQR-06]]SQR-06 Public projection is governed separately from retention _(Compliance)_
