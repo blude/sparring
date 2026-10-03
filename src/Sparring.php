@@ -381,9 +381,11 @@ final class Sparring
      */
     public function assembleDisplayMaterial(int $limit): array
     {
-        $sessions = $this->store->getDisplayableSessions('live', $limit);
+        // study sessions (evaluation study, ADR 0019) rank with live ones; the visitor's
+        // projection consent already gates them via displayable, same as live.
+        $sessions = $this->store->getDisplayableSessions(['live', 'study'], $limit);
         if (count($sessions) < $limit) {
-            $sessions = [...$sessions, ...$this->store->getDisplayableSessions('pilot', $limit - count($sessions))];
+            $sessions = [...$sessions, ...$this->store->getDisplayableSessions(['pilot'], $limit - count($sessions))];
         }
 
         $items = [];

@@ -156,19 +156,83 @@ assert($store->getExchanges($session['id'])[0]['replyCount'] === 1); // unchange
 
 $store->setScenario($session['id'], 'What is a wicked problem?', 'first-contribution');
 $store->setDisplayable($session['id'], true);
-$visible = $store->getDisplayableSessions('live', 10);
+$visible = $store->getDisplayableSessions(['live'], 10);
 assert(count($visible) === 1 && $visible[0]['id'] === $session['id']);
 
 $store->setDisplayable($session['id'], false);
-$hiddenNow = $store->getDisplayableSessions('live', 10);
+$hiddenNow = $store->getDisplayableSessions(['live'], 10);
 assert(count($hiddenNow) === 0);
 
 // pilot session must not leak into a 'live' query
 $pilotSession = $store->createSession('pilot');
 $store->appendExchange($pilotSession['id'], 'pilot contribution', 'pilot response');
 $store->setDisplayable($pilotSession['id'], true);
-assert(count($store->getDisplayableSessions('live', 10)) === 0);
-assert(count($store->getDisplayableSessions('pilot', 10)) === 1);
+assert(count($store->getDisplayableSessions(['live'], 10)) === 0);
+assert(count($store->getDisplayableSessions(['pilot'], 10)) === 1);
+
+/*
+|--------------------------------------------------------------------------
+| 'study' origin (evaluation-study sessions)
+|--------------------------------------------------------------------------
+*/
+
+// study sessions rank by recency alongside live ones in a ['live','study'] query,
+// and never leak into a live-only or pilot-only one
+$studySession = $store->createSession('study');
+assert($studySession['origin'] === 'study');
+$store->appendExchange($studySession['id'], 'study contribution', 'study response');
+$store->setDisplayable($studySession['id'], true);
+assert(count($store->getDisplayableSessions(['live'], 10)) === 0);
+assert(count($store->getDisplayableSessions(['pilot'], 10)) === 1);
+$wall = $store->getDisplayableSessions(['live', 'study'], 10);
+assert(count($wall) === 1 && $wall[0]['id'] === $studySession['id'] && $wall[0]['origin'] === 'study');
+
+// a store.db created before 'study' existed has CHECK (origin IN ('pilot','live')),
+// which SQLite can't alter in place: migrate() must rebuild the table and keep
+// every row, the exchange/evaluation rows that reference it, and the index
+$legacyPath = sys_get_temp_dir() . '/sparring_smoke_legacy_' . bin2hex(random_bytes(4)) . '.db';
+$legacy = new PDO('sqlite:' . $legacyPath);
+$legacy->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$legacy->exec(<<<SQL
+    CREATE TABLE sessions (
+        id TEXT PRIMARY KEY, created_at TEXT NOT NULL,
+        scenario_source TEXT CHECK (scenario_source IN ('first-contribution', 'generated')),
+        origin TEXT NOT NULL CHECK (origin IN ('pilot', 'live')),
+        scenario TEXT, title TEXT, displayable INTEGER NOT NULL DEFAULT 0,
+        consent_granted INTEGER, tos_agreed INTEGER, projection_consent INTEGER,
+        turn_count INTEGER NOT NULL DEFAULT 0, last_active_at TEXT NOT NULL,
+        bonus_turns INTEGER NOT NULL DEFAULT 0
+    );
+    CREATE TABLE exchanges (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, session_id TEXT NOT NULL REFERENCES sessions(id),
+        visitor_contribution TEXT NOT NULL, sparring_response TEXT NOT NULL,
+        position INTEGER NOT NULL, created_at TEXT NOT NULL, reply_count INTEGER NOT NULL DEFAULT 0
+    );
+    CREATE TABLE session_evaluations (
+        session_id TEXT PRIMARY KEY REFERENCES sessions(id) ON DELETE CASCADE,
+        answers TEXT NOT NULL, feedback TEXT, created_at TEXT NOT NULL
+    );
+    INSERT INTO sessions (id, created_at, origin, displayable, turn_count, last_active_at, bonus_turns)
+        VALUES ('LEGACY01', '2026-01-01T00:00:00Z', 'live', 1, 1, '2026-01-01T00:00:00Z', 2);
+    INSERT INTO exchanges (session_id, visitor_contribution, sparring_response, position, created_at)
+        VALUES ('LEGACY01', 'hello', 'hi', 1, '2026-01-01T00:00:00Z');
+    INSERT INTO session_evaluations (session_id, answers, created_at)
+        VALUES ('LEGACY01', '{}', '2026-01-01T00:00:00Z');
+SQL);
+$legacy = null;
+
+$migrated = new Store($legacyPath);
+$kept = $migrated->getSession('LEGACY01');
+assert($kept !== null && $kept['origin'] === 'live' && $kept['bonusTurns'] === 2);
+assert(count($migrated->getExchanges('LEGACY01')) === 1);
+assert($migrated->getEvaluation('LEGACY01') !== null); // ON DELETE CASCADE must not fire during the rebuild
+assert($migrated->createSession('study')['origin'] === 'study'); // CHECK now accepts it
+new Store($legacyPath); // second construction: migration is a no-op, not a second rebuild
+assert($migrated->getSession('LEGACY01') !== null);
+unlink($legacyPath);
+foreach (['-wal', '-shm'] as $suffix) {
+    @unlink($legacyPath . $suffix);
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -177,12 +241,12 @@ assert(count($store->getDisplayableSessions('pilot', 10)) === 1);
 */
 
 $allSessionIds = array_column($store->getAllSessions(), 'id');
-foreach ([$session['id'], $consentOnlySession['id'], $titleSession['id'], $evalSession['id'], $replierSession['id'], $pilotSession['id']] as $id) {
+foreach ([$session['id'], $consentOnlySession['id'], $titleSession['id'], $evalSession['id'], $replierSession['id'], $pilotSession['id'], $studySession['id']] as $id) {
     assert(in_array($id, $allSessionIds, true));
 }
-assert(count($allSessionIds) === 6); // every session created so far, live and pilot alike
+assert(count($allSessionIds) === 7); // every session created so far, live, pilot and study alike
 $allExchanges = $store->getAllExchanges();
-assert(count($allExchanges) === 6); // 2 on $session, 1 on $consentOnlySession, 2 on $replierSession, 1 on $pilotSession
+assert(count($allExchanges) === 7); // 2 on $session, 1 on $consentOnlySession, 2 on $replierSession, 1 on $pilotSession, 1 on $studySession
 
 /*
 |--------------------------------------------------------------------------
@@ -221,8 +285,8 @@ assert($b3 === ['allowed' => true, 'remaining' => 4]);
 */
 
 $before = $store->getCounts();
-assert($before['sessions'] === 6); // $session, $consentOnlySession, $titleSession, $evalSession, $replierSession, $pilotSession created above
-assert($before['exchanges'] === 6); // 2 on $session, 1 on $consentOnlySession, 2 on $replierSession, 1 on $pilotSession
+assert($before['sessions'] === 7); // $session, $consentOnlySession, $titleSession, $evalSession, $replierSession, $pilotSession, $studySession created above
+assert($before['exchanges'] === 7); // 2 on $session, 1 on $consentOnlySession, 2 on $replierSession, 1 on $pilotSession, 1 on $studySession
 assert($before['rateLimitWindows'] === 2); // $hash + $boundaryHash above
 $deleted = $store->resetAll();
 assert($deleted === $before);
