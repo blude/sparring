@@ -138,6 +138,17 @@ php bin/delete_session.php <id> --dry-run  # report what would be deleted for on
 php bin/delete_session.php <id> --confirm  # delete that session + its exchanges + its evaluation
 ```
 
+Session origin is `live`, `pilot` or `study`. Sessions conducted during the
+evaluation study are marked by hand (no script, ADR 0019); back up first:
+
+```sh
+php bin/backup_db.php
+sqlite3 data/store.db "UPDATE sessions SET origin='study' WHERE id IN ('<id>', '<id>')"
+```
+
+Starting the app once on an older `store.db` migrates it to accept `study`
+(a one-time table rebuild; rows are kept).
+
 On prod, run any `bin/*.php` script through `ee shell <site> --command='php bin/...'`
 instead of bare `php bin/...` on the host — the host's PHP may be older than
 this project's 8.2+ requirement (see Deploy below).

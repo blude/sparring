@@ -220,6 +220,9 @@ PHP backend. **SE-04** = the system prompt (`prompts/sparring.md`). Spec IDs
   (`DISPLAY_ITEM_LIMIT`) show; a session that goes quiet drops off entirely.
   Accepted as intentional — gives visitors a reason to keep engaging
   (`TBC-01` note).
+- **Study sessions on the wall** — Sessions with origin `study` (evaluation
+  study, marked by hand by the operator, ADR 0019) rank with live ones; the
+  visitor's projection consent gates them like any other (`TF-04`).
 - **Never-empty surface** — When too few live sessions are eligible, pilot-
   origin sessions fill the remainder (`SG-06`, `G-02`, `TF-04` fallback).
 - **Backend outage is invisible** — A failed poll retains the last good
