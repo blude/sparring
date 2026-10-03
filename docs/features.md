@@ -371,6 +371,9 @@ PHP backend. **SE-04** = the system prompt (`prompts/sparring.md`). Spec IDs
 - **Separate `session_evaluations` table** — `Store::saveEvaluation()`, one
   row per session, resubmission replaces. Deliberately not elevated to a
   first-class record (`E-04`).
+- **Optional markdown export** — `bin/export.php --markdown --evaluation`
+  appends an `## Evaluation` section (ratings + feedback) to each exported
+  session that has one; off by default.
 
 ## 15. Curriculum grounding ("poor woman's RAG")
 

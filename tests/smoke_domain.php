@@ -286,4 +286,27 @@ try {
 }
 assert($threw, 'render_session_index should reject an unknown --columns key');
 
+/*
+|--------------------------------------------------------------------------
+| bin/export.php::render_evaluation_markdown() — --markdown --evaluation
+|--------------------------------------------------------------------------
+*/
+// (defined by the same eval above — it sits between render_session_index and $store)
+
+// no evaluation left -> '' so the caller can append unconditionally
+assert(render_evaluation_markdown(null) === '');
+
+// answers + feedback; scale denominator comes from EVAL_SCALE_SIZE
+$full = ['sessionId' => 'AAAA1111', 'answers' => ['challenge' => 4, 'knowledge' => 2], 'feedback' => 'Fun.', 'createdAt' => 'x'];
+assert(render_evaluation_markdown($full) ===
+    "## Evaluation\n\n- challenge: 4/" . EVAL_SCALE_SIZE . "\n- knowledge: 2/" . EVAL_SCALE_SIZE . "\n\n**Feedback:** Fun.\n");
+
+// feedback only (all rating questions skipped) -> no bullet list
+assert(render_evaluation_markdown(['sessionId' => 'a', 'answers' => [], 'feedback' => 'Only words', 'createdAt' => 'x']) ===
+    "## Evaluation\n\n**Feedback:** Only words\n");
+
+// answers only -> no feedback line; partial answer set is fine
+assert(render_evaluation_markdown(['sessionId' => 'a', 'answers' => ['challenge' => 5], 'feedback' => null, 'createdAt' => 'x']) ===
+    "## Evaluation\n\n- challenge: 5/" . EVAL_SCALE_SIZE . "\n");
+
 echo "smoke_domain: ok\n";

@@ -28,13 +28,17 @@ declare(strict_types=1);
  *               If output-path is a directory (exists, or ends with "/"),
  *               writes one <createdAt-date>-<id>.md per session into it
  *               instead of a single concatenated document.
+ *               --evaluation (markdown only, ignored by other formats)
+ *               appends the visitor's end-of-session self-report (ratings +
+ *               feedback) as an "## Evaluation" section to each session that
+ *               has one. Off by default so existing exports don't change.
  *   --index     One scannable line per session, fields joined by " - ".
  *               Default columns: id, date, title, exchanges. Override with
  *               --columns=<csv> from: id date datetime title exchanges
  *               origin turns lastactive displayable.
  *
  * Usage: php bin/export.php [--consented-only] [output-path]
- *        php bin/export.php --jsonl|--csv|--markdown [--session=<id>] [--consented-only] [output-path]
+ *        php bin/export.php --jsonl|--csv|--markdown [--session=<id>] [--evaluation] [--consented-only] [output-path]
  *        php bin/export.php --index [--columns=<csv>] [--consented-only] [output-path]
  */
 
@@ -49,7 +53,7 @@ if (php_sapi_name() !== 'cli') {
 if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
     exit(
         "Usage: php bin/export.php [--consented-only] [output-path]\n" .
-        "       php bin/export.php --jsonl|--csv|--markdown [--session=<id>] [--consented-only] [output-path]\n" .
+        "       php bin/export.php --jsonl|--csv|--markdown [--session=<id>] [--evaluation] [--consented-only] [output-path]\n" .
         "       php bin/export.php --index [--columns=<csv>] [--consented-only] [output-path]\n"
     );
 }
@@ -96,6 +100,31 @@ function render_session_index(array $sessions, array $exchangeCounts, ?string $c
     return implode("\n", $lines) . ($lines === [] ? '' : "\n");
 }
 
+/**
+ * --markdown --evaluation's section builder, pulled out so it's unit-testable
+ * (tests/smoke_domain.php). Takes Store::getEvaluation()'s shape; returns ''
+ * when the visitor left no evaluation, so the caller can append unconditionally.
+ * Keys print as stored (no i18n labels) — the export is locale-neutral.
+ */
+function render_evaluation_markdown(?array $evaluation): string
+{
+    if ($evaluation === null) {
+        return '';
+    }
+    $lines = ['## Evaluation', ''];
+    foreach ($evaluation['answers'] as $question => $score) {
+        $lines[] = "- {$question}: {$score}/" . EVAL_SCALE_SIZE;
+    }
+    if ($evaluation['answers'] !== []) {
+        $lines[] = '';
+    }
+    if ($evaluation['feedback'] !== null) {
+        $lines[] = "**Feedback:** {$evaluation['feedback']}";
+        $lines[] = '';
+    }
+    return implode("\n", $lines);
+}
+
 $store = new Store(STORE_DB_PATH);
 
 $jsonl = in_array('--jsonl', $argv, true);
@@ -103,6 +132,7 @@ $csv = in_array('--csv', $argv, true);
 $markdown = in_array('--markdown', $argv, true);
 $index = in_array('--index', $argv, true);
 $consentedOnly = in_array('--consented-only', $argv, true);
+$withEvaluation = in_array('--evaluation', $argv, true);
 $sessionId = null;
 $columnsCsv = null;
 foreach ($argv as $arg) {
@@ -216,6 +246,13 @@ if ($markdown) {
             $lines[] = '';
             $lines[] = "**Sparring:** {$e['sparringResponse']}";
             $lines[] = '';
+        }
+        if ($withEvaluation) {
+            // ponytail: one query per session, add a bulk getter if exports get big
+            $section = render_evaluation_markdown($store->getEvaluation($sid));
+            if ($section !== '') {
+                $lines[] = $section;
+            }
         }
         $docs[$sid] = implode("\n", $lines);
     }

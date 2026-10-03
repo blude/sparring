@@ -92,8 +92,8 @@ shipped) remain undone and unplanned.
   plus an open feedback field, always skippable. Shown on natural
   turn-limit completion and on a deliberate "End session" press. Questions
   live in `EVAL_QUESTIONS`/`EVAL_SCALE_SIZE` (config.php), answers persist
-  to a new `session_evaluations` table (`Store::saveEvaluation()`), no
-  `bin/export.php` wiring yet (deferred, see PR notes).
+  to a new `session_evaluations` table (`Store::saveEvaluation()`), exported
+  with `bin/export.php --markdown --evaluation`.
 - [x] Add ability for visitors to reply to one of Sparring's replies from
   the wall projection using QR code
 - [x] Add QR Code generator
