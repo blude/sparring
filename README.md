@@ -23,6 +23,7 @@ Superraum, Dortmund, in September 2026.
 |---|---|---|
 | **Dojo** (SE-01) | `/`, `/dojo` | Phone client. Start page, consent, then one session with a limited number of turns. |
 | **Arena** (SE-02) | `/arena` | Wall display. Shows the latest exchanges from all sessions. |
+| **Scenarios** | `/ses` | Picker for the sparring evaluation scenarios. Each one starts a dojo session on its own opening prompt (`/dojo?o=ses2` to `ses4`), the same way a printed QR code would. English only. |
 | **Backend** (SE-03) | `/api/*` | Moderates each contribution, generates the reply and stores the session. |
 
 The sparring behaviour comes from a single system prompt,
