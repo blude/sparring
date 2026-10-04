@@ -1,6 +1,10 @@
 # Sparring
 
-An exhibition object where you argue with an AI that doesn't hand you the answer.
+An exhibition object where you argue with an AI that doesn't hand you the answer. Try it out at [sparringmethod.com](https://sparringmethod.com).
+
+<p align="center">
+  <img src="docs/images/logo-mono.png" alt="Sparring" height="80">
+</p>
 
 A QR code on the wall opens a text field on the visitor's phone. Whatever they
 type goes to an AI that pushes back on the argument, and both sides of the
@@ -10,9 +14,7 @@ was built for a master's thesis at FH Dortmund and shown for three days at
 Superraum, Dortmund, in September 2026.
 
 <p align="center">
-  <img src="docs/images/dojo.png" alt="Phone client mid-session: the visitor's claims and the AI's counter-questions" height="420">
-  &nbsp;
-  <img src="docs/images/arena.png" alt="Wall display: recent exchanges from several visitors, with QR codes" height="420">
+  <img src="docs/images/mockup.jpg" alt="Preview of Sparring's dojo, arena and start screens" height="420">
 </p>
 
 ## How it works
