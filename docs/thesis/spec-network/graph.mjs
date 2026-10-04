@@ -20,7 +20,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-const SPEC_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "spec");
+const SPEC_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "spec");
 
 // ---------------------------------------------------------------------------
 // which files, in which design level

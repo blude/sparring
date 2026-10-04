@@ -13,7 +13,7 @@
 // byte-identical file (good for committing). No deps, no browser.
 //
 // Usage:
-//   node docs/spec-network/force.gen.mjs [seed] [--by-type]
+//   node docs/thesis/spec-network/force.gen.mjs [seed] [--by-type]
 // Writes force.landscape.<stamp>.svg and force.portrait.<stamp>.svg.
 
 import { writeFileSync } from "node:fs";

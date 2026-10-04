@@ -13,7 +13,7 @@
 // (good for committing). No font-metrics engine headless, so node width is
 // derived from the ID string length with generous padding.
 //
-// Usage:  node docs/spec-network/network.gen.mjs
+// Usage:  node docs/thesis/spec-network/network.gen.mjs
 
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";

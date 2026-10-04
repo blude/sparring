@@ -47,6 +47,7 @@ provider gives canned replies. For real ones, see
 
 - [Getting started](docs/getting-started.md): setup, LLM providers, tests, screenshots
 - [Operations](docs/operations.md): export, database maintenance, deployment
+- [Feature inventory](docs/features.md): everything the installation does
 - [Design spec](spec/index.adoc): the design record of what the installation must do and why (L1–L3)
 - [Architecture decisions](docs/adr/README.md): how the code is built and why
 - [Prompt evals](evals/sparring/README.md): multi-turn evaluation of the sparring prompt
