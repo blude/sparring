@@ -2,7 +2,8 @@
 
 Thesis exhibition POC: visitor argues with an AI on their phone (SE-01), the
 exchange projects on a wall (SE-02), one backend service (SE-03). See
-`README.md` for setup/run, `spec/` for the design.
+`docs/getting-started.md` for setup/run, `docs/operations.md` for
+export/DB/deploy, `spec/` for the design.
 
 ## Stack
 - PHP 8.2+, vanilla JS, SQLite (`data/store.db`, WAL mode). No build step,
@@ -13,7 +14,7 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   Laravel Valet (`valet park`/`link`), which routes the same way natively.
   `LLM_PROVIDER=fake` runs it offline with no key (canned `(fake)` replies,
   markers for the failure paths): use it to check UI or API changes end to
-  end without real calls. See README "Switch LLM provider".
+  end without real calls. See `docs/getting-started.md` "LLM providers".
 - Test: assert-based smoke scripts, no framework. `tests/run.sh` runs all of
   them (PHP then Node, each its own process — see the script's own comment on
   why), stops on first failure. Individually — PHP needs
@@ -81,7 +82,7 @@ exchange projects on a wall (SE-02), one backend service (SE-03). See
   `type(scope)?: subject`, types `feat fix docs style refactor perf test chore
   build ci revert`, imperative subject, one logical change per commit. A
   `.githooks/commit-msg` hook enforces this — `composer install` wires
-  `core.hooksPath` to it automatically (see README Setup).
+  `core.hooksPath` to it automatically (see `docs/getting-started.md` Setup).
   `.githooks/pre-commit` blocks a commit that stages `prompts/sparring.md`
   without `prompts/CHANGELOG.md` (see the last section).
 - `bin/*.php` CLI scripts: CLI-only guard (`php_sapi_name() !== 'cli'`),

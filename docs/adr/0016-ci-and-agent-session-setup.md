@@ -34,7 +34,7 @@ prose in `CLAUDE.md`.
   SessionStart hook that wires `core.hooksPath`, then runs
   `composer install` asynchronously so the session isn't held up by it,
   but only when `CLAUDE_CODE_REMOTE=true`; local
-  checkouts are set up per README. It also has a permission allowlist for
+  checkouts are set up per `docs/getting-started.md`. It also has a permission allowlist for
   the test and lint commands and a denylist for `bin/deploy*.sh` and the
   destructive `bin/` data scripts.
 

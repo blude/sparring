@@ -2,7 +2,7 @@
 # SessionStart hook for Claude Code on the web: a fresh cloud container has
 # no vendor/, so tests/run.sh fatals on the missing autoloader, and
 # core.hooksPath is unset, so .githooks/ never runs. Local sessions skip
-# this: a local checkout is already set up per README.
+# this: a local checkout is already set up per docs/getting-started.md.
 set -euo pipefail
 
 if [ "${CLAUDE_CODE_REMOTE:-}" != "true" ]; then
