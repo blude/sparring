@@ -129,7 +129,7 @@ return [
     'credits.author.heading' => 'About the Author',
     'credits.author.bio' => 'Sarah is a designer and researcher based in Dortmund. She is currently a student of the Master Digital Design program at the Fachhochschule Dortmund, where she investigates the role of AI in design education. Her work explores the intersection of technology, creativity, and human-computer interaction.',
     'credits.author.contact' => '<strong>Contact:</strong> For inquiries, please contact <a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Inquiry">sarah.puppinpratti001@stud.fh-dortmund.de</a>',
-    'credits.ack.heading' => 'Acknowledgements',
+    'credits.ack.heading' => 'Acknowledgments',
     'credits.ack.intro' => 'Sparring uses the following open-source libraries and technologies:',
     'credits.ack.material' => 'Parts of Sparring&rsquo;s teaching material are based on work originally written by Dr. Kim Lauenroth.',
 
