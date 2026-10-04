@@ -1,6 +1,6 @@
 # Sparring
 
-Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design. [Try it out](https://sparringmethod.com).
+Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design.
 
 <p align="center">
   <a href="https://sparringmethod.com"><img src="docs/images/logo-mono.png" alt="Sparring" height="80"></a>
