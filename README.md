@@ -1,21 +1,24 @@
 # Sparring
 
-An exhibition object where you argue with an AI that doesn't hand you the answer. Try it out at [sparringmethod.com](https://sparringmethod.com).
+Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design. [Try it out](https://sparringmethod.com).
 
 <p align="center">
-  <img src="docs/images/logo-mono.png" alt="Sparring" height="80">
+  <a href="https://sparringmethod.com"><img src="docs/images/logo-mono.png" alt="Sparring" height="80"></a>
 </p>
+
+Sparring
+was built for a master's thesis at FH Dortmund and shown for three days at
+Superraum, Dortmund, in September 2026.
 
 A QR code on the wall opens a text field on the visitor's phone. Whatever they
 type goes to an AI that pushes back on the argument, and both sides of the
 exchange are projected onto the wall behind them, so the whole room can watch
-one person reason it through. The subject is Digital Design education. Sparring
-was built for a master's thesis at FH Dortmund and shown for three days at
-Superraum, Dortmund, in September 2026.
+one person reason it through. The subject is Digital Design education.
 
 <p align="center">
   <img src="docs/images/mockup.jpg" alt="Preview of Sparring's dojo, arena and start screens" height="420">
 </p>
+
 
 ## How it works
 
