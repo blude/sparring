@@ -1,196 +1,62 @@
-# Sparring Exhibition Object — POC
+# Sparring
 
-Implements the L1–LX design spec in `spec/`. See
-`.claude/plans/` (or ask Claude) for the build plan, gap analysis, and the
-resolved moderation-flow decision. Status: proof of concept — rudimentary
-input/display clients, backend, LLM integration, display selection, session
-lifecycle, pilot seed + export. Non-functional polish (display layout
-treatment, visual design) is explicitly deferred per the specs themselves.
+An exhibition object where you argue with an AI that doesn't hand you the answer.
 
-## Setup
+A QR code on the wall opens a text field on the visitor's phone. Whatever they
+type goes to an AI that pushes back on the argument, and both sides of the
+exchange are projected onto the wall behind them, so the whole room can watch
+one person reason it through. The subject is Digital Design education. Sparring
+was built for a master's thesis at FH Dortmund and shown for three days at
+Superraum, Dortmund, in September 2026.
 
-```sh
-composer install                       # pulls anthropic-ai/sdk into vendor/
-cp .env.example .env                   # then edit it, ANTHROPIC_API_KEY=sk-ant-...
-sh tests/run.sh                        # runs all smoke tests (PHP + Node), no API key needed
-php bin/import_pilot.php               # M1: seeds data/store.db from data/pilot/*.json
-php bin/import_curriculum.php          # syncs curriculum_chunks FTS5 table from data/curriculum/*.md
-php bin/clear_curriculum.php           # empties curriculum_chunks (disk-derived cache, safe to redo)
-php bin/probe_curriculum.php "<text>"  # prints what curriculum_chunks matches would surface for free-text <text>
-valet link                             # once per checkout; serves this dir at https://sparring.test
-```
+<p align="center">
+  <img src="docs/images/dojo.png" alt="Phone client mid-session: the visitor's claims and the AI's counter-questions" height="420">
+  &nbsp;
+  <img src="docs/images/arena.png" alt="Wall display: recent exchanges from several visitors, with QR codes" height="420">
+</p>
 
-`composer install` also wires `core.hooksPath` to `.githooks/` (Conventional Commits check on `git commit`, plus a pre-commit check that a `prompts/sparring.md` change carries a `prompts/CHANGELOG.md` entry). CI (`.github/workflows/ci.yml`) runs the same checks, the smoke tests and a `public/spec/` drift check on every push to `develop`/`main` and every PR.
+## How it works
 
-Preferred dev method is Valet — it's a real php-fpm SAPI, same as prod, so
-it doesn't inherit a shell's `export` and needs the `.env` file (`config.php`
-loads it on every request; a real env var still wins if both are set).
-`valet link` reads the folder name (`sparring`) as the site name; run it
-once from the repo root, then open `https://sparring.test/dojo` (SE-01)
-and `https://sparring.test/arena` (SE-02). `LocalValetDriver.php` at the
-repo root makes Valet route the same way as the command below.
+| Element | Path | What it does |
+|---|---|---|
+| **Dojo** (SE-01) | `/`, `/dojo` | Phone client. Start page, consent, then one session with a limited number of turns. |
+| **Arena** (SE-02) | `/arena` | Wall display. Shows the latest exchanges from all sessions. |
+| **Backend** (SE-03) | `/api/*` | Moderates each contribution, generates the reply and stores the session. |
 
-Alternative — no Valet, plain PHP built-in server:
+The sparring behaviour comes from a single system prompt,
+[`prompts/sparring.md`](prompts/sparring.md). On turn 1, the reply can draw on
+a local curriculum corpus through SQLite FTS5.
 
-```sh
-export ANTHROPIC_API_KEY=sk-ant-...    # inherits from the shell here, .env not required
-php -S localhost:8080 -t public public/index.php   # serves SE-01 + SE-02 + the API
-```
+**Stack:** PHP 8.2+, SQLite, vanilla JS. No framework and no build step.
+Anthropic is the default LLM. OpenAI and OpenAI-compatible local models are
+also supported, and an offline fake provider needs no API key.
 
-Then open `http://localhost:8080/dojo` and `http://localhost:8080/arena`.
-
-## Switch LLM provider
-
-Default is Anthropic — no config needed. To use OpenAI, or a local model
-served through LM Studio, add to `.env`:
+## Quickstart
 
 ```sh
-LLM_PROVIDER=openai
-OPENAI_API_KEY=sk-...                        # leave unset for LM Studio, any value works
-OPENAI_BASE_URL=http://localhost:1234/v1     # omit for real OpenAI (defaults to api.openai.com)
-OPENAI_GENERATION_MODEL=qwen2.5-7b-instruct  # whatever model LM Studio has loaded
-OPENAI_CLASSIFICATION_MODEL=qwen2.5-7b-instruct
-```
-
-`OPENAI_GENERATION_MODEL`/`OPENAI_CLASSIFICATION_MODEL` default to
-`gpt-4.1`/`gpt-4.1-mini` if unset — fine for real OpenAI, but LM Studio needs
-whatever model ID it has loaded, so set these explicitly for local use.
-See `config.php`'s `--- LLM (PE-01) ---` block for every var name/default.
-
-No key at all, for UI work or a demo without network: `LLM_PROVIDER=fake`
-answers every turn with a canned, clearly marked `(fake) ...` reply, instantly
-and for free. Markers in a contribution trigger the failure paths:
-`[fake:personal]` / `[fake:real-person]` (moderation rejects it),
-`[fake:classify-error]` (moderation fails closed), `[fake:generation-error]`
-(502). `FAKE_LLM_DELAY_MS=1500` adds latency to see the waiting states.
-`tests/smoke_http.php` runs the whole app this way. Never for the exhibition.
-
-```sh
+composer install
+php bin/import_pilot.php
 LLM_PROVIDER=fake php -S localhost:8080 -t public public/index.php
 ```
 
-Either way, `public/index.php` is the sole front controller — see
-`public/index.php` for the route table. Real static assets (e.g.
-`/assets/dojo.js`) still serve directly; page/endpoint scripts do not —
-`/dojo.php` 404s, only the pretty URL `/dojo` works. The display feed
-works immediately off the pilot seed; the input client needs
-`ANTHROPIC_API_KEY` set and `composer install` run, since it calls the LLM
-(or `LLM_PROVIDER=fake`, see above).
+Open <http://localhost:8080> on the phone side and <http://localhost:8080/arena> for the wall. The fake
+provider gives canned replies. For real ones, see
+[Getting started](docs/getting-started.md).
 
-## Screenshots
+## Documentation
 
-`php bin/screenshots.php` captures every visitor-facing page in fixed,
-seeded states (start page, consent step, a session mid-way and one at its
-turn limit, content pages, the German start page, the wall at 1920x1080, and the
-wall's beamer profile at 1600x900)
-into `screenshots/`, with an `index.html` gallery. It runs the app in fake
-mode against a throwaway database, so it needs no API key and never touches
-`data/store.db`. For reviewing visual changes: nothing compares against a
-baseline. CI attaches the same set to every PR as the `screenshots`
-artifact.
+- [Getting started](docs/getting-started.md): setup, LLM providers, tests, screenshots
+- [Operations](docs/operations.md): export, database maintenance, deployment
+- [Design spec](spec/index.adoc): the design record of what the installation must do and why (L1–L3)
+- [Architecture decisions](docs/adr/README.md): how the code is built and why
+- [Prompt evals](evals/sparring/README.md): multi-turn evaluation of the sparring prompt
+- [Changelog](CHANGELOG.md)
 
-It needs **chrome-headless-shell**, not regular Chrome (whose headless mode
-won't render narrower than 500px). One-off install, no project dependency:
+## Status
 
-```sh
-npx @puppeteer/browsers install chrome-headless-shell@stable
-export CHROME_BIN=<the path it prints>
-php bin/screenshots.php
-```
+This is a thesis prototype built for a single exhibition run. It is not a
+maintained product, but issues and questions are welcome.
 
-On a Mac with Xcode, `--simulator` captures the phone pages in Safari in the
-booted iOS Simulator instead, for real iOS rendering (keyboard/viewport
-behaviour included):
+## License
 
-```sh
-xcrun simctl boot "iPhone 16" && open -a Simulator
-php bin/screenshots.php --simulator screenshots-ios
-```
-
-## Export
-
-```sh
-php bin/export.php dump.json    # full raw store dump; omit the arg to print to stdout
-php bin/export.php --markdown out.md         # one concatenated transcript document
-php bin/export.php --markdown transcripts/   # dir target: one <date>-<id>.md per session
-php bin/export.php --markdown --evaluation out.md  # also append each visitor's end-of-session evaluation
-```
-
-A directory output-path for `--markdown` (an existing directory, or a path
-ending in `/`) splits the export into one file per session instead of a
-single document. `--evaluation` adds an `## Evaluation` section (ratings and
-feedback) to sessions whose visitor submitted one. See `bin/export.php`'s header for the other formats
-(`--jsonl`, `--csv`, `--index`) and flags (`--session=`, `--consented-only`).
-
-## Database maintenance
-
-```sh
-php bin/backup_db.php                  # snapshot to data/backups/store-<timestamp>.db
-php bin/backup_db.php path/to/file.db  # snapshot to a specific path instead
-
-php bin/reset_db.php --dry-run  # report what would be deleted, changes nothing
-php bin/reset_db.php --confirm  # empty sessions/exchanges/rate-limit tables
-
-php bin/prune_orphaned_sessions.php --dry-run  # count sessions with zero exchanges, inactive 24h+
-php bin/prune_orphaned_sessions.php --confirm  # delete them (never touches a session with any exchange)
-
-php bin/delete_session.php <id> --dry-run  # report what would be deleted for one session
-php bin/delete_session.php <id> --confirm  # delete that session + its exchanges + its evaluation
-```
-
-Session origin is `live`, `pilot` or `study`. Sessions conducted during the
-evaluation study are marked by hand (no script, ADR 0019); back up first:
-
-```sh
-php bin/backup_db.php
-sqlite3 data/store.db "UPDATE sessions SET origin='study' WHERE id IN ('<id>', '<id>')"
-```
-
-Starting the app once on an older `store.db` migrates it to accept `study`
-(a one-time table rebuild; rows are kept).
-
-On prod, run any `bin/*.php` script through `ee shell <site> --command='php bin/...'`
-instead of bare `php bin/...` on the host — the host's PHP may be older than
-this project's 8.2+ requirement (see Deploy below).
-
-`?debug=1` on `/dojo`/`/arena` shows a diagnostics panel (session
-id, origin, rate-limit remaining, generation timing, moderation reason on a
-flagged contribution) — dev-only, off by default.
-
-## Layout
-
-See the plan's "File layout" section. Everything under `src/` and `prompts/`
-and `data/` must sit outside the web-served directory on the real host —
-`public/` is the only directory EasyEngine's nginx should serve.
-
-## Deploy
-
-```sh
-cp bin/deploy.env.example bin/deploy.env   # once; fill in your host/path, git-ignored
-bin/deploy.sh --dry-run                    # preview the rsync, no writes
-bin/deploy.sh                              # sync to prod, then composer install in the site's container
-```
-
-Host/path/site name live in `bin/deploy.env`, not the script.
-
-Syncs this repo to the EasyEngine site's app root (`htdocs/`).
-
-First deploy on a fresh site, by hand, once:
-- create `htdocs/.env` (see Setup above — `config.php` only reads that path,
-  not EasyEngine's site-root `.env`)
-- seed `data/store.db` — run it **inside the container**, not on the host:
-  host PHP may be older than this project's 8.2+ requirement (was PHP 8.0
-  vs. the container's 8.4.22 here, a parse error on readonly-property/enum
-  syntax was the symptom)
-  ```sh
-  ssh <host> "ee shell <site> --command='php bin/import_pilot.php'"
-  ```
-- confirm `data/` is writable by the container's PHP-FPM user
-
-## Known gaps before opening night (see plan doc §7)
-
-- SC-06's display layout: TBC-01 (masonry) is implemented as the working
-  baseline in `public/assets/arena.js`. TBC-02…06 (dwell time, which exchange
-  pair, item count/truncation, pilot-origin marking) are still open per the
-  spec's own acceptance criteria — to be resolved against real pilot
-  transcripts on the actual projector.
+[MIT](LICENSE)
