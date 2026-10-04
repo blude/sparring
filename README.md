@@ -61,6 +61,23 @@ provider gives canned replies. For real ones, see
 This is a thesis prototype built for a single exhibition run. It is not a
 maintained product, but issues and questions are welcome.
 
+## Acknowledgements
+
+Parts of Sparring's teaching material are based on work originally written by
+Dr. Kim Lauenroth.
+
+Sparring uses the following open-source libraries and technologies:
+
+- [ZzFX](https://github.com/KilledByAPixel/ZzFX) by Frank Force
+- [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) by Kazuhiko Arase
+- [RethinkSans](https://github.com/hans-thiessen/Rethink-Sans/) by Rethink
+- [Darumadrop One](https://fonts.google.com/specimen/Darumadrop+One) and [Mochi Boom](https://www.1001fonts.com/mochi-boom-demo-font.html), used in the Sparring logo
+- [Material Design Icons](https://pictogrammers.com/library/mdi/) by the Pictogrammers group
+- [EasyEngine](https://easyengine.io/)
+- [SQLite](https://www.sqlite.org/)
+- [Figma](https://figma.com/)
+- [Claude API](https://github.com/anthropics/claude-api) and Claude Code
+
 ## License
 
 [MIT](LICENSE)
