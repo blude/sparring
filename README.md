@@ -66,7 +66,7 @@ maintained product, but issues and questions are welcome.
 Parts of Sparring's teaching material are based on work originally written by
 Dr. Kim Lauenroth.
 
-Sparring uses the following open-source libraries and technologies:
+Sparring uses the following libraries, fonts and tools:
 
 - [ZzFX](https://github.com/KilledByAPixel/ZzFX) by Frank Force
 - [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) by Kazuhiko Arase

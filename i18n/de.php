@@ -120,7 +120,7 @@ return [
     'credits.author.bio' => 'Sarah ist Designerin und Forscherin mit Sitz in Dortmund. Sie studiert derzeit im Masterstudiengang Digital Design an der Fachhochschule Dortmund, wo sie die Rolle von KI in der Designausbildung untersucht. Ihre Arbeit erforscht die Schnittstelle von Technologie, Kreativität und Mensch-Computer-Interaktion.',
     'credits.author.contact' => '<strong>Kontakt:</strong> Für Anfragen wende dich bitte an <a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Inquiry">sarah.puppinpratti001@stud.fh-dortmund.de</a>',
     'credits.ack.heading' => 'Danksagungen',
-    'credits.ack.intro' => 'Sparring verwendet die folgenden Open-Source-Bibliotheken und -Technologien:',
+    'credits.ack.intro' => 'Sparring verwendet die folgenden Bibliotheken, Schriften und Werkzeuge:',
     'credits.ack.material' => 'Teile des Lernmaterials von Sparring basieren auf Texten, die ursprünglich von Dr. Kim Lauenroth verfasst wurden.',
 
     // --- philosophy.php ---
