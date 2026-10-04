@@ -151,7 +151,7 @@ Each script writes its SVG(s) next to itself (a fresh `<stamp>` per run) and
 prints a one-line summary naming the files it wrote. Delete the superseded
 dated files you don't want to keep, then commit.
 
-## Editing in Illustrator
+## Editing in a vector graphics editor
 
 The SVGs open as editable text (plain `<text>`, no outlined paths, no
 `paint-order` strokes). `feature-cloud/` uses an `SF Pro Text` stack;

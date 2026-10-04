@@ -61,7 +61,7 @@ provider gives canned replies. For real ones, see
 This is a thesis prototype built for a single exhibition run. It is not a
 maintained product, but issues and questions are welcome.
 
-## Acknowledgements
+## Acknowledgments
 
 Parts of Sparring's teaching material are based on work originally written by
 Dr. Kim Lauenroth.
