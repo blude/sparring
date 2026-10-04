@@ -2,6 +2,9 @@
 
 Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design.
 
+![Trans rights][badge-trans]
+![Craft with digital material][badge-craft]
+
 <p align="center">
   <a href="https://sparringmethod.com"><img src="docs/images/logo-mono.png" alt="Sparring" height="80"></a>
 </p>
@@ -84,3 +87,6 @@ Sparring uses the following libraries, fonts and tools:
 ## License
 
 [MIT](LICENSE)
+
+[badge-trans]: https://pride-badges.pony.workers.dev/static/v1?label=trans%20rights&stripeWidth=6&stripeColors=5BCEFA,F5A9B8,FFFFFF,F5A9B8,5BCEFA
+[badge-craft]: https://img.shields.io/badge/craft_with-digital_material-blue
