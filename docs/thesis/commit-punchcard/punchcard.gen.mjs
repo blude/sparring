@@ -9,7 +9,7 @@
 // the git binary. Text uses a plain Helvetica/Arial stack so it stays
 // editable and correctly placed in Illustrator.
 //
-// Usage:  node docs/commit-punchcard/punchcard.gen.mjs
+// Usage:  node docs/thesis/commit-punchcard/punchcard.gen.mjs
 // Writes punchcard.<stamp>.svg (UTC YYYYMMDD-HHMMSS).
 
 import { execSync } from "node:child_process";

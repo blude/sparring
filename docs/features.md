@@ -220,6 +220,9 @@ PHP backend. **SE-04** = the system prompt (`prompts/sparring.md`). Spec IDs
   (`DISPLAY_ITEM_LIMIT`) show; a session that goes quiet drops off entirely.
   Accepted as intentional — gives visitors a reason to keep engaging
   (`TBC-01` note).
+- **Study sessions on the wall** — Sessions with origin `study` (evaluation
+  study, marked by hand by the operator, ADR 0019) rank with live ones; the
+  visitor's projection consent gates them like any other (`TF-04`).
 - **Never-empty surface** — When too few live sessions are eligible, pilot-
   origin sessions fill the remainder (`SG-06`, `G-02`, `TF-04` fallback).
 - **Backend outage is invisible** — A failed poll retains the last good
@@ -371,8 +374,11 @@ PHP backend. **SE-04** = the system prompt (`prompts/sparring.md`). Spec IDs
 - **Separate `session_evaluations` table** — `Store::saveEvaluation()`, one
   row per session, resubmission replaces. Deliberately not elevated to a
   first-class record (`E-04`).
+- **Optional markdown export** — `bin/export.php --markdown --evaluation`
+  appends an `## Evaluation` section (ratings + feedback) to each exported
+  session that has one; off by default.
 
-## 15. Curriculum grounding ("poor man's RAG")
+## 15. Curriculum grounding ("poor woman's RAG")
 
 - **Static domain grounding** — A hand-distilled `<domain_grounding>` section
   in the system prompt, present every turn (`LX` — "what shapes a response").

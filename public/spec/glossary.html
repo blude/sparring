@@ -7,9 +7,10 @@
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="author" content="Sarah Puppin Pratti">
 <title>Glossary</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Project theme layered over the stock asciidoctor.css (public/spec/spec-theme.css). -->
+<link rel="stylesheet" href="./spec-theme.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -21,11 +22,11 @@
 <span id="revdate">2026-06-19</span>
 </div>
 <div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
+<div id="toctitle">Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_solution_design_concept">1. Solution Design Concept</a></li>
-<li><a href="#_system_design_concept">2. System Design Concept</a></li>
-<li><a href="#_element_design_concept">3. Element Design Concept</a></li>
+<li><a href="#_solution_design_concept">Solution Design Concept</a></li>
+<li><a href="#_system_design_concept">System Design Concept</a></li>
+<li><a href="#_element_design_concept">Element Design Concept</a></li>
 </ul>
 </div>
 </div>
@@ -38,7 +39,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_solution_design_concept"><a class="anchor" href="#_solution_design_concept"></a>1. Solution Design Concept</h2>
+<h2 id="_solution_design_concept"><a class="anchor" href="#_solution_design_concept"></a>Solution Design Concept</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -93,7 +94,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_system_design_concept"><a class="anchor" href="#_system_design_concept"></a>2. System Design Concept</h2>
+<h2 id="_system_design_concept"><a class="anchor" href="#_system_design_concept"></a>System Design Concept</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -152,7 +153,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_element_design_concept"><a class="anchor" href="#_element_design_concept"></a>3. Element Design Concept</h2>
+<h2 id="_element_design_concept"><a class="anchor" href="#_element_design_concept"></a>Element Design Concept</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -223,6 +224,47 @@
 </div>
 </div>
 </div>
+<!-- Sitemap: every spec page, on every page. Our own #footer, since the build
+     passes -a nofooter (the stock one only prints a file mtime, which would
+     make the committed HTML drift between checkouts). Hand-maintained:
+     a new spec/*.adoc page needs a link here too. -->
+<footer id="footer">
+  <nav class="sitemap" aria-label="Spec pages">
+    <div>
+      <p class="sitemap-title">Overview</p>
+      <ul>
+        <li><a href="index.html">Design Documentation</a></li>
+        <li><a href="L1-solution-design-concept.html">L1 Solution Design Concept</a></li>
+        <li><a href="L2-system-design-concept.html">L2 System Design Concept</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Software elements</p>
+      <ul>
+        <li><a href="L3-SE-01-input-client.html">SE-01 Input Client</a></li>
+        <li><a href="L3-SE-02-display-client.html">SE-02 Display Client</a></li>
+        <li><a href="L3-SE-03-backend-service.html">SE-03 Backend Service</a></li>
+        <li><a href="L3-SE-04-system-prompt.html">SE-04 System Prompt</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Additional reference</p>
+      <ul>
+        <li><a href="LX-system-realization-concept.html">LX System Realization Concept</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+  </nav>
+</footer>
+<!-- Mark the sitemap link for this page; a bare /spec/ is index.html. -->
+<script>
+  (function () {
+    var page = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.sitemap a').forEach(function (a) {
+      if (a.getAttribute('href') === page) a.setAttribute('aria-current', 'page');
+    });
+  })();
+</script>
 <!-- Mermaid support for [source,mermaid] code blocks. Asciidoctor has no
      native Mermaid renderer, so this is client-side: turn the generated
      `code.language-mermaid` block into what Mermaid expects and let its
@@ -235,7 +277,51 @@
     div.textContent = code.textContent;
     code.closest('pre').replaceWith(div);
   });
-  mermaid.initialize({ startOnLoad: true });
+  // 'base' is the only Mermaid theme that honours themeVariables; these match
+  // public/spec/spec-theme.css instead of Mermaid's default lavender.
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#fbeaea',
+      primaryBorderColor: '#d32f2f',
+      primaryTextColor: '#1a1a1a',
+      lineColor: '#666',
+      edgeLabelBackground: '#f2f2f2',
+      clusterBkg: '#fafafa',
+      clusterBorder: '#d9d9d9',
+      fontFamily: 'system-ui, sans-serif'
+    }
+  });
+</script>
+<!-- Mark the ToC link for the current #hash. CSS can match the target heading
+     (:target) but not the link pointing at it, so this bridges the two. -->
+<script>
+  function markCurrentTocLink() {
+    document.querySelectorAll('#toc a').forEach(function (a) {
+      if (location.hash && a.hash === location.hash) {
+        a.setAttribute('aria-current', 'location');
+        // Long L3 ToCs overflow the fixed sidebar; keep the entry in view.
+        a.scrollIntoView({ block: 'nearest' });
+      } else {
+        a.removeAttribute('aria-current');
+      }
+    });
+  }
+  markCurrentTocLink();
+  window.addEventListener('hashchange', markCurrentTocLink);
+</script>
+<!-- Tag the `_Key:_` labels (Satisfies, Rationale, ...) that open each line of
+     a requirement so spec-theme.css can set them apart from the body text.
+     CSS alone can't: it can't see the trailing colon, and `em:first-child`
+     ignores text nodes, so it would also catch italic words and notes. -->
+<script>
+  document.querySelectorAll('.paragraph > p > em').forEach(function (em) {
+    if (!/:\s*$/.test(em.textContent)) return;
+    var prev = em.previousSibling;
+    while (prev && prev.nodeType === Node.TEXT_NODE && !prev.textContent.trim()) prev = prev.previousSibling;
+    if (!prev || prev.nodeName === 'BR') em.classList.add('meta-key');
+  });
 </script>
 </body>
 </html>

@@ -109,9 +109,12 @@ final class Sparring
             return ['status' => 'turn-limit', 'rateLimitRemaining' => $rateLimit['remaining']];
         }
 
-        // FS-01-4: trim + length bound, before any provider call.
+        // FS-01-4: trim + length bound, before any provider call. A curated
+        // QR-code opener (OPENING_PROMPTS, resolve_opening_message()) is
+        // exempt — it's vetted copy, not visitor-typed free text, so it can
+        // run longer than CONTRIBUTION_MAX_CHARS.
         $contribution = trim($rawContribution);
-        if ($contribution === '' || mb_strlen($contribution) > CONTRIBUTION_MAX_CHARS) {
+        if ($contribution === '' || (mb_strlen($contribution) > CONTRIBUTION_MAX_CHARS && !is_curated_opening_message($contribution))) {
             return ['status' => 'rejected', 'rateLimitRemaining' => $rateLimit['remaining']];
         }
 
@@ -378,9 +381,11 @@ final class Sparring
      */
     public function assembleDisplayMaterial(int $limit): array
     {
-        $sessions = $this->store->getDisplayableSessions('live', $limit);
+        // study sessions (evaluation study, ADR 0019) rank with live ones; the visitor's
+        // projection consent already gates them via displayable, same as live.
+        $sessions = $this->store->getDisplayableSessions(['live', 'study'], $limit);
         if (count($sessions) < $limit) {
-            $sessions = [...$sessions, ...$this->store->getDisplayableSessions('pilot', $limit - count($sessions))];
+            $sessions = [...$sessions, ...$this->store->getDisplayableSessions(['pilot'], $limit - count($sessions))];
         }
 
         $items = [];

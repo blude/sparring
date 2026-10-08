@@ -5,12 +5,11 @@ v.1.0, 2026-06-19
 :toclevels: 3
 :icons: font
 :sectanchors:
-:sectnums:
 
 *Element:* xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] +
 *Element profile:* User-facing frontend (presentation only, no input) +
 *Parent:* System Design Concept +
-*Status:* Draft.
+*Status:* Stable — no open TBCs remaining
 
 *Layout treatment is TO BE REFINED (xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]).* This document specifies a baseline complete enough to build against, and marks each open decision explicitly.
 
@@ -72,7 +71,7 @@ xref:L2-system-design-concept.adoc#UT-02[UT-02 Observing visitor] performs no ac
 
 - *[[EX-01-1]]EX-01-1* _(extends <<ST-01-1,ST-01-1>>)_ Retrieval fails. The element retains what it is currently showing and retries on the next interval. Nothing on the surface indicates the failure, because an error message on a gallery wall is worse than slightly stale content. _Outcome:_ Resume.
 - *[[EX-01-2]]EX-01-2* _(extends <<ST-01-2,ST-01-2>>)_ The retrieved material is identical to what is shown. The element does nothing. _Outcome:_ Terminate.
-- *[[EX-01-3]]EX-01-3* _(extends <<ST-01-1,ST-01-1>>)_ Retrieval has failed continuously for a sustained period. The element continues showing its last material indefinitely rather than clearing. The threshold at which this becomes distinguishable from normal operation is TBC. _Outcome:_ Resume.
+- *[[EX-01-3]]EX-01-3* _(extends <<ST-01-1,ST-01-1>>)_ Retrieval has failed continuously for a sustained period. The element continues showing its last material indefinitely rather than clearing. _Resolved: no threshold, no action._ No threshold or operator alert was built, and none is judged worth building speculatively — a silent, indefinitely-stale wall is not a critical failure (the piece's actual interaction is on the visitor's own phone, xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client]; the wall is a bonus surface). Revisit only if this becomes a real operational problem. _Outcome:_ Resume.
 
 '''
 
@@ -118,9 +117,9 @@ A header above the wall carries the logo, a live clock, and a total session/exch
 
 _Source:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]
 
-Each is deliberately deferred until real pilot transcripts can be seen on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] at exhibition viewing distance. None of them changes the interface xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] provides, so they can be resolved after the rest of the system works.
+Each was deliberately deferred until real pilot transcripts could be seen on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] at exhibition viewing distance. None of them changed the interface xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] provides, so they were resolved after the rest of the system worked. The exhibition has since run; all six are resolved below.
 
-*[[TBC-01]]TBC-01 Treatment of prominence and recency.* Four candidates now exist; masonry is adopted as a working default, the other three remain open:
+*[[TBC-01]]TBC-01 Treatment of prominence and recency.* _Resolved: masonry._ Four candidates were considered; masonry shipped as the baseline and ran unchanged through the exhibition on both surfaces, used on different occasions: the `venue` monitor (2 columns, 12-item limit) and the `stadium` beamer (2 columns, 6-item limit; profiles in `config.php`, see <<C-03,C-03 Fixed target resolution, one of a set of named display profiles>>). No pilot observation surfaced a reason to reconsider. The other three, for the record:
 
 - _Size gradient._ Newest item largest, older items progressively smaller and dimmer. Conveys accumulation well. Weakness: older items become texture rather than content, so most of the surface is not actually readable.
 - _Rotation._ One or two items at full size, cycling on a timer, with an indicator of how many others exist. Every item gets a turn at being readable. Weakness: loses the sense of accumulation, and requires a live-session priority rule so that a visitor who has just contributed sees their own exchange rather than waiting for the cycle.
@@ -129,15 +128,15 @@ Each is deliberately deferred until real pilot transcripts can be seen on xref:L
 +
 Masonry has its own version of "does everyone get seen," distinct from <<TBC-02,TBC-02 Whether a live session interrupts.>>: with the display profile's item limit and selection by most-recent-activity (`Store::getDisplayableSessions`, `ORDER BY last_active_at DESC`), a session that goes quiet is _excluded_, not merely delayed — it can drop off the wall entirely if enough other sessions stay more active. Accepted as intentional: recency-eviction gives visitors a reason to keep engaging rather than submitting once and disengaging, which fits a piece about friction. Not revisited unless pilot observation shows visitors feeling unfairly dropped rather than prompted to continue.
 
-*[[TBC-02]]TBC-02 Whether a live session interrupts.* Only applicable if <<TBC-01,TBC-01 Treatment of prominence and recency.>> resolves to rotation or hybrid. If a visitor's exchange does not appear promptly on the wall, the connection between typing and projection is lost, and that connection is much of what makes the piece an installation rather than a screen. Under the size-gradient baseline this is automatic and needs no rule. Under masonry, the analogous question is resolved above, not by this TBC.
+*[[TBC-02]]TBC-02 Whether a live session interrupts.* _Resolved: not applicable._ Only applicable if <<TBC-01,TBC-01 Treatment of prominence and recency.>> resolved to rotation or hybrid. It resolved to masonry instead, where the analogous question is answered above — no live-session interrupt rule was ever needed or built.
 
-*[[TBC-03]]TBC-03 Dwell time, if any.* A fixed interval will feel wrong in both directions: too long for a short exchange, too short for a dense one. Scaling to content length is the obvious alternative. Not decidable without real transcripts.
+*[[TBC-03]]TBC-03 Dwell time, if any.* _Resolved: not applicable._ Moot for the same reason as <<TBC-02,TBC-02 Whether a live session interrupts.>>: masonry items never rotate, so there is nothing to dwell on. No dwell-time constant exists in `config.php`.
 
-*[[TBC-04]]TBC-04 Which exchange pair per session.* xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] currently supplies the most recent, on the reasoning that friction has usually built by then. The most demonstrative pair may be the second or third. To be checked against pilot material. This is a change to xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#TF-04[TF-04 Assemble display material] if revised, not to this element.
+*[[TBC-04]]TBC-04 Which exchange pair per session.* _Resolved: most recent, unchanged._ Checked against the exhibition's live data (49 sessions): most sessions never exceed one or two exchanges, so there is usually no alternative pair to choose from; in the sessions that ran three or more, Sparring's pushback consistently sharpened with each turn rather than peaking early, so the most recent pair stayed the more demonstrative one. xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] keeps supplying it unchanged. (A related but distinct item stays open in `TODO.md`: suppressing a session's first exchange from the wall when it is only the opening scenario prompt — a display-omission question, not a which-pair question, and doesn't block this.)
 
-*[[TBC-05]]TBC-05 Item count and truncation.* How many items fit, and how a long contribution is trimmed. Begin with a fixed item count plus a character bound, and only measure rendered height if that proves inadequate. See <<TF-03,TF-03 Fit an item to the available space>>.
+*[[TBC-05]]TBC-05 Item count and truncation.* _Resolved: character bound._ Fixed item count per display profile (`itemLimit`, `config.php`) plus a per-side character bound shipped and ran for the full exhibition. Rendered-height measurement was never needed.
 
-*[[TBC-06]]TBC-06 Whether pilot-origin items are visually distinguishable.* They carry an origin value and could be marked. Leaving them unmarked keeps the surface uniform; marking them is more honest to an observer who assumes everything shown is live. Not urgent, but a decision rather than an oversight.
+*[[TBC-06]]TBC-06 Whether pilot-origin items are visually distinguishable.* _Resolved: left unmarked._ Origin stays off the normal surface, visible only behind the operator debug flag (`arena.js`, <<QR-07,QR-07 Diagnostic tag is available to an operator>>) — the "keep the surface uniform" option above.
 
 '''
 
@@ -213,7 +212,7 @@ NOTE: No `Calls → PE-` relation applies. This element reaches no partner eleme
 _Persistence:_ In-memory. Held only to support reconciliation. Lost on reload and rebuilt on the next cycle, which is acceptable because a reload costs one polling interval. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session], xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange] (partially; a display-only reconciliation cache, not authoritative — see xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#E-01[E-01 Session]/xref:L3-SE-03-backend-service.adoc#E-02[E-02 Exchange])
 
-[options="header"]
+[cols="2,4,2,2,12",options="header"]
 |===
 | ID | Attribute | Type | Required | Description
 | [[E-01.1]]E-01.1 | sessionId | string | required | Identity for matching in <<TF-02,TF-02 Reconcile against what is displayed>>. Opaque to this element.
@@ -221,7 +220,7 @@ _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session], x
 | [[E-01.3]]E-01.3 | visitorContribution | string | required | The visitor's turn, as supplied.
 | [[E-01.4]]E-01.4 | sparringResponse | string | required | The reply to that turn, as supplied.
 | [[E-01.5]]E-01.5 | recencyRank | integer | required | Position in the ordering supplied by xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]. Not computed here.
-| [[E-01.6]]E-01.6 | origin | enum | required | `pilot` or `live`. Not rendered on the normal surface (retained for <<TBC-06,TBC-06 Whether pilot-origin items are visually>>); shown per item only behind the debug flag (<<QR-07,QR-07 Diagnostic tag is available to an operator>>).
+| [[E-01.6]]E-01.6 | origin | enum | required | `pilot`, `live` or `study`. Not rendered on the normal surface (retained for <<TBC-06,TBC-06 Whether pilot-origin items are visually>>); shown per item only behind the debug flag (<<QR-07,QR-07 Diagnostic tag is available to an operator>>).
 | [[E-01.7]]E-01.7 | title | string | optional | The AI-refined session title (xref:L3-SE-03-backend-service.adoc#TF-07[TF-07 Refine a session title]), generated asynchronously after a session's first turn. Absent (`null`) until that completes, and for pilot-origin sessions whose transcript supplied none — the title line falls back to <<E-01.2,E-01.2 scenario>> whenever this is absent.
 |===
 
@@ -232,7 +231,7 @@ NOTE: The element derives no ordering, performs no selection, and stores nothing
 _Persistence:_ In-memory, same lifetime as <<E-01,E-01 Displayed material>> — held only to render the header stats, replaced each polling cycle. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session], xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange] (lifetime totals of each, not the per-item cache <<E-01,E-01 Displayed material>> already is)
 
-[options="header"]
+[cols="2,4,2,2,12",options="header"]
 |===
 | ID | Attribute | Type | Required | Description
 | [[E-02.1]]E-02.1 | sessionCount | integer | required | Total sessions ever created (live and pilot), supplied by xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] alongside <<E-01,E-01 Displayed material>> on the same poll. Not scoped to the sessions shown.
@@ -303,7 +302,7 @@ _Rationale:_ Mirrors xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client
 
 _Source:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]. +
 _Applies to:_ <<UI-01,UI-01 Projection surface>>, <<TF-03,TF-03 Fit an item to the available space>>, <<TF-04,TF-04 Render the surface>>. +
-_Acceptance criteria:_ The baseline in section 3 is implemented first. <<TBC-01,TBC-01 Treatment of prominence and recency.>> through <<TBC-06,TBC-06 Whether pilot-origin items are visually>> are resolved against real pilot transcripts on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] before opening. +
+_Acceptance criteria:_ The baseline in section 3 was implemented first, then run at the exhibition on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup]. <<TBC-01,TBC-01 Treatment of prominence and recency.>> through <<TBC-06,TBC-06 Whether pilot-origin items are visually>> are all resolved. +
 _Consequence:_ Rules out encoding a specific prominence treatment into <<TO-01,TO-01 Retrieve display material>>'s request or into xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s response shape. The interface must serve any of the three candidates without change. (The display-profile identifier <<TO-01,TO-01 Retrieve display material>> does carry is a screen id, not a prominence choice — see <<C-03,C-03 Fixed target resolution, one of a set of named display profiles>>.) +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-06[SC-06 The projected layout is an open decision]
 
@@ -326,10 +325,10 @@ _Acceptance criteria:_ The element renders against one of a small set of named _
 | Profile | Screen | Resolution | Columns | Items
 | `dev` | Development on a desktop monitor, landscape | comfortable landscape (~1920×1080) | 2 | 4
 | `venue` (default) | The exhibition screen — an LG monitor mounted portrait (rotated 90°); the OS presents it already rotated, so the surface needs no rotation of its own | 1296×2304 | 2 | 12
-| `stadium` | A beamer — resolution not yet settled (xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup]); carries the `dev` column count as a placeholder | TBC | 2 | 16
+| `stadium` | The exhibition beamer, an Epson EB-1945W (xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup]). Of its offered modes (1080p, 720p, 1600×900 @ 60 Hz), 1600×900 gave the sharpest result, mainly for the QR code, which is also drawn slightly larger on this profile. | 1600×900 | 2 | 6
 |===
 
-_Consequence:_ Rules out responsive layout work — each profile is still a single fixed viewport under the no-responsive-behaviour rule; the profile set just replaces the earlier assumption of exactly one. `stadium`'s resolution stays a dependency on xref:L2-system-design-concept.adoc#HE-02[HE-02 Projection setup] being settled. Per-profile visual tuning (font size, spacing on the portrait `venue` surface) is done against the real screen, keyed off a profile marker on the surface. +
+_Consequence:_ Rules out responsive layout work — each profile is still a single fixed viewport under the no-responsive-behaviour rule; the profile set just replaces the earlier assumption of exactly one. `stadium` was settled against the real beamer at the exhibition: six items is the right number for the surface, so it requests six. The lowest items often run slightly past the bottom edge; this is deliberate. The surface clips them with no scrollbar (<<QR-06,QR-06 Fixed viewport, no scroll, no overflow>>), and the bottom gradient fades the cut edge out. The larger QR code on this profile (needed for sharpness at 1600×900) can in principle crowd a short item's text, but real Sparring responses were rarely short enough for this to happen. Per-profile visual tuning (font size, spacing on the portrait `venue` surface) is done against the real screen, keyed off a profile marker on the surface. +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-03[SC-03 Build effort is capped and the piece is expendable]
 
 === [[C-04]]C-04 No build step _(Technical)_

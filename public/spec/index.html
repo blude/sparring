@@ -7,9 +7,10 @@
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="author" content="Sarah Puppin Pratti">
 <title>Sparring: Design Documentation</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Project theme layered over the stock asciidoctor.css (public/spec/spec-theme.css). -->
+<link rel="stylesheet" href="./spec-theme.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -21,18 +22,18 @@
 <span id="revdate">2026-08-29</span>
 </div>
 <div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
+<div id="toctitle">Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_what_sparring_is">1. What Sparring is</a></li>
-<li><a href="#_how_to_read_this">2. How to read this</a></li>
-<li><a href="#_the_four_levels">3. The four levels</a></li>
-<li><a href="#_beyond_the_four_levels">4. Beyond the four levels</a></li>
+<li><a href="#_what_sparring_is">What Sparring is</a></li>
+<li><a href="#_how_to_read_this">How to read this</a></li>
+<li><a href="#_specification_documents">Specification documents</a></li>
+<li><a href="#_additional_references">Additional references</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_what_sparring_is"><a class="anchor" href="#_what_sparring_is"></a>1. What Sparring is</h2>
+<h2 id="_what_sparring_is"><a class="anchor" href="#_what_sparring_is"></a>What Sparring is</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Sparring is an exhibition object built for a master&#8217;s thesis at FH Dortmund. A
@@ -51,13 +52,15 @@ the installation and why, not how the code is written.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_how_to_read_this"><a class="anchor" href="#_how_to_read_this"></a>2. How to read this</h2>
+<h2 id="_how_to_read_this"><a class="anchor" href="#_how_to_read_this"></a>How to read this</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The documentation follows a four-level framework. Each level answers a narrower
-question than the one above it, and every item carries an ID (<code>BG-01</code>,
-<code>SE-03</code>, <code>TF-02</code>) so a decision at one level traces back to the need it
-satisfies one level up.</p>
+<p>The documentation follows a three-layer framework: Solution, System, and
+Element design. Each layer answers a narrower question than the one above
+it, and every item carries an ID (<code>BG-01</code>, <code>SE-03</code>, <code>TF-02</code>) so a decision at
+one layer traces back to the need it satisfies one layer up. A Digital
+Design Brief sits above the three layers, and a System Realization record
+sits below them.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -65,6 +68,10 @@ satisfies one level up.</p>
 <col style="width: 80%;">
 </colgroup>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">L0: Digital Design Brief</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A concise, high-level summary of a planned initiative, written for management. Enough to make a Go/No-Go decision without the technical detail. It sits above the three layers.</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">L1: Solution</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Why build it. Business goals, the value it creates, the processes around it. Non-technical.</p></td>
@@ -79,14 +86,18 @@ satisfies one level up.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LX: Realization</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The deployment reality: server sizing, PHP version, SSL, and diagrams at implementation detail. It sits outside the four levels.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The deployment reality: server sizing, PHP version, SSL, and diagrams at implementation detail. It sits below the three layers.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>There is no L0. The framework defines a Digital Design Brief above L1, but
-none was produced for this project, so the record starts at L1 and its
-constraints trace to nothing above them.</p>
+<p>This project has no L0. A Design Brief exists so management can make a
+Go/No-Go call on a significant investment, with stakeholders aligning before
+budget gets committed. Sparring is a one-person thesis prototype with a
+single exhibition run, and its requirements came from the thesis proposal
+itself. There&#8217;s no approval gate to clear, and no other stakeholder who
+needs to sign off. The record starts at L1, and its constraints trace to
+nothing above them.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -105,7 +116,7 @@ element you care about.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_the_four_levels"><a class="anchor" href="#_the_four_levels"></a>3. The four levels</h2>
+<h2 id="_specification_documents"><a class="anchor" href="#_specification_documents"></a>Specification documents</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -132,7 +143,7 @@ element you care about.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_beyond_the_four_levels"><a class="anchor" href="#_beyond_the_four_levels"></a>4. Beyond the four levels</h2>
+<h2 id="_additional_references"><a class="anchor" href="#_additional_references"></a>Additional references</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -147,6 +158,47 @@ element you care about.</p>
 </div>
 </div>
 </div>
+<!-- Sitemap: every spec page, on every page. Our own #footer, since the build
+     passes -a nofooter (the stock one only prints a file mtime, which would
+     make the committed HTML drift between checkouts). Hand-maintained:
+     a new spec/*.adoc page needs a link here too. -->
+<footer id="footer">
+  <nav class="sitemap" aria-label="Spec pages">
+    <div>
+      <p class="sitemap-title">Overview</p>
+      <ul>
+        <li><a href="index.html">Design Documentation</a></li>
+        <li><a href="L1-solution-design-concept.html">L1 Solution Design Concept</a></li>
+        <li><a href="L2-system-design-concept.html">L2 System Design Concept</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Software elements</p>
+      <ul>
+        <li><a href="L3-SE-01-input-client.html">SE-01 Input Client</a></li>
+        <li><a href="L3-SE-02-display-client.html">SE-02 Display Client</a></li>
+        <li><a href="L3-SE-03-backend-service.html">SE-03 Backend Service</a></li>
+        <li><a href="L3-SE-04-system-prompt.html">SE-04 System Prompt</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Additional reference</p>
+      <ul>
+        <li><a href="LX-system-realization-concept.html">LX System Realization Concept</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+  </nav>
+</footer>
+<!-- Mark the sitemap link for this page; a bare /spec/ is index.html. -->
+<script>
+  (function () {
+    var page = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.sitemap a').forEach(function (a) {
+      if (a.getAttribute('href') === page) a.setAttribute('aria-current', 'page');
+    });
+  })();
+</script>
 <!-- Mermaid support for [source,mermaid] code blocks. Asciidoctor has no
      native Mermaid renderer, so this is client-side: turn the generated
      `code.language-mermaid` block into what Mermaid expects and let its
@@ -159,7 +211,51 @@ element you care about.</p>
     div.textContent = code.textContent;
     code.closest('pre').replaceWith(div);
   });
-  mermaid.initialize({ startOnLoad: true });
+  // 'base' is the only Mermaid theme that honours themeVariables; these match
+  // public/spec/spec-theme.css instead of Mermaid's default lavender.
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#fbeaea',
+      primaryBorderColor: '#d32f2f',
+      primaryTextColor: '#1a1a1a',
+      lineColor: '#666',
+      edgeLabelBackground: '#f2f2f2',
+      clusterBkg: '#fafafa',
+      clusterBorder: '#d9d9d9',
+      fontFamily: 'system-ui, sans-serif'
+    }
+  });
+</script>
+<!-- Mark the ToC link for the current #hash. CSS can match the target heading
+     (:target) but not the link pointing at it, so this bridges the two. -->
+<script>
+  function markCurrentTocLink() {
+    document.querySelectorAll('#toc a').forEach(function (a) {
+      if (location.hash && a.hash === location.hash) {
+        a.setAttribute('aria-current', 'location');
+        // Long L3 ToCs overflow the fixed sidebar; keep the entry in view.
+        a.scrollIntoView({ block: 'nearest' });
+      } else {
+        a.removeAttribute('aria-current');
+      }
+    });
+  }
+  markCurrentTocLink();
+  window.addEventListener('hashchange', markCurrentTocLink);
+</script>
+<!-- Tag the `_Key:_` labels (Satisfies, Rationale, ...) that open each line of
+     a requirement so spec-theme.css can set them apart from the body text.
+     CSS alone can't: it can't see the trailing colon, and `em:first-child`
+     ignores text nodes, so it would also catch italic words and notes. -->
+<script>
+  document.querySelectorAll('.paragraph > p > em').forEach(function (em) {
+    if (!/:\s*$/.test(em.textContent)) return;
+    var prev = em.previousSibling;
+    while (prev && prev.nodeType === Node.TEXT_NODE && !prev.textContent.trim()) prev = prev.previousSibling;
+    if (!prev || prev.nodeName === 'BR') em.classList.add('meta-key');
+  });
 </script>
 </body>
 </html>

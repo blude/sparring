@@ -5,7 +5,6 @@ v.1.1, 2026-08-29
 :toclevels: 3
 :icons: font
 :sectanchors:
-:sectnums:
 
 == What Sparring is
 
@@ -23,22 +22,29 @@ the installation and why, not how the code is written.
 
 == How to read this
 
-The documentation follows a four-level framework. Each level answers a narrower
-question than the one above it, and every item carries an ID (`BG-01`,
-`SE-03`, `TF-02`) so a decision at one level traces back to the need it
-satisfies one level up.
+The documentation follows a three-layer framework: Solution, System, and
+Element design. Each layer answers a narrower question than the one above
+it, and every item carries an ID (`BG-01`, `SE-03`, `TF-02`) so a decision at
+one layer traces back to the need it satisfies one layer up. A Digital
+Design Brief sits above the three layers, and a System Realization record
+sits below them.
 
 [cols="1,4"]
 |===
+| L0: Digital Design Brief | A concise, high-level summary of a planned initiative, written for management. Enough to make a Go/No-Go decision without the technical detail. It sits above the three layers.
 | L1: Solution | Why build it. Business goals, the value it creates, the processes around it. Non-technical.
 | L2: System | The installation as one system. System goals, architecture, the elements it breaks into, and scenarios that run end to end.
 | L3: Element | One document per element. The behaviour, interfaces, and constraints of each piece L2 named.
-| LX: Realization | The deployment reality: server sizing, PHP version, SSL, and diagrams at implementation detail. It sits outside the four levels.
+| LX: Realization | The deployment reality: server sizing, PHP version, SSL, and diagrams at implementation detail. It sits below the three layers.
 |===
 
-There is no L0. The framework defines a Digital Design Brief above L1, but
-none was produced for this project, so the record starts at L1 and its
-constraints trace to nothing above them.
+This project has no L0. A Design Brief exists so management can make a
+Go/No-Go call on a significant investment, with stakeholders aligning before
+budget gets committed. Sparring is a one-person thesis prototype with a
+single exhibition run, and its requirements came from the thesis proposal
+itself. There's no approval gate to clear, and no other stakeholder who
+needs to sign off. The record starts at L1, and its constraints trace to
+nothing above them.
 
 [source,mermaid]
 ----
@@ -53,7 +59,7 @@ flowchart LR
 architecture section for the shape of the system, then read whichever L3
 element you care about.
 
-== The four levels
+== Specification documents
 
 * xref:L1-solution-design-concept.adoc[L1: Solution Design Concept] holds the future press release, the business goals, and the value proposition behind arguing with an AI in public. Start here.
 * xref:L2-system-design-concept.adoc[L2: System Design Concept] covers the system goals, the architecture diagram, the split into three software elements plus one system prompt, and the scenarios that run across them.
@@ -62,7 +68,7 @@ element you care about.
 * xref:L3-SE-03-backend-service.adoc[L3: Backend Service (SE-03)] is the one stateful service: the turn pipeline (gate, moderate, generate, persist), rate limiting, session policy, and the single outbound call to the language API.
 * xref:L3-SE-04-system-prompt.adoc[L3: System Prompt (SE-04)] is the instruction set behind every Sparring reply. It has no runtime interface of its own but is modeled as a first-class element anyway.
 
-== Beyond the four levels
+== Additional references
 
 * xref:LX-system-realization-concept.adoc[LX: System Realization Concept] collects the deployment and infrastructure detail, plus implementation-level diagrams: what talks to what, what each element is built from, and what shapes a response the visitor reads.
 * xref:glossary.adoc[Glossary] lists what every ID prefix means, level by level.

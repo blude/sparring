@@ -5,12 +5,11 @@ v.1.0, 2026-06-19
 :toclevels: 3
 :icons: font
 :sectanchors:
-:sectnums:
 
 *Element:* xref:L2-system-design-concept.adoc#SE-04[SE-04 System prompt] +
 *Element profile:* Other — behavioral specification, no runtime interface +
 *Parent:* System Design Concept +
-*Status:* Draft
+*Status:* Stable — no open TBCs remaining
 
 *Sections that apply.* Goals, technical functions, entities, quality requirements, and constraints. Use cases and user interfaces do not apply: no human actor reaches this element directly — its content is delivered as an input parameter on xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s own outbound call (xref:L3-SE-03-backend-service.adoc#TO-01[TO-01 Request a Sparring response] in that element's design), never through interfaces of its own.
 
@@ -120,7 +119,7 @@ _Consequence:_ Sent to the provider as a separate, uncached block/message from t
 
 _Persistence:_ Persistent (static content, source-controlled)
 
-[options="header"]
+[cols="2,4,2,2,12",options="header"]
 |===
 | ID | Attribute | Type | Required | Description
 | [[E-01.1]]E-01.1 | moveKey | string | required | Stable identifier for the move (e.g. `assumption-surface`, `bait-and-switch`).

@@ -7,9 +7,10 @@
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="author" content="Sarah Puppin Pratti">
 <title>Element Design Concept: Input Client</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Project theme layered over the stock asciidoctor.css (public/spec/spec-theme.css). -->
+<link rel="stylesheet" href="./spec-theme.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -21,77 +22,77 @@
 <span id="revdate">2026-06-19</span>
 </div>
 <div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
+<div id="toctitle">Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_goals">1. Goals</a>
+<li><a href="#_goals">Goals</a>
 <ul class="sectlevel2">
-<li><a href="#_g_01_reach_a_working_input_surface_with_nothing_but_a_scan">1.1. G-01 Reach a working input surface with nothing but a scan</a></li>
-<li><a href="#_g_02_hold_the_visitors_place_through_interruption">1.2. G-02 Hold the visitor&#8217;s place through interruption</a></li>
-<li><a href="#_g_03_make_waiting_and_failure_legible">1.3. G-03 Make waiting and failure legible</a></li>
-<li><a href="#_g_04_make_unsuitable_input_visible">1.4. G-04 Make unsuitable input visible</a></li>
-<li><a href="#_g_05_give_the_visitor_a_light_identity_and_a_way_to_deliberately_start_over">1.5. G-05 Give the visitor a light identity, and a way to deliberately start over</a></li>
-<li><a href="#_g_06_offer_a_light_always_skippable_way_to_react_to_a_finished_session">1.6. G-06 Offer a light, always-skippable way to react to a finished session</a></li>
+<li><a href="#_g_01_reach_a_working_input_surface_with_nothing_but_a_scan">G-01 Reach a working input surface with nothing but a scan</a></li>
+<li><a href="#_g_02_hold_the_visitors_place_through_interruption">G-02 Hold the visitor&#8217;s place through interruption</a></li>
+<li><a href="#_g_03_make_waiting_and_failure_legible">G-03 Make waiting and failure legible</a></li>
+<li><a href="#_g_04_make_unsuitable_input_visible">G-04 Make unsuitable input visible</a></li>
+<li><a href="#_g_05_give_the_visitor_a_light_identity_and_a_way_to_deliberately_start_over">G-05 Give the visitor a light identity, and a way to deliberately start over</a></li>
+<li><a href="#_g_06_offer_a_light_always_skippable_way_to_react_to_a_finished_session">G-06 Offer a light, always-skippable way to react to a finished session</a></li>
 </ul>
 </li>
-<li><a href="#_use_cases">2. Use cases</a>
+<li><a href="#_use_cases">Use cases</a>
 <ul class="sectlevel2">
-<li><a href="#_uc_01_begin_a_session">2.1. UC-01 Begin a session</a></li>
-<li><a href="#_uc_02_contribute_a_turn">2.2. UC-02 Contribute a turn</a></li>
-<li><a href="#_uc_03_resume_an_interrupted_session">2.3. UC-03 Resume an interrupted session</a></li>
-<li><a href="#_uc_04_start_a_new_session_deliberately">2.4. UC-04 Start a new session deliberately</a></li>
+<li><a href="#_uc_01_begin_a_session">UC-01 Begin a session</a></li>
+<li><a href="#_uc_02_contribute_a_turn">UC-02 Contribute a turn</a></li>
+<li><a href="#_uc_03_resume_an_interrupted_session">UC-03 Resume an interrupted session</a></li>
+<li><a href="#_uc_04_start_a_new_session_deliberately">UC-04 Start a new session deliberately</a></li>
 </ul>
 </li>
-<li><a href="#_user_interfaces">3. User interfaces</a>
+<li><a href="#_user_interfaces">User interfaces</a>
 <ul class="sectlevel2">
-<li><a href="#_ui_01_session_surface">3.1. UI-01 Session surface</a></li>
+<li><a href="#_ui_01_session_surface">UI-01 Session surface</a></li>
 </ul>
 </li>
-<li><a href="#_technical_functions">4. Technical functions</a>
+<li><a href="#_technical_functions">Technical functions</a>
 <ul class="sectlevel2">
-<li><a href="#_tf_01_establish_the_session">4.1. TF-01 Establish the session</a></li>
-<li><a href="#_tf_02_record_the_consent_decision">4.2. TF-02 Record the consent decision</a></li>
-<li><a href="#_tf_03_submit_a_contribution">4.3. TF-03 Submit a contribution</a></li>
-<li><a href="#_tf_04_render_the_exchange_history">4.4. TF-04 Render the exchange history</a></li>
-<li><a href="#_tf_05_derive_visitor_identity">4.5. TF-05 Derive visitor identity</a></li>
-<li><a href="#_tf_06_refine_the_session_title">4.6. TF-06 Refine the session title</a></li>
-<li><a href="#_tf_07_present_the_session_evaluation">4.7. TF-07 Present the session evaluation</a></li>
-<li><a href="#_tf_08_present_the_turn_limit_choice">4.8. TF-08 Present the turn-limit choice</a></li>
+<li><a href="#_tf_01_establish_the_session">TF-01 Establish the session</a></li>
+<li><a href="#_tf_02_record_the_consent_decision">TF-02 Record the consent decision</a></li>
+<li><a href="#_tf_03_submit_a_contribution">TF-03 Submit a contribution</a></li>
+<li><a href="#_tf_04_render_the_exchange_history">TF-04 Render the exchange history</a></li>
+<li><a href="#_tf_05_derive_visitor_identity">TF-05 Derive visitor identity</a></li>
+<li><a href="#_tf_06_refine_the_session_title">TF-06 Refine the session title</a></li>
+<li><a href="#_tf_07_present_the_session_evaluation">TF-07 Present the session evaluation</a></li>
+<li><a href="#_tf_08_present_the_turn_limit_choice">TF-08 Present the turn-limit choice</a></li>
 </ul>
 </li>
-<li><a href="#_technical_interfaces_inbound">5. Technical interfaces (inbound)</a></li>
-<li><a href="#_technical_interfaces_outbound">6. Technical interfaces (outbound)</a>
+<li><a href="#_technical_interfaces_inbound">Technical interfaces (inbound)</a></li>
+<li><a href="#_technical_interfaces_outbound">Technical interfaces (outbound)</a>
 <ul class="sectlevel2">
-<li><a href="#_to_01_open_a_session">6.1. TO-01 Open a session</a></li>
-<li><a href="#_to_02_submit_a_contribution">6.2. TO-02 Submit a contribution</a></li>
-<li><a href="#_to_03_retrieve_a_session">6.3. TO-03 Retrieve a session</a></li>
-<li><a href="#_to_04_refine_a_session_title">6.4. TO-04 Refine a session title</a></li>
-<li><a href="#_to_05_submit_a_session_evaluation">6.5. TO-05 Submit a session evaluation</a></li>
-<li><a href="#_to_06_extend_a_session">6.6. TO-06 Extend a session</a></li>
+<li><a href="#_to_01_open_a_session">TO-01 Open a session</a></li>
+<li><a href="#_to_02_submit_a_contribution">TO-02 Submit a contribution</a></li>
+<li><a href="#_to_03_retrieve_a_session">TO-03 Retrieve a session</a></li>
+<li><a href="#_to_04_refine_a_session_title">TO-04 Refine a session title</a></li>
+<li><a href="#_to_05_submit_a_session_evaluation">TO-05 Submit a session evaluation</a></li>
+<li><a href="#_to_06_extend_a_session">TO-06 Extend a session</a></li>
 </ul>
 </li>
-<li><a href="#_entities">7. Entities</a>
+<li><a href="#_entities">Entities</a>
 <ul class="sectlevel2">
-<li><a href="#_e_01_session_view_state">7.1. E-01 Session view state</a></li>
+<li><a href="#_e_01_session_view_state">E-01 Session view state</a></li>
 </ul>
 </li>
-<li><a href="#_8_quality_requirements">8. 8. Quality requirements</a>
+<li><a href="#_quality_requirements">Quality requirements</a>
 <ul class="sectlevel2">
-<li><a href="#_qr_01_the_in_progress_state_appears_immediately_performance">8.1. QR-01 The in-progress state appears immediately <em>(Performance)</em></a></li>
-<li><a href="#_qr_02_every_failure_produces_a_statement_usability">8.2. QR-02 Every failure produces a statement <em>(Usability)</em></a></li>
-<li><a href="#_qr_03_usable_on_a_phone_held_in_one_hand_usability">8.3. QR-03 Usable on a phone held in one hand <em>(Usability)</em></a></li>
-<li><a href="#_qr_04_visitor_content_cannot_alter_the_surface_security">8.4. QR-04 Visitor content cannot alter the surface <em>(Security)</em></a></li>
-<li><a href="#_qr_05_works_on_current_mobile_browsers_without_a_build_step_compatibility">8.5. QR-05 Works on current mobile browsers without a build step <em>(Compatibility)</em></a></li>
-<li><a href="#_qr_06_diagnostic_detail_is_available_to_an_operator_hidden_by_default_maintainability">8.6. QR-06 Diagnostic detail is available to an operator, hidden by default <em>(Maintainability)</em></a></li>
-<li><a href="#_qr_07_motion_respects_a_reduced_motion_preference_every_effect_is_individually_switchable_usabilityaccessibility">8.7. QR-07 Motion respects a reduced-motion preference; every effect is individually switchable <em>(Usability/Accessibility)</em></a></li>
-<li><a href="#_qr_08_interface_language_is_selectable_and_matches_on_first_visit_where_possible_usability">8.8. QR-08 Interface language is selectable and matches on first visit where possible <em>(Usability)</em></a></li>
+<li><a href="#_qr_01_the_in_progress_state_appears_immediately_performance">QR-01 The in-progress state appears immediately <em>(Performance)</em></a></li>
+<li><a href="#_qr_02_every_failure_produces_a_statement_usability">QR-02 Every failure produces a statement <em>(Usability)</em></a></li>
+<li><a href="#_qr_03_usable_on_a_phone_held_in_one_hand_usability">QR-03 Usable on a phone held in one hand <em>(Usability)</em></a></li>
+<li><a href="#_qr_04_visitor_content_cannot_alter_the_surface_security">QR-04 Visitor content cannot alter the surface <em>(Security)</em></a></li>
+<li><a href="#_qr_05_works_on_current_mobile_browsers_without_a_build_step_compatibility">QR-05 Works on current mobile browsers without a build step <em>(Compatibility)</em></a></li>
+<li><a href="#_qr_06_diagnostic_detail_is_available_to_an_operator_hidden_by_default_maintainability">QR-06 Diagnostic detail is available to an operator, hidden by default <em>(Maintainability)</em></a></li>
+<li><a href="#_qr_07_motion_respects_a_reduced_motion_preference_every_effect_is_individually_switchable_usabilityaccessibility">QR-07 Motion respects a reduced-motion preference; every effect is individually switchable <em>(Usability/Accessibility)</em></a></li>
+<li><a href="#_qr_08_interface_language_is_selectable_and_matches_on_first_visit_where_possible_usability">QR-08 Interface language is selectable and matches on first visit where possible <em>(Usability)</em></a></li>
 </ul>
 </li>
-<li><a href="#_constraints">9. Constraints</a>
+<li><a href="#_constraints">Constraints</a>
 <ul class="sectlevel2">
-<li><a href="#_c_01_no_credential_no_policy_no_generation_in_this_element_technical">9.1. C-01 No credential, no policy, no generation in this element <em>(Technical)</em></a></li>
-<li><a href="#_c_02_session_identity_lives_in_the_address_not_in_device_storage_technical">9.2. C-02 Session identity lives in the address, not in device storage <em>(Technical)</em></a></li>
-<li><a href="#_c_03_consent_is_decided_before_input_is_possible_legal_regulatory">9.3. C-03 Consent is decided before input is possible <em>(Legal-regulatory)</em></a></li>
-<li><a href="#_c_04_no_build_step_technical">9.4. C-04 No build step <em>(Technical)</em></a></li>
+<li><a href="#_c_01_no_credential_no_policy_no_generation_in_this_element_technical">C-01 No credential, no policy, no generation in this element <em>(Technical)</em></a></li>
+<li><a href="#_c_02_session_identity_lives_in_the_address_not_in_device_storage_technical">C-02 Session identity lives in the address, not in device storage <em>(Technical)</em></a></li>
+<li><a href="#_c_03_consent_is_decided_before_input_is_possible_legal_regulatory">C-03 Consent is decided before input is possible <em>(Legal-regulatory)</em></a></li>
+<li><a href="#_c_04_no_build_step_technical">C-04 No build step <em>(Technical)</em></a></li>
 </ul>
 </li>
 </ul>
@@ -116,10 +117,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_goals"><a class="anchor" href="#_goals"></a>1. Goals</h2>
+<h2 id="_goals"><a class="anchor" href="#_goals"></a>Goals</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_g_01_reach_a_working_input_surface_with_nothing_but_a_scan"><a class="anchor" href="#_g_01_reach_a_working_input_surface_with_nothing_but_a_scan"></a>1.1. <a id="G-01"></a>G-01 Reach a working input surface with nothing but a scan</h3>
+<h3 id="_g_01_reach_a_working_input_surface_with_nothing_but_a_scan"><a class="anchor" href="#_g_01_reach_a_working_input_surface_with_nothing_but_a_scan"></a><a id="G-01"></a>G-01 Reach a working input surface with nothing but a scan</h3>
 <div class="paragraph">
 <p>The element shall present a usable input surface immediately on opening, with no installation, registration, or instruction step.<br>
 <em>Success criteria (qualitative):</em> A visitor who has never seen the piece submits their first contribution without asking anyone how it works.<br>
@@ -159,7 +160,7 @@ prompts or requires, so it does not gate <a href="#G-01">G-01 Reach a working in
 </div>
 </div>
 <div class="sect2">
-<h3 id="_g_02_hold_the_visitors_place_through_interruption"><a class="anchor" href="#_g_02_hold_the_visitors_place_through_interruption"></a>1.2. <a id="G-02"></a>G-02 Hold the visitor&#8217;s place through interruption</h3>
+<h3 id="_g_02_hold_the_visitors_place_through_interruption"><a class="anchor" href="#_g_02_hold_the_visitors_place_through_interruption"></a><a id="G-02"></a>G-02 Hold the visitor&#8217;s place through interruption</h3>
 <div class="paragraph">
 <p>The element shall restore a session and its exchanges after a reload, a locked device, or a backgrounded tab.<br>
 <em>Success criteria (qualitative):</em> Reloading restores the full session with no loss of prior exchanges and no repeated consent step.<br>
@@ -167,7 +168,7 @@ prompts or requires, so it does not gate <a href="#G-01">G-01 Reach a working in
 </div>
 </div>
 <div class="sect2">
-<h3 id="_g_03_make_waiting_and_failure_legible"><a class="anchor" href="#_g_03_make_waiting_and_failure_legible"></a>1.3. <a id="G-03"></a>G-03 Make waiting and failure legible</h3>
+<h3 id="_g_03_make_waiting_and_failure_legible"><a class="anchor" href="#_g_03_make_waiting_and_failure_legible"></a><a id="G-03"></a>G-03 Make waiting and failure legible</h3>
 <div class="paragraph">
 <p>The element shall show that a response is being produced, and shall state plainly when one cannot be.<br>
 <em>Success criteria (quantitative):</em> An in-progress state appears within 300 ms of submission.<br>
@@ -176,7 +177,7 @@ prompts or requires, so it does not gate <a href="#G-01">G-01 Reach a working in
 </div>
 </div>
 <div class="sect2">
-<h3 id="_g_04_make_unsuitable_input_visible"><a class="anchor" href="#_g_04_make_unsuitable_input_visible"></a>1.4. <a id="G-04"></a>G-04 Make unsuitable input visible</h3>
+<h3 id="_g_04_make_unsuitable_input_visible"><a class="anchor" href="#_g_04_make_unsuitable_input_visible"></a><a id="G-04"></a>G-04 Make unsuitable input visible</h3>
 <div class="paragraph">
 <p>The element shall show that an input is invalid and should require the user to modify its content before sending again.<br>
 <em>Rationale:</em> Participants should be allowed to edit their input to fix the problem.</p>
@@ -195,7 +196,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_g_05_give_the_visitor_a_light_identity_and_a_way_to_deliberately_start_over"><a class="anchor" href="#_g_05_give_the_visitor_a_light_identity_and_a_way_to_deliberately_start_over"></a>1.5. <a id="G-05"></a>G-05 Give the visitor a light identity, and a way to deliberately start over</h3>
+<h3 id="_g_05_give_the_visitor_a_light_identity_and_a_way_to_deliberately_start_over"><a class="anchor" href="#_g_05_give_the_visitor_a_light_identity_and_a_way_to_deliberately_start_over"></a><a id="G-05"></a>G-05 Give the visitor a light identity, and a way to deliberately start over</h3>
 <div class="paragraph">
 <p>The element shall reveal a generated nickname and avatar in the header once consent is recorded, and shall let the visitor abandon the current session and begin a fresh one on request.<br>
 <em>Success criteria (qualitative):</em> A visitor can find their own alias in the header at any point after consenting, and can start a new session from the same screen without navigating away manually.<br>
@@ -204,7 +205,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_g_06_offer_a_light_always_skippable_way_to_react_to_a_finished_session"><a class="anchor" href="#_g_06_offer_a_light_always_skippable_way_to_react_to_a_finished_session"></a>1.6. <a id="G-06"></a>G-06 Offer a light, always-skippable way to react to a finished session</h3>
+<h3 id="_g_06_offer_a_light_always_skippable_way_to_react_to_a_finished_session"><a class="anchor" href="#_g_06_offer_a_light_always_skippable_way_to_react_to_a_finished_session"></a><a id="G-06"></a>G-06 Offer a light, always-skippable way to react to a finished session</h3>
 <div class="paragraph">
 <p>The element shall present a short rating and open-feedback prompt when a session ends, and shall let the visitor leave without answering any part of it.<br>
 <em>Success criteria (qualitative):</em> Dismissing the prompt with nothing answered is exactly as available as answering it, from the visitor&#8217;s first look at it.<br>
@@ -215,10 +216,10 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect1">
-<h2 id="_use_cases"><a class="anchor" href="#_use_cases"></a>2. Use cases</h2>
+<h2 id="_use_cases"><a class="anchor" href="#_use_cases"></a>Use cases</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_uc_01_begin_a_session"><a class="anchor" href="#_uc_01_begin_a_session"></a>2.1. <a id="UC-01"></a>UC-01 Begin a session</h3>
+<h3 id="_uc_01_begin_a_session"><a class="anchor" href="#_uc_01_begin_a_session"></a><a id="UC-01"></a>UC-01 Begin a session</h3>
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a>, <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a><br>
 <em>Prerequisites:</em> None. This is the entry point.<br>
@@ -268,7 +269,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_uc_02_contribute_a_turn"><a class="anchor" href="#_uc_02_contribute_a_turn"></a>2.2. <a id="UC-02"></a>UC-02 Contribute a turn</h3>
+<h3 id="_uc_02_contribute_a_turn"><a class="anchor" href="#_uc_02_contribute_a_turn"></a><a id="UC-02"></a>UC-02 Contribute a turn</h3>
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a>, <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a><br>
 <em>Prerequisites:</em> <a href="#UC-01">UC-01 Begin a session</a> completed, or <a href="#UC-03">UC-03 Resume an interrupted session</a> completed.<br>
@@ -321,7 +322,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_uc_03_resume_an_interrupted_session"><a class="anchor" href="#_uc_03_resume_an_interrupted_session"></a>2.3. <a id="UC-03"></a>UC-03 Resume an interrupted session</h3>
+<h3 id="_uc_03_resume_an_interrupted_session"><a class="anchor" href="#_uc_03_resume_an_interrupted_session"></a><a id="UC-03"></a>UC-03 Resume an interrupted session</h3>
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a>, <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a><br>
 <em>Prerequisites:</em> A session identifier is present in the address.<br>
@@ -359,7 +360,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_uc_04_start_a_new_session_deliberately"><a class="anchor" href="#_uc_04_start_a_new_session_deliberately"></a>2.4. <a id="UC-04"></a>UC-04 Start a new session deliberately</h3>
+<h3 id="_uc_04_start_a_new_session_deliberately"><a class="anchor" href="#_uc_04_start_a_new_session_deliberately"></a><a id="UC-04"></a>UC-04 Start a new session deliberately</h3>
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a><br>
 <em>Prerequisites:</em> <a href="#UC-01">UC-01 Begin a session</a> or <a href="#UC-03">UC-03 Resume an interrupted session</a> completed — a session, active or complete, is currently shown.<br>
@@ -397,10 +398,10 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect1">
-<h2 id="_user_interfaces"><a class="anchor" href="#_user_interfaces"></a>3. User interfaces</h2>
+<h2 id="_user_interfaces"><a class="anchor" href="#_user_interfaces"></a>User interfaces</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ui_01_session_surface"><a class="anchor" href="#_ui_01_session_surface"></a>3.1. <a id="UI-01"></a>UI-01 Session surface</h3>
+<h3 id="_ui_01_session_surface"><a class="anchor" href="#_ui_01_session_surface"></a><a id="UI-01"></a>UI-01 Session surface</h3>
 <div class="paragraph">
 <p><em>User type:</em> <a href="L2-system-design-concept.html#UT-01">UT-01 Participating visitor</a><br>
 <em>Realises:</em> <a href="#UC-01">UC-01 Begin a session</a>, <a href="#UC-02">UC-02 Contribute a turn</a>, <a href="#UC-03">UC-03 Resume an interrupted session</a>, <a href="#UC-04">UC-04 Start a new session deliberately</a></p>
@@ -621,10 +622,10 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect1">
-<h2 id="_technical_functions"><a class="anchor" href="#_technical_functions"></a>4. Technical functions</h2>
+<h2 id="_technical_functions"><a class="anchor" href="#_technical_functions"></a>Technical functions</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_tf_01_establish_the_session"><a class="anchor" href="#_tf_01_establish_the_session"></a>4.1. <a id="TF-01"></a>TF-01 Establish the session</h3>
+<h3 id="_tf_01_establish_the_session"><a class="anchor" href="#_tf_01_establish_the_session"></a><a id="TF-01"></a>TF-01 Establish the session</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Stepwise<br>
 <em>Achieves:</em> <a href="#G-01">G-01 Reach a working input surface with nothing but a scan</a>, <a href="#G-02">G-02 Hold the visitor&#8217;s place through interruption</a></p>
@@ -657,7 +658,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tf_02_record_the_consent_decision"><a class="anchor" href="#_tf_02_record_the_consent_decision"></a>4.2. <a id="TF-02"></a>TF-02 Record the consent decision</h3>
+<h3 id="_tf_02_record_the_consent_decision"><a class="anchor" href="#_tf_02_record_the_consent_decision"></a><a id="TF-02"></a>TF-02 Record the consent decision</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#G-01">G-01 Reach a working input surface with nothing but a scan</a></p>
@@ -667,7 +668,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tf_03_submit_a_contribution"><a class="anchor" href="#_tf_03_submit_a_contribution"></a>4.3. <a id="TF-03"></a>TF-03 Submit a contribution</h3>
+<h3 id="_tf_03_submit_a_contribution"><a class="anchor" href="#_tf_03_submit_a_contribution"></a><a id="TF-03"></a>TF-03 Submit a contribution</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Stepwise<br>
 <em>Achieves:</em> <a href="#G-01">G-01 Reach a working input surface with nothing but a scan</a>, <a href="#G-03">G-03 Make waiting and failure legible</a></p>
@@ -697,7 +698,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tf_04_render_the_exchange_history"><a class="anchor" href="#_tf_04_render_the_exchange_history"></a>4.4. <a id="TF-04"></a>TF-04 Render the exchange history</h3>
+<h3 id="_tf_04_render_the_exchange_history"><a class="anchor" href="#_tf_04_render_the_exchange_history"></a><a id="TF-04"></a>TF-04 Render the exchange history</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative</p>
 </div>
@@ -706,7 +707,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tf_05_derive_visitor_identity"><a class="anchor" href="#_tf_05_derive_visitor_identity"></a>4.5. <a id="TF-05"></a>TF-05 Derive visitor identity</h3>
+<h3 id="_tf_05_derive_visitor_identity"><a class="anchor" href="#_tf_05_derive_visitor_identity"></a><a id="TF-05"></a>TF-05 Derive visitor identity</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#G-05">G-05 Give the visitor a light identity</a></p>
@@ -716,7 +717,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tf_06_refine_the_session_title"><a class="anchor" href="#_tf_06_refine_the_session_title"></a>4.6. <a id="TF-06"></a>TF-06 Refine the session title</h3>
+<h3 id="_tf_06_refine_the_session_title"><a class="anchor" href="#_tf_06_refine_the_session_title"></a><a id="TF-06"></a>TF-06 Refine the session title</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative</p>
 </div>
@@ -725,7 +726,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tf_07_present_the_session_evaluation"><a class="anchor" href="#_tf_07_present_the_session_evaluation"></a>4.7. <a id="TF-07"></a>TF-07 Present the session evaluation</h3>
+<h3 id="_tf_07_present_the_session_evaluation"><a class="anchor" href="#_tf_07_present_the_session_evaluation"></a><a id="TF-07"></a>TF-07 Present the session evaluation</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#G-06">G-06 Offer a light, always-skippable way to react</a></p>
@@ -735,7 +736,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tf_08_present_the_turn_limit_choice"><a class="anchor" href="#_tf_08_present_the_turn_limit_choice"></a>4.8. <a id="TF-08"></a>TF-08 Present the turn-limit choice</h3>
+<h3 id="_tf_08_present_the_turn_limit_choice"><a class="anchor" href="#_tf_08_present_the_turn_limit_choice"></a><a id="TF-08"></a>TF-08 Present the turn-limit choice</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#G-02">G-02 Hold the visitor&#8217;s place through interruption</a></p>
@@ -748,7 +749,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect1">
-<h2 id="_technical_interfaces_inbound"><a class="anchor" href="#_technical_interfaces_inbound"></a>5. Technical interfaces (inbound)</h2>
+<h2 id="_technical_interfaces_inbound"><a class="anchor" href="#_technical_interfaces_inbound"></a>Technical interfaces (inbound)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>None. The element provides no interface to other elements. It is reached by a person opening a URL, which is not an inbound technical interface in the sense this section covers.</p>
@@ -757,10 +758,10 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect1">
-<h2 id="_technical_interfaces_outbound"><a class="anchor" href="#_technical_interfaces_outbound"></a>6. Technical interfaces (outbound)</h2>
+<h2 id="_technical_interfaces_outbound"><a class="anchor" href="#_technical_interfaces_outbound"></a>Technical interfaces (outbound)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_to_01_open_a_session"><a class="anchor" href="#_to_01_open_a_session"></a>6.1. <a id="TO-01"></a>TO-01 Open a session</h3>
+<h3 id="_to_01_open_a_session"><a class="anchor" href="#_to_01_open_a_session"></a><a id="TO-01"></a>TO-01 Open a session</h3>
 <div class="paragraph">
 <p><em>Statement:</em> This interface creates a session and records the consent decision by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used for establishing a session before any contribution is possible.<br>
 <em>Input:</em> Three consent booleans — agreement to take part, retention, projection — required together on the decision call; all absent on the creation call.<br>
@@ -770,7 +771,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_to_02_submit_a_contribution"><a class="anchor" href="#_to_02_submit_a_contribution"></a>6.2. <a id="TO-02"></a>TO-02 Submit a contribution</h3>
+<h3 id="_to_02_submit_a_contribution"><a class="anchor" href="#_to_02_submit_a_contribution"></a><a id="TO-02"></a>TO-02 Submit a contribution</h3>
 <div class="paragraph">
 <p><em>Statement:</em> This interface submits a visitor contribution and obtains the Sparring response by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used for every turn after the session is open.<br>
 <em>Input:</em> Session identifier, contribution text.<br>
@@ -780,7 +781,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_to_03_retrieve_a_session"><a class="anchor" href="#_to_03_retrieve_a_session"></a>6.3. <a id="TO-03"></a>TO-03 Retrieve a session</h3>
+<h3 id="_to_03_retrieve_a_session"><a class="anchor" href="#_to_03_retrieve_a_session"></a><a id="TO-03"></a>TO-03 Retrieve a session</h3>
 <div class="paragraph">
 <p><em>Statement:</em> This interface fetches an existing session and its exchanges by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used for restoring state after an interruption.<br>
 <em>Input:</em> Session identifier.<br>
@@ -790,7 +791,7 @@ This is the authoritative behavior for unsuitable content — an earlier version
 </div>
 </div>
 <div class="sect2">
-<h3 id="_to_04_refine_a_session_title"><a class="anchor" href="#_to_04_refine_a_session_title"></a>6.4. <a id="TO-04"></a>TO-04 Refine a session title</h3>
+<h3 id="_to_04_refine_a_session_title"><a class="anchor" href="#_to_04_refine_a_session_title"></a><a id="TO-04"></a>TO-04 Refine a session title</h3>
 <div class="paragraph">
 <p><em>Statement:</em> This interface requests a short, refined title for a session&#8217;s first contribution by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used once per session, after the first exchange completes.<br>
 <em>Input:</em> Session identifier.<br>
@@ -812,7 +813,7 @@ No <code>Calls → PE-</code> relation applies. This element reaches no partner 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_to_05_submit_a_session_evaluation"><a class="anchor" href="#_to_05_submit_a_session_evaluation"></a>6.5. <a id="TO-05"></a>TO-05 Submit a session evaluation</h3>
+<h3 id="_to_05_submit_a_session_evaluation"><a class="anchor" href="#_to_05_submit_a_session_evaluation"></a><a id="TO-05"></a>TO-05 Submit a session evaluation</h3>
 <div class="paragraph">
 <p><em>Statement:</em> This interface records whatever the visitor answered in the evaluation prompt by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used once per session, from <a href="#TF-07">TF-07 Present the session evaluation</a>'s Send action.<br>
 <em>Input:</em> Session identifier, zero or more rating answers, optional open-feedback text.<br>
@@ -834,7 +835,7 @@ No <code>Calls → PE-</code> relation applies, same reason as <a href="#TO-04">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_to_06_extend_a_session"><a class="anchor" href="#_to_06_extend_a_session"></a>6.6. <a id="TO-06"></a>TO-06 Extend a session</h3>
+<h3 id="_to_06_extend_a_session"><a class="anchor" href="#_to_06_extend_a_session"></a><a id="TO-06"></a>TO-06 Extend a session</h3>
 <div class="paragraph">
 <p><em>Statement:</em> This interface asks the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>) to lift a completed session&#8217;s turn limit by another allowance. Used from <a href="#TF-08">TF-08 Present the turn-limit choice</a>'s extend action.<br>
 <em>Input:</em> Session identifier.<br>
@@ -859,21 +860,21 @@ No <code>Calls → PE-</code> relation applies, same reason as <a href="#TO-04">
 </div>
 </div>
 <div class="sect1">
-<h2 id="_entities"><a class="anchor" href="#_entities"></a>7. Entities</h2>
+<h2 id="_entities"><a class="anchor" href="#_entities"></a>Entities</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_e_01_session_view_state"><a class="anchor" href="#_e_01_session_view_state"></a>7.1. <a id="E-01"></a>E-01 Session view state</h3>
+<h3 id="_e_01_session_view_state"><a class="anchor" href="#_e_01_session_view_state"></a><a id="E-01"></a>E-01 Session view state</h3>
 <div class="paragraph">
 <p><em>Persistence:</em> In-memory. Discarded when the page unloads, and rebuilt from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> on the next load. Nothing is written to device storage.<br>
 <em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01 Sparring session</a> (partially; the authoritative record is <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s <a href="L3-SE-03-backend-service.html#E-01">E-01 Session</a>)</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 9.0909%;">
+<col style="width: 9.0909%;">
+<col style="width: 54.5455%;">
 </colgroup>
 <thead>
 <tr>
@@ -946,10 +947,10 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect1">
-<h2 id="_8_quality_requirements"><a class="anchor" href="#_8_quality_requirements"></a>8. 8. Quality requirements</h2>
+<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>Quality requirements</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_qr_01_the_in_progress_state_appears_immediately_performance"><a class="anchor" href="#_qr_01_the_in_progress_state_appears_immediately_performance"></a>8.1. <a id="QR-01"></a>QR-01 The in-progress state appears immediately <em>(Performance)</em></h3>
+<h3 id="_qr_01_the_in_progress_state_appears_immediately_performance"><a class="anchor" href="#_qr_01_the_in_progress_state_appears_immediately_performance"></a><a id="QR-01"></a>QR-01 The in-progress state appears immediately <em>(Performance)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a>, <a href="#TF-03">TF-03 Submit a contribution</a><br>
 <em>Acceptance criteria:</em> The state is visible within 300 ms of submission and persists until the response or a failure arrives.<br>
@@ -957,7 +958,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_02_every_failure_produces_a_statement_usability"><a class="anchor" href="#_qr_02_every_failure_produces_a_statement_usability"></a>8.2. <a id="QR-02"></a>QR-02 Every failure produces a statement <em>(Usability)</em></h3>
+<h3 id="_qr_02_every_failure_produces_a_statement_usability"><a class="anchor" href="#_qr_02_every_failure_produces_a_statement_usability"></a><a id="QR-02"></a>QR-02 Every failure produces a statement <em>(Usability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a>, <a href="#TF-01">TF-01 Establish the session</a>, <a href="#TF-03">TF-03 Submit a contribution</a><br>
 <em>Acceptance criteria (qualitative):</em> No condition leaves the surface unresponsive or unexplained. Every path that stops shows what happened and whether the visitor can continue.<br>
@@ -965,7 +966,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_03_usable_on_a_phone_held_in_one_hand_usability"><a class="anchor" href="#_qr_03_usable_on_a_phone_held_in_one_hand_usability"></a>8.3. <a id="QR-03"></a>QR-03 Usable on a phone held in one hand <em>(Usability)</em></h3>
+<h3 id="_qr_03_usable_on_a_phone_held_in_one_hand_usability"><a class="anchor" href="#_qr_03_usable_on_a_phone_held_in_one_hand_usability"></a><a id="QR-03"></a>QR-03 Usable on a phone held in one hand <em>(Usability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a><br>
 <em>Acceptance criteria (qualitative):</em> Input field and submit action reachable one-handed on a small phone with the software keyboard raised. The consent decision is answerable without scrolling.<br>
@@ -974,7 +975,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_04_visitor_content_cannot_alter_the_surface_security"><a class="anchor" href="#_qr_04_visitor_content_cannot_alter_the_surface_security"></a>8.4. <a id="QR-04"></a>QR-04 Visitor content cannot alter the surface <em>(Security)</em></h3>
+<h3 id="_qr_04_visitor_content_cannot_alter_the_surface_security"><a class="anchor" href="#_qr_04_visitor_content_cannot_alter_the_surface_security"></a><a id="QR-04"></a>QR-04 Visitor content cannot alter the surface <em>(Security)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#TF-04">TF-04 Render the exchange history</a><br>
 <em>Acceptance criteria:</em> All content returned from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> is inserted as text. No path renders it as markup.<br>
@@ -982,7 +983,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_05_works_on_current_mobile_browsers_without_a_build_step_compatibility"><a class="anchor" href="#_qr_05_works_on_current_mobile_browsers_without_a_build_step_compatibility"></a>8.5. <a id="QR-05"></a>QR-05 Works on current mobile browsers without a build step <em>(Compatibility)</em></h3>
+<h3 id="_qr_05_works_on_current_mobile_browsers_without_a_build_step_compatibility"><a class="anchor" href="#_qr_05_works_on_current_mobile_browsers_without_a_build_step_compatibility"></a><a id="QR-05"></a>QR-05 Works on current mobile browsers without a build step <em>(Compatibility)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> The element overall<br>
 <em>Acceptance criteria (qualitative):</em> Functions on current mobile Safari and Chrome. No transpilation, bundling, or framework runtime.<br>
@@ -991,7 +992,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_06_diagnostic_detail_is_available_to_an_operator_hidden_by_default_maintainability"><a class="anchor" href="#_qr_06_diagnostic_detail_is_available_to_an_operator_hidden_by_default_maintainability"></a>8.6. <a id="QR-06"></a>QR-06 Diagnostic detail is available to an operator, hidden by default <em>(Maintainability)</em></h3>
+<h3 id="_qr_06_diagnostic_detail_is_available_to_an_operator_hidden_by_default_maintainability"><a class="anchor" href="#_qr_06_diagnostic_detail_is_available_to_an_operator_hidden_by_default_maintainability"></a><a id="QR-06"></a>QR-06 Diagnostic detail is available to an operator, hidden by default <em>(Maintainability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a><br>
 <em>Acceptance criteria:</em> An address flag reveals session id, origin, rate-limit remaining, generation timing, and the exact moderation reason (from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s <a href="L3-SE-03-backend-service.html#TI-01">TI-01 Open a session</a>/<a href="L3-SE-03-backend-service.html#TI-02">TI-02 Submit a contribution</a>/<a href="L3-SE-03-backend-service.html#TI-03">TI-03 Retrieve a session</a> outputs) alongside the normal surface. Absent by default; no visitor-facing affordance exposes or hints at the <em>exact</em> reason. The standard (non-debug) flagged-message copy does, deliberately, show a coarser two-category hint derived from the same value — personal information versus inappropriate content — narrow enough that it doesn&#8217;t expose which specific classification or wordlist match fired.<br>
@@ -1000,7 +1001,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_07_motion_respects_a_reduced_motion_preference_every_effect_is_individually_switchable_usabilityaccessibility"><a class="anchor" href="#_qr_07_motion_respects_a_reduced_motion_preference_every_effect_is_individually_switchable_usabilityaccessibility"></a>8.7. <a id="QR-07"></a>QR-07 Motion respects a reduced-motion preference; every effect is individually switchable <em>(Usability/Accessibility)</em></h3>
+<h3 id="_qr_07_motion_respects_a_reduced_motion_preference_every_effect_is_individually_switchable_usabilityaccessibility"><a class="anchor" href="#_qr_07_motion_respects_a_reduced_motion_preference_every_effect_is_individually_switchable_usabilityaccessibility"></a><a id="QR-07"></a>QR-07 Motion respects a reduced-motion preference; every effect is individually switchable <em>(Usability/Accessibility)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a>, <a href="#TF-02">TF-02 Record the consent decision</a>, <a href="#TF-04">TF-04 Render the exchange history</a><br>
 <em>Acceptance criteria:</em> Every added animation (consent-decision title card, submit motion, rejection motion) is suppressed when the OS-level reduced-motion preference is set, without disabling submission or the consent decision itself. Sound is a separate signal — <code>prefers-reduced-motion</code> is a vestibular-motion preference and does not govern audio — and is instead gated solely by its own configuration switch. Each effect (title card, submit motion, rejection motion, sound) can be turned off independently by configuration, with no code change, and a single configuration switch turns all of them off at once. The title card plays once the consent decision is recorded, not on any submission, so it never overlaps <a href="#QR-01">QR-01 The in-progress state appears immediately</a>'s in-progress state — the two have no shared trigger.<br>
@@ -1009,7 +1010,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_08_interface_language_is_selectable_and_matches_on_first_visit_where_possible_usability"><a class="anchor" href="#_qr_08_interface_language_is_selectable_and_matches_on_first_visit_where_possible_usability"></a>8.8. <a id="QR-08"></a>QR-08 Interface language is selectable and matches on first visit where possible <em>(Usability)</em></h3>
+<h3 id="_qr_08_interface_language_is_selectable_and_matches_on_first_visit_where_possible_usability"><a class="anchor" href="#_qr_08_interface_language_is_selectable_and_matches_on_first_visit_where_possible_usability"></a><a id="QR-08"></a>QR-08 Interface language is selectable and matches on first visit where possible <em>(Usability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#UI-01">UI-01 Session surface</a><br>
 <em>Acceptance criteria:</em> The surface is available in English and German. On a first visit the interface language follows the device/browser&#8217;s own language setting when it names a supported language, English otherwise; an explicit switch overrides this and persists across the session and future visits on the same device. The AI&#8217;s own reply language is a separate behavior (<a href="#TF-03">TF-03 Submit a contribution</a>/prompt-level, see <a href="L3-SE-04-system-prompt.html#G-04">G-04 Match the visitor&#8217;s reply language turn by</a> of <a href="L2-system-design-concept.html#SE-04">SE-04 System prompt</a>) that follows what the visitor types, not this setting.<br>
@@ -1020,10 +1021,10 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect1">
-<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>9. Constraints</h2>
+<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>Constraints</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_c_01_no_credential_no_policy_no_generation_in_this_element_technical"><a class="anchor" href="#_c_01_no_credential_no_policy_no_generation_in_this_element_technical"></a>9.1. <a id="C-01"></a>C-01 No credential, no policy, no generation in this element <em>(Technical)</em></h3>
+<h3 id="_c_01_no_credential_no_policy_no_generation_in_this_element_technical"><a class="anchor" href="#_c_01_no_credential_no_policy_no_generation_in_this_element_technical"></a><a id="C-01"></a>C-01 No credential, no policy, no generation in this element <em>(Technical)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L2-system-design-concept.html#AP-01">AP-01 All logic lives in the backend</a>.<br>
 <em>Applies to:</em> All technical functions and outbound interfaces.<br>
@@ -1033,7 +1034,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_c_02_session_identity_lives_in_the_address_not_in_device_storage_technical"><a class="anchor" href="#_c_02_session_identity_lives_in_the_address_not_in_device_storage_technical"></a>9.2. <a id="C-02"></a>C-02 Session identity lives in the address, not in device storage <em>(Technical)</em></h3>
+<h3 id="_c_02_session_identity_lives_in_the_address_not_in_device_storage_technical"><a class="anchor" href="#_c_02_session_identity_lives_in_the_address_not_in_device_storage_technical"></a><a id="C-02"></a>C-02 Session identity lives in the address, not in device storage <em>(Technical)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L2-system-design-concept.html#AP-03">AP-03 Session identity travels in the URL; no accounts</a>.<br>
 <em>Applies to:</em> <a href="#TF-01">TF-01 Establish the session</a>, <a href="#E-01">E-01 Session view state</a>.<br>
@@ -1043,7 +1044,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_c_03_consent_is_decided_before_input_is_possible_legal_regulatory"><a class="anchor" href="#_c_03_consent_is_decided_before_input_is_possible_legal_regulatory"></a>9.3. <a id="C-03"></a>C-03 Consent is decided before input is possible <em>(Legal-regulatory)</em></h3>
+<h3 id="_c_03_consent_is_decided_before_input_is_possible_legal_regulatory"><a class="anchor" href="#_c_03_consent_is_decided_before_input_is_possible_legal_regulatory"></a><a id="C-03"></a>C-03 Consent is decided before input is possible <em>(Legal-regulatory)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L2-system-design-concept.html#SC-05">SC-05 Retention requires consent; projection requires</a>.<br>
 <em>Applies to:</em> <a href="#UC-01">UC-01 Begin a session</a>, <a href="#UI-01">UI-01 Session surface</a>.<br>
@@ -1053,7 +1054,7 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_c_04_no_build_step_technical"><a class="anchor" href="#_c_04_no_build_step_technical"></a>9.4. <a id="C-04"></a>C-04 No build step <em>(Technical)</em></h3>
+<h3 id="_c_04_no_build_step_technical"><a class="anchor" href="#_c_04_no_build_step_technical"></a><a id="C-04"></a>C-04 No build step <em>(Technical)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>.<br>
 <em>Applies to:</em> The element overall.<br>
@@ -1065,6 +1066,47 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
 </div>
 </div>
 </div>
+<!-- Sitemap: every spec page, on every page. Our own #footer, since the build
+     passes -a nofooter (the stock one only prints a file mtime, which would
+     make the committed HTML drift between checkouts). Hand-maintained:
+     a new spec/*.adoc page needs a link here too. -->
+<footer id="footer">
+  <nav class="sitemap" aria-label="Spec pages">
+    <div>
+      <p class="sitemap-title">Overview</p>
+      <ul>
+        <li><a href="index.html">Design Documentation</a></li>
+        <li><a href="L1-solution-design-concept.html">L1 Solution Design Concept</a></li>
+        <li><a href="L2-system-design-concept.html">L2 System Design Concept</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Software elements</p>
+      <ul>
+        <li><a href="L3-SE-01-input-client.html">SE-01 Input Client</a></li>
+        <li><a href="L3-SE-02-display-client.html">SE-02 Display Client</a></li>
+        <li><a href="L3-SE-03-backend-service.html">SE-03 Backend Service</a></li>
+        <li><a href="L3-SE-04-system-prompt.html">SE-04 System Prompt</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Additional reference</p>
+      <ul>
+        <li><a href="LX-system-realization-concept.html">LX System Realization Concept</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+  </nav>
+</footer>
+<!-- Mark the sitemap link for this page; a bare /spec/ is index.html. -->
+<script>
+  (function () {
+    var page = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.sitemap a').forEach(function (a) {
+      if (a.getAttribute('href') === page) a.setAttribute('aria-current', 'page');
+    });
+  })();
+</script>
 <!-- Mermaid support for [source,mermaid] code blocks. Asciidoctor has no
      native Mermaid renderer, so this is client-side: turn the generated
      `code.language-mermaid` block into what Mermaid expects and let its
@@ -1077,7 +1119,51 @@ The device holds no consent record. The decision is sent to <a href="L2-system-d
     div.textContent = code.textContent;
     code.closest('pre').replaceWith(div);
   });
-  mermaid.initialize({ startOnLoad: true });
+  // 'base' is the only Mermaid theme that honours themeVariables; these match
+  // public/spec/spec-theme.css instead of Mermaid's default lavender.
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#fbeaea',
+      primaryBorderColor: '#d32f2f',
+      primaryTextColor: '#1a1a1a',
+      lineColor: '#666',
+      edgeLabelBackground: '#f2f2f2',
+      clusterBkg: '#fafafa',
+      clusterBorder: '#d9d9d9',
+      fontFamily: 'system-ui, sans-serif'
+    }
+  });
+</script>
+<!-- Mark the ToC link for the current #hash. CSS can match the target heading
+     (:target) but not the link pointing at it, so this bridges the two. -->
+<script>
+  function markCurrentTocLink() {
+    document.querySelectorAll('#toc a').forEach(function (a) {
+      if (location.hash && a.hash === location.hash) {
+        a.setAttribute('aria-current', 'location');
+        // Long L3 ToCs overflow the fixed sidebar; keep the entry in view.
+        a.scrollIntoView({ block: 'nearest' });
+      } else {
+        a.removeAttribute('aria-current');
+      }
+    });
+  }
+  markCurrentTocLink();
+  window.addEventListener('hashchange', markCurrentTocLink);
+</script>
+<!-- Tag the `_Key:_` labels (Satisfies, Rationale, ...) that open each line of
+     a requirement so spec-theme.css can set them apart from the body text.
+     CSS alone can't: it can't see the trailing colon, and `em:first-child`
+     ignores text nodes, so it would also catch italic words and notes. -->
+<script>
+  document.querySelectorAll('.paragraph > p > em').forEach(function (em) {
+    if (!/:\s*$/.test(em.textContent)) return;
+    var prev = em.previousSibling;
+    while (prev && prev.nodeType === Node.TEXT_NODE && !prev.textContent.trim()) prev = prev.previousSibling;
+    if (!prev || prev.nodeName === 'BR') em.classList.add('meta-key');
+  });
 </script>
 </body>
 </html>

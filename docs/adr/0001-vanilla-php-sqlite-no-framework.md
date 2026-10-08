@@ -2,7 +2,7 @@
 
 - **Status:** Accepted
 - **Date:** Project inception (back-filled 2026-09-10)
-- **References:** `CLAUDE.md` "Stack"; `README.md` "Setup"; `spec/LX-system-realization-concept.adoc`
+- **References:** `CLAUDE.md` "Stack"; `docs/getting-started.md` "Setup"; `spec/LX-system-realization-concept.adoc`
 
 ## Context
 

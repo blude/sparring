@@ -2,7 +2,7 @@
 
 - **Status:** Accepted
 - **Date:** 2026-08 (back-filled 2026-09-10)
-- **References:** `src/AbstractLlmClient.php`, `src/LlmClientInterface.php`, `src/AnthropicLlmClient.php`, `src/OpenAiLlmClient.php`; `README.md` "Switch LLM provider"; `config.php` `--- LLM (PE-01) ---`
+- **References:** `src/AbstractLlmClient.php`, `src/LlmClientInterface.php`, `src/AnthropicLlmClient.php`, `src/OpenAiLlmClient.php`; `docs/getting-started.md` "LLM providers"; `config.php` `--- LLM (PE-01) ---`
 
 ## Context
 

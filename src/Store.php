@@ -31,12 +31,13 @@ final class Store
         // explicitly opts in via projection_consent (see recordConsentDecision).
         // Pilot import still forces it true directly (setDisplayable) — that path
         // has no visitor to ask.
-        $this->pdo->exec(<<<SQL
-            CREATE TABLE IF NOT EXISTS sessions (
+        // One DDL, two uses: first-run CREATE and the origin-CHECK rebuild below.
+        $sessionsDdl = fn(string $table): string => <<<SQL
+            CREATE TABLE $table (
                 id                  TEXT PRIMARY KEY,
                 created_at          TEXT NOT NULL,
                 scenario_source     TEXT CHECK (scenario_source IN ('first-contribution', 'generated')),
-                origin              TEXT NOT NULL CHECK (origin IN ('pilot', 'live')),
+                origin              TEXT NOT NULL CHECK (origin IN ('pilot', 'live', 'study')),
                 scenario            TEXT,
                 title               TEXT,
                 displayable         INTEGER NOT NULL DEFAULT 0,
@@ -47,7 +48,11 @@ final class Store
                 bonus_turns         INTEGER NOT NULL DEFAULT 0,
                 last_active_at      TEXT NOT NULL
             )
-        SQL);
+        SQL;
+        $sessionsExist = $this->pdo->query("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'sessions'")->fetchColumn();
+        if (!$sessionsExist) {
+            $this->pdo->exec($sessionsDdl('sessions'));
+        }
 
         // Guard for a store.db created before tos_agreed/projection_consent/title/
         // bonus_turns existed — SQLite has no "ADD COLUMN IF NOT EXISTS" on the versions this targets.
@@ -55,6 +60,31 @@ final class Store
         foreach (['tos_agreed' => 'INTEGER', 'projection_consent' => 'INTEGER', 'title' => 'TEXT', 'bonus_turns' => 'INTEGER NOT NULL DEFAULT 0'] as $column => $type) {
             if (!in_array($column, $existing, true)) {
                 $this->pdo->exec("ALTER TABLE sessions ADD COLUMN $column $type");
+            }
+        }
+
+        // A store.db created before the 'study' origin (ADR 0019) has CHECK
+        // (origin IN ('pilot', 'live')), and SQLite can't alter a CHECK in place:
+        // rebuild the table. Foreign keys go OFF around it (the pragma is a no-op
+        // inside a transaction) because DROP TABLE would otherwise cascade-delete
+        // session_evaluations and trip the exchanges FK. Columns are named
+        // explicitly since ALTER-added columns sit in a different order on old files.
+        $sessionsSql = (string) $this->pdo->query("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'sessions'")->fetchColumn();
+        if (!str_contains($sessionsSql, "'study'")) {
+            $columns = 'id, created_at, scenario_source, origin, scenario, title, displayable, consent_granted, tos_agreed, projection_consent, turn_count, bonus_turns, last_active_at';
+            $this->pdo->exec('PRAGMA foreign_keys = OFF');
+            $this->pdo->beginTransaction();
+            try {
+                $this->pdo->exec($sessionsDdl('sessions_new'));
+                $this->pdo->exec("INSERT INTO sessions_new ($columns) SELECT $columns FROM sessions");
+                $this->pdo->exec('DROP TABLE sessions');
+                $this->pdo->exec('ALTER TABLE sessions_new RENAME TO sessions');
+                $this->pdo->commit();
+            } catch (Throwable $e) {
+                $this->pdo->rollBack();
+                throw $e;
+            } finally {
+                $this->pdo->exec('PRAGMA foreign_keys = ON');
             }
         }
 
@@ -112,7 +142,7 @@ final class Store
 
         $this->pdo->exec('CREATE INDEX IF NOT EXISTS idx_sessions_display ON sessions(origin, displayable, last_active_at)');
 
-        // Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php):
+        // Curriculum search (poor woman's RAG ingestion, bin/import_curriculum.php):
         // requires FTS5, compiled into the sqlite3 lib PHP links against — verified
         // present in this environment; if a deploy target lacks it, this throws at
         // Store construction rather than silently degrading search.
@@ -135,8 +165,8 @@ final class Store
     /** Creates a session with origin fixed at creation (SQR-05) and no other value assigned yet. */
     public function createSession(string $origin): array
     {
-        if (!in_array($origin, ['pilot', 'live'], true)) {
-            throw new InvalidArgumentException("origin must be 'pilot' or 'live'");
+        if (!in_array($origin, ['pilot', 'live', 'study'], true)) {
+            throw new InvalidArgumentException("origin must be 'pilot', 'live' or 'study'");
         }
 
         $id = self::newSessionId(); // opaque, enumeration-resistant (E-01.1); not secret (AP-03)
@@ -434,20 +464,27 @@ final class Store
     }
 
     /**
-     * TF-04 FS-04-1/FS-04-3: displayable sessions with at least one exchange, most
-     * recent first, live before pilot. $limit total across both groups.
+     * TF-04 FS-04-1/FS-04-3: displayable sessions of the given origins with at least
+     * one exchange, most recent first across all of them. $limit total.
+     *
+     * @param string[] $origins
      */
-    public function getDisplayableSessions(string $origin, int $limit): array
+    public function getDisplayableSessions(array $origins, int $limit): array
     {
+        // Placeholders only (one per origin): the values are still bound, never interpolated.
+        $placeholders = implode(',', array_fill(0, count($origins), '?'));
         $stmt = $this->pdo->prepare(
             "SELECT s.* FROM sessions s
-             WHERE s.origin = :origin AND s.displayable = 1
+             WHERE s.origin IN ($placeholders) AND s.displayable = 1
                AND EXISTS (SELECT 1 FROM exchanges e WHERE e.session_id = s.id)
              ORDER BY s.last_active_at DESC
-             LIMIT :limit"
+             LIMIT ?"
         );
-        $stmt->bindValue('origin', $origin, PDO::PARAM_STR);
-        $stmt->bindValue('limit', $limit, PDO::PARAM_INT);
+        // bindValue, not execute([...]), so $limit stays an INTEGER for LIMIT (execute binds strings).
+        foreach (array_values($origins) as $i => $origin) {
+            $stmt->bindValue($i + 1, $origin, PDO::PARAM_STR);
+        }
+        $stmt->bindValue(count($origins) + 1, $limit, PDO::PARAM_INT);
         $stmt->execute();
         return array_map($this->hydrateSession(...), $stmt->fetchAll(PDO::FETCH_ASSOC));
     }
@@ -499,7 +536,7 @@ final class Store
 
     /*
     |--------------------------------------------------------------------------
-    | Curriculum search (poor man's RAG ingestion, bin/import_curriculum.php)
+    | Curriculum search (poor woman's RAG ingestion, bin/import_curriculum.php)
     |--------------------------------------------------------------------------
     |
     | Disk-derived cache, not visitor data: deliberately kept out of getCounts()/

@@ -16,7 +16,8 @@ declare(strict_types=1);
 | or 'openai' — the latter is any OpenAI-Chat-Completions-compatible
 | endpoint, so it also covers a local model served through LM Studio
 | (point OPENAI_BASE_URL at it; OPENAI_API_KEY can stay unset). See
-| createLlmClient().
+| createLlmClient(). 'fake' is an offline stand-in for local UI work and
+| tests (see src/FakeLlmClient.php), never for the exhibition.
 |
 */
 
@@ -52,10 +53,18 @@ function createLlmClient(): LlmClientInterface
     return match ($provider) {
         'anthropic' => new AnthropicLlmClient(),
         'openai' => new OpenAiLlmClient(),
+        // Loaded here rather than required by each endpoint like the real
+        // providers: it's dev/test-only, so it stays out of every normal
+        // request, and tests/smoke_sparring.php's own FakeLlmClient never
+        // collides with it.
+        'fake' => (static function (): LlmClientInterface {
+            require_once __DIR__ . '/src/FakeLlmClient.php';
+            return new FakeLlmClient();
+        })(),
         // Unrecognized value (typo, wrong case) fails loudly instead of
         // silently falling back to Anthropic — a typo here would otherwise
         // burn Anthropic credits with no visible sign OpenAI/local wasn't used.
-        default => throw new RuntimeException("Unknown LLM_PROVIDER '$provider' — expected 'anthropic' or 'openai'"),
+        default => throw new RuntimeException("Unknown LLM_PROVIDER '$provider' — expected 'anthropic', 'openai' or 'fake'"),
     };
 }
 
@@ -121,8 +130,9 @@ const DISPLAY_CONFIG_DEFAULT = 'venue';
 const DISPLAY_CONFIGS = [
     'dev'     => ['columns' => 2, 'itemLimit' => 4],   // LG monitor, comfortable landscape resolution
     'venue'   => ['columns' => 2, 'itemLimit' => 12],  // LG monitor rotated 90 degrees — 1296x2304 portrait, OS-rotated
-    // ponytail: beamer resolution TBC — column count is still a guess, itemLimit set per request
-    'stadium' => ['columns' => 2, 'itemLimit' => 16],
+    // Epson EB-1945W beamer at 1600x900. Slight overflow at the bottom is intended:
+    // .gradient-bottom fades the clipped items out.
+    'stadium' => ['columns' => 2, 'itemLimit' => 6],
 ];
 
 // Request-scoped: reads ?d=, falls back to the default for an absent or
@@ -141,12 +151,15 @@ function resolve_display_config(): array
 |--------------------------------------------------------------------------
 |
 | Outside the served docroot on the real host; project-root-relative here.
+| STORE_DB_PATH (env) points it elsewhere: tests/smoke_http.php runs the app
+| against a throwaway database so it never touches the real one. Real env
+| var only, not .env: the .env loader below runs after this is defined.
 |
 */
 
-const STORE_DB_PATH = __DIR__ . '/data/store.db';
+define('STORE_DB_PATH', getenv('STORE_DB_PATH') ?: __DIR__ . '/data/store.db');
 const PILOT_DATA_DIR = __DIR__ . '/data/pilot';
-const CURRICULUM_DATA_DIR = __DIR__ . '/data/curriculum/digitaldesign-wiki'; // gitignored — poor man's RAG source markdown (flat *.md), bin/import_curriculum.php
+const CURRICULUM_DATA_DIR = __DIR__ . '/data/curriculum/digitaldesign-wiki'; // gitignored — poor woman's RAG source markdown (flat *.md), bin/import_curriculum.php
 
 /*
 |--------------------------------------------------------------------------
@@ -189,11 +202,16 @@ const JUICY_DISPLAY_ENTRANCE = true;
 const OPENING_MESSAGE_PREFIX = 'Sparring Scenario: ';
 
 const OPENING_PROMPTS = [
-    1 => 'Was ist Digital Design?',
-    2 => 'Familie Heiner betreibt einen Bio-Bauernhof, tut sich aber online schwer. Ein eigener Shop bedeutet Aufwand, den sie lieber in Bildung und Gemeinschaft stecken. Lieber erreichen sie Kunden dort, wo diese sind, etwa in Chatbots wie Gemini, ChatGPT oder Claude. Bringt die Auslagerung der operativen Aufgaben an KI-Agenten mehr Risiken oder Vorteile?',
-    3 => 'Greengineers will, dass der gemeinsame Agent Solarüberschuss künftig automatisch verkauft, ohne Zustimmung der Hausbesitzer. Das macht ihn zu einem eigenständigen Marktakteur mit echter finanzieller Verantwortung, schneller als die Freigabeprozesse der drei Partner mithalten. Verschiebt autonomer Handel die tatsächliche Entscheidungsmacht innerhalb des Konsortiums? Hat die bestehende Aufbauorganisation über drei getrennte Firmen hinweg überhaupt einen Platz für diese Entscheidung?',
-    4 => 'NoteMate wollte klein und ablenkungsfrei bleiben. Für KI-Schreibhilfe fehlt dem Dreierteam aber die Kraft, ein eigenes Modell zu bauen, also läuft künftig die API eines fremden Anbieters mit, durch die Firma, die Nutzer nie beauftragt haben und niemand von NoteMate kontrolliert. Dient das noch dem, wofür NoteMate gedacht war, nämlich Denken ohne Ablenkung zu ermöglichen? Oder macht es die App leise zu einer dünnen Hülle um die KI eines anderen, während der eigentliche Daseinszweck von innen ausgehöhlt wird?',
-    // add one entry per QR code before the exhibition
+    '1' => 'Was ist Digital Design?',
+    '2' => 'Familie Heiner betreibt einen Bio-Bauernhof, tut sich aber online schwer. Ein eigener Shop bedeutet Aufwand, den sie lieber in Bildung und Gemeinschaft stecken. Lieber erreichen sie Kunden dort, wo diese sind, etwa in Chatbots wie Gemini, ChatGPT oder Claude. Bringt die Auslagerung der operativen Aufgaben an KI-Agenten mehr Risiken oder Vorteile?',
+    '3' => 'Greengineers will, dass der gemeinsame Agent Solarüberschuss künftig automatisch verkauft, ohne Zustimmung der Hausbesitzer. Das macht ihn zu einem eigenständigen Marktakteur mit echter finanzieller Verantwortung, schneller als die Freigabeprozesse der drei Partner mithalten. Verschiebt autonomer Handel die tatsächliche Entscheidungsmacht innerhalb des Konsortiums? Hat die bestehende Aufbauorganisation über drei getrennte Firmen hinweg überhaupt einen Platz für diese Entscheidung?',
+    '4' => 'NoteMate wollte klein und ablenkungsfrei bleiben. Für KI-Schreibhilfe fehlt dem Dreierteam aber die Kraft, ein eigenes Modell zu bauen, also läuft künftig die API eines fremden Anbieters mit, durch die Firma, die Nutzer nie beauftragt haben und niemand von NoteMate kontrolliert. Dient das noch dem, wofür NoteMate gedacht war, nämlich Denken ohne Ablenkung zu ermöglichen? Oder macht es die App leise zu einer dünnen Hülle um die KI eines anderen, während der eigentliche Daseinszweck von innen ausgehöhlt wird?',
+
+    // opening prompts for the sparring evaluation scenarios
+    'ses1' => '', // TODO
+    'ses2' => "Reaching Customers Where They Are. Family Heiner owns a farm with organic products and they're struggling to find their footing on the digital marketplace. Operating an online shopping platform requires planning, development, and marketing. The family isn't really passionate about operational tasks — they'd rather focus their energy on providing education and engaging with the community — but they want to reach customers where they are, which today could mean inside a chatbot like Gemini, ChatGPT, or Claude.",
+    'ses3' => "From Reactive Control to Autonomous Trading. Greengineers' three partners — the heat-pump manufacturer, the smart-home platform, and the regional utility — built their consortium around a shared reactive system: sensors, forecasts, a control loop that adjusts heating locally. Now the utility wants to add something genuinely new: letting the same agent stack anticipate a home's surplus solar generation and sell it automatically onto the wholesale energy market, without asking the homeowner first, whenever the forecast crosses a threshold. This is a new kind of economic actor sitting inside three companies' shared infrastructure, making decisions with real financial and regulatory weight, faster than any of the three partners' existing approval processes were built to handle.",
+    'ses4' => "The Elephant in the Distraction-Free Room. Anna, Bruno and Carla built NoteMate, a simple, distraction-free note-taking app, with the philosophy of being small and staying small — no complex cloud infrastructure, no ambitions beyond reliable sync. Their users now expect the app to help with the writing itself: rewrite a note in a clearer tone, tighten a paragraph, keep a running thread through scattered ideas. Building and hosting a model capable of that is beyond what a three-person team can realistically maintain — so the honest option is to plug a third-party model's API directly into the core of the product. That means a meaningful share of what NoteMate's users write will now pass through a company the team has never met and doesn't control. That includes the private, unfinished, half-formed thoughts the app was always positioned as a safe place for.",
 ];
 
 // Resolves an untrusted query-param value against the whitelist above.
@@ -206,6 +224,20 @@ function resolve_opening_message(?string $id): ?string
         return null;
     }
     return OPENING_MESSAGE_PREFIX . OPENING_PROMPTS[$id];
+}
+
+// Exact match against the whitelist above — used to exempt a curated opener
+// from CONTRIBUTION_MAX_CHARS (Sparring::processTurn) without letting a
+// visitor bypass that cap by merely prefixing their own text with
+// OPENING_MESSAGE_PREFIX.
+function is_curated_opening_message(string $contribution): bool
+{
+    foreach (OPENING_PROMPTS as $prompt) {
+        if ($contribution === OPENING_MESSAGE_PREFIX . $prompt) {
+            return true;
+        }
+    }
+    return false;
 }
 
 /*

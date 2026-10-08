@@ -25,7 +25,10 @@ return [
     'start.cta' => 'Neue Sitzung starten',
     'start.learnMore' => 'Erfahre mehr über die <a href="/philosophy">Philosophie von Sparring</a>.',
     'start.footer.craft' => 'Craft mit #DigitalMaterial &middot; <a href="/credits">Credits</a>',
-    'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">AGB</a> &middot; <a href="/privacy">Datenschutz</a> &middot; <a href="/privacy#cookies">Cookies</a> &middot; 🏳️‍⚧️',
+    'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">AGB</a> &middot; <a href="/privacy">Datenschutz</a> &middot; 🏳️‍⚧️',
+    'start.egg.title' => 'Handschuh-Check!',
+    'start.egg.body' => 'Eins, zwei, drei… fünf Treffer. Puh! Wärmst du dich schon mal auf? Mal sehen, ob du auch deine Design-Muskeln spielen lassen kannst, Champ.',
+    'start.egg.dismiss' => 'Wir sehen uns im Dojo',
 
     // --- dojo.php (SE-01) + dojo.js ---
     'dojo.title' => 'Dojo — Sparring',
@@ -117,7 +120,7 @@ return [
     'credits.author.bio' => 'Sarah ist Designerin und Forscherin mit Sitz in Dortmund. Sie studiert derzeit im Masterstudiengang Digital Design an der Fachhochschule Dortmund, wo sie die Rolle von KI in der Designausbildung untersucht. Ihre Arbeit erforscht die Schnittstelle von Technologie, Kreativität und Mensch-Computer-Interaktion.',
     'credits.author.contact' => '<strong>Kontakt:</strong> Für Anfragen wende dich bitte an <a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Inquiry">sarah.puppinpratti001@stud.fh-dortmund.de</a>',
     'credits.ack.heading' => 'Danksagungen',
-    'credits.ack.intro' => 'Sparring verwendet die folgenden Open-Source-Bibliotheken und -Technologien:',
+    'credits.ack.intro' => 'Sparring verwendet die folgenden Bibliotheken, Schriften und Werkzeuge:',
     'credits.ack.material' => 'Teile des Lernmaterials von Sparring basieren auf Texten, die ursprünglich von Dr. Kim Lauenroth verfasst wurden.',
 
     // --- philosophy.php ---
@@ -144,6 +147,9 @@ return [
     'privacy.cookies.subheading' => '<a name="cookies"></a>Cookies',
     'privacy.cookies.p1' => 'Diese Seite verwendet ein einziges Cookie, das deine gewählte Sprache für bis zu ein Jahr speichert, damit sie nicht bei jedem Besuch erneut ausgewählt werden muss. Es werden keine Tracking-, Analyse- oder Werbe-Cookies eingesetzt.',
     'privacy.contact' => 'Bei Fragen zu dieser Erklärung oder deinen Daten wende dich an Sarah Puppin Pratti (<a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Privacy%20Policy">sarah.puppinpratti001@stud.fh-dortmund.de</a>).',
+
+    'ses.title' => 'Bewertungsszenarien — Sparring',
+    'ses.heading' => 'Bewertungsszenarien',
 
     'terms.title' => 'Nutzungsbedingungen — Sparring',
     'terms.ogDescription' => 'Nutzungsbedingungen für das Ausstellungsstück Sparring.',

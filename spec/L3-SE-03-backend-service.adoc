@@ -5,12 +5,11 @@ v.1.0, 2026-06-19
 :toclevels: 3
 :icons: font
 :sectanchors:
-:sectnums:
 
 *Element:* xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] +
 *Element profile:* Backend service / API +
 *Parent:* System Design Concept +
-*Status:* Draft
+*Status:* Stable — no open TBCs remaining
 
 *Sections that apply.* Goals, use cases, both technical interface sections, technical functions, entities, quality requirements, and constraints. User interfaces do not apply: this element has no human-facing surface. Its only human actor is xref:L2-system-design-concept.adoc#UT-03[UT-03 Operator], who reaches it through the operator interface (<<TI-05,TI-05 Import pilot material>>) rather than through a UI.
 
@@ -137,7 +136,7 @@ suitability is the last cheap check before one is made.
 - *[[FS-01-1]]FS-01-1* _(Function-call)_ Call <<TF-03,TF-03 Enforce request limits>> with the request origin. If it reports the limit reached, return that condition and stop.
 - *[[FS-01-2]]FS-01-2* _(Entity-access)_ Read the session from <<E-01,E-01 Session>> by its identifier (<<E-01.1,E-01.1 sessionId>>). If absent or expired, return a session-unknown condition and stop.
 - *[[FS-01-3]]FS-01-3* _(Data-operation)_ Compare <<E-01.8,E-01.8 turnCount>> (turnCount) against the session's effective turn allowance — the base `TURN_ALLOWANCE` plus <<E-01.13,E-01.13 bonusTurns>> (bonusTurns), which <<TF-09,TF-09 Extend a session's turn allowance>> raises. If the allowance is exhausted, return a turn-limit condition and stop.
-- *[[FS-01-4]]FS-01-4* _(Data-operation)_ Trim the contribution and check it against the length bound. If it is empty or over-length, return a rejected condition and stop. No provider call has been made at this point, which matters because this is the cheapest rejection path and the one most likely to fire.
+- *[[FS-01-4]]FS-01-4* _(Data-operation)_ Trim the contribution and check it against the length bound. If it is empty or over-length, return a rejected condition and stop. A curated opening prompt (`OPENING_PROMPTS`, config.php — matched exactly against the whitelist, not by prefix, so a visitor cannot bypass the bound by imitating it) is exempt from the length check, since it is vetted copy rather than visitor-typed text. No provider call has been made at this point, which matters because this is the cheapest rejection path and the one most likely to fire.
 - *[[FS-01-5]]FS-01-5* _(Function-call)_ Call <<TF-02,TF-02 Assess a contribution for projection suitability>> with the contribution. <<TF-02,TF-02 Assess a contribution for projection suitability>> returns a suitability outcome.
 - *[[FS-01-6]]FS-01-6* _(Data-operation)_ If <<TF-02,TF-02 Assess a contribution for projection suitability>> reported the contribution unsuitable, return a content-flagged condition and stop. Nothing is written to <<E-01,E-01 Session>> or <<E-02,E-02 Exchange>>, and no provider call for a response is made — this is the same cheap-rejection reasoning as <<FS-01-4,FS-01-4>>, just one check later. The session itself is not altered; only this turn is rejected.
 - *[[FS-01-7]]FS-01-7* _(Entity-access)_ Read the session's prior exchanges from <<E-02,E-02 Exchange>> (<<E-02.3,E-02.3 visitorContribution>>, <<E-02.4,E-02.4 sparringResponse>>) in order, to supply conversational context.
@@ -183,10 +182,10 @@ _Achieves:_ <<G-05,G-05 Keep the display surface populated>>, <<G-04,G-04 Decide
 
 Produces the ordered items the projection renders. Every decision about what appears on the wall is made here, so that xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] carries no policy (xref:L3-SE-02-display-client.adoc#C-02[C-02 This element holds no selection or ordering policy] of that element).
 
-- *[[FS-04-1]]FS-04-1* _(Entity-access)_ Read live-origin sessions from <<E-01,E-01 Session>> where <<E-01.6,E-01.6 displayable>> (displayable) is true and at least one exchange exists, ordered by <<E-01.9,E-01.9 lastActiveAt>> (lastActiveAt) descending, up to the item limit. The item limit is passed in by the caller (<<TI-04,TI-04 Retrieve display material>>, resolved from the requesting display profile; a default applies when none is given) — this function does not read it from configuration itself.
+- *[[FS-04-1]]FS-04-1* _(Entity-access)_ Read live- and study-origin sessions from <<E-01,E-01 Session>> (ranked together) where <<E-01.6,E-01.6 displayable>> (displayable) is true and at least one exchange exists, ordered by <<E-01.9,E-01.9 lastActiveAt>> (lastActiveAt) descending, up to the item limit. The item limit is passed in by the caller (<<TI-04,TI-04 Retrieve display material>>, resolved from the requesting display profile; a default applies when none is given) — this function does not read it from configuration itself.
 - *[[FS-04-2]]FS-04-2* _(Data-operation)_ If fewer items were found than the limit, continue at <<FS-04-3,FS-04-3>>. Otherwise continue at <<FS-04-4,FS-04-4>>.
 - *[[FS-04-3]]FS-04-3* _(Entity-access)_ Read pilot-origin sessions from <<E-01,E-01 Session>> under the same eligibility conditions, ordered by <<E-01.9,E-01.9 lastActiveAt>> descending, and append until the limit is reached.
-- *[[FS-04-4]]FS-04-4* _(Entity-access)_ For each selected session, read its most recent exchange from <<E-02,E-02 Exchange>> (<<E-02.3,E-02.3 visitorContribution>>, <<E-02.4,E-02.4 sparringResponse>>). Which exchange to select is an open decision (xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] xref:L3-SE-02-display-client.adoc#TBC-04[TBC-04 Which exchange pair per session.]); it is made here and changing it does not affect xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client].
+- *[[FS-04-4]]FS-04-4* _(Entity-access)_ For each selected session, read its most recent exchange from <<E-02,E-02 Exchange>> (<<E-02.3,E-02.3 visitorContribution>>, <<E-02.4,E-02.4 sparringResponse>>). Which exchange to select was an open decision (xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] xref:L3-SE-02-display-client.adoc#TBC-04[TBC-04 Which exchange pair per session.], resolved), made here; changing it would not affect xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client].
 - *[[FS-04-5]]FS-04-5* _(Data-operation)_ Build each item from the session's scenario (<<E-01.5,E-01.5 scenario>>), its refined title if one exists yet (<<E-01.12,E-01.12 title>>; `null` otherwise — <<TF-07,TF-07 Refine a session title>> runs asynchronously, so this item is not blocked on it), the exchange pair, the origin (<<E-01.4,E-01.4 origin>>), and a recency position. Return the ordered list.
 
 === [[TF-05]]TF-05 Derive a scenario statement
@@ -299,7 +298,7 @@ _Error cases:_
 _Call type:_ Synchronous +
 _Calling elements:_ xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] (xref:L3-SE-02-display-client.adoc#TO-01[TO-01 Retrieve display material]) +
 _Input:_ An optional display-profile identifier (string; absent or unrecognised means the default profile). See xref:L3-SE-02-display-client.adoc#C-03[SE-02 C-03 display profiles]. +
-_Output:_ An ordered list of items, each carrying a session identifier, scenario statement, an optional refined title (`null` when none exists yet), one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total session count and a total exchange count (both integers) — every session and exchange ever recorded, live and pilot, not scoped to the items returned. +
+_Output:_ An ordered list of items, each carrying a session identifier, scenario statement, an optional refined title (`null` when none exists yet), one visitor contribution, one Sparring response, an origin value, and a recency position; alongside the list, a total session count and a total exchange count (both integers) — every session and exchange ever recorded, live, study and pilot, not scoped to the items returned. +
 _Action:_ Resolves the display-profile identifier to that profile's item count, calls <<TF-04,TF-04 Assemble display material>> with it for the item list, and separately counts all rows in <<E-01,E-01 Session>> and <<E-02,E-02 Exchange>> for the two totals — plain totals, not scoped to the sessions <<TF-04,TF-04 Assemble display material>> selects and not a selection or ordering decision, so they stay outside that function's policy. Returns all three immediately. +
 _Error cases:_ None specific to this interface. An empty list is a valid response and occurs only when no pilot material has been imported.
 
@@ -382,18 +381,70 @@ NOTE: Call behaviour is specified on the calling function steps (<<TF-01,TF-01 P
 
 == Entities
 
+Visual companion to the entity tables below — what the element stores and
+how it relates. Only identifying and meaning-carrying attributes are shown;
+the tables are the authoritative source.
+
+[source,mermaid]
+----
+erDiagram
+  SESSION ||--o{ EXCHANGE : "contains"
+  SESSION ||--o| SESSION_EVALUATION : "may receive"
+  SESSION {
+    string sessionId PK "E-01.1"
+    enum origin "E-01.4"
+    string scenario "E-01.5"
+    string title "E-01.12"
+    boolean tosAgreed "E-01.10"
+    boolean consentGranted "E-01.7"
+    boolean projectionConsent "E-01.11"
+    boolean displayable "E-01.6"
+    integer turnCount "E-01.8"
+  }
+  EXCHANGE {
+    integer exchangeId PK "E-02.1"
+    string sessionId FK "E-02.2"
+    string visitorContribution "E-02.3"
+    string sparringResponse "E-02.4"
+    integer position "E-02.5"
+    integer replyCount "E-02.7"
+  }
+  SESSION_EVALUATION {
+    string sessionId PK, FK "E-04.1"
+    object answers "E-04.2"
+    string feedback "E-04.3"
+  }
+  RATE_LIMIT_WINDOW {
+    string originHash PK "E-03.1"
+    integer requestCount "E-03.3"
+  }
+  CURRICULUM_EXCERPT {
+    string path PK "E-05.1"
+    string title "E-05.2"
+    string body "E-05.3"
+  }
+----
+
+NOTE: <<E-03,E-03 Rate limit window>> and <<E-05,E-05 Curriculum excerpt>>
+stand alone on purpose. A rate limit window is keyed by a hash of the
+request origin, never by session, so no stored record ties a visitor's
+address to their session (<<QR-10,QR-10 No raw request origin is stored>>).
+Curriculum excerpts are reference content, read during a turn but never
+written by one. <<E-02.7,E-02.7 replyCount>> is a counter only: which
+session replied to an exchange is not stored, so no relation is drawn.
+
 === [[E-01]]E-01 Session
 
 _Persistence:_ Persistent +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session]
 
-[options="header"]
+[cols="2,4,2,2,12",options="header"]
 |===
 | ID | Attribute | Type | Required | Description
 | [[E-01.1]]E-01.1 | sessionId | string | required | Generated identifier, sufficiently random to resist enumeration. Travels in the client address (xref:L2-system-design-concept.adoc#AP-03[AP-03 Session identity travels in the URL; no accounts]), so it is not secret and nothing sensitive may be derived from it.
 | [[E-01.2]]E-01.2 | createdAt | datetime | required | When the session was created.
 | [[E-01.3]]E-01.3 | scenarioSource | enum | required | `first-contribution` or `generated`. Records how <<E-01.5,E-01.5 scenario>> was produced, so a later change of approach is visible in the data.
-| [[E-01.4]]E-01.4 | origin | enum | required | `pilot` or `live`. Written at creation and never modified (xref:L2-system-design-concept.adoc#SQR-05[SQR-05 Origin is fixed at creation and never inferred]).
+| [[E-01.4]]E-01.4 | origin | enum | required | `pilot`, `live` or `study`. Written at creation (`pilot` or `live`) and never modified by the application. The one exception is the operator relabeling a `live` session `study` by hand in the store, for a session conducted during the evaluation study (xref:L2-system-design-concept.adoc#SQR-05[SQR-05 Origin is fixed at creation and never inferred]).
 | [[E-01.5]]E-01.5 | scenario | string | optional | The context line shown with the exchange. Absent until the first exchange exists.
 | [[E-01.6]]E-01.6 | displayable | boolean | required | Whether the session may appear on the projection. Defaults false; set directly from <<E-01.11,E-01.11 projectionConsent>> (projectionConsent) when the consent decision is recorded — not by moderation. Nothing unsuitable can reach <<E-02,E-02 Exchange>> in the first place (<<G-04,G-04 Decide what may be stored, and let the visitor's own>>/xref:L2-system-design-concept.adoc#AP-05[AP-05 Moderation gates storage, not a per-session display]), so there is no separate moderation-driven display flag to maintain. Independent of <<E-01.7,E-01.7 consentGranted>>.
 | [[E-01.7]]E-01.7 | consentGranted | boolean | optional | Whether the participant agreed to retention. Absent until the decision is recorded. Independent of <<E-01.6,E-01.6 displayable>> (xref:L2-system-design-concept.adoc#SQR-06[SQR-06 Public projection is governed separately from retention]).
@@ -412,7 +463,7 @@ _E-01.6, <<E-01.7,E-01.7 consentGranted>>, and <<E-01.11,E-01.11 projectionConse
 _Persistence:_ Persistent +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-02[BE-02 Exchange]
 
-[options="header"]
+[cols="2,4,2,2,12",options="header"]
 |===
 | ID | Attribute | Type | Required | Description
 | [[E-02.1]]E-02.1 | exchangeId | integer | required | Identifier, ordered by creation.
@@ -430,7 +481,7 @@ NOTE: The pair is stored as one record rather than as two turn records. This fol
 
 _Persistence:_ Transient. Reset in place on expiry rather than swept.
 
-[options="header"]
+[cols="2,4,2,2,12",options="header"]
 |===
 | ID | Attribute | Type | Required | Description
 | [[E-03.1]]E-03.1 | originHash | string | required | Hash of the request origin. The raw address is never stored.
@@ -444,7 +495,7 @@ _Purely technical, with no L1 business entity counterpart._
 
 _Persistence:_ Persistent
 
-[options="header"]
+[cols="2,4,2,2,12",options="header"]
 |===
 | ID | Attribute | Type | Required | Description
 | [[E-04.1]]E-04.1 | sessionId | string | required | Reference to <<E-01.1,E-01.1 sessionId>>. At most one row per session — a resubmission replaces the prior one rather than adding another.
@@ -454,6 +505,21 @@ _Persistence:_ Persistent
 |===
 
 _No L1 business entity counterpart — like <<E-03,E-03 Rate limit window>>, this exists to support xref:L2-system-design-concept.adoc#SG-09[SG-09 Collect an optional visitor self-report at session], which is itself deliberately secondary material (xref:L1-solution-design-concept.adoc#BG-04[BG-04 Produce a record of public interactions as secondary]), not elevated to a first-class business record the way <<E-01,E-01 Session>>/<<E-02,E-02 Exchange>> are._
+
+=== [[E-05]]E-05 Curriculum excerpt
+
+_Persistence:_ Persistent. Rebuilt in full by the operator from the `data/curriculum/` corpus; never written by a visitor request.
+
+[cols="2,4,2,2,12",options="header"]
+|===
+| ID | Attribute | Type | Required | Description
+| [[E-05.1]]E-05.1 | path | string | required | File name of the corpus page the excerpt comes from. One excerpt per page.
+| [[E-05.2]]E-05.2 | title | string | required | The page's concept name: its first top-level heading, else derived from the file name. The set of titles is the vocabulary a first contribution is matched against, and a title match weighs more than a body match.
+| [[E-05.3]]E-05.3 | body | string | required | The page's text, searchable by keyword. Passed to the model as supplementary context on the visitor's first real turn (xref:L3-SE-04-system-prompt.adoc#TF-02[SE-04 TF-02 Ground the first turn with retrieved curriculum excerpts]), never asserted as fact.
+| [[E-05.4]]E-05.4 | updatedAt | datetime | required | When the excerpt was last imported.
+|===
+
+_No L1 business entity counterpart — like <<E-03,E-03 Rate limit window>>, it supports a function rather than recording anything about a visit. The corpus it is built from is a personal knowledge base kept out of version control; the import tool is operator tooling and stays unmodeled (<<C-04,C-04 No administrative interface, no analytics layer>>)._
 
 '''
 
@@ -492,7 +558,7 @@ _Supports:_ xref:L2-system-design-concept.adoc#SQR-04[SQR-04 Credentials and quo
 === [[QR-06]]QR-06 Origin is written once _(Data-integrity)_
 
 _Applies to:_ <<E-01,E-01 Session>>, <<TF-06,TF-06 Import pilot transcripts>>, <<TI-01,TI-01 Open a session>> +
-_Acceptance criteria:_ <<E-01.4,E-01.4 origin>> is set at creation and no code path updates it. No process infers origin from any other value. +
+_Acceptance criteria:_ <<E-01.4,E-01.4 origin>> is set at creation and no code path updates it; the only later change is the operator's manual `live` to `study` relabeling. No process infers origin from any other value. +
 _Supports:_ xref:L2-system-design-concept.adoc#SQR-05[SQR-05 Origin is fixed at creation and never inferred]
 
 === [[QR-07]]QR-07 No partial exchange is ever stored _(Data-integrity)_
@@ -543,7 +609,7 @@ _Implements:_ xref:L2-system-design-concept.adoc#SC-01[SC-01 PHP with a file-bac
 _Source:_ xref:L2-system-design-concept.adoc#SC-04[SC-04 Generation is rate-limited and metered by the provider]. +
 _Applies to:_ <<TF-03,TF-03 Enforce request limits>>, <<TF-01,TF-01 Process a visitor turn>>. +
 _Acceptance criteria:_ The request rate threshold in <<TF-03,TF-03 Enforce request limits>> is set below the provider's limit, so that visitors meet this element's limit rather than the provider's. +
-_Consequence:_ Rules out unthrottled forwarding. Sets an upper bound on concurrent visitors, TBC once the threshold is chosen. +
+_Consequence:_ Rules out unthrottled forwarding. Sets an upper bound on concurrent visitors: 10 requests per 60-second window per origin (<<TF-03,TF-03 Enforce request limits>>). +
 _Implements:_ xref:L2-system-design-concept.adoc#SC-04[SC-04 Generation is rate-limited and metered by the provider]
 
 === [[C-03]]C-03 The operator path is not publicly reachable _(Security)_

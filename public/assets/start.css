@@ -86,7 +86,6 @@ body {
     top: 2px;
     width: 58.5px;
     height: 73.5px;
-    background-image: url('img/glove-l.webp');
 }
 .gloves-layer--r {
     left: 49.5px;
@@ -94,7 +93,43 @@ body {
     width: 62.5px;
     height: 75.5px;
     z-index: 1;
-    background-image: url('img/glove-r.webp');
+}
+/* Tap target + bounce transform live on this inner element, separate from
+   the outer .gloves-layer's own float animation (both animate transform —
+   splitting them onto parent/child avoids one clobbering the other), so
+   each glove can spring independently on tap without disturbing the float. */
+.glove-bounce {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+.glove-bounce[data-glove="l"] { background-image: url('img/glove-l.webp'); }
+.glove-bounce[data-glove="r"] { background-image: url('img/glove-r.webp'); }
+.glove-bounce.bouncing {
+    animation: glove-bounce 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes glove-bounce {
+    0% { transform: scale(1) translateY(0); }
+    35% { transform: scale(0.82) translateY(4px); }
+    65% { transform: scale(1.15) translateY(-6px); }
+    100% { transform: scale(1) translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .glove-bounce.bouncing { animation: none; }
+    .particle-burst { display: none; }
+}
+/* particles.js appends this canvas to <body> expecting a fixed full-viewport
+   overlay (see dojo.css's own copy of this rule) — without it the canvas
+   sits in normal document flow after the footer, off-screen. */
+.particle-burst {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 20; /* above .gate-card's 10 */
 }
 /* logo: real "Sparring" / "スパーリング" text stays in the DOM for a11y/SEO,
    visually replaced by the exported logotype PNG — typography is a deliberate
@@ -199,3 +234,61 @@ footer a { color: #666; }
 }
 .locale-switcher a, .locale-switcher span { color: #888; text-decoration: none; padding: 0.5rem 0.75rem; }
 .locale-switcher .locale-current { color: #222; background: #fff; border-radius: 999px; font-weight: 700; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); }
+
+/* Easter-egg dialog: same dark gate-card treatment as dojo.css's
+   #confirm-dialog/#eval-dialog, but position:fixed since this page has no
+   positioned ancestor to anchor an absolute card to. */
+.gate-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(92vw, 360px);
+    box-sizing: border-box;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #f2f2f2;
+    color-scheme: dark;
+    padding: 0.75rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 1.25rem;
+    z-index: 10;
+    text-align: left; /* body is text-align:center for the marketing copy above it; dojo's gate-cards never need this override since dojo's body isn't centered */
+    opacity: 1;
+    transition: opacity 300ms ease; /* same fade recipe as dojo.css's .gate-card, driven by the same .fading toggle */
+}
+.gate-card[hidden] { display: none; }
+.gate-card.fading { opacity: 0; }
+/* Spring scale-in on show, layered on top of the opacity fade — plays once
+   via a JS-added class (see start.js's showEggDialog), not looping. */
+.gate-card.bouncing-in {
+    animation: egg-dialog-in 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes egg-dialog-in {
+    0% { transform: translate(-50%, -50%) scale(0.7); }
+    60% { transform: translate(-50%, -50%) scale(1.05); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .gate-card.bouncing-in { animation: none; }
+}
+#egg-heading { margin: 0.25rem 0 0.5rem; font-size: 1.125rem; font-weight: 700; color: #fefefe; }
+#egg-description { margin: 0; line-height: 1.35; color: #ccc; }
+#egg-actions { margin-top: 0.75rem; } /* same spacing as dojo's #confirm-actions/#eval-actions */
+#egg-dismiss {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center; /* button label centered even though .gate-card's heading/description are left-aligned */
+    padding: 0.65rem;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    border: none;
+    background: #d32f2f;
+    color: #fff;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+#egg-dismiss:hover { filter: brightness(1.1); }
+#egg-dismiss:active { filter: brightness(0.85); }

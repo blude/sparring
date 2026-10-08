@@ -11,8 +11,15 @@ declare(strict_types=1);
  * No DB, no network. Store::hydrateExchange/hydrateSession aren't repeated
  * here — smoke_store.php's round-trip assertions already exercise their
  * output shape on every getSession()/getExchanges() call.
- * Run: php tests/smoke_domain.php
+ * Run: php -d zend.assertions=1 tests/smoke_domain.php
  */
+
+// assert() is compiled out under zend.assertions=-1 (production php.ini):
+// refuse to run rather than pass without checking anything.
+if (ini_get('zend.assertions') !== '1') {
+    fwrite(STDERR, basename(__FILE__) . ": needs php -d zend.assertions=1 (tests/run.sh sets it)\n");
+    exit(1);
+}
 
 require __DIR__ . '/../config.php';
 require __DIR__ . '/../src/scenario.php';
@@ -278,5 +285,28 @@ try {
     assert(str_contains($e->getMessage(), "'bogus'"));
 }
 assert($threw, 'render_session_index should reject an unknown --columns key');
+
+/*
+|--------------------------------------------------------------------------
+| bin/export.php::render_evaluation_markdown() — --markdown --evaluation
+|--------------------------------------------------------------------------
+*/
+// (defined by the same eval above — it sits between render_session_index and $store)
+
+// no evaluation left -> '' so the caller can append unconditionally
+assert(render_evaluation_markdown(null) === '');
+
+// answers + feedback; scale denominator comes from EVAL_SCALE_SIZE
+$full = ['sessionId' => 'AAAA1111', 'answers' => ['challenge' => 4, 'knowledge' => 2], 'feedback' => 'Fun.', 'createdAt' => 'x'];
+assert(render_evaluation_markdown($full) ===
+    "## Evaluation\n\n- challenge: 4/" . EVAL_SCALE_SIZE . "\n- knowledge: 2/" . EVAL_SCALE_SIZE . "\n\n**Feedback:** Fun.\n");
+
+// feedback only (all rating questions skipped) -> no bullet list
+assert(render_evaluation_markdown(['sessionId' => 'a', 'answers' => [], 'feedback' => 'Only words', 'createdAt' => 'x']) ===
+    "## Evaluation\n\n**Feedback:** Only words\n");
+
+// answers only -> no feedback line; partial answer set is fine
+assert(render_evaluation_markdown(['sessionId' => 'a', 'answers' => ['challenge' => 5], 'feedback' => null, 'createdAt' => 'x']) ===
+    "## Evaluation\n\n- challenge: 5/" . EVAL_SCALE_SIZE . "\n");
 
 echo "smoke_domain: ok\n";

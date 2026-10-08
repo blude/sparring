@@ -7,7 +7,7 @@ set -euo pipefail
 #
 # Destination is the site's app root (htdocs/), NOT htdocs/public — this
 # repo's own public/ subfolder lands at htdocs/public/ that way, keeping
-# config.php/src/data/prompts outside the served docroot per README.
+# config.php/src/data/prompts outside the served docroot per docs/operations.md.
 #
 # Host/path are environment-specific, not this repo's business to hardcode
 # (repo may go public) — set them in bin/deploy.env, git-ignored, same

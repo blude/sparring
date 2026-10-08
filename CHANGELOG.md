@@ -2,8 +2,154 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-10-03
+
+- `220aa36` docs(spec): allow study origin and its manual relabeling
+- `dcc4e48` docs: add ADR 0019 and usage notes for study origin
+- `95beb79` feat(store): add study session origin, projected like live
+- `cda6e6f` docs: update CHANGELOG through a11e41d
+- `a11e41d` feat(export): add --evaluation flag to markdown export
+
+## 2026-10-01
+
+- `fe6bc2c` docs(spec): move SE kind to a property in the requirement
+- `2dd2167` docs(spec): remove section numbers from index page
+- `d987c68` docs(spec): note both display profiles ran in TBC-01
+- `78b8477` chore(screenshots): capture stadium wall at beamer resolution
+- `9e75afe` fix(arena): limit stadium profile to 6 exchanges
+- `fe45a81` docs(spec): record Epson EB-1945W beamer as stadium profile
+- `23da31c` fix(spec): hide Mermaid tooltip div that leaves a gap below the footer
+- `af016ad` feat(spec): add sitemap footer to spec pages
+
+## 2026-09-30
+
+- `b82d145` style(spec): widen description column in entity tables
+- `0407308` docs(spec): add SE-03 entity overview diagram and E-05 curriculum excerpt
+- `da3b960` style(spec): replace stray rules with consistent section spacing
+- `8e211fd` style(spec): set requirement field labels apart from body text
+- `95cd4aa` style(spec): put Mermaid, admonitions and anchors on brand
+- `3eefb0c` feat(spec): highlight current ToC entry and target heading
+- `7547ad7` fix(spec): restore ToC link hover state
+- `af0cf4d` docs(spec): tighten ToC hierarchy and rename it to Contents
+- `1431107` docs(spec): restyle HTML spec with sans-serif and brand red
+- `400ba82` docs(spec): remove section numbers for cleaner navigation
+- `357f140` docs(spec): describe framework as three layers with L0/LX outside it
+- `3928c30` docs(spec): add L0 row to level table, rename index section headings
+
+## 2026-09-25
+
+- `0542737` Merge pull request #7 from blude/claude/agentic-coding-improvements-rroob0
+
+## 2026-09-24
+
+- `3e2ed15` docs: say poor woman's RAG instead of poor man's RAG
+- `b192616` fix(bin): clean up screenshot temp dirs and pin each shot's language
+- `4f0683f` docs: document page screenshots in ADR 0018, README and CLAUDE.md
+- `97af74c` ci: attach page screenshots to every PR as an artifact
+- `3b4de7d` feat(bin): screenshot every page in seeded states for review
+- `ea474a1` Merge pull request #6 from blude/claude/agentic-coding-improvements-rroob0
+- `dd699d5` docs: document the fake provider and HTTP smoke test in ADR 0017
+- `8dcca34` test: add an end-to-end HTTP smoke test on the fake provider
+- `84fca25` feat(llm): add an offline fake provider (LLM_PROVIDER=fake)
+- `8c5cd8f` fix(tests): run PHP smoke tests with assertions enabled
+- `abc214f` Merge pull request #5 from blude/claude/agentic-coding-improvements-rroob0
+- `d6ad3e4` build: keep the version in composer.json, refresh the lock on bump
+- `fc6845e` build: make the git tag the only record of the app version
+- `65f1329` fix(ci): close bypasses in the commit, changelog and spec drift checks
+- `a8258ad` fix(claude): make the session-start hook async via settings, not stdout
+- `c7de0d7` build: move app version to VERSION so bumps stop staling composer.lock
+- `9cb530f` chore(claude): run composer install async in the session-start hook
+- `e2cfd0e` docs: record CI and agent session setup in ADR 0016 and CLAUDE.md
+- `f4f844d` ci: run lint, smoke tests, spec drift and commit checks
+- `6f0e460` chore(githooks): block sparring.md commits without a changelog entry
+- `06fb378` chore(claude): add web session-start hook and shared settings
+
+## 2026-09-19
+
+- `d1cc43c` style(arena): widen reply-qr code in stadium view mode
+
+## 2026-09-18
+
+- `0665f5b` style(dojo): lighten gate-card link colors for legibility on dark bg
+
+## 2026-09-17
+
+- `043354c` docs: update CHANGELOG through 3d2278b
+- `3d2278b` style(ses): add subtle shadow to scenario list
+- `f62e6fa` style(ses): suppress tap highlight on the summary row
+- `fe4c87d` feat(ses): i18n the page title and heading
+- `de54607` style(content-pages): increase footer padding-top to 2rem
+- `6df27ac` style(ses): rename heading/title to "Evaluation Scenarios"
+- `3b35ce0` style(content-pages): center header and footer site-wide
+- `065488c` style(ses): center logo, heading and footer like start.php
+- `b29ac6f` feat(ses): add a chevron before the title
+- `34ee2e7` feat(ses): tapping the title toggles the description
+- `798daf3` style(ses): shorten button label to "Start"
+- `a086d09` style(ses): merge scenario cards into one list with dividers
+- `5363c9c` style(ses): swap Start button border for a light red fill
+- `879757c` style(ses): ghost-style the Start sparring button
+- `11e6fd0` style(ses): move description below the title/button row
+- `834662d` style(ses): right-align Start button, centered against card content
+- `1fbf842` style(content-pages): drop RethinkSans from headings, use default font
+- `7236e3e` style(public): match scenario Start button to start.php's #start-btn
+- `1d443f6` feat(public): make scenario description collapsible
+- `1e0e70b` fix(public): use explicit Start sparring button on scenario cards
+- `3abff4f` feat(public): add scenario picker page for ses2-ses4
+- `cf75449` style(config): remove comma from ses4 scenario
+- `4a13130` feat(config): add opening prompts for sparring evaluation scenarios
+- `aba3e67` refactor(config): change existing OPENING_PROMPTS keys to string type
+- `6c72662` docs(spec): note curated-opener exemption from contribution char cap
+- `9066ea2` fix(sparring): exempt curated QR openers from contribution char cap
+- `f692406` fix(start): remove cookies link from footer
+
+## 2026-09-15
+
+- `d56e4a7` fix(start): update egg dialog message
+- `6c6be9d` fix(start): update egg dialog dismiss label
+- `7ffde29` fix(start): suppress mobile tap highlight on gloves
+- `8580a56` feat(start): bounce+fade in egg dialog, fade out on dismiss
+- `eefb12d` fix(start): tighten egg dialog copy
+- `048899a` fix(start): match egg-dialog spacing to dojo's gate-card exactly
+- `20324e8` fix(start): left-align egg-dialog copy, full-width centered dismiss
+- `4e80187` fix(start): position particle-burst canvas as fixed overlay
+- `639ce9d` feat(start): add glove tap easter egg
+
+## 2026-09-14
+
+- `c11d761` fix(arena): use 100dvh instead of 100vh for viewport height
+
+## 2026-09-11
+
+- `126b8cf` docs(spec): rebuild HTML for status/TBC changes
+- `167cd00` docs(spec): resolve stadium profile TBC, mark SE-02 stable
+- `7096bee` docs(spec): resolve SE-02 EX-01-3, no threshold needed
+- `944c0ff` docs(spec): mark L1/L2 status stable, layout decision fully closed
+- `48910d6` docs(spec): resolve SE-02 TBC-04 against real exhibition data
+- `ed17576` docs(spec): propagate SE-02 TBC resolutions and resolve SC-04 concurrency
+- `0ebdeaf` docs(spec): resolve SE-03 concurrency TBC, mark status stable
+- `ae6bde4` docs(spec): resolve 5 of 6 SE-02 layout TBCs post-exhibition
+- `0b32f04` docs(spec): mark SE-04 status stable, no open TBCs
+- `a74924c` docs(spec): rebuild specs
+- `1fb8495` fix(spec): exclude book.adoc from HTML build
+- `27fd11b` docs(spec): move Business goals one level up
+- `7e83509` docs(spec): add fourth level in toc this is done so certain deeply nested elements are shown
+- `bb129c4` docs(spec): remove extraneous em-dashes
+- `3b0a646` docs(spec): reduce sectnumlevels a lot of sub items in the table of contents already have an ID and number. adding section numbers only made that more confusing.
+- `eb8e471` feat(spec): add PDF book build target
+- `85d1514` docs(spec): remove stray chapter number
+
+## 2026-09-10
+
+- `0c4fd2e` docs(adr): start ADR log with 14 back-filled decisions
+
+## 2026-09-07
+
+- `e7a4ad0` docs: add start screen UI-evolution screenshot gallery
+- `11e0814` docs: add dojo screen UI-evolution screenshot gallery
+
 ## 2026-09-06
 
+- `12b5382` docs: update CHANGELOG through e2bb56e
 - `e2bb56e` build(deps): sync composer.lock content-hash with composer.json
 - `b6b7e3d` docs(export): note the --markdown dir target in README
 - `876ff6d` feat(export): split --markdown into one file per session on a dir target
@@ -217,6 +363,7 @@ Generated from git history. Grouped by commit date, newest first.
 
 ## 2026-08-24
 
+- `1e954cb` Store: note the exchange-pair-per-row schema decision and its scope bet (#1)
 - `68cdcda` build(spec): share one stylesheet instead of embedding it per page
 - `0355d13` build(spec): drop Asciidoctor's default footer
 - `976b1e0` docs(spec): add gate-logic flowchart to TF-01
@@ -244,7 +391,7 @@ Generated from git history. Grouped by commit date, newest first.
 ## 2026-08-23
 
 - `72a1b44` perf: remove mermaid diagram rendering support
-- `75f00bf` Add curriculum FTS5 ingestion + search (poor man's RAG, step 1)
+- `75f00bf` Add curriculum FTS5 ingestion + search (poor woman's RAG, step 1)
 - `a2f6c73` fix: fasset() to load open graph img
 
 ## 2026-08-22

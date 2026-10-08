@@ -49,5 +49,10 @@ Their "Date" is the original decision date where it could be recovered.
 | [0012](0012-extended-thinking-disabled.md) | Extended thinking disabled on both Anthropic calls | Accepted, revisit planned |
 | [0013](0013-mermaid-rendering-removed.md) | Mermaid diagram rendering in responses | Superseded by removal |
 | [0014](0014-ios-keyboard-viewport-fix.md) | iOS keyboard viewport handled with `--vvh` + scroll-lock, not a hand-rolled handler | Accepted |
+| [0015](0015-spec-pdf-book-target.md) | Spec PDF book target pre-renders Mermaid instead of an Asciidoctor plugin | Accepted |
+| [0016](0016-ci-and-agent-session-setup.md) | GitHub Actions CI and a committed Claude Code session setup | Accepted |
+| [0017](0017-fake-llm-provider-and-http-smoke-test.md) | Offline `fake` LLM provider and an end-to-end HTTP smoke test | Accepted |
+| [0018](0018-screenshots-for-review.md) | Page screenshots for review via chrome-headless-shell, not a visual-diff gate | Accepted |
+| [0019](0019-study-session-origin.md) | A third session origin, `study`, set by hand and migrated by table rebuild | Accepted |
 
 [nygard]: https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions

@@ -7,9 +7,10 @@
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="author" content="Sarah Puppin Pratti">
 <title>Element Design Concept: Display Client</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Project theme layered over the stock asciidoctor.css (public/spec/spec-theme.css). -->
+<link rel="stylesheet" href="./spec-theme.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -21,66 +22,66 @@
 <span id="revdate">2026-06-19</span>
 </div>
 <div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
+<div id="toctitle">Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_goals">1. Goals</a>
+<li><a href="#_goals">Goals</a>
 <ul class="sectlevel2">
-<li><a href="#_g_01_make_turn_taking_visible_to_people_who_are_not_participating">1.1. G-01 Make turn-taking visible to people who are not participating</a></li>
-<li><a href="#_g_02_remain_populated_at_all_times">1.2. G-02 Remain populated at all times</a></li>
-<li><a href="#_g_03_stay_readable_and_stable_without_attention">1.3. G-03 Stay readable and stable without attention</a></li>
-<li><a href="#_g_04_distinguish_concurrent_visitors_from_one_another">1.4. G-04 Distinguish concurrent visitors from one another</a></li>
+<li><a href="#_g_01_make_turn_taking_visible_to_people_who_are_not_participating">G-01 Make turn-taking visible to people who are not participating</a></li>
+<li><a href="#_g_02_remain_populated_at_all_times">G-02 Remain populated at all times</a></li>
+<li><a href="#_g_03_stay_readable_and_stable_without_attention">G-03 Stay readable and stable without attention</a></li>
+<li><a href="#_g_04_distinguish_concurrent_visitors_from_one_another">G-04 Distinguish concurrent visitors from one another</a></li>
 </ul>
 </li>
-<li><a href="#_use_cases">2. Use cases</a>
+<li><a href="#_use_cases">Use cases</a>
 <ul class="sectlevel2">
-<li><a href="#_uc_01_an_observer_reads_the_projection">2.1. UC-01 An observer reads the projection</a></li>
+<li><a href="#_uc_01_an_observer_reads_the_projection">UC-01 An observer reads the projection</a></li>
 </ul>
 </li>
-<li><a href="#_user_interfaces">3. User interfaces</a>
+<li><a href="#_user_interfaces">User interfaces</a>
 <ul class="sectlevel2">
-<li><a href="#_ui_01_projection_surface">3.1. UI-01 Projection surface</a></li>
-<li><a href="#_open_decisions">3.2. Open decisions</a></li>
+<li><a href="#_ui_01_projection_surface">UI-01 Projection surface</a></li>
+<li><a href="#_open_decisions">Open decisions</a></li>
 </ul>
 </li>
-<li><a href="#_technical_functions">4. Technical functions</a>
+<li><a href="#_technical_functions">Technical functions</a>
 <ul class="sectlevel2">
-<li><a href="#_tf_01_retrieve_display_material">4.1. TF-01 Retrieve display material</a></li>
-<li><a href="#_tf_02_reconcile_against_what_is_displayed">4.2. TF-02 Reconcile against what is displayed</a></li>
-<li><a href="#_tf_03_fit_an_item_to_the_available_space">4.3. TF-03 Fit an item to the available space</a></li>
-<li><a href="#_tf_04_render_the_surface">4.4. TF-04 Render the surface</a></li>
+<li><a href="#_tf_01_retrieve_display_material">TF-01 Retrieve display material</a></li>
+<li><a href="#_tf_02_reconcile_against_what_is_displayed">TF-02 Reconcile against what is displayed</a></li>
+<li><a href="#_tf_03_fit_an_item_to_the_available_space">TF-03 Fit an item to the available space</a></li>
+<li><a href="#_tf_04_render_the_surface">TF-04 Render the surface</a></li>
 </ul>
 </li>
-<li><a href="#_technical_interfaces_inbound">5. Technical interfaces (inbound)</a></li>
-<li><a href="#_technical_interfaces_outbound">6. Technical interfaces (outbound)</a>
+<li><a href="#_technical_interfaces_inbound">Technical interfaces (inbound)</a></li>
+<li><a href="#_technical_interfaces_outbound">Technical interfaces (outbound)</a>
 <ul class="sectlevel2">
-<li><a href="#_to_01_retrieve_display_material">6.1. TO-01 Retrieve display material</a></li>
+<li><a href="#_to_01_retrieve_display_material">TO-01 Retrieve display material</a></li>
 </ul>
 </li>
-<li><a href="#_entities">7. Entities</a>
+<li><a href="#_entities">Entities</a>
 <ul class="sectlevel2">
-<li><a href="#_e_01_displayed_material">7.1. E-01 Displayed material</a></li>
-<li><a href="#_e_02_wall_statistics">7.2. E-02 Wall statistics</a></li>
+<li><a href="#_e_01_displayed_material">E-01 Displayed material</a></li>
+<li><a href="#_e_02_wall_statistics">E-02 Wall statistics</a></li>
 </ul>
 </li>
-<li><a href="#_quality_requirements">8. Quality requirements</a>
+<li><a href="#_quality_requirements">Quality requirements</a>
 <ul class="sectlevel2">
-<li><a href="#_qr_01_readable_at_exhibition_viewing_distance_usability">8.1. QR-01 Readable at exhibition viewing distance <em>(Usability)</em></a></li>
-<li><a href="#_qr_02_unchanged_content_does_not_redraw_usability">8.2. QR-02 Unchanged content does not redraw <em>(Usability)</em></a></li>
-<li><a href="#_qr_03_runs_unattended_for_the_full_opening_period_availability">8.3. QR-03 Runs unattended for the full opening period <em>(Availability)</em></a></li>
-<li><a href="#_qr_04_backend_interruption_is_invisible_on_the_surface_availability">8.4. QR-04 Backend interruption is invisible on the surface <em>(Availability)</em></a></li>
-<li><a href="#_qr_05_visitor_content_cannot_alter_the_surface_security">8.5. QR-05 Visitor content cannot alter the surface <em>(Security)</em></a></li>
-<li><a href="#_qr_06_fixed_viewport_no_scroll_no_overflow_compatibility">8.6. QR-06 Fixed viewport, no scroll, no overflow <em>(Compatibility)</em></a></li>
-<li><a href="#_qr_07_diagnostic_tag_is_available_to_an_operator_hidden_by_default_maintainability">8.7. QR-07 Diagnostic tag is available to an operator, hidden by default <em>(Maintainability)</em></a></li>
-<li><a href="#_qr_08_entry_and_update_motion_respect_a_reduced_motion_preference_and_are_switchable_together_usabilityaccessibility">8.8. QR-08 Entry and update motion respect a reduced-motion preference, and are switchable together <em>(Usability/Accessibility)</em></a></li>
+<li><a href="#_qr_01_readable_at_exhibition_viewing_distance_usability">QR-01 Readable at exhibition viewing distance <em>(Usability)</em></a></li>
+<li><a href="#_qr_02_unchanged_content_does_not_redraw_usability">QR-02 Unchanged content does not redraw <em>(Usability)</em></a></li>
+<li><a href="#_qr_03_runs_unattended_for_the_full_opening_period_availability">QR-03 Runs unattended for the full opening period <em>(Availability)</em></a></li>
+<li><a href="#_qr_04_backend_interruption_is_invisible_on_the_surface_availability">QR-04 Backend interruption is invisible on the surface <em>(Availability)</em></a></li>
+<li><a href="#_qr_05_visitor_content_cannot_alter_the_surface_security">QR-05 Visitor content cannot alter the surface <em>(Security)</em></a></li>
+<li><a href="#_qr_06_fixed_viewport_no_scroll_no_overflow_compatibility">QR-06 Fixed viewport, no scroll, no overflow <em>(Compatibility)</em></a></li>
+<li><a href="#_qr_07_diagnostic_tag_is_available_to_an_operator_hidden_by_default_maintainability">QR-07 Diagnostic tag is available to an operator, hidden by default <em>(Maintainability)</em></a></li>
+<li><a href="#_qr_08_entry_and_update_motion_respect_a_reduced_motion_preference_and_are_switchable_together_usabilityaccessibility">QR-08 Entry and update motion respect a reduced-motion preference, and are switchable together <em>(Usability/Accessibility)</em></a></li>
 </ul>
 </li>
-<li><a href="#_constraints">9. Constraints</a>
+<li><a href="#_constraints">Constraints</a>
 <ul class="sectlevel2">
-<li><a href="#_c_01_layout_treatment_is_an_open_decision_organisational">9.1. C-01 Layout treatment is an open decision <em>(Organisational)</em></a></li>
-<li><a href="#_c_02_this_element_holds_no_selection_or_ordering_policy_technical">9.2. C-02 This element holds no selection or ordering policy <em>(Technical)</em></a></li>
-<li><a href="#_c_03_fixed_target_resolution_one_of_a_set_of_named_display_profiles_technical">9.3. C-03 Fixed target resolution, one of a set of named display profiles <em>(Technical)</em></a></li>
-<li><a href="#_c_04_no_build_step_technical">9.4. C-04 No build step <em>(Technical)</em></a></li>
-<li><a href="#_c_05_may_deploy_as_an_installed_web_app_on_ipad_instead_of_a_projector_technical">9.5. C-05 May deploy as an installed web app on iPad instead of a projector <em>(Technical)</em></a></li>
+<li><a href="#_c_01_layout_treatment_is_an_open_decision_organisational">C-01 Layout treatment is an open decision <em>(Organisational)</em></a></li>
+<li><a href="#_c_02_this_element_holds_no_selection_or_ordering_policy_technical">C-02 This element holds no selection or ordering policy <em>(Technical)</em></a></li>
+<li><a href="#_c_03_fixed_target_resolution_one_of_a_set_of_named_display_profiles_technical">C-03 Fixed target resolution, one of a set of named display profiles <em>(Technical)</em></a></li>
+<li><a href="#_c_04_no_build_step_technical">C-04 No build step <em>(Technical)</em></a></li>
+<li><a href="#_c_05_may_deploy_as_an_installed_web_app_on_ipad_instead_of_a_projector_technical">C-05 May deploy as an installed web app on iPad instead of a projector <em>(Technical)</em></a></li>
 </ul>
 </li>
 </ul>
@@ -93,7 +94,7 @@
 <p><strong>Element:</strong> <a href="L2-system-design-concept.html#SE-02">SE-02 Display client</a><br>
 <strong>Element profile:</strong> User-facing frontend (presentation only, no input)<br>
 <strong>Parent:</strong> System Design Concept<br>
-<strong>Status:</strong> Draft.</p>
+<strong>Status:</strong> Stable — no open TBCs remaining</p>
 </div>
 <div class="paragraph">
 <p><strong>Layout treatment is TO BE REFINED (<a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a>).</strong> This document specifies a baseline complete enough to build against, and marks each open decision explicitly.</p>
@@ -108,10 +109,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_goals"><a class="anchor" href="#_goals"></a>1. Goals</h2>
+<h2 id="_goals"><a class="anchor" href="#_goals"></a>Goals</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_g_01_make_turn_taking_visible_to_people_who_are_not_participating"><a class="anchor" href="#_g_01_make_turn_taking_visible_to_people_who_are_not_participating"></a>1.1. <a id="G-01"></a>G-01 Make turn-taking visible to people who are not participating</h3>
+<h3 id="_g_01_make_turn_taking_visible_to_people_who_are_not_participating"><a class="anchor" href="#_g_01_make_turn_taking_visible_to_people_who_are_not_participating"></a><a id="G-01"></a>G-01 Make turn-taking visible to people who are not participating</h3>
 <div class="paragraph">
 <p>The element shall present visitor contributions and Sparring responses as paired exchanges, so that an observer sees a challenge and what provoked it rather than an isolated reply.<br>
 <em>Success criteria (qualitative):</em> An observer reading one projected item can tell that the AI declined to simply resolve the request.<br>
@@ -119,7 +120,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_g_02_remain_populated_at_all_times"><a class="anchor" href="#_g_02_remain_populated_at_all_times"></a>1.2. <a id="G-02"></a>G-02 Remain populated at all times</h3>
+<h3 id="_g_02_remain_populated_at_all_times"><a class="anchor" href="#_g_02_remain_populated_at_all_times"></a><a id="G-02"></a>G-02 Remain populated at all times</h3>
 <div class="paragraph">
 <p>The element shall never present an empty or near-empty surface while running, including before the first visitor of the day and between live sessions.<br>
 <em>Success criteria (qualitative):</em> The projection carries readable content continuously from start-up onward.<br>
@@ -127,7 +128,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_g_03_stay_readable_and_stable_without_attention"><a class="anchor" href="#_g_03_stay_readable_and_stable_without_attention"></a>1.3. <a id="G-03"></a>G-03 Stay readable and stable without attention</h3>
+<h3 id="_g_03_stay_readable_and_stable_without_attention"><a class="anchor" href="#_g_03_stay_readable_and_stable_without_attention"></a><a id="G-03"></a>G-03 Stay readable and stable without attention</h3>
 <div class="paragraph">
 <p>The element shall run for the duration of exhibition hours without reload, recover from backend interruption on its own, and update without visible redraw of unchanged content.<br>
 <em>Success criteria (qualitative):</em> No operator action is required at any point during opening hours. Unchanged items do not flicker or reflow on update.<br>
@@ -136,7 +137,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_g_04_distinguish_concurrent_visitors_from_one_another"><a class="anchor" href="#_g_04_distinguish_concurrent_visitors_from_one_another"></a>1.4. <a id="G-04"></a>G-04 Distinguish concurrent visitors from one another</h3>
+<h3 id="_g_04_distinguish_concurrent_visitors_from_one_another"><a class="anchor" href="#_g_04_distinguish_concurrent_visitors_from_one_another"></a><a id="G-04"></a>G-04 Distinguish concurrent visitors from one another</h3>
 <div class="paragraph">
 <p>The element shall label each item so an observer can tell exchanges from different sessions apart, even when several appear in the same view.<br>
 <em>Success criteria (qualitative):</em> An observer looking at two items can tell whether they belong to the same visitor or different ones, without reading the content of either.<br>
@@ -148,10 +149,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_use_cases"><a class="anchor" href="#_use_cases"></a>2. Use cases</h2>
+<h2 id="_use_cases"><a class="anchor" href="#_use_cases"></a>Use cases</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_uc_01_an_observer_reads_the_projection"><a class="anchor" href="#_uc_01_an_observer_reads_the_projection"></a>2.1. <a id="UC-01"></a>UC-01 An observer reads the projection</h3>
+<h3 id="_uc_01_an_observer_reads_the_projection"><a class="anchor" href="#_uc_01_an_observer_reads_the_projection"></a><a id="UC-01"></a>UC-01 An observer reads the projection</h3>
 <div class="paragraph">
 <p><em>Actors:</em> <a href="L2-system-design-concept.html#UT-02">UT-02 Observing visitor</a>, <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a><br>
 <em>Prerequisites:</em> The element is running and has completed at least one successful retrieval.<br>
@@ -192,7 +193,7 @@
 <p><strong><a id="EX-01-2"></a>EX-01-2</strong> <em>(extends <a href="#ST-01-2">ST-01-2</a>)</em> The retrieved material is identical to what is shown. The element does nothing. <em>Outcome:</em> Terminate.</p>
 </li>
 <li>
-<p><strong><a id="EX-01-3"></a>EX-01-3</strong> <em>(extends <a href="#ST-01-1">ST-01-1</a>)</em> Retrieval has failed continuously for a sustained period. The element continues showing its last material indefinitely rather than clearing. The threshold at which this becomes distinguishable from normal operation is TBC. <em>Outcome:</em> Resume.</p>
+<p><strong><a id="EX-01-3"></a>EX-01-3</strong> <em>(extends <a href="#ST-01-1">ST-01-1</a>)</em> Retrieval has failed continuously for a sustained period. The element continues showing its last material indefinitely rather than clearing. <em>Resolved: no threshold, no action.</em> No threshold or operator alert was built, and none is judged worth building speculatively — a silent, indefinitely-stale wall is not a critical failure (the piece&#8217;s actual interaction is on the visitor&#8217;s own phone, <a href="L2-system-design-concept.html#SE-01">SE-01 Input client</a>; the wall is a bonus surface). Revisit only if this becomes a real operational problem. <em>Outcome:</em> Resume.</p>
 </li>
 </ul>
 </div>
@@ -201,10 +202,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_user_interfaces"><a class="anchor" href="#_user_interfaces"></a>3. User interfaces</h2>
+<h2 id="_user_interfaces"><a class="anchor" href="#_user_interfaces"></a>User interfaces</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ui_01_projection_surface"><a class="anchor" href="#_ui_01_projection_surface"></a>3.1. <a id="UI-01"></a>UI-01 Projection surface</h3>
+<h3 id="_ui_01_projection_surface"><a class="anchor" href="#_ui_01_projection_surface"></a><a id="UI-01"></a>UI-01 Projection surface</h3>
 <div class="paragraph">
 <p><em>User type:</em> <a href="L2-system-design-concept.html#UT-02">UT-02 Observing visitor</a><br>
 <em>Realises:</em> <a href="#UC-01">UC-01 An observer reads the projection</a></p>
@@ -314,15 +315,15 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_open_decisions"><a class="anchor" href="#_open_decisions"></a>3.2. Open decisions</h3>
+<h3 id="_open_decisions"><a class="anchor" href="#_open_decisions"></a>Open decisions</h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a></p>
 </div>
 <div class="paragraph">
-<p>Each is deliberately deferred until real pilot transcripts can be seen on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> at exhibition viewing distance. None of them changes the interface <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> provides, so they can be resolved after the rest of the system works.</p>
+<p>Each was deliberately deferred until real pilot transcripts could be seen on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> at exhibition viewing distance. None of them changed the interface <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> provides, so they were resolved after the rest of the system worked. The exhibition has since run; all six are resolved below.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-01"></a>TBC-01 Treatment of prominence and recency.</strong> Four candidates now exist; masonry is adopted as a working default, the other three remain open:</p>
+<p><strong><a id="TBC-01"></a>TBC-01 Treatment of prominence and recency.</strong> <em>Resolved: masonry.</em> Four candidates were considered; masonry shipped as the baseline and ran unchanged through the exhibition on both surfaces, used on different occasions: the <code>venue</code> monitor (2 columns, 12-item limit) and the <code>stadium</code> beamer (2 columns, 6-item limit; profiles in <code>config.php</code>, see <a href="#C-03">C-03 Fixed target resolution, one of a set of named display profiles</a>). No pilot observation surfaced a reason to reconsider. The other three, for the record:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -344,29 +345,29 @@
 </ul>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-02"></a>TBC-02 Whether a live session interrupts.</strong> Only applicable if <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> resolves to rotation or hybrid. If a visitor&#8217;s exchange does not appear promptly on the wall, the connection between typing and projection is lost, and that connection is much of what makes the piece an installation rather than a screen. Under the size-gradient baseline this is automatic and needs no rule. Under masonry, the analogous question is resolved above, not by this TBC.</p>
+<p><strong><a id="TBC-02"></a>TBC-02 Whether a live session interrupts.</strong> <em>Resolved: not applicable.</em> Only applicable if <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> resolved to rotation or hybrid. It resolved to masonry instead, where the analogous question is answered above — no live-session interrupt rule was ever needed or built.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-03"></a>TBC-03 Dwell time, if any.</strong> A fixed interval will feel wrong in both directions: too long for a short exchange, too short for a dense one. Scaling to content length is the obvious alternative. Not decidable without real transcripts.</p>
+<p><strong><a id="TBC-03"></a>TBC-03 Dwell time, if any.</strong> <em>Resolved: not applicable.</em> Moot for the same reason as <a href="#TBC-02">TBC-02 Whether a live session interrupts.</a>: masonry items never rotate, so there is nothing to dwell on. No dwell-time constant exists in <code>config.php</code>.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-04"></a>TBC-04 Which exchange pair per session.</strong> <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> currently supplies the most recent, on the reasoning that friction has usually built by then. The most demonstrative pair may be the second or third. To be checked against pilot material. This is a change to <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s <a href="L3-SE-03-backend-service.html#TF-04">TF-04 Assemble display material</a> if revised, not to this element.</p>
+<p><strong><a id="TBC-04"></a>TBC-04 Which exchange pair per session.</strong> <em>Resolved: most recent, unchanged.</em> Checked against the exhibition&#8217;s live data (49 sessions): most sessions never exceed one or two exchanges, so there is usually no alternative pair to choose from; in the sessions that ran three or more, Sparring&#8217;s pushback consistently sharpened with each turn rather than peaking early, so the most recent pair stayed the more demonstrative one. <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> keeps supplying it unchanged. (A related but distinct item stays open in <code>TODO.md</code>: suppressing a session&#8217;s first exchange from the wall when it is only the opening scenario prompt — a display-omission question, not a which-pair question, and doesn&#8217;t block this.)</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-05"></a>TBC-05 Item count and truncation.</strong> How many items fit, and how a long contribution is trimmed. Begin with a fixed item count plus a character bound, and only measure rendered height if that proves inadequate. See <a href="#TF-03">TF-03 Fit an item to the available space</a>.</p>
+<p><strong><a id="TBC-05"></a>TBC-05 Item count and truncation.</strong> <em>Resolved: character bound.</em> Fixed item count per display profile (<code>itemLimit</code>, <code>config.php</code>) plus a per-side character bound shipped and ran for the full exhibition. Rendered-height measurement was never needed.</p>
 </div>
 <div class="paragraph">
-<p><strong><a id="TBC-06"></a>TBC-06 Whether pilot-origin items are visually distinguishable.</strong> They carry an origin value and could be marked. Leaving them unmarked keeps the surface uniform; marking them is more honest to an observer who assumes everything shown is live. Not urgent, but a decision rather than an oversight.</p>
+<p><strong><a id="TBC-06"></a>TBC-06 Whether pilot-origin items are visually distinguishable.</strong> <em>Resolved: left unmarked.</em> Origin stays off the normal surface, visible only behind the operator debug flag (<code>arena.js</code>, <a href="#QR-07">QR-07 Diagnostic tag is available to an operator</a>) — the "keep the surface uniform" option above.</p>
 </div>
 <hr>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_technical_functions"><a class="anchor" href="#_technical_functions"></a>4. Technical functions</h2>
+<h2 id="_technical_functions"><a class="anchor" href="#_technical_functions"></a>Technical functions</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_tf_01_retrieve_display_material"><a class="anchor" href="#_tf_01_retrieve_display_material"></a>4.1. <a id="TF-01"></a>TF-01 Retrieve display material</h3>
+<h3 id="_tf_01_retrieve_display_material"><a class="anchor" href="#_tf_01_retrieve_display_material"></a><a id="TF-01"></a>TF-01 Retrieve display material</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Stepwise<br>
 <em>Achieves:</em> <a href="#G-02">G-02 Remain populated at all times</a>, <a href="#G-03">G-03 Stay readable and stable without attention</a></p>
@@ -396,7 +397,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tf_02_reconcile_against_what_is_displayed"><a class="anchor" href="#_tf_02_reconcile_against_what_is_displayed"></a>4.2. <a id="TF-02"></a>TF-02 Reconcile against what is displayed</h3>
+<h3 id="_tf_02_reconcile_against_what_is_displayed"><a class="anchor" href="#_tf_02_reconcile_against_what_is_displayed"></a><a id="TF-02"></a>TF-02 Reconcile against what is displayed</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Stepwise<br>
 <em>Achieves:</em> <a href="#G-03">G-03 Stay readable and stable without attention</a></p>
@@ -422,7 +423,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tf_03_fit_an_item_to_the_available_space"><a class="anchor" href="#_tf_03_fit_an_item_to_the_available_space"></a>4.3. <a id="TF-03"></a>TF-03 Fit an item to the available space</h3>
+<h3 id="_tf_03_fit_an_item_to_the_available_space"><a class="anchor" href="#_tf_03_fit_an_item_to_the_available_space"></a><a id="TF-03"></a>TF-03 Fit an item to the available space</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#G-01">G-01 Make turn-taking visible to people who are not</a></p>
@@ -432,7 +433,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tf_04_render_the_surface"><a class="anchor" href="#_tf_04_render_the_surface"></a>4.4. <a id="TF-04"></a>TF-04 Render the surface</h3>
+<h3 id="_tf_04_render_the_surface"><a class="anchor" href="#_tf_04_render_the_surface"></a><a id="TF-04"></a>TF-04 Render the surface</h3>
 <div class="paragraph">
 <p><em>Detail level:</em> Narrative<br>
 <em>Achieves:</em> <a href="#G-04">G-04 Distinguish concurrent visitors from one another</a></p>
@@ -448,7 +449,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_technical_interfaces_inbound"><a class="anchor" href="#_technical_interfaces_inbound"></a>5. Technical interfaces (inbound)</h2>
+<h2 id="_technical_interfaces_inbound"><a class="anchor" href="#_technical_interfaces_inbound"></a>Technical interfaces (inbound)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>None. No element calls this one. It is a leaf that only reads.</p>
@@ -457,10 +458,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_technical_interfaces_outbound"><a class="anchor" href="#_technical_interfaces_outbound"></a>6. Technical interfaces (outbound)</h2>
+<h2 id="_technical_interfaces_outbound"><a class="anchor" href="#_technical_interfaces_outbound"></a>Technical interfaces (outbound)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_to_01_retrieve_display_material"><a class="anchor" href="#_to_01_retrieve_display_material"></a>6.1. <a id="TO-01"></a>TO-01 Retrieve display material</h3>
+<h3 id="_to_01_retrieve_display_material"><a class="anchor" href="#_to_01_retrieve_display_material"></a><a id="TO-01"></a>TO-01 Retrieve display material</h3>
 <div class="paragraph">
 <p><em>Statement:</em> This interface obtains the set of sessions currently eligible for projection by calling the backend service (<a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>). Used on every polling cycle.<br>
 <em>Input:</em> The display-profile identifier the element was loaded with (<code>?d=&lt;name&gt;</code> on the address; absent means the default profile), forwarded verbatim. This names <em>which physical screen</em> the request is for — it is not a selection, ordering, or prominence parameter. The profile-to-item-count mapping is resolved entirely in <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> (<a href="L3-SE-03-backend-service.html#TI-04">TI-04 Retrieve display material</a>), so item selection remains a backend decision and this element still carries no policy (<a href="#C-02">C-02 This element holds no selection or ordering policy</a>).<br>
@@ -485,21 +486,21 @@ No <code>Calls → PE-</code> relation applies. This element reaches no partner 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_entities"><a class="anchor" href="#_entities"></a>7. Entities</h2>
+<h2 id="_entities"><a class="anchor" href="#_entities"></a>Entities</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_e_01_displayed_material"><a class="anchor" href="#_e_01_displayed_material"></a>7.1. <a id="E-01"></a>E-01 Displayed material</h3>
+<h3 id="_e_01_displayed_material"><a class="anchor" href="#_e_01_displayed_material"></a><a id="E-01"></a>E-01 Displayed material</h3>
 <div class="paragraph">
 <p><em>Persistence:</em> In-memory. Held only to support reconciliation. Lost on reload and rebuilt on the next cycle, which is acceptable because a reload costs one polling interval.<br>
 <em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01 Sparring session</a>, <a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a> (partially; a display-only reconciliation cache, not authoritative — see <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s <a href="L3-SE-03-backend-service.html#E-01">E-01 Session</a>/<a href="L3-SE-03-backend-service.html#E-02">E-02 Exchange</a>)</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 9.0909%;">
+<col style="width: 9.0909%;">
+<col style="width: 54.5455%;">
 </colgroup>
 <thead>
 <tr>
@@ -551,7 +552,7 @@ No <code>Calls → PE-</code> relation applies. This element reaches no partner 
 <td class="tableblock halign-left valign-top"><p class="tableblock">origin</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">enum</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pilot</code> or <code>live</code>. Not rendered on the normal surface (retained for <a href="#TBC-06">TBC-06 Whether pilot-origin items are visually</a>); shown per item only behind the debug flag (<a href="#QR-07">QR-07 Diagnostic tag is available to an operator</a>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pilot</code>, <code>live</code> or <code>study</code>. Not rendered on the normal surface (retained for <a href="#TBC-06">TBC-06 Whether pilot-origin items are visually</a>); shown per item only behind the debug flag (<a href="#QR-07">QR-07 Diagnostic tag is available to an operator</a>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="E-01.7"></a>E-01.7</p></td>
@@ -576,18 +577,18 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect2">
-<h3 id="_e_02_wall_statistics"><a class="anchor" href="#_e_02_wall_statistics"></a>7.2. <a id="E-02"></a>E-02 Wall statistics</h3>
+<h3 id="_e_02_wall_statistics"><a class="anchor" href="#_e_02_wall_statistics"></a><a id="E-02"></a>E-02 Wall statistics</h3>
 <div class="paragraph">
 <p><em>Persistence:</em> In-memory, same lifetime as <a href="#E-01">E-01 Displayed material</a> — held only to render the header stats, replaced each polling cycle.<br>
 <em>Refines:</em> <a href="L1-solution-design-concept.html#BE-01">BE-01 Sparring session</a>, <a href="L1-solution-design-concept.html#BE-02">BE-02 Exchange</a> (lifetime totals of each, not the per-item cache <a href="#E-01">E-01 Displayed material</a> already is)</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 9.0909%;">
+<col style="width: 9.0909%;">
+<col style="width: 54.5455%;">
 </colgroup>
 <thead>
 <tr>
@@ -620,10 +621,10 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect1">
-<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>8. Quality requirements</h2>
+<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>Quality requirements</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_qr_01_readable_at_exhibition_viewing_distance_usability"><a class="anchor" href="#_qr_01_readable_at_exhibition_viewing_distance_usability"></a>8.1. <a id="QR-01"></a>QR-01 Readable at exhibition viewing distance <em>(Usability)</em></h3>
+<h3 id="_qr_01_readable_at_exhibition_viewing_distance_usability"><a class="anchor" href="#_qr_01_readable_at_exhibition_viewing_distance_usability"></a><a id="QR-01"></a>QR-01 Readable at exhibition viewing distance <em>(Usability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a><br>
 <em>Acceptance criteria (qualitative):</em> A complete exchange is readable by a standing observer at the room&#8217;s typical viewing distance, verified on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> in the exhibition space before opening. Not verified in a browser window.<br>
@@ -631,7 +632,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_02_unchanged_content_does_not_redraw_usability"><a class="anchor" href="#_qr_02_unchanged_content_does_not_redraw_usability"></a>8.2. <a id="QR-02"></a>QR-02 Unchanged content does not redraw <em>(Usability)</em></h3>
+<h3 id="_qr_02_unchanged_content_does_not_redraw_usability"><a class="anchor" href="#_qr_02_unchanged_content_does_not_redraw_usability"></a><a id="QR-02"></a>QR-02 Unchanged content does not redraw <em>(Usability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#TF-02">TF-02 Reconcile against what is displayed</a>, <a href="#TF-04">TF-04 Render the surface</a><br>
 <em>Acceptance criteria:</em> An update that adds one item leaves every other item visually undisturbed. No full-surface repaint occurs on a polling cycle.<br>
@@ -639,7 +640,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_03_runs_unattended_for_the_full_opening_period_availability"><a class="anchor" href="#_qr_03_runs_unattended_for_the_full_opening_period_availability"></a>8.3. <a id="QR-03"></a>QR-03 Runs unattended for the full opening period <em>(Availability)</em></h3>
+<h3 id="_qr_03_runs_unattended_for_the_full_opening_period_availability"><a class="anchor" href="#_qr_03_runs_unattended_for_the_full_opening_period_availability"></a><a id="QR-03"></a>QR-03 Runs unattended for the full opening period <em>(Availability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> The element overall<br>
 <em>Acceptance criteria (qualitative):</em> Runs for the duration of exhibition hours without reload, memory growth that degrades rendering, or accumulated state that requires clearing.<br>
@@ -647,7 +648,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_04_backend_interruption_is_invisible_on_the_surface_availability"><a class="anchor" href="#_qr_04_backend_interruption_is_invisible_on_the_surface_availability"></a>8.4. <a id="QR-04"></a>QR-04 Backend interruption is invisible on the surface <em>(Availability)</em></h3>
+<h3 id="_qr_04_backend_interruption_is_invisible_on_the_surface_availability"><a class="anchor" href="#_qr_04_backend_interruption_is_invisible_on_the_surface_availability"></a><a id="QR-04"></a>QR-04 Backend interruption is invisible on the surface <em>(Availability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#TF-01">TF-01 Retrieve display material</a><br>
 <em>Acceptance criteria:</em> A failed retrieval leaves the surface unchanged and produces no visible error. Recovery requires no reload.<br>
@@ -656,7 +657,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_05_visitor_content_cannot_alter_the_surface_security"><a class="anchor" href="#_qr_05_visitor_content_cannot_alter_the_surface_security"></a>8.5. <a id="QR-05"></a>QR-05 Visitor content cannot alter the surface <em>(Security)</em></h3>
+<h3 id="_qr_05_visitor_content_cannot_alter_the_surface_security"><a class="anchor" href="#_qr_05_visitor_content_cannot_alter_the_surface_security"></a><a id="QR-05"></a>QR-05 Visitor content cannot alter the surface <em>(Security)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#TF-04">TF-04 Render the surface</a><br>
 <em>Acceptance criteria:</em> All content from <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a> is inserted as text. No path renders it as markup.<br>
@@ -665,7 +666,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_06_fixed_viewport_no_scroll_no_overflow_compatibility"><a class="anchor" href="#_qr_06_fixed_viewport_no_scroll_no_overflow_compatibility"></a>8.6. <a id="QR-06"></a>QR-06 Fixed viewport, no scroll, no overflow <em>(Compatibility)</em></h3>
+<h3 id="_qr_06_fixed_viewport_no_scroll_no_overflow_compatibility"><a class="anchor" href="#_qr_06_fixed_viewport_no_scroll_no_overflow_compatibility"></a><a id="QR-06"></a>QR-06 Fixed viewport, no scroll, no overflow <em>(Compatibility)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>, <a href="#TF-03">TF-03 Fit an item to the available space</a><br>
 <em>Acceptance criteria:</em> Content never extends beyond the projected area at the target resolution. No scrollbar appears under any content length.<br>
@@ -673,7 +674,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_07_diagnostic_tag_is_available_to_an_operator_hidden_by_default_maintainability"><a class="anchor" href="#_qr_07_diagnostic_tag_is_available_to_an_operator_hidden_by_default_maintainability"></a>8.7. <a id="QR-07"></a>QR-07 Diagnostic tag is available to an operator, hidden by default <em>(Maintainability)</em></h3>
+<h3 id="_qr_07_diagnostic_tag_is_available_to_an_operator_hidden_by_default_maintainability"><a class="anchor" href="#_qr_07_diagnostic_tag_is_available_to_an_operator_hidden_by_default_maintainability"></a><a id="QR-07"></a>QR-07 Diagnostic tag is available to an operator, hidden by default <em>(Maintainability)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a><br>
 <em>Acceptance criteria:</em> An address flag appends a session id / origin tag to each item. Absent by default; no visitor-facing affordance exposes or hints at it.<br>
@@ -682,7 +683,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect2">
-<h3 id="_qr_08_entry_and_update_motion_respect_a_reduced_motion_preference_and_are_switchable_together_usabilityaccessibility"><a class="anchor" href="#_qr_08_entry_and_update_motion_respect_a_reduced_motion_preference_and_are_switchable_together_usabilityaccessibility"></a>8.8. <a id="QR-08"></a>QR-08 Entry and update motion respect a reduced-motion preference, and are switchable together <em>(Usability/Accessibility)</em></h3>
+<h3 id="_qr_08_entry_and_update_motion_respect_a_reduced_motion_preference_and_are_switchable_together_usabilityaccessibility"><a class="anchor" href="#_qr_08_entry_and_update_motion_respect_a_reduced_motion_preference_and_are_switchable_together_usabilityaccessibility"></a><a id="QR-08"></a>QR-08 Entry and update motion respect a reduced-motion preference, and are switchable together <em>(Usability/Accessibility)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>, <a href="#TF-04">TF-04 Render the surface</a><br>
 <em>Acceptance criteria:</em> Both the entry transition and the update pulse are suppressed when the OS-level reduced-motion preference is set, and both are turned off together by a single configuration switch, independent of every other element, with no code change. Suppressing either changes nothing else about <a href="#TF-01">TF-01 Retrieve display material</a>/<a href="#TF-02">TF-02 Reconcile against what is displayed</a> — an added or updated item still appears/updates, without the motion.<br>
@@ -694,20 +695,20 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect1">
-<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>9. Constraints</h2>
+<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>Constraints</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_c_01_layout_treatment_is_an_open_decision_organisational"><a class="anchor" href="#_c_01_layout_treatment_is_an_open_decision_organisational"></a>9.1. <a id="C-01"></a>C-01 Layout treatment is an open decision <em>(Organisational)</em></h3>
+<h3 id="_c_01_layout_treatment_is_an_open_decision_organisational"><a class="anchor" href="#_c_01_layout_treatment_is_an_open_decision_organisational"></a><a id="C-01"></a>C-01 Layout treatment is an open decision <em>(Organisational)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a>.<br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>, <a href="#TF-03">TF-03 Fit an item to the available space</a>, <a href="#TF-04">TF-04 Render the surface</a>.<br>
-<em>Acceptance criteria:</em> The baseline in section 3 is implemented first. <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> through <a href="#TBC-06">TBC-06 Whether pilot-origin items are visually</a> are resolved against real pilot transcripts on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> before opening.<br>
+<em>Acceptance criteria:</em> The baseline in section 3 was implemented first, then run at the exhibition on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a>. <a href="#TBC-01">TBC-01 Treatment of prominence and recency.</a> through <a href="#TBC-06">TBC-06 Whether pilot-origin items are visually</a> are all resolved.<br>
 <em>Consequence:</em> Rules out encoding a specific prominence treatment into <a href="#TO-01">TO-01 Retrieve display material</a>'s request or into <a href="L2-system-design-concept.html#SE-03">SE-03 Backend service</a>'s response shape. The interface must serve any of the three candidates without change. (The display-profile identifier <a href="#TO-01">TO-01 Retrieve display material</a> does carry is a screen id, not a prominence choice — see <a href="#C-03">C-03 Fixed target resolution, one of a set of named display profiles</a>.)<br>
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_c_02_this_element_holds_no_selection_or_ordering_policy_technical"><a class="anchor" href="#_c_02_this_element_holds_no_selection_or_ordering_policy_technical"></a>9.2. <a id="C-02"></a>C-02 This element holds no selection or ordering policy <em>(Technical)</em></h3>
+<h3 id="_c_02_this_element_holds_no_selection_or_ordering_policy_technical"><a class="anchor" href="#_c_02_this_element_holds_no_selection_or_ordering_policy_technical"></a><a id="C-02"></a>C-02 This element holds no selection or ordering policy <em>(Technical)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L2-system-design-concept.html#AP-01">AP-01 All logic lives in the backend</a>.<br>
 <em>Applies to:</em> <a href="#TF-01">TF-01 Retrieve display material</a>, <a href="#TO-01">TO-01 Retrieve display material</a>, <a href="#E-01">E-01 Displayed material</a>.<br>
@@ -717,7 +718,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect2">
-<h3 id="_c_03_fixed_target_resolution_one_of_a_set_of_named_display_profiles_technical"><a class="anchor" href="#_c_03_fixed_target_resolution_one_of_a_set_of_named_display_profiles_technical"></a>9.3. <a id="C-03"></a>C-03 Fixed target resolution, one of a set of named display profiles <em>(Technical)</em></h3>
+<h3 id="_c_03_fixed_target_resolution_one_of_a_set_of_named_display_profiles_technical"><a class="anchor" href="#_c_03_fixed_target_resolution_one_of_a_set_of_named_display_profiles_technical"></a><a id="C-03"></a>C-03 Fixed target resolution, one of a set of named display profiles <em>(Technical)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>.<br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>.<br>
@@ -757,20 +758,20 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>stadium</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A beamer — resolution not yet settled (<a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a>); carries the <code>dev</code> column count as a placeholder</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TBC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The exhibition beamer, an Epson EB-1945W (<a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a>). Of its offered modes (1080p, 720p, 1600×900 @ 60 Hz), 1600×900 gave the sharpest result, mainly for the QR code, which is also drawn slightly larger on this profile.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1600×900</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>Consequence:</em> Rules out responsive layout work — each profile is still a single fixed viewport under the no-responsive-behaviour rule; the profile set just replaces the earlier assumption of exactly one. <code>stadium&#8217;s resolution stays a dependency on <a href="L2-system-design-concept.html#HE-02">HE-02 Projection setup</a> being settled. Per-profile visual tuning (font size, spacing on the portrait `venue</code> surface) is done against the real screen, keyed off a profile marker on the surface.<br>
+<p><em>Consequence:</em> Rules out responsive layout work — each profile is still a single fixed viewport under the no-responsive-behaviour rule; the profile set just replaces the earlier assumption of exactly one. <code>stadium</code> was settled against the real beamer at the exhibition: six items is the right number for the surface, so it requests six. The lowest items often run slightly past the bottom edge; this is deliberate. The surface clips them with no scrollbar (<a href="#QR-06">QR-06 Fixed viewport, no scroll, no overflow</a>), and the bottom gradient fades the cut edge out. The larger QR code on this profile (needed for sharpness at 1600×900) can in principle crowd a short item&#8217;s text, but real Sparring responses were rarely short enough for this to happen. Per-profile visual tuning (font size, spacing on the portrait <code>venue</code> surface) is done against the real screen, keyed off a profile marker on the surface.<br>
 <em>Implements:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_c_04_no_build_step_technical"><a class="anchor" href="#_c_04_no_build_step_technical"></a>9.4. <a id="C-04"></a>C-04 No build step <em>(Technical)</em></h3>
+<h3 id="_c_04_no_build_step_technical"><a class="anchor" href="#_c_04_no_build_step_technical"></a><a id="C-04"></a>C-04 No build step <em>(Technical)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> <a href="L2-system-design-concept.html#SC-03">SC-03 Build effort is capped and the piece is expendable</a>.<br>
 <em>Applies to:</em> The element overall.<br>
@@ -780,7 +781,7 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 <div class="sect2">
-<h3 id="_c_05_may_deploy_as_an_installed_web_app_on_ipad_instead_of_a_projector_technical"><a class="anchor" href="#_c_05_may_deploy_as_an_installed_web_app_on_ipad_instead_of_a_projector_technical"></a>9.5. <a id="C-05"></a>C-05 May deploy as an installed web app on iPad instead of a projector <em>(Technical)</em></h3>
+<h3 id="_c_05_may_deploy_as_an_installed_web_app_on_ipad_instead_of_a_projector_technical"><a class="anchor" href="#_c_05_may_deploy_as_an_installed_web_app_on_ipad_instead_of_a_projector_technical"></a><a id="C-05"></a>C-05 May deploy as an installed web app on iPad instead of a projector <em>(Technical)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> TODO.md.<br>
 <em>Applies to:</em> <a href="#UI-01">UI-01 Projection surface</a>.<br>
@@ -792,6 +793,47 @@ The element derives no ordering, performs no selection, and stores nothing beyon
 </div>
 </div>
 </div>
+<!-- Sitemap: every spec page, on every page. Our own #footer, since the build
+     passes -a nofooter (the stock one only prints a file mtime, which would
+     make the committed HTML drift between checkouts). Hand-maintained:
+     a new spec/*.adoc page needs a link here too. -->
+<footer id="footer">
+  <nav class="sitemap" aria-label="Spec pages">
+    <div>
+      <p class="sitemap-title">Overview</p>
+      <ul>
+        <li><a href="index.html">Design Documentation</a></li>
+        <li><a href="L1-solution-design-concept.html">L1 Solution Design Concept</a></li>
+        <li><a href="L2-system-design-concept.html">L2 System Design Concept</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Software elements</p>
+      <ul>
+        <li><a href="L3-SE-01-input-client.html">SE-01 Input Client</a></li>
+        <li><a href="L3-SE-02-display-client.html">SE-02 Display Client</a></li>
+        <li><a href="L3-SE-03-backend-service.html">SE-03 Backend Service</a></li>
+        <li><a href="L3-SE-04-system-prompt.html">SE-04 System Prompt</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Additional reference</p>
+      <ul>
+        <li><a href="LX-system-realization-concept.html">LX System Realization Concept</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+  </nav>
+</footer>
+<!-- Mark the sitemap link for this page; a bare /spec/ is index.html. -->
+<script>
+  (function () {
+    var page = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.sitemap a').forEach(function (a) {
+      if (a.getAttribute('href') === page) a.setAttribute('aria-current', 'page');
+    });
+  })();
+</script>
 <!-- Mermaid support for [source,mermaid] code blocks. Asciidoctor has no
      native Mermaid renderer, so this is client-side: turn the generated
      `code.language-mermaid` block into what Mermaid expects and let its
@@ -804,7 +846,51 @@ The element derives no ordering, performs no selection, and stores nothing beyon
     div.textContent = code.textContent;
     code.closest('pre').replaceWith(div);
   });
-  mermaid.initialize({ startOnLoad: true });
+  // 'base' is the only Mermaid theme that honours themeVariables; these match
+  // public/spec/spec-theme.css instead of Mermaid's default lavender.
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#fbeaea',
+      primaryBorderColor: '#d32f2f',
+      primaryTextColor: '#1a1a1a',
+      lineColor: '#666',
+      edgeLabelBackground: '#f2f2f2',
+      clusterBkg: '#fafafa',
+      clusterBorder: '#d9d9d9',
+      fontFamily: 'system-ui, sans-serif'
+    }
+  });
+</script>
+<!-- Mark the ToC link for the current #hash. CSS can match the target heading
+     (:target) but not the link pointing at it, so this bridges the two. -->
+<script>
+  function markCurrentTocLink() {
+    document.querySelectorAll('#toc a').forEach(function (a) {
+      if (location.hash && a.hash === location.hash) {
+        a.setAttribute('aria-current', 'location');
+        // Long L3 ToCs overflow the fixed sidebar; keep the entry in view.
+        a.scrollIntoView({ block: 'nearest' });
+      } else {
+        a.removeAttribute('aria-current');
+      }
+    });
+  }
+  markCurrentTocLink();
+  window.addEventListener('hashchange', markCurrentTocLink);
+</script>
+<!-- Tag the `_Key:_` labels (Satisfies, Rationale, ...) that open each line of
+     a requirement so spec-theme.css can set them apart from the body text.
+     CSS alone can't: it can't see the trailing colon, and `em:first-child`
+     ignores text nodes, so it would also catch italic words and notes. -->
+<script>
+  document.querySelectorAll('.paragraph > p > em').forEach(function (em) {
+    if (!/:\s*$/.test(em.textContent)) return;
+    var prev = em.previousSibling;
+    while (prev && prev.nodeType === Node.TEXT_NODE && !prev.textContent.trim()) prev = prev.previousSibling;
+    if (!prev || prev.nodeName === 'BR') em.classList.add('meta-key');
+  });
 </script>
 </body>
 </html>

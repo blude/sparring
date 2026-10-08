@@ -5,7 +5,6 @@ v.1.0, 2026-06-19
 :toclevels: 3
 :icons: font
 :sectanchors:
-:sectnums:
 
 *Element:* xref:L2-system-design-concept.adoc#SE-01[SE-01 Input client] +
 *Element profile:* User-facing frontend +
@@ -354,7 +353,7 @@ NOTE: No `Calls → PE-` relation applies, same reason as <<TO-04,TO-04 Refine a
 _Persistence:_ In-memory. Discarded when the page unloads, and rebuilt from xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service] on the next load. Nothing is written to device storage. +
 _Refines:_ xref:L1-solution-design-concept.adoc#BE-01[BE-01 Sparring session] (partially; the authoritative record is xref:L2-system-design-concept.adoc#SE-03[SE-03 Backend service]'s xref:L3-SE-03-backend-service.adoc#E-01[E-01 Session])
 
-[options="header"]
+[cols="2,4,2,2,12",options="header"]
 |===
 | ID | Attribute | Type | Required | Description
 | [[E-01.1]]E-01.1 | sessionId | string | required | Identifier held in the address. Opaque to this element.
@@ -369,7 +368,7 @@ IMPORTANT: The device holds no consent record. The decision is sent to xref:L2-s
 
 '''
 
-== 8. Quality requirements
+== Quality requirements
 
 === [[QR-01]]QR-01 The in-progress state appears immediately _(Performance)_
 

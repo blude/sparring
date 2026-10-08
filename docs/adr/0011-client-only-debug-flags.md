@@ -2,7 +2,7 @@
 
 - **Status:** Accepted
 - **Date:** 2026-08 (back-filled 2026-09-10)
-- **References:** `CLAUDE.md` "Conventions"; `README.md` "Database maintenance" (`?debug=1`)
+- **References:** `CLAUDE.md` "Conventions"; `docs/getting-started.md` "Routing" (`?debug=1`)
 
 ## Context
 

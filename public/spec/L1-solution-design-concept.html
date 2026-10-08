@@ -7,9 +7,10 @@
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="author" content="Sarah Puppin Pratti">
 <title>Solution Design Concept</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Project theme layered over the stock asciidoctor.css (public/spec/spec-theme.css). -->
+<link rel="stylesheet" href="./spec-theme.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -21,64 +22,64 @@
 <span id="revdate">2026-06-19</span>
 </div>
 <div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
+<div id="toctitle">Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_vision">1. Vision</a>
+<li><a href="#_vision">Vision</a>
 <ul class="sectlevel2">
-<li><a href="#_future_press_release">1.1. Future press release</a></li>
-<li><a href="#_business_goals">1.2. Business goals</a>
-<ul class="sectlevel3">
-<li><a href="#_bg_01_make_sparrings_friction_visible_to_an_audience_not_just_to_its_user">1.2.1. BG-01 Make Sparring&#8217;s friction visible to an audience, not just to its user</a></li>
-<li><a href="#_bg_02_give_visitors_direct_unassisted_first_hand_experience_of_being_sparred_with">1.2.2. BG-02 Give visitors direct, unassisted first-hand experience of being sparred with</a></li>
-<li><a href="#_bg_03_run_unattended_through_exhibition_hours">1.2.3. BG-03 Run unattended through exhibition hours</a></li>
-<li><a href="#_bg_04_produce_a_record_of_public_interactions_as_secondary_material">1.2.4. BG-04 Produce a record of public interactions as secondary material</a></li>
+<li><a href="#_future_press_release">Future press release</a></li>
 </ul>
 </li>
+<li><a href="#_business_goals">Business goals</a>
+<ul class="sectlevel2">
+<li><a href="#_bg_01_make_sparrings_friction_visible_to_an_audience_not_just_to_its_user">BG-01 Make Sparring&#8217;s friction visible to an audience, not just to its user</a></li>
+<li><a href="#_bg_02_give_visitors_direct_unassisted_first_hand_experience_of_being_sparred_with">BG-02 Give visitors direct, unassisted first-hand experience of being sparred with</a></li>
+<li><a href="#_bg_03_run_unattended_through_exhibition_hours">BG-03 Run unattended through exhibition hours</a></li>
+<li><a href="#_bg_04_produce_a_record_of_public_interactions_as_secondary_material">BG-04 Produce a record of public interactions as secondary material</a></li>
 </ul>
 </li>
-<li><a href="#_value_proposition">2. Value proposition</a>
+<li><a href="#_value_proposition">Value proposition</a>
 <ul class="sectlevel2">
-<li><a href="#_vp_01_participating_visitor">2.1. VP-01 Participating visitor</a></li>
-<li><a href="#_vp_02_observing_visitor_bystander">2.2. VP-02 Observing visitor (bystander)</a></li>
+<li><a href="#_vp_01_participating_visitor">VP-01 Participating visitor</a></li>
+<li><a href="#_vp_02_observing_visitor_bystander">VP-02 Observing visitor (bystander)</a></li>
 </ul>
 </li>
-<li><a href="#_value_creation_architecture">3. Value creation architecture</a>
+<li><a href="#_value_creation_architecture">Value creation architecture</a>
 <ul class="sectlevel2">
-<li><a href="#_vca_01_participating_visitor_customer">3.1. VCA-01 Participating visitor <em>(Customer)</em></a></li>
-<li><a href="#_vca_02_observing_visitor_customer">3.2. VCA-02 Observing visitor <em>(Customer)</em></a></li>
-<li><a href="#_vca_03_thesis_author_exhibitor_organisation_internal">3.3. VCA-03 Thesis author / exhibitor <em>(Organisation-internal)</em></a></li>
-<li><a href="#_vca_04_the_installation_digital_element">3.4. VCA-04 The installation <em>(Digital-element)</em></a></li>
-<li><a href="#_vca_05_llm_provider_organisation_external">3.5. VCA-05 LLM provider <em>(Organisation-external)</em></a></li>
+<li><a href="#_vca_01_participating_visitor_customer">VCA-01 Participating visitor <em>(Customer)</em></a></li>
+<li><a href="#_vca_02_observing_visitor_customer">VCA-02 Observing visitor <em>(Customer)</em></a></li>
+<li><a href="#_vca_03_thesis_author_exhibitor_organisation_internal">VCA-03 Thesis author / exhibitor <em>(Organisation-internal)</em></a></li>
+<li><a href="#_vca_04_the_installation_digital_element">VCA-04 The installation <em>(Digital-element)</em></a></li>
+<li><a href="#_vca_05_llm_provider_organisation_external">VCA-05 LLM provider <em>(Organisation-external)</em></a></li>
 </ul>
 </li>
-<li><a href="#_information_architecture">4. Information architecture</a>
+<li><a href="#_information_architecture">Information architecture</a>
 <ul class="sectlevel2">
-<li><a href="#_be_01_sparring_session">4.1. BE-01 Sparring session</a></li>
-<li><a href="#_be_02_exchange">4.2. BE-02 Exchange</a></li>
-<li><a href="#_be_03_scenario">4.3. BE-03 Scenario</a></li>
-<li><a href="#_be_04_consent_record">4.4. BE-04 Consent record</a></li>
+<li><a href="#_be_01_sparring_session">BE-01 Sparring session</a></li>
+<li><a href="#_be_02_exchange">BE-02 Exchange</a></li>
+<li><a href="#_be_03_scenario">BE-03 Scenario</a></li>
+<li><a href="#_be_04_consent_record">BE-04 Consent record</a></li>
 </ul>
 </li>
-<li><a href="#_business_processes">5. Business processes</a>
+<li><a href="#_business_processes">Business processes</a>
 <ul class="sectlevel2">
-<li><a href="#_bp_01_visitor_conducts_a_sparring_session">5.1. BP-01 Visitor conducts a Sparring session</a></li>
-<li><a href="#_bp_02_recent_sessions_are_shown_to_the_room">5.2. BP-02 Recent sessions are shown to the room</a></li>
+<li><a href="#_bp_01_visitor_conducts_a_sparring_session">BP-01 Visitor conducts a Sparring session</a></li>
+<li><a href="#_bp_02_recent_sessions_are_shown_to_the_room">BP-02 Recent sessions are shown to the room</a></li>
 </ul>
 </li>
-<li><a href="#_quality_requirements">6. Quality requirements</a>
+<li><a href="#_quality_requirements">Quality requirements</a>
 <ul class="sectlevel2">
-<li><a href="#_bqr_01_visitors_experience_challenge_not_obstruction_customer_satisfaction">6.1. BQR-01 Visitors experience challenge, not obstruction <em>(Customer-satisfaction)</em></a></li>
-<li><a href="#_bqr_02_the_piece_is_available_whenever_the_room_is_open_service_quality">6.2. BQR-02 The piece is available whenever the room is open <em>(Service-quality)</em></a></li>
-<li><a href="#_bqr_03_nothing_identifying_a_visitor_reaches_the_projection_compliance">6.3. BQR-03 Nothing identifying a visitor reaches the projection <em>(Compliance)</em></a></li>
-<li><a href="#_bqr_04_exhibition_material_is_never_mistaken_for_evaluation_data_operational_excellence">6.4. BQR-04 Exhibition material is never mistaken for evaluation data <em>(Operational-excellence)</em></a></li>
+<li><a href="#_bqr_01_visitors_experience_challenge_not_obstruction_customer_satisfaction">BQR-01 Visitors experience challenge, not obstruction <em>(Customer-satisfaction)</em></a></li>
+<li><a href="#_bqr_02_the_piece_is_available_whenever_the_room_is_open_service_quality">BQR-02 The piece is available whenever the room is open <em>(Service-quality)</em></a></li>
+<li><a href="#_bqr_03_nothing_identifying_a_visitor_reaches_the_projection_compliance">BQR-03 Nothing identifying a visitor reaches the projection <em>(Compliance)</em></a></li>
+<li><a href="#_bqr_04_exhibition_material_is_never_mistaken_for_evaluation_data_operational_excellence">BQR-04 Exhibition material is never mistaken for evaluation data <em>(Operational-excellence)</em></a></li>
 </ul>
 </li>
-<li><a href="#_constraints">7. Constraints</a>
+<li><a href="#_constraints">Constraints</a>
 <ul class="sectlevel2">
-<li><a href="#_bc_01_build_effort_must_not_compete_with_thesis_writing_business">7.1. BC-01 Build effort must not compete with thesis writing <em>(Business)</em></a></li>
-<li><a href="#_bc_02_public_user_generated_content_is_subject_to_data_protection_law_legal_regulatory">7.2. BC-02 Public user-generated content is subject to data protection law <em>(Legal-regulatory)</em></a></li>
-<li><a href="#_bc_03_one_developer_no_continuous_on_site_operator_resource">7.3. BC-03 One developer, no continuous on-site operator <em>(Resource)</em></a></li>
-<li><a href="#_bc_04_display_design_is_not_yet_settled_organisational">7.4. BC-04 Display design is not yet settled <em>(Organisational)</em></a></li>
+<li><a href="#_bc_01_build_effort_must_not_compete_with_thesis_writing_business">BC-01 Build effort must not compete with thesis writing <em>(Business)</em></a></li>
+<li><a href="#_bc_02_public_user_generated_content_is_subject_to_data_protection_law_legal_regulatory">BC-02 Public user-generated content is subject to data protection law <em>(Legal-regulatory)</em></a></li>
+<li><a href="#_bc_03_one_developer_no_continuous_on_site_operator_resource">BC-03 One developer, no continuous on-site operator <em>(Resource)</em></a></li>
+<li><a href="#_bc_04_display_design_is_not_yet_settled_organisational">BC-04 Display design is not yet settled <em>(Organisational)</em></a></li>
 </ul>
 </li>
 </ul>
@@ -90,7 +91,7 @@
 <div class="paragraph">
 <p><strong>Solution:</strong> Sparring Exhibition Object<br>
 <strong>Venue:</strong> Superraum, Dortmund<br>
-<strong>Status:</strong> Draft<br>
+<strong>Status:</strong> Stable — no open TBCs remaining<br>
 <strong>Scope note:</strong> Deliberately thin. This level exists to record <em>why</em> the installation is being built and what it must be true from a non-technical perspective. No Digital Design Brief sits above it, so business constraints carry no <code>Refines → BRC-</code> relation. Those relations are omitted rather than pointed at IDs that do not exist.</p>
 </div>
 <div class="paragraph">
@@ -100,10 +101,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_vision"><a class="anchor" href="#_vision"></a>1. Vision</h2>
+<h2 id="_vision"><a class="anchor" href="#_vision"></a>Vision</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_future_press_release"><a class="anchor" href="#_future_press_release"></a>1.1. Future press release</h3>
+<h3 id="_future_press_release"><a class="anchor" href="#_future_press_release"></a>Future press release</h3>
 <div class="paragraph">
 <p><strong>Dortmund, September 2026. Sparring goes public at Superraum.</strong></p>
 </div>
@@ -129,10 +130,13 @@
 <p>The recorded sessions now sit next to the thesis evaluation as a separate, lighter set of material. It is not a controlled study. It is a public record of what happens when the friction meets people who were not expecting it.</p>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_business_goals"><a class="anchor" href="#_business_goals"></a>Business goals</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="_business_goals"><a class="anchor" href="#_business_goals"></a>1.2. Business goals</h3>
-<div class="sect3">
-<h4 id="_bg_01_make_sparrings_friction_visible_to_an_audience_not_just_to_its_user"><a class="anchor" href="#_bg_01_make_sparrings_friction_visible_to_an_audience_not_just_to_its_user"></a>1.2.1. <a id="BG-01"></a>BG-01 Make Sparring&#8217;s friction visible to an audience, not just to its user</h4>
+<h3 id="_bg_01_make_sparrings_friction_visible_to_an_audience_not_just_to_its_user"><a class="anchor" href="#_bg_01_make_sparrings_friction_visible_to_an_audience_not_just_to_its_user"></a><a id="BG-01"></a>BG-01 Make Sparring&#8217;s friction visible to an audience, not just to its user</h3>
 <div class="paragraph">
 <p>The installation shall put the exchange between learner and Sparring partner on a shared surface, so that the pedagogical mechanism is observable by people who are not the participant.</p>
 </div>
@@ -143,8 +147,8 @@
 <p><em>Rationale:</em> Legibility is a primary claim of the thesis. Until now it has only been evidenced through participant self-report after the fact.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_bg_02_give_visitors_direct_unassisted_first_hand_experience_of_being_sparred_with"><a class="anchor" href="#_bg_02_give_visitors_direct_unassisted_first_hand_experience_of_being_sparred_with"></a>1.2.2. <a id="BG-02"></a>BG-02 Give visitors direct, unassisted first-hand experience of being sparred with</h4>
+<div class="sect2">
+<h3 id="_bg_02_give_visitors_direct_unassisted_first_hand_experience_of_being_sparred_with"><a class="anchor" href="#_bg_02_give_visitors_direct_unassisted_first_hand_experience_of_being_sparred_with"></a><a id="BG-02"></a>BG-02 Give visitors direct, unassisted first-hand experience of being sparred with</h3>
 <div class="paragraph">
 <p>Any visitor shall be able to start and complete a session using only their own device, without registration, or staff assistance.</p>
 </div>
@@ -152,8 +156,8 @@
 <p><em>Success criteria (qualitative):</em> A visitor with no prior context reaches their first Sparring response without asking anyone how the piece works.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_bg_03_run_unattended_through_exhibition_hours"><a class="anchor" href="#_bg_03_run_unattended_through_exhibition_hours"></a>1.2.3. <a id="BG-03"></a>BG-03 Run unattended through exhibition hours</h4>
+<div class="sect2">
+<h3 id="_bg_03_run_unattended_through_exhibition_hours"><a class="anchor" href="#_bg_03_run_unattended_through_exhibition_hours"></a><a id="BG-03"></a>BG-03 Run unattended through exhibition hours</h3>
 <div class="paragraph">
 <p>The installation shall remain available and populated without an operator present, and shall degrade visibly rather than silently when something fails.</p>
 </div>
@@ -161,8 +165,8 @@
 <p><em>Success criteria (quantitative):</em> Available for the full duration of published opening hours across the exhibition period, with no manual intervention required to restore the projected display.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_bg_04_produce_a_record_of_public_interactions_as_secondary_material"><a class="anchor" href="#_bg_04_produce_a_record_of_public_interactions_as_secondary_material"></a>1.2.4. <a id="BG-04"></a>BG-04 Produce a record of public interactions as secondary material</h4>
+<div class="sect2">
+<h3 id="_bg_04_produce_a_record_of_public_interactions_as_secondary_material"><a class="anchor" href="#_bg_04_produce_a_record_of_public_interactions_as_secondary_material"></a><a id="BG-04"></a>BG-04 Produce a record of public interactions as secondary material</h3>
 <div class="paragraph">
 <p>Interactions shall be captured in a form that can be reviewed after the exhibition, clearly separated from the formal evaluation sessions.</p>
 </div>
@@ -175,12 +179,11 @@
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
-<h2 id="_value_proposition"><a class="anchor" href="#_value_proposition"></a>2. Value proposition</h2>
+<h2 id="_value_proposition"><a class="anchor" href="#_value_proposition"></a>Value proposition</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_vp_01_participating_visitor"><a class="anchor" href="#_vp_01_participating_visitor"></a>2.1. <a id="VP-01"></a>VP-01 Participating visitor</h3>
+<h3 id="_vp_01_participating_visitor"><a class="anchor" href="#_vp_01_participating_visitor"></a><a id="VP-01"></a>VP-01 Participating visitor</h3>
 <div class="paragraph">
 <p><em>Segment characteristics:</em> Exhibition audience. Mixed background, largely non-expert in agentic AI. Attention measured in minutes, not hours. Arrives curious, not briefed.</p>
 </div>
@@ -198,7 +201,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vp_02_observing_visitor_bystander"><a class="anchor" href="#_vp_02_observing_visitor_bystander"></a>2.2. <a id="VP-02"></a>VP-02 Observing visitor (bystander)</h3>
+<h3 id="_vp_02_observing_visitor_bystander"><a class="anchor" href="#_vp_02_observing_visitor_bystander"></a><a id="VP-02"></a>VP-02 Observing visitor (bystander)</h3>
 <div class="paragraph">
 <p><em>Segment characteristics:</em> Present in the room, not currently interacting. May be waiting, accompanying someone, or passing through. Engagement window of a few seconds.</p>
 </div>
@@ -215,7 +218,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_value_creation_architecture"><a class="anchor" href="#_value_creation_architecture"></a>3. Value creation architecture</h2>
+<h2 id="_value_creation_architecture"><a class="anchor" href="#_value_creation_architecture"></a>Value creation architecture</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -234,7 +237,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vca_01_participating_visitor_customer"><a class="anchor" href="#_vca_01_participating_visitor_customer"></a>3.1. <a id="VCA-01"></a>VCA-01 Participating visitor <em>(Customer)</em></h3>
+<h3 id="_vca_01_participating_visitor_customer"><a class="anchor" href="#_vca_01_participating_visitor_customer"></a><a id="VCA-01"></a>VCA-01 Participating visitor <em>(Customer)</em></h3>
 <div class="paragraph">
 <p>Receives the value described in <a href="#VP-01">VP-01 Participating visitor</a>. Interacts directly with <a href="#VCA-04">VCA-04 The installation</a> through their own device.</p>
 </div>
@@ -243,7 +246,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vca_02_observing_visitor_customer"><a class="anchor" href="#_vca_02_observing_visitor_customer"></a>3.2. <a id="VCA-02"></a>VCA-02 Observing visitor <em>(Customer)</em></h3>
+<h3 id="_vca_02_observing_visitor_customer"><a class="anchor" href="#_vca_02_observing_visitor_customer"></a><a id="VCA-02"></a>VCA-02 Observing visitor <em>(Customer)</em></h3>
 <div class="paragraph">
 <p>Receives the value described in <a href="#VP-02">VP-02 Observing visitor (bystander)</a> through the projected surface of <a href="#VCA-04">VCA-04 The installation</a>, without interacting.</p>
 </div>
@@ -252,13 +255,13 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vca_03_thesis_author_exhibitor_organisation_internal"><a class="anchor" href="#_vca_03_thesis_author_exhibitor_organisation_internal"></a>3.3. <a id="VCA-03"></a>VCA-03 Thesis author / exhibitor <em>(Organisation-internal)</em></h3>
+<h3 id="_vca_03_thesis_author_exhibitor_organisation_internal"><a class="anchor" href="#_vca_03_thesis_author_exhibitor_organisation_internal"></a><a id="VCA-03"></a>VCA-03 Thesis author / exhibitor <em>(Organisation-internal)</em></h3>
 <div class="paragraph">
 <p>Provides the pilot session material that populates the installation before and between live sessions, and maintains the running system. Not present continuously during exhibition hours.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vca_04_the_installation_digital_element"><a class="anchor" href="#_vca_04_the_installation_digital_element"></a>3.4. <a id="VCA-04"></a>VCA-04 The installation <em>(Digital-element)</em></h3>
+<h3 id="_vca_04_the_installation_digital_element"><a class="anchor" href="#_vca_04_the_installation_digital_element"></a><a id="VCA-04"></a>VCA-04 The installation <em>(Digital-element)</em></h3>
 <div class="paragraph">
 <p>The whole technical system, treated as one element at this level. The technical decomposition into clients and backend belongs at L2.</p>
 </div>
@@ -267,7 +270,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vca_05_llm_provider_organisation_external"><a class="anchor" href="#_vca_05_llm_provider_organisation_external"></a>3.5. <a id="VCA-05"></a>VCA-05 LLM provider <em>(Organisation-external)</em></h3>
+<h3 id="_vca_05_llm_provider_organisation_external"><a class="anchor" href="#_vca_05_llm_provider_organisation_external"></a><a id="VCA-05"></a>VCA-05 LLM provider <em>(Organisation-external)</em></h3>
 <div class="paragraph">
 <p>Supplies the language generation that produces Sparring responses. Not owned or controlled by the project.<br>
 <em>Realises:</em> <a href="#VP-01">VP-01 Participating visitor</a></p>
@@ -276,10 +279,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_information_architecture"><a class="anchor" href="#_information_architecture"></a>4. Information architecture</h2>
+<h2 id="_information_architecture"><a class="anchor" href="#_information_architecture"></a>Information architecture</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_be_01_sparring_session"><a class="anchor" href="#_be_01_sparring_session"></a>4.1. <a id="BE-01"></a>BE-01 Sparring session</h3>
+<h3 id="_be_01_sparring_session"><a class="anchor" href="#_be_01_sparring_session"></a><a id="BE-01"></a>BE-01 Sparring session</h3>
 <div class="paragraph">
 <p>One visitor&#8217;s continuous engagement with the installation, from first turn to abandonment or turn cap.</p>
 </div>
@@ -291,7 +294,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_be_02_exchange"><a class="anchor" href="#_be_02_exchange"></a>4.2. <a id="BE-02"></a>BE-02 Exchange</h3>
+<h3 id="_be_02_exchange"><a class="anchor" href="#_be_02_exchange"></a><a id="BE-02"></a>BE-02 Exchange</h3>
 <div class="paragraph">
 <p>One visitor turn together with the Sparring partner&#8217;s reply to it. The exchange, not the individual turn, is the unit that carries meaning: a reply without its prompt shows nothing about friction.</p>
 </div>
@@ -303,7 +306,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_be_03_scenario"><a class="anchor" href="#_be_03_scenario"></a>4.3. <a id="BE-03"></a>BE-03 Scenario</h3>
+<h3 id="_be_03_scenario"><a class="anchor" href="#_be_03_scenario"></a><a id="BE-03"></a>BE-03 Scenario</h3>
 <div class="paragraph">
 <p>A short statement of what a session is about, giving a reader enough context to make sense of an isolated exchange.<br>
 <em>Key information:</em> Summary text, derivation source (visitor&#8217;s opening turn or generated label).</p>
@@ -313,7 +316,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_be_04_consent_record"><a class="anchor" href="#_be_04_consent_record"></a>4.4. <a id="BE-04"></a>BE-04 Consent record</h3>
+<h3 id="_be_04_consent_record"><a class="anchor" href="#_be_04_consent_record"></a><a id="BE-04"></a>BE-04 Consent record</h3>
 <div class="paragraph">
 <p>Three independent decisions made together, once, before the session opens: agreement to the terms of participation (a precondition of using the piece at all, not a data-processing choice), consent to have the session retained and reviewed after the exhibition, and consent to have exchanges shown on the projection. The latter two are genuine opt-outs — declining either still lets the visitor spar.</p>
 </div>
@@ -327,10 +330,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_business_processes"><a class="anchor" href="#_business_processes"></a>5. Business processes</h2>
+<h2 id="_business_processes"><a class="anchor" href="#_business_processes"></a>Business processes</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_bp_01_visitor_conducts_a_sparring_session"><a class="anchor" href="#_bp_01_visitor_conducts_a_sparring_session"></a>5.1. <a id="BP-01"></a>BP-01 Visitor conducts a Sparring session</h3>
+<h3 id="_bp_01_visitor_conducts_a_sparring_session"><a class="anchor" href="#_bp_01_visitor_conducts_a_sparring_session"></a><a id="BP-01"></a>BP-01 Visitor conducts a Sparring session</h3>
 <div class="paragraph">
 <p>A visitor scans the QR code, agrees to take part and makes their retention and projection choices, and exchanges turns with the Sparring partner until they stop or reach the session limit. Their exchanges appear on the projection as they happen, if they consented to that.</p>
 </div>
@@ -413,7 +416,7 @@ A visitor who spends the session trying to argue the Sparring partner out of its
 </div>
 </div>
 <div class="sect2">
-<h3 id="_bp_02_recent_sessions_are_shown_to_the_room"><a class="anchor" href="#_bp_02_recent_sessions_are_shown_to_the_room"></a>5.2. <a id="BP-02"></a>BP-02 Recent sessions are shown to the room</h3>
+<h3 id="_bp_02_recent_sessions_are_shown_to_the_room"><a class="anchor" href="#_bp_02_recent_sessions_are_shown_to_the_room"></a><a id="BP-02"></a>BP-02 Recent sessions are shown to the room</h3>
 <div class="paragraph">
 <p>The projection presents recent exchanges so that people who are not currently participating can read what the installation does. When no live session is running, earlier pilot material keeps the surface populated.</p>
 </div>
@@ -459,10 +462,10 @@ A visitor who spends the session trying to argue the Sparring partner out of its
 </div>
 </div>
 <div class="sect1">
-<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>6. Quality requirements</h2>
+<h2 id="_quality_requirements"><a class="anchor" href="#_quality_requirements"></a>Quality requirements</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_bqr_01_visitors_experience_challenge_not_obstruction_customer_satisfaction"><a class="anchor" href="#_bqr_01_visitors_experience_challenge_not_obstruction_customer_satisfaction"></a>6.1. <a id="BQR-01"></a>BQR-01 Visitors experience challenge, not obstruction <em>(Customer-satisfaction)</em></h3>
+<h3 id="_bqr_01_visitors_experience_challenge_not_obstruction_customer_satisfaction"><a class="anchor" href="#_bqr_01_visitors_experience_challenge_not_obstruction_customer_satisfaction"></a><a id="BQR-01"></a>BQR-01 Visitors experience challenge, not obstruction <em>(Customer-satisfaction)</em></h3>
 <div class="paragraph">
 <p>The friction shall read as deliberate and directed rather than as the system malfunctioning or refusing.</p>
 </div>
@@ -477,7 +480,7 @@ A visitor who spends the session trying to argue the Sparring partner out of its
 </div>
 </div>
 <div class="sect2">
-<h3 id="_bqr_02_the_piece_is_available_whenever_the_room_is_open_service_quality"><a class="anchor" href="#_bqr_02_the_piece_is_available_whenever_the_room_is_open_service_quality"></a>6.2. <a id="BQR-02"></a>BQR-02 The piece is available whenever the room is open <em>(Service-quality)</em></h3>
+<h3 id="_bqr_02_the_piece_is_available_whenever_the_room_is_open_service_quality"><a class="anchor" href="#_bqr_02_the_piece_is_available_whenever_the_room_is_open_service_quality"></a><a id="BQR-02"></a>BQR-02 The piece is available whenever the room is open <em>(Service-quality)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#BP-01">BP-01 Visitor conducts a Sparring session</a>, <a href="#BP-02">BP-02 Recent sessions are shown to the room</a></p>
 </div>
@@ -489,7 +492,7 @@ A visitor who spends the session trying to argue the Sparring partner out of its
 </div>
 </div>
 <div class="sect2">
-<h3 id="_bqr_03_nothing_identifying_a_visitor_reaches_the_projection_compliance"><a class="anchor" href="#_bqr_03_nothing_identifying_a_visitor_reaches_the_projection_compliance"></a>6.3. <a id="BQR-03"></a>BQR-03 Nothing identifying a visitor reaches the projection <em>(Compliance)</em></h3>
+<h3 id="_bqr_03_nothing_identifying_a_visitor_reaches_the_projection_compliance"><a class="anchor" href="#_bqr_03_nothing_identifying_a_visitor_reaches_the_projection_compliance"></a><a id="BQR-03"></a>BQR-03 Nothing identifying a visitor reaches the projection <em>(Compliance)</em></h3>
 <div class="paragraph">
 <p>The public surface shall not carry names, contact details, or other personal information, whether typed deliberately or incidentally.</p>
 </div>
@@ -504,12 +507,12 @@ A visitor who spends the session trying to argue the Sparring partner out of its
 </div>
 </div>
 <div class="sect2">
-<h3 id="_bqr_04_exhibition_material_is_never_mistaken_for_evaluation_data_operational_excellence"><a class="anchor" href="#_bqr_04_exhibition_material_is_never_mistaken_for_evaluation_data_operational_excellence"></a>6.4. <a id="BQR-04"></a>BQR-04 Exhibition material is never mistaken for evaluation data <em>(Operational-excellence)</em></h3>
+<h3 id="_bqr_04_exhibition_material_is_never_mistaken_for_evaluation_data_operational_excellence"><a class="anchor" href="#_bqr_04_exhibition_material_is_never_mistaken_for_evaluation_data_operational_excellence"></a><a id="BQR-04"></a>BQR-04 Exhibition material is never mistaken for evaluation data <em>(Operational-excellence)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#BE-01">BE-01 Sparring session</a></p>
 </div>
 <div class="paragraph">
-<p><em>Acceptance criteria (qualitative):</em> Session origin is recorded at creation, not reconstructed afterwards.</p>
+<p><em>Acceptance criteria (qualitative):</em> Session origin is recorded at creation, not reconstructed afterwards. The one hand edit is the operator marking evaluation-study sessions as such (see SQR-05).</p>
 </div>
 <div class="paragraph">
 <p><em>Satisfies:</em> <a href="#BG-04">BG-04 Produce a record of public interactions as secondary</a></p>
@@ -518,10 +521,10 @@ A visitor who spends the session trying to argue the Sparring partner out of its
 </div>
 </div>
 <div class="sect1">
-<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>7. Constraints</h2>
+<h2 id="_constraints"><a class="anchor" href="#_constraints"></a>Constraints</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_bc_01_build_effort_must_not_compete_with_thesis_writing_business"><a class="anchor" href="#_bc_01_build_effort_must_not_compete_with_thesis_writing_business"></a>7.1. <a id="BC-01"></a>BC-01 Build effort must not compete with thesis writing <em>(Business)</em></h3>
+<h3 id="_bc_01_build_effort_must_not_compete_with_thesis_writing_business"><a class="anchor" href="#_bc_01_build_effort_must_not_compete_with_thesis_writing_business"></a><a id="BC-01"></a>BC-01 Build effort must not compete with thesis writing <em>(Business)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> Thesis delivery date, 29 October 2026. Exhibition opening, 4 September 2026.</p>
 </div>
@@ -533,7 +536,7 @@ A visitor who spends the session trying to argue the Sparring partner out of its
 </div>
 </div>
 <div class="sect2">
-<h3 id="_bc_02_public_user_generated_content_is_subject_to_data_protection_law_legal_regulatory"><a class="anchor" href="#_bc_02_public_user_generated_content_is_subject_to_data_protection_law_legal_regulatory"></a>7.2. <a id="BC-02"></a>BC-02 Public user-generated content is subject to data protection law <em>(Legal-regulatory)</em></h3>
+<h3 id="_bc_02_public_user_generated_content_is_subject_to_data_protection_law_legal_regulatory"><a class="anchor" href="#_bc_02_public_user_generated_content_is_subject_to_data_protection_law_legal_regulatory"></a><a id="BC-02"></a>BC-02 Public user-generated content is subject to data protection law <em>(Legal-regulatory)</em></h3>
 <div class="paragraph">
 <p><em>Source:</em> GDPR.</p>
 </div>
@@ -545,7 +548,7 @@ A visitor who spends the session trying to argue the Sparring partner out of its
 </div>
 </div>
 <div class="sect2">
-<h3 id="_bc_03_one_developer_no_continuous_on_site_operator_resource"><a class="anchor" href="#_bc_03_one_developer_no_continuous_on_site_operator_resource"></a>7.3. <a id="BC-03"></a>BC-03 One developer, no continuous on-site operator <em>(Resource)</em></h3>
+<h3 id="_bc_03_one_developer_no_continuous_on_site_operator_resource"><a class="anchor" href="#_bc_03_one_developer_no_continuous_on_site_operator_resource"></a><a id="BC-03"></a>BC-03 One developer, no continuous on-site operator <em>(Resource)</em></h3>
 <div class="paragraph">
 <p><em>Applies to:</em> The whole solution.</p>
 </div>
@@ -554,15 +557,15 @@ A visitor who spends the session trying to argue the Sparring partner out of its
 </div>
 </div>
 <div class="sect2">
-<h3 id="_bc_04_display_design_is_not_yet_settled_organisational"><a class="anchor" href="#_bc_04_display_design_is_not_yet_settled_organisational"></a>7.4. <a id="BC-04"></a>BC-04 Display design is not yet settled <em>(Organisational)</em></h3>
+<h3 id="_bc_04_display_design_is_not_yet_settled_organisational"><a class="anchor" href="#_bc_04_display_design_is_not_yet_settled_organisational"></a><a id="BC-04"></a>BC-04 Display design is not yet settled <em>(Organisational)</em></h3>
 <div class="paragraph">
-<p>The projected layout is marked TO BE REFINED and will be decided against real pilot transcripts on the actual projector.</p>
+<p>The projected layout was marked TO BE REFINED and decided against real pilot transcripts on the actual projector.</p>
 </div>
 <div class="paragraph">
 <p><em>Applies to:</em> <a href="#BP-02">BP-02 Recent sessions are shown to the room</a>.</p>
 </div>
 <div class="paragraph">
-<p><em>Acceptance criteria:</em> TBC.</p>
+<p><em>Acceptance criteria:</em> Resolved — see <a href="L2-system-design-concept.html#SC-06">SC-06 The projected layout is an open decision</a>.</p>
 </div>
 <hr>
 <div class="admonitionblock note">
@@ -581,6 +584,47 @@ Downward references ("implemented by", "realised by") are not written at this le
 </div>
 </div>
 </div>
+<!-- Sitemap: every spec page, on every page. Our own #footer, since the build
+     passes -a nofooter (the stock one only prints a file mtime, which would
+     make the committed HTML drift between checkouts). Hand-maintained:
+     a new spec/*.adoc page needs a link here too. -->
+<footer id="footer">
+  <nav class="sitemap" aria-label="Spec pages">
+    <div>
+      <p class="sitemap-title">Overview</p>
+      <ul>
+        <li><a href="index.html">Design Documentation</a></li>
+        <li><a href="L1-solution-design-concept.html">L1 Solution Design Concept</a></li>
+        <li><a href="L2-system-design-concept.html">L2 System Design Concept</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Software elements</p>
+      <ul>
+        <li><a href="L3-SE-01-input-client.html">SE-01 Input Client</a></li>
+        <li><a href="L3-SE-02-display-client.html">SE-02 Display Client</a></li>
+        <li><a href="L3-SE-03-backend-service.html">SE-03 Backend Service</a></li>
+        <li><a href="L3-SE-04-system-prompt.html">SE-04 System Prompt</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="sitemap-title">Additional reference</p>
+      <ul>
+        <li><a href="LX-system-realization-concept.html">LX System Realization Concept</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+  </nav>
+</footer>
+<!-- Mark the sitemap link for this page; a bare /spec/ is index.html. -->
+<script>
+  (function () {
+    var page = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.sitemap a').forEach(function (a) {
+      if (a.getAttribute('href') === page) a.setAttribute('aria-current', 'page');
+    });
+  })();
+</script>
 <!-- Mermaid support for [source,mermaid] code blocks. Asciidoctor has no
      native Mermaid renderer, so this is client-side: turn the generated
      `code.language-mermaid` block into what Mermaid expects and let its
@@ -593,7 +637,51 @@ Downward references ("implemented by", "realised by") are not written at this le
     div.textContent = code.textContent;
     code.closest('pre').replaceWith(div);
   });
-  mermaid.initialize({ startOnLoad: true });
+  // 'base' is the only Mermaid theme that honours themeVariables; these match
+  // public/spec/spec-theme.css instead of Mermaid's default lavender.
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#fbeaea',
+      primaryBorderColor: '#d32f2f',
+      primaryTextColor: '#1a1a1a',
+      lineColor: '#666',
+      edgeLabelBackground: '#f2f2f2',
+      clusterBkg: '#fafafa',
+      clusterBorder: '#d9d9d9',
+      fontFamily: 'system-ui, sans-serif'
+    }
+  });
+</script>
+<!-- Mark the ToC link for the current #hash. CSS can match the target heading
+     (:target) but not the link pointing at it, so this bridges the two. -->
+<script>
+  function markCurrentTocLink() {
+    document.querySelectorAll('#toc a').forEach(function (a) {
+      if (location.hash && a.hash === location.hash) {
+        a.setAttribute('aria-current', 'location');
+        // Long L3 ToCs overflow the fixed sidebar; keep the entry in view.
+        a.scrollIntoView({ block: 'nearest' });
+      } else {
+        a.removeAttribute('aria-current');
+      }
+    });
+  }
+  markCurrentTocLink();
+  window.addEventListener('hashchange', markCurrentTocLink);
+</script>
+<!-- Tag the `_Key:_` labels (Satisfies, Rationale, ...) that open each line of
+     a requirement so spec-theme.css can set them apart from the body text.
+     CSS alone can't: it can't see the trailing colon, and `em:first-child`
+     ignores text nodes, so it would also catch italic words and notes. -->
+<script>
+  document.querySelectorAll('.paragraph > p > em').forEach(function (em) {
+    if (!/:\s*$/.test(em.textContent)) return;
+    var prev = em.previousSibling;
+    while (prev && prev.nodeType === Node.TEXT_NODE && !prev.textContent.trim()) prev = prev.previousSibling;
+    if (!prev || prev.nodeName === 'BR') em.classList.add('meta-key');
+  });
 </script>
 </body>
 </html>

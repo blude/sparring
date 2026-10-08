@@ -7,14 +7,14 @@
 //   - titles: each title kept whole, short punchy ones sized bigger
 //
 // Usage:
-//   node docs/feature-cloud/cloud.gen.mjs [seed] [--landscape]
+//   node docs/thesis/feature-cloud/cloud.gen.mjs [seed] [--landscape]
 //   (default is A3 portrait, 297×420mm — it packs the long title strings
 //    tighter than landscape does)
 //
 // Writes {words,titles}.{portrait,landscape}.<stamp>.svg — the orientation
 // and a UTC YYYYMMDD-HHMMSS stamp are in the name, so runs don't overwrite
 // each other. Layout is deterministic for a given seed. Try a few seeds and
-// keep the one that composes best:  node docs/feature-cloud/cloud.gen.mjs 7
+// keep the one that composes best:  node docs/thesis/feature-cloud/cloud.gen.mjs 7
 //
 // Text width is estimated from a rough per-glyph advance table (no font
 // metrics engine available headless); collision padding absorbs the error.

@@ -32,7 +32,10 @@ return [
     'start.cta' => 'Start a new session',
     'start.learnMore' => 'Learn more about <a href="/philosophy">Sparring&rsquo;s philosophy</a>.',
     'start.footer.craft' => 'Craft with #DigitalMaterial &middot; <a href="/credits">Credits</a>',
-    'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/privacy#cookies">Cookies</a> &middot; 🏳️‍⚧️',
+    'start.footer.legal' => '&copy; {year} &middot; <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a> &middot; 🏳️‍⚧️',
+    'start.egg.title' => 'Glove check!',
+    'start.egg.body' => 'One, two, three… five hits. Whew! Warming yourself up, eh? Let\'s see if you can flex those design muscles too, champ.',
+    'start.egg.dismiss' => 'See you in the dojo',
 
     // --- dojo.php (SE-01) + dojo.js ---
     'dojo.title' => 'Dojo — Sparring',
@@ -126,8 +129,8 @@ return [
     'credits.author.heading' => 'About the Author',
     'credits.author.bio' => 'Sarah is a designer and researcher based in Dortmund. She is currently a student of the Master Digital Design program at the Fachhochschule Dortmund, where she investigates the role of AI in design education. Her work explores the intersection of technology, creativity, and human-computer interaction.',
     'credits.author.contact' => '<strong>Contact:</strong> For inquiries, please contact <a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Inquiry">sarah.puppinpratti001@stud.fh-dortmund.de</a>',
-    'credits.ack.heading' => 'Acknowledgements',
-    'credits.ack.intro' => 'Sparring uses the following open-source libraries and technologies:',
+    'credits.ack.heading' => 'Acknowledgments',
+    'credits.ack.intro' => 'Sparring uses the following libraries, fonts and tools:',
     'credits.ack.material' => 'Parts of Sparring&rsquo;s teaching material are based on work originally written by Dr. Kim Lauenroth.',
 
     // --- philosophy.php ---
@@ -151,6 +154,10 @@ return [
     'privacy.cookies.subheading' => '<a name="cookies"></a>Cookies',
     'privacy.cookies.p1' => 'This site uses one cookie, storing your chosen language for up to a year, so it does not have to be re-selected on every visit. No tracking, analytics, or advertising cookies are used.',
     'privacy.contact' => 'For questions about this policy or your data, contact Sarah Puppin Pratti (<a href="mailto:sarah.puppinpratti001@stud.fh-dortmund.de?subject=Sparring%20Privacy%20Policy">sarah.puppinpratti001@stud.fh-dortmund.de</a>).',
+
+    // --- ses.php ---
+    'ses.title' => 'Evaluation Scenarios — Sparring',
+    'ses.heading' => 'Evaluation Scenarios',
 
     // --- terms.php ---
     'terms.title' => 'Terms of Service — Sparring',

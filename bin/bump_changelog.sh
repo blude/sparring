@@ -12,7 +12,8 @@ set -euo pipefail
 # RELEASE_DATE are fixed below and updated by hand at each release milestone,
 # which resets N to 0 (see the `v*` git tags).
 #
-# Leaves the commit itself to the caller — this only edits the two files.
+# Leaves the commit itself to the caller — this only edits CHANGELOG.md,
+# composer.json and composer.lock.
 #
 # Usage: bin/bump_changelog.sh
 
@@ -89,6 +90,10 @@ new_version="${MAJOR}.${heading_count}.0"
 
 awk -v v="$new_version" '{ sub(/"version": *"[^"]*"/, "\"version\": \"" v "\""); print }' "$COMPOSER" > "$COMPOSER.tmp"
 mv "$COMPOSER.tmp" "$COMPOSER"
+# Composer hashes "version" into composer.lock's content-hash, so the edit
+# above leaves the lock stale ("lock file is not up to date"). --lock only
+# refreshes that hash; no package changes.
+composer update --lock --no-interaction --quiet
 
 head_hash=$(git rev-parse --short HEAD)
 echo "CHANGELOG.md updated through $head_hash, version set to $new_version ($heading_count date headings)."

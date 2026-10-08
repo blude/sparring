@@ -2,7 +2,7 @@
 
 - **Status:** Accepted
 - **Date:** 2026-09-03 (commits `21d79d6`, `233e03d`; follow-ups `2aeae37`)
-- **References:** `docs/ios-keyboard-viewport.md`; memory note `ios-keyboard-viewport-dont-handroll`; `public/assets/dojo.js`
+- **References:** `docs/notes/ios-keyboard-viewport.md`; memory note `ios-keyboard-viewport-dont-handroll`; `public/assets/dojo.js`
 
 ## Context
 

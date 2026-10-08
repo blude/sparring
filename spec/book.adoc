@@ -1,0 +1,92 @@
+= Sparring: Design Documentation
+Sarah Puppin Pratti <sarah.puppinpratti001@stud.fh-dortmund.de>
+v1.1, 2026-09-10
+:doctype: book
+:toc:
+:toclevels: 4
+:sectnums:
+:sectnumlevels: 2
+:icons: font
+
+// Combined book edition of the L1-LX design record. Built to
+// public/spec/sparring-spec.pdf by bin/build_spec_pdf.sh, which pre-renders
+// the Mermaid blocks to PNG (see docs/adr/0015) and slices the per-file
+// header off each include. The HTML edition (bin/build_spec.sh) stays the
+// canonical one; this is for printing and offline reading.
+//
+// Front matter below is lifted from index.adoc. The rest of index.adoc is an
+// xref list to the other files, which is what this book's table of contents
+// already is, so it is not included here.
+
+[preface]
+== What Sparring is
+
+Sparring is an exhibition object built for a master's thesis at FH Dortmund. A
+QR code on the wall opens a plain text field on the visitor's phone. Whatever
+they type goes to an AI that argues back instead of answering, and both sides
+of the exchange show up on a wall behind them, so a room full of people
+watches one visitor get pushed to reason through their own argument. It runs
+for three days at Superraum in Dortmund. The subject is Digital Design
+education, and the AI plays a motivated sparring partner rather than a helpful
+chatbot.
+
+These documents are the design record. They describe what has to be true about
+the installation and why, not how the code is written.
+
+The documentation follows a three-layer framework: Solution, System, and
+Element design. Each layer answers a narrower question than the one above
+it, and every item carries an ID (`BG-01`, `SE-03`, `TF-02`) so a decision at
+one layer traces back to the need it satisfies one layer up. A Digital
+Design Brief sits above the three layers, and a System Realization record
+sits below them.
+
+[cols="1,4"]
+|===
+| L0: Digital Design Brief | A concise, high-level summary of a planned initiative, written for management. Enough to make a Go/No-Go decision without the technical detail. It sits above the three layers.
+| L1: Solution | Why build it. Business goals, the value it creates, the processes around it. Non-technical.
+| L2: System | The installation as one system. System goals, architecture, the elements it breaks into, and scenarios that run end to end.
+| L3: Element | One document per element. The behaviour, interfaces, and constraints of each piece L2 named.
+| LX: Realization | The deployment reality: server sizing, PHP version, SSL, and diagrams at implementation detail. It sits below the three layers.
+|===
+
+This project has no L0. A Design Brief exists so management can make a
+Go/No-Go call on a significant investment, with stakeholders aligning before
+budget gets committed. Sparring is a one-person thesis prototype with a
+single exhibition run, and its requirements came from the thesis proposal
+itself. There's no approval gate to clear, and no other stakeholder who
+needs to sign off. The record starts at L1, and its constraints trace to
+nothing above them.
+
+[source,mermaid]
+----
+flowchart LR
+  L1["L1 Solution<br/>BG-01 Make Sparring's friction visible to an audience"]
+  L2["L2 System<br/>SG-02 Make turn-taking readable from across the room"]
+  L3["L3 Element, SE-02 Display Client<br/>UC-01, TF-01, QR-03"]
+  L1 -->|satisfied by| L2 -->|satisfied by| L3
+----
+
+*Suggested path:* read L1 for why the installation exists, skim L2's
+architecture section for the shape of the system, then read whichever L3
+element you care about.
+
+// build_spec_pdf.sh preprocesses each file before this include runs: strips
+// its standalone header, gives it a `chap-<prefix>` id, and prefixes every
+// anchor so requirement IDs that repeat across files don't collide. The
+// `= Title` on line 1 becomes a chapter here via leveloffset.
+
+include::L1-solution-design-concept.adoc[leveloffset=+1]
+
+include::L2-system-design-concept.adoc[leveloffset=+1]
+
+include::L3-SE-01-input-client.adoc[leveloffset=+1]
+
+include::L3-SE-02-display-client.adoc[leveloffset=+1]
+
+include::L3-SE-03-backend-service.adoc[leveloffset=+1]
+
+include::L3-SE-04-system-prompt.adoc[leveloffset=+1]
+
+include::LX-system-realization-concept.adoc[leveloffset=+1]
+
+include::glossary.adoc[leveloffset=+1]
