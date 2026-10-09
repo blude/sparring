@@ -1,19 +1,14 @@
 # Sparring
 
-Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design.
+Sparring is a versatile, rigorous partner that challenges you to sharpen your thinking in the emerging discipline of Digital Design. It was built for a master's thesis at FH Dortmund and shown for three days at Superraum, Dortmund, in September 2026.
 
+![Prototype][badge-prototype]
 ![Trans rights][badge-trans]
 ![Craft with digital material][badge-craft]
 
-<p align="center">
-  <a href="https://sparringmethod.com"><img src="docs/images/logo-mono.png" alt="Sparring" height="80"></a>
-</p>
+<a href="https://sparringmethod.com"><img src="docs/images/logo-mono.png" alt="Sparring" height="80"></a>
 
-Sparring
-was built for a master's thesis at FH Dortmund and shown for three days at
-Superraum, Dortmund, in September 2026.
-
-A QR code on the wall opens a text field on the visitor's phone. Whatever they
+A QR code on a poster on the wall opens a text field on the visitor's phone. Whatever they
 type goes to an AI that pushes back on the argument, and both sides of the
 exchange are projected onto the wall behind them, so the whole room can watch
 one person reason it through. The subject is Digital Design education.
@@ -88,5 +83,6 @@ Sparring uses the following libraries, fonts and tools:
 
 [MIT](LICENSE)
 
+[badge-prototype]: https://img.shields.io/badge/status-prototype-blue
 [badge-trans]: https://pride-badges.pony.workers.dev/static/v1?label=trans%20rights&stripeWidth=6&stripeColors=5BCEFA,F5A9B8,FFFFFF,F5A9B8,5BCEFA
 [badge-craft]: https://img.shields.io/badge/craft_with-digital_material-blue
