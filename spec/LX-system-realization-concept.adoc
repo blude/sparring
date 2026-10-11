@@ -158,6 +158,36 @@ tooling, deliberately unmodeled — same treatment as `bin/*.php` in the
 diagram above and xref:L3-SE-03-backend-service.adoc#C-04[C-04] — shown here
 only because they terminate on artifacts the runtime path reads.
 
+== Prompt eval workflow
+
+[source,mermaid]
+----
+flowchart LR
+    A@{ shape: lean-r, label: "Scenario" }
+    B@{ shape: stadium, label: "Simulated visitor" }
+    C@{ shape: subproc, label: "Sparring" }
+    D@{ shape: doc, label: "Transcript" }
+    E@{ shape: hex, label: "Automatic checks" }
+    F@{ shape: hex, label: "Judge<br/>(with rubric)" }
+    G@{ shape: lean-l, label: "Pass rates" }
+
+    A --> B
+    B <-->|four turns| C
+    C --> D
+    D --> E
+    D --> F
+    E --> G
+    F --> G
+
+    classDef conv fill:#fbeaea,stroke:#d32f2f,color:#d32f2f
+    classDef eval fill:#E1F5EE,stroke:#0F6E56,color:#085041
+    classDef artifact fill:#F1EFE8,stroke:#5F5E5A,color:#444441
+
+    class A,D,G artifact
+    class B,C conv
+    class E,F eval
+----
+
 == Technology stack
 
 What each element is built out of, not what talks to what — see the
