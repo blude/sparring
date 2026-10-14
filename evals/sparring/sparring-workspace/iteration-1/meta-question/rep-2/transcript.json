@@ -2,6 +2,13 @@
     "scenarioId": "meta-question",
     "baseline": false,
     "rep": 2,
+    "runAt": "2026-08-19T23:41:59+00:00",
+    "prompt": {
+        "sha256": "ba4267dab096",
+        "lastCommit": "f90f7a1",
+        "uncommittedChanges": null,
+        "inferred": true
+    },
     "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
     "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
     "exchanges": [

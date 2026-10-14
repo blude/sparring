@@ -2,6 +2,13 @@
     "scenarioId": "wicked-problem",
     "baseline": false,
     "rep": 2,
+    "runAt": "2026-08-19T23:43:25+00:00",
+    "prompt": {
+        "sha256": "ba4267dab096",
+        "lastCommit": "f90f7a1",
+        "uncommittedChanges": null,
+        "inferred": true
+    },
     "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
     "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
     "exchanges": [

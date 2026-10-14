@@ -2,6 +2,13 @@
     "scenarioId": "agentic-education",
     "baseline": true,
     "rep": 1,
+    "runAt": "2026-08-19T23:50:33+00:00",
+    "prompt": {
+        "sha256": "ba4267dab096",
+        "lastCommit": "f90f7a1",
+        "uncommittedChanges": null,
+        "inferred": true
+    },
     "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
     "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
     "exchanges": [

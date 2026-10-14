@@ -176,7 +176,9 @@ iteration 2 on, every `transcript.json` carries `runAt` and
 `prompt: {sha256, lastCommit, uncommittedChanges}` — copy them from there.
 `sha256` (first 12 chars of the prompt file's content hash) is the ground
 truth; `uncommittedChanges: true` means `lastCommit` is not what actually
-ran. Iteration 1 predates this, so its dates are file mtimes (+0200).
+ran. Iteration 1 predates this and was backfilled afterwards: `runAt` is the
+file mtime, `prompt` is `f90f7a1`'s content with `inferred: true` and
+`uncommittedChanges: null` (unknowable after the fact).
 
 | Iteration | Run (2026-08-20) | Prompt version | Notes |
 |-----------|------------------|----------------|-------|

@@ -2,6 +2,13 @@
     "scenarioId": "german-language",
     "baseline": false,
     "rep": 3,
+    "runAt": "2026-08-19T23:40:46+00:00",
+    "prompt": {
+        "sha256": "ba4267dab096",
+        "lastCommit": "f90f7a1",
+        "uncommittedChanges": null,
+        "inferred": true
+    },
     "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
     "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
     "exchanges": [
