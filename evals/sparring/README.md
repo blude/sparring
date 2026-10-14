@@ -169,10 +169,14 @@ directly — each `evidence` string quotes the turn it's judging.
 
 ## Iterations
 
-Which `prompts/sparring.md` each committed iteration ran against. Dates are
-file mtimes of the run output (+0200); add a row whenever an iteration is
-committed, so a later run can be diffed against the right prompt
-(`git diff <commit> HEAD -- prompts/sparring.md`).
+Which `prompts/sparring.md` each committed iteration ran against. Add a row
+whenever an iteration is committed, so a later run can be diffed against the
+right prompt (`git diff <commit> HEAD -- prompts/sparring.md`). From
+iteration 2 on, every `transcript.json` carries `runAt` and
+`prompt: {sha256, lastCommit, uncommittedChanges}` — copy them from there.
+`sha256` (first 12 chars of the prompt file's content hash) is the ground
+truth; `uncommittedChanges: true` means `lastCommit` is not what actually
+ran. Iteration 1 predates this, so its dates are file mtimes (+0200).
 
 | Iteration | Run (2026-08-20) | Prompt version | Notes |
 |-----------|------------------|----------------|-------|

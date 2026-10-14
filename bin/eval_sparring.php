@@ -94,6 +94,22 @@ $rawClient = new Client(apiKey: $key); // visitor simulation + baseline arm — 
 
 $workspace = __DIR__ . "/../evals/sparring/sparring-workspace/iteration-{$iteration}";
 
+// Which prompt this run measured, stamped into every transcript so a later
+// iteration can be diffed against the right version. The content hash is the
+// ground truth (it also catches uncommitted edits); the commit is a
+// human-friendly pointer and is null if git isn't available. The baseline arm
+// sends no prompt, but is stamped too so an iteration's arms stay comparable.
+$promptSource = (string) file_get_contents(SPARRING_PROMPT_PATH);
+$gitDir = escapeshellarg(dirname(SPARRING_PROMPT_PATH));
+$promptFile = escapeshellarg(SPARRING_PROMPT_PATH);
+$promptCommit = trim((string) shell_exec("git -C {$gitDir} log -1 --format=%h -- {$promptFile} 2>/dev/null"));
+$promptDirty = trim((string) shell_exec("git -C {$gitDir} status --porcelain -- {$promptFile} 2>/dev/null")) !== '';
+$promptInfo = [
+    'sha256' => substr(hash('sha256', $promptSource), 0, 12),
+    'lastCommit' => $promptCommit !== '' ? $promptCommit : null,
+    'uncommittedChanges' => $promptDirty,
+];
+
 /**
  * From-scratch messages array, same shape AnthropicLlmClient::generateResponse()
  * builds internally — used for the --baseline arm, where we need the identical
@@ -215,6 +231,8 @@ foreach ($scenarioFiles as $scenarioPath) {
             'scenarioId' => $scenario['id'],
             'baseline' => $baseline,
             'rep' => $rep,
+            'runAt' => date('c'),
+            'prompt' => $promptInfo,
             'persona' => $scenario['persona'] ?? null,
             'directive' => $scenario['directive'] ?? null,
             'exchanges' => $turnLog,
