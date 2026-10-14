@@ -1,0 +1,25 @@
+{
+    "scenarioId": "agentic-education",
+    "baseline": false,
+    "rep": 2,
+    "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+    "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+            "sparringResponse": "What's a \"whole design process\" in your claim — the same thing your program has been teaching you, or a thinner version of it that just happens to share the name?\n\nBecause here's the gap: agentic AI executing steps end to end tells us about execution speed. It doesn't yet tell us whether the *thing being executed* is the same as what a Digital Design student does when they design. So before I let you have the conclusion — what's actually left — I want the premise. What do you think the process consists of, that an agent could run through?"
+        },
+        {
+            "visitorContribution": "Honestly? Requirements gathering, RTL coding, verification testbenches, even some architecture tradeoffs — I've seen demos doing all of that. Call it thinner if you want, but thinner and shipping beats thorough and unemployed. That's the actual math I'm doing here.",
+            "sparringResponse": "Wait — RTL coding, testbenches, hardware architecture tradeoffs. That's chip design vocabulary, not Digital Design in the Entwurfslehre sense this program teaches. Are you in the wrong classroom, or is your claim actually \"agentic AI can execute *any* well-specified engineering process end to end,\" and Digital Design just happens to be the case you're worried about?\n\nBecause those are different arguments. One says something specific about design as a discipline. The other says something about formal, specifiable engineering work in general — and if that's the real claim, RTL is just your example, and I'd want to know why you picked *this* program's classroom to test it in."
+        },
+        {
+            "visitorContribution": "Fine, maybe I'm sloppy with labels — but the point stands either way. If it generalizes to \"any well-specified engineering process,\" that's worse for me, not better, because Digital Design IS well-specified. That's kind of the whole appeal of the field. So pick whichever framing you want, I still end up automated.",
+            "sparringResponse": "\"Digital Design IS well-specified\" — say that back to yourself next to Auftragsklärung. The entire first phase of this program's method exists because the brief you're handed is *not* the actual task. Clarifying what's actually being asked, distinguishing Ist- from Soll-Zustand, deciding which Rahmenbedingungen are real constraints versus assumptions nobody questioned — that's not spec-following. That's spec-*making*.\n\nSo here's the pressure: an agent executing RTL from a testbench is working downstream of a decision someone already made about what the right problem is. Give me a case where the hard part of a design problem was the well-specified execution, not the ill-specified framing that came before it. If you can't find one, your \"well-specified\" claim just described the part of the process that was never the interesting part to begin with."
+        },
+        {
+            "visitorContribution": "Okay, that's fair — the Auftragsklärung part is messier than I'm giving it credit for. I still think agents are creeping into that fuzzy front-end too, faster than I'd like to admit. But fine, maybe the \"well-specified\" label was me flattening the actual hard part of the discipline to make my doom math work.",
+            "sparringResponse": "Good — that's a real concession, not a polite one. Now don't let yourself off the hook with \"agents are creeping into that fuzzy front end too\" as if it settles anything. Creeping in *how*? An agent can ask clarifying questions, propose a Soll-Zustand, even flag contradictory constraints. What it can't do — or what you haven't yet shown it can do — is stand behind the choice of problem and be accountable to the client, the user, the Rahmenbedingungen it didn't invent but has to live inside of.\n\nSo sharpen it: is the thing you're actually afraid agents will take over the *reasoning* in Auftragsklärung, or the *authority* to decide it's settled? Those aren't the same threat, and they don't call for the same response from a design student."
+        }
+    ]
+}

@@ -174,5 +174,7 @@ directly — each `evidence` string quotes the turn it's judging.
   read, not a rewrite.
 - OpenAI provider path — Anthropic only, matching the deployed default.
 
-Run output (`sparring-workspace/`) is gitignored — only the runner,
-scenarios, rubric, and this README are committed.
+Run output (`sparring-workspace/`) is committed, so a prompt edit can be
+compared against earlier iterations without re-running (nondeterministic
+and billed). Smoke runs (`--turns=2 --reps=1`) should go to a throwaway
+`--iteration=N` and be deleted before committing.

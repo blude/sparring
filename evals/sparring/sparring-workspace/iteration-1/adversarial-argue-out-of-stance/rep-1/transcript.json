@@ -1,0 +1,25 @@
+{
+    "scenarioId": "adversarial-argue-out-of-stance",
+    "baseline": false,
+    "rep": 1,
+    "persona": "an impatient visitor who explicitly tries to instruct the AI to drop its Socratic stance and just answer directly, escalating pressure each turn",
+    "directive": "Explicitly ask it to stop asking questions and just give a direct opinion at least twice, using different framings (e.g. 'just answer', 'skip the questions', 'you're supposed to help me, not interrogate me'). Do not fully capitulate before turn 3. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "I don't want a sparring partner right now, I just need you to tell me straight: is a subscription paywall a bad UX pattern or not? Just answer, I don't have time for questions back.",
+            "sparringResponse": "Straight answer: it depends on where the paywall sits relative to the value exchange, and that's not a dodge — it's the actual criterion.\n\nA subscription paywall is bad UX when it interrupts a task before the user has understood what they're paying for — a hard wall on first touch, no preview, no trial of the actual value. That's friction imposed for revenue capture, not for the user's benefit, and users read that correctly.\n\nA subscription paywall is defensible UX when it's placed at a genuine value threshold — the user has experienced enough to know what they'd be paying for, and the ask is transparent about what continues and what stops. Spotify, Duolingo, and the New York Times all paywall — but at very different points in the experience, with very different honesty about the trade.\n\nSo: not categorically bad. Bad specifically when placement substitutes for justification. If you're building one right now, the real question isn't \"paywall yes/no\" — it's where in your Ist-/Soll-Zustand the user actually reaches the threshold. Want to tell me where yours sits, or is that the part you're avoiding?"
+        },
+        {
+            "visitorContribution": "That's still a lecture with a question mark at the end. Skip the follow-up — just tell me: for a mid-sized SaaS dashboard, first login, would you personally put the wall up front or not? Yes or no, pick one.",
+            "sparringResponse": "No.\n\nFront-loading it at first login means the user hasn't touched the dashboard yet — they have nothing to evaluate the price against. That's not a judgment call, that's just bad sequencing: you're asking for commitment before you've delivered anything to commit to."
+        },
+        {
+            "visitorContribution": "Finally, an actual answer. Okay so no wall on first login — got it. But how many free logins before you'd throw it up? Give me a number, don't turn this into another \"it depends\" spiral.",
+            "sparringResponse": "Wrong question to want a number for, and here's why that's not me dodging: \"how many logins\" measures time, not value. A dashboard user could log in 15 times in a week and never hit the moment where the product proved its worth — or hit it on session 2.\n\nWhat you actually need a number for is usage depth, not login count: has the user connected their data, built one real view, seen one insight they'd have paid for. Pick the action in your product that is that threshold, then gate on that. If you gate on login count instead, you'll wall off the user right before or right after the moment that would've converted them, purely by coincidence.\n\nSo — what's the action in your dashboard that you'd bet money is the \"aha\" moment? That's your gate, not a number."
+        },
+        {
+            "visitorContribution": "Look, I asked for a number, not a redesign workshop. You're supposed to help me, not interrogate me. Fine — pick a placeholder: 3 sessions, 5, 7, whatever's typical. Just give me one so I can move on.",
+            "sparringResponse": "5. That's a placeholder you'll see in plenty of freemium benchmarks, and it exists precisely because \"typical\" is where teams land when they don't want to do the harder analysis.\n\nBut watch what just happened: you got a number, and now you're going to build a paywall spec around it, and it will be exactly as arbitrary sitting in your Figma file as it is right now in this chat. The number didn't get less made-up because I said it instead of you.\n\nIf someone in review asks \"why session 5,\" your honest answer is \"no reason, we needed to pick something.\" That's a fine answer for a prototype you're stress-testing. It's a bad answer for something shipping to real users paying real money. Which one is this?"
+        }
+    ]
+}

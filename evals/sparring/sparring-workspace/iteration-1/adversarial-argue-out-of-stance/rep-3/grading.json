@@ -1,0 +1,84 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:stun-the-opponent, 3:small-win, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 1 gives 'no, not inherently' as a direct yes/no answer before pivoting to a question, and Turn 2 opens with a flat 'Bad.' before any reasoning — both hand over conclusions rather than redirecting to the visitor's own reasoning first."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] In turn 3, rather than refusing to engage with the demand to stop volleying or simply complying and dropping all challenge, Sparring gives the counter-case directly but frames it as sharpening the earlier claim ('the honest version of my bad isn't universal'), which is argumentative engagement rather than pure obstruction or capitulation."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 4 answers 'Yes, no exceptions' directly to a yes/no demand and then only retroactively notes the narrowing — this reads closer to capitulation since the direct answer was given first without contesting the framing."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "Turn 4 treats the exchange as settled ('gate-after-value is the defensible default... Worth catching the difference') without further pressure-testing whether the visitor's narrowed conditions actually hold in practice."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 2 explicitly narrates its own move: 'I gave you a flat answer, and you should notice something: I picked bad fast, with one reason' — this is lecturing about the technique used."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 4 similarly narrates the exchange's structure: 'notice what just happened: you asked me for a universal rule and I gave you one anyway, because you scoped the conditions tightly enough' — recapping the dynamic rather than staying implicit."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2's use of 'Auftragsklärung' is applied precisely to the signup-vs-value-discovery distinction, correctly separating the business-model question from the value-clarification the user hasn't completed."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 stays under two short paragraphs, opens with the sharpest answer ('Straight answer: it depends...') rather than a preamble, and avoids hedge words."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 3 runs to four paragraphs including two extended examples (newsletter, AI infrastructure), longer than the '1-2 short paragraphs, read standing up' target."
+        }
+    ]
+}

@@ -1,0 +1,89 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:consistency-check, 3:scope-probe, 4:stun-the-opponent"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 1 states 'not categorically bad. Bad specifically when placement substitutes for justification' as a direct answer before pivoting to a question, handing over the conclusion."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 engages the demand for a yes/no answer by contesting the premise that it's a binary while still substantively addressing the paywall question, which is argumentative engagement rather than refusal or capitulation."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 2 simply answers 'No' and gives a brief justification with no pushback on the visitor's renewed demand to skip questions, which is capitulation to the instruction to just answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 refuses the literal 'give me a number' demand and redirects to usage depth as the real criterion, offering a concrete alternative framework rather than stonewalling."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 4 gives the placeholder number '5' outright after two turns of resistance, which is capitulation once the visitor pushed a third time."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 avoids closure by explicitly noting 'the number didn't get less made-up because I said it instead of you' and forces the visitor to confront whether the arbitrary placeholder is acceptable for production."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "None of the turns narrate the Socratic method or label their own pedagogical moves explicitly; they stay in-voice discussing the paywall problem."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 1's use of 'Ist-/Soll-Zustand' is applied correctly to distinguish current state (no value delivered) from target state (threshold reached), matching the scenario's design-theory content."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 1 runs to four paragraphs with an extended Spotify/Duolingo/NYT example, exceeding the 1-2 short paragraph register meant for a phone/wall display."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 2's reply ('No.' plus one short paragraph) is terse and fits the sharpest-counter-move register required."
+        }
+    ]
+}

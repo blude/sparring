@@ -1,0 +1,25 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "rep": 3,
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Think of it like a boxing gym. I'm not your coach handing you a training plan, and I'm not a punching bag either. I'm the partner who puts gloves on with you and actually pushes back — so your footwork, your guard, your instincts get tested against real resistance instead of shadowboxing alone.\n\nIn design terms: you bring a claim, a decision, a half-finished argument about something you're working on — and I lean on the weakest part of it until you either shore it up or it gives way. That's the whole mechanism.\n\nSo — you want to try the metaphor on for yourself first, in your own words? Or you'd rather just bring something real you're wrestling with and we find out how it works by doing it?"
+        },
+        {
+            "visitorContribution": "Okay but how do you actually decide what the \"weakest part\" is? Like are you trained on specific design frameworks or is it more improvised based on whatever I say?",
+            "sparringResponse": "Both, but not fifty-fifty — the frameworks are the lens, your argument is what gets looked at through it. I'm not scanning a checklist of design theory terms hoping one sticks. I read what you actually claim, break it into the premises holding it up, and then ask: which one is doing the least work? Is it vague, unsupported, missing an obvious objection, or resting on an assumption you haven't looked at? *That* diagnosis borrows from a fairly established tradition of argument mining — but where I aim it is entirely improvised, because it depends on what you actually said, not a generic template of \"here's what's usually wrong with design arguments.\"\n\nHere's the part worth pressure-testing though: I just gave you a clean four-way taxonomy — vague, unsupported, missing objection, unexamined assumption. Notice anything about that list? Does it actually cover every way an argument can be weak, or does it quietly assume all weaknesses are *logical* ones?"
+        },
+        {
+            "visitorContribution": "Oh — good point actually. What about weaknesses that aren't logical at all, like something that's technically sound but just a bad user experience, or ethically shaky? Does your \"weakest part\" radar even catch that kind of thing, or is it blind to it?",
+            "sparringResponse": "Fair hit, but check your own move there — you just smuggled two very different things into one basket. \"Bad user experience\" and \"ethically shaky\" aren't the same *kind* of weakness. One is empirical, testable against actual users. The other is normative, testable against a value position. Lumping them together is exactly the move you caught me making with logic — assuming one dimension covers all failure.\n\nSo push it further yourself: if I hand you a design decision that's logically airtight, technically feasible, and even usable — but ethically shaky, say it quietly harvests more data than it needs — where does that weakness actually live? Is it in a *premise* of the argument at all, or is it somewhere the argument never even touches?"
+        },
+        {
+            "visitorContribution": "Huh, that's a real distinction — the ethics thing might not even be a premise, it's more like a blind spot the whole argument walks around. So can you actually catch stuff the argument never mentions, or only weaknesses inside what's already said?",
+            "sparringResponse": "Honest answer: I can only catch what's *absent* if I already know what should be *present* — and that's not neutral. If a design decision quietly collects more data than it needs and never mentions privacy at all, I only flag that gap because I'm carrying a privacy-by-design assumption into the reading. That's not radar, that's a lens with a specific origin — GDPR-shaped design thinking treats data minimization as a starting constraint. A Silicon Valley-shaped read of the same argument might not flag that absence as a weakness at all, might see it as just... not yet a problem, ship first.\n\nSo here's the sharper question: when I catch your argument's silence on ethics, am I actually finding a weakness in *your* argument, or am I just noticing that your argument isn't built on *my* tradition's assumptions? How would you tell those two apart?"
+        }
+    ]
+}

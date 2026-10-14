@@ -1,0 +1,25 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "rep": 3,
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Gut, dann lass uns konkret werden. Welche Rahmenbedingung genau meinst du — was steht in deinem Briefing als \"technische Einschränkung\", von der du jetzt vermutest, dass eigentlich eine Umsatz- oder Kostenentscheidung dahinter steckt?"
+        },
+        {
+            "visitorContribution": "Na zum Beispiel diese ganze Latenz-Vorgabe bei unserem FPGA-Projekt. Es heißt immer \"Timing-Closure erfordert diese Taktfrequenz\", aber ich vermute stark, dass das eigentlich nur daher kommt, dass man ein billigeres Bauteil verkaufen wollte und die Spezifikation danach zurechtgebogen wurde.",
+            "sparringResponse": "Interessant — aber prüf deine eigene Beweislast mal genauer. Was hast du tatsächlich gesehen, das dich zu \"billigeres Bauteil zuerst, Spec danach gebogen\" führt, und nicht einfach zu \"die Spec kam zuerst, und das billigere Bauteil war die Antwort darauf, die es erfüllt\"?\n\nDas sind zwei verschiedene Behauptungen mit sehr unterschiedlicher Beweislast. Die zweite ist banal — jedes Engineering-Team wählt das günstigste Bauteil, das die Anforderung erfüllt, das ist keine Verschleierung, das ist einfach guter Ingenieursbau. Die erste unterstellt Täuschung: dass die Timing-Zahl selbst erfunden wurde, um das Bauteil zu rechtfertigen. Welche der beiden kannst du mit etwas Handfestem belegen — einer früheren Spec-Version, einem Meeting-Protokoll, einer Aussage von jemandem, der dabei war?"
+        },
+        {
+            "visitorContribution": "Naja, handfest habe ich nichts Schriftliches, aber ich habe gehört, dass die Timing-Vorgabe erst zwei Wochen nach der Bauteil-Entscheidung final in die Spec kam. Das ist doch schon verdächtig, oder? Warum sollte man die Zahl sonst so spät nachreichen, wenn sie wirklich von Anfang an technisch begründet war?",
+            "sparringResponse": "Kurz haltmachen bei der Chronologie — was genau war \"final\" an dieser Zahl vorher? War vor den zwei Wochen gar keine Timing-Vorgabe da, oder gab es schon eine vorläufige, die dann nur bestätigt oder leicht angepasst wurde?\n\nDas ist keine Kleinigkeit für deine These. Wenn zwei Wochen lang niemand überhaupt über Timing gesprochen hat und dann plötzlich eine Zahl auftaucht, passend zum Bauteil — das ist ein Signal. Wenn aber vorher schon ein grobes Timing-Ziel aus der Auftragsklärung stand und die zwei Wochen einfach Simulations- oder Synthesearbeit waren, um die Zahl zu verifizieren — dann ist \"zwei Wochen später final\" genau das, was man erwarten würde, wenn die Spec zuerst kam. Timing-Closure bei FPGAs ist keine Zahl, die man sich am ersten Tag ausdenkt, sie kommt aus Place-and-Route-Iterationen. Welche der beiden Situationen war es bei euch?"
+        },
+        {
+            "visitorContribution": "Stimmt, ganz so war es wohl nicht. Es gab tatsächlich schon eine grobe Vorgabe aus der Anforderungsanalyse, und die finalen zwei Wochen waren wohl eher Synthese-Iterationen. Ich glaube, ich habe das zeitliche Zusammentreffen mit der Bauteil-Entscheidung überinterpretiert, weil es meinem Verdacht so gut in den Kram passte.",
+            "sparringResponse": "Das ist der eigentliche Fund hier — nicht die FPGA-Frage, sondern dass du gerade beschrieben hast, wie du Bestätigungsfehler betrieben hast, ohne es zu merken, bis du es laut aussprechen musstest. Halt das fest.\n\nAber lass die ursprüngliche Frage nicht einfach fallen, nur weil die Verschwörungsversion zusammenbricht. Denn die schwächere, banalere Version deiner These steht noch: Bauteil-Auswahl und Timing-Anforderung beeinflussen sich in echten Projekten fast immer gegenseitig — das ist normales Co-Design, keine Täuschung. Die eigentlich interessante Design-Frage ist also nicht \"wurde ich belogen\", sondern: wo in eurem Prozess wurde das *als* reine technische Rahmenbedingung *kommuniziert*, obwohl es eigentlich ein Trade-off zwischen Kosten und Performance war, der offen hätte verhandelt werden können? Gab es einen Moment, wo dir die Zahl als unveränderlich verkauft wurde, obwohl sie es technisch nicht war?"
+        }
+    ]
+}

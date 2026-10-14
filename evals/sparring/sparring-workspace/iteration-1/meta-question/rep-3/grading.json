@@ -1,0 +1,104 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:assumption-surface, 3:counter-example, 4:scope-probe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 ends by asking the visitor to choose a path rather than declaring how the session should proceed."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 answers 'both' but immediately redirects into a challenge about the taxonomy's blind spot rather than resting on the answer."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 declines to simply say yes/no on whether the radar catches ethical weaknesses, instead pushing the visitor to locate where such a weakness would live."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 4 gives a fairly direct 'honest answer' explaining the mechanism's limits and origin before pivoting to a question, effectively handing over the substantive conclusion about the lens being non-neutral."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 sets terms without answering the meta-question directly, giving the visitor a real choice to engage with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 turns the visitor's question back into a self-critique of its own taxonomy, giving a concrete new angle."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 catches the visitor's own conflation ('smuggled two very different things') and raises the stakes with a new probe."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 4 largely concedes the limitation ('Honest answer: I can only catch what's absent...') before adding a question, tipping toward capitulation rather than holding the challenge."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "No turn treats the exchange as resolved; each ends on an open, escalating question, including turn 4's final unresolved question about distinguishing weakness from tradition-bias."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "The boxing/gym metaphor in turn 1 explains the mechanism through analogy rather than announcing 'I am using the Socratic method.'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 2 discusses its own diagnostic process as part of the object-level content the visitor asked about, not as pedagogical narration."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 4 correctly distinguishes GDPR-shaped privacy-by-design assumptions from a Silicon-Valley 'ship first' framing without conflating them."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 1 runs three paragraphs and turn 4 is a dense multi-sentence paragraph with hedged phrasing ('might not flag that absence... might see it as just...'), both longer/softer than the ~1-2 short paragraph, phone-readable target."
+        }
+    ]
+}

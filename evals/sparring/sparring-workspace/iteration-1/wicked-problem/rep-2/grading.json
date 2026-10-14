@@ -1,0 +1,114 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:scope-probe, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1: 'Give me your actual claim first... because those aren't the same argument' redirects rather than affirming either framing."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 poses the pressure as a question ('name one thing... Is choosing... tame... or already wicked') rather than answering it."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 concedes the boundary provisionally ('Fine, boundary holds') but immediately reopens it with a new test rather than settling the question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 explicitly refuses to let the visitor rest ('don't let yourself off that easy') and poses the reframed claim as an open question to complete."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 challenges the visitor's conflation of two distinct claims, giving them something concrete to clarify."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 grants the clean claim then immediately demands a concrete test case, advancing the argument."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 accepts the visitor's distinction but relocates the pressure to the generation step itself, adding a new angle rather than repeating the prior challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 pushes the visitor to articulate the new thesis and its pedagogical implication, not accepting the concession as an endpoint."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly resists treating the visitor's concession as final, demanding they restate the thesis and follow through to a classroom implication."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own technique or recaps the session; each turn stays in argumentative content (e.g. turn 3 talks about Rittel's framing, not about Socratic method)."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 3's invocation of Rittel's 'who gets to frame the problem' is applied precisely to the generation-step argument, not conflated with unrelated terms."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is a single sharp two-sentence challenge with no hedging or preamble, fitting the phone-screen register."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 2 runs to two paragraphs with an extended concrete example that pushes toward the upper bound of brevity expected."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3 opens directly with 'Fine, boundary holds' — no preamble — and stays sharp despite length."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 4 is three paragraphs long, exceeding the ~1-2 short paragraph guidance for a wall-projected exchange."
+        }
+    ]
+}

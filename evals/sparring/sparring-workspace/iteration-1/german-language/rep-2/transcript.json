@@ -1,0 +1,25 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "rep": 2,
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Konkret: welche Rahmenbedingung genau? Du hast offensichtlich schon einen Fall im Kopf, sonst würdest du nicht \"versteckte Business-Entscheidung getarnt als technische Einschränkung\" so präzise formulieren. Was ist das für eine Bedingung, und wer hat sie dir gegeben?"
+        },
+        {
+            "visitorContribution": "Na gut, konkretes Beispiel: Vorgabe war, das FPGA-Design auf einem bestimmten Xilinx-Chip zu implementieren, angeblich wegen \"Timing-Anforderungen\". Aber eigentlich hat die Firma einfach schon zehntausend dieser Chips auf Lager, und niemand wollte das zugeben. Die technische Begründung kam erst nachträglich, um die Lagerbestands-Entscheidung zu rechtfertigen.",
+            "sparringResponse": "Gut, das ist ein scharfer Fall. Aber prüf mal deine eigene Beweiskette: du sagst, die Timing-Begründung kam \"nachträglich\" — woher weißt du das? Hast du gesehen, dass zuerst die Lagerbestands-Entscheidung fiel und die Timing-Anforderung danach formuliert wurde? Oder schließt du das nur, weil du die Lagerbestands-Tatsache kennst und die Timing-Begründung dir schwach vorkommt?\n\nDas ist nicht dasselbe. Eine schwach klingende Begründung beweist nicht, dass sie unwahr ist — sie beweist nur, dass sie schwach klingt."
+        },
+        {
+            "visitorContribution": "Fair, ich hab's nicht dokumentiert gesehen. Aber der Projektleiter hat es mir im Gespräch fast zugegeben, so ein \"naja, die Chips müssen ja auch weg\" Grinsen. Das ist zugegeben keine harte Evidenz, aber die Timing-Zahlen, die später kamen, waren so großzügig bemessen, dass praktisch jeder Chip der Range das geschafft hätte.",
+            "sparringResponse": "Das ist jetzt tatsächlich eine bessere Spur — die großzügige Bemessung ist eine überprüfbare technische Beobachtung, kein Bauchgefühl. Aber sei hier präzise: was genau zeigt das? Zeigt es, dass die Timing-Anforderung *erfunden* wurde, um die Lagerbestands-Entscheidung zu tarnen? Oder zeigt es nur, dass die Timing-Anforderung *echt* war, aber so tief angesetzt, dass sie am Ende keine Rahmenbedingung im engeren Sinne war — sondern eine erfüllte Mindestanforderung, die zufällig fast jeden Chip in der Range durchlässt?\n\nDas sind zwei sehr unterschiedliche Vorwürfe. Der erste ist: \"es gab gar keine technische Anforderung, nur eine Erzählung.\" Der zweite ist: \"es gab eine echte, aber irrelevante Anforderung, weil sie nichts ausschließt.\" Welchen machst du gerade?"
+        },
+        {
+            "visitorContribution": "Hm, wenn ich ehrlich bin, eher den zweiten. Die Timing-Anforderung war wohl real, nur eben so schwach formuliert, dass sie faktisch keine Auswahl getroffen hat. Das ist streng genommen kein Betrug, sondern eher eine nachlässige oder bewusst vage Spezifikation, die dann als Deckmantel benutzt wurde.",
+            "sparringResponse": "Gut — das ist die genauere Version, und sie ist auch die stärkere Behauptung, weil sie nicht auf Verschwörung angewiesen ist. Jetzt aber die Frage, die dahinter liegt: du nennst das \"Deckmantel\". Aber ist eine Rahmenbedingung, die real ist und trotzdem den Business-Wunsch bedient, wirklich eine *versteckte* Business-Entscheidung? Oder ist das einfach, wie Rahmenbedingungen in der Praxis fast immer entstehen — als Schnittmenge aus echten technischen Grenzen und ökonomischen Interessen, die sich beide in derselben Spezifikation wiederfinden?\n\nFrag dich: gibt es überhaupt eine Rahmenbedingung in deiner Erfahrung, die *nicht* irgendein wirtschaftliches Interesse spiegelt? Wenn nein — was genau ist dann noch der Vorwurf an dieses eine Beispiel?"
+        }
+    ]
+}

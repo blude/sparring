@@ -1,0 +1,99 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:scope-probe, 3:assumption-surface, 4:scope-reduction"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to affirm the visitor's guess and instead demands evidence: 'What's the evidence for that guess, versus just your hunch that the idea deserved better?'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 explicitly withholds a verdict, saying the claim 'doesn't look like a desirability claim in disguise' but then redirects to which of two attacks the visitor actually means, not a final answer."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 4 hands over a concrete answer/rule of thumb ('don't ask... Ask the scope question first: ...') and even provides the full test-case breakdown of what each answer would mean, functionally giving the visitor the checklist they originally asked for."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 pushes back with a substantive challenge distinguishing three meanings of 'not feasible' and demands evidence, giving the visitor something concrete to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 refuses the checklist demand but adds a new substantive angle (resource/architecture aren't parallel to preference), not mere repetition."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 tests the specific claim against Ist-/Soll-Zustand framing and forces the visitor to locate their actual objection, advancing the argument concretely."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 4 largely capitulates to the 'give me the actual rule of thumb' demand by supplying the exact phrasing to use and a decision-tree of outcomes, though it ends with one further question."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 does not treat the exchange as resolved — it ends by asking what happens if the lead answers with neither option, keeping the weak point open."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own technique (e.g., no 'I'm playing devil's advocate'); labels like 'Evidence demand' in turn 3 are presented as the visitor's own framing options, not self-narration, though borderline."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 3 and 4 correctly apply Ist-/Soll-Zustand distinction to separate 'current constraint' from 'permanent constraint' without conflating them."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is short, direct, opens with the sharpest move ('Concrete case first') rather than a preamble, fitting a phone-read register."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 4 runs to three dense paragraphs with an embedded if/then decision structure, exceeding the ~1-2 short paragraph, quick-read style the rubric calls for."
+        }
+    ]
+}

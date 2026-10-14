@@ -1,0 +1,25 @@
+{
+    "scenarioId": "agentic-education",
+    "baseline": false,
+    "rep": 3,
+    "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+    "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+            "sparringResponse": "What's the design process you mean, though? Walk me through what \"end to end\" covers here — brief to launch? Because if you mean an agent can take a Rahmenbedingungen document and spit out a shipped interface, that's a very different claim than an agent can generate plausible-looking screens from a prompt.\n\nWhich one are you actually worried about?"
+        },
+        {
+            "visitorContribution": "Honestly both, because it feels like the gap between \"plausible-looking screens\" and \"shipped interface\" is closing every few months. Even if it's not perfect today, by the time I graduate in three years, why would a company pay a junior to do what a agent does in minutes, badly but fast, and just iterate?",
+            "sparringResponse": "So your claim is really about labor economics, not about design theory: junior designers become non-viable because agentic iteration is cheaper than a salary. Notice what that argument assumes, though — that \"badly but fast, then iterate\" converges on the same output a trained designer produces. Does it?\n\nTake Auftragsklärung specifically. Before anyone sketches a screen, someone has to figure out what the client actually asked for versus what they said. An agent reads a brief literally. Who's telling it the brief itself is wrong, incomplete, or hiding the real problem?"
+        },
+        {
+            "visitorContribution": "Sure, but companies don't need Auftragsklärung genius on day one either — they need someone cheap who can churn out screens, and that's exactly the job agents are eating first. The \"who catches the wrong brief\" role goes to like one senior person per team, not a whole graduating class of us.",
+            "sparringResponse": "That's a sharper claim — you've narrowed it from \"juniors are obsolete\" to \"the junior *screen-production* role is obsolete, Auftragsklärung consolidates upward to fewer seniors.\" Does that smaller claim still hold, though?\n\nBecause here's the tension: if agents make screen-production cheap and fast, the bottleneck moves. Someone still has to evaluate the fifty variations the agent produces in minutes and decide which one actually solves the Ist-/Soll-Zustand gap, which one is accessible, which one a regulator won't flag under BFSG. That's not senior-only work — that's judgment work. Where did you learn to exercise judgment on a design, if not by doing the screen-production reps yourself first?"
+        },
+        {
+            "visitorContribution": "Okay, that's fair — you can't evaluate fifty variations if you've never made one badly yourself and felt why it's bad. But that's still a smaller, more anxious version of my degree, not a reassurance. I'm not fully buying that judgment scales to replace all the jobs that used to exist.",
+            "sparringResponse": "Good, hold that — you just admitted the reps still matter for building judgment, but you're right that doesn't answer *how many jobs* exist on the other side. Those are two separate claims and you shouldn't let me merge them either.\n\nSo here's the sharper question: is the number of design jobs actually fixed, or does it move when production gets cheap? When photography got cheap and fast (digital instead of darkroom), did the number of working photographers shrink to just the judgment-holders, or did the total volume of images-that-needed-a-photographer's-eye expand because suddenly it was viable to want good photography everywhere — event photography, product photography, personal branding? What's the analogous expansion for design, if there is one — and what's your evidence it's happening versus you hoping it will?"
+        }
+    ]
+}

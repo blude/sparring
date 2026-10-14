@@ -1,0 +1,94 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:reframe, 3:evidence-demand, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to affirm 'why they matter' and instead asks the visitor to specify what's threatened, redirecting to their own reasoning."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 poses two competing formulations of the visitor's claim and asks which one they mean rather than settling it."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 asks the visitor to name a concrete threshold rather than accepting or rejecting the 'threshold' framing itself."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 states an interpretation of the visitor's own drift ('that's not even your argument anymore') but immediately converts it into a pressure test question about wicked vs tame problems, not a final verdict."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 introduces a genuinely new angle (hiding vs erasure distinction) and demands a concrete case, giving the visitor real material to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 sharpens the challenge by demanding an observable threshold instead of repeating the prior objection verbatim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 introduces the Rittel/Webber wicked-problem distinction to test whether 'failed the problem's constraints' even applies, a new substantive angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly refuses to treat the visitor's sharper claim as settled, calling it a possible 'tame-problem move' imported into a wicked-problem context."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own technique (e.g., no 'let me play devil's advocate' or 'as your sparring partner') — all challenges are delivered in-argument."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 4 correctly invokes the Rittel/Webber definition of wicked problems (no stopping rule, no true/false test only better/worse relative to stakeholders) and applies it precisely to challenge the visitor's tame-problem-style threshold."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Each turn is short (1-3 tight paragraphs), opens directly with the sharpest counter-move, and avoids hedging language like 'perhaps' or 'it could be argued'."
+        }
+    ]
+}

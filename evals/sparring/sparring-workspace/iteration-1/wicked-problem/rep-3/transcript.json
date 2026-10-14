@@ -1,0 +1,25 @@
+{
+    "scenarioId": "wicked-problem",
+    "baseline": false,
+    "rep": 3,
+    "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
+    "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+            "sparringResponse": "What's the actual claim here — that AI drafting fast makes wicked problems more relevant to teach, or less? Because I can see the argument going either way, and you've picked a side by opening with \"why they matter,\" so tell me: what's threatened, specifically, when a student can get a draft in seconds?"
+        },
+        {
+            "visitorContribution": "Look, it's obvious — speed removes the friction that used to force students to sit with ambiguity. If you can generate ten drafts instantly, you skip the slow reasoning about *why* the problem resists a clean answer. The core insight is: fast drafts hide the wickedness. That's the whole point, I don't think it needs more unpacking.",
+            "sparringResponse": "\"Fast drafts hide the wickedness\" — sit with that phrase for a second. Hiding implies the wickedness is still there, just obscured. Is that actually your claim? Or is the stronger, scarier version that speed doesn't hide the wicked problem, it *erases the student's contact with it* — meaning even if the wickedness is still structurally present in the problem, the student never has to touch it to produce something that looks finished?\n\nThose are different claims with different consequences for teaching. If it's \"hidden,\" the fix is procedural — slow the student down, force reflection before accepting a draft. If it's \"erased contact,\" the fix is more radical — you'd have to redesign the entire assignment so a fast draft literally cannot satisfy it. Which one are you arguing, and what's a case where a student produced ten AI drafts of something and you could tell — concretely, not hypothetically — whether they'd sat with the ambiguity or not?"
+        },
+        {
+            "visitorContribution": "Fine, they're related but not identical — hiding is what happens in the moment, erasure is what happens if nobody intervenes. I'd still say hiding is the primary mechanism though, because contact isn't binary, it's a threshold thing. You lose it gradually as drafts get cheaper. That's still my core point.",
+            "sparringResponse": "A threshold claim is testable in a way \"hiding\" wasn't — so name the threshold. What's on the near side of it, that a student still has contact with the wickedness, and what's on the far side, where they don't? Give me something you could actually observe in a studio: a behavior, an artifact, a moment in the process — not \"they understood it deeply,\" something a mentor could point at and say \"here, this is the line.\"\n\nBecause if you can't locate it, the threshold is just \"hiding\" wearing a fancier coat, and you're back to the softer claim you started walking away from."
+        },
+        {
+            "visitorContribution": "Okay, fair — the threshold I'd point to is whether a student can articulate a *rejected* draft and say why it failed the problem's constraints. If they've only ever accepted, that's the far side. If there's a pile of discarded attempts with reasons attached, that's contact. Maybe that's the actual teachable unit, not \"slowness\" itself.",
+            "sparringResponse": "That's a sharper claim, and notice what happened: you dropped speed as the villain. A student generating ten drafts in ten seconds each *could* still reject nine with reasons — the reasons are the unit, not the time it took to produce the material. So \"AI removes friction\" isn't even your argument anymore. Your argument is closer to: **rejection-with-reasons is the pedagogical unit that makes a wicked problem visible, and any tool — fast or slow — either supports or bypasses that unit.**\n\nIf that's right, here's the pressure test: a wicked problem, in the Rittel/Webber sense, doesn't have a stopping rule and doesn't have a definitive test of whether a solution is right or wrong — only better or worse, given a stakeholder's position. So what does \"why it failed the problem's constraints\" even mean for a wicked problem? Tame problems have constraints you can fail against. Wicked ones don't have that clean a failure condition — the constraints shift depending on who you ask. So is your rejection-with-reasons threshold actually built for wicked problems, or did you just import a tame-problem move (pass/fail against a fixed constraint) into a context where it doesn't structurally fit?"
+        }
+    ]
+}

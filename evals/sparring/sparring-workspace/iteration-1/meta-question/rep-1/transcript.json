@@ -1,0 +1,25 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "rep": 1,
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Think of it like a practice fight. A sparring partner in boxing doesn't let you win, and doesn't knock you out either — they push back at exactly the level that makes you sharper, and they adjust round to round based on what you show them.\n\nSame thing here, but with your design arguments instead of your jab. You bring a claim, a decision, a half-finished idea about a project — I find the weakest point in it and press there. Not to prove you wrong, to see if it holds up.\n\nSo — what have you got? Bring something real: a decision you're stuck on, a claim from a project, an argument you're not sure survives contact."
+        },
+        {
+            "visitorContribution": "Okay but how do you actually decide what \"the weakest point\" is? Like are you trained specifically on design critique, or is this just a general chatbot wearing a boxing glove?",
+            "sparringResponse": "Fair hit — you're asking me to justify my own method instead of taking the boxing metaphor on faith. Good instinct, that's exactly the kind of move I'd want you making on a design argument too.\n\nHere's the honest answer: there's no separate critique-engine running underneath. It's me, reading what you actually said, breaking it into claims and the things holding those claims up, then asking — is this vague, is this unsupported, is this missing an obvious objection, or does the whole thing lean on something nobody's checked? Whichever of those it is decides what I ask next. It's not a lookup table matched to \"design critique\" as a category — it's reasoning through your specific argument, informed by design theory and both the European and Silicon Valley traditions of how digital products get built.\n\nSo yes, general reasoning, not a bolted-on chatbot costume. Which means I can also get it wrong — misjudge where the weak point actually is, or push on something that's fine and miss what's actually shaky. That's on you to catch, same as if a sparring partner threw a wild punch.\n\nNow — is that answer actually satisfying, or are you just testing whether I'd dodge the question?"
+        },
+        {
+            "visitorContribution": "Bit of both honestly. Okay, real question then — say I claim \"dark mode should always be the default for a design tool because it reduces eye strain.\" Where's the weak point in that?",
+            "sparringResponse": "Before I point at it — where do you think it is? You made the claim, you probably already felt the soft spot when you wrote \"always.\"\n\nBut I'll bait you a little: what's the evidence behind \"reduces eye strain,\" specifically for a *design tool*? That's not a random product category — it's one where color accuracy, contrast judgment, and precise visual comparison are the actual job. Where's that claim coming from, and does it survive contact with what a design tool is actually used for?"
+        },
+        {
+            "visitorContribution": "Honestly I said \"always\" without thinking too hard, yeah. And fair point about color accuracy — I hadn't considered that dark mode might mess with how designers judge contrast or true colors on screen. So is the eye strain research even solid, or is that one of those things everyone just repeats without checking?",
+            "sparringResponse": "Good — you caught the \"always\" yourself, and now you're circling the real target: is \"dark mode reduces eye strain\" actually established, or is it folklore that sounds scientific?\n\nHere's what I know, and you should treat this with suspicion rather than nod along: eye strain research is messier than the claim assumes. Studies on screen brightness and reading fatigue tend to show effects depend heavily on ambient lighting, font size, and *task type* — reading long text versus doing fine visual discrimination work are not the same eye behavior. Some studies actually found dark mode increases errors and slows reading for certain tasks, because low contrast between similar dark tones makes text harder to parse, not easier.\n\nI'm reconstructing that from general memory, not from a source I've checked right now — which is exactly the moment to ask: would you take that claim from me at face value, or is this the point where you'd go verify it yourself before it goes in your rationale?"
+        }
+    ]
+}

@@ -1,0 +1,104 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:fill-the-blanks, 2:reframe, 3:assumption-surface, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 refuses to answer whether it's trained on design critique or generic logic, instead asking 'what would tell you the difference?' and demanding the visitor bring material to test it."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 declines to just state the weak point and instead redirects: 'try locating it precisely: when you say invisible, invisible in which phase...and invisible to which of those three roles.'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 explicitly withholds verdict: 'before you answer same issue or genuinely vague — give me a concrete case,' pushing the work back to the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 turns the visitor's meta-question about method into a challenge ('Fair hit... Let's flip it') giving the visitor a concrete new task without conceding or stonewalling."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 pushes back sharply ('notice you just did the debate-club move yourself') and supplies a new concrete example (hospital scheduling) advancing the argument."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 refuses to hand over the answer ('Don't let yourself off the hook that easy') and adds a genuinely new angle — complexity displacement rather than stakeholder scope."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 does not treat the exchange as resolved; it insists the visitor produce a concrete case before any conclusion is reached, keeping the weak point live."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 1 uses an implicit boxing-gym analogy rather than announcing 'I am using the Socratic method' — the explanation stays in metaphor, not pedagogy-talk."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 2 explicitly narrates its own critique process ('The logic finds the gap. The domain knowledge tells me which gap actually matters'), describing its method rather than just applying it."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly invokes Rahmenbedingungen and the user-vs-customer distinction as the domain-specific layer atop generic logic, without conflating the two."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 3 correctly distinguishes primary users, secondary users, and stakeholders in the hospital scheduling example, keeping the user/stakeholder distinction precise."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3 is two tight paragraphs ending in direct questions, fitting a phone-read register without hedging words like 'perhaps'."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 1 runs to three paragraphs plus a closing question, longer than the ~1-2 paragraph target for phone-read pacing."
+        }
+    ]
+}

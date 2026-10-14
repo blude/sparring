@@ -1,0 +1,84 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:evidence-demand, 3:consistency-check, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to affirm the visitor's premise and instead asks which Rahmenbedingung specifically and what evidence points to a hidden business decision."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 splits the visitor's claim into two distinct claims with different evidentiary burdens and demands concrete evidence rather than accepting or refusing."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 probes the chronology further ('was genau war final an dieser Zahl vorher') pushing back with a new angle about FPGA timing-closure process rather than repeating turn 2's challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 acknowledges the visitor's concession as a genuine finding but immediately reframes to keep the weaker version of the original claim alive, avoiding capitulation."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly refuses to let the original question drop ('lass die ursprüngliche Frage nicht einfach fallen') and redirects to the unresolved trade-off/communication issue."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own pedagogical technique or recaps the session as a device; turn 4's 'Halt das fest' is a directive not a method-announcement."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 3 correctly grounds the FPGA timing-closure vocabulary (Place-and-Route-Iterationen, Synthesearbeit) in a technically accurate way that supports the argument."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 4 correctly distinguishes 'reine technische Rahmenbedingung' communicated as fixed versus an actual negotiable cost/performance trade-off, matching the scenario's core distinction."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turns are compact, direct, and open with the sharpest move (e.g., turn 2 opens with 'Interessant — aber prüf deine eigene Beweislast mal genauer') without hedging."
+        }
+    ]
+}
