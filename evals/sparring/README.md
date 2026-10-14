@@ -167,6 +167,17 @@ reshaping every run's output to fit a tool built for a different shape. For
 turn-by-turn transcript reading, open `transcript.json`/`grading.json`
 directly — each `evidence` string quotes the turn it's judging.
 
+## Iterations
+
+Which `prompts/sparring.md` each committed iteration ran against. Dates are
+file mtimes of the run output (+0200); add a row whenever an iteration is
+committed, so a later run can be diffed against the right prompt
+(`git diff <commit> HEAD -- prompts/sparring.md`).
+
+| Iteration | Run (2026-08-20) | Prompt version | Notes |
+|-----------|------------------|----------------|-------|
+| 1 | 01:35–02:00 | `f90f7a1` (committed 2026-08-20 00:30) | First read, 6 scenarios × 3 reps + baseline. Prompt had no later commit until `72a1b44` (08-23), but uncommitted edits at run time can't be ruled out. |
+
 ## Out of scope for v1
 
 - Moderation (`moderation.md`) correctness — separate track later.
