@@ -6,6 +6,8 @@
 /data/store.db-shm
 /data/backups/
 /data/curriculum/
+# bin/export.php output holding real visitor transcripts; repo is public
+/data/exports/
 __pycache__/
 
 .env
