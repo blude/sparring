@@ -11,11 +11,13 @@
 <body>
 <?= pageHeader() ?>
 <h1><?= t('terms.heading') ?></h1>
+<p><?= t('terms.updated') ?></p>
 <p><?= t('terms.p1') ?></p>
 <p><?= t('terms.p2') ?></p>
 <p><?= t('terms.p3') ?></p>
 <p><?= t('terms.p4') ?></p>
 <p><?= t('terms.p5') ?></p>
+<p><?= t('terms.p6') ?></p>
 <p><?= t('terms.privacyLink') ?></p>
 <?= pageFooter() ?>
 <?= sillyBanner() ?>
