@@ -48,7 +48,7 @@ return [
     'dojo.consent.participateLabel' => 'Ich habe das Obenstehende gelesen und stimme der Teilnahme an der Sitzung zu.',
     'dojo.consent.optionalHeading' => 'Optional',
     'dojo.consent.projectionLabel' => 'Ich bin einverstanden, dass meine ausgetauschten Nachrichten während der Sitzung auf dem Projektor angezeigt werden dürfen.',
-    'dojo.consent.retentionLabel' => 'Ich bin einverstanden, dass meine Sitzung für diese Abschlussarbeit während der Dauer der Abschlussarbeit (4. September bis 29. Oktober 2026) gesammelt und ausgewertet sowie danach zur laufenden Verbesserung von Sparring verwendet werden darf.',
+    'dojo.consent.retentionLabel' => 'Ich bin einverstanden, dass meine Sitzung während der Dauer der Abschlussarbeit gesammelt und ausgewertet sowie danach zur laufenden Verbesserung von Sparring verwendet werden darf.',
     'dojo.consent.confirm' => 'Auswahl bestätigen',
     'dojo.replyQuote.label' => 'Antwort auf:',
     'dojo.replyQuote.cancelAriaLabel' => 'Antwort abbrechen',

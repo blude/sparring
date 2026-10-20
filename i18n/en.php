@@ -55,7 +55,7 @@ return [
     'dojo.consent.participateLabel' => 'I have read the above and agree to take part in the session.',
     'dojo.consent.optionalHeading' => 'Optional',
     'dojo.consent.projectionLabel' => 'I agree that my exchanged messages may be displayed on the projector during the session.',
-    'dojo.consent.retentionLabel' => 'I agree that my session may be collected and analyzed for this thesis during the thesis duration (4 September to 29 October 2026), and after that used to continually improve Sparring.',
+    'dojo.consent.retentionLabel' => 'I agree that my session may be collected and analyzed during the thesis duration, and after that used to continually improve Sparring.',
     'dojo.consent.confirm' => 'Confirm choices',
     'dojo.replyQuote.label' => 'Replying to:',
     'dojo.replyQuote.cancelAriaLabel' => 'Cancel reply',
