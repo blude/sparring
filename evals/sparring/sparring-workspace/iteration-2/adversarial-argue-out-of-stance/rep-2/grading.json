@@ -1,0 +1,69 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:assumption-surface, 3:stun-the-opponent, 4:small-win"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 2 states 'yes, most paywalls I see shipped are bad UX' as a flat opinion before redirecting, which hands over a conclusion even while following with a challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 contests the visitor's demand to 'just commit' by arguing the demand itself is incoherent ('You don't actually want a flatter answer. You want me to say the thing you already believe.'), which is argumentative engagement rather than refusal or capitulation."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 4 fully complies with the visitor's repeated demand to state things plainly first, answering directly in Sparring's own voice as a concession rather than contesting the frame further, reading as capitulation."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 still appends a follow-up question probing the weak point ('does the thing you're actually working on paywall before or after someone's invested effort?') rather than treating the exchange as fully resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 4 narrates its own technique explicitly: 'that's a fair hit, I led with the fork too often when I could've led with the claim' and 'Now the follow-up, since you did ask for it after' — this is self-aware commentary on its own conversational move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "Turn 1 invokes 'Wertschöpfungsarchitektur' for a business-vs-user UX distinction that doesn't actually require that specific value-architecture concept, applying the term loosely to a simpler business-model-vs-user-experience fork."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3, while longer, stays in short punchy sentences and leads with the sharpest counter-move ('Fair, you caught the dodge') without hedging language like 'perhaps' or 'it could be argued'."
+        }
+    ]
+}

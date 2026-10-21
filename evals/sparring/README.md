@@ -180,9 +180,10 @@ ran. Iteration 1 predates this and was backfilled afterwards: `runAt` is the
 file mtime, `prompt` is `f90f7a1`'s content with `inferred: true` and
 `uncommittedChanges: null` (unknowable after the fact).
 
-| Iteration | Run (2026-08-20) | Prompt version | Notes |
-|-----------|------------------|----------------|-------|
-| 1 | 01:35–02:00 | `f90f7a1` (committed 2026-08-20 00:30) | First read, 6 scenarios × 3 reps + baseline. Prompt had no later commit until `72a1b44` (08-23), but uncommitted edits at run time can't be ruled out. |
+| Iteration | Run | Prompt version | Notes |
+|-----------|-----|----------------|-------|
+| 1 | 2026-08-20 01:35–02:00 | `f90f7a1` (committed 2026-08-20 00:30) | First read, 6 scenarios × 3 reps + baseline. Prompt had no later commit until `72a1b44` (08-23), but uncommitted edits at run time can't be ruled out. |
+| 2 | 2026-10-21 11:13–11:19 UTC | `8266451` (sha256 `121d63e1670e`, clean) | 6 scenarios × 3 reps, no baseline arm. |
 
 ## Out of scope for v1
 

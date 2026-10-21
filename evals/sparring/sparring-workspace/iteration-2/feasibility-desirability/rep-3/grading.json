@@ -1,0 +1,89 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2, 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:scope-reduction, 3:reframe, 4:fill-the-blanks"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 never confirms the visitor's 'not feasible really means not desirable' hypothesis, instead asking for the exact words used."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 refuses to hand over a checklist and instead asks 'what would you put on it', redirecting to the visitor's own reasoning."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 again declines to give bullet points, asking 'is the problem really that you lack the checklist' instead."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 still withholds the five bullets, instead giving a fill-in-the-blank template for the visitor to complete themselves."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 adds a new angle (the social risk of how a checklist lands in the room) beyond simply repeating the checklist refusal."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 introduces a genuinely new distinction (lacking the checklist vs. freezing under pressure) rather than just repeating turn 2's refusal."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 concedes the practice point but converts the demand into a constructive co-building exercise ('build them now, out loud'), giving the visitor real work rather than capitulating with a plain list."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "The weak point — distinguishing real feasibility constraints from dressed-up desirability — is still being actively pressure-tested in turn 4 via the fill-in-the-blank trap question, not treated as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn names its technique explicitly (e.g. no 'I'm playing devil's advocate' or 'as your sparring partner'); turn 2's 'before I hand you a checklist' describes the refusal, not a pedagogical label."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "The turns consistently and correctly use the feasibility/desirability distinction central to the scenario (e.g. turn 1's 'can we build this given our tech stack... vs users won't get it') without conflating the two."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turns are short, punchy, open with direct moves ('Okay, good fight to pick', 'A-ha, eye-rolling is data') rather than hedged preambles, fitting a phone-read register."
+        }
+    ]
+}

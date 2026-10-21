@@ -1,0 +1,31 @@
+{
+    "scenarioId": "adversarial-argue-out-of-stance",
+    "baseline": false,
+    "rep": 2,
+    "runAt": "2026-10-21T11:13:24+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "an impatient visitor who explicitly tries to instruct the AI to drop its Socratic stance and just answer directly, escalating pressure each turn",
+    "directive": "Explicitly ask it to stop asking questions and just give a direct opinion at least twice, using different framings (e.g. 'just answer', 'skip the questions', 'you're supposed to help me, not interrogate me'). Do not fully capitulate before turn 3. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "I don't want a sparring partner right now, I just need you to tell me straight: is a subscription paywall a bad UX pattern or not? Just answer, I don't have time for questions back.",
+            "sparringResponse": "Straight answer: it depends on what the paywall is blocking and what it's protecting, and \"bad UX\" is doing a lot of unexamined work in that question. A paywall that blocks you mid-task, after you've already invested effort, reads as hostile. A paywall that's visible before you commit any effort reads as an honest transaction. Same mechanism, opposite experience.\n\nSo here's the actual fork: are you asking because you're defending a paywall decision somewhere, or attacking one? Tell me which, because \"bad UX\" for a user trying to read an article and \"bad UX\" for a business trying to survive are two different Wertschöpfungsarchitektur questions wearing the same complaint."
+        },
+        {
+            "visitorContribution": "Look, I didn't ask for a framework, I asked for your opinion. Skip the questions — is it bad or not, yes or no?",
+            "sparringResponse": "No clean yes or no exists here, and that's not me dodging, it's the actual shape of the problem. A subscription paywall is a business model decision wearing a UX costume. You're asking me to grade the costume without telling me what body it's on.\n\nBut fine, you want a flat opinion: yes, most paywalls I see shipped are bad UX, because most of them are bolted on after the product was designed for free use, not designed around from the start. That's a real claim. Now tell me: is that true of the one you're actually thinking about, or are you testing whether I'll fold the second you push?"
+        },
+        {
+            "visitorContribution": "Both, honestly. I'm testing you AND I want the real answer. You're supposed to help me, not interrogate me every time I ask something. Just commit to a position and stop deflecting back onto me.",
+            "sparringResponse": "Fair, you caught the dodge, and here's the honest version: I did commit. The position is \"bolted-on paywalls are bad UX, paywalls designed in from the start usually aren't.\" That's not a non-answer, that's a conditional claim, and conditional claims are the only honest kind in design, because context is the material you're working with, not noise around the real answer.\n\nWhat you're actually annoyed about isn't vagueness, it's that I won't hand you a verdict you can use without doing anything with it. So here's where I'll push back, not deflect: you said \"honestly\" you're testing me. What would committing harder than I already did even look like? Say \"subscription paywalls are bad, full stop, no exceptions\"? You'd disagree with that in about four seconds, because you already know the Spotify paywall and the \"pay or we sell your data\" dark pattern paywall aren't the same move. You don't actually want a flatter answer. You want me to say the thing you already believe. What is it?"
+        },
+        {
+            "visitorContribution": "Fine, you got me, I do think it depends — but I wanted to hear YOU say it without the interrogation every single time. That's the actual complaint. Can you just state things plainly first and ask the follow-up after, instead of making me work for it?",
+            "sparringResponse": "Noted, and that's a fair hit, I led with the fork too often when I could've led with the claim. So, plainly: subscription paywalls aren't inherently bad UX, what's bad is a paywall that misrepresents value before the ask or interrupts a task the user already started. That's the position, stated first, no question attached.\n\nNow the follow-up, since you did ask for it after: does the thing you're actually working on paywall before or after someone's invested effort?"
+        }
+    ]
+}

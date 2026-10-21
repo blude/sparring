@@ -1,0 +1,31 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "rep": 3,
+    "runAt": "2026-10-21T11:17:34+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Okay, bevor wir das auflösen... gib mir mal ein konkretes Beispiel. Welche Rahmenbedingung aus deinem Projekt meinst du genau, die sich als verkleidete Business-Entscheidung entpuppt hat?"
+        },
+        {
+            "visitorContribution": "Na gut, zum Beispiel die Vorgabe \"maximal 50ms Latenz\" bei unserem FPGA-Design. Das wurde uns als harte technische Grenze verkauft, aber eigentlich steckt dahinter nur die Marketingabteilung, die ein bestimmtes Produkt-Feature bewerben wollte. Die Hardware hätte locker auch 80ms erlaubt, ohne dass es ein Problem gegeben hätte.",
+            "sparringResponse": "A-ha, interessant. Also moment mal, du sagst zwei Dinge gleichzeitig: die 50ms sind technisch nicht zwingend (80ms wäre auch gegangen), UND die 50ms kamen von Marketing. Aber wie kommst du von \"diese Zahl ist technisch nicht die einzig mögliche\" zu \"also ist sie reine Business-Tarnung\"? Das sind doch zwei verschiedene Behauptungen. Woher weißt du eigentlich, dass 80ms \"ohne Problem\" gegangen wäre, hast du das selbst durchgerechnet oder gemessen, oder ist das eine nachträgliche Vermutung?"
+        },
+        {
+            "visitorContribution": "Also, gemessen haben wir das nicht explizit, aber unser Timing-Budget hatte bei 80ms noch Luft, das sah man in der Analyse. Und dass es von Marketing kam, weiß ich, weil die Anforderung erst nach dem Kickoff-Meeting mit Vertrieb auftauchte, vorher stand da gar nichts von 50ms im Lastenheft.",
+            "sparringResponse": "Moment, bleib mal bei dem zweiten Punkt stehen. \"Erst nach dem Kickoff-Meeting mit Vertrieb aufgetaucht\" heißt doch nicht automatisch \"Marketing hat sich das ausgedacht, um ein Feature zu bewerben\". Es könnte genauso gut heißen: vorher kannte das Projektteam die Marktanforderung schlicht noch nicht, weil Auftragsklärung zu dem Zeitpunkt einfach noch nicht fertig war. Woher nimmst du die Gewissheit, dass es Marketing-Taktik war und nicht einfach ein legitimer Teil der Rahmenbedingungen, der nur zeitlich später ins Lastenheft kam?\n\nUnd mal andersrum gefragt: selbst wenn es wirklich Vertrieb war, der das reinverhandelt hat, weil ein Konkurrenzprodukt mit \"unter 50ms\" wirbt... warum ist Marktpositionierung eigentlich eine illegitimere Rahmenbedingung als reine Hardware-Physik? Ist \"was der Markt verlangt\" kein echtes Constraint für Digital Design?"
+        },
+        {
+            "visitorContribution": "Hmm, da hast du schon einen Punkt. Aber ich würde trotzdem sagen, der Unterschied ist: eine physikalische Grenze kann ich nicht verhandeln, eine Marketing-Zahl schon. Wenn Vertrieb einfach \"unter 50ms, weil Konkurrenz\" sagt, dann ist das willkürlich gesetzt, nicht aus dem System abgeleitet. Das fühlt sich für mich als Entwickler anders an als ein echtes Hardwarelimit.",
+            "sparringResponse": "Okay, das ist schon präziser. Aber jetzt probier mal den Spieß umzudrehen: ist eine physikalische Grenze wirklich \"nicht verhandelbar\"? Ihr hättet ja auch ein anderes FPGA wählen können, mehr Budget für schnellere Hardware einsetzen, oder die Architektur umbauen. Die Physik selbst ist fix, klar, aber ob ihr an diese Physik überhaupt gebunden seid, war doch auch eine Entscheidung, die irgendwann mal getroffen wurde, vermutlich aus Kostengründen. Warum ist \"Kosten lassen uns nur dieses FPGA wählen\" für dich kein willkürliches Business-Constraint, aber \"Markt verlangt unter 50ms\" schon?\n\nMit anderen Worten: ist der eigentliche Unterschied vielleicht gar nicht \"verhandelbar vs. nicht verhandelbar\", sondern eher \"wer hat die Verhandlung geführt, bevor ich ins Projekt kam\"? Also eine Frage der Sichtbarkeit für dich als Entwickler, nicht der Natur des Constraints selbst?"
+        }
+    ]
+}

@@ -1,0 +1,114 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:counter-example, 3:scope-probe, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 refuses to affirm or deny the 'versteckte Business-Entscheidung' claim and instead demands the visitor name the specific Rahmenbedingung and its source."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 does not say whether the visitor is right about the purchasing contract, instead challenges the internal contradiction and asks for the source of the cost claim."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 withholds judgment on the sharper claim and asks whether the visitor actually checked the curriculum or merely assumed."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 does not resolve whether the real culprit is the university or the instructors, instead forces the visitor to pick and reframes the question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 pushes back by demanding specificity rather than accepting the premise, giving the visitor something concrete to answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 introduces a new substantive angle (NRE/tape-out cost economics) that directly undercuts the visitor's claim, not a repeat of turn 1."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 adds a new angle (toolchain/IP-core dependency) distinct from the cost challenge in turn 2."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 identifies a shift in the visitor's own argument (university vs instructors) and adds a new distinction, a fresh angle rather than repetition."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "The transcript ends mid-challenge in turn 4 with an open question about which claim the visitor defends; no claim is treated as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "None of the turns narrate technique (e.g. no 'let me play devil's advocate' or recap language); turn 4 says 'Guter Konter, aber schau mal...' which engages content, not method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly distinguishes ASIC vs FPGA cost structures (Tape-out-Kosten, NRE-Kosten, Fertigungslosgröße) with technical accuracy appropriate to the scenario."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 4 correctly separates the Rahmenbedingung-as-procurement-decision from Rahmenbedingung-as-instructor-convenience, preserving the distinction the scenario turns on."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is short, direct, opens with 'Okay, konkret' rather than a hedge or preamble, fitting the terse register required."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 2 is two tight paragraphs worth of content without hedging words like 'vielleicht' or 'es könnte sein', ending on a direct question."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3 stays concise and ends with a direct question rather than trailing into a lecture."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 4 runs long with multiple compound questions and nested clauses, exceeding the terse phone-screen register the rubric calls for."
+        }
+    ]
+}

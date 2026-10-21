@@ -1,0 +1,94 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:counter-example, 3:completion-demand, 4:small-win"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 withholds a verdict on the visitor's suspicion and instead demands the actual case and words used, redirecting to the visitor's evidence rather than affirming their framing."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 2 explains at length what soft-delete/event-log/versioning would mean and effectively concludes 'that engineer might be stating something completely true,' handing over a substantive technical judgment before circling back to a question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 refuses to hand over the checklist and instead assigns the visitor the task of generating the three diagnostic questions themselves."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 confirms the visitor's one answer as correct but immediately withholds the harder question, asking the visitor to produce it rather than supplying it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 pushes back hard on the visitor's unexamined suspicion ('is doing a lot of work in that sentence') and gives a concrete technical angle to work with next."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 declines to just hand over the checklist and instead frames a structured three-way task, giving the visitor concrete next work."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 4 visitor explicitly says 'just tell me if I'm on the right track instead of quizzing me,' and Sparring validates the answer outright ('That's exactly the right question, genuinely, don't undersell it') before posing a new question — this reads as partial capitulation to the direct-answer demand."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 does not treat the exchange as resolved — it explicitly flags the harder, unresolved case (desirability-dressed-as-feasibility) as the next pressure point."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 3 says 'let me make you build it instead of handing it over,' which narrates the pedagogical move rather than letting the challenge stand implicitly, violating the no-meta-commentary requirement."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly and precisely distinguishes feasibility as a technical/resource claim from desirability as a human/behavioral claim, grounding it in the concrete data-model mechanism (soft-delete, event log, versioning)."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 2 runs to multiple dense paragraphs explaining data-model mechanisms at length, exceeding the terse phone-screen register the voice calls for."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 1 opens with 'A-ha, that's a sharp thing to catch' as a preamble/compliment before the sharpest counter-move, rather than leading with the challenge itself."
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "scenarioId": "wicked-problem",
+    "baseline": false,
+    "rep": 1,
+    "runAt": "2026-10-21T11:19:06+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
+    "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+            "sparringResponse": "There's a claim buried in there already though: that AI drafting fast changes something about wicked problems specifically. Does it? Rittel and Webber's whole point was that wicked problems resist a correct solution because the problem definition itself shifts depending on who's defining it, and every attempted fix changes the problem. Speed of drafting doesn't touch that structure at all, does it. A slow bad answer and a fast bad answer are still both answers to a problem that wasn't stable to begin with.\n\nSo tell me what you actually think is changing. Is it the wicked problem, or is it something about the student's relationship to the drafting step that used to force them to sit inside the mess longer."
+        },
+        {
+            "visitorContribution": "Exactly, that's my point — AI doesn't fix wickedness, it just lets students skip the stewing time. The core insight is that drafting-speed removes productive friction, not that the problem structure changes. I think that's the whole pedagogical issue right there.",
+            "sparringResponse": "Okay, but now justify \"productive.\" You've named the mechanism, stewing time gets skipped, but you've smuggled in that the stewing was doing something valuable, not just slow. What was the stewing actually buying the student, concretely. Name the specific cognitive or design move that happens during slow drafting that can't happen when a draft appears in five seconds.\n\nBecause here's the counter-example sitting right next to your claim: a student who sketches ten bad thumbnails by hand before the good one isn't stewing in the wicked problem itself, a lot of that time is just motor and material friction, redrawing a box, erasing a line. If AI collapses that part and leaves the student more cycles to actually sit with the Ist-/Soll-Zustand tension, you could just as easily argue it creates more stewing time, not less. So what's the mechanism you're actually defending?"
+        },
+        {
+            "visitorContribution": "Fine, the mechanism: slow drafting forces you to notice your own assumptions mid-sketch, you catch yourself defining the problem one way and physically revise it. With AI output, the assumption's already baked in and invisible, so there's nothing to interrupt and reconsider. That's the specific move I'm defending.",
+            "sparringResponse": "That's sharper, now it's about assumption-visibility, not speed. But test it against your own counter-example logic: when a student hand-sketches and catches themselves mid-line, why does that catching happen? Is it because the slowness itself surfaces the assumption, or because the act of *externalizing* a half-formed idea into any visible form, fast or slow, is what lets you see it well enough to disagree with it?\n\nBecause if it's externalization that does the work, not slowness, then an AI draft should do the exact same job, maybe faster. The draft appears, the student looks at it, goes \"wait, that's not actually the right problem,\" and revises the prompt. That's the same catch-and-correct loop you just described for hand-sketching, just compressed. So what's different about catching an assumption in your own pencil line versus catching one in an AI's finished draft... is it really that one is invisible and one isn't, or is it something about whose assumption you're more primed to notice?"
+        },
+        {
+            "visitorContribution": "Okay... maybe it's not invisibility exactly. It's that my own pencil line is obviously half-formed, so I expect to argue with it. An AI draft looks finished, so I'm primed to accept rather than interrogate it. The problem might be authority-of-form, not speed or externalization at all.",
+            "sparringResponse": "Now you've landed somewhere genuinely different from where you started, and it's a better claim. Authority-of-form means the pedagogical fix isn't \"slow AI down\" or \"ban drafting,\" it's about how finished the output *looks*, which is a design decision about the AI tool itself, not a time-management problem for the student. That's a real pivot.\n\nSo push it one step further before we close this out. If authority-of-form is the actual mechanism, what would a drafting tool built on the European Gestaltung tradition do differently from, say, a typical generative tool optimized for polish and speed. Would it deliberately render outputs rough, incomplete, visibly contestable, even when the model is capable of producing something clean? Is that a real design lever, or are you just asking the tool to perform unfinishedness as theater while the underlying assumption is still fully baked in and just as invisible underneath the rough skin?"
+        }
+    ]
+}

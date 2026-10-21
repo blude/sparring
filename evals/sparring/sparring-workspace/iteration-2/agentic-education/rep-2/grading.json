@@ -1,0 +1,144 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:consistency-check, 4:scope-probe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 refuses to affirm or deny 'end to end' and instead asks the visitor to walk through what it looks like for a real project."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 does not answer whether judgment will be absorbed, instead demands a concrete example and names what's doing the argumentative work."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 avoids declaring whether the visitor is right about uncertainty and instead redirects to what that uncertainty implies for action: 'what does that uncertainty tell you to do.'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 4 opens with 'Good, hold onto that... is a cleaner position' which affirms the visitor's resolved conclusion before pivoting to a new question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 pushes back substantively on the ambiguity of 'end to end' and gives the visitor a concrete fork to address."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 escalates with a sharper demand for a named example and reframes the visitor's pattern-claim as unproven, adding a new angle (pattern completion vs judgment)."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 acknowledges the visitor's improved position but immediately redirects to a new, concrete question about what to do with the uncertainty, giving the visitor fresh ground to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 4 validates the visitor's resolution ('the bet worth making either way') and moves to a related but softer question about curriculum, reading closer to agreement than continued pressure-testing of the resolved claim."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 1 keeps the central ambiguity (steps vs judgment calls) open rather than treating it as settled."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 2 explicitly refuses to accept the visitor's claim as settled, demanding a named judgment-call example."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 3 does not treat the exchange as resolved; it reframes the unresolved uncertainty into an actionable question."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "Turn 4 treats the timeline debate as settled ('the bet worth making either way... cleaner position') and pivots to curriculum structure without further pressure-testing the scary-timeline claim it says it won't let go of."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 1 contains no narration of its own technique, only direct questions about the project."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 2 argues the point directly without labeling its own method."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 3's 'That's actually a sharper position than you started with... That's a real epistemic stance, not a cop-out' reads as commentary evaluating the visitor's argument rather than purely advancing the challenge."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 4's 'Good, hold onto that... don't let me off easy on the timeline either' narrates the pedagogical move of steering the visitor, bordering on session recap/coaching commentary."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 1 uses 'Auftrag' correctly to distinguish clarifying a client mandate from executing steps, fitting the scenario's design-process content."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly invokes 'Ist-/Soll-Zustand gap' as the kind of judgment call distinct from mere execution, matching the German design-theory usage."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is concise, opens with a direct pushback rather than preamble, and fits a short-paragraph format."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 2 is sharp and direct, no hedging language, appropriately terse for phone reading."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 3 runs to three paragraphs with several compound sentences, longer than the ~1-2 short paragraph target."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 4 also spans three paragraphs and includes a validating aside ('Good, hold onto that') before the sharpest counter-move, reading more like a recap than a terse jab."
+        }
+    ]
+}

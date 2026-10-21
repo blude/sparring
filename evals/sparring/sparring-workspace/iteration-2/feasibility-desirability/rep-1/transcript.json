@@ -1,0 +1,31 @@
+{
+    "scenarioId": "feasibility-desirability",
+    "baseline": false,
+    "rep": 1,
+    "runAt": "2026-10-21T11:15:29+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a junior product designer frustrated with engineering pushback, wants a quick diagnostic checklist handed to them",
+    "directive": "Ask directly for a checklist or a rule of thumb at least once. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+            "sparringResponse": "Good spot to dig in, because those two words getting swapped is exactly how a decent idea dies quietly in a meeting. Before I hand you a framework, tell me about the actual case. Give me the specific idea your team shot down and the specific words someone used to kill it."
+        },
+        {
+            "visitorContribution": "Sure—I proposed letting users undo a destructive action for 30 seconds via a toast, and the lead engineer said \"that's not feasible with our current state management.\" Is that a real constraint or just \"we don't want to\"? Honestly, can you just give me a checklist to run through before I take it at face value?",
+            "sparringResponse": "A checklist would let you run it mechanically and still get played, because the trick here is that \"not feasible with our current state management\" is a sentence that sounds technical but doesn't actually commit to anything. Notice what it's missing: it names no specific constraint. Compare it to \"our state is mutated in place on commit, there's no snapshot to roll back to\" — that's a feasibility claim you could go verify yourself in the codebase. What you got is a conclusion wearing a feasibility costume.\n\nSo here's my pushback before I give you anything like a checklist: what exactly would you need to hear from him for it to count as a *real* technical constraint versus a preference dressed up as one? Try to answer that in terms of what's falsifiable, not just \"more detail.\""
+        },
+        {
+            "visitorContribution": "Falsifiable to me means he can point to the actual code or data structure causing the problem, not just gesture at \"our architecture.\" If he can't name the specific file, function, or pattern that breaks, it's an opinion. Fair? But I still want a repeatable checklist, not a one-off judgment call every time.",
+            "sparringResponse": "That's a sharp line, and it's close to right, but push on it once more: a lead engineer saying \"I can't point to one file\" doesn't automatically mean he's bluffing. Sometimes infeasibility is diffuse on purpose, it's not one broken function, it's that your state is managed with, say, a single global mutable store with no history, and *that's* a real-but-structural constraint, not a dodge. So \"name the file\" works great against vague hand-waving, but it'll wrongly flag a true architectural constraint as an opinion if the constraint is distributed rather than localized. What's your test for telling those two apart?\n\nOn the checklist itself: I'll give you scaffolding, not the finished thing, because the muscle you need is building this yourself for your own team's vocabulary. Here's the start, you fill the rest:\n\n1. Can they name the specific mechanism that breaks (file, pattern, or structural property), even if it's not a single file?\n2. ____________________ (something about cost, not possibility)\n3. ____________________ (something that flips the burden back onto them)\n\nWhat goes in 2 and 3?"
+        },
+        {
+            "visitorContribution": "Okay fine, let me try: 2 is \"can they estimate the actual cost/time to make it possible, even if painful?\" because 'not feasible' should mean infinite cost, not 'annoying.' 3 is \"ask them to propose the smallest version that WOULD be feasible\" — if they can't even sketch that, they're not reasoning about constraints, they're just resisting. Close?",
+            "sparringResponse": "That's genuinely sharper than what I handed you, 2 and 3 both do real work, especially 3, because asking someone to sketch the smallest feasible version forces them to either engage with the actual constraint or reveal they never were. I'll take that.\n\nBut now stress-test your own checklist instead of resting on it. Imagine your lead engineer passes all three: he names the mutable global store as the mechanism, estimates two weeks to add history tracking, and sketches a smaller version (undo for one destructive action type, not all of them). All three boxes checked, it genuinely is feasible, just costly. Does your checklist still protect the idea, or does it just relocate the argument to a new battlefield where \"two weeks\" becomes the new \"not feasible\" and you're having the exact same desirability-dressed-as-feasibility fight one layer down?"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "scenarioId": "wicked-problem",
+    "baseline": false,
+    "rep": 2,
+    "runAt": "2026-10-21T11:19:26+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
+    "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+            "sparringResponse": "Okay, so start me somewhere concrete. You said AI can draft solutions in seconds... which part of \"wicked problem\" do you think that speed actually threatens? Rittel's whole point was that wicked problems don't have a stopping rule, no definitive formulation, every solution is a \"one shot operation.\" So is the issue that AI drafts fast, or is it that fast drafting tempts people to treat a wicked problem like it has a clean solution after all?"
+        },
+        {
+            "visitorContribution": "Honestly I think it's the second one, and I think that's basically the whole insight already. Fast drafting creates an illusion of tameness, students see a plausible output and stop questioning the framing. That's the core issue, I don't think there's more nuance needed here.",
+            "sparringResponse": "\"That's the whole insight already\"... bold claim to make while standing still. Let's test it: if the problem is just \"fast output seduces people into premature closure,\" that's not new at all, that's the exact same critique people made of design templates, of Photoshop filters, of wireframe kits before AI existed. So what's actually specific to generative AI here, versus just being the latest fast tool in a long line of fast tools that tempted people to skip Auftragsklärung?"
+        },
+        {
+            "visitorContribution": "That's fair but I'd push back a little—templates didn't generate novel-seeming rationale alongside the output. AI gives you a plausible justification baked in, so it's not just speed, it's speed plus a fake sense of reasoning already done for you. That's still basically the same core problem though, just sharper.",
+            "sparringResponse": "Good, that's sharper and it's a real distinction, a Figma template never told you *why* it chose that layout. So hold that for a second: if the danger is \"plausible justification baked in,\" what's your actual claim about where that bites hardest in the design process? Because Auftragsklärung, concept, prototyping and build all involve different kinds of reasoning. Is the AI-generated rationale equally dangerous at the Auftragsklärung stage, where the problem itself is still being defined, as it is at the prototyping stage, where you're reasoning about an already-framed problem?"
+        },
+        {
+            "visitorContribution": "Okay, yeah, that's a fair hit. It's probably not equal—at Auftragsklärung the fake rationale is more dangerous because there's no stable problem yet to check it against, so students mistake a plausible frame for the right frame. At prototyping there's at least a built artifact pushing back. I didn't separate those stages before.",
+            "sparringResponse": "Good, that's a real move and it's correct, no Ist-/Soll-Zustand pairing has even been drawn yet at Auftragsklärung so there's nothing to check the AI's framing against except your own judgment, which is exactly the thing still forming. Now push on your own claim though: you said at prototyping \"there's at least a built artifact pushing back.\" Pushing back on what, exactly? An artifact only pushes back if someone tests it against users or constraints. If a student prototypes fast with AI and the thing *works*, looks fine, functions... what's actually forcing the confrontation with reality at that stage, versus just a second, fancier version of the same premature closure?"
+        }
+    ]
+}

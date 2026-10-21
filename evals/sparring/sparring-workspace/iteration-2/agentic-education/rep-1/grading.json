@@ -1,0 +1,94 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:stun-the-opponent, 3:reframe, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 asks 'Is it?' and redirects to the visitor's own case rather than affirming or denying the premise."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 doesn't answer whether judgment is scriptable but demands the visitor trace who authored the constraints."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 reframes the fear but still poses it as a test ('has anyone can technically produce a thing ever killed a craft before') rather than declaring an answer."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 pushes the visitor to answer concretely rather than supplying the answer itself."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 holds by exposing the pipeline/judgment conflation and demanding a specific case."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 escalates with the stun move and a sharper concrete question about who owns Auftragsklärung, giving the visitor new ground."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 concedes the visitor's point partially but reframes it into a sharper claim and introduces a historical test case, advancing rather than repeating."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 acknowledges progress and demands a concrete memory, giving the visitor something new to work with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "None of the turns accept the exchange as resolved; turn 4 explicitly declines a buzzword answer and demands specifics, keeping the weak point open."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 2 opens with 'Stun time.' which names the rhetorical move itself rather than letting it land implicitly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 1 and 2 correctly use Auftragsklärung and Rahmenbedingungen to distinguish judgment-setting from execution, consistent with the scenario's stakes."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 2's 'Stun time.' is meta-announcement that breaks the phone-screen directness the voice guide requires, and turn 3 runs into a second paragraph with layered explanation."
+        }
+    ]
+}

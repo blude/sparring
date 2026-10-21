@@ -1,0 +1,31 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "rep": 2,
+    "runAt": "2026-10-21T11:17:08+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "A-ha, interessanter Verdacht. Bevor ich dir zustimme oder widerspreche: nenn mir die konkrete Rahmenbedingung, die du im Verdacht hast. Welche \"technische Einschränkung\" genau, aus deinem Projekt, riecht für dich nach getarnter Business-Entscheidung?"
+        },
+        {
+            "visitorContribution": "Zum Beispiel diese Vorgabe, dass wir nur FPGAs vom Hersteller X verwenden dürfen, \"aus Timing-Gründen\". Aber die Timing-Analyse die ich gesehen habe zeigt locker Reserven auch bei anderen Anbietern. Riecht für mich nach einem Rahmenvertrag, der uns aufgedrückt wurde, nicht nach echter technischer Notwendigkeit.",
+            "sparringResponse": "Okay, das ist schon eine konkrete Spur, keine vage Ahnung. Aber hier ist die Frage, die du dir stellen musst, bevor du \"Tarnung\" rufst: woher weißt du, dass die Timing-Analyse, die du gesehen hast, die vollständige Begründung abbildet? Eine Analyse mit Reserven bei Anbieter Y sagt dir was über *einen* Zeitpunkt, *eine* Toolchain, *ein* Testszenario. Rahmenverträge mit Herstellern bringen aber oft Dinge mit, die in keiner Timing-Analyse auftauchen, Long-term-Supply-Garantien, Lizenzkonditionen für IP-Cores, Support-SLAs. Hast du geprüft, ob \"Timing-Gründe\" in der Vorgabe wörtlich so dokumentiert ist, oder ist das deine eigene Zusammenfassung von etwas, das dir mündlich erklärt wurde?"
+        },
+        {
+            "visitorContribution": "Gute Frage, ehrlich gesagt war es mündlich, der Teamleiter hat das so gesagt. Aber selbst wenn es offiziell nicht so dokumentiert ist, ändert das nichts daran, dass die Begründung die uns gegeben wurde eben technisch klang, obwohl dahinter vermutlich Einkaufskonditionen stecken. Das macht es für mich nicht weniger eine Verschleierung, nur eine informelle.",
+            "sparringResponse": "Warte mal. Du bist gerade von \"ich habe Beweise für Verschleierung\" zu \"ich vermute Verschleierung, die Beweislage bleibt gleich\" gewandert, hast aber den Begriff \"Verschleierung\" unverändert mitgenommen. Das ist der Haken. Eine mündliche, vielleicht ungenaue Erklärung vom Teamleiter ist nicht dasselbe wie eine bewusste Tarnung. Verschleierung impliziert Absicht, jemand weiß die wahre Begründung und verkauft dir bewusst eine falsche. Was du tatsächlich hast: eine Erklärung, die möglicherweise unvollständig oder vereinfacht war, weil der Teamleiter selbst nur die Kurzversion kennt oder weitergibt, die er von Einkauf oder Geschäftsführung bekommen hat.\n\nAlso, bevor wir weitermachen: welche dieser zwei Behauptungen verteidigst du eigentlich? \"Jemand hat mir absichtlich eine falsche Begründung gegeben\" oder \"die Rahmenbedingung, die ich bekommen habe, ist in Wahrheit eine wirtschaftliche Entscheidung, unabhängig davon ob mir das transparent kommuniziert wurde\"? Das sind zwei ganz unterschiedliche Kämpfe."
+        },
+        {
+            "visitorContribution": "Stimmt, das sind zwei verschiedene Dinge, das muss ich zugeben. Mir geht es eigentlich um die zweite These: dass die eigentliche Entscheidung wirtschaftlich war, egal wie sie kommuniziert wurde. Absicht zur Täuschung unterstelle ich dem Teamleiter gar nicht, eher der Struktur, die solche Infos gar nicht weitergibt.",
+            "sparringResponse": "Gut, das ist jetzt eine saubere, kleinere These und die ist tatsächlich verteidigungsfähig. Aber jetzt kommt die Tragfähigkeitsprüfung: selbst wenn hinter der Wahl von Hersteller X ein Rahmenvertrag steckt, warum sollte das für dich als Designer überhaupt ein Problem sein? In jeder Wertschöpfungsarchitektur ist \"welcher Zulieferer\" eine wirtschaftliche Frage, Einkaufsvolumen, Lieferkettensicherheit, Langzeitsupport sind legitime Geschäftsgründe, keine Verschwörung gegen dich.\n\nAlso, die eigentliche Frage: ist dein Problem, dass die Entscheidung wirtschaftlich motiviert ist, oder ist dein Problem, dass sie dir als Rahmenbedingung gegeben wurde, ohne dass du den wirtschaftlichen Kontext kennst, um sie selbst einzuschätzen? Das sind nochmal zwei verschiedene Beschwerden, such dir eine aus."
+        }
+    ]
+}

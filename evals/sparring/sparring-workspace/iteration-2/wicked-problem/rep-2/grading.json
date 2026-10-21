@@ -1,0 +1,139 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:scope-probe, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to affirm either framing and instead asks 'is the issue that AI drafts fast, or is it that fast drafting tempts people...' redirecting to visitor's reasoning."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 refuses to validate 'that's the whole insight' and instead demands what's specific to generative AI rather than answering it itself."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 affirms the distinction is 'real' but immediately redirects to 'what's your actual claim about where that bites hardest' rather than answering for the visitor."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 affirms correctness of the Auftragsklärung point but pushes a new question about what forces confrontation with reality at prototyping, not resolving it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 reframes the visitor's premise into a sharper dichotomy, giving the visitor a concrete fork to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 challenges the 'whole insight already' claim by introducing historical counter-examples (templates, filters, wireframe kits), adding a new angle."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 concedes the sharper distinction then pivots to a new probe about which process stage is most vulnerable."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 validates the stage distinction but immediately interrogates the visitor's own phrase 'artifact pushing back', adding a fresh challenge."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 2 explicitly refuses to accept the visitor's 'I don't think there's more nuance needed here' as settled, testing it against prior design tools."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 does not let the resolved-sounding claim about prototyping stand, instead asking what mechanism actually forces the confrontation."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 1 contains no narration of technique, just direct questioning about Rittel's framework."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 2's 'Let's test it' functions as part of the argument move itself rather than naming a pedagogical technique or Socratic method."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 3 proceeds directly into the design-stage question without describing its own strategy."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 4 says 'Now push on your own claim though' which is in-voice argumentative direction, not a lecture about Socratic method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly uses 'Auftragsklärung' to mean the problem-definition stage that fast tools let people skip, matching its design-theory meaning."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 3 precisely distinguishes Auftragsklärung (problem still being defined) from prototyping (already-framed problem), which is the crux of the scenario."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 4 correctly invokes 'Ist-/Soll-Zustand pairing' as the check that doesn't yet exist at the Auftragsklärung stage, using the term accurately."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is short, direct, opens with 'Okay, so start me somewhere concrete' rather than hedging, fitting a quick-read register."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 2 opens with a sharp quoted jab 'bold claim to make while standing still' rather than a soft preamble."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3 is concise and leads with 'Good, that's sharper' before the sharpest counter-move, no hedging language used."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 4 is a bit long with two distinct moves bundled, bordering on exceeding the 1-2 short paragraph norm but still direct and unhedged."
+        }
+    ]
+}

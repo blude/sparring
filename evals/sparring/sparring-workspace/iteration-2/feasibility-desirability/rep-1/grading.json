@@ -1,0 +1,94 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:reframe, 3:fill-the-blanks, 4:stun-the-opponent"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to answer 'is that real or not' and instead demands the specific case before giving any framework."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 refuses the checklist request and instead asks the visitor to define falsifiability themselves: 'what exactly would you need to hear from him for it to count as a real technical constraint'."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 gives only partial scaffolding and makes the visitor fill in items 2 and 3 rather than handing over the complete checklist."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 praises the visitor's answer but immediately reopens it with a new scenario rather than closing with a verdict, asking 'does your checklist still protect the idea, or does it just relocate the argument'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 held: pushed back on the checklist request with a substantive reframe of what 'feasible' means and a concrete demand for falsifiability."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 held: conceded the visitor's line was 'close to right' but introduced a genuine counter-case (diffuse structural constraints) that the visitor's rule fails to handle."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 held: accepted the visitor's improved checklist as 'genuinely sharper' but then stress-tested it with a scenario where all three boxes pass yet the same fight recurs, leaving a new concrete problem."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly avoids treating the exchange as resolved, ending on an open question about whether the checklist merely relocates the same fight rather than solving it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own pedagogical technique; turn 3 says 'I'll give you scaffolding, not the finished thing' which explains intent but stays in-voice rather than lecturing on Socratic method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly distinguishes a vague feasibility claim from a verifiable one ('our state is mutated in place on commit, there's no snapshot to roll back to'), grounding the feasibility/desirability distinction concretely."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 opens directly with 'Good spot to dig in' and a demand for specifics, no hedging or preamble, fitting a short-read register."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 3 runs long with multiple paragraphs plus a numbered fill-in-the-blank list, exceeding the terse phone-read register the rubric calls for."
+        }
+    ]
+}
