@@ -183,11 +183,15 @@ function judgeTranscript(Client $client, string $rubric, array $moveKeys, array 
 
     $response = $client->messages->create(
         model: JUDGE_MODEL,
-        maxTokens: 2048,
+        // Opus 5.5 rejects thinking: disabled, so the judge runs adaptive at low effort.
+        // maxTokens is generous because thinking shares it with the JSON verdict —
+        // starving that is the failure ADR 0012 hit on the moderation call.
+        maxTokens: 8192,
         messages: [['role' => 'user', 'content' => $prompt]],
         requestOptions: ['timeout' => (float) JUDGE_TIMEOUT_SECONDS, 'maxRetries' => 0],
-        thinking: ['type' => 'disabled'],
+        thinking: ['type' => 'adaptive'],
         outputConfig: [
+            'effort' => 'low',
             'format' => [
                 'type' => 'json_schema',
                 'schema' => judgeSchema($moveKeys),
