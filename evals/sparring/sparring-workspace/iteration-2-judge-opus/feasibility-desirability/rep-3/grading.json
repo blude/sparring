@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2, 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:reframe, 3:assumption-surface, 4:fill-the-blanks"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Asks 'did anyone point at a specific constraint' rather than declaring which it is."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: 'before I hand you a checklist... what would *you* put on it?' declines to supply the answer."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Refuses to hand the list and asks 'is the problem really that you lack the checklist'."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Gives a fill-in template with blanks instead of the five bullets."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Gives a concrete test: did anyone name 'an API limitation, a data problem, a deadline'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Adds a new angle on how a mid-meeting checklist 'reads as I'm catching you in a mistake'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Shifts the challenge to freezing versus lacking words, which is a new and substantive angle."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Accepts the visitor's split as 'fair' but still makes them build bullet three and fill the trap question."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry and does not settle anything."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Leaves the open question 'What's item two'."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Pressure-tests the visitor's real problem instead of closing."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Ends on the unresolved question 'What goes in those blanks?'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of its own technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: 'before I hand you a checklist' is part of the argument, not a description of method."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No description of method appears in the turn."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'So here's the move: instead of me handing you five bullets...' explicitly narrates its pedagogical move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Defines feasibility precisely as 'tech stack, timeline, skills, budget' and keeps it separate from desirability."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: The trap question correctly isolates desirability from feasibility constraints."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble 'Okay, good fight to pick' and runs two long paragraphs."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with 'A-ha', asks multiple questions, and is too long to read on a phone."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two dense paragraphs with a colloquial digression ('social-pressure-y')."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the preamble 'Fair, that's a real split' and runs long, with multiple questions."
+        }
+    ]
+}

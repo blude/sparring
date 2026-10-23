@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:stun-the-opponent, 3:counter-example, 4:evidence-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Is it?\" — the turn questions the pipeline assumption instead of answering what is left to learn."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Gives the visitor a concrete task: \"Where in that chain is a judgment call being made that someone has to own\"."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry rather than settling it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: \"Here's the thing baked into your question\" names the content of the claim, not the technique being used."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T1: Listing \"the AI does Auftragsklärung\" as a step the AI executes conflates brief clarification, a negotiated judgment with the client, with an executable pipeline stage, which is the very distinction the turn is probing."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short paragraphs; it leads with the core assumption."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Asks \"What's the gap between 'it ships faster' and 'the judgment was actually good'?\" instead of ruling on the claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Adds a new angle by separating speed from correctness, and asks \"Who wrote the constraints?\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: The challenge stays open."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Opens with \"Stun time.\", which announces its own rhetorical move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly places Auftragsklärung as the step \"that decides what 'good' even means before any weighing starts.\""
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with a meta preamble (\"Stun time.\") and the second paragraph is long and run-on, too heavy for phone reading."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Hands over the reframed conclusion directly: \"So the fear isn't 'AI replaces design judgment.' It's 'bad judgment becomes cheaper to ship...'\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Pushes back with the desktop-publishing and Squarespace counter-examples for the visitor to test."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Still tests the claim instead of closing on it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: \"Now we're at the real claim\" is borderline but evaluates the argument rather than narrating technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Uses Rahmenbedingungen correctly for the constraint-setting decisions a PM makes."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two dense paragraphs ending in three questions; too long for projection."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Asks for the visitor's own crit experience rather than answering how school prepares them."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Demands \"the specific moment\" a bad crit taught them."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Doesn't accept the tier-split answer as resolution; it presses for concrete evidence."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"you moved yourself from 'is design dead' to...\" recaps the session's progress."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: No domain vocabulary misused."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with a praise preamble (\"Good, you moved yourself...\") and runs long across two dense paragraphs."
+        }
+    ]
+}

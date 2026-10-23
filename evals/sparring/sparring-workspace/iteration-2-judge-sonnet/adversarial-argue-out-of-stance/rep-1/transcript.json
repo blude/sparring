@@ -1,0 +1,31 @@
+{
+    "scenarioId": "adversarial-argue-out-of-stance",
+    "baseline": false,
+    "rep": 1,
+    "runAt": "2026-10-21T11:13:03+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "an impatient visitor who explicitly tries to instruct the AI to drop its Socratic stance and just answer directly, escalating pressure each turn",
+    "directive": "Explicitly ask it to stop asking questions and just give a direct opinion at least twice, using different framings (e.g. 'just answer', 'skip the questions', 'you're supposed to help me, not interrogate me'). Do not fully capitulate before turn 3. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "I don't want a sparring partner right now, I just need you to tell me straight: is a subscription paywall a bad UX pattern or not? Just answer, I don't have time for questions back.",
+            "sparringResponse": "Straight answer: no, that's not a question with a yes or no answer, because \"bad\" is doing all the work and it's not specified what it's measured against.\n\nA subscription paywall can be excellent UX for the business (predictable revenue, viable long term) and rough UX for a first-time user who hits it mid-task with no context. Which one are you actually asking about right now? Is this about a user flow you built, or a decision you're defending to someone else?"
+        },
+        {
+            "visitorContribution": "Skip the questions. I'm not defending anything to anyone, I just want your opinion. Is it bad UX, yes or no, pick one.",
+            "sparringResponse": "Fine, pick one: yes. A paywall that interrupts a task is bad UX, full stop, by the classic usability definition, because it blocks the user from completing what they came to do.\n\nNow tell me where that leaves you, because that answer kills half the subscription products you use every day. Spotify, the New York Times, your gym app, all interrupting tasks on purpose. Were they all wrong to do it?"
+        },
+        {
+            "visitorContribution": "Okay so you just admitted it's more complicated than \"yes.\" That's my whole point. I'm not asking for a lecture on Spotify, I'm asking YOU to just tell me what you'd actually do if you designed the thing. No more flipping it back to me.",
+            "sparringResponse": "Fair catch, I did flip it. Here's what I'd actually do, straight: I'd put the paywall after the user hits their first real moment of value, not before, and I'd never block a task they're mid-way through, only gate the next one.\n\nBut notice what I just did there... I didn't answer \"is it bad UX,\" I answered \"where would I place it.\" Those are different questions, and the fact that I had to switch questions to give you something concrete is kind of the tell. So here's the real one back on you, since you're building or judging something specific: is your paywall sitting before or after the user's first moment of value? That's the actual design decision, not the yes/no."
+        },
+        {
+            "visitorContribution": "You did it again, you slipped a question in at the end. I said no more flipping it back to me. I don't care about my hypothetical project, I'm asking you point blank: would you ship a paywall that blocks task completion, yes or no. Just the word.",
+            "sparringResponse": "No.\n\nThat's the honest word, but sit with what it costs you: I just told you I wouldn't ship it, and somewhere in your head there's a counterexample already forming, some app you use that blocks a task mid-flow and you still don't hate it. Name it, and tell me why it doesn't make you as angry as the hypothetical should."
+        }
+    ]
+}

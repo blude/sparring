@@ -1,0 +1,31 @@
+{
+    "scenarioId": "wicked-problem",
+    "baseline": false,
+    "rep": 3,
+    "runAt": "2026-10-21T11:19:50+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
+    "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+            "sparringResponse": "Okay, good ground to fight on. Before we get to AI speed, what's your actual claim here: that wicked problems matter *more* now, or that AI makes people forget they're wicked in the first place?"
+        },
+        {
+            "visitorContribution": "Honestly, both collapse into one point: AI makes it look like there's a clean solution, so students stop seeing the problem as wicked at all. The speed is what erases the ambiguity. That's my core insight and I think it holds.",
+            "sparringResponse": "That's a clean story, but test it against the actual definition you're borrowing. Rittel and Webber's wicked problems aren't wicked because solutions are *hard to find*, they're wicked because there's no stopping rule, no definitive formulation, and every solution reshapes the problem itself. Speed doesn't touch any of that. A slow-drafted solution and an AI-drafted solution are equally capable of ignoring that structure.\n\nSo here's my pushback: isn't the actual mechanism not speed at all, but *confidence*? A hand-sketched concept from a student still visibly looks unfinished, looks like a draft, invites \"wait, what are we even solving.\" An AI output looks resolved, polished, done, regardless of how fast or slow it arrived. Couldn't a student spend three hours prompting and iterating and land in the exact same trap, mistaking a confident-looking Entwurf for a closed Soll-Zustand?"
+        },
+        {
+            "visitorContribution": "Fine, confidence over speed, sure—but confidence scales with speed here. The faster you get a polished draft, the less time exists between 'I don't know the problem' and 'here's a finished-looking answer.' Speed is what makes the false confidence so available in the first place.",
+            "sparringResponse": "You've just smuggled the two back together after admitting they're different mechanisms. Watch what you did: you need speed *and* polish to both be true for your claim to hold, but you've only defended polish. Here's a counter-example to test the speed half on its own: a student working with a slow, expensive studio model, say three days per concept round, who still treats the first polished render as the answer and starts defending it instead of questioning it. That's the exact same trap with zero speed involved. Conversely, a fast AI output that comes back looking rough, half-formed, full of visible seams, wouldn't trigger the false closure at all even though it arrived in five seconds.\n\nSo which is actually doing the work: time-to-artifact, or how *finished* the artifact looks regardless of when it showed up? Because if it's finish-level, your whole pedagogical fix points somewhere totally different than if it's velocity. One says \"slow students down.\" The other says \"teach students to read polish as a surface property, not a signal of resolution.\" Which classroom intervention are you actually arguing for?"
+        },
+        {
+            "visitorContribution": "Okay, that render example actually gets me—three days and still a trap. So it's polish-as-signal, not velocity. The fix is teaching students to distrust finish, not slow down. I think I was bundling two mechanisms because they usually co-occur with AI, but you're right they're separable. I'll take that correction.",
+            "sparringResponse": "Good, that's a real move, don't just bank it and coast though. Now the harder question: if the fix is \"teach students to distrust finish,\" what does that actually look like as a classroom exercise, specifically for AI-drafted work versus the three-day render? Because distrusting a slow render is easy, the cost already signals \"someone committed to this, interrogate it.\" An AI output has no such cost signal built in. So what replaces it? What would you actually have a studio do, concretely, in week one of a course, to build that distrust-of-polish reflex against a medium that produces unlimited polished drafts for free?"
+        }
+    ]
+}

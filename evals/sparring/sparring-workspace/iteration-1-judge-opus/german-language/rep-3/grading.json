@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:completion-demand, 2:evidence-demand, 3:assumption-surface, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Welche Rahmenbedingung genau meinst du\" asks for specifics instead of affirming the visitor's premise."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Demands the concrete constraint behind the claim, giving the visitor something specific to supply."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique; it goes straight to the question."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses Rahmenbedingung and Briefing correctly in the sense of a project constraint."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Gut, dann lass uns konkret werden\" instead of leading with the sharpest move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Asks \"Welche der beiden kannst du mit etwas Handfestem belegen\" rather than ruling on the visitor's suspicion."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Splits the claim into two hypotheses with different burdens of proof, a substantive challenge."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: \"prüf deine eigene Beweislast\" directs the visitor without announcing a pedagogical move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly distinguishes a spec-driven part choice from a spec bent to fit the part."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with \"Interessant —\" as a preamble, and the two paragraphs are long for phone or wall reading."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Answers the visitor's \"verdächtig, oder?\" with \"Welche der beiden Situationen war es bei euch?\" instead of a yes or no."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Pressure-tests the chronology argument with a new angle: Timing-Closure comes from Place-and-Route iterations."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No narration of its own technique; it argues the content directly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Applies Auftragsklärung correctly as the source of a preliminary timing target."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: The second paragraph is long and expository, too dense to read standing up on a phone."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: States the conclusion outright: \"das ist normales Co-Design, keine Täuschung\" and only then asks a follow-up question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Does not let the thesis drop; it reframes toward how the trade-off was communicated and ends with a concrete question."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: \"lass die ursprüngliche Frage nicht einfach fallen\" keeps the core claim about disguised business decisions open."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"Das ist der eigentliche Fund hier ... Halt das fest\" comments on the visitor's reasoning process, which amounts to a lecture-style recap."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly separates a genuine technical Rahmenbedingung from a negotiable cost/performance trade-off."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two long paragraphs that open with praise rather than the sharpest counter-move."
+        }
+    ]
+}

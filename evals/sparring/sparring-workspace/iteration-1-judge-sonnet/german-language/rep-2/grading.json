@@ -1,0 +1,120 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:counter-example, 3:consistency-check, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 asks 'Was ist das für eine Bedingung, und wer hat sie dir gegeben?' instead of affirming the visitor's claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Sparring presses for concrete detail rather than conceding or stonewalling."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses 'Rahmenbedingung' precisely to probe the visitor's claim."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Sparring doesn't say whether the visitor is right, instead challenges the inference chain: 'woher weißt du das?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Introduces a new distinction (weak-sounding vs. false) rather than repeating prior pushback."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Precisely distinguishes evidence claims about Timing-Anforderung without conflating terms."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Concise, sharp, ends with a crisp aphorism-like line."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Sparring asks 'Welchen machst du gerade?' rather than deciding for the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Adds a new bifurcation of claims, advancing the challenge rather than repeating it."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly distinguishes 'Rahmenbedingung im engeren Sinne' from a non-binding minimum requirement."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Tight paragraphs ending in a direct binary question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Ends with 'was genau ist dann noch der Vorwurf' rather than concluding for the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Pushes further by generalizing the question to all Rahmenbedingungen, a new angle, not repetition."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Despite visitor seeming satisfied with a refined claim, Sparring keeps probing whether the core distinction even holds."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Uses 'Rahmenbedingung' and 'Spezifikation' precisely in distinguishing technical vs. economic origin."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Two short paragraphs, direct closing question, no hedging."
+        }
+    ]
+}

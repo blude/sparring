@@ -1,0 +1,130 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:scope-reduction, 3:consistency-check, 4:fill-the-blanks"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 asks 'What's your actual evidence...give me a real example' rather than affirming or denying the visitor's suspicion."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Demands concrete evidence rather than deflecting, giving visitor something to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just a direct question."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Refuses to supply the checklist and instead asks 'what would count as evidence that...is true?' rather than answering the yes/no request."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Rejects the checklist request with a substantive reason ('skip the actual work of interrogating this one claim') and redirects to the specific case."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: Explains why a checklist is wrong without labeling it as a Socratic technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Two tight sentences, no hedge words, phone-readable length."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Ends with 'Which one did he actually mean?' rather than telling the visitor which it is."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Adds a new angle (distinguishing infeasible/expensive/hard/low-priority) rather than repeating prior pushback, giving visitor new traction."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Does not treat the specificity-vs-vagueness test as resolving anything; explicitly shows its limits."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Analysis stays in-content, no reference to 'Socratic method' or self-narration."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Uses feasibility/desirability distinction precisely, distinguishing infeasible from expensive/hard/low-priority without conflation."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Turn runs to three paragraphs, longer than the ~1-2 paragraph phone-readable register called for."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Refuses to give the literal script, instead asking 'What would you actually say, standing at his desk?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Declines to hand over the requested script and reframes the task as the visitor's to construct, giving a concrete constraint to work within."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'you need to think about what makes a question land as collaborative instead of interrogative' narrates the pedagogical move rather than staying implicit."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Does not treat the exchange as resolved; still pushes for the actual phrasing to be tested."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Direct, concrete, ends with a sharp question about wording."
+        }
+    ]
+}

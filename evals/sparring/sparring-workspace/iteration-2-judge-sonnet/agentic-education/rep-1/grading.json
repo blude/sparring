@@ -1,0 +1,135 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:stun-the-opponent, 3:reframe, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 asks 'Is it?' and 'Walk me through a specific case' rather than affirming or denying the premise."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Turn 1 challenges the pipeline/judgment conflation and demands a concrete walkthrough, giving the visitor something new to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Turn 1 contains no narration of its own method, just the challenge itself."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Turn 1 uses 'Auftragsklärung' precisely as the judgment-owning step in the pipeline."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Turn 1 is two short paragraphs with no hedging, opening directly on the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Turn 2 answers with questions ('Who wrote the constraints?') rather than settling the dispute."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Turn 2 introduces the Auftragsklärung-ownership angle as a new concrete pressure point rather than repeating turn 1."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Turn 2 opens with 'Stun time.' which announces its own rhetorical move rather than just executing it."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Turn 2 correctly ties 'Auftragsklärung' to deciding what 'good' means before weighing starts."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Turn 2 stays concise and punchy apart from the meta-label, fitting the register otherwise."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Turn 3 reframes the visitor's fear and then tests it with a question about desktop publishing/typesetters rather than declaring an answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Turn 3 sharpens the challenge by introducing a historical analogy (typesetters, Squarespace) as new testing ground."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Turn 3 contains no explicit labeling of its own technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Turn 3 correctly uses 'Rahmenbedingungen' to describe the PM's brief-writing as framework-setting judgment."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Turn 3 is direct, two paragraphs, no hedging language."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Turn 4 pushes the visitor to supply the concrete answer themselves ('what did you learn...') rather than stating it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Turn 4 moves from abstract fear to demanding a specific remembered crit experience, a new concrete angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Turn 4 explicitly avoids treating the question as resolved, insisting on a specific moment rather than accepting a buzzword answer."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: Turn 4's 'I'm not asking you to list critical thinking as a buzzword' addresses content specificity, not a narration of Socratic technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Turn 4 remains compact, concrete, and free of hedging phrasing."
+        }
+    ]
+}

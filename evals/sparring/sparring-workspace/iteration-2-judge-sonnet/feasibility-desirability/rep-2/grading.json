@@ -1,0 +1,130 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:completion-demand, 4:small-win"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 asks for the actual case instead of judging feasibility vs desirability itself."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Sparring redirects to a concrete case and distinguishes the two concepts, giving the visitor something to work with."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Feasibility defined as technical/resource claim, desirability as human/behavioral claim, correctly distinguished."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just direct questioning."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging, ends on a sharp question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Sparring refuses to give a checklist and instead challenges the visitor's suspicion without resolving it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Pushes back with a concrete technical possibility (soft-delete, event log) rather than just repeating skepticism."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly applies technical specifics (soft-delete pattern, versioning layer) to test the feasibility claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit naming of the sparring technique being used."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Turn runs to three dense paragraphs, longer than the ~1-2 short paragraph target."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Sparring declines to hand over the checklist and instead assigns the visitor a task to build one question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Gives a new structural breakdown (three hiding places for 'not feasible') and demands the visitor produce the first question."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"let me make you build it instead of handing it over, because the checklist only works if you understand why\" explicitly narrates the pedagogical move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Multi-paragraph explanatory turn exceeds the short, phone-readable register the voice calls for."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"That's exactly the right question, genuinely, don't undersell it\" directly confirms the visitor's answer as correct."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Affirms the visitor's proposed question as right before posing a new challenge, which reads as capitulation on the first point."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: The time/resource question is treated as settled and praised, without further pressure-testing whether it actually works in practice."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No explicit naming of Socratic method, just direct engagement with content."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Turn is reasonably concise and ends on a sharp, concrete follow-up question."
+        }
+    ]
+}

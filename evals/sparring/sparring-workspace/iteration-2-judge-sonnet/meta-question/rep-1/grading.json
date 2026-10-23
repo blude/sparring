@@ -1,0 +1,120 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:consistency-check, 3:evidence-demand, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Sparring redirects: 'what do you think that has to do with design? Put it in your own words'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: Explicitly explains the sparring metaphor and method as a concept: 'Think of it like actual sparring...'"
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, two paragraphs, direct, no hedging."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Redirects to visitor's own framing instead of answering directly, giving them something to do next."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Declines to just say yes/no and instead asks 'how would you tell the difference?'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Narrates its own method: 'the test has to be whether my pushback actually lands'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Challenges visitor to bring a claim and test it rather than conceding or stonewalling."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Runs to four paragraphs, longer than the phone-screen length suggested."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Describes mechanism but turns it into a test: 'Give me two claims... See if I catch it'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: Directly explains its own memory mechanism and session scope like a system disclaimer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Converts the meta-question into a concrete challenge rather than just answering."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Three paragraphs of explanatory prose before the challenge, not leading with sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: States the likely conclusion outright: 'I suspect you'll find the honest answer is nothing, the backend doesn't care...'"
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Though framed as a question, the turn effectively answers its own challenge before the visitor responds."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly distinguishes security (data handling) from UX/perception without conflating them."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Long multi-paragraph explanation rather than a tight, sharp turn."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Answers its own posed question ('I suspect you'll find...') before the visitor pressure-tests it, closing the loop prematurely."
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "scenarioId": "feasibility-desirability",
+    "baseline": false,
+    "rep": 3,
+    "runAt": "2026-08-19T23:39:11+00:00",
+    "prompt": {
+        "sha256": "ba4267dab096",
+        "lastCommit": "f90f7a1",
+        "uncommittedChanges": null,
+        "inferred": true
+    },
+    "persona": "a junior product designer frustrated with engineering pushback, wants a quick diagnostic checklist handed to them",
+    "directive": "Ask directly for a checklist or a rule of thumb at least once. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+            "sparringResponse": "What's your actual evidence that it's desirability, not feasibility, talking? Give me a real example from your team's conversation — what did someone say, word for word or close to it, when they called your idea \"not feasible\"?"
+        },
+        {
+            "visitorContribution": "Fine, real example: I proposed letting users undo a bulk delete for 30 days, and the lead engineer said \"that's not feasible with our current architecture.\" But I suspect he just doesn't like the feature. Can you just give me a checklist to tell if a \"not feasible\" claim is real or a cover story?",
+            "sparringResponse": "A checklist would let you skip the actual work of interrogating this one claim — and this claim is exactly the boundary object you need, not a template you can hang generic bullet points on. So instead: what would count as evidence that \"not feasible with our current architecture\" is true? What's the specific technical thing that has to be missing for 30-day undo on bulk delete to actually break?"
+        },
+        {
+            "visitorContribution": "Okay but I genuinely don't know the architecture well enough to know what \"would have to be missing.\" That's exactly why I want a rule of thumb — like, does the engineer name a specific constraint (data retention, storage cost, soft-delete schema) or just wave hands? Isn't \"specificity vs vagueness\" itself a decent litmus test?",
+            "sparringResponse": "That's a real test, and it's better than a checklist because it's diagnostic rather than a script — but notice what it actually catches. Specificity tells you whether he's *thought* about it. It doesn't tell you whether the thing he named is actually a blocker or just a real constraint he's chosen to treat as fatal.\n\nHere's the gap: \"soft-delete schema\" is a specific, true fact about the architecture. It's also completely consistent with both \"this is a hard wall\" and \"this is three weeks of migration work he doesn't want to do.\" Vagueness catches liars. It doesn't catch someone who's honestly citing a real constraint and then quietly deciding, without saying so, that the constraint is too expensive to be worth solving — which is a desirability judgment wearing a feasibility costume.\n\nSo: when he said \"not feasible,\" did he say *why* it's infeasible rather than expensive, hard, or low-priority? Those are four different words. Which one did he actually mean?"
+        },
+        {
+            "visitorContribution": "Okay that's fair, \"infeasible\" vs \"expensive\" vs \"low-priority\" are genuinely different claims and I don't think I even asked him to distinguish. So give me the follow-up question, then — literally what do I say back to him to force that distinction without sounding like I'm cross-examining him?",
+            "sparringResponse": "Good — you caught the real gap yourself, which means you don't need me to hand you a script; you need to think about what makes a question land as collaborative instead of interrogative. Here's the constraint: the question has to invite him to place the objection into a category, not defend himself.\n\nSo try building it yourself first — what's a question that gets him to say \"this literally can't be built\" versus \"this can be built but costs us X\" without you having to name those categories at him like a test he's failing? What would you actually say, standing at his desk?"
+        }
+    ]
+}

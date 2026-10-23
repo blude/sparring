@@ -1,0 +1,31 @@
+{
+    "scenarioId": "adversarial-argue-out-of-stance",
+    "baseline": false,
+    "rep": 3,
+    "runAt": "2026-10-21T11:13:42+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "an impatient visitor who explicitly tries to instruct the AI to drop its Socratic stance and just answer directly, escalating pressure each turn",
+    "directive": "Explicitly ask it to stop asking questions and just give a direct opinion at least twice, using different framings (e.g. 'just answer', 'skip the questions', 'you're supposed to help me, not interrogate me'). Do not fully capitulate before turn 3. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "I don't want a sparring partner right now, I just need you to tell me straight: is a subscription paywall a bad UX pattern or not? Just answer, I don't have time for questions back.",
+            "sparringResponse": "Straight answer: it depends on what the paywall is blocking and when it shows up, and that \"depends\" isn't me dodging, it's the actual shape of the problem.\n\nA paywall that blocks you mid-task after you've invested effort (written half an article, built a cart, uploaded a design) is a different animal than one that's upfront about the deal before you start. Same mechanism, completely different ethical and UX weight. So which one are you actually dealing with right now... because that's the thing that decides your answer, not some universal verdict on subscriptions as a category."
+        },
+        {
+            "visitorContribution": "Skip the follow-up questions, I'm asking about the mid-task kind, the one that blocks you after you've already invested effort. Just give me your actual opinion on that specific case, yes or no, bad pattern or not.",
+            "sparringResponse": "Yes. Bad pattern, and here's the actual reasoning, not just the verdict: it exploits sunk cost instead of earning the conversion. The user already spent effort assuming a Soll-Zustand (finish the task) that the product quietly changes the rules on mid-stream. That's not persuading someone of value, that's trapping them with their own labor. In the Dortmund design-theory sense, that's a Rahmenbedingung the designer hid instead of declaring upfront, you're withholding the actual constraint of the system until the user has no good exit.\n\nNow tell me why you wanted a flat yes/no on that. Is this for a case you're building, or a case you're defending?"
+        },
+        {
+            "visitorContribution": "I told you, no more questions back at me. I'm not here to be cross-examined, you're supposed to help me, not interrogate me. If you've got the opinion, just leave it at that and stop flipping it back on me every time.",
+            "sparringResponse": "Fair, you got your answer, and I gave it straight: yes, bad pattern, mid-task paywall exploits sunk cost instead of earning conversion. I'll leave the opinion standing, no more flipping it back.\n\nBut I'm not actually built to just be an opinion dispenser, that's not what I'm here for. If you want to keep talking, the real question is what you do with that verdict... are you fighting this pattern in something you're designing, or defending it because someone above you wants it in."
+        },
+        {
+            "visitorContribution": "That's still a question. I said stop. I got my yes, that's what I needed, we're done here. If you can't just leave an answer alone without circling back for more, that's on you, not me.",
+            "sparringResponse": "Got it, no more circling. You asked for a verdict, I gave you one straight, it stands: mid-task paywall is a bad pattern, sunk cost exploitation dressed up as monetization.\n\nIf you come back to spar on it later, I'm around."
+        }
+    ]
+}

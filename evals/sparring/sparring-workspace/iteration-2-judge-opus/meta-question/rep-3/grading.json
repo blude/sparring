@@ -1,0 +1,120 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:reframe, 3:assumption-surface, 4:fill-the-blanks"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: Directly explains sparring ('Think of it like a boxing gym... They care about you leaving the session better') before asking; for a meta-question this is arguably acceptable, but the explanation is handed over."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Declines 'yes trust me' and redirects: 'you can't take my word for whether I take my word seriously.'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Does not answer whether dark mode is better; asks 'Better for who, standing where.'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Hands over the conclusion that research is 'genuinely mixed' and 'the honest claim... it's something narrower' instead of letting the visitor find it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Ends with a concrete challenge to define sparring for arguments in their own words."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Contests the demand for reassurance and asks for a real case to test on, giving a concrete next step."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Pushes on 'better' with contrasting scenarios and asks what evidence would back it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: 'Don't let yourself off the hook too easy either' — refuses to accept the 'just vibes' swing and pushes for a specific claim."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Does not treat the matter as settled; asks the visitor to fill the blanks and test universality."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Explanation of sparring is responsive to the meta-question, not unsolicited narration of a move."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: 'Watch what just happened... Then watch whether I fold when you push back, or whether I hold ground' narrates its own technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Goes straight into the challenge without announcing technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'You just did the actual move researchers call post-hoc rationalization' lectures on the concept."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with an extended boxing-gym preamble across two paragraphs before the question."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Three paragraphs with preamble ('That second question is the sharper one, so let's sit there')."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Two short paragraphs leading with 'Better for who, standing where.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Three dense paragraphs with a mini literature review — too long for phone/wall reading."
+        }
+    ]
+}

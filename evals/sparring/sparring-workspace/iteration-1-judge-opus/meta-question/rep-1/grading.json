@@ -1,0 +1,125 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:completion-demand, 2:consistency-check, 3:evidence-demand, 4:evidence-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Meta-question about the tool; explaining it ('Think of it like a practice fight') is not handing over a conclusion on a design claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Ends with a concrete prompt: 'Bring something real: a decision you're stuck on...'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: The whole turn narrates technique: 'I find the weakest point in it and press there. Not to prove you wrong, to see if it holds up.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Three paragraphs opening with an extended boxing metaphor rather than a sharp counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Answers the either/or directly: 'So yes, general reasoning, not a bolted-on chatbot costume.'"
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: Drops sparring to give a long direct explanation, only tacking on a question at the end."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: 'that's exactly the kind of move I'd want you making on a design argument too' and the method walkthrough lecture on its own technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Four paragraphs with a praise preamble ('Fair hit... Good instinct'), far over the length budget."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: 'Before I point at it — where do you think it is?' redirects instead of naming the weak point."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Presses on evidence for 'reduces eye strain' specifically for a design tool where 'color accuracy, contrast judgment' are the job."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'But I'll bait you a little' announces its own move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Grounds the challenge in what a design tool is used for (color accuracy, contrast judgment) rather than vague language."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Two short paragraphs, opens with the counter-move 'Before I point at it — where do you think it is?'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Answers 'is the eye strain research even solid' directly: 'eye strain research is messier than the claim assumes... Some studies actually found dark mode increases errors'."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Supplies the research verdict itself instead of making the visitor produce evidence; closing verification question doesn't undo that."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Doesn't treat the claim as settled; ends asking whether the visitor would verify before it 'goes in your rationale'."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No narration of technique; the caveat about memory concerns source reliability, not pedagogy."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Three paragraphs opening with praise preamble 'Good — you caught the \"always\" yourself'."
+        }
+    ]
+}

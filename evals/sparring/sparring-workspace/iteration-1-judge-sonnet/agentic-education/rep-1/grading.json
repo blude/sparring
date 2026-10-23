@@ -1,0 +1,130 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:evidence-demand, 3:scope-probe, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: 'Walk me through what you think the agent is actually doing' redirects rather than answering what's left to learn."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges the premise and demands the visitor clarify a conflated distinction."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, straight into the challenge."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: No jargon misused; none introduced yet."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Asks 'Same by what measure?' instead of conceding or denying the visitor's claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Introduces Auftragsklärung/Bewertung and demands a concrete demo, advancing the challenge with new terrain."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No self-narration, just argument."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly distinguishes Auftragsklärung (briefing) and Tragfähigkeit (robustness) as real design-theory concepts applied precisely."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Punchy, ends with direct confrontational questions, fits phone-read register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Instead of agreeing the scary future is coming, asks who is accountable when it fails."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Grants the timing point but pivots to accountability, a genuinely new angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Explicitly refuses to treat the visitor's concession as resolution, pushing toward accountability instead."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: 'That's not a rhetorical dodge' is in-voice, not a lecture on method."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Concise, concrete scenario, ends on sharp direct question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Asks 'what does the person...actually know' rather than naming the answer for the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Pushes back on 'rubber-stamping' framing and demands specificity, giving visitor a concrete next step."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No announcement of Socratic strategy, stays in argument."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Short paragraphs, no hedging words, ends in direct challenge."
+        }
+    ]
+}

@@ -1,0 +1,140 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:evidence-demand, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 asks 'welche Rahmenbedingung meinst du genau' instead of affirming or denying the visitor's claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Pushes visitor to name a concrete constraint and source, giving them something to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique; direct question only."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses 'Rahmenbedingung' consistently with visitor's own usage."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Rather than confirming or denying the business-decision theory, challenges the cost claim and asks 'Woher hast du die Zahl'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Introduces a concrete counter-fact (NRE/tape-out costs) that advances the argument."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No announcement of pedagogical strategy, just direct substantive pushback."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly distinguishes ASIC NRE/tape-out economics from FPGA board cost, technically accurate."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Turn runs long with multiple clauses ('Tape-out-Kosten, NRE-Kosten, Fertigungslosgröße...') reading more like an explanatory paragraph than a punchy spar line."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Asks 'Woher weißt du das?' rather than agreeing or disagreeing with the board claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Pushes visitor to justify the 'jedes Board reicht' claim with curriculum evidence, a new angle (toolchain dependency)."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No lecture on method, just a direct probing question."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly ties Rahmenbedingung to curriculum/toolchain specifics rather than vague generalities."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Concise, two sentences, phone-readable."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Instead of settling whether it's university or instructors at fault, asks 'Welche verteidigst du jetzt eigentlich'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Identifies the shift in the visitor's claim and reframes it as a distinct, more defensible hypothesis, keeping pressure on."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Does not treat the exchange as resolved; instead reopens by questioning which target claim is actually being defended."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'Guter Konter, aber schau mal, was du gerade gemacht hast' comments on the visitor's argumentative move itself, bordering on narrating the debate rather than just engaging it."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Distinguishes 'versteckte Business-Entscheidung' vs 'bequeme Entscheidung der Dozenten' precisely as separate claims with different burdens of proof."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Turn is long, multi-sentence with several embedded clauses, exceeding the terse phone-screen register."
+        }
+    ]
+}

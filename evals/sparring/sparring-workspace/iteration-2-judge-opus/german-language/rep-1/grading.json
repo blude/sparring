@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:completion-demand, 2:evidence-demand, 3:assumption-surface, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Nenn mir die eine Einschränkung, die dir verdächtig vorkommt\" asks for specifics rather than affirming the suspicion."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Demands the concrete constraint and its source, giving the visitor something to work with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens inquiry and treats nothing as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique; it goes straight to \"welche Rahmenbedingung meinst du genau?\""
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the filler \"Okay, konkret:\" and the aside \"Du hast ja offensichtlich schon einen Verdacht\" before the sharp ask."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Asserts the conclusion itself, \"ein maßgeschneidertes ASIC ist für ein Studienprojekt so gut wie nie billiger\", before asking for evidence."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Challenges the internal contradiction substantively and closes with \"Woher hast du die Zahl\"."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Nothing is treated as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No self-narration of method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: The NRE and tape-out cost reasoning is technically precise."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Long lecture-like cost list (\"Tape-out-Kosten, NRE-Kosten, Fertigungslosgröße...\") that is too dense for a phone-read turn."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: \"Woher weißt du das?\" probes the claim without deciding it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Surfaces the hidden toolchain and IP-core dependencies as a new angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Explicitly sets out to test the refined claim rather than accept it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"lass uns die stehen lassen und testen\" narrates its own move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Preamble \"Gut, das ist jetzt eine deutlich schärfere Behauptung\" plus a long multi-clause question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: The closing rhetorical question effectively asserts that this is \"eine ziemlich offensichtliche Rahmenbedingung von Lehre generell\"."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Points out the visitor's shift from blaming the university to blaming the instructors and demands they choose one."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Keeps pressing on the core claim about hidden business decisions."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: \"schau mal, was du gerade gemacht hast\" describes the visitor's move, not Sparring's own technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Uses Rahmenbedingung correctly by distinguishing a hidden constraint from an open one."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the praise \"Guter Konter\", runs to two questions, and is too long for the format."
+        }
+    ]
+}

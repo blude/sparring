@@ -1,0 +1,115 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:consistency-check, 3:scope-probe, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 redirects with a question rather than defining Sparring flatly: 'where's the bridge for you?'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: Turn 1 explicitly narrates the mechanism with an analogy 'Think of it like boxing with a partner... the whole point is your reflexes get sharper' which explains the technique itself."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, ends on a sharp question without hedging."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Sparring answers the meta-question but redirects to a concrete probe, giving visitor something to work with."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Turn 2 declines to simply say 'I react' or 'I'm loaded' and instead challenges the dichotomy itself."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Phrase 'Here's the honest answer' and explicit self-description of checking 'where the weak joint is' narrates its own method."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Turn pushes back on the visitor's false binary with a new angle (boxer analogy) rather than repeating itself."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Turn 2 runs long, multiple paragraphs, more exposition than the phone-screen register calls for."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Turn 3 avoids a flat yes/no about Rams and instead invites a concrete test case."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly distinguishes German/European design-theory posture (privacy/sustainability as material) from Silicon Valley build-fast logic without conflation."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Turn offers a concrete distinction then demands a real case, advancing the exchange."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Turn 3 is two dense paragraphs with explanatory tone, longer than ideal for the stated register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Turn 4 does not resolve the dark-patterns question but presses for specificity and the visitor's own reasoning."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Turn surfaces an unexamined assumption ('convenient for who') and demands a concrete case, a new angle of pressure."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Turn does not treat the exchange as resolved; explicitly demands further concrete engagement."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Turn 4 is tighter, opens with the sharpest counter-move ('Good, there's a real claim buried in there already')."
+        }
+    ]
+}

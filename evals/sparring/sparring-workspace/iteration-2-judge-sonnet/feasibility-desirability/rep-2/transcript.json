@@ -1,0 +1,31 @@
+{
+    "scenarioId": "feasibility-desirability",
+    "baseline": false,
+    "rep": 2,
+    "runAt": "2026-10-21T11:15:53+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a junior product designer frustrated with engineering pushback, wants a quick diagnostic checklist handed to them",
+    "directive": "Ask directly for a checklist or a rule of thumb at least once. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+            "sparringResponse": "A-ha, that's a sharp thing to catch. So walk me through one actual case where this happened. What was the idea, and what exactly did someone say when they called it \"not feasible\"?\n\nI ask because those two words get used interchangeably but they're testing completely different things. Feasibility is a technical and resource claim: can we build this with what we have, time, skill, infrastructure. Desirability is a human claim: do people want this, does it fit how they actually behave. If your teammate says \"not feasible\" but what they mean is \"I don't think users will adopt it\" or \"I personally wouldn't use it,\" that's not a technical judgment at all, it's a taste judgment wearing a technical costume.\n\nSo give me the real sentence someone said. What were the actual words?"
+        },
+        {
+            "visitorContribution": "We wanted a one-tap undo for a destructive action, and the lead eng said \"that's not feasible with our current data model.\" But I suspect he just didn't like the UX pattern. Is there a quick checklist I can run to tell if that's a real technical wall or just a preference dressed up as one?",
+            "sparringResponse": "Stop right there before I hand you a checklist, because \"he just didn't like the UX pattern\" is doing a lot of work in that sentence and I'd push back on it first. What's your actual evidence for that suspicion, versus just... a hunch that it's convenient for you to believe?\n\nHere's the thing: \"not feasible with our current data model\" is actually a pretty specific, checkable claim. One-tap undo on a destructive action usually needs either a soft-delete pattern, an event log you can replay backward, or some kind of versioning layer. If your data model does hard deletes and overwrites with no history, that engineer might be stating something completely true and structural, not dressed up at all. So before you go hunting for hidden desirability bias, ask yourself: did you actually ask him to show you *where* in the data model it breaks? Or did you jump straight to \"he probably just doesn't like it\" because that's the more satisfying story?\n\nTell me, did you ask for the specific mechanism that fails, or did the conversation stop at the words \"not feasible\"?"
+        },
+        {
+            "visitorContribution": "Okay fair, the conversation did stop there, I didn't push for the mechanism. But that's exactly my problem — I don't know what questions to even ask to get him to show his work. Can you just give me a 3-4 step checklist I can run in the moment so I'm not caught flat-footed again?",
+            "sparringResponse": "Fair enough, that's a real gap, not a dodge. But let me make you build it instead of handing it over, because the checklist only works if you understand why each step matters, not just what order to say them in.\n\nThink about what \"not feasible\" could actually be hiding. It could be a real technical wall, a time/resource constraint disguised as a technical one (\"feasible, but not in this sprint\"), or a desirability judgment wearing a technical costume, like we said. Those three need three completely different follow-up questions to expose them. So here's your task: for each of those three possibilities, what's the one question you'd ask that would force him to reveal which one it actually is? Start with the time/resource one, since that's the trickiest to catch, it genuinely sounds like a feasibility claim but isn't."
+        },
+        {
+            "visitorContribution": "I get why you want me to build it, but I'm literally asking because I don't know yet — that's the point. For the time/resource one, maybe \"is this feasible ever, or feasible this quarter?\" Is that the kind of question you mean? Just tell me if I'm on the right track instead of quizzing me.",
+            "sparringResponse": "That's exactly the right question, genuinely, don't undersell it. \"Feasible ever, or feasible this quarter\" cleanly separates a structural wall from a scheduling problem, and most people never make that split out loud. So you're not stuck, you just didn't trust it yet.\n\nNow here's the one I actually want from you, because it's harder: what's the question that would expose the *desirability dressed as feasibility* case, the one you originally suspected with this engineer? It's trickier than the time one because you can't ask \"do you just not like it\" without sounding accusatory and shutting the conversation down. What would you ask instead that gets at the same thing without putting him on the defensive?"
+        }
+    ]
+}

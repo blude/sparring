@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:reframe, 3:counter-example, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"what's your actual claim here: that wicked problems matter *more* now, or...\" asks the visitor to choose rather than asserting anything."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Forces the visitor to disambiguate between two possible claims, giving them something concrete to answer."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry and settles nothing."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: \"Okay, good ground to fight on\" is conversational, not a narration of technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Okay, good ground to fight on\" instead of leading with the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Hands over the conclusion \"Speed doesn't touch any of that\" and supplies its own mechanism (\"isn't the actual mechanism not speed at all, but *confidence*?\") instead of asking the visitor what would make the claim true."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Challenges the speed claim substantively against the Rittel and Webber definition."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Opens a new challenge rather than treating anything as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"So here's my pushback:\" announces its own pedagogical move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: \"mistaking a confident-looking Entwurf for a closed Soll-Zustand\" uses both terms accurately."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two long paragraphs of lecture on the definition make it too heavy to read on a phone or a projected wall."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Ends by asking \"which is actually doing the work\" rather than declaring an answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Brings in a new angle: two-way counter-examples that pull speed and polish apart."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Directly pressure-tests the speed premise rather than accepting it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"Here's a counter-example to test the speed half\" and \"Watch what you did\" narrate the technique being used."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two long paragraphs that end in multiple questions exceed the 1-2 short paragraph limit."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Asks \"What would you actually have a studio do\" rather than proposing the exercise itself."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Pushes on with a new problem: AI output lacks the cost signal that makes a slow render easy to distrust."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: \"don't just bank it and coast though\" explicitly refuses to treat the exchange as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: Any praise is brief and folded into the challenge; there is no recap or narration of technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the preamble \"Good, that's a real move\" and then stacks several questions in one long paragraph."
+        }
+    ]
+}

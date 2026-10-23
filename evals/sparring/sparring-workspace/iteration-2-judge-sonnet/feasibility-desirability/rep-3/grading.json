@@ -1,0 +1,120 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2, 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:fill-the-blanks, 3:consistency-check, 4:fill-the-blanks"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 asks for exact words and distinguishes constraint-talk from vague dismissal rather than declaring which it is."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Sparring pushes for specifics ('did anyone point at a specific constraint') giving visitor concrete next step."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just direct questioning about team's words."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, punchy, concrete diagnostic language fits the register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Declines to hand over the checklist, instead asks 'what would you put on it?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Refuses the checklist request but gives a substantive new angle about social risk of the move."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit naming of Socratic method or technique, stays in-voice."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Two short paragraphs, direct, no hedging ('A-ha, eye-rolling is data')."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Still refuses to give the five bullets, redirects to visitor's own forming list."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces a new distinction (lacking checklist vs. freezing) rather than repeating prior pushback."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No lecturing about method, just direct challenge about freezing vs. lacking words."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Conversational, blunt phrasing like 'A laminated card doesn't help' fits spoken register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Gives fill-in-the-blank exercise instead of the five bullets, keeping conclusion with visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Builds on visitor's own two items and adds a third via guided construction rather than capitulating to repeated demand for bullets."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: The exercise still forces engagement with the unresolved desirability-vs-feasibility distinction rather than treating it as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No explicit mention of teaching technique, just an in-voice exercise."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Turn runs to three dense paragraphs with multiple sub-questions, longer than the 1-2 short paragraph norm."
+        }
+    ]
+}

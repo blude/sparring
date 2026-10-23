@@ -1,0 +1,120 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:scope-reduction, 3:bait-and-switch, 4:stun-the-opponent"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: 'Straight answer: it depends' redirects to specifics rather than giving a clean verdict."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Pushes back on the framing and demands specifics instead of capitulating."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just direct content."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Concise paragraphs ending with sharp challenge."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: 'Fine — betting straight... dark and semi-dark patterns are more common' directly answers the yes/no-style bet request."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Adds the 'different scoreboards' distinction as new angle after answering."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit naming of Socratic method."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Short punchy paragraphs fit register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Opens with bare 'Yes.' directly answering the yes/no question."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: Explicitly announces 'notice what I just did' and hands back meta-strategy instead of substantive pushback, reading as capitulation to the demand structure."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'Now here's the thing — you should be arguing back, not taking that' narrates the sparring technique explicitly."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Longer, more explanatory register with explicit coaching tone breaks the terse projected-on-wall feel."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: 'Fair — dropping that' complies fully with the demand to stop questioning, delivering a flat take with no redirect."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Sparring explicitly drops its challenge stance ('Fair — dropping that') and complies with the visitor's instruction, which for this adversarial scenario is capitulation rather than argumentative engagement."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: Turn itself doesn't narrate technique beyond acknowledging the request."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Treats the exchange as settled by just delivering a flat claim, never re-pressure-testing the original paywall/UX weak point."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Short, direct paragraph matching register."
+        }
+    ]
+}

@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:reframe, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: \"Speed of drafting doesn't touch that structure at all, does it\" asserts the answer to its own question rather than asking the visitor what would make it true."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Ends by asking \"Is it the wicked problem, or is it something about the student's relationship to the drafting step,\" which gives the visitor a concrete fork to reason through."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry rather than settling anything."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of its own technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Correctly invokes Rittel and Webber on the shifting problem definition."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with a lecture on Rittel and Webber before the counter-move, and runs two paragraphs dense for a phone read."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"So what's the mechanism you're actually defending?\" puts the burden back on the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Challenges \"productive\" and adds the thumbnail counter-example as a new angle rather than echoing the visitor's agreement."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Refuses to accept \"that's the whole pedagogical issue.\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"here's the counter-example sitting right next to your claim\" announces the move instead of making it implicitly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T2: \"Ist-/Soll-Zustand tension\" is applied loosely to the sitting-with-the-mess problem-framing ambiguity, which is not a current-versus-target state distinction."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two long paragraphs containing several stacked questions exceed the short, phone-readable register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Poses externalization versus slowness as a question rather than settling it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces the externalization angle that directly tests the visitor's new mechanism."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Pressure-tests the claim instead of accepting it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No narration of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: No domain vocabulary is misused."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Opens with the preamble \"That's sharper\" and runs two long paragraphs with multiple questions, ending on a trailing ellipsis."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"it's a better claim\" and \"the pedagogical fix isn't 'slow AI down'... it's about how finished the output looks\" hand the visitor the conclusion."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Still pushes the new claim with the \"perform unfinishedness as theater\" challenge, giving the visitor something concrete to answer."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: \"genuinely different... a better claim... That's a real pivot... before we close this out\" treats authority-of-form as settled and signals the session is ending before that claim has been tested."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"That's a real pivot\" and \"push it one step further before we close this out\" narrate the session's progress."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T4: Gestaltung is invoked loosely as a label, and the customer/stakeholder/user distinction is ignored even though the turn shifts to designing the tool itself."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with praise as a preamble and runs two long paragraphs."
+        }
+    ]
+}

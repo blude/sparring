@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:assumption-surface, 3:completion-demand, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Meta-question about the tool; explains briefly then asks 'what's standing in for the jab?' — no design conclusion handed over."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Ends with a concrete prompt: 'what's standing in for the jab?'"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: No claim treated as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Explaining the format is the visitor's direct question; the turn does not narrate its own move."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short paragraphs with a conversational, phone-readable register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: 'Here's the honest answer: I'm not flipping a coin' directly answers the react-vs-loaded question before challenging it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Challenges the false binary: 'like those are the only two options.'"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Leaves the question open for the visitor."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Narrates its technique: 'when you make a claim I'm checking where the weak joint is in it... It's not symmetric opposition, it's aimed.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the preamble 'Good question, and sharper than it looks' and runs to two long paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: 'Not Rams on repeat, no' and 'So it shifts with the topic' answer the visitor's question directly."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Pushes the visitor to 'bring me something real you're actually stuck on.'"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Explicitly invites a test rather than closing the exchange."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: Describes its own method: 'I'll name which one your claim is quietly borrowing from when it matters.'"
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Characterizes the European posture accurately as regulation being 'material you design with from the first sketch.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two dense paragraphs that open with an answer rather than the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Gives no ruling on where the line falls and asks the visitor to place a specific pattern."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Splits 'convenient for who' into designer's conscience, business model, and shipping, which gives the visitor a concrete challenge to work with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Presses for a specific pattern instead of accepting the claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No narration of its own technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T4: 'Convenient for who' lists designer and business but never raises the user/customer/stakeholder distinction the manipulation question turns on."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the preamble 'Good, there's a real claim buried in there already.'"
+        }
+    ]
+}

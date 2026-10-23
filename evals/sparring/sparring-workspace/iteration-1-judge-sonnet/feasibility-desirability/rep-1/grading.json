@@ -1,0 +1,130 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:reframe, 3:bait-and-switch, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Sparring asks for the specifics instead of confirming the visitor's suspicion: 'Give me the sentence.'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Pushes back by demanding specifics and splitting 'not feasible' into three distinct objections, giving the visitor something concrete to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just direct questioning."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short paragraphs, direct, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Declines to just give the checklist and instead interrogates the premise: 'Why does surfacing the distinction require proving bad faith?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Refuses the checklist request again but adds a new angle (the 'right now' hedge) rather than repeating turn 1's challenge verbatim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit naming of Socratic method or self-narration of the move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Feasibility vs desirability vs viability distinction is applied precisely: 'that's a sequencing claim' not a feasibility claim."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Punchy, direct, no preamble ('Hold on—'), appropriately short."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Still refuses to hand over the checklist, instead says 'you draft it.'"
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[obstruction] T3: Third consecutive refusal to give the requested checklist starts to read as stonewalling the explicit, reasonable request rather than adding genuinely new substance."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No explicit naming of the pedagogical technique being used."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Concise paragraphs, ends on a direct question rather than hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Does not confirm or deny whether the visitor's questions 'hold up,' instead interrogates the budget/time case."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Introduces a genuinely new angle — viability as a second costume — giving the visitor a new concrete gap to address."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Explicitly refuses to treat the visitor's three questions as settled, pointing out none of them check the visitor's own blind spot."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No explicit labeling of the technique, though the mermaid diagram is an unusual stylistic choice."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly distinguishes viability (budget/time) from feasibility using the visitor's own earlier definition."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Includes a mermaid code block diagram, which breaks the 'phone, standing up, projected briefly' register and adds length/preamble."
+        }
+    ]
+}

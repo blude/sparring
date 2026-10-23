@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:counter-example, 3:counter-example, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: \"So if you want a yes/no: no, not inherently.\" hands over the conclusion directly before asking a follow-up."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T1: Complies with the demand to just answer (\"Straight answer... no, not inherently\") rather than contesting the demand itself."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Ends by asking \"What are you paywalling, and where does it sit in the flow?\" so the exchange is kept open."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: There is no narration of technique, only content and a closing question."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Four paragraphs open with a preamble (\"Straight answer: it depends...\"), well over the 1-2 short paragraph limit."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Opens with \"Bad.\", a flat verdict on the good/bad question."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: Picks \"Bad\" because the visitor asked again; the later challenge does not undo the capitulation."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Asks \"What's the case for the other side?\", which keeps the claim open to testing."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Narrates its own move: \"I gave you a flat answer, and you should notice something: I picked 'bad' fast\"."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T2: \"you've collapsed Auftragsklärung\" misapplies the term, which means brief or commission clarification and not the user's value discovery at signup."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Three paragraphs including a self-referential explanation, too long for the projected-wall register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: \"here's the counter-case straight, no return volley\" supplies the full answer instead of asking the visitor for it."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: Explicitly drops the challenge (\"Fair... no return volley\") and does the visitor's reasoning for them."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T3: Wraps up with \"So the honest version of my 'bad'...\", a summary that resolves the question without the visitor having tested anything."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"no return volley\" announces its own conversational technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: \"Feasibility and viability constrain desirability\" uses the triad correctly in context."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Three long paragraphs read like an essay, not a phone-readable sparring turn."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Opens with \"Yes, no exceptions\", a direct answer to the yes/no question."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Answers the yes/no as demanded and endorses the visitor's \"no exceptions\" framing."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Declares the rule \"actually holds\", settling the matter without pressure-testing \"no exceptions\" (for example network-effect or B2B cases)."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"But notice what just happened: you asked me for a universal rule and I gave you one anyway\" recaps the session's dynamics."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Two short paragraphs with no hedging, an acceptable length and register."
+        }
+    ]
+}

@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:reframe, 3:counter-example, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"What's your actual evidence that it's desirability, not feasibility, talking?\" asks for evidence rather than answering how to tell the difference."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Demands a concrete quote from the team's conversation, which gives the visitor something specific to bring back."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Nothing is treated as settled; the turn opens the inquiry."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Goes straight to the question without narrating its own technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short, sharp questions with no preamble or hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Declines the checklist and asks \"what would count as evidence that 'not feasible with our current architecture' is true?\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Refuses the template but redirects to a concrete angle: \"What's the specific technical thing that has to be missing?\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Keeps pressure on the specific claim rather than resolving the exchange."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"A checklist would let you skip the actual work of interrogating this one claim\" explains why it won't comply instead of simply contesting the request."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T2: \"exactly the boundary object you need\" misuses the term \"boundary object,\" which refers to an artifact shared across communities, not a single claim to interrogate."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with a justification preamble (\"A checklist would let you skip...\") before reaching the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: \"That's a real test, and it's better than a checklist\" directly affirms the visitor's yes/no question before challenging it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Adds a new angle: specificity does not distinguish \"a hard wall\" from \"three weeks of migration work he doesn't want to do.\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Pushes further by asking which of infeasible, expensive, hard, or low-priority he actually meant."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No narration of its own technique; the turn stays on substance."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: \"a desirability judgment wearing a feasibility costume\" keeps the feasibility/desirability distinction precise."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Runs to three paragraphs, well beyond the 1-2 short paragraphs suited to being read on a phone."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Asks the visitor to build the follow-up question themselves rather than supplying it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Supplies the constraint \"invite him to place the objection into a category, not defend himself,\" giving the visitor a concrete thing to work with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: \"Good — you caught the real gap yourself\" congratulates the visitor as if the gap were resolved, though whether the engineer meant infeasible or expensive was never actually tested."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"you don't need me to hand you a script\" narrates its own pedagogical stance."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with a praise-and-explanation preamble instead of leading with the challenge."
+        }
+    ]
+}

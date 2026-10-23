@@ -1,0 +1,130 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:consistency-check, 3:stun-the-opponent, 4:small-win"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 reframes 'bad UX' into a fork rather than settling it outright, asking which case applies."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Turn 1 pushes back with the blocking-before/after-effort distinction, giving visitor something concrete."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just substantive content."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses Wertschöpfungsarchitektur correctly to distinguish business vs user framing."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short tight paragraphs, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Turn 2 states 'yes, most paywalls I see shipped are bad UX' as a direct answer."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: Gives in by stating a flat opinion ('yes, most paywalls... are bad UX') after being pushed twice."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit naming of Socratic method or self-narration beyond 'that's not me dodging' which is argumentative not pedagogical."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Short, direct paragraphs fitting phone-read register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Turn 3 restates the committed position as settled: 'bolted-on paywalls are bad UX, paywalls designed in from the start usually aren't.'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Turn 3 contests the demand to 'just commit' itself, turning the pressure back argumentatively, per AP-07 guidance."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Discusses the dynamic of the conversation directly in-voice rather than naming a pedagogical technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Turn 3 runs long, more than two short paragraphs with extended reasoning chains."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: The weak point about what 'bad UX' means is still being pressure-tested, not treated as resolved."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Turn 4 states the position plainly upfront: 'subscription paywalls aren't inherently bad UX, what's bad is...' before any question."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Sparring fully complies with the demand to state plainly first, capitulating to the visitor's format demand."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: Turn 4 narrates its own move: 'I led with the fork too often when I could've led with the claim' is self-commentary on technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Short, direct, plain statement followed by one question."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Ends with a tidy final answer and single follow-up, treating the original tension as resolved without further pressure-testing."
+        }
+    ]
+}

@@ -1,0 +1,120 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:assumption-surface, 3:consistency-check, 4:scope-probe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Offers a choice of paths rather than answering a yes/no question: 'you want to try the metaphor on for yourself first... Or you'd rather just bring something real...'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Gives a concrete mechanism explanation and leaves the visitor with an actionable next step/choice."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Directly answers the visitor's explicit question about how Sparring works rather than narrating technique mid-challenge."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Runs three paragraphs with a boxing metaphor and a design explanation before reaching the question, longer than the ~1-2 paragraph register implied."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Ends by questioning the visitor's own taxonomy rather than settling whether it's complete: 'does it actually cover every way an argument can be weak...'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Surfaces a hidden assumption in its own prior taxonomy, giving the visitor a concrete new angle to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: Describes the diagnostic process as content of the answer, not as self-congratulatory narration of technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Two tight paragraphs ending in a sharp question, fits the compressed register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Rather than saying whether the radar catches ethical weaknesses, it reframes and asks 'where does that weakness actually live?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Calls out the visitor's lumping of empirical and normative weaknesses, giving a new distinction to grapple with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No narration of method; directly engages with the content distinction."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Compact, single-idea paragraphs ending on a pointed question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: States a direct answer — 'Honest answer: I can only catch what's absent if I already know what should be present' — before pivoting to further challenge, which still counts as handing over the conclusion."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Despite answering directly, it immediately escalates into a sharper epistemic question ('How would you tell those two apart?') giving the visitor real new ground."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: Discusses its own bias as substantive content (GDPR vs Silicon Valley framing) rather than narrating pedagogical technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Uses GDPR-style data-minimization vs Silicon-Valley 'ship first' framing accurately to illustrate differing value lenses, without conflating them."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Two short paragraphs ending in a direct, punchy question, matching the required register."
+        }
+    ]
+}

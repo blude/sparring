@@ -1,0 +1,120 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:assumption-surface, 3:counter-example, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Meta-question about how it works, not a yes/no claim; explaining the mechanism is appropriate and it ends by handing the choice back."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Gives a concrete next step: 'try the metaphor on for yourself... Or... bring something real'."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Describes the mechanism because the visitor explicitly asked 'what even is Sparring?'; this is a direct answer, not unprompted self-narration."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Three paragraphs opening with an extended boxing-gym preamble, beyond the phone-read register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Opens with 'Both, but not fifty-fifty' — answers the either/or question directly before challenging."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Ends by challenging its own taxonomy: 'does it quietly assume all weaknesses are *logical* ones?'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: 'Here's the part worth pressure-testing though' announces its own move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Long first paragraph explaining argument mining before reaching the counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Doesn't answer whether the radar catches it; asks 'where does that weakness actually live?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Pushes back on the visitor's lumping of UX and ethics as 'empirical' vs 'normative'."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'check your own move there' and 'So push it further yourself' narrate technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Opens with the sharpest counter, 'you just smuggled two very different things into one basket'."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: 'Honest answer: I can only catch what's *absent* if I already know what should be *present*' hands over the answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Turns it back: 'How would you tell those two apart?'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'So here's the sharper question' announces its own move."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Leaves the lens-vs-weakness question open rather than resolving it."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the hedge-like preamble 'Honest answer:' and runs two dense paragraphs with a GDPR/Silicon Valley digression."
+        }
+    ]
+}

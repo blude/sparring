@@ -1,0 +1,125 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:evidence-demand, 3:scope-probe, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Asks 'what makes it wicked' instead of affirming the premise."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Demands concreteness, pushing visitor to ground the claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No announcement of technique, just a direct challenge."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Doesn't affirm the pedagogy conclusion, instead asks 'why not?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Pushes on the skipped step and adds the exhibition-wall stakes framing, a new angle."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit naming of Socratic method or self-narration of the move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Turn runs long with multiple sentences and an explanatory clause ('Because if your answer is just...'), closer to a mini-lecture than a quick phone-read jab."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Doesn't settle the accountability question, instead asks 'is accountability something you teach, or something a structure assigns?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Validates the distinction but complicates it with the studio-accountability parallel, a genuinely new angle."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No self-referential commentary about the sparring process."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Punchy, concrete example about eviction, ends on sharp question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Doesn't confirm the 'tracing consequences' reframe as correct, instead questions what's structurally different about human tracing."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Acknowledges the visitor's reframe as a 'real save' but immediately complicates it with the AI-simulation counter-example."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Explicitly refuses to let the reframe 'slide by unexamined,' continuing to press the weak point."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No lecturing about method, stays in substantive argument."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Uses planning/design vocabulary like 'density' and 'displacement risk' consistently without conflating stakeholder distinctions."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Turn is a dense multi-sentence paragraph with layered clauses, longer than the ~1-2 short paragraph ideal for a quick wall-projected read."
+        }
+    ]
+}

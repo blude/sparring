@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:evidence-demand, 3:reframe, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"What do you mean by 'execute a whole design process end to end'?\" redirects to the visitor's reasoning instead of answering what is left to learn."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: The turn distinguishes \"executing a process\" from \"making the decisions a process requires,\" which gives the visitor a concrete next step."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: The turn opens the inquiry and does not resolve anything."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: \"I want to know which one you're claiming\" is a direct demand, not narration of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: No design-theory vocabulary is used, and none is required yet."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: The turn is a single paragraph that opens directly with the clarifying question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"Same output, sure — but who wrote the prompt\" concedes and then asserts \"That's Auftragsklärung and that's Bewertung,\" which hands over the conclusion before challenging."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: \"Same by what measure? Same-looking layout, or same Tragfähigkeit\" is a substantive challenge to the 'same output' claim."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: The turn ends demanding evidence that a contradictory-brief demo exists, so nothing is closed."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"So here's the actual claim I want you to defend\" announces the move rather than enacting it implicitly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Auftragsklärung is tied correctly to writing the brief, and Tragfähigkeit is tied correctly to holding up under changed Rahmenbedingungen."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two long paragraphs with multiple stacked questions are too long to read on a phone or wall."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: The turn grants the hypothetical and then asks \"whose name is on the decision when it fails?\" rather than asserting an answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Shifting to accountability in the future scenario is a new angle, not a repeat of the earlier pushback."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: The turn does not treat anything as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"That's not a rhetorical dodge, I actually want your answer\" narrates its own move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: \"Wrong for this client, this context\" with the stakeholder reference is used appropriately."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: The turn opens with the preamble \"Fair, I'll take that framing seriously\" instead of the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: The turn asks \"name the specific thing\" instead of supplying the answer itself."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: \"You don't get to rubber-stamp something you can't evaluate\" turns the visitor's own framing into a concrete challenge."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: The turn keeps pressing for the specific judgment the agent structurally can't have."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: There is no narration of technique in this turn."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: No domain vocabulary is misused."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: One compact paragraph opens directly on the counter to \"Rubber-stamping.\""
+        }
+    ]
+}

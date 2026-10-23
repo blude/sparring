@@ -1,0 +1,150 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:scope-probe, 3:counter-example, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"What do you think the process consists of, that an agent could run through?\" redirects to the visitor's premise instead of answering what's left."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges whether 'whole design process' is the real thing or a thinner version, giving a concrete next step."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry; nothing treated as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: \"So before I let you have the conclusion... I want the premise\" narrates its own pedagogical move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: The turn runs two paragraphs with an explanatory middle ('Because here's the gap...') and repeats its question, which is heavier than a phone-readable single challenge."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Asks \"Are you in the wrong classroom, or is your claim actually...\" rather than ruling on the thinner-but-shipping math."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Raises a new angle by separating a design-specific claim from a general engineering-automation claim."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Opens a scope distinction; nothing is settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No self-narration; the turn engages the content directly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly distinguishes chip-design RTL from Digital Design \"in the Entwurfslehre sense.\""
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: The second paragraph re-explains the distinction already posed and adds a further question, so the turn reads long for the format."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: \"Give me a case where the hard part... was the well-specified execution\" asks for evidence rather than declaring the student safe."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Contests \"Digital Design IS well-specified\" with Auftragsklärung as spec-making, a substantive new angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Leaves the claim open and pending the visitor's counter-case."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"So here's the pressure:\" announces the move instead of making it implicitly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Uses Auftragsklärung, Ist-/Soll-Zustand, and Rahmenbedingungen (real constraints vs. unquestioned assumptions) accurately."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two dense paragraphs with a lecture-like explanation of the method's first phase go beyond a short, sharp challenge."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Ends with \"is the thing you're actually afraid agents will take over the reasoning... or the authority\" and leaves the answer to the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Rejects \"creeping in\" as unsupported and splits reasoning from authority, a fresh concrete distinction."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Despite \"Good — that's a real concession,\" it immediately presses the unresolved front-end-automation point."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"Good — that's a real concession, not a polite one\" and \"So sharpen it\" comment on the exchange rather than making the move silently."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T4: \"accountable to the client, the user, the Rahmenbedingungen\" lumps client and user together without drawing the customer/stakeholder/user distinction its accountability point turns on."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: The turn opens with a praise preamble rather than the sharpest counter-move and runs two long paragraphs."
+        }
+    ]
+}

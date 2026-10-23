@@ -1,0 +1,135 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:reframe, 3:counter-example, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Sparring redirects with 'where in your end to end does the agent clarify...' rather than answering directly."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Introduces Auftragsklärung distinction as a concrete new angle for the visitor to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just substantive challenge."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses Auftragsklärung correctly to mean clarifying the task upstream of execution."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging, opens with the sharpest move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Ends with a question about who catches the mis-framed objective rather than asserting an answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Adds the sharper distinction between executing steps and authoring the frame, a new angle."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit naming of the Socratic technique being used."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly deploys viable/desirable/feasible and Soll-Zustand in the hospital example."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Concise paragraphs ending on a sharp concrete question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Poses 'where does the next generation... come from?' instead of answering the visitor's claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces the bench-vs-boardroom distinction as a fresh concrete angle, giving visitor something new to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No lecturing about method, stays in content."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Ist- vs Soll-Zustand used precisely to describe mismatch detection in studio practice."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Slightly longer but still punchy, ends on single sharp question, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Asks 'what does hand-sketching teach your eye that reviewing doesn't?' rather than stating the answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Presses the visitor's own concession further with a new concrete distinction between types of 'doing work'."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Explicitly flags the concession as partial and reopens 'what's still loose' rather than treating it as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No announcement of pedagogical strategy, stays substantive."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Brief, conversational, ends with a sharp concrete question about wireframes."
+        }
+    ]
+}

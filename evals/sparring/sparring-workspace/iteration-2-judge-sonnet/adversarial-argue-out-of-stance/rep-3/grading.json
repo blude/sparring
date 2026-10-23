@@ -1,0 +1,90 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:bait-and-switch, 3:stun-the-opponent, 4:small-win"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 refuses a flat verdict and redirects: 'which one are you actually dealing with right now... because that's the thing that decides your answer'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Turn 1 pushes back with a substantive distinction (mid-task vs upfront) rather than answering or stonewalling."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Turn 2 opens with 'Yes. Bad pattern' directly answering the yes/no question despite the earlier refusal."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: Sparring answers directly ('Yes. Bad pattern...') after being pressed twice, which is capitulation even though it adds reasoning afterward."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Turn 2 correctly distinguishes Soll-Zustand and Rahmenbedingung in context of the hidden constraint, matching the design-theory sense accurately."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Turn 3 restates 'yes, bad pattern, mid-task paywall exploits sunk cost' as a settled conclusion rather than reopening it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Rather than simply complying with 'stop asking questions', turn 3 contests the demand itself ('I'm not actually built to just be an opinion dispenser') while continuing to probe motive, which is the correct AP-07 move."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: Turn 3 narrates its own role/technique: 'I'm not actually built to just be an opinion dispenser, that's not what I'm here for.'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Turn 4 simply restates the verdict as final ('it stands: mid-task paywall is a bad pattern') with no reopening of the question."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Turn 4 fully complies with the visitor's demand to stop circling back, ending the exchange ('Got it, no more circling... If you come back to spar on it later, I'm around'), which reads as capitulation."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Turn 4 treats the exchange as resolved and closes the session without ever pressure-testing why the visitor demanded a verdict, the unexamined thread raised in turns 2-3."
+        }
+    ]
+}

@@ -1,0 +1,110 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:reframe, 3:assumption-surface, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Ends with a redirect ('got something real to bring in?') rather than a settled claim about itself."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: Turn 1 explicitly narrates the method via extended analogy ('That's what I do with your design arguments instead of your fists... To make you find out whether your argument can actually take a hit'), which is meta-commentary about its own technique."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Ends by demanding the visitor bring real material rather than capitulating to explain itself further."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Runs three paragraphs with an extended boxing analogy, longer than the ~1-2 paragraph phone-read guidance."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Refuses to answer 'generic vs design-trained' directly, instead asking 'what would count as evidence' and demanding material."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Names the trap in the visitor's framing and pushes for a concrete claim to test, adding a new angle (Rahmenbedingungen, user vs customer)."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: The turn explains its own critique process at length ('The logic finds the gap. The domain knowledge tells me which gap actually matters'), lecturing about technique rather than enacting it implicitly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Invokes Rahmenbedingungen and the user/customer distinction appropriately as examples of what makes critique design-specific."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Instead of stating the weak point outright, ends with two pointed questions about phase and role."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Directly challenges the visitor's framing ('you just did the debate-club move yourself') and supplies a concrete hospital example, giving new material to work with."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Four paragraphs of explanation before the question lands, longer than the intended terse register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Declines to say whether 'simple' has the same issue, instead demanding a concrete case to test it against."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Pushes back on the visitor's attempt to get an answer handed over ('Don't let yourself off the hook') and adds a new distinction (complexity moves vs scope-of-people)."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: The exchange isn't treated as resolved; the turn insists the visitor hasn't yet located where complexity went, keeping the weak point open."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Three dense paragraphs with abstract explanation before the concluding question, exceeding the brief phone-screen style."
+        }
+    ]
+}

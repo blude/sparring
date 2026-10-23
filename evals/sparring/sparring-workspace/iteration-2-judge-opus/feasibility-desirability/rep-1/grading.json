@@ -1,0 +1,130 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:assumption-surface, 3:fill-the-blanks, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Before I hand you a framework, tell me about the actual case\" — no answer given, redirects to the specific case."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"What you got is a conclusion wearing a feasibility costume\" effectively answers the visitor's 'real constraint or just we don't want to?' question before asking for criteria."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: \"That's a sharp line, and it's close to right\" affirms the visitor's 'Fair?' before challenging it, which is the 'yes, but' pattern."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"That's genuinely sharper than what I handed you... I'll take that\" answers 'Close?' directly before the stress test."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Declines the framework and demands \"the specific idea your team shot down and the specific words someone used.\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Refuses the checklist with a reason and asks \"what exactly would you need to hear from him for it to count as a real technical constraint.\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Adds a new angle that diffuse constraints can be real, and offers a partial scaffold instead of the full checklist."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Accepts the improvement but pushes with a scenario where \"'two weeks' becomes the new 'not feasible'.\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Does not settle; it stress-tests the checklist against the core feasibility/desirability conflation."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Keeps the falsifiability test open with \"What's your test for telling those two apart?\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Goes straight to the case without narrating its technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"So here's my pushback before I give you anything like a checklist\" announces its own move."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"I'll give you scaffolding, not the finished thing, because the muscle you need is building this yourself\" explains the pedagogy."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"now stress-test your own checklist instead of resting on it\" narrates the technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly separates real-but-costly feasibility from a desirability objection disguised as feasibility."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Good spot to dig in\" instead of the counter-move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two long paragraphs with an extended comparison, too long to read on a phone standing up."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Multiple paragraphs plus a numbered list, well beyond 1-2 short paragraphs."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with praise (\"That's genuinely sharper\") and runs two dense paragraphs."
+        }
+    ]
+}

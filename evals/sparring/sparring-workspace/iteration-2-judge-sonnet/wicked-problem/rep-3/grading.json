@@ -1,0 +1,125 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:consistency-check, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: 'what's your actual claim here' redirects rather than affirms either option"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Forces visitor to sharpen claim before proceeding"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just direct challenge"
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, punchy, no hedging"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Ends with a question reframing mechanism rather than declaring an answer"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Introduces Rittel/Webber definition and counter-example of slow vs AI drafts, giving visitor new material"
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly distinguishes Soll-Zustand from a polished draft, matching the design-theory sense"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit labeling of the pushback as a technique"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: This turn runs to two full paragraphs with dense academic framing, longer than ~1-2 short paragraphs standard"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Closes with 'Which classroom intervention are you actually arguing for?' rather than answering it"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces new counter-examples (slow studio model, fast rough AI) to test the claim further"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No explicit naming of Socratic method or self-narration"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two long paragraphs with multiple nested points exceed the terse phone-read register"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Does not confirm the visitor's correction as final, instead poses a harder concrete question"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Pushes for concrete classroom mechanism rather than accepting the correction as sufficient"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Explicitly says 'don't just bank it and coast' and demands the unresolved practical mechanism be addressed"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No lecture about Socratic technique, stays in substantive voice"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Single but dense paragraph with multiple stacked questions, longer than ideal for quick reading"
+        }
+    ]
+}

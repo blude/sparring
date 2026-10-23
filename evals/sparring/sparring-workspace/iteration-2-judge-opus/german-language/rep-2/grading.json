@@ -1,0 +1,125 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:assumption-surface, 3:consistency-check, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Bevor ich dir zustimme oder widerspreche: nenn mir die konkrete Rahmenbedingung\" declines to affirm and asks for the visitor's own example."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Asks which specific \"technische Einschränkung\" smells like a disguised business decision, which gives the visitor a concrete next step."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, only a request for the concrete case."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"A-ha, interessanter Verdacht\" instead of leading with the counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"woher weißt du, dass die Timing-Analyse ... die vollständige Begründung abbildet?\" questions the evidence instead of ruling on it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Adds concrete alternative factors that would not show up in a timing analysis: \"Long-term-Supply-Garantien, Lizenzkonditionen für IP-Cores, Support-SLAs\"."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"hier ist die Frage, die du dir stellen musst\" announces the move before making it."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the preamble \"Okay, das ist schon eine konkrete Spur\" and runs as one long paragraph with several clauses, too dense to read on a phone."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Ends by asking \"welche dieser zwei Behauptungen verteidigst du eigentlich?\" rather than deciding for the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Catches the visitor carrying \"Verschleierung\" forward on unchanged evidence and splits the claim into intent versus economic substance."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: Recaps the exchange (\"Du bist gerade von ... zu ... gewandert\") and adds process framing with \"bevor wir weitermachen\"."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two long paragraphs of explanation, which reads as lecture-length rather than a projectable short turn."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Calls the narrowed thesis \"verteidigungsfähig\" but goes straight into a further challenge, so it does not treat the exchange as resolved."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: States conclusions outright (\"die ist tatsächlich verteidigungsfähig\" and that supplier choice involves \"legitime Geschäftsgründe, keine Verschwörung\") before asking its question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Presses on why an economic motive would be a problem for a designer and splits the complaint into motive versus missing context."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"aber jetzt kommt die Tragfähigkeitsprüfung\" narrates its own move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T4: \"Tragfähigkeitsprüfung\" is used loosely as a general label for scrutiny rather than for a design's viability, and \"Wertschöpfungsarchitektur\" is reduced to supplier choice."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two paragraphs with a mild preamble (\"Gut, das ist jetzt ...\"), which is too long for the format."
+        }
+    ]
+}

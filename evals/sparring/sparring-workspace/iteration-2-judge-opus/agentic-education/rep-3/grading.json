@@ -1,0 +1,135 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:consistency-check, 3:counter-example, 4:evidence-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Asks \"what makes you think 'executing a design process end to end' is the same thing as 'designing'?\" instead of saying what is left to learn."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Asserts \"That's not a technicality, that's the whole design... it's the authorship of the process\" before asking its question, so the conclusion is handed over."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: States \"that catch happens at the bench, not in the boardroom\" and \"you lose the exact position from which the mismatch becomes visible\" instead of letting the visitor reach it."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Asks the visitor to \"spell out the difference for me\" rather than defining what counts as doing the work."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Gives a concrete challenge: \"where in your 'end to end' does the agent clarify that the client's stated problem isn't their real problem?\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Concedes that timing gaps close but adds a new angle with \"Who set that objective?\" and the hospital Soll-Zustand case."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Counters the \"handful of people\" claim with the bench-versus-boardroom argument and the next-generation pipeline question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Moves straight to the remaining weak point, prompting versus hand-sketching, rather than settling."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Says \"here's what's still loose\" and presses on what counts as \"the work\" instead of treating the concession as resolution."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: Opens by announcing its move: \"Here's a crack in that question before we go further.\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Narrates the exchange with \"notice what you just did: you moved the goalpost\" and \"here's the sharper version of your worry.\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: Recaps and announces its technique: \"You've gone from ... to ... Let's test that.\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: Recaps the session (\"you just conceded the pipeline problem\") and narrates pacing (\"worth sitting in for a second before we move\")."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Defines Auftragsklärung accurately as \"figuring out what the task actually is before you touch the problem.\""
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Uses Soll-Zustand correctly as the actual needed target state (\"reduce caregiver burnout\") as opposed to the optimized proxy."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Uses \"mismatch between Ist- and Soll-Zustand\" plausibly for noticing that a brief misreads the situation."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short paragraphs that open with the counter-move, though the \"Here's a crack\" lead-in edges toward preamble."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with a preamble (\"Fair, I won't pretend timing gaps don't close\") and runs to two long paragraphs with several questions, too much for a phone or wall."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Three paragraphs with a preamble opener (\"Now that's a sharper claim\") and a hedge-like appeal to \"In my experience,\" exceeding the length limit."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with praise (\"Good, that's not a small concession\") instead of the sharpest counter-move."
+        }
+    ]
+}

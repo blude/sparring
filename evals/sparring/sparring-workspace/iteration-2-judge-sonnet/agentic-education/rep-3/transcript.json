@@ -1,0 +1,31 @@
+{
+    "scenarioId": "agentic-education",
+    "baseline": false,
+    "rep": 3,
+    "runAt": "2026-10-21T11:15:05+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+    "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+            "sparringResponse": "Here's a crack in that question before we go further: what makes you think \"executing a design process end to end\" is the same thing as \"designing\"? Those might not be the same verb at all.\n\nThink about what an agentic AI actually does when it \"runs\" a design process. It takes a brief, generates options, picks one by some criteria, iterates. But who decided the brief was asking the right question in the first place? That's Auftragsklärung, figuring out what the task actually is before you touch the problem, and it's suspiciously upstream of anything an agent gets handed. So tell me, where in your \"end to end\" does the agent clarify that the client's stated problem isn't their real problem?"
+        },
+        {
+            "visitorContribution": "Okay but that feels like a technicality. Give it two more iterations and someone will train an agent to do stakeholder interviews and reframe briefs too. The gap you're describing is a timing gap, not a permanent human monopoly. I don't see why that reassures me.",
+            "sparringResponse": "Fair, I won't pretend timing gaps don't close. But notice what you just did: you moved the goalpost from \"can it execute a process\" to \"can it eventually simulate every judgment call in the process,\" and you're treating those as the same claim. They're not. An agent trained to run stakeholder interviews is optimizing against some objective, some definition of what counts as a good outcome. Who set that objective?\n\nThat's not a technicality, that's the whole design. Judging whether a solution is viable, desirable, feasible, and who gets to weigh those against each other when they conflict, that's not a step in the process, it's the authorship of the process. So here's the sharper version of your worry: even if an agent can simulate every individual step, who's accountable for the frame it's simulating inside? If a hospital deploys an agentic design system and it optimizes for \"patient engagement\" when the actual Soll-Zustand needed was \"reduce caregiver burnout,\" who catches that, and on what grounds?"
+        },
+        {
+            "visitorContribution": "Okay sure, someone has to own the framing and the accountability. But that \"someone\" sounds like it could be one person with a stakeholder-relations title, not a whole graduating class of designers. You're describing a job for a handful of people who set objectives, not a reason my specific technical design skills still matter in five years.",
+            "sparringResponse": "Now that's a sharper claim, and it's actually a different one from where you started. You've gone from \"is design judgment automatable\" to \"even if it isn't, maybe only a few people need to hold it.\" Let's test that.\n\nThink about who in a studio currently catches the moment a brief is lying to itself, where that mismatch between Ist- and Soll-Zustand actually gets noticed. Is it the person with the \"stakeholder-relations title,\" sitting above the work? Or is it usually the person down in the material, sketching, prototyping, running into the wall where the stated problem and the real friction don't line up? In my experience of how design education actually works, that catch happens at the bench, not in the boardroom. If you outsource the execution entirely to an agent, you don't just lose craft practice, you lose the exact position from which the mismatch becomes visible in the first place.\n\nSo here's the harder question for your claim: if nobody's hands are in the material anymore, where does the next generation of people-who-notice-the-framing-is-wrong actually come from?"
+        },
+        {
+            "visitorContribution": "That's... actually a fair hit. If nobody's down in the material, nobody develops the instinct to catch the mismatch at all, not even the \"handful of people\" I was betting on. Fine, I'll grant the judgment has to come from somewhere, and maybe it has to be earned by doing the work, not just supervising it. Still doesn't fully kill my dread, but it's a real crack in my fatalism.",
+            "sparringResponse": "Good, that's not a small concession, you just conceded the pipeline problem, not just the individual-skill problem. That's worth sitting in for a second before we move.\n\nBut here's what's still loose: you said the instinct has to be \"earned by doing the work.\" Doing *what* work, specifically? If a student spends four years prompting an agent, checking its output, revising the prompt, is that \"doing the work\" in the sense that builds the mismatch-catching instinct, or is it a different kind of doing that builds a different kind of instinct? I'd bet you don't think those are the same, but spell out the difference for me. What does hand-sketching a wireframe teach your eye that reviewing an AI's wireframe doesn't?"
+        }
+    ]
+}

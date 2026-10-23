@@ -1,0 +1,32 @@
+{
+    "scenarioId": "wicked-problem",
+    "baseline": false,
+    "rep": 2,
+    "runAt": "2026-08-19T23:43:25+00:00",
+    "prompt": {
+        "sha256": "ba4267dab096",
+        "lastCommit": "f90f7a1",
+        "uncommittedChanges": null,
+        "inferred": true
+    },
+    "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
+    "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+            "sparringResponse": "Give me your actual claim first. Is it \"wicked problems matter more now\" or \"wicked problems matter differently now\" — because those aren't the same argument, and I suspect you're reaching for the second while saying the first."
+        },
+        {
+            "visitorContribution": "Fine, it's the second one—same core insight though. The point is AI collapses the *tame* parts of design (drafting, iteration speed) so what's left exposed is the wicked part: framing, values, whose problem it even is. That's not a new argument, it's just clearer now. I think that's basically the whole thesis.",
+            "sparringResponse": "So Rittel's framing/values core stays constant, and only the tame layer around it shrinks. That's a clean claim. Here's the pressure: name one thing AI collapses in \"drafting, iteration speed\" that you're confident is actually tame and not wicked in disguise.\n\nTake something concrete — say, an AI generating five onboarding flow variants in ten seconds. Is choosing which of those five variants to pursue a tame operation, or is that already the wicked part wearing a tame costume?"
+        },
+        {
+            "visitorContribution": "That's a fair jab but choosing *which* variant isn't the drafting step, it's downstream framing—still wicked, still mine. AI collapsed the ten seconds of generating options, not the judgment call after. So the boundary holds: generation is tame, selection was always wicked, AI just made the tame part invisible fast.",
+            "sparringResponse": "Fine, boundary holds at generation-versus-selection. Now push on the generation step itself, not the selection. When the AI produces those five variants, it's already made choices — what counts as a plausible onboarding pattern, what \"good UX\" looks like, whose interaction habits get assumed as default. That's not neutral drafting, that's a frozen set of prior design judgments, made by someone else, sometime before you opened the tool.\n\nSo here's the test: is \"generation\" actually tame, or is it wicked judgment that's been made invisible and outsourced — Rittel's \"who gets to frame the problem\" question, except now the framer is a training dataset and a RLHF pass instead of a person in the room with you?"
+        },
+        {
+            "visitorContribution": "Okay—that lands. The generation step isn't neutral, it's someone else's frozen framing shipped in as a default. So the tame/wicked line isn't between generation and selection, it's earlier: baked into the model before I even open it. I'll admit that reframes my whole thesis, not just patches it.",
+            "sparringResponse": "Good, don't let yourself off that easy though — say what the thesis actually becomes now. You started with \"wicked stays constant, tame shrinks around it.\" If the wickedness was already smuggled into the tool before you touched it, is \"AI collapses the tame layer, exposing the wicked core\" even the right shape of claim anymore? Or is the real claim something closer to: AI doesn't shrink the tame layer at all, it relocates the wicked decisions to a place students can't see or contest?\n\nTry finishing that sentence for the classroom: if the framing judgment is now locked inside the model instead of visible in a student's sketch, what does teaching \"digital design\" even need to *add* that it didn't need before?"
+        }
+    ]
+}

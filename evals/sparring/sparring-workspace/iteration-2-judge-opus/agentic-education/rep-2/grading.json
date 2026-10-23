@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:evidence-demand, 3:reframe, 4:tangential-swerve"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Asks 'are you picturing it doing the steps, or making the calls' rather than answering what's left to learn."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges 'end to end' with concrete probes about clarifying the Auftrag."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the weak link 'end to end' rather than closing anything."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: 'Here's what I'd push back on first' and 'I ask because...' narrate the move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T1: Uses 'clarify the Auftrag' and casually swaps client/stakeholder without drawing the distinction the scenario turns on."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Two long paragraphs with a preamble 'Here's what I'd push back on first' and a hedge, 'I'm less sure'."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: 'what's fallen so far is stuff that was never really judgment' asserts the conclusion rather than drawing it out."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: 'Name me the judgment call that already fell' gives a concrete new demand."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Keeps pressure on the 'every single time' pattern claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No narration of technique; it argues directly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Ist-/Soll-Zustand gap is used correctly, as brief versus actual pain."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the concession preamble 'Fair, that's a real pattern' and runs long."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: 'the move that hedges best isn't abstaining, it's making sure you're the one who can tell the difference' hands over the answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Presses on what the visitor would learn instead: 'Prompting? ...who's grading'."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Doesn't settle the matter, and asks what to do under uncertainty."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'now I get to ask the question that actually matters' and the recap of the visitor's shift narrate the session."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Long preamble praising the stance, two dense paragraphs, and several questions."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: 'Good, hold onto that' affirms the visitor's conclusion as correct."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: It agrees judgment is 'the bet worth making' even though the timeline objection the visitor raised was never answered."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: 'just because the argument resolved' treats the matter as settled while the timeline weak point stays untested."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'don't let me off easy' and the recap of positions comment on the session itself."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with a congratulatory preamble and runs to two long paragraphs."
+        }
+    ]
+}
