@@ -63,7 +63,20 @@ php bin/summarize_sparring.php evals/sparring/sparring-workspace/iteration-1
 
 Flags: `--scenario=<id>[,<id>...]` (default: all files in `scenarios/`),
 `--turns=N` (override each scenario's own turn count), `--reps=N` (default
-3), `--iteration=N` (output subdir, default 1), `--baseline`.
+3), `--iteration=N` (output subdir, default 1), `--baseline`, `--thinking`.
+
+### Thinking arm
+
+`--thinking` runs the Sparring turn with extended thinking on (production
+keeps it off, ADR 0012). Write it to its own `--iteration=N` and compare
+against a no-thinking iteration by running `summarize_sparring.php` on both
+dirs — do not mix arms inside one dir. The comparison is only valid when both
+transcripts carry the same `prompt.sha256`. Two things differ from the
+production call, so read results as "thinking plus headroom": `maxTokens`
+4096 instead of 1024 (thinking counts against it), and a 60s timeout instead
+of 20s. The visitor sim and the judge stay thinking-off. Each exchange also
+keeps the model's (summarized) thinking text under `thinking`; it is logged,
+never fed back as history.
 
 ### Cost/time expectations
 
