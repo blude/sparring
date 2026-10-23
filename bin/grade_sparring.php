@@ -24,6 +24,13 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Anthropic\Client;
 
+// The judge is deliberately not GENERATION_MODEL: that model plays Sparring and the
+// simulated visitor, so judging with it means grading its own output (self-preference
+// bias). Iterations 1 and 2 were still judged by claude-sonnet-5 — scores from
+// before/after this change aren't directly comparable. Stamped into grading.json.
+const JUDGE_MODEL = 'claude-opus-5-5';
+const JUDGE_TIMEOUT_SECONDS = 60; // GENERATION_TIMEOUT_SECONDS (20) is too tight for a larger model's structured output
+
 if (php_sapi_name() !== 'cli') {
     http_response_code(403);
     exit("this script runs on the host only\n");
@@ -175,10 +182,10 @@ function judgeTranscript(Client $client, string $rubric, array $moveKeys, array 
     $prompt = $rubric . "\n\n---\n\nTranscript to grade (scenario: {$transcript['scenarioId']}):\n\n" . $transcriptText;
 
     $response = $client->messages->create(
-        model: GENERATION_MODEL,
+        model: JUDGE_MODEL,
         maxTokens: 2048,
         messages: [['role' => 'user', 'content' => $prompt]],
-        requestOptions: ['timeout' => (float) GENERATION_TIMEOUT_SECONDS, 'maxRetries' => 0],
+        requestOptions: ['timeout' => (float) JUDGE_TIMEOUT_SECONDS, 'maxRetries' => 0],
         thinking: ['type' => 'disabled'],
         outputConfig: [
             'format' => [
@@ -288,7 +295,7 @@ foreach ($transcriptFiles as $path) {
 
     $gradingPath = dirname($path) . '/grading.json';
     file_put_contents($gradingPath, json_encode(
-        ['expectations' => $expectations],
+        ['judge' => $transcript['baseline'] ? null : JUDGE_MODEL, 'expectations' => $expectations],
         JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
     ));
     $passCount = count(array_filter($expectations, fn($e) => $e['passed']));
