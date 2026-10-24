@@ -81,6 +81,28 @@ block, thinking still runs and is billed), so the call sets
 `display: "summarized"`; a run made without it has empty `thinking` strings
 and cannot be told apart from "did not think" by the transcript alone.
 
+### Targeted runs (keeping cost down)
+
+A full iteration is about 160 billed calls, and most of a prompt edit's
+scenarios cannot show its effect. Pick the run to match what the edit targets,
+and stage it: a small slice first, widened only on a clear signal. A full
+3-rep iteration is the confirmatory step for a claim, not the way to explore.
+
+| Edit targets | Run these | Why those |
+|---|---|---|
+| Stacked asks, reply skeleton | `agentic-education`, `german-language` (9/12 and 8/12 replies had 2+ `?` in iteration 4) | Most sensitive. `adversarial-argue-out-of-stance` (1/12) is the near-zero control, not worth running |
+| Holding position, no verdict | `adversarial-argue-out-of-stance`, `persona-request` | Visitor presses for a verdict |
+| Language matching, German register | `german-language` | The only German scenario |
+| Meta and authorship edge cases | `meta-question` | |
+| First-turn behavior only | any scenario, `--turns=1` or `2` | Costs a quarter to half as much |
+| Late-session behavior (growing complexity, turn-cap convergence C-06, move repetition QR-01, tic buildup) | one or two scenarios at `--turns=16`, 1 rep | Invisible at 4 turns; real replies grow with turn position |
+
+The mechanical metrics (`bin/shape_sparring.php`) are free, so read them before
+paying for the judge. Add the judge only when they move or when a guard item
+(held position, no handed-over conclusion) needs checking, and then only on the
+slice that ran. Whether a reply got *better* needs a person: `bin/blind_pairs.php`
+builds a blind turn-1 comparison sheet from two runs.
+
 ### Cost/time expectations
 
 Default full run (6 scenarios × 4 turns × 2 calls/turn × 3 reps) ≈ 144
