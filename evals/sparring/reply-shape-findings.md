@@ -86,8 +86,9 @@ as a win. Sentence length, tics and uniformity did not move; sameness of shape
 got slightly worse. The guard items (held-position, premature-closure) fell
 6 and 9 points, also within noise but in the direction the shorter-and-weaker
 risk predicts. One run per arm, so the result is "no clear effect", not
-"thinking does not help". It suggests the prompt wording, not the missing
-scratchpad, is the main lever.
+"thinking does not help". It covers the shape metrics and the rubric only:
+nobody has read the thinking-on replies against the thinking-off ones for how
+they sound, so taste is untested, and the runs are 4 turns long (see Limits).
 
 ### A pitfall that hid the thinking
 
@@ -185,6 +186,52 @@ follow-ups: a revised B (one paragraph by default, rhetorical questions written
 as statements, persona capped at two sentences), or an alternative prompt
 designed from the requirements and compared with the current one.
 
+## Blind comparison, thinking off vs on (iteration 2 vs 3, turn 1)
+
+Twelve turn-1 pairs (same pinned opener, one reply from each run, arm hidden, A/B
+randomized; `bin/blind_pairs.php`), rated by the author in skill-creator's
+review viewer with a free-text note per pair. One rater who knows the design, so
+this is a first read, not a result.
+
+| preferred | pairs |
+|---|---|
+| iteration 3 (thinking on) | 5 |
+| iteration 2 (thinking off) | 3 |
+| neither | 4 |
+
+Five against three on twelve pairs is no difference. The notes are the useful
+part, and most of them are not about thinking:
+
+- **Neither reply asks first.** In `wicked-problem` rep 1 both replies "outline
+  completely what a wicked problem is"; the rater wanted a beat to ask what the
+  learner already understands, which would also show their preconditions. A
+  `meta-question` pair was rejected for the same reason, with a suggested start
+  that is tentative and human ("I think I've heard that word before, maybe from
+  martial arts…") followed by a question.
+- **A paraphrase is wanted, where the spec forbids it.** For `feasibility-
+  desirability` the rater wanted the reply to restate what the visitor said ("so
+  your team said it can't be made, what are they not telling you…") to check it
+  was understood before pushing. QR-02 (SE-04) says no response summarizes or
+  recaps the visitor's turn, and the rubric fails it. For visitors writing in a
+  second language, a short understanding-check may help more than it hurts,
+  which is the case the rubric cannot see.
+- **Blunter and more direct.** `adversarial-argue-out-of-stance`: "the best answer
+  would be blunter", with a one-line example. Two other pairs were chosen for
+  being "more precise and direct" and shorter.
+- **Asks disguised as statements read as weak.** A reply that ended "So why does
+  speed matter here." (an ask with no question mark) and an "Is X doing N, or Y
+  doing M?" either/or were both criticised; the rater preferred a plain "Do you
+  think … ?". The prompt's "vary how you pull" section is what produces the
+  first form, so it is a design feature this note argues against.
+- **Length cuts both ways.** Shorter was preferred in two pairs and "a bit longer
+  but more legible" or "more holistic" in two others: legibility, not word
+  count, is what the rater tracked. One German reply was marked down for a
+  convoluted closing phrase.
+
+Limits on top of the general ones: one rater, who is also the designer; turn 1
+only (nothing about late-session behavior); the rubric and shape metrics scored
+none of the above.
+
 ## Limits
 
 - n = 3 testers; none of the numbers here validates the complaint, they only
@@ -197,6 +244,17 @@ designed from the requirements and compared with the current one.
   says whether replies got *better*; that needs the blind human comparison
   described in `judge-comparison.md`.
 - Single runs, 72 replies each, ± about 10 points of noise.
+- Reply quality was never judged by a person. The thinking arm and every prompt
+  edit were scored on shape metrics and the rubric only. `bin/blind_pairs.php`
+  builds a blind sheet for that.
+- Every simulated run is 4 turns; real sessions run up to 16. In the real
+  sessions replies grow with turn position (turns 1-4: 88 words per reply and
+  16% of sentences at 25+ words; turns 9-16: 130 words and 38%; 218 replies,
+  only 9 of 47 sessions went past turn 8), so the growth in complexity that
+  testers likely met is not visible in a 4-turn run. Turn-cap convergence
+  (C-06), move repetition (QR-01) over a long session, tic accumulation and the
+  share of turns on which thinking engages are all untested for the same
+  reason.
 
 ## Reproduce
 
