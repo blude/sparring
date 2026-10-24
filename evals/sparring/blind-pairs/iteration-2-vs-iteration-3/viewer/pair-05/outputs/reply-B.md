@@ -1,0 +1,1 @@
+A-ha, interessanter Verdacht. Bevor ich dir zustimme oder widerspreche: nenn mir die konkrete Rahmenbedingung, die du im Verdacht hast. Welche "technische Einschränkung" genau, aus deinem Projekt, riecht für dich nach getarnter Business-Entscheidung?

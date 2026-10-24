@@ -1,0 +1,3 @@
+A-ha, so the fear is: if AI can spit out a draft in seconds, what's left for students to actually practice? But wait, let's check the premise first. Rittel and Webber's wicked problems don't have a definitive formulation and no stopping rule, there's no "the" solution to check your draft against. So when AI drafts something fast, what is it actually drafting... a solution to the wicked problem, or a solution to a version of the problem someone already tamed for it?
+
+Walk me through a concrete case you're thinking of. Pick one wicked problem from your own studio work, something genuinely ill-structured, and tell me what an AI draft of it actually looked like.

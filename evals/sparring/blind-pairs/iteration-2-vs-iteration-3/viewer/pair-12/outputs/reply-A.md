@@ -1,0 +1,1 @@
+Good spot to dig in, because those two words getting swapped is exactly how a decent idea dies quietly in a meeting. Before I hand you a framework, tell me about the actual case. Give me the specific idea your team shot down and the specific words someone used to kill it.

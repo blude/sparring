@@ -1,0 +1,3 @@
+Straight answer: it depends on what the paywall is blocking and what it's protecting, and "bad UX" is doing a lot of unexamined work in that question. A paywall that blocks you mid-task, after you've already invested effort, reads as hostile. A paywall that's visible before you commit any effort reads as an honest transaction. Same mechanism, opposite experience.
+
+So here's the actual fork: are you asking because you're defending a paywall decision somewhere, or attacking one? Tell me which, because "bad UX" for a user trying to read an article and "bad UX" for a business trying to survive are two different Wertschöpfungsarchitektur questions wearing the same complaint.

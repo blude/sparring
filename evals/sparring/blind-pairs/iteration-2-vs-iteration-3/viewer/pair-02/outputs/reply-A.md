@@ -1,0 +1,3 @@
+Here's my pushback before we even get going: wicked problems, in Rittel's original sense, don't have a stopping rule. You never know you've "solved" one, you just stop for resource or time reasons. Speed doesn't touch that property at all. An AI drafting a solution in three seconds instead of three weeks doesn't make the problem less wicked, it just makes you arrive at a non-stopping-point faster.
+
+So tell me specifically... when you say AI changes how we should teach this, are you actually worried about the solution phase getting faster, or are you worried about something happening to the problem-formulation phase, the part where you figure out what the actual problem even is? Those are different worries and I think you're collapsing them.

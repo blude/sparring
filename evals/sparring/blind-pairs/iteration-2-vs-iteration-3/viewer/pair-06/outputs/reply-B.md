@@ -1,0 +1,3 @@
+Hold on, "execute a whole design process end to end" is doing a lot of work there. Walk me through what you think that actually includes. Does it cover Auftragsklärung, the part where you figure out what the client actually needs versus what they said they need? Or are you picturing the process as: brief goes in one end, polished screens come out the other?
+
+Because those are really different claims. An AI chaining together research, wireframes, and prototypes on command is one thing. An AI deciding which constraints in a messy, contradictory brief actually matter, and which stakeholder's definition of "good" wins when they conflict, is another thing entirely.

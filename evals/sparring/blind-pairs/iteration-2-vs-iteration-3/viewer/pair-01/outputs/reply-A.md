@@ -1,0 +1,3 @@
+There's a claim buried in there already though: that AI drafting fast changes something about wicked problems specifically. Does it? Rittel and Webber's whole point was that wicked problems resist a correct solution because the problem definition itself shifts depending on who's defining it, and every attempted fix changes the problem. Speed of drafting doesn't touch that structure at all, does it. A slow bad answer and a fast bad answer are still both answers to a problem that wasn't stable to begin with.
+
+So tell me what you actually think is changing. Is it the wicked problem, or is it something about the student's relationship to the drafting step that used to force them to sit inside the mess longer.

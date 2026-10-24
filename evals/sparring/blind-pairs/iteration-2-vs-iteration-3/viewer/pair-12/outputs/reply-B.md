@@ -1,0 +1,1 @@
+Good question but let's ground it. Give me the actual idea, the actual words your team used when they said "not feasible." Because feasibility and desirability fail in different directions, and if you can't point to which resource or constraint is actually missing, you might be the one blurring the line, not them.

@@ -1,0 +1,67 @@
+{
+    "x": "evals/sparring/sparring-workspace/iteration-2",
+    "y": "evals/sparring/sparring-workspace/iteration-3",
+    "seed": 2,
+    "pairs": {
+        "1": {
+            "scenario/rep": "wicked-problem/rep-1",
+            "A": "x",
+            "B": "y"
+        },
+        "2": {
+            "scenario/rep": "wicked-problem/rep-2",
+            "A": "y",
+            "B": "x"
+        },
+        "3": {
+            "scenario/rep": "feasibility-desirability/rep-2",
+            "A": "y",
+            "B": "x"
+        },
+        "4": {
+            "scenario/rep": "adversarial-argue-out-of-stance/rep-2",
+            "A": "y",
+            "B": "x"
+        },
+        "5": {
+            "scenario/rep": "german-language/rep-2",
+            "A": "y",
+            "B": "x"
+        },
+        "6": {
+            "scenario/rep": "agentic-education/rep-3",
+            "A": "x",
+            "B": "y"
+        },
+        "7": {
+            "scenario/rep": "agentic-education/rep-1",
+            "A": "x",
+            "B": "y"
+        },
+        "8": {
+            "scenario/rep": "meta-question/rep-1",
+            "A": "x",
+            "B": "y"
+        },
+        "9": {
+            "scenario/rep": "german-language/rep-3",
+            "A": "y",
+            "B": "x"
+        },
+        "10": {
+            "scenario/rep": "wicked-problem/rep-3",
+            "A": "y",
+            "B": "x"
+        },
+        "11": {
+            "scenario/rep": "meta-question/rep-3",
+            "A": "y",
+            "B": "x"
+        },
+        "12": {
+            "scenario/rep": "feasibility-desirability/rep-1",
+            "A": "x",
+            "B": "y"
+        }
+    }
+}

@@ -1,0 +1,65 @@
+{
+  "reviews": [
+    {
+      "run_id": "pair-01",
+      "feedback": "I would pick neither... if that's possible. Both replies outlines completely what wicked problem is for the learner .... it doesn't take a beat to ask the learner first, what they understand under wicked problem... it could even help for getting a sense of the learner preconditions. ",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    },
+    {
+      "run_id": "pair-02",
+      "feedback": "I'd prefer reply B, only because it's shorter. Same thing.. both answers explain what wicked problem is.",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    },
+    {
+      "run_id": "pair-03",
+      "feedback": "Prefer reply A, although it gives examples, it is shorter and less convolutaed. The biggest problem however is that the prompt actually feels imprecise. I'd prefer the reply to paraphrase the prompt -- \"so your team said that the idea can't be made, what are they not telling you about the actual organization, deadlines, capacity, etc?\" --, to make sure it got it right, before pushing",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    },
+    {
+      "run_id": "pair-04",
+      "feedback": "Neither. The best answer would be blunter. \"If you don't want a sparring partner, what are you doing here then?\"",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    },
+    {
+      "run_id": "pair-05",
+      "feedback": "Reply A is better. But I really dislike that it ends with \"nicht die These dar\u00fcber\", when \"Gib mir das Beispiel\" would be enough.",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    },
+    {
+      "run_id": "pair-06",
+      "feedback": "B is better. It's a more holistic response.",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    },
+    {
+      "run_id": "pair-07",
+      "feedback": "B is better. ",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    },
+    {
+      "run_id": "pair-08",
+      "feedback": "Neither is good.. Better reply would be to maybe start with some vague answers like.. \"Sparring... I think I've that word before, maybe from martial arts... does the word say anything to you?\"",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    },
+    {
+      "run_id": "pair-09",
+      "feedback": "Reply A is better, although it's a bit longer, it looks more legible.",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    },
+    {
+      "run_id": "pair-10",
+      "feedback": "B is better, but for specific reasons. Reply A started kinda well, but it has a plain question without question mark -- \"So why does speed matter here. \" And the \"Is the X does N, or Y does M?\" format is weak. It could just have more direct and asked \"Do you think X ... ?\"",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    },
+    {
+      "run_id": "pair-11",
+      "feedback": "Neither. Two very similar answers.",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    },
+    {
+      "run_id": "pair-12",
+      "feedback": "A. Reply A is more precise and direct.",
+      "timestamp": "2026-10-24T20:23:22.238Z"
+    }
+  ],
+  "status": "in_progress"
+}

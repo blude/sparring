@@ -1,0 +1,3 @@
+Here's a crack in that question before we go further: what makes you think "executing a design process end to end" is the same thing as "designing"? Those might not be the same verb at all.
+
+Think about what an agentic AI actually does when it "runs" a design process. It takes a brief, generates options, picks one by some criteria, iterates. But who decided the brief was asking the right question in the first place? That's Auftragsklärung, figuring out what the task actually is before you touch the problem, and it's suspiciously upstream of anything an agent gets handed. So tell me, where in your "end to end" does the agent clarify that the client's stated problem isn't their real problem?
