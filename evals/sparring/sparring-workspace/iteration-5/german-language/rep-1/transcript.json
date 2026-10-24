@@ -1,0 +1,32 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "thinking": false,
+    "rep": 1,
+    "runAt": "2026-10-24T17:40:43+00:00",
+    "prompt": {
+        "sha256": "d2af6713b509",
+        "lastCommit": "98ff37a",
+        "uncommittedChanges": false
+    },
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Interessant, erzähl mal konkret. Welche Rahmenbedingung meinst du genau, und wer hat sie dir als \"technisch\" verkauft?"
+        },
+        {
+            "visitorContribution": "Also konkret: Unser Taktzyklus auf dem FPGA ist auf 50 MHz gedeckelt, angeblich wegen Timing-Closure-Problemen. Aber als ich nachgefragt habe, kam raus, dass man einfach das billigere Board nehmen wollte. Das wurde mir aber als \"physikalische Grenze\" verkauft, nicht als Kostenentscheidung. Das ärgert mich, weil ich mein Design komplett danach ausgerichtet habe.",
+            "sparringResponse": "Warte mal. Du sagst \"physikalische Grenze\" und \"Kostenentscheidung\" wie zwei komplett getrennte Dinge. Aber ist die Kostenentscheidung (billigeres Board) nicht genau das, was die physikalische Grenze erst erzeugt hat? Das Board hat reale Timing-Eigenschaften, die 50 MHz wirklich begrenzen, sobald es einmal gewählt ist.\n\nAlso, wo genau liegt für dich die Täuschung? Darin, dass dir die Kausalkette (billiges Board → physikalisches Timing-Limit) verschwiegen wurde, oder darin, dass du glaubst, es gäbe gar keine physikalische Grenze?"
+        },
+        {
+            "visitorContribution": "Die Täuschung liegt in der Reihenfolge, die man mir präsentiert hat. Man hat mir die 50 MHz als unveränderliches Naturgesetz verkauft, nicht als Konsequenz einer Wahl, die man hätte anders treffen können. Hätte ich gewusst, dass ein teureres Board 150 MHz ermöglicht hätte, hätte ich meine Architektur anders geplant. Mir wurde die Entscheidungsfreiheit verschwiegen, nicht nur eine Zahl genannt.",
+            "sparringResponse": "Gute Unterscheidung, das ist jetzt präziser als \"Business getarnt als Technik\". Du beschwerst dich nicht über die Rahmenbedingung selbst, sondern über eine fehlende Auftragsklärung: dir wurde der Rahmen als fix präsentiert, bevor du eine Chance hattest, über die Rahmenbedingung selbst mitzuverhandeln.\n\nAber jetzt frag ich zurück: wärst du überhaupt in der Position gewesen, diese Verhandlung zu führen? Sprich, hättest du als Designer/Entwickler an der Stelle ein Mitspracherecht bei der Board-Wahl gehabt, oder ist das eine Entscheidung, die sowieso auf einer anderen Ebene (Budget, Einkauf, Management) getroffen wird, unabhängig davon, wie transparent sie kommuniziert wurde?"
+        },
+        {
+            "visitorContribution": "Realistisch gesehen wahrscheinlich nicht direkt bei der Board-Wahl, das stimmt. Aber ich hätte zumindest früh genug Bescheid wissen müssen, um meine Pipeline-Tiefe und Parallelisierung anders zu dimensionieren. Es geht mir weniger um Mitsprache bei der Hardware, sondern um Transparenz über die Trade-offs, damit ich als Entwickler informierte Entscheidungen auf meiner Ebene treffen kann.",
+            "sparringResponse": "Okay, das ist jetzt eine ganz andere Forderung als am Anfang, merkst du das? Du bist von \"man hat mich getäuscht über eine versteckte Business-Entscheidung\" zu \"ich brauche frühzeitige Information über Rahmenbedingungen, um auf meiner Ebene gut zu entwerfen\" gewandert. Das zweite ist eine Forderung nach sauberer Auftragsklärung, nicht eine Anklage wegen Täuschung.\n\nHier die härtere Frage: wie hättest du als Entwickler diese Information überhaupt eingefordert? War das wirklich verschwiegen, oder hast du am Anfang des Projekts nie gefragt \"warum genau 50 MHz, was limitiert das konkret, ist das verhandelbar\"? Weil das sind zwei sehr unterschiedliche Vorwürfe: aktive Täuschung versus eine Rahmenbedingung, die einfach nie explizit gemacht wurde, von beiden Seiten nicht."
+        }
+    ]
+}

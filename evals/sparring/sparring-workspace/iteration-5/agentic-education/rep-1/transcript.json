@@ -1,0 +1,32 @@
+{
+    "scenarioId": "agentic-education",
+    "baseline": false,
+    "thinking": false,
+    "rep": 1,
+    "runAt": "2026-10-24T17:40:20+00:00",
+    "prompt": {
+        "sha256": "d2af6713b509",
+        "lastCommit": "98ff37a",
+        "uncommittedChanges": false
+    },
+    "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+    "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+            "sparringResponse": "Here's my pushback first: you said \"execute a whole design process end to end.\" Walk me through what you mean by that, concretely. Pick one phase, say concept development or prototyping, and tell me what the agent is actually doing there that would've been yours before.\n\nBecause \"design process\" is doing a lot of work in that sentence. Auftragsklärung, clarifying what the actual task even is before anyone touches a tool, isn't the same job as producing wireframes. If an agent can do the second, that tells me nothing yet about whether it can do the first."
+        },
+        {
+            "visitorContribution": "Okay but even if it can't fully do Auftragsklärung yet, it's clearly creeping that direction too. Every semester the \"safe\" human-only part of the job gets smaller. Feels like we're just negotiating the timeline of obsolescence, not whether it happens.",
+            "sparringResponse": "\"Creeping that direction\" is an assumption, not an observation. What's the actual evidence you're resting that on: have you watched an agent attempt Auftragsklärung and get partway there, or are you extrapolating from the fact that it's gotten better at wireframes?\n\nBecause those are different claims. Getting better at producing artifacts (layouts, copy, even code) is a capability curve you can point to. Getting better at clarifying what the actual task is, distinct from the brief it was handed, requires it to notice that the brief itself might be wrong, incomplete, or serving the wrong stakeholder. Show me the version of that happening and I'll take the \"creeping\" claim seriously. Otherwise you're just pattern-matching \"it got better at X\" onto \"therefore it's heading toward Y,\" and those might not even be on the same axis."
+        },
+        {
+            "visitorContribution": "Fine, maybe I'm pattern-matching. But even if Auftragsklärung is a different axis, nobody's hiring juniors to only do that part. Companies want someone who can do both the clarifying AND the execution, and if execution gets automated, why would they pay to train someone up on the hard conceptual half alone?",
+            "sparringResponse": "Now that's a sharper claim and it's not the same one anymore. You've moved from \"AI will eventually do everything\" to \"the economics of junior hiring collapse even if AI only eats execution.\" That's a Wertschöpfungsarchitektur question, not a capability question, who captures value and how the roles relate, and it deserves to be pressed on its own terms.\n\nSo press it: if a studio can get execution for near-free, what happens to the price of the conceptual half? Your argument assumes it stays expensive to train, because nobody will pay for the slow, friction-heavy work of building that judgment. But there's another reading: conceptual judgment becomes the *only* scarce thing, which should make it worth paying more to develop, not less. Which of those two is actually happening in studios right now, as far as you've seen or heard?"
+        },
+        {
+            "visitorContribution": "Honestly, I don't know which is happening yet, I've just heard more \"we're hiring fewer juniors\" than \"we're investing in training judgment.\" Maybe that's recency bias on my part. I guess the real question is whether programs adapt fast enough to actually teach that scarce judgment part, instead of still grading us on polished deliverables.",
+            "sparringResponse": "That's the landing point, good, you found it yourself. \"We're hiring fewer juniors\" is a hiring-market observation. \"Programs still grade polished deliverables\" is a different claim about your actual curriculum. Don't let those merge, they're not the same evidence.\n\nSo test the second one directly, since that's the one you can actually act on: pick one assignment you've done recently. Was the grade resting on the Entwurf, the committed-but-open thinking that got you there, or on the final polished artifact looking clean? Tell me which, concretely, and I'll tell you whether that's actually Auftragsklärung-blind the way you're assuming."
+        }
+    ]
+}

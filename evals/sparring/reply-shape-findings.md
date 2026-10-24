@@ -144,6 +144,47 @@ rule is followed once per paragraph, not once per reply: the two-paragraph
 skeleton, not the wording of the ask rule, produces the second ask. That is the
 hypothesis edit B tests (shape and a "only the last paragraph may ask" clause).
 
+## Edit B, stage 1 (iteration 5): did not clear the gate
+
+Prompt `98ff37a` (sha256 `d2af6713b509`): edit A plus edit B (no alternation
+by habit, 1-2 paragraphs as a cap with short one-idea sentences, a question
+only in the last paragraph of a two-paragraph reply, a "vary the shape" block,
+and short stakeholder voices). To keep spend down the run was staged: one rep
+of `agentic-education`, `german-language` and the new `persona-request`
+(24 calls, no judge), to be widened only on a clear signal.
+
+Against iteration 4 on the two scenarios both runs share (24 replies against
+8):
+
+| | iteration 4 (edit A) | iteration 5 (A+B) |
+|---|---|---|
+| replies with 2+ `?` | 70% | 50% |
+| replies with two paragraphs | 83% | 87% |
+| `?` in a paragraph before the last | 41% | 37% |
+| words per reply | 109 | 96 |
+
+With 8 replies, a 20-point change is inside the noise, and the two-paragraph
+rate did not move. Reading the 12 replies:
+
+- The "only the last paragraph may ask" clause is mostly ignored. The model puts
+  a rhetorical question or an imperative ask in paragraph 1 and another at the
+  end.
+- One paragraph works when it happens (`german-language` turn 1 is a single
+  short reply with one ask), but nothing makes it the default.
+- The stakeholder voice works but runs about 100 words as a quoted block,
+  followed by an extra ask of Sparring's own ("Your move…").
+- When the visitor demanded a verdict, turn 3 declined it well and then
+  stacked two questions; turn 4 answered "underspecified, not wrong" and then
+  added three more asks.
+- The banned shorthand "move" appears in two persona replies.
+
+Decision: stop at stage 1 (24 calls spent), do not widen. The rules were
+followed locally while the two-paragraph skeleton stayed, which suggests
+patching clauses into this prompt's structure may not be enough. Candidate
+follow-ups: a revised B (one paragraph by default, rhetorical questions written
+as statements, persona capped at two sentences), or an alternative prompt
+designed from the requirements and compared with the current one.
+
 ## Limits
 
 - n = 3 testers; none of the numbers here validates the complaint, they only
