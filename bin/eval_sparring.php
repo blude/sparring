@@ -18,6 +18,7 @@ declare(strict_types=1);
  * Usage:
  *   php bin/eval_sparring.php [--scenario=<id>[,<id>...]] [--turns=N]
  *                              [--reps=N] [--iteration=N] [--baseline] [--thinking]
+ *                              [--prompt=<file>]
  *
  *   --scenario=<id>  Comma-separated scenario ids (evals/sparring/scenarios/<id>.json).
  *                     Default: every scenario file.
@@ -34,6 +35,12 @@ declare(strict_types=1);
  *                     compare against a no-thinking iteration on the same prompt
  *                     hash — see README "Thinking arm". Not combinable with --baseline.
  *
+ *   --prompt=<file>   Run against this system prompt instead of prompts/sparring.md,
+ *                     for an A/B with a candidate prompt. Production code is
+ *                     untouched; the file's hash, commit and dirty state are
+ *                     stamped in each transcript, plus its path. Not combinable
+ *                     with --baseline (which sends no prompt).
+ *
  * Smoke path before a full paid run: --scenario=<id> --turns=2 --reps=1
  */
 
@@ -49,7 +56,7 @@ if (php_sapi_name() !== 'cli') {
 
 if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
     exit(
-        "Usage: php bin/eval_sparring.php [--scenario=<id>[,<id>...]] [--turns=N] [--reps=N] [--iteration=N] [--baseline] [--thinking]\n"
+        "Usage: php bin/eval_sparring.php [--scenario=<id>[,<id>...]] [--turns=N] [--reps=N] [--iteration=N] [--baseline] [--thinking] [--prompt=<file>]\n"
     );
 }
 
@@ -65,6 +72,7 @@ $reps = 3;
 $iteration = 1;
 $baseline = in_array('--baseline', $argv, true);
 $thinking = in_array('--thinking', $argv, true);
+$promptArg = null;
 foreach ($argv as $arg) {
     if (str_starts_with($arg, '--scenario=')) {
         $scenarioFilter = explode(',', substr($arg, strlen('--scenario=')));
@@ -74,12 +82,26 @@ foreach ($argv as $arg) {
         $reps = (int) substr($arg, strlen('--reps='));
     } elseif (str_starts_with($arg, '--iteration=')) {
         $iteration = (int) substr($arg, strlen('--iteration='));
+    } elseif (str_starts_with($arg, '--prompt=')) {
+        $promptArg = substr($arg, strlen('--prompt='));
     }
 }
 if ($baseline && $thinking) {
     // The no-prompt arm with thinking on would be a third experiment, not a comparison arm.
     fwrite(STDERR, "--thinking and --baseline can't be combined.\n");
     exit(1);
+}
+if ($baseline && $promptArg !== null) {
+    fwrite(STDERR, "--prompt and --baseline can't be combined: the baseline arm sends no prompt.\n");
+    exit(1);
+}
+$promptPath = SPARRING_PROMPT_PATH;
+if ($promptArg !== null) {
+    $promptPath = realpath($promptArg) ?: '';
+    if ($promptPath === '' || !is_file($promptPath)) {
+        fwrite(STDERR, "No such prompt file: {$promptArg}\n");
+        exit(1);
+    }
 }
 if ($baseline) {
     $reps = 1; // no-prompt arm is low-information by design (README) — kept cheap
@@ -99,7 +121,13 @@ if ($scenarioFiles === []) {
     exit(1);
 }
 
-$llm = new AnthropicLlmClient($key); // real Sparring turn — production code, unmodified prompts/sparring.md
+// Real Sparring turn through production code. With --prompt only the prompt text is swapped: the
+// class is final and the property protected, so reflection sets it after the constructor has loaded the default.
+$llm = new AnthropicLlmClient($key);
+if ($promptArg !== null) {
+    (new ReflectionProperty(AbstractLlmClient::class, 'sparringPrompt'))
+        ->setValue($llm, (string) file_get_contents($promptPath));
+}
 $rawClient = new Client(apiKey: $key); // visitor simulation + baseline arm — scaffolding, not under test
 
 $workspace = __DIR__ . "/../evals/sparring/sparring-workspace/iteration-{$iteration}";
@@ -109,9 +137,9 @@ $workspace = __DIR__ . "/../evals/sparring/sparring-workspace/iteration-{$iterat
 // ground truth (it also catches uncommitted edits); the commit is a
 // human-friendly pointer and is null if git isn't available. The baseline arm
 // sends no prompt, but is stamped too so an iteration's arms stay comparable.
-$promptSource = (string) file_get_contents(SPARRING_PROMPT_PATH);
-$gitDir = escapeshellarg(dirname(SPARRING_PROMPT_PATH));
-$promptFile = escapeshellarg(SPARRING_PROMPT_PATH);
+$promptSource = (string) file_get_contents($promptPath);
+$gitDir = escapeshellarg(dirname($promptPath));
+$promptFile = escapeshellarg($promptPath);
 $promptCommit = trim((string) shell_exec("git -C {$gitDir} log -1 --format=%h -- {$promptFile} 2>/dev/null"));
 $promptDirty = trim((string) shell_exec("git -C {$gitDir} status --porcelain -- {$promptFile} 2>/dev/null")) !== '';
 $promptInfo = [
@@ -119,6 +147,10 @@ $promptInfo = [
     'lastCommit' => $promptCommit !== '' ? $promptCommit : null,
     'uncommittedChanges' => $promptDirty,
 ];
+if ($promptArg !== null) {
+    // Relative to the repo so the stamp stays readable and portable.
+    $promptInfo['file'] = ltrim(str_replace(dirname(__DIR__), '', $promptPath), '/');
+}
 
 /**
  * From-scratch messages array, same shape AnthropicLlmClient::generateResponse()
