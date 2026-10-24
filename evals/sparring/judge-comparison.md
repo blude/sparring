@@ -107,6 +107,8 @@ plain code, identical across judges, and are not part of this comparison.
 
 - Both judges are Claude models, and Sparring is a Claude model. Opus reduces,
   but does not remove, same-family bias.
+- The simulated visitor is still `claude-sonnet-5`, as in the original run, so
+  Sparring and the visitor share a model. Only the judge was changed.
 - Only two disagreements were checked by hand. No set of human labels exists, so
   neither judge is validated against a person.
 - Judge noise: three Opus gradings of one transcript agreed on five of six items;
@@ -144,8 +146,9 @@ Four limits follow from this.
    improved, whether they kept going, or whether they would rate the exchange
    as useful. The simulated visitor is a persona instructed to resist for the
    first turns, so it can test whether Sparring stays firm, but it is not a
-   learner. The optional end-of-session rating form that real visitors see is
-   not used by the evaluation.
+   learner. The rating form was filled in during the study sessions and by some
+   exhibition visitors; its answers are not used by this evaluation, and not
+   every visitor filled it in.
 4. **No comparison against a plausible alternative.** The no-prompt baseline arm
    was only run through the mechanical checks, never judged, so the data cannot
    say that prompted replies are better than unprompted ones on any quality
@@ -156,8 +159,8 @@ teaching expertise, to compare pairs of replies blind, for example the same
 turn with and without a preamble, and record which they prefer and why. A
 small sample is enough to learn whether the rubric's verdicts agree with human
 judgment on the contested items (`voice-style`, `no-meta-commentary`). For
-outcomes, the exhibition sessions and their rating-form answers are the
-natural evidence. Neither was part of this evaluation, so the results above
+outcomes, the study sessions and the exhibition visitors who filled in the
+rating form are the natural evidence. Neither was part of this evaluation, so the results above
 should be read as "the prompt behaves as designed", with the design itself left
 open.
 
