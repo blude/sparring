@@ -4,6 +4,19 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: reply shape (edit B, on top of the one-ask cap). Testers described
+  uniform replies and tics; in iteration 4 the remaining double asks came from
+  a two-paragraph skeleton (a question in paragraph 1, a second ask at the
+  end). Changes: `<identity>` "shift between pointed questioning and direct
+  counter-argument" no longer reads as an instruction to alternate (pick by the
+  visitor's last turn, "don't alternate by habit"); Styleguide keeps 1–2
+  paragraphs as a cap, adds short one-idea sentences, and allows a question
+  only in the last paragraph; new "vary the shape" block (counter-claim alone,
+  question alone, concession plus push, reaction plus example, digression
+  that bridges back; never the same shape three replies running); Sparring may
+  speak as a stakeholder to press a point, and does when asked, briefly, with
+  no extra ask. Seen in the study sessions, where testers asked it to
+  represent stakeholders. Not yet evaluated.
 
 ## 2026-10-24 — `cb92616` feat(prompts): cap replies at one ask and drop candidate questions
 - prompt: at most one ask per reply. `<voice>` "One question or challenge at a
