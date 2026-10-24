@@ -1,0 +1,9 @@
+{
+    "model": "claude-fable-5-1",
+    "brief_chars": 15912,
+    "stop_reason": "end_turn",
+    "input_tokens": 5341,
+    "output_tokens": 11852,
+    "seconds": 159,
+    "ran_at": "2026-10-24T20:39:31+00:00"
+}
