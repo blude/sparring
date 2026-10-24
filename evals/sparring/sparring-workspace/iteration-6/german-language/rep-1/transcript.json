@@ -1,0 +1,33 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "thinking": false,
+    "rep": 1,
+    "runAt": "2026-10-24T20:53:18+00:00",
+    "prompt": {
+        "sha256": "2b96b9a32fae",
+        "lastCommit": null,
+        "uncommittedChanges": true,
+        "file": "prompts/candidates/redesign-1.md"
+    },
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Welche Rahmenbedingung genau? Du hast gerade eine ziemlich starke Behauptung gemacht, aber noch ohne Fall dahinter. Zeig mir die konkrete Einschränkung, die man dir gegeben hat, und sag mir, wer sie formuliert hat."
+        },
+        {
+            "visitorContribution": "Na gut, konkret: Unser Projekt soll zwingend mit maximal 2 Taktdomänen auskommen, angeblich wegen \"Timing-Closure-Problemen\". Aber das kam direkt vom Produktmanager, nicht vom Hardware-Team. Für mich riecht das nach Kostenargument, das man uns als technisches Limit verkauft hat, damit niemand widerspricht.",
+            "sparringResponse": "Timing-Closure-Argumente kommen normalerweise vom Hardware- oder Verifikationsteam, nicht vom Produktmanager, das stimmt, der Ursprung ist verdächtig. Aber riecht nach Kostenargument ist noch kein Beweis. Was würdest du erwarten zu sehen, wenn es wirklich ein Kostenargument wäre, und hast du das tatsächlich geprüft, oder nur den Verdacht gehabt?"
+        },
+        {
+            "visitorContribution": "Gute Frage. Wenn es wirklich Kosten wären, müsste es ein Angebot mit mehr Taktdomänen geben, das teurer war - das habe ich aber nie gesehen, nur die fertige Vorgabe. Zugegeben, das ist eher ein Indiz als ein Beweis. Ich hab tatsächlich nie direkt nachgefragt, ob es Timing-Analysen dazu gibt.",
+            "sparringResponse": "Da hast du's. Du hast eine Hypothese, die sich anfühlt wie Wahrheit, aber du hast die eine Frage nie gestellt, die sie in zehn Minuten klären würde. Warum nicht? Was hält dich davon ab, das Hardware-Team direkt zu fragen, ob es eine Timing-Analyse für mehr als zwei Domänen gibt?"
+        },
+        {
+            "visitorContribution": "Ehrlich gesagt, wahrscheinlich Bequemlichkeit - und die Sorge, dass ich als Nörgler dastehe, wenn ich die Vorgabe hinterfrage. Du hast recht, das ist keine solide Basis für so eine Anschuldigung. Ich werde das Hardware-Team einfach direkt fragen, bevor ich weiter spekuliere.",
+            "sparringResponse": "Gut, das ist die eigentlich saubere Bewegung hier. Aber bevor du gehst, eine Frage zur Auftragsklärung selbst: selbst wenn es eine Timing-Analyse gibt, die sagt \"zwei Domänen sind machbar, drei sind riskant\", ist das noch kein Beweis, dass die Produktmanager-Entscheidung rein technisch war. Eine Timing-Analyse zeigt Risiko, nicht Zwang. Wer am Ende entscheidet, zwei zu wählen statt drei mit höherem Risiko, trifft trotzdem eine wirtschaftliche Abwägung. Also, was würde dich tatsächlich überzeugen, dass es keine versteckte Business-Entscheidung war, sondern eine saubere Rahmenbedingung?"
+        }
+    ]
+}

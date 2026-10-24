@@ -232,6 +232,40 @@ Limits on top of the general ones: one rater, who is also the designer; turn 1
 only (nothing about late-session behavior); the rubric and shape metrics scored
 none of the above.
 
+## A prompt redesigned from the requirements (iteration 6, stage 1)
+
+After edits A and B, an alternative prompt was drafted from scratch by
+`claude-fable-5-1` from `redesign-brief.md` (requirements, tester feedback and
+the author's blind-review notes; deliberately without the current prompt text,
+the rubric or the shape metrics). Raw response: `redesign/draft-1-response.md`;
+the prompt itself: `prompts/candidates/redesign-1.md` (about 2,300 words against
+3,100 for the current one, different structure and wording). Stage 1 ran it on
+the same three scenarios as iteration 5, 1 rep, thinking off, 12 replies, not
+judged.
+
+| (two shared scenarios, plus overall for iteration 6) | iter 2 original | iter 4 (A) | iter 5 (A+B slice) | iter 6 redesign |
+|---|---|---|---|---|
+| replies with two paragraphs | 67% | 83% | 87% | 0% |
+| replies with 2+ `?` | 75% | 71% | 50% | 38% |
+| words per reply | 113 | 109 | 96 | 56 |
+
+Iteration 6 over all 12 replies: 2+ `?` in 33%, questions in a row in 25%, mean 80
+words, longest sentence 45 words. The paragraph-based "same shape as the previous
+reply" rate rose to 44% only because most replies are now one paragraph, so that
+metric no longer discriminates for this prompt.
+
+Reading the replies: the `agentic-education` and German replies are short, plain
+and carry one ask each; the stakeholder voice opens in character and hands back.
+Problems: the persona scenario's third reply has three paragraphs (over the
+cap); under a repeated demand for a verdict the fourth reply says "I'd lean
+toward not collapsing the whole history", a position handed over and labelled a
+bet; "failure mode" appeared once (0 in 144 earlier replies) and "move" once
+(about 13% of earlier replies), and a German reply says "saubere Bewegung", a
+calque of "move". Fable dropped the name Popov ("You are Sparring"), moved turn-cap
+convergence from "approaching 16" to "past the halfway point", and its tag names
+differ from the seven listed in SE-04 C-04. Not yet judged; one rep; the author
+has not read these replies against earlier ones blind.
+
 ## Limits
 
 - n = 3 testers; none of the numbers here validates the complaint, they only

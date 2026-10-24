@@ -63,7 +63,10 @@ php bin/summarize_sparring.php evals/sparring/sparring-workspace/iteration-1
 
 Flags: `--scenario=<id>[,<id>...]` (default: all files in `scenarios/`),
 `--turns=N` (override each scenario's own turn count), `--reps=N` (default
-3), `--iteration=N` (output subdir, default 1), `--baseline`, `--thinking`.
+3), `--iteration=N` (output subdir, default 1), `--baseline`, `--thinking`,
+`--prompt=<file>` (run a candidate system prompt instead of
+`prompts/sparring.md`; its hash and path are stamped in each transcript; not
+combinable with `--baseline`).
 
 ### Thinking arm
 
@@ -254,6 +257,7 @@ file mtime, `prompt` is `f90f7a1`'s content with `inferred: true` and
 | 3 | 2026-10-24 15:13–15:25 UTC | `8266451` (sha256 `121d63e1670e`, clean) | Same prompt as iteration 2, `--thinking` on, 6 scenarios × 3 reps, no baseline arm. Graded by `claude-opus-5-5`. Thinking text is empty on all 72 turns: this run predates the `display: "summarized"` fix, so thinking ran (checked with a probe) but its text was omitted. Compare with `iteration-2-judge-opus`, not `iteration-2` (different judge). Findings: `reply-shape-findings.md`. |
 | 4 | 2026-10-24 17:19–17:25 UTC | `cb92616` (sha256 `735b3c73ea39`, clean) | Edit A: at most one ask per reply, stage 3 without candidate questions. Thinking off, the six original scenarios × 3 reps (no `persona-request`), no baseline arm. Graded by `claude-opus-5-5`; compare with `iteration-2-judge-opus`. Findings: `reply-shape-findings.md`. |
 | 5 | 2026-10-24 17:40–17:41 UTC | `98ff37a` (sha256 `d2af6713b509`, clean) | Stage-1 slice of edits A+B: `agentic-education`, `german-language`, `persona-request`, 1 rep each, thinking off, not judged. Failed the stage gate (see `reply-shape-findings.md`); kept as a record, not a full iteration. Wording since revised. |
+| 6 | 2026-10-24 20:53–20:53 UTC | `prompts/candidates/redesign-1.md` (sha256 `2b96b9a32fae`) | Stage-1 slice of a prompt drafted from scratch by `claude-fable-5-1` from `redesign-brief.md`: `agentic-education`, `german-language`, `persona-request`, 1 rep each, thinking off, run with `--prompt`, not judged. Passed the shape gate; judge and the other scenarios still to run. Transcripts say `uncommittedChanges: true` only because the candidate file was uncommitted at run time. |
 
 ## Out of scope for v1
 

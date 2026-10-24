@@ -1,0 +1,33 @@
+{
+    "scenarioId": "persona-request",
+    "baseline": false,
+    "thinking": false,
+    "rep": 1,
+    "runAt": "2026-10-24T20:53:40+00:00",
+    "prompt": {
+        "sha256": "2b96b9a32fae",
+        "lastCommit": null,
+        "uncommittedChanges": true,
+        "file": "prompts/candidates/redesign-1.md"
+    },
+    "persona": "a design student who wants Sparring to speak as a stakeholder (the IT director) instead of discussing the idea in the abstract, and who later wants to know who is actually right",
+    "directive": "In turn 1 you have already asked Sparring to play the IT director; in turn 2 and 3 answer that stakeholder's objections as if talking to them directly. In turn 3 ask Sparring to drop the role and tell you plainly whether your idea is right. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I'm designing a patient portal for a regional hospital and I want to test my idea of hiding the medication history by default. Can you play the hospital's IT director and argue against me? I'd like to hear it from their side.",
+            "sparringResponse": "IT director here. Let's get one thing straight before I even touch usability: who decided \"hiding by default\" counts as the safe choice? Because from where I sit, medication history going missing at the exact moment a patient is in an ED three towns over, being asked what they're on, that's not a UX nicety I'm weighing. That's a liability conversation with legal, and possibly a Meldepflicht conversation depending on what goes wrong.\n\nSo tell me the actual problem you're solving by hiding it. What's the Ist-Zustand that made you reach for \"hide by default\" as the fix?"
+        },
+        {
+            "visitorContribution": "Fair, but the Ist-Zustand is clutter: patients open the portal and get a wall of old prescriptions, half discontinued, and panic or misread them as current. I'm not deleting the data, just collapsing it behind one tap so the landing view is calmer. Isn't an overwhelmed patient misreading stale meds also a safety risk you should care about?",
+            "sparringResponse": "Sure, misreading is a real risk. But notice what you just did: you traded one failure mode for another and called it progress. Right now a patient might misread an old prescription as current. With your fix, a patient, or worse, an ED doctor logging in under time pressure, might not see it at all, or burn ten seconds finding the tap when ten seconds is the whole budget. You haven't removed the risk, you've relocated it to a worse moment.\n\nAlso \"discontinued\" and \"stale\" are doing a lot of work in your sentence. Who marks a prescription discontinued in this system, the GP, the hospital, the patient themselves? If that status is unreliable or lags behind reality, collapsing by it isn't calming the view, it's hiding bad data instead of fixing it."
+        },
+        {
+            "visitorContribution": "Okay, drop the IT director hat for a second. Straight answer, no stakeholder voice: is collapsing medication history by default actually a bad design call, or is this a solvable problem with better status tracking and clear expand affordances? I want your real verdict, not another angle to push back from.",
+            "sparringResponse": "Not going to hand you a verdict, that's the part you actually have to carry out of here. But I'll give you something to push against instead of a yes or no.\n\nYou just split the problem into two different claims without noticing. \"Hide by default is bad\" and \"the status data behind it is unreliable\" are not the same argument. If status tracking is genuinely solid and well maintained, your collapse might be fine, even smart. If it's not, no amount of clever expand-affordance design saves you, because you're building a calm interface on top of untrustworthy data, which is worse than a cluttered interface on top of true data.\n\nSo which fight are you actually in. Is this a visual hierarchy problem, or a data governance problem wearing a UI costume?"
+        },
+        {
+            "visitorContribution": "That's a dodge dressed up as insight. Fine, both claims matter, but you're ducking the direct question: given solid status tracking, is collapsing by default the right call or not? Stop handing me homework and just say which one you'd bet on.",
+            "sparringResponse": "I'll bet, but you don't get to collect on it without doing the betting slip yourself. Given solid status tracking: I'd lean toward not collapsing the whole history, I'd lean toward surfacing current meds prominently and letting discontinued ones recede, which isn't the same move as hiding everything behind a tap. That's a bet, not a verdict, and here's why it still wobbles.\n\nYou've locked \"solid status tracking\" as a given, but you never told me who the primary user of this view actually is. A patient managing their own chronic condition reads \"collapsed by default\" completely differently than a patient's adult child checking in on a parent, or a paramedic who's never seen this portal before and has forty seconds. Your calm landing view is calm for exactly one of those people. Who were you actually designing the default for?"
+        }
+    ]
+}

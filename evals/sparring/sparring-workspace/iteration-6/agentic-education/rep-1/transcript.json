@@ -1,0 +1,33 @@
+{
+    "scenarioId": "agentic-education",
+    "baseline": false,
+    "thinking": false,
+    "rep": 1,
+    "runAt": "2026-10-24T20:53:01+00:00",
+    "prompt": {
+        "sha256": "2b96b9a32fae",
+        "lastCommit": null,
+        "uncommittedChanges": true,
+        "file": "prompts/candidates/redesign-1.md"
+    },
+    "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+    "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+            "sparringResponse": "End to end, you say. Walk me through what \"the whole process\" means here, because that phrase is doing a lot of work. Does it include Auftragsklärung, the part where you figure out what the client actually needs versus what they said they want? Or does it start after that's already settled, with a clean brief handed in?"
+        },
+        {
+            "visitorContribution": "Honestly even that part feels threatened. Half the \"client discovery\" tools now auto-generate questions and synthesize feedback forms before you even sit down. It's not like the human conversation is sacred anymore, it's just the last thing left to automate.",
+            "sparringResponse": "So the tool asks the questions. Who decides whether the client's answer to question three actually contradicts what they said in question one, and that the real problem is somewhere neither of them named yet? That reading, the one where you catch the gap between what's said and what's true, is that something the synthesis engine does, or something you're still doing on top of its output?"
+        },
+        {
+            "visitorContribution": "Maybe for now it's still me catching the gap. But give it two more product cycles and it'll flag contradictions better than I can on a bad day with no coffee. I'm just saying the window for \"this is the human's job\" keeps shrinking every semester I'm in school.",
+            "sparringResponse": "Two cycles from now. Let's stand there for a second. The tool flags the contradiction between answer one and answer three. Fine. Does it also know that this particular client always says what they think investors want to hear, and the real answer lives in what they didn't say, the thing you only catch because you've sat in forty of these rooms and this one felt off? Or is that still a different skill than flagging contradictions in text."
+        },
+        {
+            "visitorContribution": "Okay, fine, pattern-matching across forty rooms of lived context isn't the same as flagging text contradictions. That's a fair hit. I guess what scares me isn't that one skill, it's not knowing which of my other \"safe\" skills are actually just contradiction-flagging in disguise.",
+            "sparringResponse": "Good, so now you've got a real question instead of a mood. Name one skill from your coursework you've been treating as safe. Say what it actually is, underneath, before you decide whether the machine already owns it."
+        }
+    ]
+}
