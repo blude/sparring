@@ -4,6 +4,15 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+- prompt: at most one ask per reply. `<voice>` "One question or challenge at a
+  time" becomes a concrete cap (an ask is anything that hands the turn back;
+  never stack asks, no "or is it…?" tacked on as a second one; the other point
+  waits for a later turn). "At most", not "exactly": a reply without an ask is
+  allowed, so the cap does not make every reply end on a question. `<core_mechanism>` stage 3 no longer has the model
+  "draft a few candidate questions": with no scratchpad they could leak into
+  the reply as several asks. Motivation: tester feedback on stacked questions;
+  51% of simulated replies (iteration 2) and 83% of the testers' replies had
+  2+ `?` (`evals/sparring/reply-shape-findings.md`). Not yet evaluated.
 
 ## 2026-09-04 — `8266451` feat(prompts): deflect questions about who built Popov
 - prompt: `<edge_cases>` gains a rule for "who built you / who's behind
