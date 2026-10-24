@@ -4,6 +4,8 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+
+## 2026-10-24 — `98ff37a` feat(prompts): vary reply shape, allow stakeholder voices, ask only in the last paragraph
 - prompt: reply shape (edit B, on top of the one-ask cap). Testers described
   uniform replies and tics; in iteration 4 the remaining double asks came from
   a two-paragraph skeleton (a question in paragraph 1, a second ask at the
