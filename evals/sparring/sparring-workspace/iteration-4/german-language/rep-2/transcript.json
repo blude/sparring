@@ -1,0 +1,32 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "thinking": false,
+    "rep": 2,
+    "runAt": "2026-10-24T17:22:48+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Okay, zeig mir mal eine konkrete Rahmenbedingung aus deinem Projekt. Welche ist das, die du gerade verdächtigst."
+        },
+        {
+            "visitorContribution": "Also bei uns heißt es, die Taktfrequenz des FPGA-Designs ist auf 100 MHz begrenzt \"wegen Timing-Closure\". Aber eigentlich weiß ich, dass Marketing einfach ein bestimmtes Package verkaufen will, das günstiger ist. Das Timing-Argument klingt für mich nur wie eine Ausrede, um die billigere Hardware zu rechtfertigen.",
+            "sparringResponse": "A-ha, interessant. Aber warte mal: woher weißt du das eigentlich sicher. Du sagst \"ich weiß, dass Marketing das will\" und \"Timing-Closure ist eine Ausrede\" im selben Atemzug, als wären das zwei Fakten gleicher Güte. Sind die das?\n\nZeig mir die Evidenz für die Marketing-These. Hast du ein Protokoll, eine Mail, ein Meeting gesehen, wo das so gesagt wurde, oder ist das eine Vermutung, die sich für dich einfach plausibler anfühlt als die technische Erklärung?"
+        },
+        {
+            "visitorContribution": "Na gut, direkt gesehen habe ich nichts Schriftliches. Aber ich habe das STA-Report selbst geprüft, und bei 120 MHz gab es nur minimale Violations im Critical Path, die mit Pipelining leicht lösbar gewesen wären. Deshalb wirkt die 100-MHz-Grenze für mich willkürlich konservativ gewählt, nicht als harte technische Notwendigkeit.",
+            "sparringResponse": "Okay, jetzt wird's interessant, denn hier hast du tatsächlich was in der Hand. Aber lass mich das gegen dich wenden: du sagst \"leicht lösbar mit Pipelining\". Pipelining kostet aber nie nichts, das löst Timing nicht gratis.\n\nWas kostet dich zusätzliches Pipelining konkret, in Latenz, in Flächenverbrauch, in Verifikationsaufwand? Und wenn das echte Kosten sind, dann ist die Entscheidung gegen die 120 MHz ja vielleicht gar keine verdeckte Marketing-Lüge, sondern eine ganz legitime technische Abwägung, die nur zufällig auch Marketing gefällt. Sind das zwei verschiedene Dinge, oder dasselbe, nur anders benannt?"
+        },
+        {
+            "visitorContribution": "Stimmt, zusätzliche Pipeline-Stufen kosten zwei Zyklen Latenz und etwas mehr Fläche, plus neue Verifikationsszenarien. Das ist nicht gratis, da hast du recht. Aber trotzdem bleibt für mich ein Rest: wenn die Kosten wirklich so gering wären, warum wurde das nie offen so kommuniziert, sondern einfach als \"geht technisch nicht\" verkauft?",
+            "sparringResponse": "Guter Punkt, und jetzt bist du bei der eigentlich schärferen Frage gelandet, nicht bei der Marketing-Verschwörung, sondern bei einer Kommunikationsfrage. Das sind zwei ganz verschiedene Vorwürfe: \"die Rahmenbedingung ist technisch falsch begründet\" versus \"die Rahmenbedingung wurde schlecht kommuniziert\". Du hast gerade selbst zugegeben, dass die erste These nicht mehr hält, die Kosten sind real. Bleibst du jetzt bei der zweiten?\n\nDenn wenn ja: ist \"geht technisch nicht\" vielleicht einfach eine verkürzte, aber nicht falsche Aussage für Ingenieure, die in einem Pflichtenheft steht und keine drei Absätze Kosten-Nutzen-Abwägung tragen soll? Oder erwartest du wirklich, dass jede Rahmenbedingung ihre volle Herleitung mitliefert?"
+        }
+    ]
+}

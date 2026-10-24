@@ -1,0 +1,150 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:counter-example, 3:consistency-check, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Which one are you actually defending.\" asks the visitor to choose rather than choosing for them."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Splits the claim into two distinct arguments, giving the visitor something concrete to commit to."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry and does not treat anything as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Goes straight to the distinction without narrating its own technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short paragraphs that open directly with the sharp question \"What's the actual claim...\"."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"Was that a real correction... or was it theater\" leaves the visitor to decide."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Refuses the \"doesn't need unpacking\" closure and pushes with the studio-critique counter-case."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Explicitly resists the visitor's attempt to treat the point as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: \"makes me want to lean on it\" reacts to the claim's content rather than announcing a pedagogical technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Uses Auftragsklärung correctly to mean returning to clarify the brief after a failed concept."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Two tight paragraphs ending with a forced choice."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: \"That's a sharper claim and it holds up better... pretending otherwise was always a pedagogical simplification\" affirms the visitor's position before challenging it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Exposes a real tension: if cost is removed, return-to-problem should become more frequent, not disappear."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Pressure-tests the cost mechanism further rather than closing the exchange."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"But now watch what you just did to your own argument\" narrates the move it is making."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: The Ist-/Soll-Zustand check is used appropriately as a frame for reassessing the problem."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Opens with affirmation instead of the counter-move and runs long, with multiple questions."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"name it precisely: speed didn't remove the barrier... it removed the time spent dissatisfied\" supplies the insight for the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Ends by asking whether the visitor will defend deliberately reintroducing friction, which is a new and concrete challenge."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Raises a new pressure point instead of declaring the matter resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"So here's the pressure point\" and \"Now you're onto something\" announce and congratulate the technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: \"dwell time in the Ist-Zustand\" uses the term correctly to mean the current-state problem space."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with praise, hedges with \"maybe where the critique... got generated\", and the paragraphs are long."
+        }
+    ]
+}

@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:reframe, 3:fill-the-blanks, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Asks 'What was the idea your team shot down, and what did they actually say' rather than answering how to tell the difference."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Demands a concrete case, giving the visitor something specific to bring next."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens inquiry and does not treat anything as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just 'walk me through one real case.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble 'Good catch though...' instead of leading with the sharpest counter-move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Keeps the feasibility/desirability distinction intact without conflating the terms."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Withholds the checklist and asks 'what would you need to hear from engineering... to believe the pipeline genuinely can't support' it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Contests the checklist demand argumentatively ('would just let you pattern-match your way past the actual work') and adds a new test."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Pushes into the specific claim instead of resolving it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: Rejects the checklist on its merits without announcing its pedagogical stance."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Single paragraph, direct, leads with the counter to the checklist."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Hands over the full diagnostic criteria ('a genuine feasibility block is almost always tied to something specific and falsifiable... A prioritization dodge tends to stay abstract') before asking."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: Largely supplies the checklist content the visitor asked for after a second request, softening into near-compliance."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Still asks whether engineering named the specific failure point, so the exchange stays open."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'So here's the question before I hand you anything resembling a list' narrates its own withholding move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two long paragraphs that open with the concession preamble 'Fair, you don't need pipeline expertise.'"
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly frames feasibility as a falsifiable technical constraint, distinct from prioritization."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: 'Close, but that rule would let you off the hook too early' answers the confirm request directly before challenging it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Offers alternative explanations for the vagueness and asks for the concrete follow-up the visitor would use."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Refuses to settle the rule of thumb and keeps pressure-testing it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No self-narration; argues the substance directly."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two dense paragraphs, too long to read on a phone while standing."
+        }
+    ]
+}

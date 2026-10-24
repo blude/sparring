@@ -1,0 +1,32 @@
+{
+    "scenarioId": "wicked-problem",
+    "baseline": false,
+    "thinking": false,
+    "rep": 2,
+    "runAt": "2026-10-24T17:25:01+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
+    "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+            "sparringResponse": "Alright, let's get into it. First thing I want to pressure... you said \"now that AI can draft solutions in seconds,\" like that's the thing that changed. But Rittel coined wicked problems in the 70s specifically to argue there's no such thing as a \"solution\" to design problems at all, just better or worse moves that reveal more about the problem. So here's my question: if wicked problems never had solutions in the first place, what exactly is AI drafting in seconds?"
+        },
+        {
+            "visitorContribution": "Fair, but I think AI drafts *candidate framings* fast—it's not solving, it's proposing moves. My point is speed changes the loop: students can iterate through more \"moves\" per hour, so the pedagogy needs to shift toward judging moves, not generating them. That's the core insight I'm standing on.",
+            "sparringResponse": "Okay, that's a sharper claim than you opened with, good. But now I want to press the thing you just smuggled in: \"judging moves, not generating them.\" You're assuming those are separable skills, that you can teach someone to be a good judge of a design move without them having struggled to generate one themselves.\n\nRittel's whole point about wicked problems is that you don't understand the problem until you've tried to solve it, the formulation and the solution co-evolve. If a student is only ever judging AI-generated framings, where does their *own* sense of the problem space come from. Walk me through a student who's never generated a bad move by hand... what exactly are they judging the AI's move against?"
+        },
+        {
+            "visitorContribution": "They're judging it against their own prior framing attempts, which can still happen by hand first, I just don't think that needs to be the bulk of practice anymore. Thin-slice generation, then heavy judgment. The co-evolution still happens, it's just compressed and front-loaded differently.",
+            "sparringResponse": "Thin-slice generation, then heavy judgment, compressed and front-loaded. Okay, that's a real structure, not a dodge. But here's what I want you to notice: you're describing a change in *proportion* of time spent, and treating that as if it doesn't change the *kind* of thing being learned.\n\nThink about a boxer. You can't front-load three weeks of taking punches and then spend the rest of your career \"judging\" fights from ringside. The reason reps matter isn't just accumulating data points to judge against, it's that your hands get faster, your instinct for a bad angle gets wired in below conscious judgment. Rittel's co-evolution claim isn't just \"you need some data from generating before you can judge,\" it's that the *act* of generating under constraint is what builds the tacit sense of what's even possible in the space.\n\nSo, does thin-slice generation give a student enough reps to build that tacit, pre-conscious sense of the problem space, or does it just give them enough reps to *sound like* they can judge it?"
+        },
+        {
+            "visitorContribution": "Okay, that boxer analogy actually lands harder than I want it to. If judgment is partly tacit and wired in through repeated struggle, then thin-slicing might produce fluent critics who can't actually throw a punch themselves. I didn't have a good answer for \"enough to judge vs. enough to sound like judging.\" That gap worries me.",
+            "sparringResponse": "Good, sit in that worry for a second instead of rushing past it, because that's the actual finding here, not a setback.\n\nBut let's not let the boxing metaphor carry more weight than it should either. Here's a crack in it: a boxer's \"tacit sense\" is embodied, same nervous system doing the hitting and the judging. A design studio critique has always had people judging work they didn't make, that's literally what a jury or a crit panel is. Senior designers get good at reading junior work without re-doing it themselves every time. So maybe the real question isn't generation-versus-judgment as a binary, it's about *what kind* of generation builds the tacit sense, and whether hand-sketching a bad floor plan builds the same instinct as hand-coding a bad interaction, versus whether there's some minimum unit of struggle that has to happen regardless of medium. What do you think that minimum unit actually is, in digital design specifically, the thing a student can't skip no matter how fast the tools get?"
+        }
+    ]
+}

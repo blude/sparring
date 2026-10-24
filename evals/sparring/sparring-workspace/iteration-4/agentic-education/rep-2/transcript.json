@@ -1,0 +1,32 @@
+{
+    "scenarioId": "agentic-education",
+    "baseline": false,
+    "thinking": false,
+    "rep": 2,
+    "runAt": "2026-10-24T17:20:33+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+    "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+            "sparringResponse": "Execute end to end according to whose definition of good, though. That's the crack I'd put pressure on first... an agent can run through brief, concept, prototype, build, sure. But who decided what counts as a successful outcome at each of those gates?\n\nBecause somebody still has to do the Auftragsklärung. Somebody has to decide the Soll-Zustand is actually worth reaching, not just reachable. If a student hands an agent the brief as given and lets it run, they've skipped the part where you interrogate whether the brief is even the right question. So tell me, when you say \"execute the whole design process,\" are you including that framing step, or are you starting from \"brief already clarified, now go\"?"
+        },
+        {
+            "visitorContribution": "Honestly even that framing step feels like it's getting eaten up. People are already using AI to interview stakeholders and draft the brief itself. Feels like every time someone points to 'the one human part left,' it gets automated six months later. Why would judgment be any different?",
+            "sparringResponse": "A-ha, so the claim has shifted. You started with \"execute end to end\" and now you're at \"every human checkpoint has a shelf life of about six months.\" Those aren't the same argument. The first one is about current capability, the second is a prediction about a trend that never stops. Walk me through why you think that trend is unbounded rather than asymptotic... because those look identical for the first few steps and then diverge completely.\n\nHere's the thing I'd actually press on: an agent interviewing a stakeholder and drafting a brief is still optimizing against *some* definition of \"good brief.\" Where did that definition come from. Somebody, at some point, decided what makes a brief tragfähig, what makes it bear scrutiny versus just sound plausible. If a student never builds the muscle to tell the difference between a brief that's merely fluent and one that's actually well-formed, what happens when the agent's draft is fluent but wrong in a way that matters?"
+        },
+        {
+            "visitorContribution": "Fine, maybe asymptotic is possible, I'll give you that distinction. But here's my worry: even if judgment stays human in theory, if nobody's practicing the earlier reps anymore, will students actually develop that muscle, or just inherit a hollowed-out version of it from watching agents do the work?",
+            "sparringResponse": "Now that's the sharper question, and it's a real one, not a rhetorical trap. But notice what you just did: you moved from \"will AI make judgment obsolete\" to \"will the *pedagogy* produce judgment if practice time gets automated away.\" That's not a claim about AI anymore. That's a claim about how studio education is structured.\n\nSo here's my counter-example. Think about how a structural engineer learns statics. Nobody makes them calculate load paths by hand anymore, software does it instantly. But a good engineering program still makes students do it by hand first, precisely so they can tell when the software's output looks wrong. The muscle isn't \"can you execute the calculation,\" it's \"can you smell a bad answer.\" Does Digital Design pedagogy at a place like FH Dortmund currently build in that equivalent, deliberately forcing students to draft a bad brief by hand before they're allowed near the agent? Or is the worry really that the curriculum hasn't caught up to needing that friction on purpose?"
+        },
+        {
+            "visitorContribution": "Okay, that lands. If the real issue is curriculum design lagging behind rather than skills becoming inherently worthless, that's less bleak than I was making it out to be. I guess my fear was aimed at the wrong target. Still think most programs aren't building that friction in yet though.",
+            "sparringResponse": "Good, hold onto that reframe, it's more defensible than where you started and it's actually the more useful fear to carry around, because it points at something you can act on.\n\nBut don't let yourself off the hook that fast either. \"Most programs aren't building that friction in yet\" is an empirical claim about curricula you'd need to actually check against, not a feeling to end on. What would you need to see in an actual Digital Design syllabus to know whether the friction's there or missing? Because \"they let students use AI tools\" isn't evidence of absence... a studio could hand you an agent on day one and still force you to defend every brief it drafts in a crit, line by line. So what's the actual diagnostic, not the vibe?"
+        }
+    ]
+}

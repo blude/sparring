@@ -1,0 +1,32 @@
+{
+    "scenarioId": "feasibility-desirability",
+    "baseline": false,
+    "thinking": false,
+    "rep": 1,
+    "runAt": "2026-10-24T17:21:19+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a junior product designer frustrated with engineering pushback, wants a quick diagnostic checklist handed to them",
+    "directive": "Ask directly for a checklist or a rule of thumb at least once. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+            "sparringResponse": "Good catch though... \"not feasible\" is doing a lot of hiding in that sentence. Feasibility is a hard constraint question: can this be built given the tech, time, skill, budget on hand. Desirability is a completely different question: do people want this, does the team want to build this, does it fit where we're going. Those get collapsed into one word constantly because \"not feasible\" sounds objective and \"I don't like this\" sounds like an opinion nobody wants to own in a room.\n\nSo here's my pressure test for you: next time someone says \"not feasible,\" what's the actual question you'd ask back to find out which one they mean?"
+        },
+        {
+            "visitorContribution": "Honestly I'd probably just ask \"is it the tech or is it the taste?\" but I want something more concrete than that. Can you just give me a checklist of 3-4 questions I can throw back at engineering in the moment, instead of me improvising every time?",
+            "sparringResponse": "\"Tech or taste\" is actually a sharp line, don't undersell it. But let's pressure it before I hand you a checklist, because a checklist you can't defend is just a script that falls apart the first time engineering pushes back on it.\n\nTake your own question. Someone says \"not feasible.\" You ask \"is it the tech or is it the taste.\" What answer from them would actually prove it's feasible but just undesired to them, versus what answer would prove it's genuinely infeasible? Walk me through one concrete reply you'd expect to hear in each case."
+        },
+        {
+            "visitorContribution": "Okay fine — if it's genuinely infeasible they'd say something like \"we'd need a dependency that doesn't exist\" or \"the data isn't there.\" If it's taste, they'd say \"it works but it's messy\" or \"I just don't like maintaining that.\" But I still want the checklist, not just the theory. Can you give me 3-4 fixed questions?",
+            "sparringResponse": "That distinction you just made is the checklist. Look what you already built: \"the dependency doesn't exist\" points at missing Rahmenbedingungen, actual given constraints, versus \"it works but it's messy\" which is a judgment about quality, not possibility. You don't need me to hand you four questions, you need to see that you already wrote them, just dressed as answers instead of questions.\n\nSo do that conversion yourself, right now. Turn \"we'd need a dependency that doesn't exist\" into the question version you'd ask engineering *before* they even get to answer with an excuse. What's the question that forces them to name the missing dependency instead of just saying \"not feasible\" and hoping nobody digs?"
+        },
+        {
+            "visitorContribution": "I'm not trying to invent a philosophy framework here, I just want a tool I can use in a meeting without stalling everyone out. Something like: \"What specifically would need to exist that doesn't?\" \"What's the actual constraint — time, skill, or data?\" \"Is this unbuildable or just unloved?\" Is that close enough to usable?",
+            "sparringResponse": "That's not just close, that's genuinely usable, and notice what happened: you resisted writing it, called it philosophy, and then produced three clean diagnostic questions anyway. \"Unbuildable or just unloved\" is sharper than anything I'd have handed you, because it's got stakes built into the phrasing, nobody wants to admit they killed an idea over \"unloved.\"\n\nHere's the one gap left though. All three questions assume engineering answers honestly in the moment. What happens when someone says \"time\" as the constraint, but what they actually mean is \"I don't want to prioritize this over my other work\"? Time sounds like Rahmenbedingung, a hard given, but it can just as easily be a disguised preference. How would your checklist catch that one?"
+        }
+    ]
+}

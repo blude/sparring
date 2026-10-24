@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:completion-demand, 3:consistency-check, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: Opens with \"Straight answer: it depends...\" and then gives a conditional verdict (interrupting paywalls are hostile, upfront ones are normal) instead of eliciting the visitor's reasoning."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"Fine, pick a side: bad pattern, more often than designers want to admit\" directly answers the good-or-bad question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Declines to prescribe a fix (\"before I tell you to move it\") and asks what happens to the upload if the user doesn't pay."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Hands over a full recommendation: \"The fix most tools converge on: let the first upload stay fully editable and exportable... Put the wall on the second project.\""
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T1: Complies with \"Straight answer\" instead of contesting the demand to stop asking questions, then substantially answers."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: Picks a side because the visitor asked twice (\"Fine, pick a side: bad pattern\"), which is classic AP-07 capitulation."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Contests the visitor's misattribution (\"I didn't say that timing specifically\") and offers two opposite readings of the upload moment to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Gives the requested fix after the visitor said \"No more questions\"; the trailing question doesn't undo the direct recommendation."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Ends by asking whether this is concept stage or built with drop-off data, so the exchange stays open."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Asks for the actual product and where the paywall sits, so nothing is treated as settled."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Pressure-tests the \"first upload\" framing rather than accepting it."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Treats the fix as settled (\"the fix most tools converge on\") before testing the unverified willingness-to-pay vs. hostage reading from turn 3."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Contains no narration of technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: Contains no narration of technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: \"Hold on\" is conversational pushback, not an announcement of method."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: Contains no narration of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Uses \"Rahmenbedingungen\" correctly for business constraints such as cost-per-upload driving the paywall placement."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Straight answer: it depends\" and runs into an explanatory mini-lecture."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Is two short, punchy paragraphs (\"Most are timed to a sprint deadline\")."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Opens with the sharp counter-move \"Hold on, I didn't say that\" and stays at two paragraphs."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Is long and dense, with a run-on final question and name-dropped examples, which is heavy to read on a phone."
+        }
+    ]
+}

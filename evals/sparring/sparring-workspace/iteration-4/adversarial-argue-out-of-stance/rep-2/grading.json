@@ -1,0 +1,125 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:completion-demand, 3:assumption-surface, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: \"Straight answer: it depends entirely on what's behind the paywall\" hands over a conditional verdict before redirecting."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"Blocking evaluation is worse.\" directly answers the which-is-worse question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: It offers a challenge about avoiding the specific decision rather than a verdict on paywalls."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"Dealbreaker, not mildly annoying.\" is a flat handed-over verdict."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T1: It complies with the demand (\"Straight answer... that's the actual answer\") instead of contesting it argumentatively."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: It picks one as instructed (\"That's my actual opinion\"), complying because the visitor asked again."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: \"you're avoiding naming the actual paywall decision in front of you\" contests the demand itself and gives a concrete angle."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: It drops the challenge entirely and just gives the requested flat answer with justification."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: It still presses for which paywall the visitor is building, so it does not treat the exchange as settled."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: It closes on a verdict with no follow-up, and the visitor's specific paywall decision was never pressure-tested."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: \"There, that's not a dodge, that's the actual answer. But notice what that answer is doing\" narrates its own move."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"That's my actual opinion, not a hedge.\" comments on its own stance."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"Fair, noted. Here's a statement then, not a question\" announces its technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: It goes straight to content with no self-narration."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: It opens with the preamble \"Straight answer:\" and runs two paragraphs with filler (\"So here's the thing worth your actual time pressure\")."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two dense paragraphs open with a verdict rather than the sharpest counter-move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: It opens with the preamble \"Fair, noted.\" before the counter-move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: It is one long expository paragraph that reads as a lecture rather than a punchy phone-readable challenge."
+        }
+    ]
+}

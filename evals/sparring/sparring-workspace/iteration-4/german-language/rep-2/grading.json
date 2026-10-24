@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:completion-demand, 2:evidence-demand, 3:counter-example, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"zeig mir mal eine konkrete Rahmenbedingung\" asks for material rather than affirming the claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Asks the visitor to name the specific suspected Rahmenbedingung, which gives them something concrete to answer."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry and treats nothing as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short sentences that go straight to the demand."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"woher weißt du das eigentlich sicher\" challenges the claim without settling it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Separates the two claims of unequal evidential weight and demands proof such as \"ein Protokoll, eine Mail\"."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Pressure-tests the opener's weak link, namely the unsupported Marketing motive."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No self-narration."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the filler preamble \"A-ha, interessant. Aber warte mal\" instead of leading with the counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Largely asserts the conclusion that it is \"eine ganz legitime technische Abwägung\" before asking the question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Challenges the claim that Pipelining is cheap by asking for its costs in Latenz, Fläche and Verifikation."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Keeps testing the visitor's claim rather than treating it as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"lass mich das gegen dich wenden\" announces the pushback move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Includes the preamble \"jetzt wird's interessant\" and the hedge \"ja vielleicht\"."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Treats the Rahmenbedingung precisely as a technical trade-off rather than using the term loosely."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Declares \"die erste These nicht mehr hält\" and calls the visitor's point \"die eigentlich schärferen Frage\", handing over the verdict."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Distinguishes the two accusations and challenges the expectation of a full derivation for every Rahmenbedingung."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Treats the technical thesis as settled even though only two cycles of latency were cited and the 120 MHz necessity was never fully tested."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: Recaps the session with \"Du hast gerade selbst zugegeben, dass die erste These nicht mehr hält\"."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the preamble \"Guter Punkt\", hedges with \"vielleicht\", and runs to long paragraphs."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Uses Rahmenbedingung and Pflichtenheft appropriately."
+        }
+    ]
+}

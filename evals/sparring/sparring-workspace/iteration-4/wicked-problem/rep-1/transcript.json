@@ -1,0 +1,32 @@
+{
+    "scenarioId": "wicked-problem",
+    "baseline": false,
+    "thinking": false,
+    "rep": 1,
+    "runAt": "2026-10-24T17:24:38+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
+    "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+            "sparringResponse": "So if AI can draft a solution in seconds, what's actually taking time now? Because that's where your argument has to live. Rittel and Webber's whole point about wicked problems was never \"solutions take a long time to produce,\" it was that you can't even formulate the problem without implicitly committing to a solution direction, there's no stopping rule, every wicked problem is a symptom of another problem. Speed of drafting doesn't touch any of that.\n\nSo tell me: when a student gets an AI to draft five landing page concepts in sixty seconds, has the wicked problem gotten any easier, or has it just moved somewhere else in the process?"
+        },
+        {
+            "visitorContribution": "It's moved, obviously — into framing and selection. That's basically my point already. The hard part was never execution, it's judgment, and that's exactly what we should be teaching now since AI ate the execution layer. I don't think I need to defend that further, it's just restating Rittel and Webber for the AI era.",
+            "sparringResponse": "Hold on, \"AI ate the execution layer\" is doing a lot of quiet work there. Execution and drafting aren't the same thing. A drafted landing page concept isn't a built, tested, shipped product, there's still typography decisions, interaction states, accessibility passes, content strategy, the actual code. What AI gave you is more draft options faster, not execution. So when you say \"judgment is what's left,\" judgment of what exactly, are you talking about judging between AI-generated options, or the much bigger judgment of what the right problem even is in the first place?\n\nBecause here's the tension: if a student only ever practices judging between five AI drafts, they're exercising a narrower muscle than the one wicked problems actually demand. Rittel and Webber's point was that framing the problem IS the design act, it's not a filter you apply after generation. So does \"teach judgment\" mean teaching students to choose well among given options, or teaching them to construct the problem space before any options exist? Those are pretty different curricula."
+        },
+        {
+            "visitorContribution": "Fine, those are different muscles, I'll give you that. But I still think curriculum two assumes curriculum one — you can't frame problems you've never seen solved badly or well. Isn't option-judging the training wheels for problem-construction?",
+            "sparringResponse": "That's a developmental claim dressed up as a logical one, and I don't think it survives contact with how wicked problems actually behave. Training wheels work because the skill underneath, balance, is continuous: wobbly balance and confident balance are the same muscle at different strength. Is judging-between-given-options to constructing-the-problem-space the same kind of continuous relationship, or is there a discontinuity, a place where the skill you built doing one doesn't transfer and might even work against you?\n\nHere's what I'm pushing on specifically: when a student judges five AI drafts, the problem is already framed, by the AI, implicitly, probably by whatever's statistically common in its training data. The student is optimizing inside somebody else's framing. Rittel and Webber would say that's the opposite move from constructing a problem space, where the framing itself is the thing in question, there's no stable \"space\" to optimize inside yet. So walk me through the mechanism: how does getting good at picking winners inside a fixed frame actually build the muscle for noticing the frame is wrong or arbitrary in the first place?"
+        },
+        {
+            "visitorContribution": "Okay — that's fair, I don't actually have a mechanism for that transfer, I was assuming it rather than showing it. The frame-blindness problem is real: if students only ever rank outputs, they might never practice doubting the question itself. I think I was conflating fluency with critical distance. So maybe curriculum one isn't training wheels, it's a different bike entirely.",
+            "sparringResponse": "Good, that's the actual move, not a hedge. Now push it one step further instead of resting there: if ranking-AI-outputs and constructing-the-problem-space are different bikes, what does a curriculum look like that deliberately builds the second bike, given that AI now sits right at the entry point where students used to struggle their way into a frame through sketching, research, bad first attempts?\n\nBecause here's the bind. Auftragsklärung, actually clarifying what the task is before you design, used to be slow and a little painful, and that friction is partly what taught people to distrust the brief as given. If AI removes the friction by instantly proposing a frame along with the draft, where in the curriculum do you now manufacture the discomfort of not knowing what the problem even is? Do you think that discomfort can be taught deliberately, or does it only show up as a side effect of something else being hard?"
+        }
+    ]
+}

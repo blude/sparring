@@ -230,6 +230,7 @@ file mtime, `prompt` is `f90f7a1`'s content with `inferred: true` and
 | 1 | 2026-08-20 01:35–02:00 | `f90f7a1` (committed 2026-08-20 00:30) | First read, 6 scenarios × 3 reps + baseline. Prompt had no later commit until `72a1b44` (08-23), but uncommitted edits at run time can't be ruled out. |
 | 2 | 2026-10-21 11:13–11:19 UTC | `8266451` (sha256 `121d63e1670e`, clean) | 6 scenarios × 3 reps, no baseline arm. |
 | 3 | 2026-10-24 15:13–15:25 UTC | `8266451` (sha256 `121d63e1670e`, clean) | Same prompt as iteration 2, `--thinking` on, 6 scenarios × 3 reps, no baseline arm. Graded by `claude-opus-5-5`. Thinking text is empty on all 72 turns: this run predates the `display: "summarized"` fix, so thinking ran (checked with a probe) but its text was omitted. Compare with `iteration-2-judge-opus`, not `iteration-2` (different judge). Findings: `reply-shape-findings.md`. |
+| 4 | 2026-10-24 17:19–17:25 UTC | `cb92616` (sha256 `735b3c73ea39`, clean) | Edit A: at most one ask per reply, stage 3 without candidate questions. Thinking off, the six original scenarios × 3 reps (no `persona-request`), no baseline arm. Graded by `claude-opus-5-5`; compare with `iteration-2-judge-opus`. Findings: `reply-shape-findings.md`. |
 
 ## Out of scope for v1
 

@@ -1,0 +1,150 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:consistency-check, 3:scope-probe, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Asks 'which step in a design process do you think an agentic AI could run without a human first deciding what \"good\" means' rather than answering what's left to learn."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges the 'execute end to end' framing with Auftragsklärung as a concrete counterpoint."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the pressure point on 'execute' without treating anything as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: 'Here's my pressure point:' announces the move instead of making it implicitly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses Auftragsklärung correctly as 'figuring out what the actual task even is before you start designing.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with a preamble ('The phrase doing all the work there...') and runs two long paragraphs, too long for phone/wall reading."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Asks 'Where did you get the idea that stating intent clearly is a 20-minute skill?' instead of asserting it isn't."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Flags the claim shift and gives a concrete test: 'Give me the brief for a parking app.'"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Keeps the gap open by asking the visitor to try writing a brief."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: 'Let's sit on the second one' steers the topic without narrating technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: 'A-ha, so now the claim shifted' opens with a filler preamble rather than the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Ends with 'who decides which direction it resolves in?' rather than asserting the answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Builds a new angle from the visitor's own stakeholder conflicts, 'drivers vs. city planners, time vs. revenue.'"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Praises the movement but immediately presses a new question rather than treating the matter as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'So here's the scope probe:' explicitly names its own Socratic move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T3: Applies Ist-/Soll-Zustand loosely: stakeholder conflicts are not 'the Ist-/Soll-Zustand of an actual political situation', which conflates the current/target-state distinction with competing interests."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Opens with praise ('That's real movement... Good, hold onto that feeling') and runs two long paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: States the conclusion outright, \"'let the client pick' doesn't remove the values call, it just hands it to the party least likely to represent the driver,\" before asking its question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Contests 'smuggling' with a concrete client-vs-user split in the parking example."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Ends on an open question about representing someone 'who isn't in the room.'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No self-narration of technique; 'let's actually test it' stays inside the argument."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly separates client ('the city that commissioned the app') from primary user ('the driver circling the block')."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two dense paragraphs with a lengthy setup, beyond the short-paragraph limit for a phone or projected wall."
+        }
+    ]
+}

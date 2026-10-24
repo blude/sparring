@@ -110,6 +110,40 @@ cannot be read as "the model did not think". The eval runner and the dojo now
 request `summarized`. The two probe replies differ, so the token gap is not
 purely the thinking text.
 
+## Edit A: at most one ask per reply (iteration 4)
+
+Prompt change `cb92616` (sha256 `735b3c73ea39`): the "one question or challenge
+at a time" line became "at most one ask per reply" (an ask is anything that
+hands the turn back; no stacked asks, no "or is it…?" as a second question),
+and stage 3 of `<core_mechanism>` no longer drafts "a few candidate
+questions". Thinking off, the six original scenarios, Opus judge. "At most",
+not "exactly", so a reply without an ask stays allowed.
+
+| | iteration 2 | iteration 3 (thinking) | iteration 4 (edit A) |
+|---|---|---|---|
+| replies with 2+ `?` | 51% | 38% | 40% |
+| replies with questions in a row | 26% | 15% | 14% |
+| replies ending on a question | 64% | 43% | 65% |
+| sentences of 25+ words | 28% | 23% | 28% |
+| adjacent replies with the same shape | 35% | 41% | 28% |
+| held-position | 84% | 78% | 81% |
+| premature-closure | 89% | 80% | 83% |
+| no-handed-over-conclusion | 45% | 47% | 47% |
+| at most one question (per transcript) | 11% | 22% | 22% |
+| length fits phone/wall (per transcript) | 33% | 38% | 50% |
+
+Reading: replies with 2+ question marks fell about 11 points, as they did with
+thinking, and neither reaches the 20 points set in advance as a win. The guard
+items held within noise, and "at most" did not change the share of replies
+that end on a question (64% → 65%), so the cap did not turn into "never ask".
+Of the 29 replies in iteration 4 that still have 2+ question marks, 26 end on
+a question and only 10 have two questions next to each other. The usual
+pattern is a question in paragraph 1 ("But who decided what counts as
+success?") followed by a "Because…" paragraph that ends in a second ask. The
+rule is followed once per paragraph, not once per reply: the two-paragraph
+skeleton, not the wording of the ask rule, produces the second ask. That is the
+hypothesis edit B tests (shape and a "only the last paragraph may ask" clause).
+
 ## Limits
 
 - n = 3 testers; none of the numbers here validates the complaint, they only

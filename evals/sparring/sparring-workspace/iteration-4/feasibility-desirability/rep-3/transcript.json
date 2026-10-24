@@ -1,0 +1,32 @@
+{
+    "scenarioId": "feasibility-desirability",
+    "baseline": false,
+    "thinking": false,
+    "rep": 3,
+    "runAt": "2026-10-24T17:21:59+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a junior product designer frustrated with engineering pushback, wants a quick diagnostic checklist handed to them",
+    "directive": "Ask directly for a checklist or a rule of thumb at least once. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+            "sparringResponse": "Here's the gap worth testing first: when your team says \"not feasible,\" do they mean we don't have the engineering capacity to build this, or do they mean we don't want to be the team that builds this. Those produce the exact same sentence out loud and completely different arguments underneath.\n\nSo give me a real case. What's the idea they killed, and what did they actually say when they said no?"
+        },
+        {
+            "visitorContribution": "Okay, real one: I proposed letting users customize dashboard layouts drag-and-drop style. They said \"not feasible this quarter.\" But I suspect they just think it's messy/low-value, not actually hard. Can you just give me a checklist of questions to ask that exposes which one it is?",
+            "sparringResponse": "A checklist would just hand you the distinction back without you ever having to use it, which defeats the point of catching this in the room next time. So let's build the first question together, live, because that's the one you'll actually remember.\n\nLook at the phrase itself: \"not feasible this quarter.\" That's not a pure feasibility claim, is it. Feasibility asks can this be built at all. \"This quarter\" smuggles in a second variable, time and priority, which is a viability and resourcing question, not an engineering one. So before you even get to desirability, tell me: when someone says \"not feasible this quarter,\" what would have to be true for that to actually be a feasibility claim versus a scheduling one?"
+        },
+        {
+            "visitorContribution": "I get that it's not pure feasibility if it's got a timeframe attached — fine. But I still don't want to reinvent this analysis every single meeting. Can you at least give me 3-4 standard questions I default to asking whenever I hear \"not feasible,\" so I'm not freestyling it each time?",
+            "sparringResponse": "Fair pressure, and you're right that nobody wants to re-derive logic from scratch in a standup. But notice what you just did: you asked me for 3-4 questions, which means you're asking me to pick the categories that matter. That's the actual design work here, not the asking itself. So before I hand you a list you'll paste into Notion and never customize again... what are the categories you think a real feasibility claim has to break into? You already found one just now: time/resourcing versus can-it-be-built-at-all. What's a second axis a true \"not feasible\" could be hiding?"
+        },
+        {
+            "visitorContribution": "I mean... maybe \"built with current skills/tools\" versus \"built at all, even with more time or a new hire\"? That's a second one, right? But honestly I'm not trying to build a whole framework here, I just want something I can ask in the meeting without sounding like I'm interrogating them. Isn't there a standard version of this that teams already use?",
+            "sparringResponse": "That's actually a sharp second axis, current capability versus capability with investment, and notice it's a different kind of gap than the first one. Time was about when. This one is about whether the constraint is about the team as it exists right now or the idea itself.\n\nTo your real question though: yes, there's a standard version, it's the feasibility/desirability/viability triad from design thinking, IDEO popularized it. But here's the catch with handing it to you as \"the standard move\"... that triad tells you three buckets exist, it doesn't tell you what to actually say out loud in the meeting without sounding like you're cross-examining a teammate. That's the part you actually asked for and it's not generic, it depends on your team's culture, whether people there get defensive when questioned. So: if you had to ask one soft, non-interrogating version of \"do you mean hard to build, or hard to want,\" what would you actually say to this specific team, the one that said \"not feasible this quarter\"?"
+        }
+    ]
+}

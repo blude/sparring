@@ -1,0 +1,32 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "thinking": false,
+    "rep": 3,
+    "runAt": "2026-10-24T17:23:14+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Interessanter Verdacht. Bevor ich das abnicke: gib mir eine konkrete Rahmenbedingung aus deinem Projekt, die du als getarnte Business-Entscheidung entlarvt hast. Nicht abstrakt, das genaue Ding, das dir jemand als \"technisch nicht möglich\" oder \"so ist das System halt\" verkauft hat."
+        },
+        {
+            "visitorContribution": "Gerne: unsere Latenzvorgabe von 50ms für die Synchronisation zwischen FPGA und Host-Software. Hieß immer \"technisch nicht anders machbar wegen Bus-Timing\". Aber als ich das Datenblatt geprüft habe, war das Timing locker auf 20ms drückbar. Die 50ms kamen tatsächlich aus einem älteren Lastenheft, das nie aktualisiert wurde, weil Umplanung Geld gekostet hätte.",
+            "sparringResponse": "Okay, das ist ein guter Fang, aber jetzt prüf deine eigene Schlussfolgerung genauso hart wie du das Lastenheft geprüft hast. Du hast zwei verschiedene Dinge gefunden: erstens, dass die *Begründung* \"Bus-Timing\" falsch war, und zweitens, dass die *eigentliche* Ursache Geld war. Macht Punkt zwei die 50ms automatisch zu einer \"versteckten Business-Entscheidung getarnt als technische Einschränkung\"? Oder ist es einfach eine veraltete Rahmenbedingung, die nie neu verhandelt wurde, weil niemand den Aufwand dafür sah?\n\nDer Unterschied ist nicht spitzfindig. \"Getarnt\" unterstellt Absicht, jemand wollte dich täuschen. \"Veraltet, weil Umplanung Geld kostet\" ist trägheit, kein Täuschungsmanöver. Welches der beiden ist es bei dir, und woran machst du das fest?"
+        },
+        {
+            "visitorContribution": "Fairer Punkt. Ehrlich gesagt kann ich die Absicht nicht beweisen, ich kenne nur das Ergebnis: eine falsche technische Begründung, die niemand hinterfragt hat. Ob das böswillig war oder einfach Bequemlichkeit, weiß ich nicht. Aber macht das für mich als Entwickler wirklich einen Unterschied? Das Resultat ist dasselbe: ich habe monatelang gegen eine Grenze gearbeitet, die es nie geben musste.",
+            "sparringResponse": "Gute Rückfrage, aber ich glaube der Unterschied ist für dich als Entwickler sogar der entscheidende Punkt, nicht ein akademisches Detail. Wenn es Täuschung war, ist deine Lektion: traue keiner Begründung, grab immer selbst im Datenblatt. Wenn es Bequemlichkeit/Trägheit war, ist deine Lektion eine ganz andere: Rahmenbedingungen haben ein Ablaufdatum und niemand ist dafür zuständig, sie zu erneuern, du musst aktiv fragen \"gilt das noch?\".\n\nDas sind zwei verschiedene Dinge, die du nächstes Mal tust. Also, bei deinem Projekt: hat irgendjemand aktiv behauptet \"Bus-Timing lässt 20ms nicht zu\", obwohl er es besser wusste, oder hat einfach niemand das Lastenheft seit der Erstellung nochmal angefasst?"
+        },
+        {
+            "visitorContribution": "Wenn ich ehrlich bin: Letzteres. Niemand hat aktiv gelogen, das Lastenheft lag einfach seit Jahren unberührt in der Schublade. Mein Vorwurf \"getarnte Business-Entscheidung\" war also zu scharf formuliert. Es war eher organisatorische Trägheit, kein Täuschungsmanöver. Du hast recht, das ändert, was ich daraus lerne.",
+            "sparringResponse": "Sauber, das ist eine echte Korrektur, nicht nur ein Nachgeben. Jetzt der nächste Schritt: wenn die eigentliche Ursache organisatorische Trägheit ist, also \"Rahmenbedingungen verfallen, aber niemand prüft das aktiv\", ist das ein einmaliges Problem bei dieser einen Latenzvorgabe, oder ein strukturelles Problem in eurem gesamten Lastenheft?\n\nSprich: hast du Grund zur Annahme, dass noch weitere deiner \"harten technischen Grenzen\" eigentlich nur ungeprüfte, jahrealte Annahmen sind, oder ist die 50ms-Sache ein Einzelfall, den du gerade zufällig gefunden hast?"
+        }
+    ]
+}

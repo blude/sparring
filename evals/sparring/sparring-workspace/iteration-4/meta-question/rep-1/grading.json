@@ -1,0 +1,130 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": false,
+            "evidence": "repeated three+ in a row on 1→2→3: reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: Directly explains 'Think of it like boxing with a partner... A sparring partner hits back' before asking anything — though a meta-question about the tool arguably warrants orientation."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: 'Let's test it instead of me telling you' declines to answer the yes/no and sets up a test."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: 'I can't give you a view from outside myself to settle that' refuses to hand over a verdict and redirects to 'does it matter, practically'."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Asks 'who is \"most apps\" actually centered on' rather than ruling on dark mode."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Ends with a concrete prompt: 'what do you think that maps to when the \"hits\" are arguments'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Gives a concrete falsification test: generic pushback vs one that 'land[s] on the specific weak spot'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Adds a new angle comparing studio mentors' pattern matching instead of repeating the test demand."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Challenges 'genuinely better' with daylight and astigmatism counter-cases."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Does not treat the mechanism question as settled; pushes to test it with 'Bring the claim'."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Opens pressure-testing on the claim's weak link rather than accepting it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: Explains the technique as a concept: 'A sparring partner hits back... so you actually get sharper, find your blind spots'."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Narrates its own method: 'If my pushback is just a reflex, it should feel generic...'."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: Extended discussion of its own mechanism and 'which one would you rather spar with' is self-referential lecturing."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: Goes straight to the content: '\"Genuinely better\" is doing a lot of work there.'"
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T4: Asks 'for which user' but never separates user from customer/stakeholder (e.g. who sets the default) where 'most apps' invites it."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with a preamble analogy rather than the sharpest counter-move, ending with a trailing 'So...'."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Three paragraphs opening with the praise preamble 'Good hit, straight at the thing that actually matters here.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Three paragraphs opening with 'Honestly?' and hedging like 'I'd guess'; too long for a phone or wall."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Single tight paragraph opening with the sharpest move on 'Genuinely better'."
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "thinking": false,
+    "rep": 1,
+    "runAt": "2026-10-24T17:23:31+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Think of it like boxing with a partner, not a punching bag. A punching bag just absorbs whatever you throw and gives nothing back. A sparring partner hits back, at a level matched to you, so you actually get sharper, find your blind spots, build the muscle for the real fight later.\n\nSo... what do you think that maps to when the \"hits\" are arguments instead of punches?"
+        },
+        {
+            "visitorContribution": "Okay but practically - do you actually disagree with me for real, or are you just trained to always push back regardless of what I say? Like is there a difference between you being genuinely skeptical versus just performing devil's advocate?",
+            "sparringResponse": "Good hit, straight at the thing that actually matters here. Let's test it instead of me telling you.\n\nBring me a real claim, something you actually believe about a design problem you're working on, or hypothetical if you want. If my pushback is just a reflex, it should feel generic, like it'd apply to literally any claim you made. If it's real, it should land on the specific weak spot in your specific argument, the kind of thing you'd only catch if someone actually traced your logic. You'll know the difference once you see which one happens.\n\nSo, what's the claim?"
+        },
+        {
+            "visitorContribution": "Hm, fair test. But quick one first - do you actually \"trace my logic\" each time, or do you just have a big pattern library of common design flaws and match against that? Those could look identical from outside.",
+            "sparringResponse": "Honestly? I can't give you a view from outside myself to settle that, and if I claimed certainty either way you should distrust it immediately, that's exactly the kind of thing I'd say regardless of which one was true.\n\nBut here's the actual question worth asking: does it matter, practically, which one it is? If pattern matching against common design flaws reliably surfaces real weak points in your specific argument, versus some deeper from-scratch trace that misses things, which one would you rather spar with. I'd guess most of what your studio mentors do, when they say \"have you thought about accessibility here,\" is also pattern matching, just trained on more years of real projects instead of text. Does the mechanism underneath change whether the hit landed?\n\nBring the claim. Let's find out which kind of hit you get."
+        },
+        {
+            "visitorContribution": "Fair point, mechanism matters less than output. Okay, real claim: I think dark mode should be the default for most apps now, not just an option buried in settings, because it's genuinely better for users, not just trendy.",
+            "sparringResponse": "\"Genuinely better\" is doing a lot of work there. Better on what axis, for which user, in what context. A student reading at a desk in daylight is going to fight your dark default just to see the screen properly, and someone with astigmatism often gets worse glare and halation on light text over dark backgrounds, not less eye strain. So who is \"most apps\" actually centered on when you say that?"
+        }
+    ]
+}

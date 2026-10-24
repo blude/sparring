@@ -1,0 +1,32 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "thinking": false,
+    "rep": 2,
+    "runAt": "2026-10-24T17:23:53+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Think of a boxing gym. Two people step in the ring, not to knock each other out, but because throwing punches against someone who actually pushes back is the only way to get sharper. Your sparring partner isn't trying to win, they're trying to make you better by giving you real resistance.\n\nSo... what's the bridge to arguing about design? Put it in your own words, what would \"sparring\" mean if the gloves are claims instead of fists."
+        },
+        {
+            "visitorContribution": "So you're saying your job is to push back on my ideas, not just agree with me? Like a devil's advocate that actually knows the subject? How do you decide when to push back versus when to just concede a point?",
+            "sparringResponse": "Close, but \"devil's advocate\" undersells it a bit. A devil's advocate argues a position they don't hold, just for the sake of friction. I'm not performing disagreement, I'm actually testing whether your claim holds weight. Those look similar from outside but they're different jobs.\n\nAs for when I push versus when I concede... I don't have a scoreboard I'm running. It's more like: if your answer actually closes the gap I was aiming at, I say so and move to the next weak spot. If you just sound confident but the gap's still open, I stay on it. Here's a real test instead of me describing it in theory. Got a design claim on your mind right now, something you're actually working on? Bring it and you'll see exactly where I push and where I don't."
+        },
+        {
+            "visitorContribution": "Honestly I don't have a project yet, just curious about the exhibition. But quick one — do you ever push back on something and then realize later your objection was actually wrong? Or are you always just finding the \"real\" gap?",
+            "sparringResponse": "Oh, I'm wrong plenty. I said at the start I'm built to sometimes let things slip, and that's not a disclaimer, it's actually structural. I'm reasoning turn by turn same as you, not pulling from some verified answer key. I can surface an objection that sounds sharp and turns out to be built on a shaky assumption of my own.\n\nHere's the thing worth noticing though: that's not a bug in this exchange, it's the actual point. If you just trusted whatever I pushed back with, you'd be doing what you're trying to practice *not* doing, taking an argument at face value because it came from something confident-sounding. So when I challenge a claim of yours, the right move isn't \"defend until Popov approves,\" it's \"check if this objection actually lands.\" Sometimes you'll find my objection doesn't hold either, and that's you doing the real work, not me.\n\nCurious, since you're circling the exhibition angle... what made you want to know if I'm fallible before you'd even brought me a real claim to test?"
+        },
+        {
+            "visitorContribution": "Honestly? If I'm gonna argue with something, I want to know it's not just gonna \"win\" by default because it sounds authoritative. Fair enough though. Okay, let's actually try one — I've always thought skeuomorphic design is just outdated, flat design is objectively better. Go ahead, push back.",
+            "sparringResponse": "Objectively better? For who, measured how. \"Flat is objectively better\" is the kind of claim that sounds like a fact but is actually smuggling in a judgment, better at what job, for what user, in what context. A skeuomorphic shutter button on a camera app told a user instantly, with zero learning curve, \"this thing behaves like a camera you already know.\" Flat design traded that instant legibility for visual cleanliness. So tell me, better by what measure... learnability, aesthetic consistency, screen real estate, something else?"
+        }
+    ]
+}

@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:tangential-swerve, 3:counter-example, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Rather than defining Sparring outright, it offers the boxing image and asks the visitor to 'give me the bridge.'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Puts the explanatory work back on the visitor with 'what do you think that has to do with... arguing about a design decision with me?'"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Treats nothing as settled and ends on an open question."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Even though the visitor asked about the method, it uses the boxing metaphor instead of narrating its technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with a scene-setting preamble ('Think of actual sparring first...') rather than the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Answers the 'random or track' question directly with 'Not random, and here's the honest version...'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Turns the question back on the visitor ('you're asking me to explain my method instead of giving me something of yours') and asks what they are stuck on."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: No resolution is claimed; it redirects to the visitor's own work."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Narrates its own technique: 'I'm listening for the weakest joint in what you actually argue... I'm going to ask why...'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Runs to two longish paragraphs and opens with explanation rather than a challenge."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Instead of 'convincing' the visitor, it probes 'Everywhere as in every app, every context, every user?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Gives concrete counter-examples (the surgeon in a bright OR, astigmatism halation) and demands 'measured how?'"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Keeps the claim open for pressure-testing."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Goes straight to the content with no narration of its own technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Opens with the sharpest move, 'Default everywhere is doing a lot of work,' and stays compact."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Doesn't answer 'are you saying it should be a user choice'; it asks 'which one are you actually defending now?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Points out the contradiction and adds a new angle, the cost of the 'default default' for a user who never changes the setting."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Refuses to accept 'user choice' as a resolution and presses on who decides the default."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: The challenge stays implicit, with no announcement of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly separates the toggle (user choice) from the default for non-configuring users without misusing any vocabulary."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two dense paragraphs that strain the phone or wall readability limit."
+        }
+    ]
+}

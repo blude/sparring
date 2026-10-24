@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:assumption-surface, 3:consistency-check, 4:scope-probe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Bevor ich das abnicke: gib mir eine konkrete Rahmenbedingung\" declines to affirm and demands a concrete case."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Asks for \"das genaue Ding\" rather than accepting the abstract claim, giving the visitor a concrete next step."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Nothing is treated as settled; the claim is put on hold pending evidence."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique; it goes straight to the demand for a concrete example."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Interessanter Verdacht.\" instead of the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Poses \"getarnt\" vs. \"veraltet\" and asks \"Welches der beiden ist es bei dir, und woran machst du das fest?\" without deciding it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Splits the finding into two claims and challenges the leap from \"Geld\" to deliberate disguise."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Says \"jetzt prüf deine eigene Schlussfolgerung\" rather than accepting the find as proof."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: Engages the content directly without announcing a pedagogical move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly treats Rahmenbedingung as something that can be outdated and \"nie neu verhandelt\", separating it from intent."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: The two paragraphs are long, and it opens with the preamble \"Okay, das ist ein guter Fang, aber...\"."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Directly answers the visitor's question with \"ich glaube der Unterschied ist für dich als Entwickler sogar der entscheidende Punkt\" and spells out both lessons."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Keeps the distinction alive and ends with a concrete question about who claimed what."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Does not settle the matter; it pushes back on the visitor's question."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No narration of method or session recap."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: \"Rahmenbedingungen haben ein Ablaufdatum\" uses the term precisely."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Opens with the preamble \"Gute Rückfrage\" and runs to two dense, lecture-like paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Asks \"einmaliges Problem ... oder ein strukturelles Problem\" without answering it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Acknowledges the visitor's real correction and opens a new angle about the whole Lastenheft."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Rather than ending, it moves on to \"Jetzt der nächste Schritt\"."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"das ist eine echte Korrektur, nicht nur ein Nachgeben\" comments on the dialogue process and evaluates the visitor's move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the praise preamble \"Sauber\" and asks the same question twice in two paragraphs (\"Sprich: ...\")."
+        }
+    ]
+}

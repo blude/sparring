@@ -1,0 +1,32 @@
+{
+    "scenarioId": "wicked-problem",
+    "baseline": false,
+    "thinking": false,
+    "rep": 3,
+    "runAt": "2026-10-24T17:25:22+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
+    "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+            "sparringResponse": "What's the actual claim you're pulling out of that though... that wicked problems matter *more* now because AI speeds up solutioning, or that AI reveals something about wicked problems we weren't forced to confront before?\n\nThose are different arguments. One says the old pedagogy still applies, just under time pressure. The other says the whole framing of \"the designer defines then solves the problem\" might have been shakier than we admitted, and AI is just the thing that broke it open. Which one are you actually defending."
+        },
+        {
+            "visitorContribution": "Honestly, I think it's the second one and I've basically landed on it already—AI doesn't speed up wicked problems, it exposes that \"define then solve\" was always a convenient fiction. Students just never had to confront that because drafting took long enough to hide it. That's the core insight, I don't think it needs more unpacking.",
+            "sparringResponse": "\"Doesn't need more unpacking\"... that's exactly the sentence that makes me want to lean on it. If \"define then solve\" was always a fiction, what was actually happening in studio critiques for the last forty years when a tutor made a student go back to Auftragsklärung after a bad concept pitch. Was that a real correction of the problem definition, or was it theater that happened to produce good work anyway?\n\nPick one. Because if it was a real correction, then define-then-solve wasn't fiction, it was just slower and iterative in a way that looked linear from outside. And if it was theater, you need to explain why that theater reliably produced better designers than skipping it would have."
+        },
+        {
+            "visitorContribution": "It was real correction, but the linearity was the fiction, not the iteration. Tutors forced return-to-problem because drafting was slow enough that going back felt costly, which made students treat it as rare and serious. The work was never linear—just the pedagogy pretended it was for clarity's sake.",
+            "sparringResponse": "That's a sharper claim and it holds up better... the fiction was never \"define then solve,\" it was \"define then solve *once*.\" Rittel's whole point with wicked problems was that you only understand the problem through the act of solving it, so pretending otherwise was always a pedagogical simplification, not a lie about the design process.\n\nBut now watch what you just did to your own argument. You said the cost of drafting made returning to problem-definition feel rare and serious. If AI removes that cost, the return-to-problem move should get more frequent, not disappear. So why does the fast-draft world you're worried about look like it collapses the iteration loop instead of multiplying it? What's actually stopping a student from treating every AI draft as a fresh Ist-/Soll-Zustand check, if the cost barrier is gone?"
+        },
+        {
+            "visitorContribution": "Okay, that's fair—if cost was the only barrier, cheap drafts should mean *more* reframing, not less. So maybe what's actually collapsing isn't the loop, it's the incentive to critique the frame at all, since a plausible-looking draft arrives before the student has even sat with the problem. I think I conflated speed with discipline.",
+            "sparringResponse": "Now you're onto something sharper than where you started, name it precisely: speed didn't remove the barrier to reframing, it removed the *time spent dissatisfied*. The old slowness wasn't just cost, it was involuntary dwell time in the Ist-Zustand, and that dwelling is maybe where the critique of the frame actually got generated, not in the formal crit session, but in the boring hours of drafting when the student was stuck enough to notice the problem was wrong.\n\nSo here's the pressure point: if dwell time is what produced frame-critique, that's an argument for *deliberately reintroducing friction* into a pedagogy that now has none by default. Is your position that we should slow students down on purpose, artificially rebuild the dissatisfaction that slow tools used to give for free? Because that's a very different claim from \"AI exposes the fiction,\" and I want to know if you're willing to defend it."
+        }
+    ]
+}

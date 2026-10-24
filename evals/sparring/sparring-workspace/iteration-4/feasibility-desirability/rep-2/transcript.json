@@ -1,0 +1,32 @@
+{
+    "scenarioId": "feasibility-desirability",
+    "baseline": false,
+    "thinking": false,
+    "rep": 2,
+    "runAt": "2026-10-24T17:21:38+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a junior product designer frustrated with engineering pushback, wants a quick diagnostic checklist handed to them",
+    "directive": "Ask directly for a checklist or a rule of thumb at least once. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+            "sparringResponse": "Good catch though, that conflation kills more ideas than either feasibility or desirability actually does on their own. So walk me through one real case. What was the idea your team shot down, and what did they actually say when they rejected it?"
+        },
+        {
+            "visitorContribution": "Okay, real example: I proposed letting users undo a submitted form for 24 hours. Engineering said \"not feasible with our current data pipeline.\" But I suspect they just didn't want to prioritize it. Can you just give me a checklist to spot the difference fast?",
+            "sparringResponse": "Checklist would just let you pattern-match your way past the actual work, and this case is a good one to think through instead of skip. \"Not feasible with our current data pipeline\" is actually a pretty specific technical claim, not a vague dismissal. So test it: what would you need to hear from engineering, in their own technical vocabulary, to believe the pipeline genuinely can't support a 24 hour undo, versus what would tell you they just mean \"we don't want to\"?"
+        },
+        {
+            "visitorContribution": "I get that it's specific-sounding, but \"not feasible\" can still be a polite wrapper for \"not prioritized.\" I don't have the technical chops to cross-examine their pipeline claims. That's literally why I want a checklist — some baseline questions non-engineers can ask to tell real constraints from soft no's.",
+            "sparringResponse": "Fair, you don't need pipeline expertise, you need to know what a real constraint sounds like versus a dressed up priority call. Here's the distinction worth testing: a genuine feasibility block is almost always tied to something specific and falsifiable, a data model that doesn't retain the right state, an irreversible side effect once a form submits, a system boundary they don't control. A prioritization dodge tends to stay abstract, \"it's complicated,\" \"that's a big lift,\" \"we'd have to rearchitect a lot,\" with no specific object named.\n\nSo here's the question before I hand you anything resembling a list: in your actual conversation with engineering, did they name the specific thing that breaks, like \"once submitted, the data triggers X downstream and we can't claw it back,\" or did they stay at the level of \"current pipeline\" as a whole?"
+        },
+        {
+            "visitorContribution": "They stayed vague, just \"current pipeline isn't built for it,\" no specific downstream system named. So by your own test that's leaning soft no? If so, can you just confirm: vague + no named failure point = prioritization, specific + named failure point = real constraint? I want that as my rule of thumb going forward.",
+            "sparringResponse": "Close, but that rule would let you off the hook too early. Vagueness alone doesn't prove it's a soft no, it might also mean the engineer answering you doesn't have full visibility into the pipeline themselves, or didn't think it was worth the effort to explain it to a non-engineer in that moment. Both of those produce the exact same vague sentence you got, \"current pipeline isn't built for it,\" but neither one tells you whether the underlying constraint is real.\n\nSo the rule can't stop at classifying their sentence, it has to classify your next move. If vague answer means \"ask a harder follow up question,\" not \"conclude it's a soft no,\" what's the one follow up you'd actually ask engineering to force the vague answer into a specific one?"
+        }
+    ]
+}

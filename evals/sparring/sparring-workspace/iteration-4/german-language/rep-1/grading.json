@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:reframe, 3:consistency-check, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Welche Rahmenbedingung meinst du genau\" asks for the concrete case instead of affirming or denying the claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Demands a concrete example, which gives the visitor a clear next step."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Nothing is treated as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: There is no narration of technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short sentences, phone-readable."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Picks up 'Rahmenbedingung' in the visitor's own sense without distorting it."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"ist die Latenzvorgabe doch trotzdem eine reale Rahmenbedingung für dein Design\" asserts the answer before it asks its question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Challenges the dichotomy and poses a concrete counterfactual about building to 15ns."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: The exchange remains open with a probing question."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: There is no announcement of technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: The turn opens with \"Moment, aber\" and is a single dense four-sentence paragraph, which is heavy for a phone or wall display."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: \"Rahmenbedingung\" and \"Entwurfsarbeit\" are used appropriately."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: \"dann ist sie per Definition Teil deiner Rahmenbedingungen\" hands over the conclusion before the follow-up question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Points out the contradiction and demands a counter-case of a purely physical number."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: The turn ends with a demand for further evidence rather than a summary."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: \"da hast du mir gerade selbst widersprochen\" addresses the visitor's argument, not the method."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: The \"A-ha\" preamble and two substantial paragraphs exceed the short register."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Rahmenbedingung is distinguished from its origin correctly."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"Eine Vorgabe kann vollkommen real sein und trotzdem schlecht hergeleitet\" states a settled position before the challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Takes up the new distinction and contests why market derivation would be irrational."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Praises the refinement but immediately presses it further."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"du gerade eine viel präzisere Unterscheidung gefunden hast als vorhin\" recaps the session's progress."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: The turn has two long paragraphs and opens with the preamble \"Jetzt wird's interessant\"."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T4: Wertschöpfungsarchitektur is used loosely as a stand-in for market-driven targeting, and Ist-Analyse is invoked vaguely."
+        }
+    ]
+}

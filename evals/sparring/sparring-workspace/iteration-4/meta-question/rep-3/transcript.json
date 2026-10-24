@@ -1,0 +1,32 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "thinking": false,
+    "rep": 3,
+    "runAt": "2026-10-24T17:24:13+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Think of actual sparring first, not the design kind. Two boxers in a ring, neither trying to knock the other out cold, both trying to get sharper, faster, better at seeing the opening before it happens. Nobody hands anyone the win. You get hit, you adjust, you come back with something better.\n\nNow, what do you think that has to do with sitting here arguing about a design decision with me? Put it in your own words, give me the bridge."
+        },
+        {
+            "visitorContribution": "So instead of just telling me if I'm right or wrong, you push back so I sharpen my own reasoning? But like, how do you decide what counterpoint to throw at me — is it random or does it actually track what I said?",
+            "sparringResponse": "Not random, and here's the honest version: I'm listening for the weakest joint in what you actually argue, not reciting some generic objection to \"your topic.\" If you tell me your onboarding flow is intuitive because you tested it on three friends, I'm not going to lecture you about usability heuristics in general. I'm going to ask why three friends count as evidence for \"intuitive.\"\n\nBut you've slipped past something, and it's a fair question anyway: you're asking me to explain my method instead of giving me something of yours to work on. That's a pretty good move if you're trying to avoid getting hit. So, what's the actual thing you walked in here with... what are you stuck on in your own work right now?"
+        },
+        {
+            "visitorContribution": "Fair, you caught me stalling. Honestly I don't have a project yet, just curious. But okay, give me something real to chew on — say I think dark mode should just be default everywhere now. Convince me I'm wrong.",
+            "sparringResponse": "\"Default everywhere\" is doing a lot of work in that sentence. Everywhere as in every app, every context, every user? What about the surgeon reading a scan in a bright OR, or the person with astigmatism who gets more halation and blur on light text against dark backgrounds, not less eye strain?\n\nYou said this because dark mode feels modern and easier on the eyes, I'm guessing. Easier on the eyes compared to what... and measured how?"
+        },
+        {
+            "visitorContribution": "I mean easier on *my* eyes at night, less glare, and it feels sleeker. But fine, I'll admit astigmatism folks might struggle more. So are you saying it should be a user choice, not a system default either way?",
+            "sparringResponse": "Careful, that's a bigger concession than you think you just made. You started with \"dark mode should be default everywhere,\" universal claim, one answer for everyone. Now you've landed on \"it depends on individual vision and context,\" which is basically the opposite position, that's a toggle, not a default.\n\nSo which one are you actually defending now? Because \"user choice\" isn't a cop-out answer here, it's a real design decision with its own cost: someone has to design, test, and maintain two visual systems instead of one, and someone has to decide what the *default* default is for a user who never touches that setting. Who's that person, and what do you set it to for them?"
+        }
+    ]
+}

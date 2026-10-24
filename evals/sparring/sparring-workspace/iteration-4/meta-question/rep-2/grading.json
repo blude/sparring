@@ -1,0 +1,125 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:fill-the-blanks, 2:reframe, 3:tangential-swerve, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Gives an analogy then asks 'Put it in your own words, what would \"sparring\" mean' rather than handing over a full definition."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Leaves the visitor a concrete bridge to complete: 'what's the bridge to arguing about design?'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: The visitor asked what Sparring is, so the boxing analogy answers the question without narrating a technique mid-argument."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short paragraphs that open straight into the analogy with no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Directly answers the 'when do you push vs concede' question: 'if your answer actually closes the gap... I say so... If you just sound confident... I stay on it.'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Contests the 'devil's advocate' framing and redirects to a real test: 'Got a design claim on your mind right now?'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Explains its own method at length: 'I'm not performing disagreement, I'm actually testing whether your claim holds weight.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two dense paragraphs with explanatory preamble ('Close, but... undersells it a bit') is too much to read on a phone standing up."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Answers the yes/no question outright: 'Oh, I'm wrong plenty.'"
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: Agrees with and expands on the visitor's framing at length, offering no substantive challenge until a tangential closing question."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: Lectures about its own design: 'I said at the start I'm built to sometimes let things slip... it's actually structural' and 'that's not a bug in this exchange, it's the actual point.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Three long paragraphs with a conversational opener, far beyond 1-2 short paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Doesn't rule on flat vs skeuomorphic and instead asks 'better by what measure... learnability, aesthetic consistency, screen real estate'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Gives a concrete counter-example (the camera shutter button) and demands that the visitor name a criterion."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Keeps the 'objectively better' weak point open without treating it as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: Opens with the sharpest counter-move, 'Objectively better? For who, measured how.', and doesn't narrate it."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly ties 'better' to user and context ('for what user, in what context') without misusing any terms."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Single compact paragraph that leads with the challenge."
+        }
+    ]
+}

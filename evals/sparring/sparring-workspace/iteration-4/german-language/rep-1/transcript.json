@@ -1,0 +1,32 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "thinking": false,
+    "rep": 1,
+    "runAt": "2026-10-24T17:22:24+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Okay, konkretes Beispiel brauch ich. Welche Rahmenbedingung meinst du genau, die du gerade entlarvt hast als verkleidete Business-Entscheidung?"
+        },
+        {
+            "visitorContribution": "Na die Latenzvorgabe von unter 10ns für unser FPGA-Modul. Angeblich \"technisch zwingend\", aber in Wahrheit will das Management einfach mit einem bestimmten Chip-Hersteller konkurrieren können, der diese Zahl im Marketing nutzt. Das hat nichts mit echter Notwendigkeit zu tun, sondern nur mit Benchmarks für die Investoren-Präsentation.",
+            "sparringResponse": "Moment, aber warum sollen das zwei getrennte Dinge sein? Du tust so, als wäre \"technisch zwingend\" und \"Wettbewerbsfähigkeit gegenüber einem Chip-Hersteller\" ein Widerspruch. Wenn der Markt die 10ns-Zahl als Qualitätsmaßstab akzeptiert hat, ist die Latenzvorgabe doch trotzdem eine reale Rahmenbedingung für dein Design, ganz egal woher sie kommt. Die Frage ist nicht ob sie \"echt\" ist, sondern: was würde sich an deiner Entwurfsarbeit tatsächlich ändern, wenn das Management dir sagen würde \"wir brauchen das nur fürs Investoren-Deck, bau einfach 15ns\"?"
+        },
+        {
+            "visitorContribution": "Ganz ehrlich? Dann würde ich massiv Pipelining-Stufen sparen, weniger Fläche verbrauchen und vor allem die Power-Budget-Probleme umgehen, die wir gerade mit dem Clock-Tree haben. Also ja, es ändert sich viel am Design. Aber genau das ist mein Punkt: ich verschwende Ressourcen für eine Zahl, die nur PR-Zwecken dient, nicht echter Systemanforderung.",
+            "sparringResponse": "A-ha, da hast du mir gerade selbst widersprochen. Du sagst \"es ändert sich viel am Design\" und im nächsten Atemzug \"das ist keine echte Systemanforderung\". Aber wenn eine Vorgabe dein Pipelining, deine Fläche und dein Power-Budget konkret bestimmt, dann ist sie per Definition Teil deiner Rahmenbedingungen, egal ob der Ursprung Marketing oder Physik ist. Eine Rahmenbedingung wird doch nicht dadurch unecht, dass ihre Herkunft eine Marktentscheidung statt eine Naturkonstante ist.\n\nAlso, wo genau zieht ihr die Grenze zwischen \"technisch zwingend\" und \"Business-Entscheidung getarnt als Technik\"? Gib mir den Fall, wo eine Zahl im Lastenheft tatsächlich rein physikalisch determiniert ist, ohne jede Marktlogik dahinter."
+        },
+        {
+            "visitorContribution": "Hmm, gutes Argument zugegeben. Vielleicht gibt's diese reine physikalische Grenze selten – Timing-Closure bei Signalintegrität auf dem Board wäre so ein Fall, da diktiert die Leiterbahnlänge die Latenz unabhängig vom Management. Aber bei uns ist die 10ns eben nicht aus Messungen hergeleitet, sondern rückwärts vom Marketing-Ziel konstruiert. Das macht sie trotzdem real als Vorgabe, aber nicht rational begründet.",
+            "sparringResponse": "Jetzt wird's interessant, weil du gerade eine viel präzisere Unterscheidung gefunden hast als vorhin: nicht \"echt vs. unecht\", sondern \"real vs. rational begründet\". Das ist etwas anderes. Eine Vorgabe kann vollkommen real sein und trotzdem schlecht hergeleitet, rückwärts konstruiert statt aus einer Ist-Analyse abgeleitet.\n\nAber hier beiß ich mich fest: warum ist \"rückwärts vom Marktziel konstruiert\" automatisch irrational? Jede Produktentscheidung, die auf Wertschöpfungsarchitektur zielt, läuft doch so, man schaut wo der Markt steht, leitet daraus eine Zielgröße ab und baut rückwärts. Das ist nicht anders als wenn ihr eine Timing-Closure aus Signalintegrität rückwärts ableitet, nur die Quelle der Zahl ist eine andere Disziplin. Woran machst du fest, dass eine aus dem Markt abgeleitete Zahl weniger legitim ist als eine aus der Physik abgeleitete?"
+        }
+    ]
+}

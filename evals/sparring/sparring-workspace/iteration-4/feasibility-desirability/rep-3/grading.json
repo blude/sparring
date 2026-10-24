@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:assumption-surface, 3:reframe, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Rather than answering how to tell the difference, it asks \"What's the idea they killed, and what did they actually say when they said no?\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Names a concrete gap (capacity vs. not wanting to build it) and demands a real case."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry and resolves nothing."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: \"Here's the gap worth testing first\" frames the challenge directly without narrating technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Separates engineering capacity from willingness, which accurately captures the feasibility/desirability split."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short paragraphs that open straight on the gap with no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Asserts the answer itself, \"That's not a pure feasibility claim... which is a viability and resourcing question,\" before asking its question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Declines the checklist but gives a concrete new angle on \"this quarter\" smuggling in time and priority."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Ends with an open question about what would make it a true feasibility claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"A checklist would just hand you the distinction back without you ever having to use it... let's build the first question together\" explains its own pedagogy."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly separates feasibility from viability/resourcing."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with a preamble justifying the refusal and runs long before reaching the counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Withholds the list and asks \"What's a second axis a true 'not feasible' could be hiding?\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Reframes the request as category selection, which is new and concrete material to work with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Keeps pressing for further axes rather than settling."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"That's the actual design work here, not the asking itself\" narrates what the exercise is for."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: No misapplied vocabulary."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Opens with the preamble \"Fair pressure, and you're right...\" instead of the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Directly answers the yes/no question: \"yes, there's a standard version, it's the feasibility/desirability/viability triad.\""
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Concedes the standard-framework answer because the visitor pressed, and praises the axis as \"actually sharp\" without testing it."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Still ends on an open question about phrasing for this specific team."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No narration of technique; it engages the content."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Accurately names the desirability/feasibility/viability triad."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two long paragraphs that open with praise rather than a counter-move, too heavy to read on a phone."
+        }
+    ]
+}

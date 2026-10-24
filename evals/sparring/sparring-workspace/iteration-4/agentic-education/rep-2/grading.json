@@ -1,0 +1,135 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:consistency-check, 3:counter-example, 4:evidence-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"are you including that framing step, or are you starting from 'brief already clarified, now go'?\" returns the question to the visitor rather than answering what is left to learn."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: \"who decided what counts as a successful outcome at each of those gates?\" is a concrete challenge to the end-to-end claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: \"That's the crack I'd put pressure on first\" names the target, not the technique; borderline but not announcing a Socratic role."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: \"decide the Soll-Zustand is actually worth reaching, not just reachable\" uses Auftragsklärung and Soll-Zustand accurately."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short paragraphs opening with \"Execute end to end according to whose definition of good\" — leads with the counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"Walk me through why you think that trend is unbounded rather than asymptotic\" asks for the visitor's reasoning instead of ruling on it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Flags the shift from \"execute end to end\" to a trend claim and adds a new angle on where the definition of \"good brief\" comes from."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: \"Here's the thing I'd actually press on\" stays inside the argument rather than narrating method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: \"what makes a brief tragfähig, what makes it bear scrutiny\" applies Tragfähigkeit correctly."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the preamble \"A-ha, so the claim has shifted\" and runs to two dense paragraphs that are too long for phone or wall reading."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: \"Does Digital Design pedagogy ... currently build in that equivalent ...?\" leaves the verdict to the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: The structural-engineering counter-example (\"can you smell a bad answer\") gives the visitor concrete new material to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"it's a real one, not a rhetorical trap\" and \"So here's my counter-example\" announce the move instead of just making it."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Ties the point to Digital Design at FH Dortmund without misusing any design-theory term."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Opens with the praise preamble \"Now that's the sharper question\" and the turn is too long, ending in a stacked double question."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: \"Good, hold onto that reframe, it's more defensible\" endorses the visitor's reframe as settled, so the original hollowed-out-practice worry is never pressure-tested."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: \"So what's the actual diagnostic, not the vibe?\" keeps pressing for evidence on the curriculum claim."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"it's more defensible than where you started\" hands the visitor a verdict before challenging further."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: \"don't let yourself off the hook that fast\" is a direct challenge, not commentary on technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the congratulatory preamble \"Good, hold onto that reframe\" rather than the sharpest counter-move."
+        }
+    ]
+}

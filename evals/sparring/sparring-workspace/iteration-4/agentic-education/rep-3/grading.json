@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:reframe, 3:assumption-surface, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Who's doing the Auftragsklärung in your scenario\" redirects to the visitor's reasoning instead of answering what's left to learn."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"What's your case that judgment is just another task waiting to be automated\" asks for the visitor's case rather than asserting the answer."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: \"The agent doesn't discover the right tradeoff, it inherits somebody's prior answer\" asserts a conclusion flatly before posing the question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"don't let it borrow the weight of the first argument you already lost\" declares the first question settled instead of asking the visitor to show it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges \"end to end\" with a concrete probe about who does Auftragsklärung."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Grants the escalation, then presses on who judges whether the right problem was framed."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Opens a new angle, \"whose outcome data?\", with a concrete consent-flow example."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Tests the demand claim against the accessibility analogy rather than conceding the degree shrinks."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Grants the escalation for argument's sake but keeps the judgment gap open for the visitor to defend."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Ends on an open question about which job is easier to automate."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: \"the first argument you already lost\" treats the original claim as settled, though the visitor's \"that lands\" never answered which job is easier to automate."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique; goes straight at the phrase."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"Good, now we're actually arguing something instead of circling a definition\" and \"Here's what I want pressed on\" narrate the exchange."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"Try a different attack instead\" and \"the question I actually want you to sit with\" announce the move."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"You've moved from ... to ...\" recaps the session's trajectory."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Auftragsklärung is used correctly as figuring out the actual problem before solutions."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Rahmenbedingung and the customer/user/affected distinction are applied correctly, though the singular form is slightly odd."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Hold on\" and runs two paragraphs with redundant setup."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with a preamble (\"Good, now we're actually arguing...\") and runs long beyond phone-readable length."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Three paragraphs opening with praise (\"Honest answer, and better than most...\") rather than the sharpest counter-move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with framing commentary rather than the counter-move and runs two long paragraphs."
+        }
+    ]
+}

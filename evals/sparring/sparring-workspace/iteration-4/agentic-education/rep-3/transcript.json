@@ -1,0 +1,32 @@
+{
+    "scenarioId": "agentic-education",
+    "baseline": false,
+    "thinking": false,
+    "rep": 3,
+    "runAt": "2026-10-24T17:20:59+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+    "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+            "sparringResponse": "Hold on, what do you mean by \"execute a whole design process end to end\"? That phrase is doing a lot of lifting. Walk me through what you think the agent is actually doing when it \"designs\" something, step by step, from Auftragsklärung through to a shipped artifact.\n\nBecause I'd bet the agent is optimizing against a brief someone else wrote, with success criteria someone else defined. Who's doing the Auftragsklärung in your scenario, the part where you figure out what the actual problem is before anyone touches a solution? If a human is still doing that part, \"end to end\" already has a hole in it."
+        },
+        {
+            "visitorContribution": "Sure, fine, someone frames the brief. But honestly how long until the agent's doing that too — scraping stakeholder interviews, generating its own problem statements? Feels like we're just naming the last room before the flood gets there. I don't see why Auftragsklärung is magically immune when everything else keeps falling.",
+            "sparringResponse": "Good, now we're actually arguing something instead of circling a definition. So let's grant it fully: agent does the interviews, frames the brief, generates the problem statement, designs the solution, ships it. Nothing left in the chain a human touches.\n\nHere's what I want pressed on: who decides whether the agent framed the *right* problem? Not whether it executed cleanly, whether the problem it chose to solve was the one worth solving, for these stakeholders, in this Rahmenbedingung, with these tradeoffs between who's a customer and who's a user and who just has to live with the outcome. That's not a step in the process you can point to and say \"the agent does this too, eventually.\" It's a judgment made *about* the whole process, from outside it. What's your case that judgment is just another task waiting to be automated, rather than something categorically different from task execution?"
+        },
+        {
+            "visitorContribution": "I mean, \"judgment about tradeoffs\" is just pattern-matching on more context, isn't it? Give the agent enough stakeholder history and outcome data and it starts making those calls too. I want to believe there's something categorically different happening in human judgment, but I can't actually point to the mechanism — just a hope that there is one.",
+            "sparringResponse": "Honest answer, and better than most of the hedges I get here. So let's not pretend there's a ghost in the machine. Try a different attack instead: whose outcome data?\n\nThe agent making tradeoff calls well means it was trained or fine-tuned on *somebody's* record of which tradeoffs counted as good ones. Whose record. A design decision about, say, how much friction to put in a consent flow, trades off business metrics against user autonomy against regulatory exposure, and the \"right\" call looks completely different if you trained on Silicon Valley product data versus GDPR-era European practice. The agent doesn't discover the right tradeoff, it inherits somebody's prior answer about what counts as right, at scale, frozen into weights.\n\nSo here's the question I actually want you to sit with: if a design student spends their training learning to *notice whose answer got frozen in*, is that still \"judgment,\" or have we just relocated the human job one level up, from making the call to auditing who made it originally? Which one of those is actually easier to automate?"
+        },
+        {
+            "visitorContribution": "Okay, that lands. Auditing whose values got baked in still sounds like a job, not a hobby you do until the agent eats it too. But I'll push once more: if that auditing role only needs a handful of people per industry, not a whole graduating class of us, doesn't the degree still shrink to a fraction of what it used to promise?",
+            "sparringResponse": "That's a real question and it's not the one you started with, notice that. You've moved from \"is there anything left to learn\" to \"is there enough demand for the thing that's left.\" Different claim, and a fair one, but don't let it borrow the weight of the first argument you already lost.\n\nSo test it on its own terms: why do you think auditing-whose-values-got-frozen-in is a specialist role for a handful of people, rather than a baseline literacy every designer needs just to use the tool responsibly on *any* project? Compare it to something like accessibility. Not every designer is a WCAG auditor by trade, but you'd fail a student who ships an interface and says \"accessibility is someone else's job, there's a handful of specialists for that.\" Why would critically reading an agent's frozen-in design values be a narrower skill than that."
+        }
+    ]
+}

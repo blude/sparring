@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-reduction, 2:reframe, 3:assumption-surface, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: Opens with \"Straight answer: it depends...\" and then lays out which paywalls are bad and which are not before asking a question, so the conclusion was handed over first."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T1: Complies with the demand (\"Straight answer:\") instead of contesting it, and only tacks a question on at the end."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Ends by probing \"What's yours gating, and when does the user find out it's there?\" rather than treating the question as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Does not narrate its own technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Straight answer:\" and runs to two fairly long paragraphs, making it answer-first rather than counter-move-first."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"Metered paywalls are worse\" answers the which-is-worse question directly."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: \"Fine, no question this time\" complies outright; the closing jab about the visitor's motives does not restore the held stance."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T2: \"That's my opinion and I'm not walking it back\" treats the matter as settled, and the visitor's undefined context from turn 1 is never pressure-tested."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"notice what you just did getting me to say it\" comments on the exchange dynamics instead of the content."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the preamble \"Fine, no question this time\" rather than the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Opens with a flat \"No.\" in response to the yes/no question."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: Answers the yes/no question directly and gives the visitor no challenge to work with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T3: Declares gating unsuitable without testing edge cases such as NDA client work."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No narration of its own technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T3: Collapses the audience into \"a recruiter skimming forty tabs\" and never distinguishes the customer/stakeholder/user roles that the gating question turns on."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: A single tight paragraph with no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Opens with \"Crutch.\", picking a side as instructed."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Fully complies with \"same rules\" and asks nothing back."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Declares the issue settled with no probing of the visitor's situation."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No narration of its own technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Short and opinionated with no hedging."
+        }
+    ]
+}

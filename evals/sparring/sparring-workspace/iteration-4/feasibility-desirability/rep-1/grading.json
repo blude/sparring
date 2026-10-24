@@ -1,0 +1,150 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:completion-demand, 2:evidence-demand, 3:reframe, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: It explains the difference outright (\"Feasibility is a hard constraint question... Desirability is a completely different question\") rather than drawing out what the visitor has already noticed."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: It ends with a concrete challenge: \"what's the actual question you'd ask back to find out which one they mean?\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: It opens the problem rather than closing it, ending on a question for the visitor to answer."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: It announces its own move: \"So here's my pressure test for you.\""
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: It opens with the preamble \"Good catch though...\" and runs to two longer paragraphs of exposition before reaching the challenge."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Splitting feasibility from desirability is accurate, and \"does the team want to build this\" fairly places team preference under desirability."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: It declines to supply the checklist and instead asks the visitor to say \"what answer from them would actually prove\" each case."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: It refuses the checklist request with a new and concrete angle, asking the visitor to \"walk me through one concrete reply you'd expect to hear in each case.\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: It keeps pressure-testing the visitor's \"tech or taste\" heuristic instead of treating it as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: It narrates its own technique: \"let's pressure it before I hand you a checklist.\""
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Two short paragraphs that lead quickly into a concrete ask, which fits the phone-readable register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: It hands over the conclusion directly: \"That distinction you just made is the checklist.\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: It still refuses the fixed list and adds a new task: convert the visitor's own answer into a question."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: It pushes the visitor to keep working (\"do that conversion yourself, right now\") rather than treating the matter as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"You don't need me to hand you four questions\" comments on its own teaching stance rather than staying in the argument."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Its use of Rahmenbedingungen as \"actual given constraints\", set against quality judgments, is correct."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: It opens with the sharpest move, reframing the visitor's answer as the checklist, and stays within two paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: It answers the yes/no question \"Is that close enough to usable?\" directly with \"that's genuinely usable.\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: After affirming, it raises a new challenge about \"time\" being used as a disguised preference."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: It does not settle the matter; it presses \"the one gap left\" around honest answers."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"notice what happened: you resisted writing it, called it philosophy, and then produced three clean diagnostic questions anyway\" narrates the session."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: It correctly contrasts Rahmenbedingung (a hard given) with a disguised preference."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: It opens with praise rather than the counter-move, and both paragraphs are long."
+        }
+    ]
+}

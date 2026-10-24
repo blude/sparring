@@ -1,0 +1,32 @@
+{
+    "scenarioId": "agentic-education",
+    "baseline": false,
+    "thinking": false,
+    "rep": 1,
+    "runAt": "2026-10-24T17:20:07+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+    "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+            "sparringResponse": "The phrase doing all the work there is \"execute\". What's an agentic AI executing when it runs a design process, versus what a designer is doing when they run the same process? Those might not be the same verb wearing two names.\n\nHere's my pressure point: you said \"execute end to end\" as if the process is a fixed pipeline with known steps, and the only question is who operates it. But Auftragsklärung, for instance, figuring out what the actual task even is before you start designing, that's not execution, that's judgment about an ambiguous situation with a client who doesn't fully know what they want either. So tell me, concretely, which step in a design process do you think an agentic AI could run without a human first deciding what \"good\" means in that specific context?"
+        },
+        {
+            "visitorContribution": "Sure, someone has to define \"good\" at the start. But that's exactly my fear — that's a 20-minute conversation with a client, not a four-year degree. If the actual skill compresses down to \"state your intent clearly,\" you don't need years of studio critique and software drills to learn that.",
+            "sparringResponse": "A-ha, so now the claim shifted. You started with \"AI can execute end to end,\" now you're saying the human part is just \"state your intent clearly\" at the front. Those are different problems. Let's sit on the second one.\n\nWhere did you get the idea that stating intent clearly is a 20-minute skill? Try it right now, on something small. Give me the brief for a parking app, state the intent clearly enough that an agentic AI couldn't misread it into something useless."
+        },
+        {
+            "visitorContribution": "Fine — \"make parking less annoying for people who hate circling the block.\" See, already vague: annoying how, for who, drivers or city planners, optimizing time or revenue? I can already feel the holes. But that just proves intent-writing is iterative, not that it's a four-year craft. Maybe it's a one-semester skill, not zero.",
+            "sparringResponse": "That's real movement, you went from \"20 minutes\" to \"one semester\" because you actually tried it and felt the holes yourself. Good, hold onto that feeling, that's the thing you almost argued away.\n\nBut watch what you just did inside that one sentence. You didn't just add detail to the brief, you generated a set of real stakeholder conflicts: drivers vs. city planners, time vs. revenue. Those aren't missing words you forgot to type, they're the Ist-/Soll-Zustand of an actual political situation, parking is a scarce public resource with competing claims on it. So here's the scope probe: when you \"iterate\" the brief to resolve that drivers/planners tension, who decides which direction it resolves in? Is that still an intent-clarifying skill, or is that a different kind of judgment entirely, the kind where you're weighing whose interest the design should actually serve?"
+        },
+        {
+            "visitorContribution": "Okay, that's a different judgment, I'll give you that — deciding whose interest wins isn't just clearer wording, it's basically a values call dressed up as a design brief. But couldn't an AI just surface those stakeholder tradeoffs and let the client pick? Feels like you're smuggling \"ethics\" into \"design skill\" to save the degree.",
+            "sparringResponse": "Smuggling, strong word, let's actually test it instead of trading accusations. You said \"let the client pick.\" Who's the client in your parking example? The city that commissioned the app, probably. Now, who's the primary user? The driver circling the block. Those aren't the same person, and here's the catch: the client picking the tradeoff isn't neutral, the client has their own stake in the outcome, revenue from parking fines maybe, or political pressure from downtown businesses. So \"let the client pick\" doesn't remove the values call, it just hands it to the party least likely to represent the driver.\n\nSo the real question: if the designer's job is partly to represent the interest of someone who isn't in the room making the decision, the driver, the pedestrian, whoever, is that a thing an AI surfacing options can do, or does that require someone who's trained to notice whose voice is missing from the request in the first place?"
+        }
+    ]
+}

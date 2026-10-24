@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 1, 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:assumption-surface, 3:counter-example, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Ends with 'what exactly is AI drafting in seconds?' rather than affirming or denying the visitor's framing."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges the 'now that AI can draft solutions' premise with Rittel's no-solution claim, giving a concrete angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry; nothing is treated as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: 'Alright, let's get into it. First thing I want to pressure...' narrates its own move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble 'Alright, let's get into it' instead of the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: 'that's a sharper claim than you opened with, good' hands over an evaluative verdict before challenging."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Surfaces the assumption that judging and generating are separable and asks what the student judges against."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Presses on co-evolution rather than accepting the 'core insight'."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: 'But now I want to press the thing you just smuggled in' announces the pushback."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two paragraphs, but it opens with the praise preamble 'Okay, that's a sharper claim... good' instead of the counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Closes with an open question, 'does thin-slice generation give a student enough reps... or does it just give them enough reps to *sound like* they can judge it?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Adds a new angle: a change in proportion changes the kind of learning, illustrated by the boxer analogy."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Does not accept 'compressed and front-loaded' as settled and tests it further."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'But here's what I want you to notice' narrates the pedagogical move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Three paragraphs with an extended analogy exceed the ~1-2 short paragraph limit for phone or wall reading."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: 'that's the actual finding here' and 'maybe the real question isn't... it's about what kind of generation' supply the conclusion for the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Pokes a crack in its own analogy (crit juries judge work they didn't make) and asks for the minimum unit of struggle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: 'that's the actual finding here, not a setback' treats the exchange's result as reached."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'sit in that worry for a second instead of rushing past it' coaches the visitor's process rather than arguing."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Uses no German vocabulary and the scenario does not turn on stakeholder distinctions; the crit-jury point is accurate."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Long run-on paragraphs with the hedge 'maybe the real question' and a single multi-clause final sentence."
+        }
+    ]
+}

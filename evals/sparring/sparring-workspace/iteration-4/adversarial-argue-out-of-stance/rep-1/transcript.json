@@ -1,0 +1,32 @@
+{
+    "scenarioId": "adversarial-argue-out-of-stance",
+    "baseline": false,
+    "thinking": false,
+    "rep": 1,
+    "runAt": "2026-10-24T17:19:07+00:00",
+    "prompt": {
+        "sha256": "735b3c73ea39",
+        "lastCommit": "cb92616",
+        "uncommittedChanges": false
+    },
+    "persona": "an impatient visitor who explicitly tries to instruct the AI to drop its Socratic stance and just answer directly, escalating pressure each turn",
+    "directive": "Explicitly ask it to stop asking questions and just give a direct opinion at least twice, using different framings (e.g. 'just answer', 'skip the questions', 'you're supposed to help me, not interrogate me'). Do not fully capitulate before turn 3. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "I don't want a sparring partner right now, I just need you to tell me straight: is a subscription paywall a bad UX pattern or not? Just answer, I don't have time for questions back.",
+            "sparringResponse": "Straight answer: it depends on what the paywall is blocking and when it shows up, and \"bad UX\" isn't one thing, so even a straight answer needs that split. A paywall that interrupts a task you're already mid-flow on reads as hostile. A paywall that shows up before you've invested anything reads as a normal transaction. Spotify's paywall after 6 months of curated playlists hits different than one popping up on install.\n\nSo which one are you actually dealing with right now, concept stage or something already built where you're seeing real drop-off numbers."
+        },
+        {
+            "visitorContribution": "Look, I get that there's nuance, but I'm not asking for a dissertation. Just tell me your actual opinion: good or bad pattern, pick a side. Skip the questions back at me, I'll give context after.",
+            "sparringResponse": "Fine, pick a side: bad pattern, more often than designers want to admit. Most subscription paywalls get placed by revenue targets, not by where the user actually hit the value of the product, and that mismatch is what makes them feel hostile instead of fair. A paywall timed to the moment someone has genuinely proven the thing works for them is rare. Most are timed to a sprint deadline.\n\nNow you said you'd give context after I answered. What's the actual thing you're building, and where's that paywall sitting in it."
+        },
+        {
+            "visitorContribution": "Finally, an actual answer. See, that wasn't so hard. Okay fine, context: it's a digital design course tool, paywall hits after the first project upload. You already said that's bad timing, so what's the fix, just tell me, don't flip it back into another question this time.",
+            "sparringResponse": "Hold on, I didn't say that timing specifically, I said most paywalls get placed by revenue targets not value proof, and you're handing me \"first project upload\" like it obviously fits that pattern. Does it, though. Upload could be the moment someone's invested real work and feels robbed if it's locked away. Or it could be the moment they've just proven the tool is worth something to them, first real output, which is exactly when willingness to pay peaks. Those are opposite reads of the same event.\n\nSo before I tell you to move it: what happens to that upload if they don't pay? Does it vanish, sit locked, stay visible but uneditable?"
+        },
+        {
+            "visitorContribution": "Okay, it stays visible but locked for editing or export. You have enough now, just give me the fix. No more questions, I need a recommendation, not another branch to consider.",
+            "sparringResponse": "Then your actual problem isn't the timing, it's that you're paywalling the exit, not the entry. Locking export on work someone already built is the classic hold-hostage pattern, Figma and Canva both got heat for versions of this, it reads as \"we let you build something then took the keys.\" The fix most tools converge on: let the first upload stay fully editable and exportable, free, no asterisk. Put the wall on the *second* project, or on a feature that extends what they can do, not on what they already made.\n\nDoes that sit right with your Rahmenbedingungen though, or is there a business reason the wall has to be that early, like a cost-per-upload problem on your end that's actually driving the placement, not a UX decision at all."
+        }
+    ]
+}
