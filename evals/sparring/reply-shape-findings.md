@@ -1,0 +1,132 @@
+# Reply shape: tester feedback, measurement, and the thinking arm
+
+Written 2026-10-24. Commands to reproduce are at the end.
+
+## Why this was looked at
+
+Three testers (none writing in their native language) said Sparring used
+tics, complex sentence structures, several questions in a row, and that its
+replies were uniform ("counter, question, counter, question"). Three people is a
+very small sample, so this is treated as a hypothesis to test, not a verdict.
+
+## The existing evaluation could not see it
+
+The judged rubric checks content (handed-over conclusion, held position,
+closure, meta-commentary, grounding, voice). The move-repetition check labels
+the *Socratic move* of each turn from a closed vocabulary of 14. Two replies can
+use different moves and still share one skeleton, so a variety check at the
+move level cannot see a complaint about variety at the surface level. The
+mechanical at-most-one-question check was already failing about 90% of
+transcripts, but it is a pass/fail flag, so it did not show how bad or where.
+
+## Measuring shape
+
+`bin/shape_sparring.php` (definitions in `reply_shape.php`) measures how a reply
+is built, in plain code: no API calls, no judge, no variance. Same
+measurements, three sources:
+
+| | study (3 testers) | live (exhibition) | simulated, iteration 2 |
+|---|---|---|---|
+| conversations / replies | 3 / 30 | 40 / 188 | 18 / 72 |
+| replies with 2+ `?` | 83% | 55% | 51% |
+| replies with questions in a row | 37% | 30% | 26% |
+| replies ending on a question | 87% | 60% | 64% |
+| words per reply | 143 | 104 | 117 |
+| words per sentence | 21.0 | 17.7 | 18.4 |
+| sentences of 25+ words | 38% | 25% | 28% |
+| adjacent replies with the same shape | 41% | 32% | 35% |
+
+- The testers' complaints show up in the data. Their sessions score worse than
+  both the exhibition sessions and the simulated runs on every row.
+- The simulated visitor reproduces the exhibition numbers roughly, so the
+  harness is a fair proxy for the typical session, not for these three testers.
+- Caveats: the testers' sessions are longer (about 10 turns against 4), three
+  conversations are too few to generalize from, and the repeated-phrase counts
+  grow with conversation length, so they are not compared across sources.
+
+## What in the prompt produces this (hypotheses, not yet tested)
+
+Read against `prompts/sparring.md` at `8266451`:
+
+- "1–2 paragraphs" with a model that fills both gives a fixed skeleton:
+  a long claim-and-counter paragraph, then a second paragraph starting
+  "Because…" or "So…" that stacks one to three questions, often "is it X, or is
+  it Y".
+- "Shift between pointed questioning … and direct counter-argument" can be read
+  as an instruction to alternate, which is the pattern the testers described.
+- Stage 3 of `<core_mechanism>` has the model "draft a few candidate
+  questions". With thinking off the model has no scratchpad, so "do stages 1–3
+  silently" has nowhere to run, and the candidates can end up in the reply.
+- "Vary how you pull" varies only how a reply *ends*, not its shape.
+- "One question or challenge at a time" is one line against all of the above.
+
+## Thinking arm: does giving the silent stages a scratchpad fix it?
+
+Iteration 3 is iteration 2's prompt (`121d63e1670e`, unchanged) with extended
+thinking on (`--thinking`, adaptive), so thinking is the only variable. Both are
+graded by `claude-opus-5-5`.
+
+| | iteration 2 | iteration 3 (thinking) |
+|---|---|---|
+| replies with 2+ `?` | 51% | 38% |
+| replies with questions in a row | 26% | 15% |
+| replies ending on a question | 64% | 43% |
+| sentences of 25+ words | 28% | 23% |
+| adjacent replies with the same shape | 35% | 41% |
+| no-handed-over-conclusion | 45% | 47% |
+| held-position | 84% | 78% |
+| premature-closure | 89% | 80% |
+| no-meta-commentary | 44% | 47% |
+| voice-style | 12% | 19% |
+| at most one question per turn (per transcript) | 11% | 22% |
+
+Reading: questions moved the right way by about 13 points, which is inside the
+noise (about 10 points on 72 replies) and short of the 20 points set in advance
+as a win. Sentence length, tics and uniformity did not move; sameness of shape
+got slightly worse. The guard items (held-position, premature-closure) fell
+6 and 9 points, also within noise but in the direction the shorter-and-weaker
+risk predicts. One run per arm, so the result is "no clear effect", not
+"thinking does not help". It suggests the prompt wording, not the missing
+scratchpad, is the main lever.
+
+### A pitfall that hid the thinking
+
+All 72 thinking texts in iteration 3 were empty, and the same happened in a
+dojo session the author ran with thinking switched on and deliberately hard
+questions. On this model
+extended thinking is on by default but its text is **omitted** by default: the
+response contains a `thinking` block with an empty string, and the thinking is
+still billed. A probe on one real turn, same input, two settings:
+
+| setting | thinking block | thinking text | output tokens |
+|---|---|---|---|
+| `adaptive` (default display) | present | 0 chars | 523 |
+| `adaptive` + `display: "summarized"` | present | 629 chars | 758 |
+
+With the default, the reply is 682 characters (about 170 tokens) out of 523
+output tokens, so roughly 350 tokens were hidden thinking. Iteration 3 is
+therefore a valid thinking run whose thinking text was not captured; empty text
+cannot be read as "the model did not think". The eval runner and the dojo now
+request `summarized`. The two probe replies differ, so the token gap is not
+purely the thinking text.
+
+## Limits
+
+- n = 3 testers; none of the numbers here validates the complaint, they only
+  show that the data are consistent with it.
+- Every simulated measure uses a `claude-sonnet-5` visitor that writes fluent,
+  articulate text, unlike the testers, who wrote short and simple. That may
+  understate how the replies read to them.
+- All shape metrics are proxies for what the testers meant. A reply can pass
+  every one and still read badly, or fail one and read well. No measure here
+  says whether replies got *better*; that needs the blind human comparison
+  described in `judge-comparison.md`.
+- Single runs, 72 replies each, ± about 10 points of noise.
+
+## Reproduce
+
+```bash
+php bin/shape_sparring.php --db=data/store.db --origin=study \
+    evals/sparring/sparring-workspace/iteration-2 evals/sparring/sparring-workspace/iteration-3
+php bin/shape_sparring.php --db=data/store.db --origin=live
+```
