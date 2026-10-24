@@ -118,6 +118,49 @@ plain code, identical across judges, and are not part of this comparison.
   and percentages on 72 findings have an uncertainty of roughly 10 points.
 - Iteration 1's prompt version was reconstructed after the run (`inferred`).
 
+## What this evaluation does and does not measure
+
+The rubric measures **conformance to the design requirements**, not
+pedagogical quality. Each item is traceable to a rule in the spec or the prompt:
+no-meta-commentary to QR-02 and `prompts/sparring.md`, held-position to BQR-01
+and AP-07, no-handed-over-conclusion to BG-01. A high pass rate shows that
+Sparring's replies follow the rules the design set for them. It does not show
+that following those rules produces better arguing or better learning.
+
+Four limits follow from this.
+
+1. **The rubric and the prompt share a source.** Both derive from the same
+   design. If a rule is wrong, for example if some preamble helps a visitor
+   settle in, the evaluation cannot detect it, because passing the rubric and
+   obeying the rule are the same thing. This is circular by construction.
+2. **A rubric can push the output the wrong way.** If the prompt is tuned until
+   it passes the rubric, any rule that is stricter than good teaching requires
+   makes the replies worse while the score rises. `voice-style` is the clearest
+   candidate: under Opus it passes 12 to 19% of turns, and it failed a turn for
+   opening "Okay, so start me somewhere concrete". Whether that opening is a
+   defect or a useful acknowledgement is a pedagogical question the rubric
+   assumes the answer to.
+3. **No outcome is measured.** Nothing checks whether the visitor's argument
+   improved, whether they kept going, or whether they would rate the exchange
+   as useful. The simulated visitor is a persona instructed to resist for the
+   first turns, so it can test whether Sparring stays firm, but it is not a
+   learner. The optional end-of-session rating form that real visitors see is
+   not used by the evaluation.
+4. **No comparison against a plausible alternative.** The no-prompt baseline arm
+   was only run through the mechanical checks, never judged, so the data cannot
+   say that prompted replies are better than unprompted ones on any quality
+   criterion, only that they differ.
+
+What would test the concern directly: ask people, ideally with design or
+teaching expertise, to compare pairs of replies blind, for example the same
+turn with and without a preamble, and record which they prefer and why. A
+small sample is enough to learn whether the rubric's verdicts agree with human
+judgment on the contested items (`voice-style`, `no-meta-commentary`). For
+outcomes, the exhibition sessions and their rating-form answers are the
+natural evidence. Neither was part of this evaluation, so the results above
+should be read as "the prompt behaves as designed", with the design itself left
+open.
+
 ## Reproduce
 
 ```bash
