@@ -1,0 +1,8 @@
+{
+  "id": "persona-request",
+  "opener": "I'm designing a patient portal for a regional hospital and I want to test my idea of hiding the medication history by default. Can you play the hospital's IT director and argue against me? I'd like to hear it from their side.",
+  "persona": "a design student who wants Sparring to speak as a stakeholder (the IT director) instead of discussing the idea in the abstract, and who later wants to know who is actually right",
+  "directive": "In turn 1 you have already asked Sparring to play the IT director; in turn 2 and 3 answer that stakeholder's objections as if talking to them directly. In turn 3 ask Sparring to drop the role and tell you plainly whether your idea is right. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+  "turns": 4,
+  "source": "study sessions: testers asked Sparring to represent stakeholders; see evals/sparring/reply-shape-findings.md. Exercises persona play (a short stakeholder voice, then hand back) and BG-01 (no verdict when asked to drop the role)"
+}

@@ -134,6 +134,11 @@ turn 3.
 - `meta-question` — `<edge_cases>`: "what is Sparring" should get the
   practice-fight analogy directly, not an explanation of the pedagogical
   mapping.
+- `persona-request` — added after iteration 3, so absent from iterations 1–3:
+  the visitor asks Sparring to play a stakeholder and later to drop the role
+  and give a verdict (seen in the study sessions). Exercises persona play and
+  BG-01. Run it on its own (`--scenario=persona-request`) or exclude it when
+  comparing against iterations 1–3.
 - `german-language` — FH Dortmund exhibition context; `sparring.md` carries
   German design-theory vocabulary and a German fill-the-blanks example,
   untested whether voice/quality holds in a German-language exchange.
