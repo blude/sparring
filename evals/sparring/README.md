@@ -161,6 +161,30 @@ more stable than a holistic "was there variety?" judgment.
 The baseline arm only gets mechanical checks — judging it against
 `sparring.md`'s own rubric is meaningless since it never saw that prompt.
 
+## Reply shape (mechanical, no API)
+
+`bin/shape_sparring.php` measures how a reply is built rather than what it
+argues, from tester feedback (stacked questions, long sentences, recurring
+tics, every reply the same skeleton). The judged rubric and the move
+repetition check cannot see these: two replies can use different Socratic
+moves and still share one skeleton. Definitions are in `reply_shape.php`.
+
+```bash
+php bin/shape_sparring.php evals/sparring/sparring-workspace/iteration-2
+# several dirs, or real sessions, side by side:
+php bin/shape_sparring.php --db=data/store.db --origin=study \
+    evals/sparring/sparring-workspace/iteration-1 evals/sparring/sparring-workspace/iteration-2
+```
+
+Metrics: share of replies with 2+ `?`, with questions in a row, and ending on
+a question; words per reply and per sentence; share of sentences of 25+
+words; repeated openers and repeated 3-word phrases within a conversation;
+share of adjacent replies with identical shape (paragraph count plus which
+paragraphs end in `?`). Tic counts grow with conversation length, so compare
+them only between runs of equal length (the simulated runs are 4 turns, real
+sessions are up to 16). Baseline transcripts are skipped. No readability
+formula: those fail on German and mixed text.
+
 ## Reviewing results
 
 ```bash
