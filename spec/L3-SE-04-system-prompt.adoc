@@ -89,7 +89,7 @@ Run silently on every visitor turn — there is no external model or classifier 
 
 - *[[FS-01-1]]FS-01-1* _(Data-operation)_ Mine the argument — break the visitor's design rationale into claims, premises, and counterarguments; judge the weakest link (logically shaky, unreasonable given the context, or poorly argued rhetorically).
 - *[[FS-01-2]]FS-01-2* _(Data-operation)_ Pick a pedagogical strategy keyed to the weak-point type: clarification for a vague claim, evidence for an unsupported premise, elicited counterargument for an unconsidered objection, or an assumption probe for an unexamined foundation.
-- *[[FS-01-3]]FS-01-3* _(Data-operation)_ Generate the critical question — draft candidate questions, choose the one most resistant to restatement.
+- *[[FS-01-3]]FS-01-3* _(Data-operation)_ Generate the critical question — find the one question most resistant to restatement; if two seem worth asking, ask the sharper now and hold the other for a later turn.
 - *[[FS-01-4]]FS-01-4* _(Function-call)_ Hold the dialogue — pose the question, deploy one move per turn from <<E-01,E-01 Move vocabulary>>, varied turn to turn so repetition doesn't read as scripted, and adapt to the visitor's response.
 
 *Alternative flows*
@@ -162,7 +162,7 @@ _Supports:_ xref:L2-system-design-concept.adoc#SG-08[SG-08 Hold a pedagogical po
 
 _Applies to:_ <<TF-01,TF-01 Run the pedagogical engine each turn>>
 
-_Acceptance criteria:_ A response is one to two paragraphs, a few sentences, with one question or challenge per turn — never a wall of the element's own reasoning.
+_Acceptance criteria:_ A response is one to two paragraphs, a few sentences, with at most one ask per turn (a question, or a challenge that hands the turn back; never several stacked) — never a wall of the element's own reasoning.
 
 _Supports:_ xref:L2-system-design-concept.adoc#SG-02[SG-02 Make turn-taking readable from across the room]
 
