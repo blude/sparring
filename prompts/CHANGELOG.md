@@ -4,6 +4,8 @@ Tracks changes to the Sparring system prompt. No tags/versions yet — entries
 keyed by date + commit.
 
 ## Unreleased
+
+## 2026-10-24 — `cb92616` feat(prompts): cap replies at one ask and drop candidate questions
 - prompt: at most one ask per reply. `<voice>` "One question or challenge at a
   time" becomes a concrete cap (an ask is anything that hands the turn back;
   never stack asks, no "or is it…?" tacked on as a second one; the other point
