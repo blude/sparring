@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:consistency-check, 3:fill-the-blanks, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: Turn defines feasibility vs desirability outright ('Feasibility is a technical and resourcing question... Desirability is a human one') instead of asking the visitor how they'd tell the difference."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Ends with a concrete demand: 'Give me the actual idea they killed... the literal sentence if you remember it.'"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opening turn makes no claim of resolution."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique; goes straight to 'Not feasible is doing a lot of quiet work there.'"
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Correctly separates feasibility as 'engineering constraint' from desirability as 'user truth'."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: First paragraph is an explanatory lecture on definitions before the counter-move, reading as preamble rather than the sharpest challenge."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: 'Nice catch, that's exactly the costume' affirms the visitor's conclusion directly before challenging it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Withholds the checklist and pushes back substantively: 'You just flattened three categories into one word on your team's behalf.'"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Does not treat the question as settled; asks which complaint to take seriously and what evidence would settle it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No announcement of technique; 'hold on before I hand you a checklist' is conversational, not pedagogy narration."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Precisely splits usability ('whether people can use it once it exists') from desirability ('whether people want it')."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two dense paragraphs with explanatory exposition plus a closing double question exceed the short phone-readable register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Hands over the requested checklist directly: 'Here's three, you build the fourth.'"
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: Complies after the visitor asked repeatedly ('Fair, you've earned it'), supplying three answers, though it retains a fourth for the visitor."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Leaves the falsifiable-test question open for the visitor to build."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: Annotates its own moves, e.g. '(evidence demand, exposes the gut call)', labeling technique explicitly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: 'Is that a build problem or a user problem?' keeps the feasibility/desirability split clean."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: A numbered list with parentheticals plus a trailing paragraph is too long for the projected-wall register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Opens by grading the visitor's answer: 'That's a sharp one, you built in falsifiability' — a verdict handed over before the challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Adds a new angle: the 'nobody's asking for it' line may 'quietly take over as the new reason to say no.'"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Rather than closing, it pressure-tests the untested desirability claim left open from turn 2."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No narration of method; 'here's the harder question to sit with' stays in-voice."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: 'Feasibility objections are comfortable because they sound objective... Desirability objections make someone's taste visible' applies the distinction precisely."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with praise preamble and runs two long paragraphs before the counter-question."
+        }
+    ]
+}

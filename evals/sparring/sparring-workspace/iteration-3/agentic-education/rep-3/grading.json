@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:assumption-surface, 3:reframe, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Walk me through what you think that actually includes\" redirects rather than answering what's left to learn."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Splits the claim into two distinct readings the visitor must choose between."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry; nothing is treated as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique; goes straight at the phrase \"end to end\"."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses Auftragsklärung correctly as clarifying actual versus stated client need."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Hold on\" and runs two full paragraphs with three questions, too long for a phone-and-wall read."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"That's not a prediction problem, it's a power problem\" hands the visitor the conclusion instead of letting them reach it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Challenges the assumption of a correct label with a concrete engagement-versus-user example."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Keeps pressure on the \"pattern to learn\" claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No self-narration; goes directly to the training-label question."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly separates client (\"who paid\"), designer, and user (\"never got asked\"), which is exactly the customer/stakeholder/user distinction the scenario turns on."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with \"Okay\" instead of the sharpest counter-move and stretches over two paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Asserts \"That's what junior work actually is underneath the task list\" as a settled answer rather than eliciting it from the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Adds a new angle, the judgment pipeline, which gives the visitor concrete material to work with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Ends on an open challenge about how judgment is acquired."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No technique narration."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Avoids specialist vocabulary, and the \"feature factory\" reference is used appropriately."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two long paragraphs with a lecture-like explanation of how judgment forms, far beyond 1-2 short paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"I'd bet the thing you want to cut is actually where the rep-building happens\" pre-supplies the conclusion."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Demands a concrete example of \"theater\" rather than accepting the partial concession."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Refuses to settle: \"don't let yourself off easy on the other half.\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No narration of method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: References studio exercises and critique formats appropriately."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the preamble \"Good,\" which praises before the counter-move."
+        }
+    ]
+}

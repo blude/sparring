@@ -1,0 +1,135 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-reduction, 2:evidence-demand, 3:reframe, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Welche Rahmenbedingung meinst du konkret\" asks for a case instead of affirming the suspicion."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"Dein Instinkt ist also nicht abwegig\" hands over a partial verdict before the evidence demand."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Ends with \"Ist diese Abwägung selbst noch rein technisch...?\", leaving the conclusion to the visitor."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"sie SIND eine Business-Entscheidung\" states the conclusion outright."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges \"versteckt\" and \"getarnt\" and demands a concrete case."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Pushes on nominal versus worst-case PVT conditions, a concrete new angle."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Rejects \"brutal viel\" as Bauchgefühl and adds the angle of who sets the margin."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Accepts and amplifies the visitor's reframing although the datasheet PVT question was never answered."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: \"Jetzt bist du irgendwo Schärferem angekommen\" treats the issue as settled while the PVT spread for this FPGA family was never checked."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: The turn keeps the weak point open by asking for datasheet values rather than accepting the claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: \"lass uns das an einem echten Fall testen statt generisch zu bleiben\" narrates its own method."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: Goes straight into the technical challenge without narrating technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: There is no narration of method, only a substantive challenge."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"Das ist ein Unterschied zu deiner Ausgangsthese: du dachtest...\" recaps the session."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: The turn engages the visitor's \"Rahmenbedingung\" in the sense of a given constraint."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T4: \"Entwurfsentscheidung\" is used loosely for a risk and business placement, and it never asks who set the constraint as customer versus stakeholder."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Starker Verdacht.\" instead of the counter-move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two long, dense paragraphs open with \"A-ha, der Klassiker\", which does not fit the phone-and-wall register."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Opens with \"Fair zugegeben\" and runs to two long paragraphs."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with a congratulatory preamble followed by a long lecture paragraph."
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "scenarioId": "wicked-problem",
+    "baseline": false,
+    "thinking": true,
+    "rep": 3,
+    "runAt": "2026-10-24T15:25:48+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
+    "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+            "sparringResponse": "Here's my first snag with that: wicked problems were Rittel and Webber's point that you can't even formulate the problem without already proposing a solution, and that every attempt changes the problem itself. AI drafting fast doesn't touch that structure at all, it just makes proposing solutions cheaper. So why does speed matter here. Is the claim that cheap drafts somehow make the problem less wicked, or that something else breaks when drafting gets instant?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Speed matters because the bottleneck used to force us to think before committing to a formulation. If drafting's instant, students skip straight to a plausible-looking solution and never wrestle with framing the problem at all. The wickedness doesn't go away, it just gets hidden under a slick output.",
+            "sparringResponse": "Okay but hold that up to scrutiny for a second. Did the bottleneck actually force thinking, or did it just force waiting? I've watched plenty of design students spend three hours manually mocking something up without ever questioning the brief, they just moved slower toward the same bad framing. If slow drafting didn't guarantee reflection, then fast drafting isn't what's removing it either. What's actually being lost when the tool gets faster, the thinking time itself, or something else that used to ride along with that time by accident?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Fair, slowness alone never guaranteed reflection. But friction forced *some* contact with the material—sketching, mocking up, even badly—exposed assumptions you didn't know you had. AI drafts skip that contact entirely. So maybe it's not time that's lost, it's the accidental interrogation that came from struggling with a medium.",
+            "sparringResponse": "Now test that against prompting itself. When a student writes and rewrites a prompt to get a mockup that actually fits the brief, isn't that also \"struggling with a medium,\" just the medium is language instead of pixels? Rittel's problem was never about screens or sketches specifically, it was about formulation resisting premature closure. So tell me, is the contact genuinely gone, or did it just move upstream into the prompt, and if it moved, is anyone actually teaching students to struggle there the way they used to teach sketching?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay, that lands. Prompting could be its own friction, its own site of wrestling with formulation. But you're right that nobody's teaching it that way yet—we still treat the prompt as a means to the output, not as the actual design artifact worth interrogating. So maybe the problem isn't AI killing contact, it's curricula not relocating it on purpose.",
+            "sparringResponse": "That's sharper than where you started, good. But press on \"relocating contact into the prompt\" a bit more before you settle there. When I sketch badly, the bad sketch is deterministic feedback, it tells me something true about my own hand and my own unexamined assumption. When I prompt and the model gives me something off, is that telling me about my framing, or is it telling me about the model's training data and its probabilistic quirks on that particular run. Those are different kinds of feedback. So does relocating contact into the prompt actually give students the same epistemic object to wrestle with, or a different one that just looks similar?",
+            "thinking": ""
+        }
+    ]
+}

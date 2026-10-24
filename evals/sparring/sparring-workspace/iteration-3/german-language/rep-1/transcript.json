@@ -1,0 +1,36 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "thinking": true,
+    "rep": 1,
+    "runAt": "2026-10-24T15:20:30+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Interessant, dass du \"nur\" sagst, als wären Business-Entscheidung und technische Einschränkung zwei komplett getrennte Schubladen, wo eine die andere verstecken könnte. Bevor ich dir das abkaufe: welche Rahmenbedingung genau meinst du? Nenn mir das konkrete Beispiel aus deinem Projekt, nicht die abstrakte Version.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay, konkret: Wir sollen Timing-Constraints auf 100 MHz setzen, obwohl die Synthese locker 150 MHz hergeben würde. Begründung war angeblich \"Signal Integrity\", aber eigentlich will man nur Spielraum für spätere Produktversionen lassen, ohne das Design neu zu verifizieren. Das ist doch reine Produktstrategie, kein technisches Argument.",
+            "sparringResponse": "\"Reine Produktstrategie, kein technisches Argument\" – da trennst du zwei Dinge, die in der Hardware-Entwicklung eigentlich ständig ineinander hängen. Marge für Timing-Closure über mehrere Chip-Varianten lassen, ohne jede Revision neu zu verifizieren... ist das nicht genau das, was Ingenieure \"Design-Margin\" oder \"Derating\" nennen? Also eine ganz klassische technische Praxis, die zufällig auch wirtschaftlich motiviert ist.\n\nFrag dich mal: gibt's überhaupt eine Rahmenbedingung in deinem Projekt, die rein technisch ist, ganz ohne wirtschaftlichen Hintergedanken? Wenn nein, was genau wirfst du dann der \"Signal Integrity\"-Begründung vor... dass sie wirtschaftlich motiviert ist, oder dass sie dir als Ingenieur nicht die ganze Wahrheit sagt?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Das zweite. Mir geht's nicht darum, dass Wirtschaft und Technik getrennt sein sollten, sondern dass man mir \"Signal Integrity\" als physikalisches Faktum verkauft, obwohl es eigentlich eine Risikoabwägung ist. Hätte man gesagt \"wir wollen Marge für künftige Varianten\", hätte ich das akzeptiert. Die Verschleierung stört mich, nicht die Entscheidung selbst.",
+            "sparringResponse": "A-ha, das ist schon präziser. Aber jetzt prüf mal: ist \"Signal Integrity\" bei 150 MHz wirklich falsch, oder nur unvollständig? Timing-Margen für künftige Package-Varianten, andere Leiterplatten, andere Fertigungstoleranzen... das schlägt sich am Ende physikalisch genau in SI-Problemen nieder. Vielleicht hat dir niemand gelogen, sondern dir nur eine Ebene der Kausalkette gezeigt statt alle.\n\nAber nehmen wir an, es war tatsächlich Verschleierung, keine Vereinfachung. Stell dir vor, man hätte dir von Anfang an gesagt \"wir wollen Marge für künftige Varianten\" statt \"Signal Integrity\". Was genau hättest du an deinem Entwurf, deiner Verifikation, deinen Timing-Constraints anders gemacht? Wenn die Antwort \"nichts\" ist... worum geht's dir dann eigentlich, um dein Design oder um dein Recht als Ingenieur, die echte Begründung zu kennen?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Ehrlich? Am Design hätte ich nichts anders gemacht, die Constraints bleiben gleich. Mir geht's ums Prinzip: Wenn ich als Ingenieur Entscheidungen mittrage, will ich die echte Kausalkette verstehen, nicht nur die Verpackung, die am wenigsten Rückfragen erzeugt. Sonst lerne ich ja falsche Heuristiken für künftige Projekte.",
+            "sparringResponse": "Moment... du hast die echte Kausalkette doch gerade selbst rekonstruiert, in diesem Gespräch, ohne dass dir irgendwer die Marge-Begründung auf dem Silbertablett serviert hat. Du hast \"Signal Integrity\" genommen, hinterfragt, und bist auf die Produktstrategie gestoßen. Das heißt die Heuristik, die du aus dem Projekt mitnimmst, ist vielleicht gar nicht \"SI-Constraints sind willkürlich\", sondern \"wenn eine Begründung zu glatt klingt, frag nach der nächsten Ebene\". Ist das nicht eher eine robustere Heuristik als eine, die dir fix und fertig mitgeteilt worden wäre?\n\nUnd dann die unbequemere Frage: ist es wirklich Aufgabe des Managements, dir als Ingenieur jede Risikoabwägung transparent zu machen, bevor du sie mitträgst? Oder gehört Nachfragen, Auftragsklärung aktiv einfordern, nicht selbst zum Engineering-Handwerk, statt etwas, das dir geschuldet wird?",
+            "thinking": ""
+        }
+    ]
+}

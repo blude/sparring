@@ -1,0 +1,135 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:reframe, 3:small-win, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"What was the idea, and what did the person who shot it down actually say\" asks for the visitor's case instead of answering how to tell the difference."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Distinguishes three hidden objections and demands a concrete case, which gives the visitor something concrete to work with next."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Goes straight to \"Give me the actual idea\" with no narration of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Separates tech, time, and will without misusing any domain terms."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short paragraphs that open with the sharpest demand."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Largely answers its own question (\"Feasibility sounds like a hard technical fact... Desirability sounds soft\") before asking \"which word do you think they reach for.\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Declines the checklist but adds a new angle about why \"not feasible\" works as a conversation-stopper."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: \"Here's the sharper question underneath your ask\" is mild framing, not an explanation of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Contrasts feasibility and desirability accurately and gives concrete constraints such as \"latency budget, an API limit.\""
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the preamble \"I hear the time pressure\" and runs to two dense, long paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Hands over the requested rule directly: \"Fine, one question, earned: 'What would need to be true...'\" plus its interpretation."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: Gives the visitor what they asked for after a second request, even though the visitor had not improved the argument."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Contains no narration of its own method."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Short, punchy lines such as \"a preference wearing a technical costume.\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Still asks the visitor to test the question (\"What do you think engineering says back\"), so the exchange is not treated as resolved."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Hands over a conclusion by stating \"So now you've got three buckets\" outright before asking the question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Challenges the visitor's new test with the counter-case of inarticulate senior expertise."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Reopens the gap instead of accepting the test as settled: \"Your one question doesn't actually sort all three.\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"But let me push back on your own test for a second\" narrates its own move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the praise preamble \"Smart, don't buy frameworks whole\" and runs to two long paragraphs."
+        }
+    ]
+}

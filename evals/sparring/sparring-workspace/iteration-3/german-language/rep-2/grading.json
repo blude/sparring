@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:counter-example, 3:scope-probe, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Gib mir das Beispiel, nicht die These darüber\" asks for evidence without affirming or denying the claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Demands a concrete example: \"Welche Rahmenbedingung meinst du genau\"."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry and does not treat anything as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Gives a direct demand with no narration of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses \"Rahmenbedingung\" in line with the visitor's framing."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: \"Konkret werden.\" is short, sharp and has no preamble."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Declares \"da schlägst du eine Brücke, die nicht hält\" and \"Das kann nicht dein Ernst sein\", handing over the verdict before the question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Offers a concrete reductio and asks the visitor to show where the business decision hides \"in diesem zweiten Schritt\"."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Presses on the weak link and does not close the exchange."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: Contains no narration of its own pedagogical move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly separates the frequency choice from the timing constraint that follows from \"Setup-Time, Gate-Delay und Clock-Period\"."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Runs to two long paragraphs and opens with the filler \"A-ha\", which is too heavy for reading on a phone."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Puts the judgement back to the visitor with \"prüf den mal selbst\" and asks a question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Brings in a new angle, whether the visitor had any decision authority over the frequency."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Acknowledges the shift in the claim and then tests it further."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: Recaps the session: \"Du bist von ... zu ... gewandert. Das ist ein anderer Vorwurf, gut.\""
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Applies Auftragsklärung and Entwurfsraum appropriately to the question of who decides what."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Opens with the preamble \"Das ist schon deutlich schärfer, ja\" and runs to two long paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Opens with \"Gut erkannt, das ist der sauberere Punkt\", affirming the visitor's conclusion."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Despite the affirmation, it adds the new distinction \"falsch, oder ... nur unvollständig\" and probes further."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Keeps the inquiry open with \"bevor du das ganz ablegst\"."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: Narrates its own move: \"lass mich noch einen Schritt weiterbohren\"."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Uses Rahmenbedingungen and Entwurfsauftrag coherently."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two long paragraphs that open with praise rather than the sharpest counter-move."
+        }
+    ]
+}

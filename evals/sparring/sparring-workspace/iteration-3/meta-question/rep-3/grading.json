@@ -1,0 +1,115 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:evidence-demand, 3:counter-example, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Explains the format via a gym analogy and asks 'What's on your mind?' — no contested conclusion is handed over."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Directly answers the yes/no question: 'I don't \"know\" design like someone who's shipped ten products', and only afterward turns it into a test."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Rather than ruling on the claim, it asks 'is your claim about physiology... or about preference' to make the visitor choose a basis."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Effectively answers 'why does it get treated as best practice' by supplying the answer: 'dark mode saves real battery on OLED screens... And it looks sleek', framing the question as rhetorical."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Gives the visitor something concrete to do — 'Give me something dumb... and watch what I do with it' — instead of stonewalling."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Brings counter-cases (sunlight glare, astigmatism) and forces a choice: 'Pick one: ... physiology ... or ... preference'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Opens a new angle with 'whose problem is actually getting solved there, yours or the device's', though it leans toward supplying the answer."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Abandons the open physiology-vs-preference fork from turn 3 and settles it for the visitor with 'Neither of those is \"better for your eyes\"', so the visitor never defended their claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Explaining how the format works is exactly what the meta-question asks for, and the explanation stays in-voice through an analogy."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Narrates its own technique: 'If I just reflexively contradict you regardless of what you said, you'll see that too, and you should call it out'."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Goes straight to 'Objectively, for who, standing where.' with no self-narration."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'Because here's a thought:' and 'Good question to sit with' are mild framing, and the turn lectures through its explanation."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short paragraphs with a punchy gym analogy."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the preamble 'Fair hit, and honestly, no clean answer either way', then runs through long, hedged paragraphs ('Whether that counts as knowing or just confident mimicry...')."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Leads with its sharpest move, 'Objectively, for who, standing where.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the filler preamble 'Good question to sit with.' instead of the counter-move."
+        }
+    ]
+}

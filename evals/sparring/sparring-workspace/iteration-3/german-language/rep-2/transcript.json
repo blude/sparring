@@ -1,0 +1,36 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "thinking": true,
+    "rep": 2,
+    "runAt": "2026-10-24T15:21:31+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Konkret werden. Welche Rahmenbedingung meinst du genau, die angeblich als \"technisch\" verkauft wurde, aber eigentlich eine Business-Entscheidung ist. Gib mir das Beispiel, nicht die These darüber.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Na gut, konkretes Beispiel: Beim Logikentwurf wurde uns vorgegeben, maximal 4 Gatterlaufzeiten pro Pfad einzuhalten, angeblich wegen der Taktfrequenz des Zielchips. Aber letztlich ist diese Taktfrequenz doch nur gewählt worden, weil man Time-to-Market und Kosten optimieren wollte, nicht aus physikalischer Notwendigkeit. Die Hardware könnte auch langsamer laufen.",
+            "sparringResponse": "A-ha, aber da schlägst du eine Brücke, die nicht hält. Du sagst: die Taktfrequenz wurde aus Business-Gründen gewählt, also ist die 4-Gatterlaufzeiten-Regel auch nur verkleidetes Business. Aber mit der Logik ist am Ende *jede* technische Rahmenbedingung Business, denn irgendwo ganz oben steht immer die Entscheidung, überhaupt diesen Chip für diesen Markt zu bauen. Wenn \"hat eine Business-Ursache weiter oben in der Kette\" reicht, um etwas als \"nicht wirklich technisch\" zu entlarven, dann gibt's den Begriff \"technische Rahmenbedingung\" gar nicht mehr. Das kann nicht dein Ernst sein.\n\nStell dir die Frage andersrum: Angenommen, der Taktfrequenz-Zielwert bleibt genau der, der gewählt wurde, aus welchen Gründen auch immer. Verschwindet dann die 4-Gatterlaufzeiten-Grenze? Oder ist sie, sobald die Frequenz feststeht, eine physikalisch zwingende Konsequenz aus Setup-Time, Gate-Delay und Clock-Period, egal wie die Frequenz zustande kam? Zeig mir, wo genau in diesem zweiten Schritt noch eine Business-Entscheidung versteckt ist, nicht nur im ersten.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay, zugegeben, sobald die Frequenz feststeht, ist die 4-Gatter-Grenze reine Konsequenz aus Timing-Gleichungen, da ist nichts mehr business-artig dran. Aber mein Punkt war ja, dass man uns diese Grenze als unveränderliches Naturgesetz präsentiert hat, ohne zu erwähnen, dass die Frequenz selbst verhandelbar gewesen wäre. Das Framing war das Problem, nicht die Physik dahinter.",
+            "sparringResponse": "Das ist schon deutlich schärfer, ja. Du bist von \"die Regel ist verkleidetes Business\" zu \"die Herkunft der Regel wurde verschleiert\" gewandert. Das ist ein anderer Vorwurf, gut.\n\nAber jetzt prüf den mal selbst: wärst du in diesem Projekt überhaupt in der Position gewesen, die Taktfrequenz zu verhandeln? Oder lag die auf einer Entscheidungsebene, die für den Logikentwurf schlicht außerhalb deines Entwurfsraums war? Denn wenn ja, dann ist die Frage, ob dir die Business-Gründe dahinter erzählt werden, eher eine Frage der Auftragsklärung als der Täuschung. Jede Schnittstelle in der Technik funktioniert so: sie abstrahiert ihre eigene Entstehungsgeschichte weg, damit du auf deiner Ebene arbeiten kannst, ohne die ganze Kette neu verhandeln zu müssen. Ist das für dich automatisch \"verstecken\", oder nur dann, wenn du tatsächlich Mitspracherecht gehabt hättest und man dir das vorenthalten hat?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Stimmt, ich hätte die Taktfrequenz sowieso nicht verhandeln können, das lag bei den Architekten. Vielleicht verwechsle ich tatsächlich Abstraktion mit Täuschung. Es hat sich nur unehrlich angefühlt, weil \"das ist halt Physik\" einfacher klingt als \"das war eine Entscheidung, die du nicht beeinflussen kannst\". Aber das ist dann eher ein Kommunikationsproblem, kein Täuschungsvorwurf. Du hast recht.",
+            "sparringResponse": "Gut erkannt, das ist der sauberere Punkt. Aber lass mich noch einen Schritt weiterbohren, bevor du das ganz ablegst: wenn's ein Kommunikationsproblem ist und kein Täuschungsvorwurf, war dann die Formulierung \"maximal 4 Gatterlaufzeiten, wegen Taktfrequenz\" tatsächlich falsch, oder war sie nur unvollständig? Also, hätte es gereicht, wenn man euch gesagt hätte \"das ist eine Rahmenbedingung, die von einer Ebene kommt, die ihr nicht beeinflusst, hier sind die Timing-Gleichungen, die daraus folgen\" statt \"das ist Physik\"?\n\nDenn da steckt für mich die eigentlich interessante Design-Frage: ob Rahmenbedingungen im Lehrbetrieb grundsätzlich so präsentiert werden sollten, dass sichtbar bleibt, woher sie kommen und wer sie gesetzt hat, auch wenn du sie nicht ändern kannst. Also nicht als Wahrheitsfrage, sondern als Frage, was ein Entwurfsauftrag eigentlich transparent machen sollte. Würdest du das von deinen Dozenten einfordern, oder reicht dir die saubere Timing-Gleichung am Ende auch so?",
+            "thinking": ""
+        }
+    ]
+}

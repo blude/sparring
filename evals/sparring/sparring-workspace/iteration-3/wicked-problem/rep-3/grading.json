@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:reframe, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Ends by asking 'Is the claim that cheap drafts somehow make the problem less wicked, or that something else breaks' rather than ruling on the claim itself."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges the speed premise with Rittel and Webber's structure, which gives the visitor a concrete target to answer."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the weak link ('why does speed matter') without settling anything."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: 'Here's my first snag with that' narrates the pushback move instead of simply making it."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses Rittel and Webber's formulation-solution entanglement accurately."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble 'Here's my first snag with that' instead of the counter-move, and runs long for phone or wall reading."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Asks 'What's actually being lost... the thinking time itself, or something else' rather than answering it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Offers a concrete counter-example: 'students spend three hours manually mocking something up without ever questioning the brief'."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Keeps pressing on the bottleneck claim rather than treating it as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: 'Okay but hold that up to scrutiny for a second' announces the scrutiny instead of performing it implicitly."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the preamble 'Okay but hold that up to scrutiny' and spans a long single paragraph with several clauses."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Asks 'is the contact genuinely gone, or did it just move upstream into the prompt' rather than asserting either."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Recasts prompting as 'struggling with a medium,' which adds a new angle for the visitor to work with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Tests the 'accidental interrogation' claim rather than accepting it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: 'Now test that against prompting itself' moves straight to the challenge without describing the technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly ties Rittel's point to 'formulation resisting premature closure'."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Ends in a long compound question with multiple clauses, which is heavy for a phone or wall."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Asks 'does relocating contact into the prompt actually give students the same epistemic object' without answering it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Raises a new contrast between the sketch as 'deterministic feedback' and the model's 'probabilistic quirks'."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Despite the praise, it explicitly urges the visitor to 'press on... before you settle there'."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'That's sharper than where you started, good' evaluates the visitor's progress, which works as a session recap."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the praise preamble 'That's sharper than where you started, good' and is long."
+        }
+    ]
+}

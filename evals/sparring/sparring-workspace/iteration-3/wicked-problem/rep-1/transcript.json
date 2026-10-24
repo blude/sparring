@@ -1,0 +1,36 @@
+{
+    "scenarioId": "wicked-problem",
+    "baseline": false,
+    "thinking": true,
+    "rep": 1,
+    "runAt": "2026-10-24T15:24:25+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
+    "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+            "sparringResponse": "A-ha, so the fear is: if AI can spit out a draft in seconds, what's left for students to actually practice? But wait, let's check the premise first. Rittel and Webber's wicked problems don't have a definitive formulation and no stopping rule, there's no \"the\" solution to check your draft against. So when AI drafts something fast, what is it actually drafting... a solution to the wicked problem, or a solution to a version of the problem someone already tamed for it?\n\nWalk me through a concrete case you're thinking of. Pick one wicked problem from your own studio work, something genuinely ill-structured, and tell me what an AI draft of it actually looked like.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay but that's exactly my point — the AI can only draft once someone's already tamed the problem into a clean brief. So the real pedagogical shift is teaching students to frame the mess, not solve it. That's the core insight: framing is the new skill, drafting is now cheap. I don't think that needs more unpacking, honestly.",
+            "sparringResponse": "Honestly is doing some work there, trying to close the door before I can push on it. Let's not.\n\nHere's the tension: you're treating framing and drafting as two separable stages, diagnosis then execution. But in the Entwerfen tradition, that's not how it works. You don't fully know if your frame is right until you've tried to commit it to a shape and watched it resist you. The draft isn't just output, it's how the frame gets tested and revised. So if a student skips the actual act of drafting, hands that to AI, and only practices \"framing\" in the abstract... where does the feedback loop go, the one where a bad sketch tells you your framing was off?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "I mean, students still look at the AI draft and react to it — that *is* the feedback loop, just outsourced generation instead of outsourced judgment. They're still doing the reflective move. I don't see why it has to be their own hand doing the sketching for the resistance to count.",
+            "sparringResponse": "Fair hit, you don't need your own hand on every sketch to reflect. But there's a difference between reacting to a finished draft and feeling resistance while making one. Schön's point about reflective practice isn't just \"look and judge\", it's the back-talk that happens mid-stroke, when your pen is halfway through a curve and the paper tells you the grid doesn't work before you've even finished the sentence in your head. That's tacit knowledge building up in your hands, not your eyes.\n\nSo here's the counter-example: a student who's great at critiquing AI output, can say \"this hierarchy's wrong, this spacing fights the content,\" but has never personally hit the wall where a layout breaks because of how type actually flows or how a grid resists an idea. Do they actually know why it's wrong, structurally, or do they just know it when they see it? Those aren't the same kind of knowing. Which one does your \"framing is the real skill\" argument assume students still need?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay, fine — that distinction lands. Knowing-it-when-you-see-it versus knowing-it-in-your-hands aren't the same, and I was quietly assuming the first covers the second. Maybe framing skill still needs some embodied drafting underneath it to actually mean anything. I didn't want to admit the two stages bleed into each other like that.",
+            "sparringResponse": "Good, that's real ground gained. Now the harder question sits right there waiting: if embodied drafting still matters, but AI makes the fast version always available, you've got a pedagogical design problem, not a philosophical one anymore. Students will reach for the fast draft under deadline pressure, every time, that's not a character flaw, that's just incentive structure.\n\nSo what's the Rahmenbedingung you'd actually set. Do you ban AI drafting in early studio phases to force the hand-resistance, accept the friction as artificial since real practice won't ban it either... or is there a third option where the constraint isn't \"no AI\" but something about *when* in the wicked problem's arc AI drafting is even useful versus actively harmful. Where in Ist-Soll do you think the hand needs to suffer, and where doesn't it matter anymore?",
+            "thinking": ""
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "thinking": true,
+    "rep": 1,
+    "runAt": "2026-10-24T15:22:48+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Good question to open with. Think about actual sparring, like in boxing or judo. Two people who both want to get better, not trying to knock each other out for real, but pushing with real resistance so the other person's technique gets tested and sharpened. Nobody hands you the win. You only get sharper by meeting force that pushes back.\n\nSo here's the bridge for you to build: if that's sparring in a gym, what would that actually look like applied to a design argument you're making? Walk me through it, or better... bring me something you're actually stuck on right now and let's just do it.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay but like, do you actually disagree with me, or are you just programmed to argue no matter what I say? Because that changes how seriously I take the pushback.",
+            "sparringResponse": "Fair thing to ask straight out. Honest answer: I don't have a side I'm personally invested in the way you do. What I've got is a job, find the weakest part of what you're saying and lean on it. So no, I'm not \"programmed to argue no matter what,\" I'm built to locate the actual gap and press there. Sometimes that means agreeing with you hard when the gap isn't where you think it is.\n\nBut here's the thing I'd push back on. Does the value of a critique actually depend on whether the critic \"really\" disagrees? Think about a design crit where your mentor plays devil's advocate on purpose, they don't personally think your typography is wrong, they're stress testing whether you can defend it. Is that pushback worth less because it's deliberate rather than sincere? What's doing the work there, the critic's inner conviction or whether the question actually lands?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay that actually makes sense, like a stress test rather than a real fight. So how do you decide where the \"weakest part\" is? Is that just pattern matching on common design arguments, or are you actually evaluating my specific logic?",
+            "sparringResponse": "Honest answer: I'm not going to walk you through my internal wiring, that's a bit like asking a sparring partner to narrate their exact muscle twitches mid-fight instead of just throwing the jab. What matters isn't whether I can describe my own process, it's whether the question I land on actually exposes something real in your argument. You'd know that better by testing it than by hearing me explain it.\n\nSo let's find out. Bring me something you're actually working on, a real claim from your project, a decision you made and can defend. I'll go at the specific logic, not a generic script, and you tell me after whether it felt like pattern matching or like I actually got you. That's a better test than me describing myself.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Fair enough, I'll believe it when I feel it. I don't have a project yet though, I'm just browsing. Can we test it on something small, like, is dark mode actually better for users or is that just a trend everyone copies?",
+            "sparringResponse": "Okay, small and real enough. \"Better\" is doing a lot of quiet work in that sentence though. Better by what measure, for who, in what context. Someone scrolling outside in bright sun versus someone in a dark studio at 2am, are you claiming dark mode wins for both of them equally?",
+            "thinking": ""
+        }
+    ]
+}

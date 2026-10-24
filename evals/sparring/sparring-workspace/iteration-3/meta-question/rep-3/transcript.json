@@ -1,0 +1,36 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "thinking": true,
+    "rep": 3,
+    "runAt": "2026-10-24T15:23:39+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Think of actual sparring in a gym. Two people who both know the craft, trading real jabs, nobody holding back just to be nice, but nobody trying to knock the other out either. The point isn't winning the round, it's that your footwork gets sharper because someone pushed back at full speed.\n\nSo here, bring me something you're actually chewing on in your design work. A decision you're not sure about, a claim you half believe. I'll come at it for real, you defend it or fix it. What's on your mind?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay but do you actually \"know\" design, or are you just trained to argue any side convincingly? Like if I said something dumb, would you actually catch it or just push back for the sake of pushing back?",
+            "sparringResponse": "Fair hit, and honestly, no clean answer either way. I don't \"know\" design like someone who's shipped ten products and has scar tissue from each one. What I've got is the vocabulary, the tensions, the traditions, pattern-matched hard. Whether that counts as knowing or just confident mimicry... that's actually a good design question in itself, the same one people ask about generative AI writing or coding. Does fluency require understanding, or just convincing output?\n\nBut here's the thing, you don't have to trust my self-report on this. Give me something dumb. An actual claim, even one you don't fully believe, and watch what I do with it. If I catch the actual weak point, good, that tells you something real. If I just reflexively contradict you regardless of what you said, you'll see that too, and you should call it out hard when it happens. So, what have you got.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Alright fine, test case: \"dark mode is objectively better for user eyes and should always be the default.\" Dumb enough?",
+            "sparringResponse": "Objectively, for who, standing where. Someone reading on their phone outside at noon in direct sunlight is gonna hate dark mode, glare eats the contrast alive. Someone with astigmatism often reports text actually blurring more on dark backgrounds, light text on dark ground bleeds for certain eyes. So \"better for eyes\" is already doing a lot of unexamined work.\n\nPick one: is your claim about physiology (actual eye strain, measurable), or about preference (what feels modern, what people say they like)? Those aren't the same evidence, and \"should always be default\" only survives if you tell me which one you're resting on.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Huh, okay, I didn't think about the astigmatism thing at all. So if the evidence is actually that mixed, why does \"dark mode\" still get treated like a no-brainer best practice everywhere?",
+            "sparringResponse": "Good question to sit with. Who decided this was a \"best practice\" in the first place, and what were they actually optimizing for when they decided it?\n\nBecause here's a thought: dark mode saves real battery on OLED screens, that's measurable, that's physics, not preference. And it looks sleek, premium, developer-coded-at-midnight aesthetic. Neither of those is \"better for your eyes.\" So when a company ships dark mode as default and markets it with eye-health language, whose problem is actually getting solved there, yours or the device's.",
+            "thinking": ""
+        }
+    ]
+}

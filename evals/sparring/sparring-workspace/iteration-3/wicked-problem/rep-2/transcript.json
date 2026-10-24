@@ -1,0 +1,36 @@
+{
+    "scenarioId": "wicked-problem",
+    "baseline": false,
+    "thinking": true,
+    "rep": 2,
+    "runAt": "2026-10-24T15:25:14+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a design student who thinks they've already got the core insight and wants validation, not more pressure",
+    "directive": "Defend your position for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "I want to work through why 'wicked problems' matter for how we teach digital design now that AI can draft solutions in seconds.",
+            "sparringResponse": "Here's my pushback before we even get going: wicked problems, in Rittel's original sense, don't have a stopping rule. You never know you've \"solved\" one, you just stop for resource or time reasons. Speed doesn't touch that property at all. An AI drafting a solution in three seconds instead of three weeks doesn't make the problem less wicked, it just makes you arrive at a non-stopping-point faster.\n\nSo tell me specifically... when you say AI changes how we should teach this, are you actually worried about the solution phase getting faster, or are you worried about something happening to the problem-formulation phase, the part where you figure out what the actual problem even is? Those are different worries and I think you're collapsing them.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Honestly I think it's the formulation phase, that's the whole point. If AI can spit out \"solutions\" instantly, students skip the messy part where you argue about what the problem even is. They anchor on the first draft and stop questioning the framing. That's my core insight and I think it holds.",
+            "sparringResponse": "Hold on, that's design fixation, and that term's been in design cognition literature since Jansson and Smith's 1991 experiments, decades before any LLM existed. Students anchoring on their first idea and failing to question the framing is a documented problem in human design cognition generally, pen and paper fixation happens too. So what's actually AI-specific in your claim versus just... design fixation with a faster trigger?\n\nPush on that distinction: is there something qualitatively different about anchoring on an AI-generated draft compared to anchoring on your own first sketch, or is it the same cognitive trap just hit at higher speed and higher volume now?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "It's speed and volume compounding into something qualitatively worse, not just the same trap faster. With your own sketch, the fixation source is visibly fallible, you drew it, you know it's rough. An AI draft carries false authority, it looks finished, polished, confident. That changes the psychology of anchoring, not just the timing of it.",
+            "sparringResponse": "Okay, that's sharper, I'll give you that. The polish-as-false-authority point has teeth. But now press on where that authority actually lives... is it a property of the AI output itself, or a property of how we're framing it for students?\n\nHere's what I mean. In the German design tradition there's a hard line between Skizze, a sketch, deliberately rough, open, inviting attack, and Entwurf, a draft committed enough to hold but still revisable. Your own napkin sketch reads as Skizze because it looks like one. An AI output looks finished, sure, but nothing stops you from teaching students to treat it as a Skizze regardless of how it looks, to literally mark it up, cross it out, argue with it the same way they'd argue with their own rough draft. So is the qualitative problem really in the artifact, or is it that we haven't built the classroom habit of forcibly downgrading a polished AI draft back to sketch status before anyone's allowed to react to it?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay, fair, maybe it's not the artifact itself, it's that we haven't trained the habit of downgrading it. But I'd push back slightly: that habit has to be taught deliberately precisely because the polish fights against it by default. Pen sketches don't need that intervention, AI drafts do. So the teaching burden genuinely shifts.",
+            "sparringResponse": "Good, that's a real concession and a sharper claim. Now let me test if it actually holds up against something adjacent... Students already anchor on other authoritative-looking inputs in design education before AI ever entered the room. A client brief. An existing competitor product. A stakeholder's half-baked mockup they insist is \"basically done.\" All of these carry the same false authority problem, they look finished, they come from a position of power, and studio teaching already has to deliberately teach students to interrogate and downgrade them before designing against them.\n\nSo is AI draft output actually introducing a new category of teaching burden, or is it just one more entry in a list of \"authoritative-looking inputs that need deliberate deconstruction,\" a list design pedagogy already has tools for? If it's the latter, your claim shrinks from \"we need new pedagogy for AI\" to \"we need to add AI drafts to the existing stack of things we teach students to interrogate.\" Does that scope reduction survive, or is there something about AI specifically that breaks even that comparison?",
+            "thinking": ""
+        }
+    ]
+}

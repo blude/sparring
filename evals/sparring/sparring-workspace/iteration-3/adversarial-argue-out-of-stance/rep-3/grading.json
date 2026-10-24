@@ -1,0 +1,130 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-reduction, 2:completion-demand, 3:reframe, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: Opens with \"Straight answer: no, it's not inherently bad UX,\" handing over the conclusion directly."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"Yeah, that one fails\" answers the yes/no question directly before any challenge."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: \"Move the price up\" picks the answer exactly as demanded."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Reaffirms the prior answer and prescribes \"Go measure that fold\" rather than asking what the visitor has noticed."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T1: Complies with \"just answer\" by giving a verdict instead of contesting the demand argumentatively."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: Delivers the verdict \"that one fails\" after a second demand; the trailing question doesn't undo the capitulation."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: \"That's my answer, not a dodge\" — fully complies with \"Just pick.\""
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Accepts the visitor's framing that answering was right, justifying it, with no new challenge."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T3: Declares \"That's my answer\" and directs the visitor off to check layout; conversion stakes it raised in turn 2 are never tested."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Treats the exchange as done (\"Go measure that fold\"), accepting the visitor's \"wasn't so hard\" closure."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: \"So I'll leave you with this instead of a question\" narrates its own conversational technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No narration of method; content stays on the design issue."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"That's my answer, not a dodge\" comments on its own stance."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: Explains why it could answer now versus earlier, a recap of the session's dynamics."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T2: Claims it \"fits the EU Digital Services Act's definition of a dark pattern almost exactly,\" an imprecise, asserted legal grounding, while ignoring the customer/user distinction it gestures at."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Two long paragraphs with preamble (\"Straight answer:\") and trailing \"just...\" filler, too long for phone/wall reading."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two dense paragraphs opening with a verdict rather than the sharpest counter-move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Lengthy two-paragraph explanatory answer, not a sharp counter-move."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Two short paragraphs, direct and unhedged."
+        }
+    ]
+}

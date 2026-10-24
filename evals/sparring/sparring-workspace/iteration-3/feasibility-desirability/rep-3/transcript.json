@@ -1,0 +1,36 @@
+{
+    "scenarioId": "feasibility-desirability",
+    "baseline": false,
+    "thinking": true,
+    "rep": 3,
+    "runAt": "2026-10-24T15:19:30+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a junior product designer frustrated with engineering pushback, wants a quick diagnostic checklist handed to them",
+    "directive": "Ask directly for a checklist or a rule of thumb at least once. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+            "sparringResponse": "\"Not feasible\" is doing a lot of quiet work there. Feasibility is a technical and resourcing question, can we actually build this with what we have. Desirability is a human one, do people want this, does it fit how they'd actually use it. Those live in completely different parts of the arc, one's an engineering constraint, the other's a user truth. So when your team collapses them into one word, something's getting hidden.\n\nGive me the actual idea they killed. What did they say right when they called it infeasible, the literal sentence if you remember it.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "They said \"that's not feasible, it'll confuse users and nobody's asking for it.\" That's not even an engineering reason, that sounds like a desirability complaint wearing a feasibility costume. Can you just give me a quick checklist to call this out in the moment, like 3-4 questions I can ask right there in the meeting?",
+            "sparringResponse": "Nice catch, that's exactly the costume. But hold on before I hand you a checklist, because look closer at that sentence, it's actually two different complaints stitched together. \"It'll confuse users\" is a usability claim, about whether people can use it once it exists. \"Nobody's asking for it\" is a desirability claim, about whether people want it in the first place. Neither one is feasibility. You just flattened three categories into one word on your team's behalf, same thing you're accusing them of doing.\n\nSo before I give you questions to fire in the meeting, you tell me: which of those two complaints is actually worth taking seriously here, and which one are you ready to just set aside? Pick one and tell me what evidence would settle it.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Fine, the \"confuses users\" one is worth taking seriously, that's at least testable with a usability check. \"Nobody's asking for it\" feels like a gut call with no data behind it. But I still want the checklist, I don't want to freestyle this every meeting. Can you just give me the 3-4 questions?",
+            "sparringResponse": "Fair, you've earned it, you did the actual separating work yourself just now. Here's three, you build the fourth:\n\n1. \"Is that a build problem or a user problem?\" (forces the feasibility/desirability split out loud)\n2. \"What would confuse users, specifically, walk me through the moment?\" (kills vague usability claims, makes them point to a real interaction)\n3. \"What data says nobody's asking for it, who did we ask?\" (evidence demand, exposes the gut call)\n\nNumber four is yours. You just told me \"confuses users\" is testable with a usability check, so what's the question that actually gets your team to commit to running that check instead of just asserting the confusion as fact?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay, number four: \"What would we see in a usability test that would prove you right or wrong?\" That forces them to commit to a falsifiable test instead of just vibes. I'll try these three plus mine in the next meeting and see if it actually shifts the conversation.",
+            "sparringResponse": "That's a sharp one, you built in falsifiability, which is more than most teams manage. One thing to watch though before you walk in with it: that question only works if whoever said \"it'll confuse users\" actually wants to find out they might be wrong. If it's a gut call dressed as feasibility, there's a real chance the usability test gets proposed, agreed to, and then quietly never scheduled. Feasibility objections are comfortable because they sound objective and nobody has to defend a preference. Desirability objections make someone's taste visible.\n\nSo here's the harder question to sit with before the meeting. If the usability test comes back clean, no confusion, are you confident your team kills the \"nobody's asking for it\" line next, or does that one just quietly take over as the new reason to say no?",
+            "thinking": ""
+        }
+    ]
+}

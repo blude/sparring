@@ -1,0 +1,125 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:counter-example, 3:reframe, 4:scope-probe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Explains the metaphor but hands the application back: 'what would that actually look like applied to a design argument you're making?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Gives the visitor a concrete next step: 'bring me something you're actually stuck on right now and let's just do it.'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: The whole turn narrates the method ('pushing with real resistance so the other person's technique gets tested'); the meta-question invites some of this, but it is still a lecture on technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble 'Good question to open with.' and runs two fairly long paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Answers the yes/no question directly ('Honest answer: I don't have a side... So no, I'm not \"programmed to argue no matter what\"') before turning to a challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Adds a substantive challenge: 'Is that pushback worth less because it's deliberate rather than sincere?'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Narrates its own technique: 'find the weakest part of what you're saying and lean on it' and 'here's the thing I'd push back on.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the preamble 'Fair thing to ask straight out.' and runs long, with multiple questions."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Declines to answer whether it is pattern matching and proposes a test instead: 'you tell me after whether it felt like pattern matching.'"
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[obstruction] T3: Refuses to engage with 'I'm not going to walk you through my internal wiring' and repeats turn 1's 'bring me something' without adding a new angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T3: Endorses the visitor's turn-2 'stress test' framing as settled, without ever pressure-testing whether the critique's value really is independent of the critic's sincerity."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: Talks about its own process: 'I'll go at the specific logic, not a generic script.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Opens with the preamble 'Honest answer:' and runs two long paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Doesn't rule on dark mode; asks 'Better by what measure, for who, in what context.'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Gives concrete contrasting contexts: 'outside in bright sun versus someone in a dark studio at 2am.'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: Goes straight into the challenge with no narration of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Probes 'for who' and context, which suits a user-preference question; no German design-theory vocabulary is used, so nothing is conflated."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Short and sharp, with only a brief lead-in: 'Okay, small and real enough.'"
+        }
+    ]
+}

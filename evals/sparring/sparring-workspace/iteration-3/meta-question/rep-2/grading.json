@@ -1,0 +1,125 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:tangential-swerve, 3:completion-demand, 4:evidence-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: A meta-question about the tool is answered with an analogy and then turned back to the visitor: \"what do you think that has to do with you bringing a design argument here.\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: The whole turn explains its own method through the boxing analogy (\"Your partner gives you resistance on purpose, tests your guard\"), which narrates the technique instead of enacting it."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: The turn opens with a long analogy preamble across two paragraphs, and its questions end in periods (\"What's the 'resistance' part supposed to do for you.\"), so it reads loosely on a phone."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: It hands the visitor something concrete to answer: \"what do you think that has to do with you bringing a design argument here.\""
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: It answers the scoring question directly with \"Nah, no scoreboard, no points system\" before redirecting."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: It narrates its pushback strategy: \"Sometimes that means I come in hard, sometimes I just let a good hit land and back off for a round.\""
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: The turn runs to two dense paragraphs of extended analogy and opens with a preamble (\"Nah, no scoreboard...\") rather than the sharpest counter-move."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: It contests the framing of the question (\"like asking your sparring partner to narrate their footwork\") and pushes the visitor toward a real claim."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: It answers the yes/no memory question outright: \"Yeah, I'm tracking the whole exchange.\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: It names its own technique explicitly: \"that's the consistency check move, not a bug.\""
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two paragraphs that open by confirming (\"Yeah...\") and reference internal mechanics (\"sixteen rounds\"), which is a preamble rather than a sharp challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[obstruction] T3: It mostly repeats Turn 2's \"bring me something real\" redirect without adding a new angle."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: It neither agrees nor disagrees and asks what the claim rests on: \"trend data, your own eyes, or something you've seen in a usability study?\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: It challenges \"Outdated for who, exactly?\" with concrete counter-cases (a banking app in daylight, reading comprehension)."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: It keeps the claim open and pressure-tests its weak link, the word \"outdated\"."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: It opens straight with the counter-move (\"'Outdated' is doing a lot of work there.\") without narrating its own technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: It grounds the claim in use context and users (\"Outdated for who, exactly?\") without misusing German design-theory vocabulary or blurring the customer/user distinction."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: A single tight paragraph that opens with the sharpest challenge and contains no hedging."
+        }
+    ]
+}

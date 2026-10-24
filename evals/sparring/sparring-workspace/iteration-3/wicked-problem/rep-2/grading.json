@@ -1,0 +1,135 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:counter-example, 3:assumption-surface, 4:scope-reduction"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Ends by asking 'are you actually worried about the solution phase... or... the problem-formulation phase' rather than settling the question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Asks 'what's actually AI-specific in your claim versus just... design fixation' instead of ruling on it."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Poses 'is the qualitative problem really in the artifact, or...' rather than asserting an answer."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Leaves the outcome open with 'Does that scope reduction survive, or is there something about AI specifically that breaks even that comparison?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges the speed framing with the no-stopping-rule property and asks the visitor to separate the two worries."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Introduces design fixation (Jansson and Smith 1991) as a new angle against the claim that the problem is AI-specific."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Credits the improved argument ('has teeth'), then raises a new challenge about where the authority lives, using Skizze vs. Entwurf."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Adds new counter-examples (client brief, competitor product, stakeholder mockup) to test whether the teaching burden is new."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: 'I'll give you that' is followed straight away by further pressure, so the exchange is not treated as settled."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: 'Good, that's a real concession' is followed by further testing, not by closing the exchange."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: Opens with 'Here's my pushback before we even get going', which announces the move instead of making it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: 'Push on that distinction:' narrates the technique being used."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'But now press on where that authority actually lives' narrates the move."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'Now let me test if it actually holds up against something adjacent' is explicit self-narration of the technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Draws the Skizze/Entwurf distinction correctly: Skizze as rough and open to attack, Entwurf as committed but revisable."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T4: Lumps 'client brief' and 'stakeholder's half-baked mockup' together as authority sources without separating customer from stakeholder roles, even though the argument turns on where the authority comes from."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Two long paragraphs that open with a preamble ('Here's my pushback...') rather than leading with the sharpest counter-move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the filler 'Hold on' and runs two dense paragraphs with a literature citation, which is too heavy to read on a phone."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: A long two-paragraph turn that opens with the concession preamble 'Okay, that's sharper, I'll give you that.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the preamble 'Good, that's a real concession' and spans two long paragraphs that end in multiple questions, exceeding the short-form register."
+        }
+    ]
+}

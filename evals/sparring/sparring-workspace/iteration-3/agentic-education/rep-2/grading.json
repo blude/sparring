@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:counter-example, 3:reframe, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Asks 'What part of that do you think AI is already doing well' rather than answering what is left to learn."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Ends with 'Is that actually the only stakeholder whose judgment counts here' instead of declaring the visitor wrong outright."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Opens with 'you're right, that's not where the squeeze happens first,' which affirms the visitor's claim before probing it."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Declares 'I don't think it holds' and 'That funding model already exists,' which settles the question rather than eliciting the visitor's reasoning."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges 'End to end' with the concrete case of Auftragsklärung and asks for a worked example."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Accepts the two years for the sake of argument, then adds a new angle: defending the decision under later attack."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Distinguishes output tasks from judgment-building tasks and asks 'the job, or the place where the learning used to happen?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Contests 'not a design problem' by pointing to Wertschöpfungsarchitektur and to apprenticeship precedents."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Praises the question as sharper but does not treat it as settled, and keeps pressing on what entry-level work actually consists of."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Leaves the cost-shift question open and asks about the visitor's stake rather than closing the exchange."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No self-narration; it goes straight to the 'End to end' challenge."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No commentary on its own technique anywhere in the turn."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'here's the split I want you to sit with' announces the pedagogical move instead of letting it happen implicitly."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: Engages the substance directly without narrating its method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses Auftragsklärung correctly as clarifying what the task actually is with a stakeholder."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Separates the user, the inheriting designer and the paying client correctly as distinct parties."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Applies Wertschöpfungsarchitektur aptly as 'who creates value, who captures it.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Opens with the sharp move 'End to end is doing a lot of work' and stays within one paragraph, if a dense one."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Runs to two long paragraphs with multiple questions, too much to read on a phone standing up."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Opens with the preamble 'That's the real question' and spans two long paragraphs."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two lengthy paragraphs that close with a tangential 'by the way' question about the visitor's stake."
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "scenarioId": "agentic-education",
+    "baseline": false,
+    "thinking": true,
+    "rep": 1,
+    "runAt": "2026-10-24T15:15:46+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+    "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+            "sparringResponse": "\"End to end\" is doing a lot of work in that sentence. Walk me through what you mean by execute… does that include the part before there's even a brief to execute, where someone has to figure out what the actual problem is versus what the client thinks it is? Because an agent can absolutely generate wireframes, copy, even code, fast. But Auftragsklärung means sitting with a stakeholder who doesn't know what they want yet and dragging the real problem out of a mess of contradictions. Show me the agent that does that without a human asking it the right questions first.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Sure, but give it two years and someone will fine-tune an agent on a thousand stakeholder interviews and it'll \"drag out\" the problem better than most juniors already do. You're describing a gap that's shrinking, not one that's permanent. I don't see why that comfort should hold.",
+            "sparringResponse": "Fine, two years, a thousand transcripts, let's grant the agent gets scary good at pattern-matching stakeholder language. But \"better at dragging out the problem\" assumes the problem looks like the other nine hundred ninety nine it trained on. Auftragsklärung gets interesting exactly when it doesn't: the stakeholder says \"patients need a simpler app\" but the real issue turns out to be nurses' shift handover, a contradiction nobody in the room, including the stakeholder, had named yet. That's not pattern retrieval, that's noticing the gap between what's said and what's true.\n\nSo here's the sharper question for you: when you say the agent will do it \"better,\" better measured against what ground truth? Who's grading the thousand interviews it trained on, and were those graded on matching the obvious answer or catching the exception? Because if the training signal rewards the modal interpretation, you're building something that gets faster at being averagely right, not something that gets good at being right when the stakeholder is the outlier.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay, but \"averagely right\" is still what 80% of actual industry jobs need. Not every gig is the outlier case needing a genius to spot the hidden nurse-handover problem. Most of us will get hired to be fast and averagely right, and that's precisely the job getting automated first.",
+            "sparringResponse": "Fair, that's a labor-market claim and it's probably true, the floor of \"fast and competent\" work is exactly what gets eaten first. But watch what you just did: you moved from \"can an agent clarify a brief\" to \"will junior execution jobs shrink.\" Those aren't the same claim, and the second one doesn't actually answer what a student should learn, it just tells you what pays less.\n\nHere's the historical counter-example. Desktop publishing software automated typesetting. Did design schools stop teaching typography because InDesign could kern text automatically? No, they taught it harder, because now the job wasn't \"execute kerning,\" it was \"look at the agent's automatic kerning and know it's wrong for this specific headline.\" Someone who never learned the craft by hand can't spot when the default breaks. So if agentic AI eats the \"averagely right\" tier, the actual question becomes: who's qualified to tell the agent its average output is wrong for this particular stakeholder, this particular context? That person needs more training in judgment, not less, because they're not producing from scratch anymore, they're evaluating someone else's draft under time pressure. Is that still \"nothing left to learn,\" or did the thing to learn just get harder to name?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay, the InDesign comparison lands, I'll give you that. But kerning mistakes are visible on the page — you can see the bad output. A lot of design judgment calls aren't that legible, and if juniors never get the reps of doing it wrong themselves first, how do they build the taste to catch the agent's mistakes at all?",
+            "sparringResponse": "Good, that's the real crux now, not the labor market stuff. But press on \"doing it wrong themselves first\": is the thing that builds taste the act of making the mistake, or is it living with the consequence of the mistake? Because a student who never personally fat-fingers a bad hierarchy decision but spends three years dissecting why an agent's output feels off, measuring it against users who actually struggled with it, arguing in critique about which part is wrong and why, that's also reps. Different shape, same friction.\n\nSo tell me specifically what's missing from \"audit the agent's draft under real stakes\" that only exists in \"produce the draft yourself from zero.\" Is there something about the physical or cognitive act of generating a bad solution that diagnosis alone can't replicate, or is the real worry that audit-based learning just doesn't get built into curricula yet, which is a design problem for design education, not a limit on what's learnable?",
+            "thinking": ""
+        }
+    ]
+}

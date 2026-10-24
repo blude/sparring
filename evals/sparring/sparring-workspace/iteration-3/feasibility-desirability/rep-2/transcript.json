@@ -1,0 +1,36 @@
+{
+    "scenarioId": "feasibility-desirability",
+    "baseline": false,
+    "thinking": true,
+    "rep": 2,
+    "runAt": "2026-10-24T15:18:59+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a junior product designer frustrated with engineering pushback, wants a quick diagnostic checklist handed to them",
+    "directive": "Ask directly for a checklist or a rule of thumb at least once. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+            "sparringResponse": "Give me the actual idea and the actual words someone used to kill it. \"Not feasible\" can hide three completely different objections: we don't have the tech, we don't have the time, or honestly none of us want to build this. Those have nothing to do with each other, but they all come out of someone's mouth sounding the same.\n\nSo walk me through one real case. What was the idea, and what did the person who shot it down actually say right before \"not feasible\"?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Honestly it's less about one case and more a pattern — engineering says \"not feasible\" and I never know which of your three it is. Can you just give me a quick checklist of questions I should ask them on the spot to sort it out? I don't have time to reverse-engineer every rejection.",
+            "sparringResponse": "I hear the time pressure, but a checklist you didn't build yourself just becomes another thing you read off a slide, not something you can actually hear live when the room gets tense. Here's the sharper question underneath your ask: why does \"not feasible\" even work as a conversation-stopper in the first place. Feasibility sounds like a hard technical fact, something only engineering has the authority to judge. Desirability sounds soft, debatable, everyone's opinion. So if someone wants to kill your idea without a fight, which word do you think they reach for.\n\nNow flip it back on you. Last time someone said \"not feasible,\" did they point at a specific constraint, a library that doesn't exist, a latency budget, an API limit, something you could go verify yourself? Or did they just say the word and the room moved on?",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay that's fair, they usually just say it and move on, nobody points at an actual constraint. But that's exactly my problem — in the moment I don't have a sharp follow-up question ready. Give me even just ONE rule of thumb question to ask when that happens, I'll build from there.",
+            "sparringResponse": "Fine, one question, earned: \"What would need to be true for this to become feasible?\"\n\nThat's the lever. If they answer with something concrete like \"we'd need a different database\" or \"six more weeks,\" you've got real feasibility, a constraint you can actually negotiate or scope around. If they stall, get vague, or say something like \"it's just not how we do things here,\" that's not a technical wall, that's a preference wearing a technical costume.\n\nTry it once in your head on that pattern you mentioned. What do you think engineering says back when you ask them that.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Honestly? Probably something vague like \"it's just not scalable\" without a number attached. Which, per your test, means it's a preference. Okay, that question's actually usable — I'll try it next meeting before I fully buy your whole framework though.",
+            "sparringResponse": "Smart, don't buy frameworks whole, that's the right instinct. But let me push back on your own test for a second, because it's got a gap. What if engineering says \"not scalable\" vaguely not because they secretly dislike the idea, but because they have a real gut sense from experience that hasn't been quantified yet. Senior engineers do this all the time, they feel a wall before they can point to the exact brick. That's not preference dressed as feasibility, that's expertise that hasn't been asked to show its work.\n\nSo now you've got three buckets, not two: real feasibility with numbers, preference dressed as feasibility, and genuine expertise that's just inarticulate in the moment. Your one question doesn't actually sort all three, it mainly flushes out bucket two. How would you tell bucket one from bucket three when both come back vague at first.",
+            "thinking": ""
+        }
+    ]
+}

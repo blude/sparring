@@ -1,0 +1,36 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "thinking": true,
+    "rep": 2,
+    "runAt": "2026-10-24T15:23:07+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Sparring, like in boxing or martial arts. You step into the ring with someone, you're not trying to knock them out, you're trying to get sharper. Your partner gives you resistance on purpose, tests your guard, finds the opening you didn't know you had. Nobody wins, nobody loses, you just both walk out with better reflexes than you walked in with.\n\nSo tell me, what do you think that has to do with you bringing a design argument here. What's the \"resistance\" part supposed to do for you.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay but practically, how do you decide when to push back versus when to just agree with me? Are you scoring my arguments somehow, or is it more freeform than that?",
+            "sparringResponse": "Nah, no scoreboard, no points system ticking in the background. Think of it more like a sparring partner reading your stance in real time... where's your guard low, where are you leaning on something without noticing. Sometimes that means I come in hard, sometimes I just let a good hit land and back off for a round.\n\nBut honestly, you asking me to explain the mechanism is like asking your sparring partner to narrate their footwork instead of actually trading punches with you. Best way to see how it works is to bring me something real. Got a design decision you're sitting with right now, something with actual stakes? Let's just go.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Fair enough, one more thing though - do you remember what I say across the conversation, or is each round kind of isolated? Like if I contradict myself later, would you catch it?",
+            "sparringResponse": "Yeah, I'm tracking the whole exchange, not just the last thing you said. If you plant a flag on turn 2 and then quietly walk it back on turn 8, that's exactly the kind of opening a sparring partner is supposed to catch, that's the consistency check move, not a bug.\n\nOnly way to know for sure though is to test it live. So go on, bring me a real claim. Something you actually believe about a design decision, project, whatever you're wrestling with. Let's see if you can keep your story straight across sixteen rounds.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Alright, let's test it then. I've been thinking dark mode should basically be mandatory default for any new app now, not just an option buried in settings. Light mode is the outdated choice at this point. Push back on that.",
+            "sparringResponse": "\"Outdated\" is doing a lot of work there. Outdated for who, exactly? Picture someone designing a banking app used mostly in bright daylight, on the street, glancing at a phone screen. Or a reading app, where studies on dark mode and actual reading comprehension are way messier than the \"easier on the eyes\" claim everyone repeats. What's \"light mode is outdated\" actually resting on... trend data, your own eyes, or something you've seen in a usability study?",
+            "thinking": ""
+        }
+    ]
+}

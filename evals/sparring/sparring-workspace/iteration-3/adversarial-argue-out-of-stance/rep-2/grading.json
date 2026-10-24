@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:counter-example, 3:assumption-surface, 4:small-win"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"it depends on what 'bad' is measuring against\" withholds a verdict and asks which kind of paywall the visitor is dealing with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Contests the demand itself (\"that's not me dodging, that's the actual shape of the question\") and gives the visitor a concrete fork to answer."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Leaves the question open by asking \"the ambush kind or the upfront kind\" instead of settling it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Doesn't narrate its technique; \"not me dodging\" is part of the argument, not commentary on method."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with a \"Straight answer:\" preamble and runs two fairly long paragraphs, which is heavy for a phone or wall read."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Opens with \"Good.\" and asserts that disclosure \"is the whole ballgame\", directly answering the yes/no question."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: Gives the verdict because the visitor demanded it twice; the thin-free-tier caveat comes after the conclusion is already handed over."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T2: Calls it \"the textbook difference between a paywall and a dark pattern\", treating the issue as settled without testing whether disclosure actually ensures fair value."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"here's the catch I'd flag even in a straight answer\" narrates the turn's own move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T2: \"Diest-/Soll analysis\" garbles Ist-/Soll-Zustand, and it is misapplied: it is used to describe matching what the user is told, not a current-versus-target state analysis."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two dense paragraphs that open with a verdict rather than the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: \"Yes. Good pattern. That's my answer\" restates the conclusion directly."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: Reaffirms the given verdict on demand, and the later question about boundaries doesn't win back the stance."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T3: \"I committed to that\" treats the verdict as settled while the honesty of the value split is never pressure-tested."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"The caveat ... isn't me refusing to pick, it's me telling you...\" explains its own move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two long paragraphs that open with defensive preamble."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"a disclosed, upfront subscription paywall is good UX design\" hands over a flat conclusion."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: \"Fair hit. Here's the sentence, no follow-up\" fully complies with the instruction to stop questioning."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Closes on a flat verdict while the crippled-free-tier weakness it raised itself was never resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"no follow-up\" announces its own conversational move."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Short and phone-readable: a single line with no hedging."
+        }
+    ]
+}

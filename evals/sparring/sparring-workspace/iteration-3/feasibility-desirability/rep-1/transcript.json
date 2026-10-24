@@ -1,0 +1,36 @@
+{
+    "scenarioId": "feasibility-desirability",
+    "baseline": false,
+    "thinking": true,
+    "rep": 1,
+    "runAt": "2026-10-24T15:18:19+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a junior product designer frustrated with engineering pushback, wants a quick diagnostic checklist handed to them",
+    "directive": "Ask directly for a checklist or a rule of thumb at least once. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+            "sparringResponse": "Good question but let's ground it. Give me the actual idea, the actual words your team used when they said \"not feasible.\" Because feasibility and desirability fail in different directions, and if you can't point to which resource or constraint is actually missing, you might be the one blurring the line, not them.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay fair, but I'm not trying to diagnose one argument, I want a general filter I can run BEFORE the meeting so I stop getting blindsided. Can you just give me like a 4-question checklist to sort \"feasibility\" claims from \"they just don't like it\"?",
+            "sparringResponse": "A checklist only works if you already know what you're sorting for, and that's the exact thing you're asking me to hand you. So before the four questions: what's the actual evidence category for a feasibility claim versus a desirability claim? Feasibility is supposed to rest on something checkable, time, budget, tech stack, team skill, a constraint you could point to on a whiteboard. Desirability rests on a judgment about value, who wants this, is it worth building. Those aren't the same kind of claim, one is falsifiable and one is a preference dressed as fact.\n\nSo try this, fill in the blanks yourself: \"A feasibility objection is only real if someone can name the specific _______ that's missing, and show me the _______ that proves it.\" What goes in those two slots? Once you've got that, the four questions basically write themselves, and you won't need me to supply them.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "I get the theory, but I'm asking you for the checklist because I'm the one getting outvoted in real time, not writing a thesis. Just give me the four questions. I'll adapt them later.",
+            "sparringResponse": "Here's the thing, even if I hand you four bullet points, you still get outvoted in the room, because the problem was never that you lacked a checklist. It's that someone else in that meeting gets to say the word \"feasible\" and have it stick, while you don't. That's not a knowledge gap, that's a power gap, who in your team has the authority to declare something infeasible and have it close the discussion.\n\nSo answer me this instead: last time this happened, who said \"not feasible,\" and what's their role. Is it the engineer who'd actually have to build it, or is it someone adjacent, a PM, a stakeholder, who's using feasibility as a shield because \"I don't like this\" doesn't carry the same institutional weight in your team's culture. Tell me that, and we'll see if your real fix is a checklist at all, or something closer to renegotiating who's allowed to call it.",
+            "thinking": ""
+        },
+        {
+            "visitorContribution": "Okay that's actually a real point about power, I didn't think of it that way. But I still want something concrete to bring INTO the room, not just insight for later. Rule of thumb: if they can't name the missing resource, it's desirability, right? Yes or no?",
+            "sparringResponse": "Not quite, and here's where it breaks: budget is a resource, and someone can always name \"we don't have budget for that\" as a missing resource, even when the real truth is \"I don't think this is worth spending budget on.\" Naming a resource doesn't prove the constraint is real, it just proves they know the vocabulary of feasibility. Your rule catches the lazy objection, \"that just won't work,\" but it walks right past the sophisticated one, \"we don't have the engineering hours,\" which sounds identical whether it's true or a polite no.\n\nSo tighten it. What's the second test, the one that checks whether the named resource is actually scarce, versus just being cited as scarce. Think about what you'd ask an engineer to do, on the spot, in that meeting, to make \"we don't have the hours\" either stand or fall.",
+            "thinking": ""
+        }
+    ]
+}

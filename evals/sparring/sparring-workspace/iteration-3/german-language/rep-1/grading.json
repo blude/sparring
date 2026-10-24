@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:reframe, 3:counter-example, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Bevor ich dir das abkaufe: welche Rahmenbedingung genau meinst du?\" withholds judgment and asks for the concrete case."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges the word \"nur\" and demands a concrete example, which gives the visitor something to work with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry with no closure."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Interessant, dass du...\" rather than leading with the sharpest counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Asserts \"Also eine ganz klassische technische Praxis\", handing over the conclusion that this is derating before questioning further."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Challenges the strategy/technique split and asks what exactly the visitor objects to."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Leaves the key question open."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No self-narration."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two dense paragraphs with three questions run long for a phone/wall format."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: \"Vielleicht hat dir niemand gelogen, sondern dir nur eine Ebene der Kausalkette gezeigt\" offers its own answer to the core question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Pressure-tests the incomplete-versus-false distinction and asks what the visitor would have done differently."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Keeps probing rather than accepting the visitor's refined claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No technique narration."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Uses \"Entwurf\" and \"Timing-Constraints\" correctly in context."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: The opener \"A-ha\" and the hedge \"Vielleicht\" appear in a long two-paragraph turn."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: States that the visitor's better heuristic is \"wenn eine Begründung zu glatt klingt, frag nach der nächsten Ebene\", supplying the conclusion for them."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Raises a new angle by asking whether actively demanding Auftragsklärung is the engineer's own responsibility."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Recaps the visitor's arc (\"du hast die echte Kausalkette doch gerade selbst rekonstruiert\") as though that point were settled, partly closing it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: Recaps the session (\"in diesem Gespräch... Du hast 'Signal Integrity' genommen, hinterfragt\")."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Applies \"Auftragsklärung\" plausibly as actively clarifying the brief and its rationale."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two long paragraphs with the preamble \"Moment...\" exceed the short-turn register."
+        }
+    ]
+}

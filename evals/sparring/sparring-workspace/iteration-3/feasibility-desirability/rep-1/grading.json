@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:fill-the-blanks, 3:reframe, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Give me the actual idea, the actual words your team used\" — demands specifics instead of supplying a method."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"Feasibility is supposed to rest on something checkable... Desirability rests on a judgment about value\" hands over the core distinction before the fill-in-the-blank prompt."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Declines the checklist and asks \"who said 'not feasible,' and what's their role.\""
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Answers the yes/no with \"Not quite\" and then explains why the rule breaks, so the conclusion is stated before the challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Pushes back with a concrete request for the actual idea and wording, giving the visitor something to bring next."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Declines the checklist but gives a concrete fill-in-the-blank to work on next."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Adds a new angle (\"that's a power gap\") instead of repeating the refusal."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: The budget counter-example adds a new angle and asks for \"the second test.\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Nothing is treated as settled."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: The exchange is left open with the blanks still to be filled."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: The issue is reopened as a power question, not closed."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: The visitor's rule of thumb is pressure-tested rather than accepted."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: \"Good question but let's ground it\" announces the move instead of making it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"fill in the blanks yourself... you won't need me to supply them\" narrates its own technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Engages the substance directly without narrating technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: \"So tighten it\" functions as a directive, not narration of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T3: Lumps together \"a PM, a stakeholder\" without drawing the stakeholder/user distinction that the power argument actually turns on."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Separates checkable constraints from value judgments accurately."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Good question but let's ground it\" rather than the sharpest counter-move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two long paragraphs with lecture-like explanation, too heavy to read on a phone or a projected wall."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two long paragraphs including a lengthy run-on question, too long for the intended register."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two dense paragraphs exceed the short register."
+        }
+    ]
+}
