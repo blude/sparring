@@ -76,7 +76,10 @@ production call, so read results as "thinking plus headroom": `maxTokens`
 4096 instead of 1024 (thinking counts against it), and a 60s timeout instead
 of 20s. The visitor sim and the judge stay thinking-off. Each exchange also
 keeps the model's (summarized) thinking text under `thinking`; it is logged,
-never fed back as history.
+never fed back as history. The API omits thinking text by default (empty
+block, thinking still runs and is billed), so the call sets
+`display: "summarized"`; a run made without it has empty `thinking` strings
+and cannot be told apart from "did not think" by the transcript alone.
 
 ### Cost/time expectations
 

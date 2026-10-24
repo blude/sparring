@@ -172,7 +172,9 @@ function thinkingGenerate(Client $client, string $sparringPrompt, array $priorEx
         messages: buildMessages($priorExchanges, $newContribution),
         // Longer than production's 20s bound: thinking adds latency, and a timeout here would drop the turn.
         requestOptions: ['timeout' => 60.0, 'maxRetries' => 0],
-        thinking: ['type' => 'adaptive'],
+        // display: this model omits thinking text by default (the block comes back with an empty string,
+        // though the thinking still runs and is billed); 'summarized' returns it so the transcript can log it.
+        thinking: ['type' => 'adaptive', 'display' => 'summarized'],
     );
     $text = null;
     $thought = '';
