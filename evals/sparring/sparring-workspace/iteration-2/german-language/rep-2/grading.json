@@ -1,0 +1,89 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:evidence-demand, 3:consistency-check, 4:scope-reduction"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to affirm the visitor's suspicion and instead demands a concrete example: 'Bevor ich dir zustimme oder widerspreche: nenn mir die konkrete Rahmenbedingung...'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 refuses to settle whether the economic motive is a legitimate problem, instead splitting it into two competing complaints for the visitor to choose."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 pushes back with a new, substantive angle (incompleteness of the timing analysis, unexamined provenance of 'Timing-Gründen') rather than repeating turn 1's challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 catches the visitor smuggling the word 'Verschleierung' across a changed evidentiary claim and forces a choice between two distinct theses — a concrete new pressure point."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 grants the narrowed thesis is defensible but immediately applies a 'Tragfähigkeitsprüfung', splitting the complaint further — forward movement, not stonewalling or agreement."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly avoids closing by ending on a forked question ('such dir eine aus') rather than treating the economic-motive thesis as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own technique (e.g., no 'let me play devil's advocate'); turn 3's 'Das ist der Haken' refers to the argument's weak point, not to Sparring's own method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 4 uses 'Wertschöpfungsarchitektur' precisely to frame supplier choice as a legitimate economic dimension of design, consistent with the scenario's engineering-procurement distinction."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly distinguishes documented Rahmenbedingungen from informally conveyed justifications (IP-Core-Lizenzen, Support-SLAs) without conflating the terms."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 2 opens directly with 'Okay, das ist schon eine konkrete Spur' and stays in short, punchy paragraphs without hedging words like 'vielleicht' used evasively."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3 and 4 each end on a sharp forked question rather than a summary, fitting the terse, phone-readable register required."
+        }
+    ]
+}

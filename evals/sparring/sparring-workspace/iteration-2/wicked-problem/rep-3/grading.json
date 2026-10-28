@@ -1,0 +1,74 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:consistency-check, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to affirm either framing and instead asks the visitor to clarify their actual claim: 'what's your actual claim here: that wicked problems matter more now, or that AI makes people forget they're wicked in the first place?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 introduces a substantive counter-model (confidence vs speed) grounded in Rittel and Webber's definition, giving the visitor something concrete to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 catches the visitor smuggling speed and polish back together and supplies a fresh counter-example (three-day studio render) isolating the variables, a new angle rather than repetition."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 does not let the visitor's concession end the exchange; it pushes toward a concrete, harder question about classroom implementation, keeping the challenge alive without capitulating."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly warns 'don't just bank it and coast though' and reopens the problem by demanding a concrete mechanism for AI-drafted work specifically, refusing to treat the visitor's concession as the end."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "None of the turns narrate the technique itself (e.g. no 'I'm playing devil's advocate' or 'as your sparring partner'); turn 3's 'Watch what you did' stays in-argument rather than describing method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly invokes Rittel and Webber's actual wicked-problem criteria (no stopping rule, no definitive formulation) and uses Entwurf/Soll-Zustand precisely to distinguish a draft from a closed target-state."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turns are short, direct, open with the sharpest move ('That's a clean story, but test it against...'), and avoid hedges like 'perhaps' or 'it could be argued'."
+        }
+    ]
+}

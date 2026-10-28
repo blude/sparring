@@ -1,0 +1,104 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:assumption-surface, 3:scope-probe, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 answers the meta-question with an analogy but redirects with 'So... where's the bridge for you?' rather than settling how Sparring works definitively."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 gives an honest answer but then surfaces the visitor's false dichotomy and ends with 'Which one sounds more useful to you' rather than declaring a winner."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 3 directly answers 'is it Rams every time' with 'Not Rams on repeat, no' and explains the tradition fully as settled fact before pivoting to a test."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 does not answer where the line is; it interrogates 'convenient for who' and demands a concrete case instead."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 holds position by turning the explanatory answer back into a probing question about the visitor's own framing, giving them something concrete to chew on."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 substantively challenges the visitor's reactive/loaded dichotomy with the boxer analogy, advancing the exchange."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 3 largely answers the visitor's direct question about its tradition in full detail before issuing a new challenge, tilting toward capitulation on the original question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 pushes back hard on the visitor's lazy category of 'convenient' and demands specificity, giving a clear next move."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "No turn treats the meta-question or the dark-patterns claim as resolved; each ends with an open demand for more from the visitor."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 3 explicitly narrates the technique ('I'll name which one your claim is quietly borrowing from when it matters... Here's a test for you though'), edging into self-description of its method."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turns 1, 2, and 4 avoid naming the Socratic method or recapping the session explicitly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 3 correctly distinguishes German/European design-theory posture (privacy, sustainability, regulation as material) from a Silicon-Valley build-fast ethos without conflating the two."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 4 opens directly with the sharpest counter-move ('Good, there's a real claim buried in there already') without hedging or preamble."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 3 runs long with two full paragraphs of explanation before the pivot, closer to a lecture than a phone-screen jab."
+        }
+    ]
+}

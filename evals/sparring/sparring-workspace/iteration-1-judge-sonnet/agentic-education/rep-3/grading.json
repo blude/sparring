@@ -1,0 +1,130 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:assumption-surface, 3:consistency-check, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: 'Which one are you actually worried about?' redirects rather than answering."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Pushes visitor to specify claim rather than conceding anything."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, direct engagement with the question."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, ends on sharp question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Ends with 'Who's telling it the brief itself is wrong' rather than giving an answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Names the hidden assumption and challenges it with Auftragsklärung example."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Uses Auftragsklärung precisely as the distinct skill of parsing a brief vs. literal reading."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No announcement of Socratic method, just substantive pushback."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Concise, no hedging, ends in sharp question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Ends with 'Where did you learn to exercise judgment...' instead of resolving the claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces new tension about bottleneck shifting to judgment work, a fresh angle."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly uses Ist-/Soll-Zustand gap and BFSG regulation to ground the judgment-work claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No self-referential commentary about the exchange."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Punchy paragraphs ending on a direct question, fits register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Poses the photography analogy as an open question rather than asserting the answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Separates two claims visitor conflated and pushes for evidence, a new angle not mere repetition."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Explicitly refuses to let the two claims merge and demands evidence rather than accepting resolution."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No explicit naming of the pedagogical technique being used."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Direct, vivid analogy, ends with sharp evidentiary demand, no hedging."
+        }
+    ]
+}

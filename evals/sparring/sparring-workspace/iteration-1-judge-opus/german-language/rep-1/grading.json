@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:evidence-demand, 3:reframe, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: \"Gutes Auge dafür\" affirms the visitor's framing before asking for proof."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: \"Nenn mir eine konkrete Rahmenbedingung aus deinem Projekt\" gives the visitor a concrete next step."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, it goes straight to the demand."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: It opens with the praise preamble \"Gutes Auge dafür\" instead of the sharpest counter-move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: It uses \"Rahmenbedingung\" correctly in the visitor's sense."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"Das macht deinen Verdacht plausibel\" hands the visitor a verdict on their hypothesis."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: It demands evidence of sequence and adds a new angle: \"kann gleichzeitig business-motiviert und technisch korrekt sein\"."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: \"jetzt die Gegenfrage\" is a light transition, not a lecture on method."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: The turn runs to two dense paragraphs with five questions and an expository opener on timing closure, too long for phone or wall reading."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: It correctly distinguishes a business-motivated from a technically valid constraint on the 50MHz Rahmenbedingung."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: It asks \"Was ändert sich für dich als Entwerfer...\" rather than ruling on whether the disguise matters."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: It challenges the visitor to show why the \"Verkleidung\" itself is a problem."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: It treats the refined claim as \"riskanter\" and keeps pressing rather than treating it as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"Jetzt sind wir bei der schärferen Behauptung\" narrates the progress of the session."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: It opens with a commentary preamble before the question and spans two paragraphs."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: It correctly frames the Rahmenbedingung as a cost decision versus a timing constraint."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"Das ist eine sauberere Unterscheidung als deine erste Behauptung\" hands over an evaluative verdict."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: It asks for an openly business-declared constraint as a counter-example test."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: It pressure-tests whether the disguise is really the cause rather than accepting the claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"Aber jetzt drück ich dagegen\" announces the pushback move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: It opens with the affirming preamble \"Da ist er\" and runs to two paragraphs."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: It cleanly treats the Rahmenbedingung as a negotiable object versus fixed in origin."
+        }
+    ]
+}

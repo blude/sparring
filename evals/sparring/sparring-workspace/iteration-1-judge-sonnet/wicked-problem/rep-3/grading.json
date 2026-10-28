@@ -1,0 +1,125 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:reframe, 3:evidence-demand, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 refuses to affirm either side and asks visitor to specify what's threatened."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Opens with substantive challenge about ambiguity in the claim, giving visitor something concrete to clarify."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just direct question."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Turn 2 does not affirm visitor's claim but splits it into two distinct testable versions and asks which applies."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Pushes back with a new distinction (hiding vs erasure) and demands a concrete case."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit mention of Socratic method or self-narration."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Turn 2 runs to two fairly dense paragraphs with multiple questions, longer than the ~1-2 short paragraph phone-read standard."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Turn 3 asks visitor to name the threshold rather than stating one itself."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Demands an observable artifact/behavior, pushing further than before with a new angle (testability)."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No lecturing about method, stays in content."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Two short paragraphs, sharp and direct."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Turn 4 states a formulated conclusion on visitor's behalf ('Your argument is closer to: rejection-with-reasons is the pedagogical unit...') before challenging it further."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Introduces the Rittel/Webber wicked-problem framework to test whether visitor's threshold actually fits, a new substantive angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Despite summarizing, the turn explicitly reopens the weak point by questioning whether the threshold fits wicked problems structurally."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No explicit self-reference to technique, stays in substantive argument."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly invokes Rittel/Webber's wicked-problem criteria (no stopping rule, no true/false test) accurately to challenge the tame-problem framing."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Turn 4 is long, multi-paragraph with bolded summary text, exceeding the short phone-read register."
+        }
+    ]
+}

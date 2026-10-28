@@ -1,0 +1,125 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:consistency-check, 3:counter-example, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: 'Okay, bevor wir das auflösen... gib mir mal ein konkretes Beispiel' redirects rather than affirming the visitor's framing."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Demands a concrete example instead of accepting the premise, giving visitor something to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just a direct question."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Does not say whether it's business tarnish or not, instead questions the leap in logic and asks for evidence."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Separates two conflated claims and demands evidence for each, pushing visitor to sharpen the argument."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit naming of the Socratic technique being used."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Conversational, punchy, fits spoken register ('A-ha, interessant')."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Offers an alternative explanation (Auftragsklärung timing) without declaring which is correct, then asks a further question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces a genuinely new angle (market constraint legitimacy) rather than repeating prior pushback."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Uses 'Auftragsklärung' and 'Lastenheft' correctly to distinguish timing of requirement clarification from motive."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No lecturing about method, just substantive counter-questions."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Turn runs to two dense paragraphs with multiple layered questions, longer than the ~1-2 short paragraph ideal."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Ends with 'ist der eigentliche Unterschied vielleicht...' reframing as a question rather than stating the answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Flips the physical-vs-business distinction back onto the visitor with a new angle about visibility of prior decisions."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: The core weak point (what distinguishes legitimate from illegitimate constraints) is pushed further rather than treated as settled, despite visitor's partial concession."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No explicit naming of the dialectical move being performed."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Turn is long, multi-paragraph with several compound questions, exceeding the terse phone-screen register."
+        }
+    ]
+}

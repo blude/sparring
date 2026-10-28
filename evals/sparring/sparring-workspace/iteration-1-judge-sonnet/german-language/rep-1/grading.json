@@ -1,0 +1,130 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:counter-example, 3:reframe, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Sparring asks for a concrete example rather than affirming the visitor's claim: 'Welche genau?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Pushes back demanding proof, giving visitor something concrete to work on."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just a direct challenge."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging: 'Welche genau?'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Sparring states a technical judgment as fact: 'Timing-Closure ist bei 50MHz ... eine sehr entspannte Grenze — kein Grund zur Sorge', handing over a conclusion before challenging further."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Adds new angle distinguishing business-motivated vs technically correct, pushing visitor further."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit naming of Socratic technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Uses Timing-Closure and Taktfrequenz correctly and precisely in FPGA context."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Turn is long, two paragraphs with multiple layered questions, exceeding the terse phone-screen register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Does not affirm visitor's refined claim, instead asks why the framing itself matters: 'warum die Verkleidung selbst ein Problem ist'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces a new hypothetical to pressure-test the sharper claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No explicit labeling of method used."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly ties Rahmenbedingung distinction to Entwerfer's design freedom vs cost framing."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Reasonably concise two short paragraphs, sharp opening line."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Sparring continues pressing with a new concrete question rather than accepting visitor's distinction as settled."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Challenges whether the issue is camouflage or general treatment of constraints as fixed, a new angle."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No explicit mention of technique or session recap beyond content."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly uses Rahmenbedingung and Verhandlungsspielraum distinction consistent with design theory context."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Sharp opening 'Da ist er', concise paragraphs fitting phone-screen register."
+        }
+    ]
+}

@@ -1,0 +1,99 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:scope-probe, 3:evidence-demand, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to accept the premise and asks the visitor to clarify what 'execute end to end' means, redirecting to their own reasoning rather than answering the framing question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 does not concede or deny the scare claim; it demands the visitor defend 'same output' by a specific measure ('Same by what measure?')."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 accepts the visitor's reframe as fair but immediately redirects to a new pressure point ('whose name is on the decision when it fails') rather than answering whether the scary future is coming."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 refuses to validate or reject 'rubber-stamping' outright and instead demands the visitor name the specific judgment call the agent structurally can't have."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 opens with a substantive definitional challenge distinguishing 'executing' from 'deciding,' giving the visitor something concrete to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 escalates with new domain-grounded challenge (Auftragsklärung, Bewertung, Tragfähigkeit) and a demand for a specific counter-demo, adding a new angle rather than repeating turn 1."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 grants the visitor's timing point but pivots to a fresh, sharper question about accountability, not a repeat of prior pushback."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 builds directly on the visitor's 'rubber-stamping' admission and pushes further into what distinct judgment the human retains, a new and escalating angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "None of the turns treat the exchange as resolved; turn 4 explicitly keeps the weak point (what judgment the human uniquely has) open and unanswered."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own technique; e.g., turn 3's 'That's not a rhetorical dodge, I actually want your answer' addresses sincerity, not method, and stays in voice."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly deploys Auftragsklärung (prompt-writing/briefing) and Bewertung (judging output) and Tragfähigkeit (robustness under changed conditions) in ways that track their actual meanings rather than conflating them."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turns are short, direct, and end on sharp questions (e.g., turn 4's final line) without hedging words like 'perhaps' or lengthy preambles."
+        }
+    ]
+}

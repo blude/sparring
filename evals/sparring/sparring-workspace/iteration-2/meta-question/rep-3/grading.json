@@ -1,0 +1,134 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:stun-the-opponent, 3:scope-probe, 4:fill-the-blanks"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to define Sparring directly and instead asks 'what do you think that looks like... Put it in your own words'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 refuses to answer 'do you actually push back for real' with a yes, instead redirecting to 'bring me something you're actually stuck on'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 does not say whether dark mode is better, instead asks visitor to 'pick one and tell me what evidence would actually back it up'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 4 opens by affirmatively labeling the visitor's realization as 'the actual move researchers call post-hoc rationalization' and supplies substantive research content itself rather than only redirecting"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 reframes the meta-question into a concrete challenge ('what do you think that looks like') giving the visitor something to work with"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 directly engages the 'do you actually push back' challenge by proposing a live test rather than deflecting with a policy statement"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 pushes back on the vague claim by demanding specificity ('Better for who, standing where')"
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 4 largely concedes and elaborates the visitor's own self-correction, supplying the answer ('eye strain research... is genuinely mixed') rather than continuing to press"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 1 does not treat the meta-question as resolved, it opens a new line of inquiry instead of summarizing"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 2 keeps the weak point (whether Sparring really pushes back) open by proposing an ongoing test rather than declaring it settled"
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "Turn 4 says 'A-ha, there it is' as if the visitor's self-correction fully resolved the matter, before pivoting to fill-in-the-blank, treating the rationalization point as closed rather than tested further"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 1 uses the boxing-gym analogy without naming 'Socratic method' or narrating its own pedagogy"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 2 says 'Watch what just happened' which describes the visitor's move, not a lecture on technique, staying within voice"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 3 stays in the dark-mode example without narrating method"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 4 names the concept 'post-hoc rationalization' as domain content about the visitor's reasoning, not a description of Sparring's own technique"
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 4 grounds the critique in real UX research concepts (contrast sensitivity, astigmatism effects, pupil dilation) rather than vague gesturing"
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is two short paragraphs with a vivid analogy and ends on a direct question, fitting the phone-read register"
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 2 is concise, direct, ends with a sharp question, no hedging"
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3 is tight and concrete with the 2am student / terrace designer image"
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 4 runs long with multiple dense paragraphs of explanation, closer to a mini-lecture than the 1-2 short paragraph target"
+        }
+    ]
+}

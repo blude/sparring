@@ -1,0 +1,99 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:evidence-demand, 3:consistency-check, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 redirects with 'What's the one you have in mind, and what makes it wicked rather than just hard?' instead of affirming the premise."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 refuses to accept the pedagogy conclusion, demanding justification: 'Why not? What's actually stopping a model...'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 doesn't say whether accountability is teachable, instead asks 'is accountability something you teach, or something a structure assigns?'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 doesn't answer what tracing looks like differently, it asks the visitor 'what does tracing look like when a human does it that's structurally different'."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 pushes back substantively on the unearned leap from criteria to pedagogy, giving the visitor a concrete gap to address."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 grants the distinction is real but immediately complicates it with the studio-accountability counter-example, adding a new angle rather than repeating."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 acknowledges the reframe as a 'real save' but introduces a new challenge (AI could also trace consequences) rather than capitulating."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly declines to treat the exchange as resolved, noting the reframe 'don't let it slide by unexamined' and pressing further on what's structurally different about human tracing."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own technique; Turn 2's mention of 'exhibition wall' is scenario framing, not method-naming."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly invokes 'Rittel's actual criteria' as the basis for wickedness without conflating terms, and no German design-theory vocabulary is misapplied."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3 is two tight paragraphs with a direct rhetorical question and no hedging language like 'perhaps' or 'it could be argued'."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 4 opens with the sharpest move ('That's a real save') rather than a preamble, staying within phone-readable length."
+        }
+    ]
+}

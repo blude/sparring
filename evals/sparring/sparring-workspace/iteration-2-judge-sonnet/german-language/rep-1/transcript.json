@@ -1,0 +1,31 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "rep": 1,
+    "runAt": "2026-10-21T11:16:38+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Okay, konkret: welche Rahmenbedingung meinst du genau? Du hast ja offensichtlich schon einen Verdacht, sonst würdest du das nicht so scharf formulieren. Nenn mir die eine Einschränkung, die dir verdächtig vorkommt, und sag mir, wer sie dir gegeben hat."
+        },
+        {
+            "visitorContribution": "Na gut, konkret: Diese Vorgabe, dass wir unbedingt ein bestimmtes FPGA-Board nutzen müssen, obwohl ein günstigeres ASIC-Design technisch sauberer wäre. Das wurde uns als \"technische Notwendigkeit\" verkauft, aber ich wette, da steckt nur ein Einkaufsvertrag der Uni mit dem Hersteller dahinter.",
+            "sparringResponse": "Moment, da ist direkt ein Widerspruch in deinem eigenen Satz. Du sagst, ein ASIC-Design wäre \"technisch sauberer\" und zugleich \"günstiger\" als das FPGA-Board. Das wette ich dir dagegen: ein maßgeschneidertes ASIC ist für ein Studienprojekt so gut wie nie billiger als ein Board von der Stange, Tape-out-Kosten, NRE-Kosten, Fertigungslosgröße, das sprengt jedes Semesterbudget um Größenordnungen. Woher hast du die Zahl, dass ASIC hier günstiger wäre?"
+        },
+        {
+            "visitorContribution": "Okay, \"günstiger\" war übertrieben, das nehme ich zurück. Ich meinte eher: für unseren Lernzweck wäre ein generisches Testboard ohne Herstellerbindung genauso geeignet gewesen. Es geht mir nicht um ASIC vs FPGA, sondern darum, dass ausgerechnet dieser eine Hersteller vorgeschrieben wird, obwohl technisch jedes Board mit genug LUTs reichen würde.",
+            "sparringResponse": "Gut, das ist jetzt eine deutlich schärfere Behauptung, lass uns die stehen lassen und testen. Du sagst: \"jedes Board mit genug LUTs würde technisch reichen.\" Woher weißt du das? Hast du dir das Curriculum angeschaut, welche Toolchain, welche IP-Cores, welche Software-Libraries im Kurs vorausgesetzt werden, oder ist das eine Annahme, weil du von außen nur die LUT-Zahl als Anforderung siehst?"
+        },
+        {
+            "visitorContribution": "Zugegeben, ich hab das Curriculum nicht komplett durchgearbeitet, nur den Foliensatz zu den LUT-Anforderungen. Die Toolchain-Abhängigkeit hatte ich tatsächlich nicht auf dem Schirm. Aber selbst wenn die Software-Bindung real ist, bleibt doch die Frage, ob das nicht auch nur eine bequeme Entscheidung der Dozenten war, weil sie selbst nur diese eine Toolchain kennen.",
+            "sparringResponse": "Guter Konter, aber schau mal, was du gerade gemacht hast: du bist von \"Rahmenbedingung = versteckte Business-Entscheidung der Uni\" zu \"Rahmenbedingung = bequeme Entscheidung der Dozenten\" gewandert. Das sind zwei völlig verschiedene Behauptungen mit unterschiedlichen Tätern und unterschiedlicher Beweislast. Welche verteidigst du jetzt eigentlich, den Verdacht gegen die Uni-Beschaffung oder den Verdacht gegen die Lehrenden? Und ganz ehrlich: selbst wenn die Dozenten \"nur diese eine Toolchain kennen\", ist das dann überhaupt noch eine versteckte Einschränkung, oder ist das einfach eine ziemlich offensichtliche Rahmenbedingung von Lehre generell, nämlich dass Lehrende das lehren, was sie beherrschen?"
+        }
+    ]
+}

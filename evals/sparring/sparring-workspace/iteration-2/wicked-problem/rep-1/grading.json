@@ -1,0 +1,99 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:reframe, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to affirm the premise and instead asks 'tell me what you actually think is changing,' redirecting to visitor's reasoning rather than answering."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 asks visitor to 'justify productive' and 'name the specific cognitive or design move' rather than conceding or denying the claim."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 asks 'is it really that one is invisible and one isn't, or is it something about whose assumption you're more primed to notice' rather than settling the question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 praises the pivot but immediately reopens with 'is that a real design lever, or are you just asking the tool to perform unfinishedness as theater' — does not hand over a final verdict."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 introduces a substantive counter (Rittel and Webber's structural point about problem definition) giving visitor a concrete new angle to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 deploys a genuine counter-example (hand-sketching friction vs AI collapsing it) rather than repeating turn 1's challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 reframes around externalization vs slowness, a new angle distinct from the prior assumption-visibility challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 acknowledges progress but pushes further into design-lever territory ('performing unfinishedness as theater'), adding a new angle rather than closing or stonewalling."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "Turn 4 opens with 'Now you've landed somewhere genuinely different from where you started, and it's a better claim,' treating the authority-of-form answer as settled progress before fully pressure-testing whether it resolves the original pedagogical stakes."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "None of the turns narrate the technique itself (no 'I'm playing devil's advocate' or similar); challenges are delivered as direct argumentative content."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 1 correctly invokes Rittel and Webber's wicked-problem structure (shifting problem definition) without conflating it with speed; turn 2 correctly uses Ist-/Soll-Zustand to mark the tension being stewed over."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3 opens with 'That's sharper, now it's about assumption-visibility, not speed' — direct, no hedging, short paragraphs suited to quick reading."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 2's second paragraph runs long with multiple clauses ('Because here's the counter-example sitting right next to your claim... you could just as easily argue it creates more stewing time, not less. So what's the mechanism you're actually defending?') stretching past the terse phone-read register."
+        }
+    ]
+}

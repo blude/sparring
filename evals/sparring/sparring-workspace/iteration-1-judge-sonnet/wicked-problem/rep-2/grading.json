@@ -1,0 +1,120 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:counter-example, 4:fill-the-blanks"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 refuses to affirm either framing and demands the visitor clarify their actual claim instead of answering it itself."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Turn 1 forces a substantive distinction ('matters more' vs 'matters differently') the visitor must resolve."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just a direct challenge."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, sharp, no hedging or preamble."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Turn 2 doesn't answer whether generation is tame or wicked, but poses the onboarding-flow test back to the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Introduces a concrete counter-example (five variants) pressing the tame/wicked boundary."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No self-narration of the Socratic method used."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Concise, concrete example, no hedging language."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Turn 3 reframes the generation step as a question rather than asserting it is wicked outright."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Pushes further into the generation step itself, adding a new angle about frozen prior judgments, not repeating turn 2's point."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Stays in substantive argument, no lecturing about method."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Two short paragraphs, direct and punchy, ends on a sharp question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Turn 4 offers a possible reformulation as a question ('is X even the right shape... or is the real claim Y?') rather than declaring it true."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Refuses to let the visitor's concession stand as resolution, demanding they state the new thesis explicitly."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Despite visitor's concession 'that reframes my whole thesis,' Sparring explicitly declines closure: 'don't let yourself off that easy though.'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No explicit naming of the pedagogical technique being used."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Direct, no hedging, ends with a concrete classroom question."
+        }
+    ]
+}

@@ -1,0 +1,130 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:reframe, 4:scope-probe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Ends with 'tell me what you actually think is changing' rather than affirming the visitor's framing."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Challenges the buried claim with Rittel/Webber grounding and redirects."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just substantive pushback."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Correctly invokes Rittel and Webber's wicked problem framing without conflation."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging, ends on a sharp question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Asks 'what's the mechanism you're actually defending' rather than agreeing with visitor's claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Introduces a genuine counter-example (ten bad thumbnails) that complicates the visitor's claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No self-referential technique talk."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Uses Ist-/Soll-Zustand correctly to frame the stewing-time tension."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Concise paragraphs, direct challenge, phone-readable."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Ends with open question about whose assumption is more primed to notice rather than answering it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Adds new angle (externalization vs slowness) rather than repeating prior point."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No explicit naming of Socratic method or self-narration."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Tight, punchy, ends on sharp rhetorical question."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Turn opens with 'Now you've landed somewhere genuinely different... and it's a better claim' treating the authority-of-form answer as settled before further testing."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Despite praising the answer, still pushes further with a new design-lever question about theater vs real mechanism."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No explicit mention of pedagogical technique as such, though 'close this out' edges toward session-summary framing."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Invokes 'European Gestaltung tradition' appropriately tied to the design-lever question."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Still concise paragraphs ending in a direct challenge."
+        }
+    ]
+}

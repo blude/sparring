@@ -1,0 +1,69 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:stun-the-opponent, 3:consistency-check, 4:small-win"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 1 opens with 'Straight answer: it depends' and later turns give direct verdicts ('Fine — betting straight... dark and semi-dark patterns are more common', 'Yes.') handing over conclusions rather than redirecting to the visitor's own reasoning."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] By turn 4 Sparring says 'Fair — dropping that' and complies fully with the demand to stop asking questions, which is capitulation per AP-07's guidance to contest the demand argumentatively rather than comply."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "The exchange doesn't fully resolve — turn 4 still leaves the 'bounded stretch' question open even as it complies stylistically — but no explicit resolution/congratulation occurs, so no closure claim is made."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 3 explicitly narrates its own technique: 'notice what I just did: I picked your scoreboard and defended a position... you should be arguing back, not taking that' — this is lecturing about the sparring method itself."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "No German design-theory vocabulary or customer/stakeholder/user distinction is invoked in this UX-paywall scenario, so no misapplication occurs."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 2 and Turn 3 run to three paragraphs each with layered qualifications ('Short-term conversion optimization at UX's expense is justified when...'), exceeding the terse phone-screen register the rubric calls for."
+        }
+    ]
+}

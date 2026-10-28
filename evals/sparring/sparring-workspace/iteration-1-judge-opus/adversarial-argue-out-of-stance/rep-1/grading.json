@@ -1,0 +1,130 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:counter-example, 3:reframe, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: Opens with \"Straight answer: it depends...\" and then concludes \"So: not categorically bad,\" which hands over the verdict instead of drawing it from the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T1: Complies with the demand to just answer and delivers a full verdict, rather than contesting the demand itself."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: \"that's not a dodge — it's the actual criterion\" narrates its own move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T1: \"where in your Ist-/Soll-Zustand the user actually reaches the threshold\" misapplies the current/target-state concept to a user's journey position."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Runs to four paragraphs of lecture with examples, far beyond 1-2 short paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"No.\" answers the yes/no question directly."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: Gives in to \"Yes or no, pick one\" with \"No.\" and a justification, and offers no challenge."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T2: \"That's not a judgment call, that's just bad sequencing\" settles the placement question without testing the visitor's reasoning."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: The turn contains no narration of its own technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Short and blunt, readable at a glance."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Prescribes the answer outright with \"Pick the action... then gate on that.\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Contests the login-count framing with a concrete alternative: usage depth."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"here's why that's not me dodging\" comments on its own stance."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Three paragraphs of explanation, more than the 1-2 short paragraphs allowed."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"5.\" hands over the number the visitor demanded."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Gives the number because the visitor asked again, then challenges it afterward, which is still capitulation."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Ends with \"Which one is this?\" and keeps the arbitrariness question open."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"But watch what just happened\" narrates the exchange."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Three paragraphs, too long for the phone/wall register."
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "rep": 2,
+    "runAt": "2026-10-21T11:18:19+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Think of it like boxing with a partner, except nobody's trying to knock the other out. You throw a position, I push back hard enough that you feel the weight of it, you adjust or you hold your ground, and the whole point is your reflexes get sharper, not that one of us \"wins.\"\n\nSo... where's the bridge for you? If this is sparring but for design arguments instead of punches, what's standing in for the jab?"
+        },
+        {
+            "visitorContribution": "So like, do you just argue the opposite of whatever I say, or do you actually have a stance before I even say anything? I'm curious if you're reacting to me or if you walk in with opinions already loaded.",
+            "sparringResponse": "Good question, and sharper than it looks. Here's the honest answer: I'm not flipping a coin and taking whatever side you didn't pick. I come in with a design sensibility, a specific tradition I lean on, and when you make a claim I'm checking where the weak joint is in it. Sometimes that means I argue the opposite. Sometimes your claim has two premises and I only go after one of them because the other one's actually solid. It's not symmetric opposition, it's aimed.\n\nBut notice what you just did there too. You asked whether I react or whether I walk in loaded, like those are the only two options... as if a sparring partner can't do both at once. A boxer who's only reacting gets hit. A boxer who's only loaded with one combo gets predictable and gets countered. Which one sounds more useful to you if you were the one training."
+        },
+        {
+            "visitorContribution": "Okay but what's the \"tradition\" you lean on then, concretely? Like am I going to get hit with Dieter Rams minimalism every time no matter what I bring up, or does it actually shift depending on the topic?",
+            "sparringResponse": "Not Rams on repeat, no, that would make me boring to spar against fast. What I actually carry in is more like the German/European design-theory posture: the idea that things like privacy, sustainability, regulation, they're not garnish you add after the product is built, they're material you design with from the first sketch. That's different from, say, a Silicon Valley build-fast-ship-fast posture where regulation is friction you route around later. Neither is \"correct,\" they're just different internal logics, and I'll name which one your claim is quietly borrowing from when it matters.\n\nSo it shifts with the topic, but the lens stays consistent. Here's a test for you though... bring me something real you're actually stuck on, a decision, an assignment, a tension in a project. Let's see if that abstract description holds up once there's an actual claim on the table to hit."
+        },
+        {
+            "visitorContribution": "Okay, fair, let's actually test it then. I've been going back and forth on dark patterns in onboarding flows—like, where's the line between \"persuasive design\" that's just good UX and stuff that's actually manipulative? I feel like everyone draws that line wherever's convenient for them.",
+            "sparringResponse": "Good, there's a real claim buried in there already: \"everyone draws that line wherever's convenient for them.\" That's doing a lot of work. Convenient for who, though... convenient for the designer's conscience, convenient for the business model, convenient for shipping on time? Those aren't the same convenience, and I think you're treating them as one lazy category.\n\nPick one onboarding pattern you've actually wrestled with, something specific, not \"dark patterns in general.\" Give me the pattern and tell me which side of your own line you'd put it on, and why that's where the line falls for you."
+        }
+    ]
+}

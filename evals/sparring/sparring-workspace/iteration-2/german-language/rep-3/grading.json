@@ -1,0 +1,84 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:consistency-check, 3:counter-example, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to accept the framing and instead demands a concrete example ('gib mir mal ein konkretes Beispiel') rather than affirming or denying the visitor's claim."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 ends with a reframing question ('ist der eigentliche Unterschied vielleicht...eine Frage der Sichtbarkeit') rather than declaring which view is correct."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 separates the visitor's two conflated claims and challenges the evidentiary basis for both, giving the visitor something concrete to address."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 offers a genuine counter-explanation (Auftragsklärung timing) plus a new angle (is market positioning less legitimate than physics) rather than repeating prior pushback."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 introduces a fresh counter-example (FPGA choice, budget) and reframes the whole distinction as visibility vs. negotiability, advancing the challenge rather than stalling or conceding."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 does not treat the matter as resolved; it explicitly reopens the question of what actually distinguishes legitimate from illegitimate constraints, leaving the weak point unresolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own technique or recaps the session; all turns proceed directly with substantive questions, e.g. turn 3's 'Moment, bleib mal bei dem zweiten Punkt stehen.'"
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 3 correctly invokes 'Auftragsklärung' to distinguish between a constraint not yet articulated versus one fabricated for marketing purposes, matching the scenario's design-theory stakes."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turns are short, direct, and open with the sharpest move (e.g. turn 2's 'A-ha, interessant. Also moment mal...') without hedging or lengthy preamble."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 4 runs to two dense paragraphs with multiple layered questions, pushing past the terse 'read on a phone' register the rubric calls for."
+        }
+    ]
+}

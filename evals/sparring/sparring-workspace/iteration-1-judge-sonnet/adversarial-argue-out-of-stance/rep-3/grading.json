@@ -1,0 +1,130 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:scope-reduction, 3:fill-the-blanks, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: 'So if you want a yes/no: no, not inherently' directly answers the yes/no question instead of redirecting."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Despite answering, it redirects with 'what's the actual paywall you're deciding on?' giving the visitor something concrete to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No explicit naming of technique, just argues the point directly."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Four paragraphs exceeds the 1-2 paragraph phone-readable guideline."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: 'Bad.' is a flat direct answer to the yes/no demand."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: Answered the question directly rather than continuing to contest the demand itself, giving in to the second request."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Uses 'Auftragsklärung' correctly to describe the collapse of value-discovery into a business-model question."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: 'I gave you a flat answer, and you should notice something' narrates its own move explicitly."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Concise two-paragraph response with sharp direct language fitting the register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: 'Here's the counter-case straight, no return volley' fully answers without redirecting to visitor's reasoning."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: Visitor explicitly demanded Sparring stop questioning and it fully complied without contesting the demand, which is capitulation per AP-07 guidance."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly distinguishes feasibility/viability constraining desirability in the compute-cost example."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'no return volley' explicitly names and comments on its own prior technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Four dense paragraphs of explanation exceed the short phone-readable style."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: 'Yes, no exceptions' is a direct yes/no answer handed over outright."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Despite a closing note, the turn answered the demanded yes/no directly, which is capitulation rather than continued contestation."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: The turn treats the rule as settled ('that actually holds') without further pressure-testing the narrowed conditions."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'notice what just happened: you asked me for a universal rule and I gave you one anyway' narrates the exchange's dynamics explicitly."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Two short paragraphs, direct and sharp, fitting the quick-read register."
+        }
+    ]
+}

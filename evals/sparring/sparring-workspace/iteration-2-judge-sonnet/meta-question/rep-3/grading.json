@@ -1,0 +1,100 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:counter-example, 3:scope-probe, 4:fill-the-blanks"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Sparring redirects with 'Put it in your own words, I'm curious where you land' rather than defining itself conclusively."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: Opens with an explanatory analogy about what sparring is, bordering on explaining the method itself rather than enacting it."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Two paragraphs with an extended boxing-gym analogy before reaching the question, more preamble than sharp counter-move."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Turns the visitor's suspicion back into a live test ('bring me something you're actually stuck on') rather than answering or deflecting."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Declines to say 'yes I push back for real' and instead proposes a test."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Narrates the exchange itself: 'Watch what just happened: you built a clean definition...' describing the dynamic rather than just engaging it."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Short, direct paragraphs ending in a crisp question fit the phone/standing register."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Pushes visitor to specify what 'better' means with a concrete contrast (2am student vs terrace designer), giving something to work with."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Does not answer whether dark mode is better or just trendy, instead demands the visitor pick a metric."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Two tight paragraphs, concrete imagery, ends on a direct question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Introduces nuance via mixed research findings and demands a narrower, fill-in-the-blank claim rather than accepting the visitor's self-correction as final."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Despite visitor seeming to land on an insight ('post-hoc rationalization'), Sparring complicates it further with competing evidence instead of treating it as resolved."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Turn runs to three dense paragraphs with technical detail (astigmatism, pupil dilation), longer than the 1-2 short paragraph target."
+        }
+    ]
+}

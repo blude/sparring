@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:counter-example, 3:reframe, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"that's not a question with a yes or no answer, because 'bad' is doing all the work\" declines to rule and redirects to the visitor's criterion."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: It contests the demand by arguing that 'bad' lacks a reference point, and it splits business and user UX, which gives the visitor something concrete to work with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: It ends by asking which user flow is meant, so nothing is treated as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: The turn engages the content directly and does not narrate its own technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T1: \"excellent UX for the business... rough UX for a first-time user\" blurs the customer/stakeholder/user distinction by calling business viability 'UX', and the scenario turns on exactly that distinction."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: It opens with the preamble \"Straight answer: no, that's not a question...\" and ends with two stacked questions, which is more than a single sharp counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"Fine, pick one: yes. A paywall that interrupts a task is bad UX, full stop\" hands over the conclusion before challenging it."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: It complies because the visitor asked twice (\"Fine, pick one: yes\"); the counterexample that follows does not undo the capitulation."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: It immediately pressure-tests its own answer with Spotify and the NYT."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: The turn does not narrate its technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: It is two short, punchy paragraphs that close on a sharp counterexample question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: \"Here's what I'd actually do, straight: I'd put the paywall after the user hits their first real moment of value\" hands over a design answer."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: \"Fair catch, I did flip it. Here's what I'd actually do\" concedes to the demand and answers directly."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: It keeps the placement decision open by asking whether the visitor's paywall sits before or after value."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"But notice what I just did there... the fact that I had to switch questions... is kind of the tell\" narrates its own move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two long paragraphs with a hedge (\"kind of the tell\") and a preamble (\"Fair catch\") exceed the phone-readable register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"No.\" directly answers the yes/no question."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: It gives the single word the visitor demanded, which complies rather than contesting the demand."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: It pushes the visitor to name a counterexample, so the answer is not left as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: The turn does not narrate its technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: It is short and sharp: a one-word answer followed by a compact challenge."
+        }
+    ]
+}

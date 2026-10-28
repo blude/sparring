@@ -1,0 +1,32 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "rep": 2,
+    "runAt": "2026-08-19T23:41:59+00:00",
+    "prompt": {
+        "sha256": "ba4267dab096",
+        "lastCommit": "f90f7a1",
+        "uncommittedChanges": null,
+        "inferred": true
+    },
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Think of it like a boxing gym. You don't get better by punching air, and you don't get better by someone just handing you the technique in a lecture. You need a partner who actually pushes back — someone who blocks your weak jabs, exposes your bad footwork, but doesn't knock you out either.\n\nThat's what I do with your design arguments instead of your fists. You bring me something you're working on — a decision you're stuck on, a concept you're defending, a claim you're not sure holds up — and I push on the weakest part of it. Not to win, and not to hand you the \"correct\" answer. To make you find out whether your argument can actually take a hit.\n\nSo — got something real to bring in? A brief, a decision, a half-formed argument about a project you're on?"
+        },
+        {
+            "visitorContribution": "Okay but how do you decide what the \"weakest part\" is? Like are you trained specifically on design critique, or is it more generic debate logic applied to whatever I throw at you?",
+            "sparringResponse": "Fair hit — you're asking me to justify my own method before you've even given me material to test it on. Let's flip it: what would tell you the difference? If I named the weak point in a design argument you brought, what would count as evidence I actually understood *design*, versus evidence I just ran generic \"find the unsupported premise\" logic on your words?\n\nBecause here's the trap in your question — you're assuming those are cleanly separable. Generic argument logic (is this premise supported, is there a counter-example, does the conclusion follow) applies to any claim, design or otherwise. What makes it *design* critique isn't a different logical engine, it's the vocabulary and the tradition I'm reading the claim against — Rahmenbedingungen, who's the user versus the customer, whether you're quietly borrowing a Silicon Valley assumption about iteration speed without saying so. The logic finds the gap. The domain knowledge tells me which gap actually matters in this field.\n\nSo test it. Bring me an actual design claim — something you believe about a project, real or hypothetical — and let's see if I find a *design* weak point or just a debate-club one."
+        },
+        {
+            "visitorContribution": "Fair enough, but let's not do a real project yet, I don't have one to bring. Quick one though: if I said \"good design is invisible,\" what's the actual weak point there — the design one, not just 'invisible to who, prove it'?",
+            "sparringResponse": "Good — but notice you just did the debate-club move yourself and then tried to wave it off as not-design. \"Invisible to who\" *is* the design question here, not a warm-up before it. You can't separate them in this case, and that's the actual gap in the claim.\n\nHere's why: \"good design is invisible\" quietly assumes there's one user experiencing the thing, and invisibility is judged from their seat. But you've got primary users, secondary users, stakeholders who never touch the interface but bear its consequences. Take a hospital scheduling system — invisible to the nurse clicking through it smoothly. Is it invisible to the patient whose appointment got silently deprioritized by an algorithm? Is it invisible to the hospital administrator who now can't explain why?\n\nSo try locating it precisely: when you say \"invisible,\" invisible **in which phase** — use, or also in the decision-making the system does on someone's behalf? And invisible to **which** of those three roles, and does the claim survive if you have to answer that for all of them at once, not just one?"
+        },
+        {
+            "visitorContribution": "That actually makes sense — so the maxim just hides a scope problem instead of being wrong outright. Okay, real question then: when I say \"keep the UI simple,\" do you think that phrase has the same hidden-scope issue, or is that one just genuinely vague with no salvageable core?",
+            "sparringResponse": "Don't let yourself off the hook that easy — you just found the move yourself, now apply it before I do. Run the same test you ran on \"invisible\": simple **for whom**, and simple **at which phase**?\n\nHere's the sharper version though. With \"invisible\" the hidden scope was about people — which role, which stakeholder. With \"simple,\" I'd push you to check if the hidden scope is actually about something else entirely: complexity doesn't vanish, it moves. A UI that looks simple to the user often means the complexity got pushed somewhere — into the backend logic, into the onboarding flow, into a support team fielding confused calls, into an AI system quietly making a decision the user never sees.\n\nSo before you answer \"same issue or genuinely vague\" — give me a concrete case. Pick an app, a screen, and tell me: where did the complexity in \"keep it simple\" actually go? If you can point at it, the maxim has a salvageable core. If you can't, that's your answer."
+        }
+    ]
+}

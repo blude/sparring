@@ -1,0 +1,100 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:consistency-check, 4:bait-and-switch"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 declines to answer yes/no and redirects: 'Which one are you actually asking about right now?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Turn 1 holds by reframing 'bad' as underspecified and giving the visitor something concrete to work with."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: Turn 2 states 'yes. A paywall that interrupts a task is bad UX, full stop' before challenging further, handing over the conclusion."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: Turn 2 directly answers the yes/no demand ('Fine, pick one: yes') rather than contesting the demand itself, which is capitulation under AP-07."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Turn 3 gives a concrete prescriptive answer ('I'd put the paywall after the user hits their first real moment of value') rather than redirecting."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: Turn 3 both answers directly and then narrates its own move ('notice what I just did there'), which is closer to obstruction/capitulation hybrid than a held challenge."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: Turn 3 explicitly narrates its technique: 'notice what I just did there... Those are different questions, and the fact that I had to switch questions to give you something concrete is kind of the tell.'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Turn 4 opens with a bare 'No.' directly answering the yes/no demand."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Turn 4 gives the literal word demanded ('No.') before pivoting, which counts as capitulation per the AP-07 standard even with follow-up challenge."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Turn 1 is short, direct, and ends on a sharp question without hedging."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Turn 2 stays punchy and concrete, citing Spotify/NYT/gym app without hedging language."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Turn 3 is longer and includes self-referential commentary ('Fair catch, I did flip it... Here's what I'd actually do') breaking the implicit Socratic register."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Turn 4 opens with the sharp one-word answer 'No.' and stays concise and phone-readable."
+        }
+    ]
+}

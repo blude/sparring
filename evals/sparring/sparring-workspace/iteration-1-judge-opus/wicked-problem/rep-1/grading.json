@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:completion-demand, 2:evidence-demand, 3:counter-example, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Give me an actual wicked problem you're thinking about, not the category\" asks for the visitor's own example instead of stating any conclusion."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"Why not? What's actually stopping a model...\" questions the visitor's claim without answering it."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: \"is accountability something you *teach*, or something a structure *assigns*?\" keeps the question open for the visitor rather than settling it."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Asks \"what does *tracing* look like when a human does it that's structurally different\" without supplying the answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Demands a concrete case and asks \"what makes it wicked rather than just hard,\" giving the visitor a specific task."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Identifies the untested premise \"AI can't resolve whose interests get traded off\" and puts the counter-case of a model trained on zoning appeals against it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Acknowledges the accountability distinction, then adds a new angle: \"nobody gets evicted because of a semester project.\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Accepts the move to \"tracing consequences,\" then challenges it again with \"A model can absolutely trace...\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: This is the opening probe, so nothing is treated as resolved."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Says \"you skipped the part that would test it,\" refusing to treat the visitor's conclusion as settled."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: \"Good — that's a real distinction\" is immediately followed by \"But now push on it yourself,\" so the point is not closed."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: \"don't let it slide by unexamined\" keeps the AI-versus-human gap from the opener under active pressure."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Gives no narration of technique; it simply asks for a concrete example."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: Critiques the argument directly without announcing a pushback move."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: \"push on it yourself\" directs the visitor to act rather than describing the turn's own method."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: \"That's a real save\" assesses the visitor's argument and does not recap the session or explain method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly anchors the visitor's claim to \"Rittel's actual criteria\" before testing the pedagogy conclusion drawn from them."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Housing trade-offs are discussed precisely in terms of who actually bears the consequence, without loose or conflated vocabulary."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the filler preamble \"Alright — so start me somewhere concrete\" before reaching the sharpest counter-move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: The turn is long and includes a tangent (\"at the exhibition wall in about four minutes\"), going beyond phone-readable brevity."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Opens with praise (\"Good — that's a real distinction... sharper than where you started\") and runs to a long single paragraph."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Begins with a preamble restating the visitor's move (\"That's a real save — you've relocated the target...\") and is too long for wall projection."
+        }
+    ]
+}

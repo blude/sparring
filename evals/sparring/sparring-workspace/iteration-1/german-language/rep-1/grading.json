@@ -1,0 +1,89 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:consistency-check, 3:reframe, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 ('Nenn mir eine konkrete Rahmenbedingung... Welche genau?') redirects to visitor's own reasoning instead of affirming or denying the claim."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 ends with a probing counter-example question ('hattest du da tatsächlich mehr Verhandlungsspielraum?') rather than declaring whether the visitor's distinction is correct."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 concedes plausibility ('macht deinen Verdacht plausibel') but immediately demands evidence and complicates the stakes, giving the visitor concrete new ground to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 acknowledges the sharper claim then pushes further by asking what would concretely change under an honest framing, advancing rather than repeating the challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 praises the refined distinction ('sauberere Unterscheidung') but then reframes toward a deeper question about whether the real issue is fixedness rather than disguise, adding a genuinely new angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly withholds resolution by asking for a counter-example that would test whether openness actually grants negotiation room, keeping the core tension unresolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own technique (no 'let me play devil's advocate' or similar); all turns argue in-voice."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly ties Timing-Closure and Taktfrequenz technical reasoning to the FPGA context without conflating it with the business-motivation question, keeping the two distinct as the scenario requires."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turns are short, direct, and open with the sharpest counter-move (e.g. Turn 4: 'Da ist er — die Rahmenbedingung als Verhandlungsobjekt'), fitting the terse phone-read register."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 2 contains hedging language ('macht deinen Verdacht plausibel... kein Grund zur Sorge') and runs to two dense paragraphs with multiple stacked questions, exceeding the terse register expected."
+        }
+    ]
+}

@@ -1,0 +1,120 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:counter-example, 3:fill-the-blanks, 4:scope-probe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: 'Before I hand you a framework, tell me about the actual case' redirects rather than answering."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Demands specifics instead of conceding or refusing, giving visitor concrete next step."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two short sentences, direct, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Ends with 'what exactly would you need to hear from him' rather than declaring the engineer right or wrong."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Dissects the engineer's phrase and introduces falsifiability as a new angle."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly distinguishes a vague feasibility claim from a verifiable one using the codebase example."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Two tight paragraphs, no hedge words, punchy comparison to 'costume'."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Says the line is 'close to right' but immediately complicates it and asks for the visitor's own test."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces the distributed-constraint counter-example, a genuinely new angle rather than repeating turn 2's challenge."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'I'll give you scaffolding, not the finished thing, because the muscle you need is building this yourself for your own team's vocabulary' narrates the pedagogical move explicitly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly distinguishes localized ('name the file') from structural ('single global mutable store') feasibility constraints."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Direct, numbered fill-in-the-blank structure fits a quick-glance phone read despite length."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Validates the visitor's checklist items but then poses a hypothetical that undercuts resting on them, never settling the matter."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Constructs a scenario where the checklist passes yet the fight relocates, pushing the visitor further rather than closing."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Despite saying 'I'll take that,' the turn immediately stress-tests the checklist against the original weak point rather than treating it as resolved."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Keeps the feasibility/desirability distinction precise by noting 'two weeks' could itself become 'the new not feasible.'"
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: No hedging, ends on a sharp direct question about the checklist's limits."
+        }
+    ]
+}

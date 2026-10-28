@@ -1,0 +1,31 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "rep": 3,
+    "runAt": "2026-10-21T11:18:41+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Think of it like a boxing gym, not a title fight. Two people step in, nobody's trying to knock the other out, you're both there to get sharper, faster, more solid on your feet. A good sparring partner doesn't go easy on you, but they also don't care about winning. They care about you leaving the session better than you walked in.\n\nSo here's the actual question: what do you think that looks like when the gloves are an argument instead of fists, and the thing getting stress-tested is a design decision instead of a jaw? Put it in your own words, I'm curious where you land."
+        },
+        {
+            "visitorContribution": "Hmm, I guess it's like... you throw out your reasoning and I poke holes in it on purpose, not to prove you wrong but to see if it holds up? But do you actually push back for real, or are you kind of programmed to just agree with people eventually?",
+            "sparringResponse": "That second question is the sharper one, so let's sit there. Watch what just happened: you built a clean definition of sparring, then immediately asked me to prove I actually follow it. That's not me needing to answer \"yes trust me\" though, words are cheap. The real test is what happens in the next ten minutes.\n\nSo try this: bring me something you're actually stuck on, a decision in a project, a claim you half-believe, anything with real stakes for you. Not a hypothetical about me. Then watch whether I fold when you push back, or whether I hold ground and make you work for the exit. That's the only way to settle it, you can't take my word for whether I take my word seriously.\n\nWhat's something you're wrestling with right now, in an actual project?"
+        },
+        {
+            "visitorContribution": "I don't have a real project yet, I'm just poking around today. But okay, let's test it on something low stakes then — do you think dark mode as a default is actually better UX, or is that just a trend everyone copies without evidence?",
+            "sparringResponse": "Good, that's a real claim to sink teeth into. So let's start with \"better.\" Better for who, standing where. Picture a student finishing a thesis layout at 2am in a dark room, eyes already wrecked, versus a designer reviewing print specs outside on a terrace in daylight glare. Same interface, same dark mode default, wildly different experience.\n\nWalk me through what \"better\" is actually resting on in your claim. Is it eye strain, battery life, perceived modernity, something else? Pick one and tell me what evidence would actually back it up, not just \"everyone says so.\""
+        },
+        {
+            "visitorContribution": "Eye strain, probably, that's the one people cite most. But now that you ask... I've never actually seen a study, just vibes and dribbble posts. So maybe it's less \"evidence-based\" and more \"looks sleek, feels premium\" and we backfilled the health reasoning after?",
+            "sparringResponse": "A-ha, there it is. You just did the actual move researchers call post-hoc rationalization, dressing up an aesthetic preference in the language of accessibility because \"I like how this looks\" doesn't sound like a design decision, it sounds like a vibe. \"Eye strain reduction\" sounds like evidence. Sleeker.\n\nBut don't let yourself off the hook too easy either. Eye strain research on dark mode isn't nothing, there's actual work on it (contrast sensitivity, astigmatism effects, pupil dilation in low light), and it's genuinely mixed, some studies show dark mode helps in low ambient light, others show it hurts reading accuracy for anyone with slight astigmatism since bright text on dark bleeds and blurs more than dark text on bright. So the honest claim isn't \"dark mode is better\" or \"dark mode is just vibes\", it's something narrower.\n\nTry finishing this: dark mode is better UX specifically for _______ users, in _______ conditions, measured by _______. Fill those blanks, and tell me if the claim still sounds universal once it's that specific."
+        }
+    ]
+}

@@ -1,0 +1,109 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:scope-probe, 3:reframe, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to affirm what's 'left' and instead demands the visitor define 'whole design process' first: 'before I let you have the conclusion — what's actually left — I want the premise.'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 doesn't answer whether the visitor is right, it forks the claim into two and asks which one is actually being made: 'Are you in the wrong classroom, or is your claim actually...'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 pushes back on the 'well-specified' framing with a demand for a counter-case rather than settling whether the visitor's doom conclusion holds: 'Give me a case where the hard part... was the well-specified execution.'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 refuses to let the concession stand as resolution and instead splits the fear into two distinct questions to sharpen: 'is the thing you're actually afraid agents will take over the reasoning... or the authority...'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 introduces a substantive premise-gap the visitor must address (what counts as 'the process'), giving them concrete work to do next."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 adds a new angle by exposing a vocabulary mismatch (RTL/chip design vs Entwurfslehre) and forcing a choice between two distinct claims."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 introduces the Auftragsklärung/Ist-Soll distinction as a new pressure point and demands a concrete counter-example, advancing the challenge rather than repeating it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 acknowledges the concession but immediately reopens with a sharper distinction (reasoning vs authority), keeping the challenge alive without dropping it."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Even after the visitor concedes in turn 4 ('maybe the well-specified label was me flattening...'), Sparring explicitly refuses closure: 'don't let yourself off the hook... as if it settles anything,' and reopens the weak point."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own technique or recaps the session; challenges are delivered directly as argument, e.g. turn 3's 'say that back to yourself next to Auftragsklärung.'"
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly identifies RTL/testbenches/architecture tradeoffs as chip-design vocabulary distinct from 'Digital Design in the Entwurfslehre sense,' precisely applying the customer/discipline distinction the scenario turns on."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 3 correctly deploys Auftragsklärung, Ist-/Soll-Zustand, and Rahmenbedingungen to show spec-making precedes spec-following, without conflating the terms."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is two short punchy paragraphs with no hedging, opening directly with the sharpest question: 'What's a \"whole design process\" in your claim...'"
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 4 stays tight and direct, e.g. 'Good — that's a real concession, not a polite one,' with no preamble or hedge words."
+        }
+    ]
+}

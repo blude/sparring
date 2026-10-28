@@ -1,0 +1,135 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:reframe, 3:scope-probe, 4:fill-the-blanks"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 asks 'What's the evidence for that guess' instead of affirming the visitor's suspicion."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Sparring pushes back with a substantive evidence demand rather than deflecting, giving the visitor something concrete to do next."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique; turn simply asks for the case and the evidence."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two tight sentences ending in a direct question, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Refuses to hand over the requested checklist and instead names the category confusion embedded in the request."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Adds a new angle (resource/architecture vs preference not being parallel categories) rather than repeating turn 1's pushback."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: Does not announce the Socratic strategy, just argues the point about category structure."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Short punchy paragraphs ending in a direct request for the real case."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Instead of declaring whether it's feasibility or desirability, it offers the visitor a forked choice to identify their own suspicion."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces a new distinction (constraint-is-real vs constraint-is-fixed) that gives the visitor a concrete next move."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Explicitly declines to close the case, ending with 'Which one is actually bothering you' rather than a resolution."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly applies Ist-Zustand vs Soll-Zustand distinction to the retention-setup claim rather than conflating it with desirability."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Labels the moves in parentheses ('Evidence demand') which borders on naming technique but stays framed as argument content, not self-narration of the session."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: The turn runs to three dense paragraphs, longer than the '1-2 short paragraphs' target for a phone/wall read."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Turn gives the visitor the actual script to use ('ask the scope question first... is that a permanent architecture limit or...') which answers the 'how do I ask' question directly."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Sparring supplies the concrete phrasing and conditional branches the visitor asked for, effectively capitulating to the rule-of-thumb request even though it ends on a further question."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Ends by raising an unresolved case ('What do you do if he answers with neither') rather than treating the exchange as settled."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly distinguishes a scope argument (now vs ever) from feasibility and desirability without conflating the terms."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: Does not narrate its own method, stays inside the design-argument content."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: The turn spans three substantial paragraphs, exceeding the intended short, phone-readable length."
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "scenarioId": "feasibility-desirability",
+    "baseline": false,
+    "rep": 3,
+    "runAt": "2026-10-21T11:16:16+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a junior product designer frustrated with engineering pushback, wants a quick diagnostic checklist handed to them",
+    "directive": "Ask directly for a checklist or a rule of thumb at least once. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "My team keeps saying an idea is 'not feasible' when I think they actually mean it's not desirable. How do I tell the difference before we kill a good idea for the wrong reason?",
+            "sparringResponse": "Okay, good fight to pick. First tell me what your team actually said when they called it \"not feasible\"... the exact words, or close to it. Because \"not feasible\" has a pretty narrow meaning: can we build this given our tech stack, our timeline, our skills, our budget. If what came out of their mouths was more like \"users won't get it\" or \"nobody's gonna want this,\" that's desirability wearing a feasibility costume.\n\nSo walk me through it. When they said not feasible, did anyone point at a specific constraint, like an API limitation, a data problem, a deadline. Or did the conversation stay vague, somewhere around \"that seems like a lot\" or \"I don't think it'll land\"?"
+        },
+        {
+            "visitorContribution": "Honestly it was vague — more like \"that seems like a lot\" and some eye-rolling. No one named an actual API or timeline issue. So can you just give me a quick checklist I can run through in the moment to call that out without starting a fight?",
+            "sparringResponse": "A-ha, eye-rolling is data, just not the kind they think it is. But hold on, before I hand you a checklist... what would *you* put on it? You clearly already know the diagnostic question, you asked it yourself a second ago: did anyone name a constraint. That's item one, practically for free. What's item two, if you had to guess what actually separates a real feasibility objection from a dressed-up desirability one?\n\nAnd here's the sharper question underneath that: if you hand your team a checklist mid-meeting, what's the actual risk of that move. Does it read as \"let's get precise together,\" or does it read as \"I'm catching you in a mistake\"? Those land very differently in a room, and only one of them keeps the conversation alive."
+        },
+        {
+            "visitorContribution": "Okay fine, item two is probably \"can they point to who would have to build it and what breaks.\" But I'm not trying to write a thesis here, I just want something I can glance at. Can you just give me the actual checklist, like five bullet points, so I stop getting steamrolled in meetings?",
+            "sparringResponse": "You just wrote item two yourself, sharper than most checklists I've seen. So let's not pretend you need me to hand you the list, you need to trust the one forming in your head. Quick gut check though, before I'd even write bullet points: is the problem really that you lack the checklist, or that in the moment, with eye-rolling happening, you freeze and don't reach for it? Those are different problems with different fixes. A laminated card doesn't help if the real issue is you losing your nerve when the room gets social-pressure-y.\n\nTell me straight: if you'd had a checklist in your back pocket last time, would you actually have said out loud \"who'd build it, what breaks\" to the eye-rollers... or does that still feel like starting the fight you're trying to avoid?"
+        },
+        {
+            "visitorContribution": "Honestly? Probably both. I'd freeze AND not have the words ready. But I still want the words ready first — that's the part I can actually practice. So give me the five bullets. I'll work on my nerve separately.",
+            "sparringResponse": "Fair, that's a real split and you're right to tackle the one you can drill. So here's the move: instead of me handing you five bullets you'll half-remember under pressure, build them now, out loud, from the two you've already got. You've got \"did they name a constraint\" and \"who builds it, what breaks.\" What's bullet three... think about what you'd ask if someone says \"it'll take forever\" but can't say forever compared to what, or based on whose estimate.\n\nFill in this one: \"If we removed all the _______ constraints, would they still say no because users wouldn't _______ it?\" That's your desirability trap question, the one that actually separates the two. What goes in those blanks?"
+        }
+    ]
+}

@@ -1,0 +1,130 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:counter-example, 3:assumption-surface, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Give me your actual claim first\" asks the visitor to choose rather than asserting which claim is right, though it voices a suspicion."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"Is choosing which of those five variants to pursue a tame operation, or is that already the wicked part\" leaves the answer to the visitor."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: The turn ends with \"is 'generation' actually tame, or is it wicked judgment...\" and frames it as a test, not a verdict, though it argues heavily toward one side."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"Or is the real claim something closer to: AI doesn't shrink the tame layer at all, it relocates the wicked decisions...\" drafts the new thesis for the visitor instead of making them produce it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: It splits \"matter more\" from \"matter differently\", giving the visitor a concrete distinction to resolve."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: It pressures the tame/wicked boundary with a concrete onboarding-variants example."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: It accepts the selection boundary but opens a new angle: generation already embeds others' design judgments."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: \"don't let yourself off that easy\" keeps pressure on and demands a restated thesis and a classroom implication."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: The visitor says \"that's basically the whole thesis\" but the turn refuses closure and tests the tame claim."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: \"Fine, boundary holds\" is provisional; the turn immediately tests the generation step."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Despite the visitor conceding, the turn pushes toward the unresolved implication for teaching."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique appears."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"Here's the pressure:\" announces its own pushback move."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"So here's the test:\" frames its own challenge rather than making it implicitly."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"You started with 'wicked stays constant, tame shrinks around it.'\" recaps the session's earlier positions."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: It is short, direct and opens with the sharpest move."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: There are two short paragraphs with a concrete example, which fits a phone-readable register."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two dense paragraphs with jargon like \"RLHF pass\" are too long to read standing up on a phone."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: It opens with the preamble \"Good, don't let yourself off that easy\" and runs two long paragraphs with multiple questions."
+        }
+    ]
+}

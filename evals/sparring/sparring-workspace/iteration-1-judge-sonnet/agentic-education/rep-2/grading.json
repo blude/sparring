@@ -1,0 +1,135 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:reframe, 3:completion-demand, 4:scope-probe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 asks 'what's a whole design process in your claim' instead of affirming or denying the premise."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Sparring presses for the premise behind 'whole design process' rather than conceding or stonewalling."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just direct questioning."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Two tight paragraphs, no hedging, opens with the sharp question itself."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Turn 2 asks whether the visitor is 'in the wrong classroom' rather than settling the claim."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Introduces a new angle (vocabulary mismatch, generalization problem) rather than repeating turn 1's challenge."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No announcement of Socratic method, just the challenge itself."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Correctly distinguishes RTL/chip-design vocabulary from the Entwurfslehre sense of Digital Design."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Short, direct, no hedges like 'perhaps'."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Rather than agreeing or disagreeing with 'well-specified', demands a counter-case."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Pushes with a concrete demand for a case, adding the Auftragsklärung distinction as a new angle."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No lecturing about method, directly engages the content."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly applies Auftragsklärung and Ist-/Soll-Zustand to distinguish spec-making from spec-following."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Two short paragraphs, sharp opening, no hedges."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Even after visitor's concession, asks the visitor to sharpen whether it's reasoning or authority at stake, not handing over an answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Acknowledges concession but introduces new distinction between reasoning and authority, giving visitor a new concrete task."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Despite the visitor's concession, Sparring refuses to treat the exchange as resolved and poses a sharper distinction to pressure-test."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No explicit naming of the sparring technique being used."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly uses Soll-Zustand and Rahmenbedingungen in distinguishing reasoning from accountability."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Concise, no hedging language, direct challenge throughout."
+        }
+    ]
+}

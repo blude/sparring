@@ -1,0 +1,125 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:evidence-demand, 3:consistency-check, 4:scope-reduction"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: 'Bevor ich dir zustimme oder widerspreche: nenn mir die konkrete Rahmenbedingung' declines to affirm or deny the visitor's framing."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Redirects visitor to specify concrete example rather than accepting or rejecting the claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just a direct question."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, punchy, no hedging language."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Does not confirm the 'Tarnung' claim, instead asks whether the analysis reflects the full picture."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Adds new angle (supply guarantees, IP licensing) and demands verification of documentation, giving visitor concrete next step."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No explicit naming of the sparring technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Direct, concrete, phone-readable paragraph with no hedges."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Instead of ruling on whether it's verschleierung, forces visitor to pick which claim they defend."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces a substantive distinction (intent vs. structural opacity) the visitor must now address."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No explicit labeling of the Socratic move itself."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Slightly longer but stays concrete and sharp, ends with explicit fork rather than lecture."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Rather than deciding if the economic motive is a problem, asks visitor to clarify which complaint they actually hold."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Pushes further with a new framing (legitimate business reasons) and demands the visitor commit to one of two distinct complaints."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: The weak link (why economic motive is a problem) is still being pressure-tested, not treated as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No meta-narration of the sparring process itself."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Uses 'Wertschöpfungsarchitektur' correctly in context of supplier economics."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T4: Direct and ends with a clear forced choice, no hedging."
+        }
+    ]
+}

@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:assumption-surface, 3:consistency-check, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Which one are you actually worried about?\" declines to answer and asks the visitor to clarify the claim."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"Does it?\" leaves the convergence question for the visitor instead of asserting the answer."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: \"That's not senior-only work — that's judgment work\" asserts the conclusion before posing the question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: The turn poses the photography analogy as an open question and demands evidence (\"what's your evidence it's happening versus you hoping it will?\") rather than asserting that jobs expand."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: The turn distinguishes \"shipped interface\" from \"plausible-looking screens\", which gives the visitor a concrete fork to answer."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: It surfaces the hidden assumption that \"badly but fast, then iterate\" converges on what a trained designer produces, and adds the Auftragsklärung challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: It adds a new angle, that the bottleneck moves to evaluating \"fifty variations\", and asks where judgment is learned."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: It separates the reps claim from the job-count claim and pushes with the photography counter-example plus an evidence demand."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry rather than closing it."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: The turn keeps the convergence question open rather than treating anything as settled."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: \"Does that smaller claim still hold, though?\" keeps the claim under test."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: \"doesn't answer *how many jobs* exist\" explicitly keeps the unresolved job-count gap open."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: The turn contains no narration of its own technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: \"Notice what that argument assumes\" is part of the argument, not a description of method."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"you've narrowed it from... to...\" recaps the session's progress."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"So here's the sharper question\" and \"you shouldn't let me merge them\" narrate the turn's own move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T1: It calls Rahmenbedingungen \"a document\" an agent takes as input, treating constraints as if they were a brief."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Auftragsklärung is correctly used for clarifying the actual versus the stated request."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: The Ist-/Soll-Zustand gap is used appropriately as the problem the variations must solve."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: The turn reaches for no specialist vocabulary, and the labor question doesn't require it."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short and opens with a direct probe."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: It opens with a restating preamble (\"So your claim is really about labor economics...\") before the counter-move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: It opens with the \"That's a sharper claim\" recap preamble and runs long, with a list of evaluation criteria."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: It opens with \"Good, hold that\" and the photography paragraph runs well past a phone-readable length."
+        }
+    ]
+}

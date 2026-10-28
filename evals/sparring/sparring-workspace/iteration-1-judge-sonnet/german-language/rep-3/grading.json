@@ -1,0 +1,130 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:evidence-demand, 3:consistency-check, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 asks which Rahmenbedingung the visitor means rather than confirming the premise."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Pushes visitor to specify concretely, giving them something to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just a direct question."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Does not confirm or deny the deception theory, instead demands evidence for which claim holds."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Splits the claim into two and demands concrete evidence, advancing the challenge with a new angle."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No announcement of Socratic method, just substantive challenge."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Uses 'Spec' and engineering reasoning about component selection coherently without conflating terms."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Two short paragraphs, direct and sharp, no hedging."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Instead of answering 'is it suspicious', asks what 'final' meant before the two weeks."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces new technical detail (place-and-route, synthesis iterations) to sharpen the challenge."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Engages directly with FPGA timing-closure process, no self-narration."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly applies FPGA-specific concepts like Place-and-Route and Synthese-Iterationen to the dispute."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Concise paragraphs ending in a direct question, fits the register."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Sparring explicitly refuses to let the original question drop even after the conspiracy theory collapses, redirecting to the trade-off communication issue."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Reframes the weaker but still live version of the thesis instead of closing the discussion."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: 'Das ist der eigentliche Fund hier' explicitly narrates and labels the visitor's cognitive error as a finding, which is a form of lecturing about the exchange's progress."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Distinguishes technical constraint framing from a cost/performance trade-off that should have been negotiated."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: This turn runs to three paragraphs, longer than the recommended 1-2 short paragraphs."
+        }
+    ]
+}

@@ -1,0 +1,110 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:fill-the-blanks, 3:assumption-surface, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 redirects to visitor with 'what have you got?' rather than asserting a conclusion about the visitor's situation."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: Explains the mechanism via boxing analogy as direct answer to the visitor's literal question, not as lecturing mid-critique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Three paragraphs exceeds the '1-2 short paragraphs, phone-readable' voice requirement."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Ends by demanding the visitor bring a real claim, giving them something concrete to do next."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Rather than simply asserting authority, it ends by turning the question back: 'is that answer actually satisfying, or are you just testing whether I'd dodge the question?'"
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: Describes its own reasoning process as a direct answer to a direct question about method, not as unsolicited lecturing on Socratic technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Four dense paragraphs is far beyond the short, phone-readable register the voice requires."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Admits fallibility and turns the scrutiny back onto the visitor ('That's on you to catch'), giving them a new angle to work with."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: 'Before I point at it — where do you think it is?' declines to hand over the answer about the weak point."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Introduces a new concrete angle (color accuracy/contrast judgment) rather than repeating prior pushback."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Two tight paragraphs, sharp and direct, fits the phone-readable register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Turn 4 substantively answers the visitor's 'is the research solid' question with detailed findings before circling back to a question, effectively handing over the conclusion."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Provides the substantive research content directly rather than pressing the visitor to test it themselves first, reading as capitulation to the informational request."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Ends with 'would you take that claim from me at face value, or... verify it yourself' — leaves the weak point (unverified claim) still open for pressure-testing."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Three substantial paragraphs of explanation exceed the required short, punchy register."
+        }
+    ]
+}

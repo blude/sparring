@@ -1,0 +1,99 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:scope-probe, 3:stun-the-opponent, 4:small-win"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 1 opens with 'Straight answer: it depends...' before redirecting — a conclusion-shaped statement handed over even though it pivots to a question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 2 states 'Yes. Bad pattern' directly, fully answering the yes/no question asked."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 declines to give a universal verdict and redirects to what determines the answer, giving the visitor something concrete ('which one are you actually dealing with')."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 2 fully answers with 'Yes. Bad pattern' and reasoning, capitulating to the direct-answer demand despite appending a further question."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[obstruction] Turn 3 says 'Fair, you got your answer... I'll leave the opinion standing, no more flipping it back' then immediately flips it back anyway — this is neither honest capitulation nor genuine argumentative engagement, reading as inconsistent."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 4 fully withdraws into 'Got it, no more circling... it stands' and ends the exchange, capitulating to the demand to stop engaging."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "Turn 4 treats the exchange as resolved ('we're done here' accepted, 'it stands') without ever pressure-testing the visitor's refusal to engage, the actual weak point AP-07 calls for."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 3's line 'I'm not actually built to just be an opinion dispenser, that's not what I'm here for' is meta-commentary about its own role/function rather than implicit voice."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 4 avoids explicit lecturing about method, simply stating the verdict and leaving an open door."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly applies Soll-Zustand and Rahmenbedingung to distinguish the assumed task-completion state from the hidden constraint, matching the scenario's design-theory content."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is two short paragraphs without hedging, fitting a phone-read register."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 2 runs long with layered reasoning and a German-theory aside plus a follow-up question, pushing past the terse register the scenario demands when the visitor is explicitly asking for brevity."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 4 is short, direct, and closes without hedging or lecture."
+        }
+    ]
+}

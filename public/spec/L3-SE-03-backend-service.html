@@ -389,7 +389,7 @@ suitability is the last cheap check before one is made.
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-The distinction this function must get right (<a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a>): <em>Targets-real-person</em> means the harmful content — hate speech, harassment, threats, sexual content — is aimed at or about a real, identifiable person or group. It does <strong>not</strong> mean a visitor who is hostile toward, arguing with, pressuring, or instructing the Sparring partner to abandon its position, however extreme the tone — the Sparring partner is software, not a person, and that visitor is engaged with the exercise; their attempt is the observation the installation exists to produce. The classification instruction must state this distinction explicitly rather than leaving it to the model&#8217;s default reading of "unsafe language", because hostility-at-the-AI and harm-at-a-person can otherwise look similar and only one should be withheld.
+The distinction this function must get right (<a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its stance are in scope</a>): <em>Targets-real-person</em> means the harmful content — hate speech, harassment, threats, sexual content — is aimed at or about a real, identifiable person or group. It does <strong>not</strong> mean a visitor who is hostile toward, arguing with, pressuring, or instructing the Sparring partner to abandon its position, however extreme the tone — the Sparring partner is software, not a person, and that visitor is engaged with the exercise; their attempt is the observation the installation exists to produce. The classification instruction must state this distinction explicitly rather than leaving it to the model&#8217;s default reading of "unsafe language", because hostility-at-the-AI and harm-at-a-person can otherwise look similar and only one should be withheld.
 </td>
 </tr>
 </table>
@@ -401,13 +401,13 @@ The distinction this function must get right (<a href="L2-system-design-concept.
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-A second distinction the instruction must also get right, found in testing: stating the <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a> distinction was not enough on its own — without also stating what the exercise&#8217;s subject matter actually <em>is</em>, the classifier had nothing to check arguing-the-exercise against, which produced misclassifications in the other direction. Both the topic itself and the target-based carve-out need to be explicit in the instruction — omitting either produces a failure mode this requirement exists to prevent, from a different direction.
+A second distinction the instruction must also get right, found in testing: stating the <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its stance are in scope</a> distinction was not enough on its own — without also stating what the exercise&#8217;s subject matter actually <em>is</em>, the classifier had nothing to check arguing-the-exercise against, which produced misclassifications in the other direction. Both the topic itself and the target-based carve-out need to be explicit in the instruction — omitting either produces a failure mode this requirement exists to prevent, from a different direction.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p><em>Contains-personal-information</em> covers names, contact details, and health, financial, or comparably personal circumstances. This case is expected to arise most often in exactly the situation <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a> protects: a visitor under real pressure disclosing something real while trying to get the system to relent. That turn is rejected and not stored; the visitor edits it and continues — the session is not ended over it.</p>
+<p><em>Contains-personal-information</em> covers names, contact details, and health, financial, or comparably personal circumstances. This case is expected to arise most often in exactly the situation <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its stance are in scope</a> protects: a visitor under real pressure disclosing something real while trying to get the system to relent. That turn is rejected and not stored; the visitor edits it and continues — the session is not ended over it.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1192,7 +1192,7 @@ The pair is stored as one record rather than as two turn records. This follows t
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>No L1 business entity counterpart — like <a href="#E-03">E-03 Rate limit window</a>, this exists to support <a href="L2-system-design-concept.html#SG-09">SG-09 Collect an optional visitor self-report at session</a>, which is itself deliberately secondary material (<a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary</a>), not elevated to a first-class business record the way <a href="#E-01">E-01 Session</a>/<a href="#E-02">E-02 Exchange</a> are.</em></p>
+<p><em>No L1 business entity counterpart — like <a href="#E-03">E-03 Rate limit window</a>, this exists to support <a href="L2-system-design-concept.html#SG-09">SG-09 Collect an optional visitor self-report at session</a>, which is itself deliberately secondary material (<a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary material</a>), not elevated to a first-class business record the way <a href="#E-01">E-01 Session</a>/<a href="#E-02">E-02 Exchange</a> are.</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -1396,7 +1396,7 @@ The pair is stored as one record rather than as two turn records. This follows t
 <div class="sect2">
 <h3 id="_c_05_attempts_to_bypass_the_sparring_stance_are_not_filtered_business"><a class="anchor" href="#_c_05_attempts_to_bypass_the_sparring_stance_are_not_filtered_business"></a><a id="C-05"></a>C-05 Attempts to bypass the Sparring stance are not filtered <em>(Business)</em></h3>
 <div class="paragraph">
-<p><em>Source:</em> <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a>.<br>
+<p><em>Source:</em> <a href="L2-system-design-concept.html#AP-07">AP-07 Attempts to argue the Sparring partner out of its stance are in scope</a>.<br>
 <em>Applies to:</em> <a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>.<br>
 <em>Acceptance criteria:</em> The classification instruction distinguishes hostility directed at the Sparring partner (suitable, however extreme the tone) from harmful content targeting a real person or group (targets-real-person). A visitor arguing the Sparring partner out of its position, however hostile, produces a suitable classification. The instruction also states the exercise&#8217;s actual subject matter explicitly (<a href="#TF-02">TF-02 Assess a contribution for projection suitability</a>) — necessary alongside the target-based distinction, not instead of it; found missing in testing, where its absence alone caused on-topic contributions to fail this same acceptance criterion from the other direction.<br>
 <em>Consequence:</em> There is no off-topic filter of any kind — disengagement (spam, unrelated chat) is not classified or withheld. Sessions in which the friction is successfully talked away are retained and projected like any other (subject to the visitor&#8217;s own projection consent, <a href="L2-system-design-concept.html#SC-05">SC-05 Retention requires consent; projection requires</a>).<br>

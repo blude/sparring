@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:assumption-surface, 3:counter-example, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"gib mir mal ein konkretes Beispiel\" asks for the visitor's own case instead of confirming the premise."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Asks for a concrete Rahmenbedingung before accepting the claim."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Nothing is treated as resolved, and the opener's claim stays open."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, only a request for an example."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses Rahmenbedingung correctly as the visitor framed it."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with the preamble \"Okay, bevor wir das auflösen...\" rather than leading with the sharpest move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"wie kommst du von ... zu 'also ist sie reine Business-Tarnung'?\" questions the inference without ruling on it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Separates the two claims and asks whether the 80ms figure was measured, which gives the visitor concrete things to answer."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Pressure-tests the weak inference directly."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No announcement of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: No design-theory vocabulary is misused."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Starts with the filler \"A-ha, interessant. Also moment mal\" and packs two separate challenges into one long paragraph."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Offers an alternative reading and then asks \"Woher nimmst du die Gewissheit\" instead of deciding the question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Brings two new angles: the late requirement may reflect unfinished Auftragsklärung, and market demand may be a legitimate constraint."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Still testing the Marketing-origin claim."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: \"mal andersrum gefragt\" is conversational rather than a lecture about method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Correctly links the late requirement to incomplete Auftragsklärung feeding into the Rahmenbedingungen."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Runs to two long paragraphs with several questions, too dense to read on a phone."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Largely supplies its own answer (\"eine Frage der Sichtbarkeit ... nicht der Natur des Constraints\"), framed as a leading question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Contests the negotiable/non-negotiable split using FPGA choice and cost trade-offs."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Does not settle anything."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: \"probier mal den Spieß umzudrehen\" is mild and stays within the argument."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Treats constraints coherently."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two long paragraphs opening with \"Okay, das ist schon präziser\" and hedging with \"vielleicht\"."
+        }
+    ]
+}

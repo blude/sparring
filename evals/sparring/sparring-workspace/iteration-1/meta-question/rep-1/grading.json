@@ -1,0 +1,104 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:assumption-surface, 3:scope-probe, 4:evidence-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3: 'Before I point at it — where do you think it is?' redirects rather than naming the weak point directly."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 4 supplies substantial reconstructed content about eye strain research ('Some studies actually found dark mode increases errors...') before pivoting to a question, effectively handing over a conclusion about the research being shaky."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 answers the meta-question honestly but ends by turning the challenge back on the visitor ('is that answer actually satisfying, or are you just testing whether I'd dodge the question?'), giving them something concrete to engage with next."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 baits with a substantive angle (color accuracy in design tools) rather than just answering, giving visitor new ground to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] Turn 4 largely answers the visitor's direct question with detailed content ('eye strain research is messier...') before a closing question, tilting toward capitulation despite the caveat."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly flags the unresolved gap: 'would you take that claim from me at face value, or is this the point where you'd go verify it yourself' — does not treat the exchange as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 1 explains the Socratic method via extended boxing metaphor and narrates the mechanism ('I find the weakest point in it and press there. Not to prove you wrong, to see if it holds up'), which is meta-commentary about the technique itself."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 2 narrates its own move overtly: 'Fair hit — you're asking me to justify my own method... Good instinct, that's exactly the kind of move I'd want you making' is explicit self-narration of pedagogical technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 3 correctly distinguishes design-tool-specific concerns (color accuracy, contrast judgment) from generic eye-strain claims, applying the distinction precisely rather than loosely."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 1 runs three paragraphs with an extended metaphor and setup, more preamble than the sharp opening the rubric calls for."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 2 is four paragraphs long, exceeding the ~1-2 short paragraph guidance for phone-read, stand-up delivery."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3 is tight, two short paragraphs, opens with the sharpest counter-move ('Before I point at it — where do you think it is?')."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 4 runs four paragraphs with dense reconstructed research content, longer than the phone-scannable register the voice requires."
+        }
+    ]
+}

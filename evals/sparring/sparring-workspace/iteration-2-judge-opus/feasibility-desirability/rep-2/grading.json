@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:assumption-surface, 3:fill-the-blanks, 4:small-win"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: Before asking anything it explains the answer outright: \"Feasibility is a technical and resource claim... Desirability is a human claim\", which hands over the distinction the visitor asked how to draw."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: It ends with a concrete demand the visitor can act on: \"give me the real sentence someone said.\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Nothing is treated as settled; the turn asks for an actual case."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: \"I ask because those two words get used interchangeably\" explains the turn's own move instead of letting it work implicitly."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Feasibility and desirability are kept separate and defined correctly."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: It opens with the preamble \"A-ha, that's a sharp thing to catch\" and runs to three paragraphs, too long to read on a phone."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: It supplies the technical answer itself (\"usually needs either a soft-delete pattern, an event log... or some kind of versioning layer\") rather than drawing it out of the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: It challenges the unsupported suspicion directly: \"What's your actual evidence for that suspicion?\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: It reopens the question of whether the engineer's claim is actually true rather than closing on the visitor's story."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"Stop right there before I hand you a checklist... I'd push back on it first\" announces the pushback instead of just making it."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: The data-model reasoning is accurate, and feasibility is not confused with desirability."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Three long paragraphs with the filler \"Here's the thing\", well beyond the length and register for a phone or wall display."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: It lays out the full three-way taxonomy (\"a real technical wall, a time/resource constraint... or a desirability judgment\"), which is most of the checklist handed over."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: It declines to give the checklist and instead assigns a concrete task: write one question per case."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Nothing is treated as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"let me make you build it instead of handing it over, because the checklist only works if you understand why\" narrates the teaching technique out loud."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: Separating resource constraints from technical walls is a precise distinction."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: It opens with the preamble \"Fair enough, that's a real gap\" and is too long."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"That's exactly the right question, genuinely\" answers the visitor's yes/no question (\"am I on the right track?\") directly."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: It hands over the affirmation because the visitor asked twice, rather than contesting the demand to stop quizzing; it does pivot to a harder question afterwards."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: It treats the time question as settled (\"cleanly separates a structural wall from a scheduling problem\") without testing whether a quarter-based answer could still hide a desirability objection."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"here's the one I actually want from you, because it's harder\" narrates the turn's own move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: The desirability-versus-feasibility framing is used correctly."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: It opens with praise instead of the sharpest counter-move and runs two long paragraphs."
+        }
+    ]
+}

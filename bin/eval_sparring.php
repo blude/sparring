@@ -17,7 +17,7 @@ declare(strict_types=1);
  *
  * Usage:
  *   php bin/eval_sparring.php [--scenario=<id>[,<id>...]] [--turns=N]
- *                              [--reps=N] [--iteration=N] [--baseline]
+ *                              [--reps=N] [--iteration=N] [--baseline] [--thinking]
  *
  *   --scenario=<id>  Comma-separated scenario ids (evals/sparring/scenarios/<id>.json).
  *                     Default: every scenario file.
@@ -29,6 +29,10 @@ declare(strict_types=1);
  *   --baseline        Run with the system prompt omitted (the no-prompt
  *                     comparison arm). Forces exactly 1 rep regardless of
  *                     --reps — see README for why.
+ *   --thinking        Run the Sparring turn with extended thinking on (production
+ *                     keeps it off, ADR 0012). Write to its own --iteration and
+ *                     compare against a no-thinking iteration on the same prompt
+ *                     hash — see README "Thinking arm". Not combinable with --baseline.
  *
  * Smoke path before a full paid run: --scenario=<id> --turns=2 --reps=1
  */
@@ -45,7 +49,7 @@ if (php_sapi_name() !== 'cli') {
 
 if (in_array('--help', $argv, true) || in_array('-h', $argv, true)) {
     exit(
-        "Usage: php bin/eval_sparring.php [--scenario=<id>[,<id>...]] [--turns=N] [--reps=N] [--iteration=N] [--baseline]\n"
+        "Usage: php bin/eval_sparring.php [--scenario=<id>[,<id>...]] [--turns=N] [--reps=N] [--iteration=N] [--baseline] [--thinking]\n"
     );
 }
 
@@ -60,6 +64,7 @@ $turnsOverride = null;
 $reps = 3;
 $iteration = 1;
 $baseline = in_array('--baseline', $argv, true);
+$thinking = in_array('--thinking', $argv, true);
 foreach ($argv as $arg) {
     if (str_starts_with($arg, '--scenario=')) {
         $scenarioFilter = explode(',', substr($arg, strlen('--scenario=')));
@@ -70,6 +75,11 @@ foreach ($argv as $arg) {
     } elseif (str_starts_with($arg, '--iteration=')) {
         $iteration = (int) substr($arg, strlen('--iteration='));
     }
+}
+if ($baseline && $thinking) {
+    // The no-prompt arm with thinking on would be a third experiment, not a comparison arm.
+    fwrite(STDERR, "--thinking and --baseline can't be combined.\n");
+    exit(1);
 }
 if ($baseline) {
     $reps = 1; // no-prompt arm is low-information by design (README) — kept cheap
@@ -93,6 +103,22 @@ $llm = new AnthropicLlmClient($key); // real Sparring turn — production code, 
 $rawClient = new Client(apiKey: $key); // visitor simulation + baseline arm — scaffolding, not under test
 
 $workspace = __DIR__ . "/../evals/sparring/sparring-workspace/iteration-{$iteration}";
+
+// Which prompt this run measured, stamped into every transcript so a later
+// iteration can be diffed against the right version. The content hash is the
+// ground truth (it also catches uncommitted edits); the commit is a
+// human-friendly pointer and is null if git isn't available. The baseline arm
+// sends no prompt, but is stamped too so an iteration's arms stay comparable.
+$promptSource = (string) file_get_contents(SPARRING_PROMPT_PATH);
+$gitDir = escapeshellarg(dirname(SPARRING_PROMPT_PATH));
+$promptFile = escapeshellarg(SPARRING_PROMPT_PATH);
+$promptCommit = trim((string) shell_exec("git -C {$gitDir} log -1 --format=%h -- {$promptFile} 2>/dev/null"));
+$promptDirty = trim((string) shell_exec("git -C {$gitDir} status --porcelain -- {$promptFile} 2>/dev/null")) !== '';
+$promptInfo = [
+    'sha256' => substr(hash('sha256', $promptSource), 0, 12),
+    'lastCommit' => $promptCommit !== '' ? $promptCommit : null,
+    'uncommittedChanges' => $promptDirty,
+];
 
 /**
  * From-scratch messages array, same shape AnthropicLlmClient::generateResponse()
@@ -126,6 +152,41 @@ function baselineGenerate(Client $client, array $priorExchanges, string $newCont
         }
     }
     throw new RuntimeException('baseline generation returned no text content');
+}
+
+/**
+ * --thinking arm: the same payload AnthropicLlmClient::generateResponse() sends
+ * (cached system block + history), but with thinking on. Lives here instead of
+ * as a flag on the production client so ADR 0012's disabled-thinking path stays
+ * untouched. maxTokens is raised from production's 1024 because thinking tokens
+ * count against it and starving the reply text would confound the comparison.
+ *
+ * @return array{text: string, thinking: string}
+ */
+function thinkingGenerate(Client $client, string $sparringPrompt, array $priorExchanges, string $newContribution): array
+{
+    $response = $client->messages->create(
+        model: GENERATION_MODEL,
+        maxTokens: 4096,
+        system: AnthropicLlmClient::buildSystemBlocks($sparringPrompt, null),
+        messages: buildMessages($priorExchanges, $newContribution),
+        // Longer than production's 20s bound: thinking adds latency, and a timeout here would drop the turn.
+        requestOptions: ['timeout' => 60.0, 'maxRetries' => 0],
+        thinking: ['type' => 'adaptive'],
+    );
+    $text = null;
+    $thought = '';
+    foreach ($response->content as $block) {
+        if ($block->type === 'thinking') {
+            $thought .= $block->thinking;
+        } elseif ($block->type === 'text' && $text === null) {
+            $text = $block->text;
+        }
+    }
+    if ($text === null) {
+        throw new RuntimeException('thinking generation returned no text content');
+    }
+    return ['text' => $text, 'thinking' => $thought];
 }
 
 /**
@@ -181,10 +242,16 @@ foreach ($scenarioFiles as $scenarioPath) {
         $turnLog = [];
 
         for ($turn = 1; $turn <= $turns; $turn++) {
+            $thought = null;
             try {
-                $sparringResponse = $baseline
-                    ? baselineGenerate($rawClient, $priorExchanges, $contribution)
-                    : $llm->generateResponse($priorExchanges, $contribution);
+                if ($thinking) {
+                    ['text' => $sparringResponse, 'thinking' => $thought] =
+                        thinkingGenerate($rawClient, $promptSource, $priorExchanges, $contribution);
+                } else {
+                    $sparringResponse = $baseline
+                        ? baselineGenerate($rawClient, $priorExchanges, $contribution)
+                        : $llm->generateResponse($priorExchanges, $contribution);
+                }
             } catch (Throwable $e) {
                 fwrite(STDERR, "[{$scenario['id']}][{$armLabel}-{$rep}][turn {$turn}] generation failed: {$e->getMessage()}\n");
                 break;
@@ -192,7 +259,9 @@ foreach ($scenarioFiles as $scenarioPath) {
 
             $exchange = ['visitorContribution' => $contribution, 'sparringResponse' => $sparringResponse];
             $priorExchanges[] = $exchange;
-            $turnLog[] = $exchange;
+            // Logged only, never fed back as history (buildMessages reads the two keys above) —
+            // production wouldn't replay thinking text to the model either.
+            $turnLog[] = $thought === null ? $exchange : $exchange + ['thinking' => $thought];
 
             if ($turn < $turns) {
                 try {
@@ -214,7 +283,10 @@ foreach ($scenarioFiles as $scenarioPath) {
         file_put_contents($outDir . '/transcript.json', json_encode([
             'scenarioId' => $scenario['id'],
             'baseline' => $baseline,
+            'thinking' => $thinking,
             'rep' => $rep,
+            'runAt' => date('c'),
+            'prompt' => $promptInfo,
             'persona' => $scenario['persona'] ?? null,
             'directive' => $scenario['directive'] ?? null,
             'exchanges' => $turnLog,

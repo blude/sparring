@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:reframe, 3:evidence-demand, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"what's threatened, specifically, when a student can get a draft in seconds?\" asks for the visitor's reasoning instead of affirming the premise."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Forces the visitor to choose a direction for the claim: \"more relevant to teach, or less?\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry and settles nothing."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: There is no narration of technique, only the challenge itself."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: \"Because I can see the argument going either way\" is hedging preamble that comes before the sharpest question, which lands last."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"Which one are you arguing\" leaves the choice with the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Rejects \"doesn't need more unpacking\" by splitting the claim into hidden versus erased contact, a new and concrete angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Refuses the visitor's attempt to close and presses on the phrase \"hide.\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: \"sit with that phrase for a second\" is an imperative to the visitor, not narration of the move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Two long paragraphs carrying several questions and a double demand (\"Which one... and what's a case\") is too dense to read on a phone."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: \"so name the threshold\" puts the burden on the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Demands an observable marker: \"something a mentor could point at.\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Does not accept the threshold claim until it is located."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Contains no announcement of technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Opens directly with the counter-move, and \"'hiding' wearing a fancier coat\" is sharp and fits the register."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: The bolded line \"Your argument is closer to: rejection-with-reasons is the pedagogical unit...\" hands the visitor a finished synthesis before challenging it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Pressure-tests the new claim against Rittel/Webber: no definitive test means no clean failure condition."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: \"That's a sharper claim\" is followed immediately by a structural challenge, not a resolution."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"notice what happened\" and \"here's the pressure test\" announce the pedagogical move."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Applies the tame/wicked distinction and stakeholder-relative evaluation precisely: \"only better or worse, given a stakeholder's position.\""
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Two long paragraphs with a bolded thesis and a multi-sentence lecture on Rittel/Webber exceed the short phone register."
+        }
+    ]
+}

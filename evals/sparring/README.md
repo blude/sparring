@@ -63,7 +63,20 @@ php bin/summarize_sparring.php evals/sparring/sparring-workspace/iteration-1
 
 Flags: `--scenario=<id>[,<id>...]` (default: all files in `scenarios/`),
 `--turns=N` (override each scenario's own turn count), `--reps=N` (default
-3), `--iteration=N` (output subdir, default 1), `--baseline`.
+3), `--iteration=N` (output subdir, default 1), `--baseline`, `--thinking`.
+
+### Thinking arm
+
+`--thinking` runs the Sparring turn with extended thinking on (production
+keeps it off, ADR 0012). Write it to its own `--iteration=N` and compare
+against a no-thinking iteration by running `summarize_sparring.php` on both
+dirs — do not mix arms inside one dir. The comparison is only valid when both
+transcripts carry the same `prompt.sha256`. Two things differ from the
+production call, so read results as "thinking plus headroom": `maxTokens`
+4096 instead of 1024 (thinking counts against it), and a 60s timeout instead
+of 20s. The visitor sim and the judge stay thinking-off. Each exchange also
+keeps the model's (summarized) thinking text under `thinking`; it is logged,
+never fed back as history.
 
 ### Cost/time expectations
 
@@ -167,6 +180,24 @@ reshaping every run's output to fit a tool built for a different shape. For
 turn-by-turn transcript reading, open `transcript.json`/`grading.json`
 directly — each `evidence` string quotes the turn it's judging.
 
+## Iterations
+
+Which `prompts/sparring.md` each committed iteration ran against. Add a row
+whenever an iteration is committed, so a later run can be diffed against the
+right prompt (`git diff <commit> HEAD -- prompts/sparring.md`). From
+iteration 2 on, every `transcript.json` carries `runAt` and
+`prompt: {sha256, lastCommit, uncommittedChanges}` — copy them from there.
+`sha256` (first 12 chars of the prompt file's content hash) is the ground
+truth; `uncommittedChanges: true` means `lastCommit` is not what actually
+ran. Iteration 1 predates this and was backfilled afterwards: `runAt` is the
+file mtime, `prompt` is `f90f7a1`'s content with `inferred: true` and
+`uncommittedChanges: null` (unknowable after the fact).
+
+| Iteration | Run | Prompt version | Notes |
+|-----------|-----|----------------|-------|
+| 1 | 2026-08-20 01:35–02:00 | `f90f7a1` (committed 2026-08-20 00:30) | First read, 6 scenarios × 3 reps + baseline. Prompt had no later commit until `72a1b44` (08-23), but uncommitted edits at run time can't be ruled out. |
+| 2 | 2026-10-21 11:13–11:19 UTC | `8266451` (sha256 `121d63e1670e`, clean) | 6 scenarios × 3 reps, no baseline arm. |
+
 ## Out of scope for v1
 
 - Moderation (`moderation.md`) correctness — separate track later.
@@ -174,5 +205,7 @@ directly — each `evidence` string quotes the turn it's judging.
   read, not a rewrite.
 - OpenAI provider path — Anthropic only, matching the deployed default.
 
-Run output (`sparring-workspace/`) is gitignored — only the runner,
-scenarios, rubric, and this README are committed.
+Run output (`sparring-workspace/`) is committed, so a prompt edit can be
+compared against earlier iterations without re-running (nondeterministic
+and billed). Smoke runs (`--turns=2 --reps=1`) should go to a throwaway
+`--iteration=N` and be deleted before committing.

@@ -1,0 +1,109 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:scope-probe, 2:assumption-surface, 3:consistency-check, 4:counter-example"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to affirm the premise and instead asks 'Which one are you actually worried about?' redirecting to the visitor's own reasoning."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 reframes the claim as labor economics and asks 'Does it?' rather than answering whether juniors are non-viable."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 asks 'Does that smaller claim still hold, though?' instead of stating whether the narrowed claim is correct."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 ends on an open question about evidence for expansion rather than declaring whether design jobs will grow or shrink."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 pushes back with a substantive distinction (plausible screens vs shipped interface) giving the visitor something concrete to sharpen."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 surfaces the hidden assumption about brief interpretation and introduces Auftragsklärung as a concrete counter-angle."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 acknowledges the visitor sharpened their claim then introduces a new tension (bottleneck moves to judgment/evaluation work)."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 grants the reps point but immediately reframes with a new historical analogy (photography) demanding evidence, not capitulating to the visitor's pessimism."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly refuses closure by demanding 'what's your evidence it's happening versus you hoping it will?' rather than accepting the visitor's doubt as final."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "None of the turns narrate the sparring technique itself; e.g., turn 4 says 'Good, hold that' as content engagement, not a lecture on method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2 correctly deploys Auftragsklärung to distinguish brief interpretation from execution, matching its technical meaning."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 3 correctly uses Ist-/Soll-Zustand to frame the judgment gap between current and desired state, consistent with its definition."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is short, direct, opens with the sharpest question ('What's the design process you mean, though?') without hedging."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 4 stays within a couple of short paragraphs and uses a concrete analogy rather than hedged abstraction."
+        }
+    ]
+}

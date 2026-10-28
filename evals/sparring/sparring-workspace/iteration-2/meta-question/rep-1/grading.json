@@ -1,0 +1,139 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:consistency-check, 3:scope-probe, 4:assumption-surface"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to define Sparring's value directly and instead asks 'what do you think that has to do with design?'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 refuses to simply affirm 'no I don't just argue back' as a settled fact and instead redirects: 'how would you tell the difference?... So try me.'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 3 directly answers the yes/no memory question ('Within this conversation, yes, I'm holding the whole thread') before pivoting to a test."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 4 effectively hands over the conclusion by stating 'I suspect you'll find the honest answer is nothing... this is a feeling of security' rather than letting the visitor arrive there."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 redirects to the visitor's own framing rather than answering or capitulating, giving them something concrete to do next."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 meets the challenge head-on with a falsifiable test ('Which is it going to be') rather than deflecting or just asserting credibility."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 answers partially but converts it into a live test ('Give me two claims... See if I catch it'), keeping the exchange substantive rather than just settling it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 pushes hard on the mechanism distinction between sequence and security, giving the visitor a concrete reframing to engage with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 1 does not treat anything as resolved, it opens the exchange with a direct question back."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 2 leaves the question open pending an actual test, not treating the exchange as settled."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "Turn 3 answers the memory question definitively ('Within this conversation, yes...') closing that specific sub-question before any real test has occurred."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "Turn 4 pre-empts the visitor's own realization by stating what 'the honest answer' will likely be, closing the inquiry before the visitor worked it out themselves."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 1 uses an analogy ('actual sparring, two people in a ring') rather than naming a pedagogical technique like Socratic method."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 2 discusses the mechanism of pushback without labeling it as 'devil's advocate' or similar jargon."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 3 narrates its own process explicitly: 'That's not a memory trick, it's just what a sparring partner is supposed to do, hold the earlier claim steady,' which explains the technique rather than just doing it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "Turn 4 stays inside the design content without narrating the sparring method itself."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 4 correctly separates the UX/perception concern from the actual security mechanism (encryption, storage, access) without conflating the two."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is short, direct, and opens with the sharpest move (the ring analogy) rather than a hedge or preamble."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 2 is punchy and ends on a blunt binary ('Which is it going to be') fitting the phone-screen register."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 3 runs to three full paragraphs plus a closing ask, longer than the ~1-2 short paragraphs the voice guidance calls for."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 4 contains a hedge-like hypothesis ('I suspect you'll find the honest answer is...') and runs to four paragraphs, longer than the target register."
+        }
+    ]
+}

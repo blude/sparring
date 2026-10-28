@@ -1,0 +1,145 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:assumption-surface, 3:completion-demand, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Asks 'what's the actual idea, and what did they say when they killed it?' instead of handing a diagnostic."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Pushes for the exact sentence and asks which of three objections the visitor suspects."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opens the inquiry rather than closing it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: 'Before I hand you a diagnostic' and 'a sharper question underneath that' narrate its own move."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with preamble 'Good instinct to be suspicious of that word' and runs two paragraphs with multiple stacked questions."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: States the conclusion outright: 'that's a viability or desirability call wearing a technical costume' and supplies a definition of feasibility."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Refuses the checklist and challenges 'Why does surfacing the distinction require proving bad faith?'"
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Ends asking what would count as genuine infeasibility, keeping it open."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: 'So before I give you anything' narrates its withholding strategy."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Distinguishes feasibility, viability, and desirability precisely with 'right now' as a sequencing claim."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Three paragraphs with a lecture-style definition, far beyond 1-2 short paragraphs."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Declines the script and asks 'What's your version of that pin?'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Redirects to visitor drafting the questions with a concrete shape to react to."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Does not treat the test as settled; asks visitor to build it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: 'before I hand you a script, notice what you just did' and 'I'll tell you which ones are sharp' narrate technique."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Three paragraphs opening with 'Fine — but before I hand you a script', a preamble."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Answers 'Does that hold up?' with 'That's a strong set' and asserts 'Budget and time aren't feasibility questions... they're viability questions.'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Raises a new angle: 'missing time/budget' exposes viability as a second costume."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: Pressure-tests the visitor's set against their own definition rather than closing."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No narration of technique; it directly confronts the questions."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: Correctly separates viability from feasibility and desirability."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Includes a mermaid diagram and long paragraph, unfit for phone/wall reading, and opens with praise."
+        }
+    ]
+}

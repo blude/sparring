@@ -1,0 +1,140 @@
+{
+    "judge": "claude-sonnet-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:counter-example, 3:consistency-check, 4:scope-probe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Turn 1 asks the visitor to clarify what 'end to end' means rather than answering directly."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Distinguishes two meanings of 'design process' and pushes visitor to specify, giving them something concrete to work with."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of technique, just direct questioning."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses 'Auftrag' precisely in context of client ambiguity."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: Short, direct, no hedging, ends on sharp question."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: Doesn't concede or deny the claim, demands a concrete example instead."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Introduces new distinction (pattern completion vs judgment) rather than repeating prior pushback."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: No self-referential commentary about the sparring method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Uses Ist-/Soll-Zustand gap correctly to mark the real hard judgment call."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T2: Tight paragraphs, no hedging, ends with a direct challenge."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: Instead of affirming the visitor's resolved stance, redirects to 'what does that uncertainty tell you to do.'"
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Adds a new angle (what to do vs what to believe) rather than repeating earlier challenge."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Does not treat the exchange as resolved, pushes further into what the visitor should actually spend years learning."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: Acknowledges the shift in position without lecturing about Socratic method itself."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T3: Concise, direct, ends in pointed question about prompting and grading."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T4: Does not simply accept the resolution, redirects to curriculum design question."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Pushes further on the timeline point and reframes into curriculum/evaluation question, a new angle."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Opens by affirming 'the bet worth making either way' as settled before pivoting, risking treating the core question as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: No explicit naming of the sparring technique itself."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: References studio critique and curriculum grounded in design education context appropriately."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Runs to three dense paragraphs, longer than the ~1-2 paragraph guidance."
+        }
+    ]
+}

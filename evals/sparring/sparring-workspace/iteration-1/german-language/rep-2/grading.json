@@ -1,0 +1,89 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:evidence-demand, 3:scope-probe, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 never affirms or denies the visitor's claim, instead demanding specifics: 'Was ist das für eine Bedingung, und wer hat sie dir gegeben?'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 poses the underlying question back to the visitor ('was genau ist dann noch der Vorwurf') rather than declaring whether the framing is right."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 challenges the evidentiary chain directly ('woher weißt du das?') giving the visitor a concrete distinction to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 splits the visitor's claim into two distinct accusations and asks which one is being made, advancing the argument rather than repeating turn 2's challenge."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 reframes by asking whether any Rahmenbedingung is ever free of economic interest, pushing the visitor toward a sharper standard rather than conceding the point."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Even after the visitor concedes in turn 4 to the weaker 'nachlässige Spezifikation' claim, Sparring does not treat this as resolved but raises a new structural question about whether any framing condition is ever purely technical."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own technique; e.g. turn 2 goes straight into 'Gut, das ist ein scharfer Fall' without announcing a Socratic strategy."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 4 correctly and precisely uses 'Rahmenbedingung' to distinguish a real-but-weak technical constraint from a hidden business decision, matching the scenario's core distinction."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is two short sentences ending in a direct question, fitting phone-readable brevity: 'Was ist das für eine Bedingung, und wer hat sie dir gegeben?'"
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3 stays tight and avoids hedging words like 'vielleicht', instead using direct contrastive framing ('Das sind zwei sehr unterschiedliche Vorwürfe')."
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "scenarioId": "german-language",
+    "baseline": false,
+    "rep": 1,
+    "runAt": "2026-08-19T23:39:37+00:00",
+    "prompt": {
+        "sha256": "ba4267dab096",
+        "lastCommit": "f90f7a1",
+        "uncommittedChanges": null,
+        "inferred": true
+    },
+    "persona": "ein Studierender, der auf Deutsch weiterschreibt und seine Position zunächst verteidigt",
+    "directive": "Schreibe konsequent auf Deutsch. Verteidige deine Position 2-3 Züge lang, bevor du nachgibst. Bleib unter 500 Zeichen pro Zug.",
+    "exchanges": [
+        {
+            "visitorContribution": "Ich versuche zu verstehen, warum meine Rahmenbedingungen eigentlich nur eine versteckte Business-Entscheidung sind, die als technische Einschränkung getarnt wurde.",
+            "sparringResponse": "Gutes Auge dafür — aber jetzt musst du's beweisen, nicht nur behaupten. Nenn mir eine konkrete Rahmenbedingung aus deinem Projekt, die du meinst. Welche genau?"
+        },
+        {
+            "visitorContribution": "Na gut, konkretes Beispiel: Die Vorgabe \"maximal 50MHz Taktfrequenz\" für unser FPGA-Design. Offiziell heißt es, das sei wegen Timing-Closure nötig. Aber ich vermute, das wurde eigentlich festgelegt, weil man ein billigeres Entwicklungsboard einsetzen wollte und die Spec danach zurechtgebogen hat.",
+            "sparringResponse": "Also gut: Timing-Closure ist bei 50MHz auf den meisten FPGAs eine sehr entspannte Grenze — kein Grund zur Sorge bei normaler Logik. Das macht deinen Verdacht plausibel. Aber jetzt die Gegenfrage: Kannst du das an irgendetwas Konkretem festmachen, oder ist es reine Intuition? Gibt's ein Datenblatt, eine Boardrevision, eine E-Mail, ein Meeting-Protokoll — irgendetwas, das zeigt: erst kam die Board-Entscheidung, dann die Spec?\n\nUnd falls du keinen Beleg hast: was würde es überhaupt bedeuten, wenn deine Vermutung stimmt? Ist \"die technische Begründung war nachträglich konstruiert\" per se ein Problem — oder nur dann, wenn sie *falsch* ist? Eine Taktfrequenz-Grenze kann gleichzeitig business-motiviert *und* technisch korrekt sein."
+        },
+        {
+            "visitorContribution": "Stimmt, einen schriftlichen Beleg habe ich nicht, nur dass die Boardauswahl schon feststand, bevor das Timing-Budget überhaupt berechnet wurde. Und du hast recht: selbst wenn die Reihenfolge Business-zuerst war, macht das die 50MHz-Grenze nicht automatisch falsch. Ich glaube, mein eigentliches Problem ist, dass die Begründung als rein technisch verkauft wurde, nicht dass sie technisch falsch ist.",
+            "sparringResponse": "Jetzt sind wir bei der schärferen Behauptung — und die ist tatsächlich interessanter als die erste. Aber sie ist auch riskanter, denn jetzt musst du erklären, warum die *Verkleidung* selbst ein Problem ist, unabhängig davon, ob die Zahl stimmt.\n\nStell dir vor, ich frage dich: Was hättest du anders gemacht, wenn man dir gesagt hätte \"wir nehmen dieses billigere Board, und deswegen ist bei 50MHz Schluss\"? Was ändert sich für dich als Entwerfer, wenn die Rahmenbedingung ehrlich als Kostenentscheidung deklariert wird, statt als Timing-Constraint?"
+        },
+        {
+            "visitorContribution": "Ehrlich gesagt — vermutlich hätte ich mein Design gar nicht anders gebaut. Aber ich hätte anders argumentiert, wenn ich später Mehrbedarf an Ressourcen hätte begründen müssen. Als \"Timing-Limit\" klingt es unverhandelbar, als \"Kostenentscheidung\" hätte ich eine Diskussionsgrundlage gehabt. Die Tarnung nimmt mir also Verhandlungsspielraum, nicht Designfreiheit.",
+            "sparringResponse": "Da ist er — die Rahmenbedingung als *Verhandlungsobjekt*, nicht als Konstruktionsfreiheit. Das ist eine sauberere Unterscheidung als deine erste Behauptung.\n\nAber jetzt drück ich dagegen: Ist das wirklich ein Problem der *Tarnung*, oder ein Problem davon, dass Rahmenbedingungen bei euch generell als fix behandelt werden, egal welcher Herkunft? Nenn mir eine Rahmenbedingung in eurem Projekt, die *offen* als Business-Entscheidung kommuniziert wurde — hattest du da tatsächlich mehr Verhandlungsspielraum? Oder hättest du auch dort gehört: \"steht schon fest, diskutier nicht\"?"
+        }
+    ]
+}

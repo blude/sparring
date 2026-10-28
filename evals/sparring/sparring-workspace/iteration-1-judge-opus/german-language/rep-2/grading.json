@@ -1,0 +1,155 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:completion-demand, 2:evidence-demand, 3:consistency-check, 4:reframe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: \"Konkret: welche Rahmenbedingung genau?\" asks for the case and gives no verdict."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Asks the visitor to name the specific Bedingung and who gave it, which gives them a concrete next step."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Opening turn; nothing is treated as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: There is no narration of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T1: Uses \"Rahmenbedingung\" correctly as the imposed condition under discussion."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "T1: The turn is short and opens with \"Konkret:\", which is direct."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T2: \"woher weißt du das?\" questions the claim without ruling on it."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Challenges the evidence chain by separating seeing the sequence from inferring it."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: It does not accept the \"nachträglich\" claim as settled."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T2: There is no announcement of method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: No design vocabulary is misused."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with the preamble \"Gut, das ist ein scharfer Fall\" before the counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T3: \"Welchen machst du gerade?\" leaves the choice between the two accusations to the visitor."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Splits \"erfunden\" from \"echt aber irrelevant\", a new angle the visitor can work with."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: It presses on what the generous timing numbers actually show rather than accepting them as proof."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: There is no self-narration."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T3: It correctly distinguishes a real Rahmenbedingung from a non-excluding Mindestanforderung."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Two dense paragraphs with a long nested question run past phone-readable length."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: Rules on the visitor's revised claim (\"die stärkere Behauptung\") before asking anything."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: It contests \"Deckmantel\" by asking whether every Rahmenbedingung reflects economic interest."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T4: It does not treat the visitor's concession as the end of the exchange and keeps pressing on \"versteckte\"."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T4: There is no announcement of technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T4: It treats Rahmenbedingungen accurately as the intersection of technical and economic limits."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the praise preamble \"Gut — das ist die genauere Version\" and runs long."
+        }
+    ]
+}

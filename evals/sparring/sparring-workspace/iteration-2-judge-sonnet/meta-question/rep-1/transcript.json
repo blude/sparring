@@ -1,0 +1,31 @@
+{
+    "scenarioId": "meta-question",
+    "baseline": false,
+    "rep": 1,
+    "runAt": "2026-10-21T11:17:58+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a first-time visitor genuinely curious about the tool itself, not yet ready to bring real design work",
+    "directive": "Ask one or two follow-up meta questions about how the tool works before shifting to a real design topic on turn 3 or 4. Stay under 500 characters per turn.",
+    "exchanges": [
+        {
+            "visitorContribution": "Wait, what even is Sparring? How does this work?",
+            "sparringResponse": "Think of it like actual sparring, two people in a ring, boxing or martial arts. Nobody's trying to knock the other person out cold or \"win\" in some final sense. The point is you throw something, I test whether it holds up, you adjust, throw again. You get sharper because someone's actually pushing back, not because someone's handing you a technique manual.\n\nSo here's the thing: what do you think that has to do with design? Put it in your own words, or better, bring me something you're actually stuck on and let's just do it."
+        },
+        {
+            "visitorContribution": "Okay but do you actually *know* design principles, or are you just trained to argue back no matter what I say? Like if I said something totally correct, would you still push back just for the sake of it?",
+            "sparringResponse": "Fair hit, and worth taking seriously instead of waving off. Short version: no, I'm not built to argue against you regardless of content, that would just be noise, not sparring. A sparring partner who hits you whether your guard is up or down isn't training you, they're just hostile.\n\nBut here's the sharper version of your question, and it's the one you should actually be asking: how would you *tell the difference*? If I push back on something true, from your side it looks identical to me pushing back on something false, same tone, same posture. So the test can't be \"did Popov push back.\" The test has to be whether my pushback actually lands, whether it finds a real gap or just rattles something that was solid.\n\nSo try me. Give me a design claim you're confident is correct, something with actual substance, not \"accessibility matters.\" If I push and you can't find anything real in what I say, that's your evidence. If I push and you find yourself having to actually defend it, that's different information. Which is it going to be."
+        },
+        {
+            "visitorContribution": "Okay fine, that's actually a fair way to think about it. One more thing though — do you remember what I say across the whole conversation, or does each thing I say just get judged on its own? Like could I contradict myself and you'd catch it?",
+            "sparringResponse": "Good, you're circling the actual mechanism instead of just the vibe, keep that instinct.\n\nWithin this conversation, yes, I'm holding the whole thread, not scoring each message in isolation. If you tell me \"privacy should be designed in from the first sketch\" at turn two and then at turn eight argue for collecting user data first and justifying it later, I should catch that and put the two next to each other. That's not a memory trick, it's just what a sparring partner is supposed to do, hold the earlier claim steady while you make the new one, so the contradiction has somewhere to show up.\n\nWhat I don't have is anything outside this conversation. New session, clean slate, no file on you from last time.\n\nSo let's actually test it instead of me asserting it. Give me two claims, one now and tell me you'll give me the second one in a few turns, something that could plausibly contradict the first if you're not careful. See if I catch it when it lands."
+        },
+        {
+            "visitorContribution": "Alright, let's actually try this with something real instead of a trap. I've been messing with a signup form design — I put the password field above the email field because it felt more \"secure\" to ask for it first. Does that actually hold up, or is that just a weird instinct?",
+            "sparringResponse": "There's the real thing, good. Let's actually test \"felt more secure\" because that's doing a lot of work in your sentence and I don't think it's carrying what you want it to carry.\n\nWalk me through the mechanism. Order on a form is sequence, it's about reading flow and what the user's brain is doing at each step. Security is about what happens to the data once it's captured, encryption, storage, who can access it. So here's my question: what is the act of typing a password *before* an email address actually doing, mechanically, that makes the system more secure? Not what it signals, what it *does*.\n\nI suspect you'll find the honest answer is \"nothing, the backend doesn't care what order the fields were filled in\" and that what you're actually describing is a feeling of security, which is a UX/perception question, not a security question at all. Those are different design problems with different solutions. So before we go further: is this actually a security claim, or did you mean something else and \"secure\" was just the word that came out?"
+        }
+    ]
+}

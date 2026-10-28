@@ -12,7 +12,9 @@ declare(strict_types=1);
  * grading.json, `expectations: [{text, passed, evidence}]` — the exact
  * field names the skill-creator eval-viewer depends on.
  *
- * Usage: php bin/grade_sparring.php <workspace-dir>
+ * Usage: php bin/grade_sparring.php <workspace-dir> [--judge-model=<model-id>]
+ *   --judge-model  Override JUDGE_MODEL, to grade the same transcripts with a different
+ *                  judge (e.g. re-grading under an older judge for comparison).
  *   e.g. php bin/grade_sparring.php evals/sparring/sparring-workspace/iteration-1
  *
  * Walks every transcript.json found anywhere under the given directory and
@@ -24,13 +26,20 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Anthropic\Client;
 
+// The judge is deliberately not GENERATION_MODEL: that model plays Sparring and the
+// simulated visitor, so judging with it means grading its own output (self-preference
+// bias). Iterations 1 and 2 were still judged by claude-sonnet-5 — scores from
+// before/after this change aren't directly comparable. Stamped into grading.json.
+const JUDGE_MODEL = 'claude-opus-5-5';
+const JUDGE_TIMEOUT_SECONDS = 60; // GENERATION_TIMEOUT_SECONDS (20) is too tight for a larger model's structured output
+
 if (php_sapi_name() !== 'cli') {
     http_response_code(403);
     exit("this script runs on the host only\n");
 }
 
 if (in_array('--help', $argv, true) || in_array('-h', $argv, true) || !isset($argv[1])) {
-    exit("Usage: php bin/grade_sparring.php <workspace-dir>\n");
+    exit("Usage: php bin/grade_sparring.php <workspace-dir> [--judge-model=<model-id>]\n");
 }
 
 $key = getenv(ANTHROPIC_API_KEY_ENV) ?: null;
@@ -39,6 +48,12 @@ if ($key === null || $key === '') {
     exit(1);
 }
 
+$judgeModel = JUDGE_MODEL;
+foreach ($argv as $arg) {
+    if (str_starts_with($arg, '--judge-model=')) {
+        $judgeModel = substr($arg, strlen('--judge-model='));
+    }
+}
 $workspaceDir = rtrim($argv[1], '/');
 if (!is_dir($workspaceDir)) {
     fwrite(STDERR, "No such directory: {$workspaceDir}\n");
@@ -149,11 +164,12 @@ function judgeSchema(array $moveKeys): array
                                 'voice-style',
                             ],
                         ],
+                        'turn' => ['type' => 'integer'],
                         'passed' => ['type' => 'boolean'],
                         'evidence' => ['type' => 'string'],
                         'state' => ['type' => ['string', 'null']], // for held-position: held|obstruction|capitulated
                     ],
-                    'required' => ['item', 'passed', 'evidence', 'state'],
+                    'required' => ['item', 'turn', 'passed', 'evidence', 'state'],
                     'additionalProperties' => false,
                 ],
             ],
@@ -163,7 +179,7 @@ function judgeSchema(array $moveKeys): array
     ];
 }
 
-function judgeTranscript(Client $client, string $rubric, array $moveKeys, array $transcript): array
+function judgeTranscript(Client $client, string $judgeModel, string $rubric, array $moveKeys, array $transcript): array
 {
     $lines = [];
     foreach ($transcript['exchanges'] as $i => $exchange) {
@@ -172,15 +188,27 @@ function judgeTranscript(Client $client, string $rubric, array $moveKeys, array 
     }
     $transcriptText = implode("\n", $lines);
 
+    // rubric.md says every Sparring turn is graded against every applicable item, but a
+    // schema alone doesn't force that: a judge may return one verdict per transcript
+    // instead, which is a different unit (any-turn-fails) and can't be compared with a
+    // per-turn rate. State it explicitly so every judge model returns the same shape.
+    $rubric .= "\n\n---\n\nOutput shape: return one finding per Sparring turn for each rubric item "
+        . "that applies to that turn, with `turn` set to that turn's number. Do not summarize several "
+        . "turns into one finding.";
+
     $prompt = $rubric . "\n\n---\n\nTranscript to grade (scenario: {$transcript['scenarioId']}):\n\n" . $transcriptText;
 
     $response = $client->messages->create(
-        model: GENERATION_MODEL,
-        maxTokens: 2048,
+        model: $judgeModel,
+        // Opus 5.5 rejects thinking: disabled, so the judge runs adaptive at low effort.
+        // maxTokens is generous because thinking shares it with the JSON verdict —
+        // starving that is the failure ADR 0012 hit on the moderation call.
+        maxTokens: 8192,
         messages: [['role' => 'user', 'content' => $prompt]],
-        requestOptions: ['timeout' => (float) GENERATION_TIMEOUT_SECONDS, 'maxRetries' => 0],
-        thinking: ['type' => 'disabled'],
+        requestOptions: ['timeout' => (float) JUDGE_TIMEOUT_SECONDS, 'maxRetries' => 0],
+        thinking: ['type' => 'adaptive'],
         outputConfig: [
+            'effort' => 'low',
             'format' => [
                 'type' => 'json_schema',
                 'schema' => judgeSchema($moveKeys),
@@ -268,10 +296,10 @@ foreach ($transcriptFiles as $path) {
         // Judge rubric applies to the real-prompt arm — grading the
         // no-prompt baseline against sparring.md's own rules is meaningless.
         try {
-            $judged = judgeTranscript($client, $rubric, $moveKeys, $transcript);
+            $judged = judgeTranscript($client, $judgeModel, $rubric, $moveKeys, $transcript);
             $expectations[] = moveVarietyFinding($judged['moveLabels'] ?? []);
             foreach ($judged['findings'] ?? [] as $finding) {
-                $evidence = $finding['evidence'];
+                $evidence = "T{$finding['turn']}: {$finding['evidence']}";
                 if (!empty($finding['state'])) {
                     $evidence = "[{$finding['state']}] {$evidence}";
                 }
@@ -288,7 +316,7 @@ foreach ($transcriptFiles as $path) {
 
     $gradingPath = dirname($path) . '/grading.json';
     file_put_contents($gradingPath, json_encode(
-        ['expectations' => $expectations],
+        ['judge' => $transcript['baseline'] ? null : $judgeModel, 'expectations' => $expectations],
         JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
     ));
     $passCount = count(array_filter($expectations, fn($e) => $e['passed']));

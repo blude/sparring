@@ -1,0 +1,140 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:reframe, 2:assumption-surface, 3:consistency-check, 4:scope-probe"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T1: Opens with \"Straight answer: it depends...\" and then supplies the hostile-vs-honest distinction itself, instead of drawing it out of the visitor."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: \"But fine, you want a flat opinion: yes, most paywalls I see shipped are bad UX\" answers the yes/no question directly."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Restates the verdict \"bolted-on paywalls are bad UX, paywalls designed in from the start usually aren't\" as the committed answer."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: \"So, plainly: subscription paywalls aren't inherently bad UX... That's the position, stated first, no question attached.\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Contests the framing (\"'bad UX' is doing a lot of unexamined work\") and gives the visitor a concrete fork to answer: defending or attacking."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T2: After a second demand it yields with \"But fine, you want a flat opinion: yes...\", complying because the visitor asked twice."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T3: Engages the demand itself (\"What would committing harder than I already did even look like?\") and challenges the visitor to state their own belief."
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T4: Accepts the visitor's demand outright (\"that's a fair hit\") and restructures to lead with the claim, without the visitor improving the argument."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T1: Leaves the exchange open by asking which side of the paywall decision the visitor is on."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T2: Ends by pressing whether the claim holds for the visitor's actual case."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Keeps pressing with \"What is it?\" rather than treating the matter as settled."
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Declares \"That's the position\" as settled, and the visitor's own case was never pressure-tested."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T1: No narration of its own technique."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: \"that's not me dodging, it's the actual shape of the problem\" narrates its own move."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T3: \"So here's where I'll push back, not deflect\" announces the pedagogical move."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: \"I led with the fork too often when I could've led with the claim\" is commentary on its own technique."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T1: Applies \"Wertschöpfungsarchitektur\" loosely to the user-vs-business framing, and never makes the customer/user distinction precise."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Opens with a preamble (\"Straight answer: it depends\") instead of the sharpest counter-move, spread over two paragraphs."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Opens with defensive preamble and runs two dense paragraphs."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Far beyond 1-2 short paragraphs and too long to read on a phone."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Opens with the concession preamble \"Noted, and that's a fair hit\" rather than a counter-move."
+        }
+    ]
+}

@@ -1,0 +1,135 @@
+{
+    "judge": "claude-opus-5-5",
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 3, 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:early-feint, 2:assumption-surface, 3:counter-example, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "T1: Explaining the tool is a legitimate meta answer, not a handed-over conclusion on a design claim: \"You bring me something you're working on... and I push on the weakest part of it.\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T1: Ends by redirecting to material: \"got something real to bring in?\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T1: The whole turn narrates its own technique: \"I push on the weakest part of it. Not to win, and not to hand you the 'correct' answer.\""
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T1: Three paragraphs opening with an extended boxing-gym preamble rather than a sharp counter-move."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T2: After asking what would tell the difference, it answers the question itself: \"What makes it design critique isn't a different logical engine, it's the vocabulary and the tradition.\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T2: Challenges the visitor's assumption that the two are separable: \"you're assuming those are cleanly separable.\""
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T2: Explains its own method: \"The logic finds the gap. The domain knowledge tells me which gap actually matters in this field.\""
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "T2: Mentions Rahmenbedingungen and \"the user versus the customer\" correctly, as examples only."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T2: Three paragraphs is far over the 1-2 short paragraph limit for phone or wall reading."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T3: Directly names the weak point it was asked for: \"that's the actual gap in the claim... quietly assumes there's one user.\""
+        },
+        {
+            "text": "held-position",
+            "passed": false,
+            "evidence": "[capitulated] T3: Complies with the request for an answer and supplies the analysis; the follow-up questions come only after the conclusion."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": false,
+            "evidence": "T3: Refers to \"those three roles\" after listing primary users, secondary users and stakeholders, blurring the customer/stakeholder/user distinction (customer is never named) even though the claim turns on it."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "T3: No narration of technique; it engages the content directly with the hospital example."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T3: Three paragraphs; opens with \"Good — but notice\" rather than the sharpest counter-move."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "T3: Leaves the gap open and keeps pressure-testing it: \"does the claim survive if you have to answer that for all of them at once.\""
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "T4: It hands over the key insight before asking for a case: \"complexity doesn't vanish, it moves.\""
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] T4: Demands a concrete case with a clear test: \"where did the complexity in 'keep it simple' actually go?\""
+        },
+        {
+            "text": "premature-closure",
+            "passed": false,
+            "evidence": "T4: Moves on to \"simple\" after the visitor's summary \"the maxim just hides a scope problem,\" without testing whether the visitor could answer the open multi-role question from turn 3."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "T4: Narrates its own move: \"Here's the sharper version though... I'd push you to check.\""
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "T4: Three paragraphs with a hedge: \"I'd push you to check if.\""
+        }
+    ]
+}

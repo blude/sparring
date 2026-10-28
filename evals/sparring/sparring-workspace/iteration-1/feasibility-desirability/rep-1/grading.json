@@ -1,0 +1,114 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 2 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3, 4 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:assumption-surface, 3:scope-reduction, 4:consistency-check"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 refuses to diagnose and instead demands the exact sentence and asks the visitor which of three meanings applies."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 reframes the checklist request into a question about which move the visitor is actually trying to make, without answering it for them."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 refuses to hand over a script and instead tells the visitor to draft their own questions."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 4 does not just push back but effectively delivers the analytical payoff itself ('Budget and time aren't feasibility questions by that definition — they're viability questions'), handing over the conclusion the visitor was fishing for."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 declines to give the diagnostic and demands specifics, giving the visitor concrete work to do next."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 challenges the 'paranoid' framing and redefines feasibility rigorously, advancing the argument."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 declines the checklist request again but adds a new angle by making the visitor construct their own test."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 identifies a genuine new gap (viability vs. feasibility) in the visitor's own three questions, giving fresh substantive pressure."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly reopens the matter by showing the visitor's questions may have only swapped one costume for another rather than accepting the checklist as solved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own pedagogical technique or recaps 'so far we've established' in an explicit lecturing way."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 2's precise definition of feasibility ('can this be built at all, with known methods... at a cost the org can absorb') is used correctly and consistently referenced again in turn 4."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 opens directly with 'Good instinct' and a demand for specifics rather than hedging or preamble."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 2 runs to three dense paragraphs with an embedded lecture-like definition, exceeding the terse phone-readable register the rubric calls for."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 3 stays tight and ends with a sharp, phone-readable challenge."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 4's Mermaid diagram plus multi-sentence explanation is longer and more analytic than the standing-up-reading register the rubric specifies."
+        }
+    ]
+}

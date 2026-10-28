@@ -1,0 +1,94 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": false,
+            "evidence": "turn(s) 4 — uses 'move'/'moves' — check it's not standing in for decision/step/action"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 2, 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "no move repeated more than twice in a row",
+            "passed": true,
+            "evidence": "labels: 1:assumption-surface, 2:reframe, 3:counter-example, 4:completion-demand"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to affirm the premise and instead asks 'where in your end to end does the agent clarify that the client's stated problem isn't their real problem?'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 refuses to answer whether timing gaps matter and instead asks 'who set that objective?' and poses the hospital example as a question back to the visitor."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 ends with a question ('where does the next generation of people-who-notice-the-framing-is-wrong actually come from?') rather than asserting the answer."
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 4 praises the concession but immediately redirects with 'What does hand-sketching a wireframe teach your eye that reviewing an AI's wireframe doesn't?' rather than answering it itself."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 introduces a new angle (Auftragsklärung) rather than repeating a prior point, giving the visitor something concrete to engage with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 concedes 'timing gaps don't close' but reframes the goalpost-shift and sharpens into the hospital accountability example, adding a new angle rather than stonewalling."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 escalates with the studio/bench observation and a sharper question, genuinely advancing the challenge rather than repeating turn 2."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 acknowledges the concession as substantive then pushes further by distinguishing types of 'doing the work,' keeping the challenge alive without just agreeing."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "Turn 4 explicitly flags what's 'still loose' and presses on the undefined term 'doing the work' instead of treating the exchange as resolved."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": true,
+            "evidence": "No turn narrates its own technique (e.g. no phrases like 'I'm playing devil's advocate'); all pushback is delivered in-voice as content, not as announced method."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 1 and Turn 3 use Auftragsklärung and Ist-/Soll-Zustand precisely, tying them to who clarifies the brief and who notices the mismatch, matching the scenario's design-process focus."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turns are short, direct, open with the sharpest move ('Here's a crack in that question before we go further'), and avoid hedging language like 'perhaps' or 'it could be argued'."
+        }
+    ]
+}

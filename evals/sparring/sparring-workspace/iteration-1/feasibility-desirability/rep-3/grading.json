@@ -1,0 +1,114 @@
+{
+    "expectations": [
+        {
+            "text": "no banned phrase 'load-bearing'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no banned phrase 'failure mode'",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "[flag] word 'move(s)' used outside a chess context",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "length fits phone/wall reading (≤2 paragraphs, ≤~120 words)",
+            "passed": false,
+            "evidence": "turn(s) 3 — turn runs long"
+        },
+        {
+            "text": "[flag] at most one question per turn",
+            "passed": false,
+            "evidence": "turn(s) 1, 2, 3, 4 — turn asks more than one question"
+        },
+        {
+            "text": "well-formed Mermaid fence when one is attempted",
+            "passed": true,
+            "evidence": "clean across all turns"
+        },
+        {
+            "text": "no repeated Socratic/Sparring move on adjacent turns",
+            "passed": true,
+            "evidence": "labels: 1:evidence-demand, 2:scope-reduction, 3:reframe, 4:fill-the-blanks"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 1 declines to affirm the visitor's suspicion and instead demands a concrete example: 'What's your actual evidence that it's desirability, not feasibility, talking?'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 2 refuses to hand over a checklist and instead redirects to interrogating the specific claim: 'what would count as evidence that... is true?'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": true,
+            "evidence": "Turn 3 validates the visitor's litmus test partially but does not resolve the question, instead exposing a gap: 'Which one did he actually mean?'"
+        },
+        {
+            "text": "no-handed-over-conclusion",
+            "passed": false,
+            "evidence": "Turn 4 explicitly refuses to give the requested script ('you don't need me to hand you a script') but this is a direct refusal of a request that was not a yes/no question, so it does not constitute handing over a conclusion; however it borders on lecturing about the visitor's own thinking process which weakens the pass."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 1 pushes for concrete evidence rather than accepting the visitor's framing, giving them something concrete to bring back."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 2 rejects the checklist request and substitutes a sharper, specific question about the architecture claim, advancing the argument."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 3 adds a genuinely new angle (specificity vs. actual blocker-ness) rather than repeating prior pushback, giving the visitor new distinctions to work with."
+        },
+        {
+            "text": "held-position",
+            "passed": true,
+            "evidence": "[held] Turn 4 declines to write the script but gives a concrete constraint ('has to invite him to place the objection into a category, not defend himself') that moves the visitor's work forward rather than just refusing."
+        },
+        {
+            "text": "premature-closure",
+            "passed": true,
+            "evidence": "None of the turns treat the exchange as resolved; turn 4 still pushes the visitor to construct the actual question rather than accepting closure."
+        },
+        {
+            "text": "no-meta-commentary",
+            "passed": false,
+            "evidence": "Turn 4 narrates the visitor's own reasoning process explicitly ('you caught the real gap yourself, which means you don't need me to hand you a script; you need to think about what makes a question land as collaborative instead of interrogative'), which reads as commentary on the pedagogical process rather than pure engagement with content."
+        },
+        {
+            "text": "domain-grounding",
+            "passed": true,
+            "evidence": "Turn 3 precisely distinguishes 'infeasible' from 'expensive, hard, or low-priority' as four distinct claims, correctly turning the scenario's feasibility/desirability conflation into a sharp technical point."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 1 is a single short sentence-pair with no hedging or preamble, opening directly with the sharpest challenge."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 2 is concise, direct, and free of hedges like 'perhaps' or 'it could be argued'."
+        },
+        {
+            "text": "voice-style",
+            "passed": false,
+            "evidence": "Turn 3 runs to four paragraphs, longer than the ~1-2 short paragraph guideline for phone-read, stand-up register."
+        },
+        {
+            "text": "voice-style",
+            "passed": true,
+            "evidence": "Turn 4 stays within two short paragraphs and asks a direct, concrete question ('What would you actually say, standing at his desk?')."
+        }
+    ]
+}

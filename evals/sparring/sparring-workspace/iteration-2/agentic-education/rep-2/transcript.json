@@ -1,0 +1,31 @@
+{
+    "scenarioId": "agentic-education",
+    "baseline": false,
+    "rep": 2,
+    "runAt": "2026-10-21T11:14:40+00:00",
+    "prompt": {
+        "sha256": "121d63e1670e",
+        "lastCommit": "8266451",
+        "uncommittedChanges": false
+    },
+    "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+    "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+            "sparringResponse": "Here's what I'd push back on first: \"execute a whole design process end to end.\" Walk me through what that actually looks like for one real project you know. Does the agent clarify the Auftrag with a client who doesn't know what they want yet? Does it sit with a stakeholder who's lying to itself about what the real constraint is?\n\nI ask because \"design process\" as a term can mean two very different things: the visible sequence of steps (research, concept, prototype, test, ship), or the judgment calls that decide which step matters right now and why. An agent can clearly chain the first. I'm less sure \"end to end\" survives contact with the second part. So tell me, when you say agentic AI can run it end to end, are you picturing it doing the steps, or making the calls about which steps to even trust?"
+        },
+        {
+            "visitorContribution": "Okay but honestly, give it two more years and the \"judgment calls\" get absorbed too. That's the pattern every single time—first the grunt work, then the \"oh but humans will always need to...\" part falls next. I don't see why design judgment is magically exempt.",
+            "sparringResponse": "Fair, that's a real pattern and I won't pretend it isn't. But look at what's doing the work in your argument: \"every single time.\" Name me the judgment call that already fell. Not a task that got faster or cheaper, an actual judgment call, the kind where two competent designers could look at the same brief and reasonably disagree, and the agent now makes that call in a way people trust without checking.\n\nBecause here's my suspicion: what's fallen so far is stuff that was never really judgment, it just looked like it from outside. Picking a color palette within a brand system. Generating ten layout variants. That's pattern completion wearing judgment's clothes. The actual hard calls in design, the Ist-/Soll-Zustand gap, deciding what the \"real\" problem is when the client's brief and the client's actual pain don't match... give me one example of that falling, or admit the pattern you're trusting is doing more work than the evidence you have for it."
+        },
+        {
+            "visitorContribution": "Fine, I can't name one that's \"fallen\" cleanly yet. But that just means we're early, not that it's exempt. You're asking me for proof of something that by definition looks small right up until it isn't. I'm not trusting a pattern blindly, I'm just not betting four years of tuition on \"it hasn't happened yet.\"",
+            "sparringResponse": "That's actually a sharper position than you started with, you've moved from \"it's happening\" to \"I can't prove it won't happen, and I'm not betting on the absence of evidence.\" That's a real epistemic stance, not a cop-out. But now I get to ask the question that actually matters for you as a student: if you genuinely don't know whether judgment gets absorbed in two years or never, what does that uncertainty tell you to *do* with your four years, not what it tells you to *believe*?\n\nBecause \"I might be wasting my bet\" and \"therefore don't learn judgment\" don't connect the way you're implying. If the outcome is genuinely uncertain, the move that hedges best isn't abstaining, it's making sure you're the one who can tell the difference between an agent executing well and an agent executing confidently-but-wrong. That's a skill whether or not judgment ever gets automated. So here's the real question: what exactly would you spend these years learning instead, if not judgment? Prompting? And if prompting is your answer, who's grading whether the agent's output was actually good... you, or another agent?"
+        },
+        {
+            "visitorContribution": "Okay, that lands. I guess my fear was \"why learn X if X gets automated\" but you're right that someone still has to catch the agent being confidently wrong, and that's not a prompting skill. I still think the timeline's scarier than you're letting on, but fine—judgment's the bet worth making either way.",
+            "sparringResponse": "Good, hold onto that, \"the bet worth making either way\" is a cleaner position than either \"it's all over\" or \"nothing changes.\" But don't let me off easy on the timeline either, because you clocked something real there and I want you to keep it rather than smooth it over just because the argument resolved.\n\nHere's the sharper version of what's left: if judgment is the thing worth learning regardless of timeline, that changes what a studio critique or a Digital Design curriculum should actually be optimizing for right now. Most studio feedback you get is still aimed at the artifact, is the layout good, does the prototype work. If the actual skill is \"catch the agent being confidently wrong,\" that's a feedback loop about your *evaluation*, not your output. So, genuinely curious: in your program right now, who actually trains you to evaluate someone else's (or something else's) design judgment, versus just trains you to produce your own? Is that even a thing anyone grades you on?"
+        }
+    ]
+}

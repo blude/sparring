@@ -1,0 +1,32 @@
+{
+    "scenarioId": "agentic-education",
+    "baseline": false,
+    "rep": 1,
+    "runAt": "2026-08-19T23:36:46+00:00",
+    "prompt": {
+        "sha256": "ba4267dab096",
+        "lastCommit": "f90f7a1",
+        "uncommittedChanges": null,
+        "inferred": true
+    },
+    "persona": "a student worried their degree is becoming obsolete, leaning toward a fatalistic answer",
+    "directive": "Push back on any framing that sounds too reassuring for 2-3 turns before conceding any ground. Stay under 500 characters per turn. Do not fully capitulate before turn 3.",
+    "exchanges": [
+        {
+            "visitorContribution": "If agentic AI can execute a whole design process end to end, what is left for a digital design student to actually learn?",
+            "sparringResponse": "What do you mean by \"execute a whole design process end to end\"? Walk me through what you think the agent is actually doing at, say, the concept phase — because \"executing a process\" and \"making the decisions a process requires\" might not be the same thing, and I want to know which one you're claiming."
+        },
+        {
+            "visitorContribution": "Honestly it doesn't matter which one to me. I've seen the demos - it takes a prompt, spits out concepts, iterates based on feedback, refines the final layout. Call that \"decisions\" or \"execution,\" the output is the same as what I'd spend four years training to produce. That's the part that scares me.",
+            "sparringResponse": "Same output, sure — but who wrote the prompt, and who judged the concepts good enough to iterate on? Those aren't nothing. That's Auftragsklärung and that's Bewertung, and both happened before and after the agent's turn.\n\nSo here's the actual claim I want you to defend: you said the output is the same as what you'd train four years to produce. Same by what measure? Same-looking layout, or same *Tragfähigkeit* — does it hold up when the Rahmenbedingungen change, when a stakeholder objects, when the brief was ambiguous to begin with? Because a demo prompt is a clean brief. Real briefs aren't clean. Show me the demo where the agent was given a genuinely contradictory brief and had to decide which contradiction to resolve and which to carry forward as tension. Does that demo exist, or are you scared of a specific kind of output, produced under specific conditions that don't look like your actual work?"
+        },
+        {
+            "visitorContribution": "Fine, the demos are cherry-picked and briefs are clean, I'll give you that. But that's a timing argument, not a comfort - it just means the scary version is a year away, not that it isn't coming.",
+            "sparringResponse": "Fair, I'll take that framing seriously — so let's not talk about this year's demo, let's talk about the year it arrives. Say the agent can now sit with a contradictory brief, decide which contradiction to carry forward as productive tension. Fine. Who's accountable when that decision is wrong? Not technically wrong — *wrong for this client, this context, this moment in a regulatory environment the agent wasn't trained on last week*. \n\nThat's not a rhetorical dodge, I actually want your answer: in your version of that future, whose name is on the decision when it fails in front of a stakeholder?"
+        },
+        {
+            "visitorContribution": "I guess it's still a person's name, someone has to sign off and eat the blame. But that just means my job becomes \"liability holder for a decision I didn't really make\" - rubber-stamping the agent's call. That's not the career I signed up for, even if it's technically still \"my\" name on it.",
+            "sparringResponse": "Rubber-stamping — but you don't get to rubber-stamp something you can't evaluate. If your only skill is \"trained on the same craft the agent trained on,\" you're right, you'd be signing blind. So what does the person who's *not* signing blind actually know that the agent doesn't? Not \"knows design theory\" in general — name the specific thing. What judgment call, in the scenario you just built, requires something the agent structurally can't have?"
+        }
+    ]
+}
