@@ -172,7 +172,7 @@
 <div class="paragraph">
 <p>The system shall persist sessions and exchanges tagged as pilot or live at the moment they are created.<br>
 <em>Success criteria (qualitative):</em> Live exhibition material can be extracted without manual sorting.<br>
-<em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary</a></p>
+<em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary material</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -207,8 +207,8 @@
 <div class="paragraph">
 <p>The system shall offer the visitor a short, always-skippable rating and open-feedback prompt when their session ends, and record whatever they choose to answer.<br>
 <em>Success criteria (qualitative):</em> A visitor can leave a rating, leave open feedback, leave both, or leave neither, without any of those choices affecting how the session itself concludes.<br>
-<em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary</a><br>
-<em>Rationale:</em> Same secondary, non-rigorous status as the rest of <a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary</a> — a self-report gathered in passing from an unbriefed visitor, not <a href="L1-solution-design-concept.html#BQR-04">BQR-04 Exhibition material is never mistaken for evaluation</a>'s formal evaluation sessions.</p>
+<em>Satisfies:</em> <a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary material</a><br>
+<em>Rationale:</em> Same secondary, non-rigorous status as the rest of <a href="L1-solution-design-concept.html#BG-04">BG-04 Produce a record of public interactions as secondary material</a> — a self-report gathered in passing from an unbriefed visitor, not <a href="L1-solution-design-concept.html#BQR-04">BQR-04 Exhibition material is never mistaken for evaluation</a>'s formal evaluation sessions.</p>
 </div>
 <hr>
 </div>
@@ -262,7 +262,7 @@
 <h4 id="_ap_05_moderation_gates_storage_not_a_per_session_display_flag"><a class="anchor" href="#_ap_05_moderation_gates_storage_not_a_per_session_display_flag"></a><a id="AP-05"></a>AP-05 Moderation gates storage, not a per-session display flag</h4>
 <div class="paragraph">
 <p>Content assessed as unsuitable is rejected before it is ever written down: no exchange is stored, no turn is consumed, and the Sparring partner is never called. The visitor edits the contribution and resubmits; the session itself is not ended.<br>
-<em>Rationale:</em> An earlier version of this decision ended the participant&#8217;s session outright on a moderation hit, on the reasoning that a defensive stance was warranted even at the cost of a visible, unexplained interruption. Built and tested, that traded one problem for a worse one: it gives the visitor no way to recover from a false positive, and — per <a href="#AP-07">AP-07 Attempts to argue the Sparring partner out of its</a> — a visitor pressuring the Sparring partner is <em>supposed</em> to keep going, not be cut off. Rejecting the single turn and letting the visitor fix it protects the public surface just as well without punishing engagement the piece exists to produce.<br>
+<em>Rationale:</em> An earlier version of this decision ended the participant&#8217;s session outright on a moderation hit, on the reasoning that a defensive stance was warranted even at the cost of a visible, unexplained interruption. Built and tested, that traded one problem for a worse one: it gives the visitor no way to recover from a false positive, and — per <a href="#AP-07">AP-07 Attempts to argue the Sparring partner out of its stance are in scope</a> — a visitor pressuring the Sparring partner is <em>supposed</em> to keep going, not be cut off. Rejecting the single turn and letting the visitor fix it protects the public surface just as well without punishing engagement the piece exists to produce.<br>
 <em>Implications:</em> Moderation runs before the provider call, immediately after the length check (same reasoning: cheapest rejection path, no cost incurred). No <code>is_appropriate</code> ruling is stored against the session, because there is nothing to rule on after the fact — a stored exchange has already passed.<br>
 <em>Satisfies:</em> <a href="#SG-07">SG-07 Gate public projection at the moment of submission</a></p>
 </div>
@@ -281,7 +281,7 @@
 <p>Content filtering addresses profanity, personal information, and hateful, harassing, threatening, or sexual content targeting a real person or group. It does not address visitors trying to make the system abandon its position.<br>
 <em>Rationale:</em> Whether system-placed friction holds against a motivated user is the question the installation exists to expose. Filtering those attempts would remove the observation the piece is built to produce.<br>
 <em>Implications:</em> Rules out treating persuasion, pressure, or instruction-style attacks on the Sparring stance as abuse. Requires the moderation function to distinguish adversarial-but-engaged input aimed at the Sparring partner from harmful content aimed at a real person, and this distinction must be stated in that function&#8217;s specification rather than left to a wordlist.<br>
-<em>Satisfies:</em> <a href="#SG-05">SG-05 Record every interaction with its origin fixed at</a>, <a href="#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
+<em>Satisfies:</em> <a href="#SG-05">SG-05 Record every interaction with its origin fixed at</a>, <a href="#SG-08">SG-08 Hold a pedagogical position under sustained pressure or premature-closure attempts</a></p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -424,7 +424,7 @@ Dashed link marks the system boundary. Detailed interaction sequences are in sec
 <em>Key responsibilities:</em> Defines the Sparring persona and behavioral rules. Specifies the four-stage reasoning engine run on every turn. Specifies the closed Socratic/Sparring move vocabulary. Grounds responses in the FH Dortmund Digital Design curriculum and named design-theory traditions. Specifies boundary-object handling and edge-case behavior.<br>
 <em>Interacts with:</em> <a href="#SE-03">SE-03 Backend service</a><br>
 <em>Realises:</em> <a href="L1-solution-design-concept.html#VCA-04">VCA-04 The installation</a><br>
-<em>Satisfies:</em> <a href="#SG-08">SG-08 Hold a pedagogical position under sustained</a></p>
+<em>Satisfies:</em> <a href="#SG-08">SG-08 Hold a pedagogical position under sustained pressure or premature-closure attempts</a></p>
 </div>
 </div>
 </div>

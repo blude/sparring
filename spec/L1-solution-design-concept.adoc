@@ -252,7 +252,7 @@ _Applies to:_ <<BP-02,BP-02 Recent sessions are shown to the room>>, <<BE-02,BE-
 
 _Acceptance criteria (qualitative):_ Content assessed as carrying personal information is rejected before it is stored or sent to the Sparring partner — the visitor edits and resubmits, and the rest of the session is unaffected. Nothing unsuitable is ever in a position to reach the projection. A generated nickname shown alongside a session (see xref:L2-system-design-concept.adoc#SE-02[SE-02 Display client] element design) is not in scope here: it is not supplied by the visitor, identifies nothing about them, and carries no information this requirement exists to keep off the wall.
 
-_Satisfies:_ <<BG-01,BG-01 Make Sparring's friction visible to an audience>>, <<BG-04,BG-04 Produce a record of public interactions as secondary>>
+_Satisfies:_ <<BG-01,BG-01 Make Sparring's friction visible to an audience>>, <<BG-04,BG-04 Produce a record of public interactions as secondary material>>
 
 === [[BQR-04]]BQR-04 Exhibition material is never mistaken for evaluation data _(Operational-excellence)_
 
@@ -260,7 +260,7 @@ _Applies to:_ <<BE-01,BE-01 Sparring session>>
 
 _Acceptance criteria (qualitative):_ Session origin is recorded at creation, not reconstructed afterwards. The one hand edit is the operator marking evaluation-study sessions as such (see SQR-05).
 
-_Satisfies:_ <<BG-04,BG-04 Produce a record of public interactions as secondary>>
+_Satisfies:_ <<BG-04,BG-04 Produce a record of public interactions as secondary material>>
 
 == Constraints
 
