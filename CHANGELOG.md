@@ -2,8 +2,76 @@
 
 Generated from git history. Grouped by commit date, newest first.
 
+## 2026-10-29
+
+- `fce0845` docs(readme): credit digital-design-werkzeuge plugin
+
+## 2026-10-28
+
+- `de1bd4a` docs(spec): add back trimmed part of requiment title in links
+
+## 2026-10-24
+
+- `3ad24f6` docs(evals): correct rating-form scope and note the visitor model
+- `76d7ac7` docs(evals): state what the rubric does and does not measure
+- `965349b` docs(evals): compare original and Opus judging of iterations 1 and 2
+- `896fbef` chore(evals): re-grade iterations 1 and 2 with Opus and a Sonnet control
+- `f17cfbe` feat(evals): per-turn judge findings and a --judge-model override
+- `353754b` fix(evals): run the Opus judge with adaptive thinking at low effort
+
+## 2026-10-23
+
+- `e934cc7` feat(evals): judge sparring transcripts with Opus, stamp judge in grading.json
+- `bf0ae07` feat(evals): add --thinking arm to the sparring eval runner
+
+## 2026-10-21
+
+- `1975acb` chore(evals): commit sparring eval run iteration 2
+
+## 2026-10-20
+
+- `e7ca1fc` docs(i18n): shorten retention consent label
+- `9cd840d` docs(i18n): state thesis duration dates in consent, terms and privacy
+- `64f8bd9` docs(i18n): drop exhibition-only wording from terms and privacy
+- `ad0d68b` feat(consent): date-split use of sessions (thesis, then service improvement)
+- `8d7d548` feat(consent): allow retained sessions to improve Sparring
+- `5ca6ac2` chore: gitignore data/exports
+
+## 2026-10-14
+
+- `8ba6f64` docs(evals): backfill prompt version and run time for iteration-1
+- `715f799` feat(evals): stamp prompt hash and run time into transcripts
+- `5e6b15f` docs(evals): record prompt version for iteration-1
+- `5739617` chore(evals): commit sparring eval run output
+
+## 2026-10-11
+
+- `83c9b9d` docs(spec): add prompt eval workflow diagram
+
+## 2026-10-09
+
+- `e380ef4` docs(README): add status badge and tweak intro text
+
+## 2026-10-04
+
+- `f02e2af` docs: add badges to README
+- `153dc44` docs: drop redundant site link from README intro
+- `f87f13e` docs: reword README intro and link logo to site
+- `e6b0575` docs(credits): drop open-source claim from acknowledgments intro
+- `daedd7a` docs(credits): spell heading Acknowledgments to match README
+- `f58ae19` docs: spell README heading Acknowledgments
+- `188369d` docs: add acknowledgements to README
+- `53f8f10` docs: list /ses scenario picker in README
+- `e9ac22d` docs: replace README screenshots with mockup and logo, link live site
+- `94c07ae` docs: organize TODO.md by area, move finished items to Done
+- `f5f6be7` docs: trim CLAUDE.md, move spec and prompt guidance to folder files
+- `788e0fa` docs: organize docs/ into guides, notes and thesis artefacts
+- `86d2719` docs: repoint README section references to docs/
+- `89b91d1` docs: restructure README, move setup and ops into docs/
+
 ## 2026-10-03
 
+- `d6bf502` docs: update CHANGELOG through 220aa36
 - `220aa36` docs(spec): allow study origin and its manual relabeling
 - `dcc4e48` docs: add ADR 0019 and usage notes for study origin
 - `95beb79` feat(store): add study session origin, projected like live
