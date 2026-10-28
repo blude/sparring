@@ -78,6 +78,7 @@ Sparring uses the following libraries, fonts and tools:
 - [SQLite](https://www.sqlite.org/)
 - [Figma](https://figma.com/)
 - [Claude API](https://github.com/anthropics/claude-api) and Claude Code
+- [Digital Design Werkzeuge](https://github.com/blude/digital-design-werkzeuge): a Claude Code plugin with agent skills for writing a Digital Design Brief and design concepts as validated, traceable StrictDoc documents
 
 ## License
 
