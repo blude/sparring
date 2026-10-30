@@ -22,7 +22,7 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
 <main>
   <header id="top-bar">
     <div id="top-bar-leading">
-      <button id="avatar-btn" type="button" hidden></button>
+      <div id="avatar-btn" aria-hidden="true" hidden></div>
       <div id="session-title-group">
         <div id="avatar-alias" hidden></div>
         <div id="session-title"><?= t('dojo.untitled') ?></div>
@@ -33,7 +33,7 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
     </div>
   </header>
 
-  <div id="history" aria-live="polite"></div>
+  <div id="history" role="log"></div>
 
   <?php
     /* Playbook: [hidden] by default, dojo.js fades it in only for a new/
@@ -52,8 +52,8 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
     </div>
   </div>
 
-  <div id="retention" class="gate-card" hidden>
-    <h2 id="consent-heading"><?= t('dojo.consent.heading') ?></h2>
+  <div id="retention" class="gate-card" role="dialog" aria-labelledby="consent-heading" hidden>
+    <h2 id="consent-heading" tabindex="-1"><?= t('dojo.consent.heading') ?></h2>
     <p><?= t('dojo.consent.tosLine') ?></p>
     <label class="consent-row">
       <input type="checkbox" id="consent-tos">
@@ -77,8 +77,8 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
       EVAL_QUESTIONS/EVAL_SCALE_SIZE in config.php. Shown by dojo.js on
       natural turn-limit completion and on a deliberate "End session" press. */
   ?>
-  <div id="eval-dialog" class="gate-card" hidden>
-    <h2 id="eval-heading"><?= t('dojo.eval.heading') ?></h2>
+  <div id="eval-dialog" class="gate-card" role="dialog" aria-labelledby="eval-heading" hidden>
+    <h2 id="eval-heading" tabindex="-1"><?= t('dojo.eval.heading') ?></h2>
     <div id="eval-form">
       <?php foreach (EVAL_QUESTIONS as $q): ?>
       <fieldset class="eval-question" data-question="<?= $q ?>">
@@ -94,8 +94,8 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
         <div class="eval-glove-rating">
           <?php for ($i = EVAL_SCALE_SIZE; $i >= 1; $i--): ?>
           <?php $label = t("dojo.eval.q.$q.label.$i"); ?>
-          <input type="radio" name="eval-<?= $q ?>" id="eval-<?= $q ?>-<?= $i ?>" value="<?= $i ?>" data-label="<?= htmlspecialchars($label, ENT_QUOTES) ?>">
-          <label for="eval-<?= $q ?>-<?= $i ?>" class="eval-glove" aria-label="<?= htmlspecialchars($label, ENT_QUOTES) ?>"></label>
+          <input type="radio" name="eval-<?= $q ?>" id="eval-<?= $q ?>-<?= $i ?>" value="<?= $i ?>" aria-label="<?= htmlspecialchars($label, ENT_QUOTES) ?>" data-label="<?= htmlspecialchars($label, ENT_QUOTES) ?>">
+          <label for="eval-<?= $q ?>-<?= $i ?>" class="eval-glove"></label>
           <?php endfor; ?>
         </div>
       </fieldset>
@@ -123,8 +123,8 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
   </div>
 
   <?php /* Custom confirm, replacing window.confirm() — same gate-card treatment as #retention/#eval-dialog, for a consistent look and to keep the flow scriptable (a native confirm() blocks everything else on the page while open). */ ?>
-  <div id="confirm-dialog" class="gate-card" hidden>
-    <h2 id="confirm-heading"><?= t('dojo.confirm.endSession.heading') ?></h2>
+  <div id="confirm-dialog" class="gate-card" role="dialog" aria-labelledby="confirm-heading" aria-describedby="confirm-description" hidden>
+    <h2 id="confirm-heading" tabindex="-1"><?= t('dojo.confirm.endSession.heading') ?></h2>
     <p id="confirm-description"><?= t('dojo.confirm.endSession.description') ?></p>
     <div id="confirm-actions">
       <button id="confirm-cancel" type="button"><?= t('dojo.confirm.cancel') ?></button>
@@ -140,7 +140,7 @@ $replyQuote = isset($_GET['r']) && is_numeric($_GET['r'])
 
   <form id="composer">
     <div id="composer-row">
-      <textarea id="contribution" placeholder="<?= t('dojo.composer.placeholder') ?>" disabled></textarea>
+      <textarea id="contribution" aria-label="<?= t('dojo.composer.placeholder') ?>" placeholder="<?= t('dojo.composer.placeholder') ?>" disabled></textarea>
       <button id="submit" type="submit" disabled aria-label="<?= t('dojo.composer.sendAriaLabel') ?>">
         <span class="icon icon--glove" aria-hidden="true"></span>
       </button>
@@ -182,6 +182,8 @@ window.STRINGS = {
         installationUnavailable: <?= json_encode(t('dojo.js.installationUnavailable')) ?>,
         consentFailed: <?= json_encode(t('dojo.js.consentFailed')) ?>,
         thinkingStatuses: <?= json_encode(array_map(fn($i) => t("dojo.js.thinking.$i"), range(0, 6))) ?>,
+        speakerVisitor: <?= json_encode(t('dojo.speaker.visitor')) ?>,
+        speakerSparring: <?= json_encode(t('dojo.speaker.sparring')) ?>,
         replyQuoteLabel: <?= json_encode(t('dojo.replyQuote.label')) ?>,
         evalSkipMessage: <?= json_encode(t('dojo.eval.skipMessage')) ?>
     }

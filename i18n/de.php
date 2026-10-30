@@ -22,6 +22,7 @@ return [
     'start.presentedBy' => 'FH DORTMUND und SUPERRAUM präsentieren',
     'start.alphaNotice' => 'Alpha-Vorschau',
     'start.copy.punchline' => 'Bereite deine schärfsten Argumente vor, teile deine härtesten Schläge aus und sei bereit, wohlmeinende Konter einzustecken!',
+    'start.glovesAlt' => 'Boxhandschuhe',
     'start.cta' => 'Neue Sitzung starten',
     'start.learnMore' => 'Erfahre mehr über die <a href="/philosophy">Philosophie von Sparring</a>.',
     'start.footer.craft' => 'Craft mit #DigitalMaterial &middot; <a href="/credits">Credits</a>',
@@ -54,6 +55,8 @@ return [
     'dojo.replyQuote.cancelAriaLabel' => 'Antwort abbrechen',
     'dojo.composer.placeholder' => 'Was beschäftigt dich?',
     'dojo.composer.sendAriaLabel' => 'Senden',
+    'dojo.speaker.visitor' => 'Du:',
+    'dojo.speaker.sparring' => 'Sparring:',
     'dojo.composer.disclaimer' => 'Sparring ist KI und kann Fehler machen',
     'dojo.composer.charProgressAria' => 'Verwendete Zeichen',
     'dojo.titleCard.line1' => 'BEREIT?',
@@ -103,6 +106,7 @@ return [
 
     // --- arena.php (SE-02) ---
     'arena.title' => 'Arena — Sparring',
+    'arena.js.replyQr' => 'Auf diesen Austausch antworten',
     'arena.js.replyCount' => '{n} Antworten',
     'arena.js.stats' => '{sessions} Sitzungen / {exchanges} Runden',
 

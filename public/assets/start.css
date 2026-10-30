@@ -232,7 +232,7 @@ footer a { color: #666; }
     margin: 0 auto 1rem;
     background: #f0f0f0;
 }
-.locale-switcher a, .locale-switcher span { color: #888; text-decoration: none; padding: 0.5rem 0.75rem; }
+.locale-switcher a, .locale-switcher span { color: #666; text-decoration: none; padding: 0.5rem 0.75rem; }
 .locale-switcher .locale-current { color: #222; background: #fff; border-radius: 999px; font-weight: 700; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); }
 
 /* Easter-egg dialog: same dark gate-card treatment as dojo.css's
@@ -272,6 +272,7 @@ footer a { color: #666; }
 @media (prefers-reduced-motion: reduce) {
     .gate-card.bouncing-in { animation: none; }
 }
+#egg-heading:focus { outline: none; }
 #egg-heading { margin: 0.25rem 0 0.5rem; font-size: 1.125rem; font-weight: 700; color: #fefefe; }
 #egg-description { margin: 0; line-height: 1.35; color: #ccc; }
 #egg-actions { margin-top: 0.75rem; } /* same spacing as dojo's #confirm-actions/#eval-actions */

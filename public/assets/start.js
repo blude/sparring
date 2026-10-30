@@ -42,6 +42,7 @@ window.SparringStartTaps = {
         dialog.hidden = false;
         void dialog.offsetWidth; // commit the 0-opacity state before animating away from it
         dialog.classList.add('bouncing-in');
+        document.getElementById('egg-heading').focus({ preventScroll: true });
         requestAnimationFrame(function () {
             dialog.classList.remove('fading');
         });

@@ -146,6 +146,7 @@ window.SparringArenaMasonry = {
             var link = document.createElement('a');
             link.href = location.origin + '/dojo?r=' + item.exchangeId;
             link.target = '_blank';
+            link.setAttribute('aria-label', window.REPLY_QR_LABEL);
             qrEl.appendChild(link);
             window.SparringQr.renderInto(link, link.href);
         }

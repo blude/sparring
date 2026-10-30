@@ -586,6 +586,12 @@ main {
 }
 
 .eval-glove-rating input:checked ~ label { background-color: var(--accent); }
+/* Native outlines are clipped by the glove mask, so show keyboard focus by lightening and enlarging the glove. */
+.eval-glove-rating input:focus-visible + label { background-color: #ddd; transform: scale(1.25); }
+.eval-glove-rating input:checked:focus-visible + label { background-color: #ff6b6b; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+#history .endchoice-copy:focus, #consent-heading:focus, #eval-heading:focus, #confirm-heading:focus { outline: none; }
 
 #eval-feedback-label { display: block; margin: 0.5rem 0 0.4rem; font-weight: 600; }
 
@@ -740,7 +746,7 @@ main {
 }
 #contribution:focus { outline: none; } /* the box's own border/shadow above is the focus indicator */
 #contribution:disabled { color: #999; }
-#contribution::placeholder { color: #999; }
+#contribution::placeholder { color: #767676; }
 
 #composer-footer { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.875rem; color: #666; }
 #composer-disclaimer { margin: 0; }

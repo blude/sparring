@@ -35,6 +35,7 @@ window.DISPLAY_COLUMNS = <?= (int) $display['columns'] ?>;
 window.DISPLAY_ITEM_LIMIT = <?= (int) $display['itemLimit'] ?>;
 window.LOCALE = <?= json_encode(resolve_locale()) ?>;
 window.REPLY_COUNT_LABEL = <?= json_encode(t('arena.js.replyCount')) ?>;
+window.REPLY_QR_LABEL = <?= json_encode(t('arena.js.replyQr')) ?>;
 window.STATS_LABEL = <?= json_encode(t('arena.js.stats')) ?>;
 window.JUICY = {
     enabled: <?= JUICY_ENABLED ? 'true' : 'false' ?>,

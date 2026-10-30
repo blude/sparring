@@ -227,7 +227,12 @@ window.SparringDojoCharProgress = {
     function appendTurn(role, text) {
         var el = document.createElement('div');
         el.className = 'turn ' + role;
-        el.textContent = text;
+        // Speaker is otherwise conveyed only by bubble side/colour.
+        var who = document.createElement('span');
+        who.className = 'sr-only';
+        who.textContent = role === 'visitor' ? window.STRINGS.dojo.speakerVisitor : window.STRINGS.dojo.speakerSparring;
+        el.appendChild(who);
+        el.appendChild(document.createTextNode(text));
         historyEl.appendChild(el);
         historyEl.scrollTop = historyEl.scrollHeight;
         return el;
@@ -247,7 +252,6 @@ window.SparringDojoCharProgress = {
         if (!message) return;
         statusTurnEl = document.createElement('div');
         statusTurnEl.className = 'turn turn--status' + (pending ? ' turn--pending' : '');
-        statusTurnEl.setAttribute('role', 'status');
         statusTurnEl.textContent = message;
         historyEl.appendChild(statusTurnEl);
         historyEl.scrollTop = historyEl.scrollHeight;
@@ -422,8 +426,16 @@ window.SparringDojoCharProgress = {
         fieldEl.style.height = fieldEl.scrollHeight + 'px';
     }
 
+    // A disabled field drops focus to <body>; remember it was focused so
+    // re-enabling puts keyboard/screen reader users back in the composer.
+    var composerHadFocus = false;
     function setComposerEnabled(enabled) {
+        if (!enabled && document.activeElement === fieldEl) composerHadFocus = true;
         fieldEl.disabled = !enabled;
+        if (enabled && composerHadFocus) {
+            composerHadFocus = false;
+            fieldEl.focus({ preventScroll: true });
+        }
         submitEl.disabled = !enabled || fieldEl.value.trim() === '';
     }
 
@@ -505,6 +517,8 @@ window.SparringDojoCharProgress = {
         endChoiceEl.appendChild(actionsEl);
         historyEl.appendChild(endChoiceEl);
         historyEl.scrollTop = historyEl.scrollHeight;
+        copyEl.tabIndex = -1;
+        copyEl.focus({ preventScroll: true }); // announce the choice
 
         function removeBlock() {
             if (endChoiceEl) { endChoiceEl.remove(); endChoiceEl = null; }
@@ -682,6 +696,8 @@ window.SparringDojoCharProgress = {
         requestAnimationFrame(function () {
             el.classList.remove('fading'); // fades 0 -> 1
         });
+        var heading = el.querySelector('h2');
+        if (heading) heading.focus({ preventScroll: true }); // announce the dialog
     }
 
     // Fades a .gate-card dialog out, then [hidden]s it once the fade finishes

@@ -12,14 +12,14 @@
 <p class="presented-by"><?= t('start.presentedBy') ?></p>
 <div class="content">
   <div class="branding">
-    <div class="gloves-box" role="img" aria-label="Boxing Gloves">
+    <div class="gloves-box" role="img" aria-label="<?= t('start.glovesAlt') ?>">
       <div class="gloves-layer gloves-layer--honeycomb"></div>
       <div class="gloves-layer gloves-layer--l"><div class="glove-bounce" data-glove="l"></div></div>
       <div class="gloves-layer gloves-layer--r"><div class="glove-bounce" data-glove="r"></div></div>
     </div>
     <div class="logo">
       <h1 class="wordmark">Sparring</h1>
-      <p class="subtitle">スパーリング</p>
+      <p class="subtitle" lang="ja">スパーリング</p>
     </div>
     <p class="alpha-notice"><?= t('start.alphaNotice') ?></p>
   </div>
@@ -31,8 +31,8 @@
   <p class="learn-more"><?= t('start.learnMore') ?></p>
 </div>
 <?php /* Easter egg: 5 glove taps in a row pops this up. Same gate-card treatment as dojo's dialogs, minus the aria-modal ceremony none of those use either. */ ?>
-<div id="egg-dialog" class="gate-card" hidden>
-  <h2 id="egg-heading"><?= t('start.egg.title') ?></h2>
+<div id="egg-dialog" class="gate-card" role="dialog" aria-labelledby="egg-heading" aria-describedby="egg-description" hidden>
+  <h2 id="egg-heading" tabindex="-1"><?= t('start.egg.title') ?></h2>
   <p id="egg-description"><?= t('start.egg.body') ?></p>
   <div id="egg-actions">
     <button id="egg-dismiss" type="button"><?= t('start.egg.dismiss') ?></button>
