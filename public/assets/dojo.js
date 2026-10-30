@@ -428,9 +428,11 @@ window.SparringDojoCharProgress = {
 
     // A disabled field drops focus to <body>; remember it was focused so
     // re-enabling puts keyboard/screen reader users back in the composer.
+    // Skipped on touch-first devices: a programmatic focus there can pop the
+    // software keyboard back up unasked.
     var composerHadFocus = false;
     function setComposerEnabled(enabled) {
-        if (!enabled && document.activeElement === fieldEl) composerHadFocus = true;
+        if (!enabled && document.activeElement === fieldEl && window.matchMedia('(pointer: fine)').matches) composerHadFocus = true;
         fieldEl.disabled = !enabled;
         if (enabled && composerHadFocus) {
             composerHadFocus = false;
